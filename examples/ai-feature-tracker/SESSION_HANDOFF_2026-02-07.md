@@ -1,6 +1,6 @@
 # Session Handoff: 2026-02-07
 
-**Purpose:** Context for the next Claude session continuing this work in a new repo (`consensus-collab-protocol`).
+**Purpose:** Context for the next Claude session continuing this work in a new repo (`turnfile`).
 
 ---
 
@@ -16,7 +16,7 @@
    - v4: Codex split into core + project profile + onboarding guide (the right architecture)
    - v5: Claude refined all three docs (N-agent support, full domain contract, capability-gated progression, shadow review, rollback policy). Codex reviewed and approved.
 
-4. **Decision to extract** — The protocol is too general to live inside `ai-feature-tracker`. Maintainer decided to move it to a standalone repo (`consensus-collab-protocol`).
+4. **Decision to extract** — The protocol is too general to live inside `ai-feature-tracker`. Maintainer decided to move it to a standalone repo (`turnfile`).
 
 ---
 
@@ -81,7 +81,7 @@ The combination of: heterogeneous agents (different providers), no shared runtim
 
 When starting the next session, point the new Claude instance at:
 1. This handoff document
-2. Whatever Codex has set up in `consensus-collab-protocol`
+2. Whatever Codex has set up in `turnfile`
 3. Optionally: `COLLAB_PROTOCOL_CORE.md` and `LLM_ONBOARDING.md` from this repo as reference
 
 That should be enough context to start contributing without re-deriving everything.
