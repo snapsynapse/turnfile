@@ -80,3 +80,7 @@ These principles emerged from real collaboration sessions and are encoded throug
 ## Status
 
 This protocol has been tested in one real-world collaboration (two LLM agents + human maintainer, ~45 minute session, 114 tests, zero file collisions). The core rules are stable. The framework docs are complete but will evolve as more sessions are run.
+
+## License
+
+Apache 2.0 — see [LICENSE](LICENSE) for details.
