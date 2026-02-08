@@ -1,0 +1,26 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Editor / IDE
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Active session workspace (local only — move to examples/ when historical)
+inception/
+
+# Local tooling (promote to public when ready)
+tools/
+
+# Claude Code local config
+.claude/
+
+# Research / scratch
+.perplexity-research/
