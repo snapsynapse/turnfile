@@ -1,6 +1,6 @@
 # Example: AI Feature Tracker
 
-These files are artifacts from the first real-world use of the Consensus Collaboration Protocol. They were produced during a Claude + Codex + Human Maintainer session on the [ai-feature-tracker](https://github.com/snapsynapse/ai-feature-tracker) project (link checker replacement milestone).
+These files are artifacts from the first real-world use of Turnfile (then called "Consensus Collaboration Protocol"). They were produced during a Claude + Codex + Human Maintainer session on the [ai-feature-tracker](https://github.com/snapsynapse/ai-feature-tracker) project (link checker replacement milestone).
 
 They are preserved here as a reference example — not as active protocol documents.
 

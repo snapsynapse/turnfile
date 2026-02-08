@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to the Consensus Collaboration Protocol.
+All notable changes to Turnfile (SNAP — Structured Negotiation of Autonomous Peers).
 
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 

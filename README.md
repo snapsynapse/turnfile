@@ -1,4 +1,6 @@
-# Consensus Collaboration Protocol
+# Turnfile
+
+**Structured Negotiation of Autonomous Peers (SNAP)**
 
 A standalone framework for **consent-based, peer multi-LLM collaboration** with human-on-the-loop governance and public auditability.
 

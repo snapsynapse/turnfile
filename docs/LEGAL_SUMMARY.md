@@ -1,7 +1,7 @@
 # Legal Landscape Summary (Patent-Oriented, High-Level)
 
 **Prepared:** 2026-02-08  
-**Project:** `consensus-collab-protocol`  
+**Project:** `turnfile` (SNAP — Structured Negotiation of Autonomous Peers)  
 **Purpose:** Briefing note for counsel before public launch.
 
 > This document is not legal advice. It is a high-level technical landscape summary for attorney review.
@@ -94,4 +94,4 @@ Suggested attorney tasks:
 
 ## 6) Draft positioning statement (lawyer-reviewable)
 
-`consensus-collab-protocol` is an open governance and communications specification for asynchronous human-plus-LLM collaboration. It requires only human-readable markdown files, append-only audit logs, and explicit participant consent. It does not require a centralized runtime orchestrator, proprietary message bus, or hidden control plane.
+Turnfile (`turnfile`) is an open governance and communications specification for asynchronous human-plus-LLM collaboration. It requires only human-readable markdown files, append-only audit logs, and explicit participant consent. It does not require a centralized runtime orchestrator, proprietary message bus, or hidden control plane.

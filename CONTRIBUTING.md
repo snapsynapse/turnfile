@@ -1,6 +1,6 @@
 # Contributing
 
-Thank you for your interest in the Consensus Collaboration Protocol.
+Thank you for your interest in Turnfile (SNAP — Structured Negotiation of Autonomous Peers).
 
 ## How this project works
 
