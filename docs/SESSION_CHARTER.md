@@ -152,3 +152,17 @@ Copy this file to start a new collaborative session. Fill in each section before
 - [ ] Acceptance criteria confirmed (section 8 above)
 - [ ] All agents have signed the handshake (section 9 above)
 - [ ] Retro commitment acknowledged
+
+---
+
+## 11) Session close checklist
+
+> Run through this before declaring a session complete. See [PRD-014](./prds/PRD-014-session-closeout-boot-handoff-contract.md) for the full closeout contract.
+
+- [ ] All agent unread mailbox counts are zero
+- [ ] WORKLOG status block updated and session entry posted
+- [ ] TURNFILE.yaml updated (locks released, tasks completed, agent status idle)
+- [ ] Session state snapshot written to chat log
+- [ ] Boot file archived and new boot file written
+- [ ] **Git commits**: promoted artifacts committed granularly (one commit per PRD, per tool, per structural change); remaining session work in a summary commit
+- [ ] Push to remote (only when maintainer directs)

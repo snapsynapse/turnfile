@@ -273,7 +273,12 @@ After any milestone completion, task status change, or substantive protocol acti
 6. **Archive boot file** to `docs/archive/boot-claude/boot-claude_v<N>.md` (globally monotonic versioning per PRD-014).
 7. **Write new boot file** with updated current state.
 8. **Promote completed artifacts** from `working-session/` to tracked `docs/` (copy, not move) — **only when explicitly directed by maintainer** and only for PRDs that pass the promotion gate (`PRD_STATUS.json` eligible = true + `tools/validate-prd-promotion.mjs` passes + maintainer acceptance evidence per PRD-006 R2a/R3).
-9. **Commit and push** tracked changes — only when maintainer directs. Do not auto-push.
+9. **Commit tracked changes** — only when maintainer directs. Use granular commits, not one mega-commit:
+   - Each PRD promotion gets its own commit (e.g., `Promote PRD-015: Gemini onboarding contract`).
+   - Each new tool or template gets its own commit.
+   - Structural changes (moves, renames, path updates) are separate from content changes.
+   - Remaining session work (doc updates, OQ resolutions, config changes) can be one commit summarizing the session.
+   - Do not auto-push. Push only when maintainer directs.
 10. **Final mailbox check** — confirm Claude unread = 0.
 
 **Outputs:** Updated WORKLOG, MAILBOX, TURNFILE.yaml, chat-claude.md snapshot, new boot file, archived boot file.
