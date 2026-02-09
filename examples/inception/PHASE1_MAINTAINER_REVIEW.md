@@ -38,7 +38,7 @@ For each PRD, this review provides:
 ## PRD-003: Message Lifecycle + SLA Contract
 
 **Owner:** Claude (draft + finalization) + Codex (review) + Maintainer
-**File:** `docs/prds/PRD-003-message-lifecycle-sla-contract.md`
+**File:** `inception/docs/PRD-003-message-lifecycle-sla-contract.md`
 
 ### What It Does
 
@@ -100,8 +100,8 @@ This can be done with a `notify` message to keep it lightweight — but note R7 
 ### Judgment Call
 
 PRD-003 AC #4 (stale-message exercise) is not yet met. You have two options:
-- **Option A:** Approve PRD-003 conditionally — mark AC #4 as a post-promotion validation requirement. The spec is correct; only the exercise is missing.
-- **Option B:** Defer approval until one stale-message scenario is exercised end-to-end during Phase 2.
+- **Option A:** Approve PRD-003 conditionally — mark AC #4 as a post-promotion validation requirement. The spec is correct; only the exercise is missing. *MAINTAINER = N*
+- **Option B:** Defer approval until one stale-message scenario is exercised end-to-end during Phase 2. *MAINTAINER = Y*
 
 ### Recommendation
 
@@ -112,7 +112,7 @@ PRD-003 AC #4 (stale-message exercise) is not yet met. You have two options:
 ## PRD-004: Maintainer Decision Contract
 
 **Owner:** Codex (draft) + Claude (review + finalization) + Maintainer
-**File:** `docs/prds/PRD-004-maintainer-decision-contract.md`
+**File:** `inception/docs/PRD-004-maintainer-decision-contract.md`
 
 ### What It Does
 
@@ -184,7 +184,7 @@ The R2 payload shape (options, recommended, if-delayed) hasn't been rigidly enfo
 ## PRD-008: Cross-Sandbox Handoff Contract (Payload-First)
 
 **Owner:** Maintainer + Codex + Claude
-**File:** `docs/prds/PRD-008-cross-sandbox-handoff-contract.md`
+**File:** `inception/docs/PRD-008-cross-sandbox-handoff-contract.md`
 
 ### What It Does
 
@@ -250,7 +250,7 @@ echo "Test payload content" | node tools/new-payload-envelope.mjs \
   --topic test-review \
   --format full-text \
   --scope critical-only \
-  --files docs/PHASE1_MAINTAINER_REVIEW.md \
+  --files inception/PHASE1_MAINTAINER_REVIEW.md \
   --seq 01
 ```
 Verify the output includes a valid envelope with checksum-bearing revision token.
@@ -268,8 +268,8 @@ Two acceptance criteria are not yet met:
 - AC #6 (helper script adoption): Script is shipped but not yet used in a live exchange.
 
 Options:
-- **Option A:** Approve with AC #3 and #6 as post-promotion validation tasks. The cap and helper are well-specified; only the exercise is missing.
-- **Option B:** Require that Phase 2 cross-reviews deliberately use the helper script (satisfies AC #6) and include one intentionally large payload to test chunking (satisfies AC #3).
+- **Option A:** Approve with AC #3 and #6 as post-promotion validation tasks. The cap and helper are well-specified; only the exercise is missing. *MAINTAINER=N*
+- **Option B:** Require that Phase 2 cross-reviews deliberately use the helper script (satisfies AC #6) and include one intentionally large payload to test chunking (satisfies AC #3). *MAINTAINER=Y*
 
 ### Recommendation
 
@@ -280,7 +280,7 @@ Options:
 ## PRD-009: Cross-Document Reconciliation + Open Question Triage
 
 **Owner:** Claude (draft) + Codex (review) + Maintainer
-**File:** `docs/prds/PRD-009-cross-document-reconciliation.md`
+**File:** `inception/docs/PRD-009-cross-document-reconciliation.md`
 
 ### What It Does
 
@@ -322,14 +322,14 @@ Codex reviewed PRD-009 and identified 4 findings. Claude applied all 4:
 | 1 | Cross-agent document change uses R1 proposal format without extra round-trips | **MET** | PRD-008 and PRD-009 cross-reviews both used payload-first proposals with inline diffs and per-change rationale. |
 | 2 | At least one message uses explicit `Closure owner` and `Review scope` | **MET** | Multiple messages (MSG-021, MSG-023, MSG-024) include both fields. |
 | 3 | Parallel PRD handoff includes interface delta block (including "delta: none") | **MET** | MSG-023 and MSG-024 include interface delta blocks. At least one "delta: none" case documented. |
-| 4 | OQ registry exists with all current open questions deduplicated | **MET** | `docs/OPEN_QUESTIONS.md` contains 36 questions from all PRDs in pilot scope. Active/Deferred/Resolved sections. Deduplication notes present. |
+| 4 | OQ registry exists with all current open questions deduplicated | **MET** | `inception/OPEN_QUESTIONS.md` contains 36 questions from all PRDs in pilot scope. Active/Deferred/Resolved sections. Deduplication notes present. |
 | 5 | At least one semantic change has R4 revision attribution comment | **MET** | PRD-003 and PRD-004 both contain `<!-- REV-... -->` attribution comments for maintainer OQ resolutions. |
 | 6 | No OQ resolved in a PRD without updating registry | **MET** | All 34 resolved OQs are recorded in the registry with resolution text and source. |
 
 ### Test Scenarios for Maintainer
 
 **Test 1 — OQ registry integrity:**
-Open `docs/OPEN_QUESTIONS.md`. Verify:
+Open `inception/OPEN_QUESTIONS.md`. Verify:
 1. Every PRD's "Open questions" section cross-references the registry (OQ-XXX IDs match).
 2. No resolved OQ remains in "Active Questions" section.
 3. Deduplication notes identify overlapping questions correctly.
@@ -424,11 +424,11 @@ These tests can be run in a single maintainer review session:
 
 | # | Test | What to check | Pass condition |
 |---|------|---------------|----------------|
-| Q1 | OQ registry count | Open `docs/OPEN_QUESTIONS.md` | 0 active, 2 deferred, 34 resolved |
+| Q1 | OQ registry count | Open `inception/OPEN_QUESTIONS.md` | 0 active, 2 deferred, 34 resolved |
 | Q2 | State machine transition table | Read PRD-003 R1 | 10 transitions, no ambiguities |
 | Q3 | Helper script exists | `ls tools/new-payload-envelope.mjs` | File exists |
 | Q4 | Revision attribution comments | Search PRD-003/004 for `<!-- REV-` | At least 1 per file |
-| Q5 | MAILBOX closed summary | Open `working-session/MAILBOX.md`, check Closed Summary | Messages show final status + outcome |
+| Q5 | MAILBOX closed summary | Open `inception/MAILBOX.md`, check Closed Summary | Messages show final status + outcome |
 
 ### Functional Validation (30 min)
 

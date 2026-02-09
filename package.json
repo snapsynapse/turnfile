@@ -1,0 +1,21 @@
+{
+  "name": "turnfile",
+  "version": "0.1.0",
+  "description": "SNAP — Structured Negotiation of Autonomous Peers. File-based LLM collaboration protocol.",
+  "license": "Apache-2.0",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/snapsynapse/turnfile.git"
+  },
+  "scripts": {
+    "lint:turnfile": "node tools/turnfile-lint.mjs",
+    "lint:mailbox": "node tools/validate-mailbox-invariants.mjs",
+    "lint:prds": "node tools/validate-prd-promotion.mjs",
+    "export:mailbox": "node tools/export-mailbox-json.mjs"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "js-yaml": "^4.1.1"
+  }
+}

@@ -102,24 +102,41 @@ Copy this file to start a new collaborative session. Fill in each section before
 
 ## 9) Handshake acknowledgments
 
-> Each agent reviews this charter and signs below before implementation begins. Handshakes carry forward across protocol versions unless roles or lane assignments change.
+> Each agent and the maintainer reviews this charter and signs below before implementation begins. Handshakes carry forward across protocol versions unless roles or lane assignments change.
+>
+> Signing acknowledges the governance docs listed in the header: [Protocol Core](./PROTOCOL_CORE.md), [Human Governance](./HUMAN_GOVERNANCE.md), and [Conflict Resolution](./CONFLICT_RESOLUTION.md).
 
-### <!-- Agent name -->
+### <!-- Agent name (Provider) -->
 
 **Signed:** <!-- Agent name, provider -->
 **Role:** <!-- Lane description -->
 **Handshake status:** <!-- Accepted / Accepted with reservations -->
+**Scope acknowledgment:**
+<!-- Standard acknowledgments:
+- Accepts protocol invariants in `docs/PROTOCOL_CORE.md`.
+- Accepts human maintainer authority per `docs/HUMAN_GOVERNANCE.md`.
+- Accepts structured disagreement flow per `docs/CONFLICT_RESOLUTION.md`.
+- Commits to file-based communication and append-only WORKLOG participation.
+-->
 **Notes:**
-- <!-- Specific acknowledgments or reservations -->
+- <!-- Additional reservations or context -->
 **Timestamp:**
 
-### <!-- Agent name -->
+### <!-- Agent name (Provider) -->
 
 **Signed:**
 **Role:**
 **Handshake status:**
+**Scope acknowledgment:**
 **Notes:**
 -
+**Timestamp:**
+
+### Maintainer (Human)
+
+**Signed:**
+**Handshake status:**
+**Acknowledgment:**
 **Timestamp:**
 
 ---

@@ -32,6 +32,17 @@ Pull requests are welcome for:
 - New examples from real sessions (add to `examples/`)
 - Protocol doc changes (with rationale)
 
+### Propose larger changes via PRD
+
+For substantial changes — new protocol features, new coordination mechanisms, changes that affect multiple documents — use the PRD (Product Requirement Document) process:
+
+1. Copy `templates/prd.md` and fill in the problem, goal, requirements, and acceptance criteria
+2. Open a PR with the draft PRD in `docs/prds/`
+3. The PRD goes through a promotion gate: review by active agents + maintainer acceptance + zero blocking items (see `docs/prds/README.md` for the full gate)
+4. Use `node tools/validate-prd-promotion.mjs` to check gate status
+
+The existing 12 PRDs in `docs/prds/` were all developed through this process and serve as examples of the expected format and rigor.
+
 ### Add examples
 
 If you've run a session using this protocol, consider contributing your artifacts to `examples/`:

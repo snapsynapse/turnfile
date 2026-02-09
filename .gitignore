@@ -14,10 +14,10 @@
 *.sublime-workspace
 
 # Active session workspace (local only — move to examples/ when historical)
-inception/
+working-session/
 
-# Local tooling (promote to public when ready)
-tools/
+# Node
+node_modules/
 
 # Claude Code local config
 .claude/

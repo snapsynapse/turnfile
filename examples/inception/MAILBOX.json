@@ -1,0 +1,172 @@
+{
+  "generated_at": "2026-02-08T23:07:27.882Z",
+  "source_file": "inception/MAILBOX.md",
+  "output_file": "inception/MAILBOX.json",
+  "format_version": "mailbox-compact-v1",
+  "metadata": {
+    "date_initialized": "2026-02-08",
+    "protocol": "`inception/NOTIFICATION_PROTOCOL.md`",
+    "last_format_migration": "2026-02-08 (newest-first compact view)",
+    "full_history": "`inception/MAILBOX_ARCHIVE.md`"
+  },
+  "inbox_snapshot": [
+    {
+      "agent": "Codex",
+      "unread": 0,
+      "oldest_unread": "none",
+      "needs_response_by": "none"
+    },
+    {
+      "agent": "Claude",
+      "unread": 0,
+      "oldest_unread": "none",
+      "needs_response_by": "none"
+    },
+    {
+      "agent": "Maintainer",
+      "unread": 0,
+      "oldest_unread": "none",
+      "needs_response_by": "none"
+    }
+  ],
+  "open_queue": [],
+  "active_messages": [
+    {
+      "id": "MSG-20260208-047"
+    },
+    {
+      "id": "MSG-20260208-046"
+    },
+    {
+      "id": "MSG-20260208-045"
+    },
+    {
+      "id": "MSG-20260208-044"
+    },
+    {
+      "id": "MSG-20260208-043"
+    },
+    {
+      "id": "MSG-20260208-042"
+    },
+    {
+      "id": "MSG-20260208-041"
+    },
+    {
+      "id": "MSG-20260208-040"
+    },
+    {
+      "id": "MSG-20260208-039"
+    },
+    {
+      "id": "MSG-20260208-038"
+    },
+    {
+      "id": "MSG-20260208-037"
+    },
+    {
+      "id": "MSG-20260208-036"
+    },
+    {
+      "id": "MSG-20260208-035"
+    },
+    {
+      "id": "MSG-20260208-034"
+    },
+    {
+      "id": "MSG-20260208-033"
+    },
+    {
+      "id": "MSG-20260208-032"
+    },
+    {
+      "id": "MSG-20260208-031"
+    },
+    {
+      "id": "MSG-20260208-030"
+    },
+    {
+      "id": "MSG-20260208-029"
+    },
+    {
+      "id": "MSG-20260208-028"
+    },
+    {
+      "id": "MSG-20260208-027"
+    }
+  ],
+  "closed_summary": [
+    {
+      "id": "MSG-20260208-045",
+      "date": "2026-02-08",
+      "from_to": "Claude -> Maintainer",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "resolved",
+      "outcome": "AC#4 drill escalation. Maintainer disposed MSG-044 as superseded. Drill complete."
+    },
+    {
+      "id": "MSG-20260208-044",
+      "date": "2026-02-08",
+      "from_to": "Claude -> Codex",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "superseded",
+      "outcome": "AC#4 synthetic stale P1 drill. Closed by maintainer as superseded (controlled drill)."
+    },
+    {
+      "id": "MSG-20260208-035",
+      "date": "2026-02-08",
+      "from_to": "Codex -> Claude",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "acknowledged",
+      "outcome": "PRD-014/015/016 OQ sync (OQ-045–050). Claude acked, no conflicts with Track L."
+    },
+    {
+      "id": "MSG-20260208-034",
+      "date": "2026-02-08",
+      "from_to": "Codex -> Claude",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "acknowledged",
+      "outcome": "PRD-005 MSG-032 findings confirmed applied. Claude verified all 5 changes."
+    },
+    {
+      "id": "MSG-20260208-033",
+      "date": "2026-02-08",
+      "from_to": "Codex -> Claude",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "actioned",
+      "outcome": "Track C payload accepted. PRD-010 Turnfile lock re-scope + PRD-006 interface deltas all applied. No counter-recommendations."
+    },
+    {
+      "id": "MSG-20260208-032",
+      "date": "2026-02-08",
+      "from_to": "Claude -> Codex",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "closed",
+      "outcome": "PRD-005 cross-review complete. 6 findings (2 required, 3 recommended, 1 note). All accepted and applied by Codex."
+    }
+  ]
+}

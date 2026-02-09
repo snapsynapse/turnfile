@@ -1,0 +1,317 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "turnfile-v0.schema.json",
+  "title": "Turnfile v0.1 Schema",
+  "description": "JSON Schema for the SNAP Turnfile coordination state artifact. Validates the structural contract defined in PRD-013 R2. YAML Turnfiles are validated by converting to JSON first (e.g., via js-yaml) then applying this schema.",
+  "type": "object",
+  "required": ["turnfile", "agents", "maintainer", "coordination", "locks", "turn_queue", "messages"],
+  "additionalProperties": false,
+  "properties": {
+    "turnfile": {
+      "description": "Project metadata. Maintainer-only writes (PRD-013 R2.1).",
+      "type": "object",
+      "required": ["version", "project", "workspace"],
+      "additionalProperties": false,
+      "properties": {
+        "version": {
+          "description": "Turnfile format version. Must be a quoted string to avoid YAML implicit typing (PRD-013 R1.1).",
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+$"
+        },
+        "project": {
+          "description": "Project identifier.",
+          "type": "string",
+          "minLength": 1
+        },
+        "workspace": {
+          "description": "Workspace path relative to repo root (e.g., 'working-session/').",
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+
+    "agents": {
+      "description": "Agent registry. Each agent writes only their own entry (PRD-013 R2.1).",
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "$ref": "#/$defs/agent_entry"
+      }
+    },
+
+    "maintainer": {
+      "description": "Maintainer status. Maintainer-only writes (PRD-013 R2.1).",
+      "type": "object",
+      "required": ["id", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "description": "Maintainer identifier.",
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "description": "Maintainer availability status.",
+          "type": "string",
+          "enum": ["available", "away", "observing"]
+        },
+        "last_seen": {
+          "description": "Informational session marker for last maintainer activity.",
+          "type": "string"
+        }
+      }
+    },
+
+    "coordination": {
+      "description": "Coordination state. Phase/step are maintainer-only writes; tasks are collaborative (PRD-013 R2.1).",
+      "type": "object",
+      "required": ["revision", "active_phase", "active_step", "tasks"],
+      "additionalProperties": false,
+      "properties": {
+        "revision": {
+          "description": "Monotonic integer incremented on every successful Turnfile write (PRD-013 R1.3). Used for lease clocks and tie-breaks.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "active_phase": {
+          "description": "Current protocol phase. Maintainer-only writes (PRD-013 R4.1).",
+          "type": "string",
+          "minLength": 1
+        },
+        "active_step": {
+          "description": "Current step within the active phase. Maintainer-only writes (PRD-013 R4.1).",
+          "type": "string",
+          "minLength": 1
+        },
+        "tasks": {
+          "description": "Task registry. Any agent may create; owner may update status; maintainer may reassign (PRD-013 R2.1).",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/task_entry"
+          }
+        }
+      }
+    },
+
+    "locks": {
+      "description": "Active locks on shared resources. Any agent may acquire/release their own locks (PRD-013 R2.1, R3.3).",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/lock_entry"
+      }
+    },
+
+    "turn_queue": {
+      "description": "Ordered list of pending turn claims. Agents append; maintainer may reorder (PRD-013 R2.1).",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/turn_claim"
+      }
+    },
+
+    "messages": {
+      "description": "Lightweight signal channel. Append-only during sessions; compacted at session close (PRD-013 R5.3, R6.4).",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/signal_entry"
+      }
+    }
+  },
+
+  "$defs": {
+    "agent_entry": {
+      "description": "Per-agent registration entry.",
+      "type": "object",
+      "required": ["role", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "role": {
+          "description": "Agent role in the protocol.",
+          "type": "string",
+          "enum": ["agent", "maintainer", "observer"]
+        },
+        "status": {
+          "description": "Current agent status.",
+          "type": "string",
+          "enum": ["idle", "active", "blocked", "offline"]
+        },
+        "current_task": {
+          "description": "Task ID the agent is currently working on, or null.",
+          "type": ["string", "null"]
+        },
+        "last_seen": {
+          "description": "Informational session marker (e.g., 'codex-session-12'). Non-authoritative for coordination (PRD-013 R1.3).",
+          "type": ["string", "null"]
+        },
+        "session_id": {
+          "description": "Current session identifier, or null if not in a session.",
+          "type": ["string", "null"]
+        }
+      }
+    },
+
+    "task_entry": {
+      "description": "Task registry entry. Lifecycle: pending -> claimed -> in_progress -> done (or blocked). See PRD-013 R6.1-R6.3.",
+      "type": "object",
+      "required": ["description", "owner", "status", "priority", "depends_on", "created_by", "created_rev"],
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "description": "Short description of the task.",
+          "type": "string",
+          "minLength": 1
+        },
+        "owner": {
+          "description": "Agent ID, 'maintainer', or 'unassigned'.",
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "description": "Task lifecycle status.",
+          "type": "string",
+          "enum": ["pending", "claimed", "in_progress", "blocked", "done"]
+        },
+        "priority": {
+          "description": "Task priority tier.",
+          "type": "string",
+          "enum": ["P0", "P1", "P2"]
+        },
+        "depends_on": {
+          "description": "List of task IDs that must be done before this task can be claimed (PRD-013 R6.2).",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "created_by": {
+          "description": "Actor who created the task.",
+          "type": "string",
+          "minLength": 1
+        },
+        "created_rev": {
+          "description": "Coordination revision when the task was created.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "claim_rev": {
+          "description": "Coordination revision when the task was claimed, or null if unclaimed.",
+          "type": ["integer", "null"]
+        },
+        "completed_rev": {
+          "description": "Coordination revision when the task was completed, or null if not yet done.",
+          "type": ["integer", "null"]
+        },
+        "notes": {
+          "description": "Free-text notes about the task.",
+          "type": "string"
+        }
+      }
+    },
+
+    "lock_entry": {
+      "description": "Lock on shared resources. Stale when (coordination.revision - acquired_rev) > lease_revs (PRD-013 R3.3).",
+      "type": "object",
+      "required": ["files", "holder", "acquired_rev", "lease_revs", "reason"],
+      "additionalProperties": false,
+      "properties": {
+        "files": {
+          "description": "List of file paths under lock.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "holder": {
+          "description": "Agent ID holding the lock.",
+          "type": "string",
+          "minLength": 1
+        },
+        "acquired_rev": {
+          "description": "Coordination revision when lock was acquired.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "lease_revs": {
+          "description": "Number of revisions before the lock is considered stale. Default: 2.",
+          "type": "integer",
+          "minimum": 1,
+          "default": 2
+        },
+        "reason": {
+          "description": "Brief reason for the lock.",
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+
+    "turn_claim": {
+      "description": "Pending turn claim entry.",
+      "type": "object",
+      "required": ["agent", "action", "requested_rev", "priority"],
+      "additionalProperties": false,
+      "properties": {
+        "agent": {
+          "description": "Agent requesting the turn.",
+          "type": "string",
+          "minLength": 1
+        },
+        "action": {
+          "description": "Brief description of the intended action.",
+          "type": "string",
+          "minLength": 1
+        },
+        "requested_rev": {
+          "description": "Coordination revision when the turn was requested.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "priority": {
+          "description": "Priority of the turn request.",
+          "type": "string",
+          "enum": ["P0", "P1", "P2"]
+        }
+      }
+    },
+
+    "signal_entry": {
+      "description": "Lightweight coordination signal. Not a replacement for MAILBOX.md (PRD-013 R6.4).",
+      "type": "object",
+      "required": ["id", "from", "to", "signal", "rev"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "description": "Signal identifier (e.g., 'SIG-001').",
+          "type": "string",
+          "pattern": "^SIG-[0-9]+$"
+        },
+        "from": {
+          "description": "Sending agent ID.",
+          "type": "string",
+          "minLength": 1
+        },
+        "to": {
+          "description": "Target agent ID or 'all'.",
+          "type": "string",
+          "minLength": 1
+        },
+        "signal": {
+          "description": "Signal type per PRD-013 R6.4.",
+          "type": "string",
+          "enum": ["ready", "blocked", "handoff", "yield", "request_turn", "notify"]
+        },
+        "rev": {
+          "description": "Coordination revision when the signal was posted.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "detail": {
+          "description": "Optional brief context for the signal.",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

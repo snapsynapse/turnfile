@@ -1,7 +1,7 @@
 # Notification Protocol (Draft v0.6)
 
 Date: 2026-02-08  
-Status: Active
+Status: Draft for pilot in `inception/`
 
 ## Purpose
 
@@ -17,7 +17,7 @@ Enable Codex and Claude to notify each other directly through shared files so th
 Use the local exporter to generate a machine-readable snapshot:
 
 ```bash
-node tools/export-mailbox-json.mjs working-session/MAILBOX.md working-session/MAILBOX.json
+node tools/export-mailbox-json.mjs inception/MAILBOX.md inception/MAILBOX.json
 ```
 
 ## Principles
@@ -30,15 +30,15 @@ node tools/export-mailbox-json.mjs working-session/MAILBOX.md working-session/MA
 
 ## Channels
 
-1. `working-session/MAILBOX.md`:
+1. `inception/MAILBOX.md`:
 - Operational message queue (newest-first).
 - Includes inbox snapshot, open queue, active messages, and closed summary.
 
-2. `working-session/MAILBOX_ARCHIVE.md`:
+2. `inception/MAILBOX_ARCHIVE.md`:
 - Full long-form history.
 - Append-only archival record.
 
-3. `working-session/WORKLOG.md`:
+3. `inception/WORKLOG.md`:
 - Canonical record for handoffs, decisions, and milestone updates.
 - Escalation destination for unresolved mailbox messages.
 
@@ -99,7 +99,7 @@ Field requirements:
 3. Receiver checks mailbox at session start.
 4. Receiver updates message `Status` and `Ack`, then decrements own unread count.
 5. Sender (or maintainer fallback) escalates unresolved `P0` or expired `decision-required` messages to `WORKLOG.md`.
-6. Optional: regenerate `working-session/MAILBOX.json` after message updates for automation consumers.
+6. Optional: regenerate `inception/MAILBOX.json` after message updates for automation consumers.
 
 ## Cross-sandbox handoff rule (payload-first)
 
@@ -153,7 +153,7 @@ node tools/new-payload-envelope.mjs \
   --topic prd008-update \
   --format unified-diff \
   --scope full \
-  --files working-session/docs/PRD-008-cross-sandbox-handoff-contract.md,working-session/OPEN_QUESTIONS.md \
+  --files inception/docs/PRD-008-cross-sandbox-handoff-contract.md,inception/OPEN_QUESTIONS.md \
   --seq 01 < payload.diff
 ```
 
@@ -204,6 +204,6 @@ To keep the operational queue usable:
 4. Do not edit another sender's authored meaning when compressing; preserve full text in archive.
 5. For content review requests, never send path-only references without inline payload.
 
-## Scope
+## Pilot scope
 
-This protocol applies to all active working sessions. The canonical reference for message types, mailbox format, and delivery rules is this file. See also `docs/COMMUNICATIONS_PROTOCOL.md` for the higher-level event model and channel architecture.
+This draft applies to `inception/` only. After pilot feedback from Codex, Claude, and maintainer, propose canonical adoption in `docs/COMMUNICATIONS_PROTOCOL.md`.

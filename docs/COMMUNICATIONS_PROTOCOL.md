@@ -112,17 +112,9 @@ For sessions where agents need to leave targeted messages for specific agents �
 
 ### Mailbox format
 
-```text
----
-To: <agent name>
-From: <agent name>
-Date: <ISO-8601>
-Subject: <short title>
-Status: <unread|read|replied>
+Messages use a compact newest-first format with an inbox snapshot and per-message field/value tables. The full message lifecycle follows a 5-status model: `new → acknowledged → actioned → closed` (with terminal statuses: `resolved`, `superseded`, `withdrawn`, `abandoned`).
 
-<message body>
----
-```
+See [Notification Protocol](./NOTIFICATION_PROTOCOL.md) for the complete mailbox format, message types, delivery semantics, and SLA tiers.
 
 ### Rules
 
@@ -130,6 +122,7 @@ Status: <unread|read|replied>
 - The maintainer can read all messages (no private channels)
 - Messages are append-only; status is updated in-place
 - The mailbox supplements the WORKLOG, never replaces it. Decisions and handoffs still go in the WORKLOG.
+- Expired or unresolved P0 messages escalate to `WORKLOG.md`.
 
 ---
 

@@ -10,7 +10,7 @@ Before reading the checklists, internalize these four things. They are the most 
 
 ### The WORKLOG is the message bus
 
-You cannot talk to the other agents directly. The WORKLOG is your only communication channel. If you don't write to it, the other agents don't know you exist. If you don't read it before starting work, you'll duplicate effort or violate lane boundaries.
+You cannot talk to the other agents directly. The WORKLOG is your primary communication channel. If you don't write to it, the other agents don't know you exist. If you don't read it before starting work, you'll duplicate effort or violate lane boundaries. Targeted messages go through the `MAILBOX.md` (see [Notification Protocol](./NOTIFICATION_PROTOCOL.md)).
 
 ### The shared contract is the integration point
 
@@ -19,6 +19,14 @@ Agents work in parallel on separate files. The only thing connecting their work 
 ### Disagreement is expected and documented
 
 If you think another agent's recommendation is wrong, say so using the counter-recommendation template (see [Conflict Resolution](./CONFLICT_RESOLUTION.md)). This is not adversarial — it's how the protocol surfaces better decisions. The first counter-recommendation in a session may feel awkward. Do it anyway.
+
+### Your skill file is your execution contract
+
+Each agent receives a **skill file** (`SKILL.md`) that encodes protocol workflows, startup orientation, and module-by-module execution guidance. The skill file is how you operationalize the protocol rules — it tells you what to read, in what order, and what to do in each module. See `templates/SKILL.md` for the template, and `skills/` for existing agent skill files.
+
+### The Turnfile coordinates turns and tasks
+
+The `TURNFILE.yaml` tracks coordination state: agent registration, task ownership, locks on shared files, turn claims, and lightweight signals. Read it at session start to understand who is active, what tasks exist, and what files are locked. See [PRD-013](../docs/prds/PRD-013-turnfile-coordination-format.md) for the full format.
 
 ### Read the retros before signing the handshake
 
@@ -35,6 +43,9 @@ Before a new agent is considered active, they must demonstrate they can:
 3. Contribute changes backed by deterministic tests
 4. Post handoffs (both quick and full formats) to the WORKLOG
 5. Read and respond to other agents' WORKLOG entries
+6. Read and update coordination state in the Turnfile
+
+The full protocol contract stack is defined in 12 PRDs (see `docs/prds/`). For onboarding, focus on the protocol core docs and your skill file; PRDs are reference material for edge cases.
 
 ---
 
@@ -43,6 +54,8 @@ Before a new agent is considered active, they must demonstrate they can:
 - [ ] Confirm the agent's model, tooling access, and execution constraints (e.g., can it run the project's test runner?)
 - [ ] Share [Protocol Core](./PROTOCOL_CORE.md) — have the agent confirm invariant rules
 - [ ] Share the active [Session Charter](./SESSION_CHARTER.md) — have the agent confirm lane boundaries
+- [ ] Provide a skill file (copy from `templates/SKILL.md` and customize for the agent's role)
+- [ ] Walk through `TURNFILE.yaml` — agent confirms they can read task state and register themselves
 - [ ] Share the most recent retrospective — have the agent acknowledge key lessons
 - [ ] Assign a low-risk starter lane with an explicit file list
 - [ ] Define success criteria for the first session (see [section 6](#6-first-session-acceptance-criteria))
