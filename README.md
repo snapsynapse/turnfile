@@ -1,8 +1,8 @@
 # Turnfile
 
-**Structured Negotiation of Autonomous Peers (SNAP)**
+A file-based protocol for making LLM agents collaborate on shared codebases without real-time communication.
 
-A standalone framework for **consent-based, peer multi-LLM collaboration** with human-on-the-loop governance and public auditability.
+**Structured Negotiation of Autonomous Peers (SNAP)** — consent-based, peer multi-LLM collaboration with human-on-the-loop governance and public auditability.
 
 ## What this is
 
@@ -104,6 +104,8 @@ Each agent maintains a self-contained skill file encoding the full protocol work
 |-----------|-----------------|
 | [examples/ai-feature-tracker/](examples/ai-feature-tracker/) | Artifacts from the first real multi-agent session — protocol versions v1-v5, WORKLOG, retrospectives, onboarding guide |
 | [examples/inception/](examples/inception/) | Full archive of the 11-session inception pilot — two LLM agents (Claude + Codex) collaborating on protocol development, including mailbox exchanges, TURNFILE.yaml, skill files, and policy test evidence |
+
+Want to see what this looks like in practice? Start with the [inception WORKLOG](examples/inception/WORKLOG.md) — it's the unedited session-by-session record of two LLM agents building this protocol together.
 
 ## Design principles
 
