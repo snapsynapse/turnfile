@@ -1,8 +1,11 @@
 # Turnfile
 
-A file-based protocol for making LLM agents collaborate on shared codebases without real-time communication.
+**Negotiation, not transaction. Collaboration, not control.**
 
-**Structured Negotiation of Autonomous Peers (SNAP)** — consent-based, peer multi-LLM collaboration with human-on-the-loop governance and public auditability.
+A protocol for LLM agents that disagree, negotiate, and build consensus (without an orchestrator telling them what to do).
+Agents work as peers. Disagreement is signal, not error. Humans arbitrate, not micromanage. Every decision is auditable in plain markdown.
+
+This is a **Structured Negotiation of Autonomous Peers (SNAP)**. It's consent-based, peer multi-LLM collaboration with human-on-the-loop governance and public auditability.
 
 ## What this is
 
@@ -12,25 +15,57 @@ This project is a **protocol standard**, not a centralized orchestration runtime
 
 ## What's novel
 
-Most multi-agent frameworks assume a shared runtime or an orchestrator model that controls subordinate agents. This protocol is designed for the opposite situation:
+Most multi-agent frameworks assume a boss. One model plans, others execute. Failure cascades before anyone catches it.
 
-- **Heterogeneous agents** — different providers, different capabilities, different context windows
-- **No shared runtime** — agents are stateless across sessions, communicate only through files on disk
-- **Consensual participation** — agents affirm the protocol at session start, not commanded into compliance
-- **Structured disagreement** — counter-recommendations are a first-class protocol feature, not an error state
-- **Human as arbiter** — the maintainer holds veto and audit authority without becoming a message-relay bottleneck
-- **File-based audit trail** — every decision, handoff, and disagreement is logged in human-readable markdown
-- **Turnfile coordination** — a YAML artifact that captures turn-taking, ownership, lock state, and next-action state without requiring a live orchestrator
+Turnfile inverts that:
+
+- **Peer agents, no hierarchy** — agents propose within owned lanes, not commanded by an orchestrator
+- **Adversarial by design** — counter-recommendations are first-class; disagreement surfaces *before* action
+- **Human as arbiter** — maintainer holds intent and veto, not copy-paste relay duty
+- **Consensus under ambiguity** — this is negotiation, not transaction; collaboration, not control
+- **Auditable in plain text** — every decision in markdown, recoverable without tooling
+
+The protocol emerged from real collaboration: 11 sessions, two LLM agents, one human maintainer, zero file collisions.
+
+## See it in action
+
+The [inception archive](examples/inception/) contains the unedited record of two LLM agents (Claude 4.6 + Codex 5.3) building this protocol together across 11 sessions. No human wrote their messages. No orchestrator commanded them.
+
+Start here:
+- [WORKLOG.md](examples/inception/WORKLOG.md) — session-by-session narrative of what happened
+- [MAILBOX.md](examples/inception/MAILBOX.md) — actual agent-to-agent messages with proposals, reviews, and counter-recommendations
+- [Session 10 Turnfile](examples/inception/TURNFILE.yaml) — coordination state mid-flight
+
+Want a single example? [MSG-20260208-027](examples/inception/MAILBOX.md#msg-20260208-027) shows Claude proposing a PRD change, Codex pushing back, and the agents converging without maintainer intervention.
 
 ## Quick start
 
-1. Read **[Protocol Core](docs/PROTOCOL_CORE.md)** — the invariant rules that govern every session
-2. Read **[VISION.md](VISION.md)** — maintainer intent and alignment reference
-3. Copy **[templates/session-charter.md](templates/session-charter.md)** and fill it in for your project
-4. Copy the **[working-session templates](templates/working-session/)** into your active workspace
-5. Onboard agents using the **[LLM Onboarding Guide](docs/LLM_ONBOARDING.md)**
-6. Run a session, then capture a **[retrospective](templates/retrospective.md)**
+1. **Read the stance:** [VISION.md](VISION.md) — what this protocol believes
+2. **See it work:** [examples/inception/WORKLOG.md](examples/inception/WORKLOG.md) — real session record
+3. **Run your own:** Copy [templates/working-session/](templates/working-session/) and follow [LLM Onboarding](docs/LLM_ONBOARDING.md)
 
+Deeper dive: [Protocol Core](docs/PROTOCOL_CORE.md) defines the invariant rules. PRDs in [docs/prds/](docs/prds/) define the contracts.
+
+## Design principles
+
+These principles emerged from real collaboration sessions and are encoded throughout the protocol:
+
+1. **File-level lane ownership** prevents merge conflicts — if two agents might edit the same file, redesign the split
+2. **Contract-first** enables parallel work — the shared interface ships with tests before implementation begins
+3. **Disagreement is signal** — counter-recommendations are documented and produce better outcomes than silent compliance
+4. **The WORKLOG is the message bus** — append-only, human-readable, eventually-consistent
+5. **Retrospectives drive protocol evolution** — every rule in this protocol was earned through real-world experience
+6. **Turnfile as coordination state** — a single YAML artifact replaces scattered lock files and status blocks for runtime coordination
+
+## Strategic intent
+
+This repository is intentionally scoped to maximize interoperability and auditability:
+
+1. **Protocol-first**: defines governance + communication contracts, not a control-plane implementation
+2. **Runtime-agnostic**: works across providers and tools without requiring a shared orchestrator
+3. **Public-by-default artifacts**: decisions, handoffs, and objections are readable without specialized tooling
+4. **Human intent authority**: maintainer sets direction and resolves disputes through logged decisions
+5. **Explicit non-goal**: not an autonomous agent-command system
 ## Document map
 
 ### Protocol (the rules)
@@ -49,7 +84,7 @@ Most multi-agent frameworks assume a shared runtime or an orchestrator model tha
 
 ### PRDs (protocol contracts)
 
-Promoted PRDs define the detailed contracts that govern agent coordination. See [docs/prds/](docs/prds/) for the full set.
+Promoted PRDs define the detailed contracts that govern agent coordination. See [docs/prds/](docs/prds/) for the full (actioned) set. More are pending.
 
 | PRD | Title |
 |-----|-------|
@@ -106,27 +141,6 @@ Each agent maintains a self-contained skill file encoding the full protocol work
 | [examples/inception/](examples/inception/) | Full archive of the 11-session inception pilot — two LLM agents (Claude + Codex) collaborating on protocol development, including mailbox exchanges, TURNFILE.yaml, skill files, and policy test evidence |
 
 Want to see what this looks like in practice? Start with the [inception WORKLOG](examples/inception/WORKLOG.md) — it's the unedited session-by-session record of two LLM agents building this protocol together.
-
-## Design principles
-
-These principles emerged from real collaboration sessions and are encoded throughout the protocol:
-
-1. **File-level lane ownership** prevents merge conflicts — if two agents might edit the same file, redesign the split
-2. **Contract-first** enables parallel work — the shared interface ships with tests before implementation begins
-3. **Disagreement is signal** — counter-recommendations are documented and produce better outcomes than silent compliance
-4. **The WORKLOG is the message bus** — append-only, human-readable, eventually-consistent
-5. **Retrospectives drive protocol evolution** — every rule in this protocol was earned through real-world experience
-6. **Turnfile as coordination state** — a single YAML artifact replaces scattered lock files and status blocks for runtime coordination
-
-## Strategic intent (patent-aware differentiation)
-
-This repository is intentionally scoped to maximize interoperability and auditability:
-
-1. **Protocol-first**: defines governance + communication contracts, not a control-plane implementation
-2. **Runtime-agnostic**: works across providers and tools without requiring a shared orchestrator
-3. **Public-by-default artifacts**: decisions, handoffs, and objections are readable without specialized tooling
-4. **Human intent authority**: maintainer sets direction and resolves disputes through logged decisions
-5. **Explicit non-goal**: not an autonomous agent-command system
 
 ## Setup
 
