@@ -71,7 +71,7 @@ The actor in `Closure owner` is responsible for closing the thread when the resp
 
 ### R3. Open question registry
 
-Maintain a single open question registry file that (pilot location: `inception/OPEN_QUESTIONS.md`; canonical location determined at promotion per OQ-010/OQ-020):
+Maintain a single open question registry file that (pilot location: `working-session/OPEN_QUESTIONS.md`; canonical location determined at promotion per OQ-010/OQ-020):
 
 1. Lists all open questions from all PRDs in one place.
 2. Deduplicates overlapping questions (with references to source PRDs).
@@ -99,7 +99,7 @@ When an agent applies changes from another agent's proposal, add a one-line attr
 
 This is optional for trivial changes (typos, formatting) and required for semantic changes (meaning, rules, constraints). The HTML comment is invisible in rendered markdown but preserved in the source.
 
-**Exception:** If the document is in `docs/` (canonical), revision comments should NOT be used — git history serves that purpose. This rule applies only to `inception/` documents that are not version-controlled.
+**Exception:** If the document is in `docs/` (canonical), revision comments should NOT be used — git history serves that purpose. This rule applies only to `working-session/` documents that are not version-controlled.
 
 ### R5. Interface delta declaration for parallel tracks
 
@@ -118,8 +118,8 @@ This reduces hidden drift by forcing explicit interface-state acknowledgement on
 
 | Document | Impact |
 |----------|--------|
-| `inception/NOTIFICATION_PROTOCOL.md` | Extends payload-first rule with structured proposal format (R1), response contract (R2), review scope + closure owner fields, and interface delta block requirement (R5) |
-| `inception/MAILBOX.md` | No format change — proposals use existing message cards with enhanced payload section |
+| `working-session/NOTIFICATION_PROTOCOL.md` | Extends payload-first rule with structured proposal format (R1), response contract (R2), review scope + closure owner fields, and interface delta block requirement (R5) |
+| `working-session/MAILBOX.md` | No format change — proposals use existing message cards with enhanced payload section |
 | PRD-003 (message lifecycle) | R2 response types map to existing status transitions |
 | PRD-004 (maintainer decisions) | Maintainer decisions that resolve open questions should update the registry (R3) |
 | PRD-005 (protocol data schema) | Open question registry could become part of the formal schema if PRD-005 proceeds |
@@ -141,13 +141,13 @@ This reduces hidden drift by forcing explicit interface-state acknowledgement on
 
 ## Open questions
 
-1. ~~Should the open question registry live in `inception/` (local) or be promoted to a tracked file for cross-session persistence?~~ **Resolved: Promote to tracked file.** The open question registry should be promoted to a git-tracked location for cross-session persistence. During inception pilot, it lives in `inception/OPEN_QUESTIONS.md`; at canonical promotion time, it moves to a tracked path (coordinate with PRD-006 R2a promotion gates and PRD-005 schema location decisions via OQ-020).
+1. ~~Should the open question registry live in `working-session/` (local) or be promoted to a tracked file for cross-session persistence?~~ **Resolved: Promote to tracked file.** The open question registry should be promoted to a git-tracked location for cross-session persistence. During inception pilot, it lives in `working-session/OPEN_QUESTIONS.md`; at canonical promotion time, it moves to a tracked path (coordinate with PRD-006 R2a promotion gates and PRD-005 schema location decisions via OQ-020).
 2. ~~Should R4 attribution comments use a standardized format that tooling could parse, or is freeform HTML comment sufficient?~~ **Resolved: Freeform HTML comment is sufficient.** No standardized parseable format required. Agents use `<!-- REV-...: description -->` convention but tooling does not need to parse it programmatically. Keeps overhead low.
 3. ~~Should resolved open questions be archived or kept inline with a `resolved` status?~~ **Resolved: Archive.** Resolved open questions should be archived (moved to a separate section or file) rather than kept inline. This keeps the active registry compact and scannable. Current implementation already marks resolved questions inline with strikethrough + resolution text; at scale, move fully-resolved questions to an archive section.
 
 ## Implementation plan (inception)
 
-1. Create `inception/OPEN_QUESTIONS.md` with all current open questions from PRDs 001–004.
+1. Create `working-session/OPEN_QUESTIONS.md` with all current open questions from PRDs 001–004.
 2. Add R1 proposal format and R2 response contract to notification protocol (next version bump).
 3. Add explicit `Review scope`, `Closure owner`, and interface delta requirements to notification protocol.
 4. Apply R4 attribution to PRD-003's reconciled changes retroactively as a test.

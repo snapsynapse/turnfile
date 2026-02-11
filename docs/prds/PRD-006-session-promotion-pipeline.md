@@ -8,7 +8,7 @@ Date: 2026-02-08
 
 The Turnfile protocol distinguishes three artifact tiers, each with different visibility and governance rules:
 
-1. **`inception/`** — local-only working directory. Gitignored. Contains active session files (mailbox, worklog, PRDs, chat logs). Not published. Ephemeral by design.
+1. **`working-session/`** — local-only working directory. Gitignored. Contains active session files (mailbox, worklog, PRDs, chat logs). Not published. Ephemeral by design.
 2. **`docs/` + `templates/`** — canonical, tracked, published. The protocol specification. Changes require maintainer approval.
 3. **`examples/`** — historical reference. Tracked and published. Contains complete session artifacts from past engagements for onboarding and pattern reference.
 
@@ -64,8 +64,8 @@ Define exactly two promotion paths from inception:
 
 | Path | Source | Target | Purpose |
 |------|--------|--------|---------|
-| **Canonical** | `inception/docs/*.md`, `inception/NOTIFICATION_PROTOCOL.md`, etc. | `docs/*.md`, `templates/*.md` | Protocol rules, templates, and reference docs validated through pilot use |
-| **Archival** | `inception/` (compact operational subset) | `examples/<session-name>/` | Historical reference bundle sized for onboarding and pattern reference |
+| **Canonical** | `working-session/docs/*.md`, `working-session/NOTIFICATION_PROTOCOL.md`, etc. | `docs/*.md`, `templates/*.md` | Protocol rules, templates, and reference docs validated through pilot use |
+| **Archival** | `working-session/` (compact operational subset) | `examples/<session-name>/` | Historical reference bundle sized for onboarding and pattern reference |
 
 No other promotion paths exist. Files that don't fit either path (scratch notes, debugging artifacts, redundant drafts) are discarded at session close — they exist only in local filesystem history.
 
@@ -82,7 +82,7 @@ An inception artifact is ready for canonical promotion when ALL of the following
 5. **Cross-reference audit passed:** All references to/from other documents are valid. Promoted docs must not reference inception-only files; inception files referencing the promoted doc must be updated.
 6. **Format compliant:** The artifact conforms to the canonical format conventions defined by PRD-005 (or the existing canonical docs if PRD-005 is not yet adopted).
 7. **Promotion-blocker disposition recorded:** Any deferred question marked promotion-relevant (currently `OQ-026` from PRD-007) has an explicit maintainer disposition (`allow`, `block`, or `conditional`) in the promotion proposal.
-8. **Registry gate passed:** `inception/docs/PRD_STATUS.json` marks the PRD as eligible with Codex/Claude/Maintainer acceptance evidence and zero blockers.
+8. **Registry gate passed:** `working-session/docs/PRD_STATUS.json` marks the PRD as eligible with Codex/Claude/Maintainer acceptance evidence and zero blockers.
 
 #### R2b. Archival promotion gates
 
@@ -153,10 +153,10 @@ When promoting an inception document to `docs/` or `templates/`:
 1. **Remove inception metadata:** Strip "Status: Draft (inception)", replace with appropriate production status.
 2. **Remove implementation plan section:** The inception-specific implementation plan is not relevant to the canonical doc. Replace with a brief "History" or "Origin" note if useful.
 3. **Remove coordination sections:** Sections like "Coordination with Codex (PRD-004)" are session-specific. Extract any lasting interface contracts into the document body.
-4. **Update cross-references:** Replace `inception/` paths with `docs/` or `templates/` paths. Remove references to mailbox messages, worklog entries, or other inception-only files.
+4. **Update cross-references:** Replace `working-session/` paths with `docs/` or `templates/` paths. Remove references to mailbox messages, worklog entries, or other inception-only files.
 5. **Merge with existing canonical docs where appropriate:** Some inception PRDs (e.g., PRD-003 lifecycle rules) should be merged into an existing canonical doc (e.g., `docs/COMMUNICATIONS_PROTOCOL.md`) rather than creating a new standalone file. The promotion proposal must specify: new file vs. merge target.
 6. **Preserve agent attribution:** Add a brief attribution note (e.g., "Originated as PRD-003 during inception session 2026-02-08. Drafted by Claude, reviewed by Codex.").
-7. **Retain origin trace via promoted archive path:** If origin context is required, link to `examples/<session-name>/` artifacts, not `inception/` paths.
+7. **Retain origin trace via promoted archive path:** If origin context is required, link to `examples/<session-name>/` artifacts, not `working-session/` paths.
 
 #### R4b. Archival promotion transformations
 
@@ -222,7 +222,7 @@ This section is added when an agent proposes promotion, not when the PRD is firs
 | PRD-010 (shared-file locking) | Promotion updates that touch shared control-plane files follow transaction + Turnfile lease lock flow |
 | PRD-011 (session resumption) | Promotion outputs must keep resumption references valid (including Turnfile-first read order context) |
 | PRD-013 (Turnfile format) | Archival bundles include Turnfile coordination snapshot; lock state source is Turnfile, not LOCKS.md |
-| `inception/OPEN_QUESTIONS.md` | OQ resolution is a readiness gate; promotion triggers a registry scan |
+| `working-session/OPEN_QUESTIONS.md` | OQ resolution is a readiness gate; promotion triggers a registry scan |
 
 ## Acceptance criteria
 
@@ -248,7 +248,7 @@ All open questions have been resolved by maintainer direction:
 
 1. ~~Should there be a "staging" tier between inception and canonical — e.g., `docs/drafts/` — for documents that have passed agent review but not yet accumulated two sessions of pilot validation?~~ **Resolved:** no staging tier.
 2. ~~Should archival promotion include the full mailbox archive or only the compact operational view?~~ **Resolved:** compact operational view only.
-3. ~~Should promoted canonical docs retain a link back to their inception origin (e.g., "See examples/inception-2026-02-08/ for the original PRD and review history")?~~ **Resolved:** yes, retain inception-origin backlink.
+3. ~~Should promoted canonical docs retain a link back to their inception origin (e.g., "See examples/inception/ for the original PRD and review history")?~~ **Resolved:** yes, retain inception-origin backlink.
 4. ~~Should the transformation rules (R4a) be automated with a script, or is manual transformation sufficient at current scale?~~ **Resolved:** manual now; automation later.
 
 ## Implementation plan (inception)

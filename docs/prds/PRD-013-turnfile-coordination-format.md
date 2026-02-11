@@ -11,7 +11,7 @@ Date: 2026-02-08
 | Codex acceptance | accepted | Turnfile task `prd-013-cross-review` completed (revision 14) |
 | Claude acceptance | accepted | `MSG-027/028` acceptance cycle |
 | Maintainer acceptance | accepted | no explicit maintainer acceptance logged yet |
-| Eligible for move to `docs/prds` | yes | blocked until maintainer acceptance + zero blockers in `inception/docs/PRD_STATUS.json` |
+| Eligible for move to `docs/prds` | yes | blocked until maintainer acceptance + zero blockers in `working-session/docs/PRD_STATUS.json` |
 
 ## Problem
 
@@ -58,7 +58,7 @@ Define a machine-parseable, human-readable coordination file format — the **Tu
 
 ## R1. Format specification: YAML
 
-The Turnfile uses YAML format, stored as `TURNFILE.yaml` in the coordination workspace (during pilot: `inception/TURNFILE.yaml`).
+The Turnfile uses YAML format, stored as `TURNFILE.yaml` in the coordination workspace (during pilot: `working-session/TURNFILE.yaml`).
 
 YAML is chosen for:
 - Human readability without tooling.
@@ -80,7 +80,7 @@ To mitigate YAML's known risks (whitespace sensitivity, merge conflicts, implici
 
 ### R1.2. Schema validation
 
-A JSON Schema file shall be published for the Turnfile format at `docs/schemas/turnfile/turnfile-v<major>.schema.json` (per PRD-005 R8.4 canonical schema location policy). During pilot, drafts live at `inception/schemas/turnfile/`.
+A JSON Schema file shall be published for the Turnfile format at `docs/schemas/turnfile/turnfile-v<major>.schema.json` (per PRD-005 R8.4 canonical schema location policy). During pilot, drafts live at `working-session/schemas/turnfile/`.
 
 Agents should validate their writes against the schema before committing changes. A lint/validate helper script shall be provided (see M2).
 
@@ -388,7 +388,7 @@ To help agents choose the right channel:
 
 ### Initial setup (maintainer)
 
-1. Create `inception/TURNFILE.yaml` with project metadata, registered agents, and initial task list.
+1. Create `working-session/TURNFILE.yaml` with project metadata, registered agents, and initial task list.
 2. Set `coordination.active_phase` and `active_step` to current state.
 3. Validate against schema.
 
@@ -441,9 +441,9 @@ To help agents choose the right channel:
 ## Milestones
 
 1. **M0:** Draft PRD-013 (this document). ✓
-2. **M1:** Publish Turnfile JSON Schema v0.1 at `inception/schemas/turnfile/`.
+2. **M1:** Publish Turnfile JSON Schema v0.1 at `working-session/schemas/turnfile/`.
 3. **M2:** Create `tools/turnfile-lint.mjs` (or equivalent) for YAML validation + schema conformance.
-4. **M3:** Create initial `inception/TURNFILE.yaml` with current project state (registered agents, active phase/tasks). ✓ (Created session 9; in active use since session 10.)
+4. **M3:** Create initial `working-session/TURNFILE.yaml` with current project state (registered agents, active phase/tasks). ✓ (Created session 9; in active use since session 10.)
 5. **M4:** Pilot Turnfile in one full agent session — both agents use it for task tracking + lock management. ✓ (Session 10: both agents reading/writing TURNFILE.yaml for P2-B parallel tracks.)
 6. **M5:** Validate AC#3 (self-coordinated task claiming without maintainer intervention).
 7. **M6:** Decide canonical adoption path (stays YAML, migrates to another format, or is retired).

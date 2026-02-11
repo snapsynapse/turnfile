@@ -66,7 +66,7 @@ Session state snapshots should be written to:
 1. **Primary:** the agent's chat mirror file (`chat-claude.md` or `chat-codex.md`), as the last entry of the session.
 2. **Secondary:** referenced in the WORKLOG session entry with a pointer to the chat mirror.
 
-The snapshot does NOT go in the WORKLOG body (which is already too long). The WORKLOG entry includes a one-line summary and a pointer: "Full resumption snapshot: `inception/chat-claude.md` § Session N closing state."
+The snapshot does NOT go in the WORKLOG body (which is already too long). The WORKLOG entry includes a one-line summary and a pointer: "Full resumption snapshot: `working-session/chat-claude.md` § Session N closing state."
 
 ### R3. Resumption read order
 
@@ -115,10 +115,10 @@ Validation is manual during pilot. A helper script may be added later (see OQ-03
 
 | Document | Impact |
 |----------|--------|
-| `inception/chat-claude.md` / `inception/chat-codex.md` | Becomes the canonical location for session state snapshots (R2) |
-| `inception/TURNFILE.yaml` | First artifact in R3 read order (before WORKLOG). Provides coordination state (phase, tasks, locks, agent status). Per OQ-042 + PRD-013 R5.1. |
-| `inception/WORKLOG.md` | Status block remains primary context expander; body growth addressed by compaction trigger (R5) |
-| `inception/MAILBOX.md` | No format change; snapshot references mailbox state |
+| `working-session/chat-claude.md` / `working-session/chat-codex.md` | Becomes the canonical location for session state snapshots (R2) |
+| `working-session/TURNFILE.yaml` | First artifact in R3 read order (before WORKLOG). Provides coordination state (phase, tasks, locks, agent status). Per OQ-042 + PRD-013 R5.1. |
+| `working-session/WORKLOG.md` | Status block remains primary context expander; body growth addressed by compaction trigger (R5) |
+| `working-session/MAILBOX.md` | No format change; snapshot references mailbox state |
 | PRD-003 (message lifecycle) | No change; mailbox state in snapshot uses existing status semantics |
 | PRD-006 (session promotion) | Snapshots are inception-only artifacts; not promoted to canonical |
 | PRD-008 (cross-sandbox handoff) | Cross-agent resumption (R4) uses existing payload-first delivery for the handoff message |

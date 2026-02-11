@@ -47,20 +47,20 @@ Define a lightweight transaction + lock contract for shared operational files th
 
 This contract applies to:
 
-1. `inception/MAILBOX.md`
-2. `inception/WORKLOG.md`
-3. `inception/OPEN_QUESTIONS.md`
-4. `inception/docs/README.md`
+1. `working-session/MAILBOX.md`
+2. `working-session/WORKLOG.md`
+3. `working-session/OPEN_QUESTIONS.md`
+4. `working-session/docs/README.md`
 
 Derived artifact rule:
 
-5. `inception/MAILBOX.json` is projection output and must be regenerated whenever `MAILBOX.md` changes (R5).
+5. `working-session/MAILBOX.json` is projection output and must be regenerated whenever `MAILBOX.md` changes (R5).
 
-Lock state is stored in `inception/TURNFILE.yaml` (`locks` section), not in a dedicated `LOCKS.md` file.
+Lock state is stored in `working-session/TURNFILE.yaml` (`locks` section), not in a dedicated `LOCKS.md` file.
 
 ## R2. Turnfile lock ledger + revision lease semantics
 
-Before editing any file in R1, an agent must acquire a lock entry in `inception/TURNFILE.yaml` under `locks`.
+Before editing any file in R1, an agent must acquire a lock entry in `working-session/TURNFILE.yaml` under `locks`.
 
 Required lock fields:
 
@@ -133,7 +133,7 @@ Any transaction that changes `MAILBOX.md` must regenerate `MAILBOX.json` in the 
 Command:
 
 ```bash
-node tools/export-mailbox-json.mjs inception/MAILBOX.md inception/MAILBOX.json
+node tools/export-mailbox-json.mjs working-session/MAILBOX.md working-session/MAILBOX.json
 ```
 
 Projection regeneration is part of transaction completion, not a deferred follow-up.

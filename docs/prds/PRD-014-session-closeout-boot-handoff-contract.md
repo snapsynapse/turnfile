@@ -11,7 +11,7 @@ Date: 2026-02-08
 | Codex acceptance | accepted | `MSG-20260208-036` reply confirms recommendations applied |
 | Claude acceptance | accepted | `MSG-20260208-036` review outcome: accept with recommendations |
 | Maintainer acceptance | accepted | no explicit maintainer acceptance logged yet |
-| Eligible for move to `docs/prds` | yes | blocked until maintainer acceptance + zero blockers in `inception/docs/PRD_STATUS.json` |
+| Eligible for move to `docs/prds` | yes | blocked until maintainer acceptance + zero blockers in `working-session/docs/PRD_STATUS.json` |
 
 ## Problem
 
@@ -79,7 +79,7 @@ Additional rules:
 
 At session close:
 
-1. Current boot file is archived under `inception/archive/<boot-file-stem>/` with monotonic version naming, following PRD-006 archival path conventions.
+1. Current boot file is archived under `working-session/archive/<boot-file-stem>/` with monotonic version naming, following PRD-006 archival path conventions.
 2. New boot file is written for next-thread startup and reflects current coordination state.
 3. Archive README is updated if archive structure changed.
 4. Boot handoff must include at minimum:
@@ -178,7 +178,7 @@ Closeout edits that touch shared control-plane files (`MAILBOX.md`, `WORKLOG.md`
 1. ~~**OQ-045:** Should reflection blocks have a strict template (`lesson`, `gratitude`, `next improvement`) or remain freeform?~~ **Resolved:** Freeform, under 100 characters. No strict template.
 2. ~~**OQ-046:** Should boot archive version naming be globally monotonic or per-agent monotonic?~~ **Resolved:** Globally monotonic.
 
-Tracked in: `inception/OPEN_QUESTIONS.md`.
+Tracked in: `working-session/OPEN_QUESTIONS.md`.
 
 ## Exit criteria for moving beyond inception draft
 

@@ -159,9 +159,9 @@ Messages of type `notify` (FYI updates):
 
 | Document | Impact |
 |----------|--------|
-| `inception/NOTIFICATION_PROTOCOL.md` | Extends §5 (delivery semantics) and §6 (response expectations) with formal lifecycle |
-| `inception/MAILBOX.md` | No format change — lifecycle is enforced through existing `Status` and `Ack` fields |
-| `inception/WORKLOG.md` | Adds escalation entries to WORKLOG body; maintainer final outcomes belong in decision index |
+| `working-session/NOTIFICATION_PROTOCOL.md` | Extends §5 (delivery semantics) and §6 (response expectations) with formal lifecycle |
+| `working-session/MAILBOX.md` | No format change — lifecycle is enforced through existing `Status` and `Ack` fields |
+| `working-session/WORKLOG.md` | Adds escalation entries to WORKLOG body; maintainer final outcomes belong in decision index |
 | PRD-001 (maintainer interaction) | Provides the deterministic lifecycle PRD-001 requires for maintainer reply patterns |
 | PRD-004 (maintainer decision contract) | Consumes PRD-003 lifecycle/SLA semantics for maintainer-decision messages |
 | PRD-007 (trust + provenance) | SLA violations (`sla_missed` events) are tracked as trust signals per maintainer decision (OQ-005) |
@@ -191,7 +191,7 @@ All open questions have been resolved by maintainer decision:
 
 ## Implementation plan (inception)
 
-1. Add lifecycle state machine and SLA table to `inception/NOTIFICATION_PROTOCOL.md` (Claude lane, current session).
+1. Add lifecycle state machine and SLA table to `working-session/NOTIFICATION_PROTOCOL.md` (Claude lane, current session).
 2. Codex reviews for consistency with PRD-001 and PRD-004 interactions.
 3. Exercise one stale-message scenario on a real message during pilot.
 4. If stable across two sessions, propose lifecycle rules for canonical `docs/COMMUNICATIONS_PROTOCOL.md`.
