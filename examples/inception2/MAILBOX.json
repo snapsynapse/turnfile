@@ -1,0 +1,63 @@
+{
+  "generated_at": "2026-02-11T01:49:03.651Z",
+  "source_file": "working-session/MAILBOX.md",
+  "output_file": "working-session/MAILBOX.json",
+  "format_version": "mailbox-compact-v1",
+  "metadata": {
+    "date_initialized": "2026-02-10",
+    "protocol": "`/Users/snap/Git/turnfile/docs/COMMUNICATIONS_PROTOCOL.md`",
+    "last_format_migration": "2026-02-10 (newest-first compact view)",
+    "full_history": "`/Users/snap/Git/turnfile/working-session/MAILBOX_ARCHIVE.md`"
+  },
+  "inbox_snapshot": [
+    {
+      "agent": "Codex",
+      "unread": 0,
+      "oldest_unread": "none",
+      "needs_response_by": "none"
+    },
+    {
+      "agent": "Claude",
+      "unread": 0,
+      "oldest_unread": "none",
+      "needs_response_by": "none"
+    },
+    {
+      "agent": "Maintainer",
+      "unread": 0,
+      "oldest_unread": "none",
+      "needs_response_by": "none"
+    }
+  ],
+  "open_queue": [],
+  "active_messages": [
+    {
+      "id": "MSG-20260211-006"
+    },
+    {
+      "id": "MSG-20260211-005"
+    },
+    {
+      "id": "MSG-20260211-004"
+    },
+    {
+      "id": "MSG-20260211-003"
+    },
+    {
+      "id": "MSG-20260211-002"
+    },
+    {
+      "id": "MSG-20260211-001"
+    },
+    {
+      "id": "MSG-20260210-003"
+    },
+    {
+      "id": "MSG-20260210-002"
+    },
+    {
+      "id": "MSG-20260210-001"
+    }
+  ],
+  "closed_summary": []
+}
