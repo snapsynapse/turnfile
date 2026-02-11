@@ -1,0 +1,597 @@
+{
+  "schema_version": "1.0",
+  "updated_at": "2026-02-11",
+  "policy": {
+    "required_reviewers": [
+      "codex",
+      "claude",
+      "maintainer"
+    ],
+    "promotion_rule": "A PRD may move from working-session/docs to docs/prds only when Codex, Claude, and Maintainer are all accepted with evidence and blocking_items is empty.",
+    "registry_is_source_of_truth": true
+  },
+  "prds": [
+    {
+      "id": "PRD-001",
+      "title": "Maintainer Interaction Model",
+      "path": "docs/prds/PRD-001-maintainer-interaction-model.md",
+      "shelf": "docs/prds",
+      "state": "actioned",
+      "acceptance": {
+        "codex": {
+          "status": "accepted",
+          "evidence": [
+            "MAILBOX MSG-20260211-011 follow-through: Codex accepted PRD-001 after Claude amendments applied"
+          ]
+        },
+        "claude": {
+          "status": "accepted",
+          "evidence": [
+            "MAILBOX MSG-20260211-011 review: APPLY with amendments (applied)"
+          ]
+        },
+        "maintainer": {
+          "status": "accepted",
+          "evidence": [
+            "MAILBOX MSG-20260211-012 decision: approve-with-conditions; conditions satisfied by logged Codex/Claude review evidence"
+          ]
+        }
+      },
+      "blocking_items": [],
+      "eligible_for_docs_prds": true
+    },
+    {
+      "id": "PRD-002",
+      "title": "Rust Notification Viewer (MVP)",
+      "path": "working-session/docs/PRD-002-rust-notification-viewer-mvp.md",
+      "shelf": "working-session/docs",
+      "state": "draft",
+      "acceptance": {
+        "codex": {
+          "status": "accepted",
+          "evidence": [
+            "MAILBOX MSG-20260211-014 follow-through: Codex applied all Claude counters (R2/R6/R7 updates)"
+          ]
+        },
+        "claude": {
+          "status": "accepted",
+          "evidence": [
+            "MAILBOX MSG-20260211-014 review: APPLY with 3 counters"
+          ]
+        },
+        "maintainer": {
+          "status": "pending",
+          "evidence": []
+        }
+      },
+      "blocking_items": [
+        "Maintainer acceptance pending"
+      ],
+      "eligible_for_docs_prds": false
+    },
+    {
+      "id": "PRD-003",
+      "title": "Message Lifecycle + SLA Contract",
+      "path": "docs/prds/PRD-003-message-lifecycle-sla-contract.md",
+      "shelf": "docs/prds",
+      "state": "actioned",
+      "acceptance": {
+        "codex": {
+          "status": "accepted",
+          "evidence": [
+            "MAILBOX MSG-20260208-022 (Codex accepted PRD-003/004)"
+          ]
+        },
+        "claude": {
+          "status": "accepted",
+          "evidence": [
+            "MAILBOX MSG-20260208-020 (Claude finalized PRD-003/004)"
+          ]
+        },
+        "maintainer": {
+          "status": "accepted",
+          "evidence": [
+            "WORKLOG Decision Index: Phase 1 approved (2026-02-08)"
+          ]
+        }
+      },
+      "blocking_items": [],
+      "eligible_for_docs_prds": true
+    },
+    {
+      "id": "PRD-004",
+      "title": "Maintainer Decision Contract",
+      "path": "docs/prds/PRD-004-maintainer-decision-contract.md",
+      "shelf": "docs/prds",
+      "state": "actioned",
+      "acceptance": {
+        "codex": {
+          "status": "accepted",
+          "evidence": [
+            "MAILBOX MSG-20260208-022 (Codex accepted PRD-003/004)"
+          ]
+        },
+        "claude": {
+          "status": "accepted",
+          "evidence": [
+            "MAILBOX MSG-20260208-020 (Claude finalized PRD-003/004)"
+          ]
+        },
+        "maintainer": {
+          "status": "accepted",
+          "evidence": [
+            "WORKLOG Decision Index: Phase 1 approved (2026-02-08)"
+          ]
+        }
+      },
+      "blocking_items": [],
+      "eligible_for_docs_prds": true
+    },
+    {
+      "id": "PRD-005",
+      "title": "Protocol Data Schema + Compatibility",
+      "path": "docs/prds/PRD-005-protocol-data-schema-compatibility.md",
+      "shelf": "docs/prds",
+      "state": "actioned",
+      "acceptance": {
+        "codex": {
+          "status": "accepted",
+          "evidence": [
+            "MAILBOX MSG-20260208-034 (Codex applied and confirmed PRD-005 findings)"
+          ]
+        },
+        "claude": {
+          "status": "accepted",
+          "evidence": [
+            "MAILBOX MSG-20260208-032 (Claude review) + MSG-034 ack"
+          ]
+        },
+        "maintainer": {
+          "status": "accepted",
+          "evidence": [
+            "Maintainer-directed actioned-PRD cleanup to docs/prds (Session 11)"
+          ]
+        }
+      },
+      "blocking_items": [],
+      "eligible_for_docs_prds": true
+    },
+    {
+      "id": "PRD-006",
+      "title": "Session Promotion Pipeline",
+      "path": "docs/prds/PRD-006-session-promotion-pipeline.md",
+      "shelf": "docs/prds",
+      "state": "actioned",
+      "acceptance": {
+        "codex": {
+          "status": "accepted",
+          "evidence": [
+            "MAILBOX MSG-20260208-033 (Track C payload applied)"
+          ]
+        },
+        "claude": {
+          "status": "accepted",
+          "evidence": [
+            "MAILBOX MSG-20260208-033 actioned by Claude"
+          ]
+        },
+        "maintainer": {
+          "status": "accepted",
+          "evidence": [
+            "Maintainer-directed actioned-PRD cleanup to docs/prds (Session 11)"
+          ]
+        }
+      },
+      "blocking_items": [],
+      "eligible_for_docs_prds": true
+    },
+    {
+      "id": "PRD-007",
+      "title": "Trust + Provenance Layer",
+      "path": "docs/prds/PRD-007-trust-provenance-layer.md",
+      "shelf": "docs/prds",
+      "state": "actioned",
+      "acceptance": {
+        "codex": {
+          "status": "accepted",
+          "evidence": [
+            "P2-C reconciliation accepted with no contradictions (WORKLOG Session 10)"
+          ]
+        },
+        "claude": {
+          "status": "accepted",
+          "evidence": [
+            "P2-C reconciliation accepted with no contradictions (WORKLOG Session 10)"
+          ]
+        },
+        "maintainer": {
+          "status": "accepted",
+          "evidence": [
+            "WORKLOG Decision Index: OQ-026 resolved and adopted"
+          ]
+        }
+      },
+      "blocking_items": [],
+      "eligible_for_docs_prds": true
+    },
+    {
+      "id": "PRD-008",
+      "title": "Cross-Sandbox Handoff Contract",
+      "path": "docs/prds/PRD-008-cross-sandbox-handoff-contract.md",
+      "shelf": "docs/prds",
+      "state": "actioned",
+      "acceptance": {
+        "codex": {
+          "status": "accepted",
+          "evidence": [
+            "MAILBOX MSG-20260208-021 (Codex applied required fixes)"
+          ]
+        },
+        "claude": {
+          "status": "accepted",
+          "evidence": [
+            "MAILBOX MSG-20260208-021 closure cycle"
+          ]
+        },
+        "maintainer": {
+          "status": "accepted",
+          "evidence": [
+            "WORKLOG Decision Index: Phase 1 approved (2026-02-08)"
+          ]
+        }
+      },
+      "blocking_items": [],
+      "eligible_for_docs_prds": true
+    },
+    {
+      "id": "PRD-009",
+      "title": "Cross-Document Reconciliation",
+      "path": "docs/prds/PRD-009-cross-document-reconciliation.md",
+      "shelf": "docs/prds",
+      "state": "actioned",
+      "acceptance": {
+        "codex": {
+          "status": "accepted",
+          "evidence": [
+            "MAILBOX MSG-20260208-023 review completed"
+          ]
+        },
+        "claude": {
+          "status": "accepted",
+          "evidence": [
+            "Codex finding applied and reconciled in next cycle"
+          ]
+        },
+        "maintainer": {
+          "status": "accepted",
+          "evidence": [
+            "WORKLOG Decision Index: Phase 1 approved (2026-02-08)"
+          ]
+        }
+      },
+      "blocking_items": [],
+      "eligible_for_docs_prds": true
+    },
+    {
+      "id": "PRD-010",
+      "title": "Shared-File Transaction Locking",
+      "path": "docs/prds/PRD-010-shared-file-transaction-locking.md",
+      "shelf": "docs/prds",
+      "state": "actioned",
+      "acceptance": {
+        "codex": {
+          "status": "accepted",
+          "evidence": [
+            "MAILBOX MSG-20260208-033 (Turnfile re-scope accepted)"
+          ]
+        },
+        "claude": {
+          "status": "accepted",
+          "evidence": [
+            "MAILBOX MSG-20260208-033 actioned with no counters"
+          ]
+        },
+        "maintainer": {
+          "status": "accepted",
+          "evidence": [
+            "Maintainer-directed actioned-PRD cleanup to docs/prds (Session 11)"
+          ]
+        }
+      },
+      "blocking_items": [],
+      "eligible_for_docs_prds": true
+    },
+    {
+      "id": "PRD-011",
+      "title": "Session Resumption Contract",
+      "path": "docs/prds/PRD-011-session-resumption-contract.md",
+      "shelf": "docs/prds",
+      "state": "actioned",
+      "acceptance": {
+        "codex": {
+          "status": "accepted",
+          "evidence": [
+            "H-001/H-002 applied and accepted in MSG-038 cycle"
+          ]
+        },
+        "claude": {
+          "status": "accepted",
+          "evidence": [
+            "MSG-038 apply-all confirmed"
+          ]
+        },
+        "maintainer": {
+          "status": "accepted",
+          "evidence": [
+            "Maintainer-directed actioned-PRD cleanup to docs/prds (Session 11)"
+          ]
+        }
+      },
+      "blocking_items": [],
+      "eligible_for_docs_prds": true
+    },
+    {
+      "id": "PRD-012",
+      "title": "Protocol Skills Pack for Codex + Claude",
+      "path": "docs/prds/PRD-012-protocol-skills-codex-claude.md",
+      "shelf": "docs/prds",
+      "state": "actioned",
+      "acceptance": {
+        "codex": {
+          "status": "accepted",
+          "evidence": [
+            "MAILBOX MSG-20260208-029 (Codex cross-review completed)"
+          ]
+        },
+        "claude": {
+          "status": "accepted",
+          "evidence": [
+            "MAILBOX MSG-20260208-029 ack: all findings accepted and applied"
+          ]
+        },
+        "maintainer": {
+          "status": "accepted",
+          "evidence": [
+            "Maintainer verbal acceptance, Session 12 pre-work (2026-02-08)"
+          ]
+        }
+      },
+      "blocking_items": [],
+      "eligible_for_docs_prds": true
+    },
+    {
+      "id": "PRD-013",
+      "title": "Turnfile Coordination Format",
+      "path": "docs/prds/PRD-013-turnfile-coordination-format.md",
+      "shelf": "docs/prds",
+      "state": "actioned",
+      "acceptance": {
+        "codex": {
+          "status": "accepted",
+          "evidence": [
+            "TURNFILE task prd-013-cross-review completed (rev 14)"
+          ]
+        },
+        "claude": {
+          "status": "accepted",
+          "evidence": [
+            "MAILBOX MSG-027/028 acceptance cycle"
+          ]
+        },
+        "maintainer": {
+          "status": "accepted",
+          "evidence": [
+            "Maintainer verbal acceptance, Session 12 pre-work (2026-02-08)"
+          ]
+        }
+      },
+      "blocking_items": [],
+      "eligible_for_docs_prds": true
+    },
+    {
+      "id": "PRD-014",
+      "title": "Session Closeout + Boot Handoff Contract",
+      "path": "docs/prds/PRD-014-session-closeout-boot-handoff-contract.md",
+      "shelf": "docs/prds",
+      "state": "actioned",
+      "acceptance": {
+        "codex": {
+          "status": "accepted",
+          "evidence": [
+            "MAILBOX MSG-20260208-036 reply: recommendations applied"
+          ]
+        },
+        "claude": {
+          "status": "accepted",
+          "evidence": [
+            "MAILBOX MSG-20260208-036 review: accept with recommendations"
+          ]
+        },
+        "maintainer": {
+          "status": "accepted",
+          "evidence": [
+            "Maintainer verbal acceptance, Session 12 pre-work (2026-02-08)"
+          ]
+        }
+      },
+      "blocking_items": [],
+      "eligible_for_docs_prds": true
+    },
+    {
+      "id": "PRD-015",
+      "title": "Agent Onboarding + Vetting Contract",
+      "path": "working-session/docs/PRD-015-agent-onboarding-vetting-contract.md",
+      "shelf": "working-session/docs",
+      "state": "draft",
+      "acceptance": {
+        "codex": {
+          "status": "accepted",
+          "evidence": [
+            "MAILBOX MSG-20260208-036 reply: recommendations applied"
+          ]
+        },
+        "claude": {
+          "status": "accepted",
+          "evidence": [
+            "MAILBOX MSG-20260208-036 review: accept with recommendations"
+          ]
+        },
+        "maintainer": {
+          "status": "pending",
+          "evidence": [
+            "MAILBOX MSG-20260211-015: acceptance rollback; generalized onboarding test evidence required before maintainer gate"
+          ]
+        }
+      },
+      "blocking_items": [
+        "Maintainer acceptance pending generalized onboarding test evidence"
+      ],
+      "eligible_for_docs_prds": false
+    },
+    {
+      "id": "PRD-016",
+      "title": "Session Rotation + New Thread Trigger Contract",
+      "path": "docs/prds/PRD-016-session-rotation-trigger-contract.md",
+      "shelf": "docs/prds",
+      "state": "actioned",
+      "acceptance": {
+        "codex": {
+          "status": "accepted",
+          "evidence": [
+            "MAILBOX MSG-20260208-036 reply: recommendations applied"
+          ]
+        },
+        "claude": {
+          "status": "accepted",
+          "evidence": [
+            "MAILBOX MSG-20260208-036 review: accept with recommendations"
+          ]
+        },
+        "maintainer": {
+          "status": "accepted",
+          "evidence": [
+            "MAILBOX MSG-20260211-007: Maintainer approval confirmed (2026-02-11)"
+          ]
+        }
+      },
+      "blocking_items": [],
+      "eligible_for_docs_prds": true
+    },
+    {
+      "id": "PRD-017",
+      "title": "Boot Sequence Commands and Documentation Contract",
+      "path": "working-session/docs/PRD-017-boot-sequence-commands-and-documentation-contract.md",
+      "shelf": "working-session/docs",
+      "state": "draft",
+      "acceptance": {
+        "codex": {
+          "status": "accepted",
+          "evidence": [
+            "MAILBOX MSG-20260211-010 follow-through: Codex verified amendment pass and accepted PRD-017"
+          ]
+        },
+        "claude": {
+          "status": "accepted",
+          "evidence": [
+            "MAILBOX MSG-20260211-010: Claude review APPLY + amendment pass submitted"
+          ]
+        },
+        "maintainer": {
+          "status": "pending",
+          "evidence": []
+        }
+      },
+      "blocking_items": [
+        "Maintainer acceptance pending"
+      ],
+      "eligible_for_docs_prds": false
+    },
+    {
+      "id": "PRD-018",
+      "title": "Maintainer Approval Authority Matrix Contract",
+      "path": "working-session/docs/PRD-018-maintainer-approval-authority-matrix-contract.md",
+      "shelf": "working-session/docs",
+      "state": "draft",
+      "acceptance": {
+        "codex": {
+          "status": "accepted",
+          "evidence": [
+            "MAILBOX MSG-20260211-010 follow-through: Codex counters resolved and accepted for PRD-018"
+          ]
+        },
+        "claude": {
+          "status": "accepted",
+          "evidence": [
+            "MAILBOX MSG-20260211-010: Claude refinement + amendment pass for PRD-018"
+          ]
+        },
+        "maintainer": {
+          "status": "pending",
+          "evidence": []
+        }
+      },
+      "blocking_items": [
+        "Maintainer acceptance pending"
+      ],
+      "eligible_for_docs_prds": false
+    },
+    {
+      "id": "PRD-019",
+      "title": "Mailbox-First Approval and Polling Cadence Contract",
+      "path": "working-session/docs/PRD-019-mailbox-first-approval-and-polling-cadence-contract.md",
+      "shelf": "working-session/docs",
+      "state": "draft",
+      "acceptance": {
+        "codex": {
+          "status": "accepted",
+          "evidence": [
+            "MAILBOX MSG-20260211-010 follow-through: Codex counter resolved and accepted for PRD-019"
+          ]
+        },
+        "claude": {
+          "status": "accepted",
+          "evidence": [
+            "MAILBOX MSG-20260211-010: Claude refinement + amendment pass for PRD-019"
+          ]
+        },
+        "maintainer": {
+          "status": "pending",
+          "evidence": []
+        }
+      },
+      "blocking_items": [
+        "Maintainer acceptance pending"
+      ],
+      "eligible_for_docs_prds": false
+    },
+    {
+      "id": "PRD-020",
+      "title": "Boot Artifact Completeness and Chat Log Contract",
+      "path": "working-session/docs/PRD-020-boot-artifact-completeness-and-chat-log-contract.md",
+      "shelf": "working-session/docs",
+      "state": "draft",
+      "acceptance": {
+        "codex": {
+          "status": "accepted",
+          "evidence": [
+            "MAILBOX MSG-20260211-010 follow-through: Codex deadlock counter resolved and accepted for PRD-020"
+          ]
+        },
+        "claude": {
+          "status": "accepted",
+          "evidence": [
+            "MAILBOX MSG-20260211-010: Claude refinement + amendment pass for PRD-020"
+          ]
+        },
+        "maintainer": {
+          "status": "pending",
+          "evidence": []
+        }
+      },
+      "blocking_items": [
+        "Maintainer acceptance pending"
+      ],
+      "eligible_for_docs_prds": false
+    }
+  ]
+}

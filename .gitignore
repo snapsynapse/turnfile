@@ -13,8 +13,8 @@
 *.sublime-project
 *.sublime-workspace
 
-# Active session workspace (local only — move to examples/ when historical)
-working-session/
+# Active session workspace (tracked as of session 13)
+# working-session/
 
 # Node
 node_modules/
