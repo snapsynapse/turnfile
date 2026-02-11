@@ -1,0 +1,16 @@
+{
+  "generated_at": null,
+  "source_file": "working-session/MAILBOX.md",
+  "output_file": "working-session/MAILBOX.json",
+  "format_version": "mailbox-compact-v1",
+  "metadata": {
+    "date_initialized": "<YYYY-MM-DD>",
+    "protocol": "docs/COMMUNICATIONS_PROTOCOL.md",
+    "last_format_migration": null,
+    "full_history": "working-session/MAILBOX_ARCHIVE.md"
+  },
+  "inbox_snapshot": [],
+  "open_queue": [],
+  "active_messages": [],
+  "closed_summary": []
+}

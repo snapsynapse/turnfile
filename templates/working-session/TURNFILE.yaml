@@ -1,0 +1,95 @@
+# TURNFILE.yaml — SNAP Coordination State
+# Protocol: Turnfile v0.1
+# Project: <PROJECT_NAME>
+# Last modified revision: 0
+# Modified by: maintainer
+
+turnfile:
+  version: "0.1"
+  project: "<project-name>"
+  workspace: "working-session/"
+
+# --- Agent Registry ---
+# Add one entry per agent. Use the agent's short name as the key.
+# Status values: "active", "idle", "offline"
+#
+# Example:
+#   claude:
+#     role: "agent"
+#     status: "active"
+#     current_task: null
+#     last_seen: "claude-session-1"
+#     session_id: "claude-session-1"
+#
+#   gemini:
+#     role: "agent"
+#     status: "idle"
+#     current_task: null
+#     last_seen: "gemini-session-1"
+#     session_id: "gemini-session-1"
+agents: {}
+
+# --- Maintainer ---
+maintainer:
+  id: "<maintainer-id>"
+  status: "available"
+  last_seen: "maintainer-session-0"
+
+# --- Coordination State ---
+coordination:
+  revision: 0
+  active_phase: "phase-1"
+  active_step: null
+
+  # Task registry. Each task has a unique kebab-case key.
+  #
+  # Example:
+  #   draft-prd-001:
+  #     description: "Draft PRD-001 — Maintainer Interaction Model"
+  #     owner: "claude"
+  #     status: "in_progress"
+  #     priority: "P1"
+  #     depends_on: []
+  #     created_by: "maintainer"
+  #     created_rev: 1
+  #     claim_rev: 1
+  #     completed_rev: null
+  #     notes: "Assigned at session start."
+  tasks: {}
+
+# --- Locks ---
+# Revision-based lease locks (PRD-010 + PRD-013 R1.3).
+# Lease expiry: (coordination.revision - acquired_rev) > lease_revs
+# Default lease_revs: 2
+#
+# Example:
+#   mailbox-edit:
+#     holder: "claude"
+#     target: "working-session/MAILBOX.md"
+#     acquired_rev: 5
+#     lease_revs: 2
+#     purpose: "Posting MSG-001"
+locks: {}
+
+# --- Turn Queue ---
+# Pending turn claims. Ordered by requested_rev (ascending).
+#
+# Example:
+#   - agent: "gemini"
+#     requested_rev: 6
+#     purpose: "Respond to MSG-001"
+turn_queue: []
+
+# --- Signal Log ---
+# Lightweight coordination signals. No payload, no lifecycle, no SLA.
+# Append-only. Compact at session close (retain last N per PRD-013 R5.3).
+# Signal types: "ready", "yield", "notify", "blocked"
+#
+# Example:
+#   - id: "SIG-001"
+#     from: "claude"
+#     to: "all"
+#     signal: "ready"
+#     rev: 1
+#     detail: "Session started. PRD-001 draft claimed."
+messages: []
