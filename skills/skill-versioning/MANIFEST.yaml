@@ -1,0 +1,59 @@
+bundle: skill-versioning
+bundle_version: 3
+bundle_date: 2026-02-11
+description: >
+  Metaskill for version tracking across Agent Skills sessions, surfaces,
+  and platforms. Manifest, changelog, and version headers prevent version
+  confusion during iterative skill development.
+
+compatibility:
+  designed_for:
+    platform: Cross-platform
+    model: Claude + Codex compatible
+    surface: Chat, CLI
+  tested_on:
+    - platform: Anthropic Claude
+      model: Claude Opus 4.6
+      surface: Chat
+      status: pass
+      date: 2026-02-10
+      notes: Full bootstrap and round-trip validated with .skill ZIP
+    - platform: OpenAI Codex
+      model: GPT-5 Codex
+      surface: CLI
+      status: pass
+      date: 2026-02-11
+      notes: Installed and loaded with minimal SKILL frontmatter.
+  spec_version: agentskills.io/1.0
+  frontmatter_mode: minimal
+
+files:
+  - path: SKILL.md
+    role: skill
+    version: 3
+    hash: sha256:37c245fdc7a1fb44569b239c630bc148ecffbc0abaf96874a17be9ed2c3fd328
+    note: Canonical skill definition with minimal frontmatter for Codex compatibility.
+
+  - path: README.md
+    role: reference
+    version: 2
+    hash: sha256:70c967aa2442fb238d33f37141eee5676ca9875393ac35c35c8992b8277de3f0
+    note: Human-facing instructions, worked example, porting workflows, troubleshooting, references
+
+  - path: evals.json
+    role: evals
+    version: 1
+    hash: sha256:32f4d02ccd1c614a677af02a916ad30c2d8da5c490330f9e4f1cf05b27421e66
+    note: 5 structural evals (bootstrap, verify, save, conflict, handoff). Not yet updated for v2 cross-platform changes — may be stale.
+
+  - path: CHANGELOG.md
+    role: reference
+    version: 3
+    hash: sha256:4366787d936fd9d4def66bbdd927e5380acdb0b1855dda89aac3ab0857648538
+    note: Bundle change history.
+
+  - path: MANIFEST.yaml
+    role: reference
+    version: 3
+    hash: null
+    note: Self-referential file; hash tracked externally when needed.

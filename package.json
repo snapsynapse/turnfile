@@ -12,7 +12,9 @@
     "lint:turnfile": "node tools/turnfile-lint.mjs",
     "lint:mailbox": "node tools/validate-mailbox-invariants.mjs",
     "lint:prds": "node tools/validate-prd-promotion.mjs",
-    "export:mailbox": "node tools/export-mailbox-json.mjs"
+    "export:mailbox": "node tools/export-mailbox-json.mjs",
+    "validate:skills": "node tools/validate-skills-preflight.mjs --strict-global",
+    "validate:skills:ci": "node tools/validate-skills-preflight.mjs"
   },
   "devDependencies": {
     "ajv": "^8.17.1",

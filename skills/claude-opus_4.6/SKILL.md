@@ -5,10 +5,10 @@ description: Execute the Turnfile protocol (a SNAP protocol) in Claude for mailb
 
 # Turnfile Protocol Skill File — Claude
 
-Version: 0.2.1 (aligned with Codex skill structure)
+Version: 0.3.0
 Protocol revision baseline: PRD-003 through PRD-014 (all promoted to docs/prds/)
 Agent: Claude (Anthropic)
-Last updated: 2026-02-08
+Last updated: 2026-02-11
 
 ---
 
@@ -55,6 +55,51 @@ After any milestone completion, task status change, or substantive protocol acti
 3. `working-session/MAILBOX.md` — update message lifecycle status, inbox snapshot, and open queue when a thread changed.
 4. After mailbox edits, regenerate `working-session/MAILBOX.json`.
 5. After skill file changes that affect protocol coverage or validation status, update the Versioning table.
+
+---
+
+## Module 0: Session Bootstrap (Cold Start)
+
+**Trigger examples:**
+1. "Start a new working session on this branch."
+2. Agent reads `working-session/` and finds no TURNFILE.yaml.
+
+**Inputs:** None (detects cold start automatically).
+
+**Procedure:**
+
+1. Check if `working-session/TURNFILE.yaml` exists.
+   - If it exists → skip to Module 1 (Session Start).
+   - If it does not exist → continue with cold-start bootstrap below.
+2. Copy all template files from `templates/working-session/` into `working-session/`:
+   - `TURNFILE.yaml`, `WORKLOG.md`, `MAILBOX.md`, `MAILBOX.json`, `MAILBOX_ARCHIVE.md`, `WORKLOG_ARCHIVE.md`, `OPEN_QUESTIONS.md`
+3. Rename agent-generic files:
+   - `boot-agent.md` → `boot-claude.md` (or use existing boot file if already present)
+   - `chat-agent.md` → `chat-claude.md`
+4. Fill `<PLACEHOLDER>` values in all template files:
+   - `<PROJECT_NAME>` → `Turnfile`
+   - `<project-name>` → `turnfile`
+   - `<maintainer-id>` → `snap`
+   - `<AGENT_NAME>` → `Claude`
+   - `<YYYY-MM-DD>` → current date
+5. Initialize TURNFILE.yaml agent section:
+   - Add `claude` under `agents` with `status: "active"`, `session_id: "claude-session-<N>"`.
+   - Set `coordination.revision: 1`.
+   - Post initial signal: `SIG-001` from claude, signal `ready`, detail describing the bootstrap.
+6. Initialize WORKLOG.md:
+   - Fill status block with Claude active, awaiting maintainer direction.
+   - Add Session 0 entry documenting the bootstrap.
+7. Initialize MAILBOX.md:
+   - Add agent rows to Inbox Snapshot (Claude, Codex, Maintainer — all unread=0).
+8. **Skills preflight** (P-7):
+   - Verify `skills/claude-opus_4.6/SKILL.md` is readable and frontmatter parses.
+   - Verify `skills/skill-versioning/MANIFEST.yaml` exists and file hashes match actual files.
+   - If preflight fails, escalate to maintainer before proceeding.
+9. Report bootstrap complete to maintainer. Proceed to Module 1.
+
+**Outputs:** Initialized `working-session/` with all runtime artifacts. Status report.
+
+**Escalation:** If templates are missing or corrupt, escalate to maintainer immediately. Do not attempt to create files from memory — templates are the source of truth.
 
 ---
 
@@ -411,11 +456,12 @@ After executing any module, report:
 
 | Field | Value |
 |-------|-------|
-| Skill file version | 0.2.1 |
+| Skill file version | 0.3.0 |
 | Protocol baseline | PRD-003 through PRD-014 (all promoted) |
 | Policy test suite | PRD-012-M3-policy-test-suite.md (19 assertions, 4 scenario harnesses) — archived at `examples/inception/skills/policy-tests/` |
 | Last validated | M4 validation complete — all 4 scenarios PASS (rev 41, inception session 10) |
 | Structural alignment | Aligned with Codex SKILL.md structure: front matter, execution contract, boundary discipline, startup read order, fallback rules, output format |
+| v0.3.0 changes | Added Module 0 (Session Bootstrap) for cold-start initialization from templates. Bumped version. |
 
 Changes to protocol semantics require maintainer approval (PRD-012 R7.2).
 Environment-specific changes that don't alter protocol semantics are Claude-owned but must be documented (PRD-012 R7.3).
