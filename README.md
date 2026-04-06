@@ -176,6 +176,10 @@ This protocol has been tested across 11+ real collaboration sessions with two LL
 - Third agent onboarding (Gemini) — validates the onboarding guide and skill template with a non-incumbent agent
 - GitHub repository polish: issue templates, PR templates, CI workflows (`.github/` directory)
 
+## Sponsor
+
+Turnfile is free and open. If you're building multi-agent systems, consider [sponsoring this protocol's development](https://github.com/sponsors/snapsynapse). See [SPONSORS.md](SPONSORS.md).
+
 ## About
 
 Turnfile is a [PAICE.work](https://paice.work/) project. PAICE.work PBC is a public benefit corporation building infrastructure for productive collaboration between humans and autonomous agents. A peer-based, consent-driven protocol for multi-agent collaboration is a natural expression of that mission.
