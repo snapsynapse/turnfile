@@ -12,7 +12,7 @@ Last revised: 2026-02-08
 | Codex acceptance | accepted | `MSG-20260208-029` Codex cross-review completed |
 | Claude acceptance | accepted | `MSG-20260208-029` ack confirms findings accepted and applied |
 | Maintainer acceptance | accepted | no explicit maintainer acceptance logged yet |
-| Eligible for move to `docs/prds` | yes | blocked until maintainer acceptance + zero blockers in `inception/docs/PRD_STATUS.json` |
+| Eligible for move to `docs/prds` | yes | blocked until maintainer acceptance + zero blockers in `working-session/docs/PRD_STATUS.json` |
 
 ## Alignment reference
 
@@ -77,7 +77,7 @@ Each agent maintains its own **complete, self-contained skill file** expressing 
 
 Skill artifacts live in **two locations**:
 
-1. **Repository-managed** (`inception/skills/` during pilot; `docs/skills/` after canonical promotion): the authoritative, versioned, reviewed copies.
+1. **Repository-managed** (`working-session/skills/` during pilot; `docs/skills/` after canonical promotion): the authoritative, versioned, reviewed copies.
 2. **Per-agent home directory**: operational copies that agents load at session start. These are derived from the repository copies and may include agent-local configuration (e.g., environment-specific paths), but must not diverge on protocol semantics.
 
 The repository copy is canonical. If home-directory copies diverge on protocol semantics, the repository copy wins and the agent must re-sync.
@@ -191,9 +191,9 @@ Validation passes only when Codex and Claude reach equivalent outcomes on the sa
 | PRD-011 | Becomes session close/resume module; Turnfile read added to resumption read order |
 | **PRD-013** | **Defines Turnfile coordination format that skills read/write; R2.1 establishes Turnfile as the coordination interface for skill-driven state updates** |
 | **Vision.md** | **Alignment reference for governance posture, invocation strictness, and audit requirements** |
-| `inception/NOTIFICATION_PROTOCOL.md` | Remains the normative source; skills are execution guidance |
-| `inception/OPEN_QUESTIONS.md` | Tracks unresolved design decisions for skills rollout |
-| `inception/TURNFILE.yaml` | Runtime coordination artifact that skills interact with for lock, task, and agent state |
+| `working-session/NOTIFICATION_PROTOCOL.md` | Remains the normative source; skills are execution guidance |
+| `working-session/OPEN_QUESTIONS.md` | Tracks unresolved design decisions for skills rollout |
+| `working-session/TURNFILE.yaml` | Runtime coordination artifact that skills interact with for lock, task, and agent state |
 
 ## Acceptance criteria
 
@@ -232,7 +232,7 @@ Validation passes only when Codex and Claude reach equivalent outcomes on the sa
 4. **M2**: Draft maintainer invocation examples for each required module, including Turnfile coordination (R3).
 5. **M3**: Draft policy test suite covering all required modules (R1, R2).
 6. **M4**: Run four validation scenarios (R6) across Codex and Claude.
-7. **M5**: Decide canonical adoption path — migrate from `inception/skills/` to `docs/skills/` (R1.1).
+7. **M5**: Decide canonical adoption path — migrate from `working-session/skills/` to `docs/skills/` (R1.1).
 
 ## Open questions
 
@@ -245,7 +245,7 @@ All four original open questions have been resolved by maintainer inline annotat
 | OQ-039 | Explicit invocation only, or heuristic triggers? | **Explicit maintainer invocation only.** | R3 |
 | OQ-040 | Auto-apply low-risk changes, or always confirm? | **Always require explicit maintainer confirmation.** | R5.1 |
 
-No new open questions at this time. Cross-PRD open questions tracked in `inception/OPEN_QUESTIONS.md`.
+No new open questions at this time. Cross-PRD open questions tracked in `working-session/OPEN_QUESTIONS.md`.
 
 ## Exit criteria for moving beyond inception draft
 

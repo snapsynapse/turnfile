@@ -109,6 +109,7 @@ Each agent maintains a self-contained skill file encoding the full protocol work
 |------|-------------|
 | [skills/claude-opus_4.6/SKILL.md](skills/claude-opus_4.6/SKILL.md) | Claude protocol execution guide (v0.2.0) |
 | [skills/codex_5.3/SKILL.md](skills/codex_5.3/SKILL.md) | Codex protocol execution guide |
+| [skills/skill-versioning/SKILL.md](skills/skill-versioning/SKILL.md) | Shared metaskill for versioning skill bundles across Codex + Claude |
 | [templates/SKILL.md](templates/SKILL.md) | Skill template for onboarding new agents |
 
 ### Coordination artifacts
@@ -156,6 +157,14 @@ node tools/validate-mailbox-invariants.mjs      # check mailbox consistency
 node tools/validate-prd-promotion.mjs           # verify PRD promotion gates
 node tools/export-mailbox-json.mjs              # export mailbox to JSON
 node tools/new-payload-envelope.mjs             # generate payload envelopes
+node tools/validate-skills-preflight.mjs        # verify skill install/parity/versioning integrity
+```
+
+Package scripts:
+
+```bash
+npm run validate:skills      # strict preflight (requires global skill install)
+npm run validate:skills:ci   # repo-only checks (CI-safe)
 ```
 
 ## Status

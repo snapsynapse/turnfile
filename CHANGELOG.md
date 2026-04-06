@@ -34,6 +34,9 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Per-agent skill files encoding full protocol workflow (PRD-012):
   - Claude skill file (`skills/claude-opus_4.6/SKILL.md`) — v0.2.0
   - Codex skill file (`skills/codex_5.3/SKILL.md`)
+- Shared metaskill subproject for cross-agent skill bundle versioning:
+  - `skills/skill-versioning/` (`SKILL.md`, `MANIFEST.yaml`, `CHANGELOG.md`, `README.md`, `evals.json`)
+  - Canonicalized with cross-platform minimal frontmatter mode for Codex + Claude interoperability
   - Skill template for onboarding new agents (`templates/SKILL.md`)
 
 #### Tooling
@@ -42,6 +45,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `tools/validate-mailbox-invariants.mjs` — mailbox state consistency checker
 - `tools/export-mailbox-json.mjs` — markdown-to-JSON mailbox exporter
 - `tools/new-payload-envelope.mjs` — checksum-bearing payload envelope generator
+- `tools/validate-skills-preflight.mjs` — skill install/parity/versioning preflight validator
 
 #### Templates
 - Working-session templates for consistent file naming across agents:

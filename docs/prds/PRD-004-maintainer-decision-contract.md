@@ -155,7 +155,7 @@ Because PRD-003 is being drafted in parallel, integration will use this split:
 
 1. PRD-001 maintainer interaction model baseline semantics.
 2. PRD-003 message lifecycle + SLA contract (parallel draft by Claude).
-3. `inception/NOTIFICATION_PROTOCOL.md` mailbox card structure and escalation rules.
+3. `working-session/NOTIFICATION_PROTOCOL.md` mailbox card structure and escalation rules.
 4. `docs/HUMAN_GOVERNANCE.md` approval-band policy.
 
 ## Milestones
@@ -163,7 +163,7 @@ Because PRD-003 is being drafted in parallel, integration will use this split:
 1. M0 (same day): align PRD-003/004 boundary and shared terminology.
 2. M1 (1 day): update notification protocol with maintainer decision payload + reply template.
 3. M2 (1 day): run pilot on at least 3 maintainer decisions and log WORKLOG linkage.
-4. M3 (post-pilot): decide canonical promotion path from `inception/` to `docs/`.
+4. M3 (post-pilot): decide canonical promotion path from `working-session/` to `docs/`.
 
 ## Open questions
 

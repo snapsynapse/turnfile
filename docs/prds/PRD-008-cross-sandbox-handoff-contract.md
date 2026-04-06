@@ -14,7 +14,7 @@ Cross-agent reviews are failing when messages reference file paths without inlin
 Define a deterministic handoff contract for cross-sandbox content review that:
 
 1. Transports reviewable content directly in mailbox messages.
-2. Preserves `inception/` as local-only (no forced git tracking of active session artifacts).
+2. Preserves `working-session/` as local-only (no forced git tracking of active session artifacts).
 3. Reduces maintainer copy/paste relay work.
 4. Keeps full auditability in mailbox/worklog history.
 
@@ -152,7 +152,7 @@ Add and maintain a local helper script/template generator for payload envelopes:
 
 1. PRD-003 message lifecycle + SLA contract.
 2. PRD-004 maintainer decision contract.
-3. `inception/NOTIFICATION_PROTOCOL.md` v0.6 payload-first rule.
+3. `working-session/NOTIFICATION_PROTOCOL.md` v0.6 payload-first rule.
 4. PRD-005 protocol data schema + compatibility (future metadata formalization).
 5. `tools/new-payload-envelope.mjs` helper script (shipped; adoption tracked in M5).
 

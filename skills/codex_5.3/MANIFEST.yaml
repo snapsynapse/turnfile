@@ -1,0 +1,50 @@
+bundle: turnfile-codex-collaboration
+bundle_version: 1
+bundle_date: 2026-02-08
+description: >
+  Codex's protocol execution guide for the Turnfile protocol (a SNAP protocol).
+  Encodes mailbox lifecycle, payload-first review exchange, lock-safe shared-file
+  updates, session close/resume, and Turnfile task/lock coordination as operational
+  instructions for Codex's environment.
+
+compatibility:
+  designed_for:
+    platform: OpenAI Codex
+    model: Codex 5.3
+    surface: CLI
+  tested_on:
+    - platform: OpenAI Codex
+      model: Codex 5.3
+      surface: CLI
+      status: pass
+      date: 2026-02-08
+      notes: >
+        Policy test suite validated (M4, 4/4 scenarios PASS). Aligned with
+        Claude SKILL.md structure v0.2.0.
+  spec_version: agentskills.io/1.0
+  frontmatter_mode: minimal
+    # minimal = name + description only (max portability)
+    # Version info tracked here in manifest, not in SKILL.md frontmatter
+
+files:
+  - path: SKILL.md
+    role: skill
+    version: 1
+    hash: null
+    note: >
+      Codex protocol execution guide. 8 modules (M-01 through M-08): mailbox
+      lifecycle, maintainer decision, payload-first review, cross-PRD
+      reconciliation, shared-file transaction, session close/resume, Turnfile
+      coordination, OQ registry.
+
+  - path: CHANGELOG.md
+    role: reference
+    version: 1
+    hash: null
+    note: Bundle change history.
+
+  - path: MANIFEST.yaml
+    role: reference
+    version: 1
+    hash: null
+    note: Self-referential file; hash tracked externally when needed.

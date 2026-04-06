@@ -121,7 +121,7 @@ Scope boundary note: PRD-005 governs projection schemas (`MAILBOX.json`, `WORKLO
 - Canonical markdown artifacts promoted from inception should retain a minimum header block (`Title`, `Status`, `Owner`, `Date`) and required sections (`Problem`, `Goal`, `Requirements`, `Acceptance criteria`, `Open questions` or explicit `none`).
 4. Canonical schema locations:
 - Primary location: `docs/schemas/<projection_kind>/<schema_id>-v<major>.schema.json`.
-- Optional local draft location during inception: `inception/schemas/` (must be promoted before canonical adoption).
+- Optional local draft location during inception: `working-session/schemas/` (must be promoted before canonical adoption).
 
 ## Proposed workflow
 

@@ -1,0 +1,44 @@
+bundle: turnfile-protocol-gemini
+bundle_version: 1
+bundle_date: 2026-02-11
+description: >
+  Gemini CLI's protocol execution guide for the Turnfile protocol (a SNAP protocol).
+  Encodes mailbox lifecycle, payload-first review, lock-safe shared-file updates,
+  session bootstrap/start/close, Turnfile task/lock coordination, and OQ management
+  as operational instructions for Gemini CLI's environment (sandboxed writes, shell
+  access, MCP tools, 1M context).
+
+compatibility:
+  designed_for:
+    platform: Google Gemini
+    model: Gemini 2.5
+    surface: CLI
+  tested_on: []
+    # No test runs yet — pending onboarding validation (PRD-015)
+  spec_version: agentskills.io/1.0
+  frontmatter_mode: minimal
+    # minimal = name + description only (max portability)
+    # Version info tracked here in manifest, not in SKILL.md frontmatter
+
+files:
+  - path: SKILL.md
+    role: skill
+    version: 1
+    hash: null
+    note: >
+      Gemini protocol execution guide. 9 modules (M0-M8): session bootstrap,
+      session start, mailbox lifecycle, maintainer decision, cross-agent review,
+      shared-file transaction, session close, Turnfile coordination, OQ registry.
+      Adapted from Claude v0.3.0 with Gemini-specific environment notes.
+
+  - path: CHANGELOG.md
+    role: reference
+    version: 1
+    hash: null
+    note: Bundle change history.
+
+  - path: MANIFEST.yaml
+    role: reference
+    version: 1
+    hash: null
+    note: Self-referential file; hash tracked externally when needed.
