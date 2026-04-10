@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Turnfile &mdash; Making adversarial agents play nice</title>
+  <meta name="description" content="Turnfile is an open protocol for LLM agents that disagree, negotiate, and build consensus &mdash; without an orchestrator telling them what to do. Peer agents, file-level lane ownership, human arbiter, and every decision auditable in plain markdown.">
+  <meta name="keywords" content="turnfile, SNAP, structured negotiation of autonomous peers, multi-agent protocol, LLM collaboration, peer agents, counter-recommendation, human-in-the-loop, agent arbitration, mailbox protocol, markdown coordination, auditable AI">
+  <meta name="author" content="Sam Rogers">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="theme-color" content="#6c8cff">
+  <link rel="canonical" href="https://turnfile.work/">
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="mask-icon" href="/favicon.svg" color="#8aa4ff">
+  <link rel="apple-touch-icon" href="/favicon.svg">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Turnfile">
+  <meta property="og:title" content="Turnfile">
+  <meta property="og:description" content="A protocol for LLM agents that disagree, negotiate, and build consensus &mdash; without an orchestrator telling them what to do.">
+  <meta property="og:image" content="https://turnfile.work/imgs/og.png">
+  <meta property="og:url" content="https://turnfile.work/">
+  <meta property="og:locale" content="en_US">
+  <meta property="article:published_time" content="2026-02-08T00:00:00Z">
+  <meta property="article:modified_time" content="2026-04-09T00:00:00Z">
+  <meta property="article:author" content="Sam Rogers">
+  <meta property="article:publisher" content="https://paice.work/">
+  <meta property="article:section" content="Open Patterns">
+  <meta property="article:tag" content="turnfile">
+  <meta property="article:tag" content="SNAP">
+  <meta property="article:tag" content="multi-agent-protocol">
+  <meta property="article:tag" content="LLM-collaboration">
+  <meta property="article:tag" content="counter-recommendation">
+  <meta property="article:tag" content="human-in-the-loop">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Turnfile">
+  <meta name="twitter:description" content="A protocol for LLM agents that disagree, negotiate, and build consensus &mdash; without an orchestrator telling them what to do.">
+  <meta name="twitter:image" content="https://turnfile.work/imgs/og.png">
+  <meta name="twitter:creator" content="@snapsynapse">
+
+  <!-- JSON-LD: TechArticle -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Turnfile",
+    "alternativeHeadline": "A protocol for LLM agents that disagree, negotiate, and build consensus",
+    "description": "Turnfile defines Structured Negotiation of Autonomous Peers (SNAP) — a protocol for multi-LLM collaboration with file-level lane ownership, first-class counter-recommendations, a human maintainer as arbiter, and audit-visible markdown state. There is no orchestrator; peer agents coordinate through a shared Turnfile, mailbox, and worklog.",
+    "inLanguage": "en",
+    "url": "https://turnfile.work/",
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://turnfile.work/" },
+    "datePublished": "2026-02-08",
+    "dateModified": "2026-04-09",
+    "author": {
+      "@type": "Person",
+      "name": "Sam Rogers",
+      "url": "https://paice.work/",
+      "affiliation": { "@type": "Organization", "name": "PAICE.work PBC" }
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "PAICE.work PBC",
+      "url": "https://paice.work/",
+      "logo": { "@type": "ImageObject", "url": "https://paice.work/logo.png" }
+    },
+    "image": "https://turnfile.work/imgs/og.png",
+    "keywords": ["turnfile", "SNAP", "multi-agent protocol", "LLM collaboration", "peer agents", "counter-recommendation", "human-in-the-loop", "mailbox protocol", "markdown coordination"],
+    "isPartOf": { "@type": "CreativeWork", "name": "PAICE.work Open Patterns" },
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "copyrightHolder": { "@type": "Organization", "name": "PAICE.work PBC" },
+    "copyrightYear": 2026,
+    "citation": [
+      { "@type": "WebPage", "name": "Graceful Boundaries", "url": "https://gracefulboundaries.dev/" },
+      { "@type": "WebPage", "name": "HardGuard25", "url": "https://hardguard25.com/" },
+      { "@type": "WebPage", "name": "Knowledge as Code", "url": "https://knowledge-as-code.com/" },
+      { "@type": "WebPage", "name": "Skill Provenance", "url": "https://skillprovenance.dev/" }
+    ]
+  }
+  </script>
+
+  <!-- JSON-LD: DefinedTerm (stake the term) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "DefinedTerm",
+    "name": "Turnfile",
+    "alternateName": ["turnfile", "SNAP", "Structured Negotiation of Autonomous Peers"],
+    "description": "A file-based protocol for peer-based multi-LLM collaboration. A Turnfile is the runtime coordination artifact that captures turn-taking, ownership, lock state, and next-action state in a structured, human-legible format. There is no orchestrator; agents propose within owned lanes and a human maintainer arbitrates.",
+    "url": "https://turnfile.work/",
+    "inDefinedTermSet": {
+      "@type": "DefinedTermSet",
+      "name": "PAICE.work Open Patterns",
+      "url": "https://paice.work/"
+    },
+    "sameAs": [
+      "https://github.com/snapsynapse/turnfile"
+    ]
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f1117;
+      --bg-alt: #1a1d27;
+      --surface2: #242836;
+      --text: #e1e4ed;
+      --text-muted: #8b90a0;
+      --accent: #6c8cff;
+      --accent-hover: #8aa4ff;
+      --border: #2e3345;
+      --green: #4ecb71;
+      --red: #ff6b6b;
+      --code-bg: #0b0d13;
+      --code-text: #e1e4ed;
+      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --mono: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
+      --max-width: 960px;
+      --radius: 10px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { color: var(--accent-hover); text-decoration: underline; }
+
+    /* Skip link (a11y) */
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 0;
+      background: var(--accent);
+      color: #fff;
+      padding: 0.5rem 1rem;
+      z-index: 100;
+    }
+    .skip-link:focus { left: 0; }
+
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; }
+
+    /* Nav */
+    nav {
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      z-index: 10;
+    }
+    nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    nav .logo {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
+    nav .logo svg { color: var(--accent-hover); flex: 0 0 auto; }
+    nav .logo:hover svg { color: var(--accent); }
+    nav .links { display: flex; align-items: center; gap: 1.5rem; font-size: 0.9rem; }
+    nav .links a { color: var(--text-muted); }
+    nav .links a:hover { color: var(--text); text-decoration: none; }
+
+    /* GitHub star button */
+    .gh-star {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.35rem 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--bg-alt);
+      color: var(--text) !important;
+      font-weight: 600;
+      font-size: 0.8rem;
+      transition: border-color 0.1s ease, transform 0.05s ease;
+    }
+    .gh-star:hover {
+      border-color: var(--accent);
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
+    .gh-star svg { flex: 0 0 auto; color: #eab308; }
+
+    /* Byline */
+    .byline {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin: 0.75rem 0 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.9rem;
+      align-items: center;
+      justify-content: center;
+    }
+    .byline .sep { color: var(--border); }
+    /* Underline byline links: contrast between --accent link text and --text-muted
+       surrounding text is only 1.03:1, so rely on non-color affordance. */
+    .byline a { color: var(--text); text-decoration: underline; text-decoration-color: var(--border); text-underline-offset: 2px; }
+    .byline a:hover { color: var(--accent-hover); text-decoration-color: var(--accent-hover); }
+    .byline .version {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      background: var(--bg-alt);
+      color: var(--accent);
+      border: 1px solid var(--border);
+    }
+
+    /* Canonical note */
+    .canonical-note {
+      margin-top: 2.5rem;
+      padding: 1rem 1.25rem;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 8px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .canonical-note strong { color: var(--text); }
+    .canonical-note a { text-decoration: underline; text-underline-offset: 2px; }
+
+    /* Sections */
+    section { padding: 4rem 0; }
+    section.alt { background: var(--bg-alt); }
+
+    h1 { font-size: 2.75rem; line-height: 1.15; letter-spacing: -0.02em; font-weight: 800; }
+    h2 { font-size: 1.75rem; font-weight: 700; margin-bottom: 1.5rem; letter-spacing: -0.01em; }
+    h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
+
+    p { margin-bottom: 1rem; }
+    p:last-child { margin-bottom: 0; }
+
+    /* Hero */
+    .hero { padding: 5rem 0 4rem; text-align: center; }
+    .hero h1 { margin-bottom: 1rem; }
+    .hero .subtitle {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      max-width: 680px;
+      margin: 0 auto 1.5rem;
+    }
+    .hero .hook {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 640px;
+      margin: 0 auto 2.5rem;
+    }
+
+    /* Turnfile snippet — the hero visual identity. Mimics a compact TURNFILE.yaml. */
+    .turnfile-snippet {
+      font-family: var(--mono);
+      font-size: 0.9rem;
+      line-height: 1.7;
+      text-align: left;
+      padding: 1.5rem 1.75rem;
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      margin: 1rem auto 2rem;
+      max-width: 520px;
+      white-space: pre;
+      overflow-x: auto;
+    }
+    .turnfile-snippet:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    .turnfile-snippet .tk-key { color: var(--accent-hover); }
+    .turnfile-snippet .tk-str { color: var(--text); }
+    .turnfile-snippet .tk-cm  { color: var(--text-muted); font-style: italic; }
+    .turnfile-snippet .tk-arr { color: var(--accent); }
+
+    /* Pillars */
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+      text-align: left;
+    }
+    .pillar {
+      padding: 1.5rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg-alt);
+    }
+    section.alt .pillar { background: var(--bg); }
+    .pillar h3 { color: var(--accent); font-size: 1rem; }
+    .pillar p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0; }
+
+    /* Buttons */
+    .cta-row { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.15s, color 0.15s;
+    }
+    /* Dark text on light accent: ~6.1:1. White on --accent fails WCAG AA. */
+    .btn-primary { background: var(--accent); color: var(--bg); }
+    .btn-primary:hover { background: var(--accent-hover); text-decoration: none; color: var(--bg); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--accent-hover);
+      border: 1px solid var(--accent);
+    }
+    .btn-secondary:hover { background: var(--accent); color: var(--bg); text-decoration: none; }
+
+    /* Code blocks */
+    .code-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .code-block { text-align: left; }
+    .code-block h3 { font-size: 0.95rem; margin-bottom: 0.75rem; }
+    .code-block .annotation {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 0.75rem;
+      font-style: italic;
+    }
+    pre {
+      background: var(--code-bg);
+      color: var(--code-text);
+      padding: 1.25rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      line-height: 1.5;
+      border: 1px solid var(--border);
+    }
+    code { font-family: var(--mono); font-size: 0.88em; color: var(--accent); }
+
+    /* Tables */
+    table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; }
+    th, td {
+      text-align: left;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+    th { font-weight: 600; color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    td.reject { color: var(--red); font-weight: 600; }
+    td.accept { color: var(--green); font-weight: 600; }
+
+    /* Demo callout */
+    .demo-block {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    /* Underline inline links in the inception paragraph — accent-on-text contrast is 2.41:1. */
+    .demo-block p a { text-decoration: underline; text-underline-offset: 2px; }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 0;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .footer-grid {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .footer-meta p { margin-bottom: 0.25rem; }
+    .footer-meta a { text-decoration: underline; text-underline-offset: 2px; }
+    .footer-links a { text-decoration: underline; text-underline-offset: 2px; text-decoration-color: var(--border); }
+    .footer-links a:hover { text-decoration-color: var(--accent-hover); }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      h1 { font-size: 2rem; }
+      .hero { padding: 3rem 0 2.5rem; }
+      .turnfile-snippet { font-size: 0.72rem; padding: 1rem 1.1rem; }
+      .pillars { grid-template-columns: 1fr; }
+      .code-grid { grid-template-columns: 1fr; }
+      nav .links { display: none; }
+      nav .links.mobile-compact { display: flex; gap: 0.75rem; }
+      .footer-grid { flex-direction: column; }
+      pre { font-size: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<nav>
+  <div class="container">
+    <a href="/" class="logo" aria-label="Turnfile home">
+      <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false">
+        <path d="M 24 10 A 10 10 0 1 1 8 10" stroke="currentColor" stroke-width="2.75" stroke-linecap="round"/>
+        <path d="M 4 12 L 8 10 L 8 15" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>Turnfile</span>
+    </a>
+    <div class="links mobile-compact">
+      <a href="#why">Why</a>
+      <a href="#install">Install</a>
+      <a href="#inception">Inception</a>
+      <a href="https://github.com/snapsynapse/turnfile" class="gh-star" target="_blank" rel="noopener" aria-label="Star snapsynapse/turnfile on GitHub">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+          <path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/>
+        </svg>
+        <span>Star on GitHub</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+<section class="hero">
+  <div class="container">
+    <h1>Making adversarial agents play nice.</h1>
+    <p class="subtitle">An open protocol for LLM agents that disagree, negotiate, and build consensus &mdash; without an orchestrator telling them what to do.</p>
+    <p class="byline">
+      By <a href="https://paice.work/" target="_blank" rel="noopener author">Sam Rogers</a>, <a href="https://paice.work/" target="_blank" rel="noopener">PAICE.work PBC</a>
+      <span class="sep">&middot;</span>
+      Published <time datetime="2026-02-08">February 8, 2026</time>
+      <span class="sep">&middot;</span>
+      Updated <time datetime="2026-04-09">April 9, 2026</time>
+      <span class="sep">&middot;</span>
+      <span class="version">v0.1.0-draft</span>
+      <span class="sep">&middot;</span>
+      <a href="https://creativecommons.org/licenses/by/4.0/" rel="license" target="_blank">CC&nbsp;BY&nbsp;4.0</a>
+    </p>
+    <p class="hook">Most multi-agent frameworks assume a boss. One model plans, others execute, and failure cascades before anyone catches it. Turnfile inverts that: peer agents own their lanes, counter-recommendations are first-class, and a human arbitrates &mdash; without copy-paste relay duty.</p>
+
+    <div class="turnfile-snippet" role="img" tabindex="0" aria-label="Example Turnfile coordination artifact showing two peer agents Claude and Codex with owned lanes, a human maintainer as arbiter, and the current turn being handed from Codex to Claude"><span class="tk-cm"># turnfile.yaml</span>
+<span class="tk-key">agents</span>:
+  - <span class="tk-str">claude</span>   <span class="tk-cm"># lanes: docs/*</span>
+  - <span class="tk-str">codex</span>    <span class="tk-cm"># lanes: schemas/*</span>
+<span class="tk-key">arbiter</span>: <span class="tk-str">maintainer</span>
+<span class="tk-key">turn</span>:    <span class="tk-str">codex</span> <span class="tk-arr">&rarr;</span> <span class="tk-str">claude</span></div>
+
+    <div class="cta-row">
+      <a href="https://github.com/snapsynapse/turnfile/blob/main/VISION.md" class="btn btn-primary" target="_blank" rel="noopener">Read the Vision</a>
+      <a href="#inception" class="btn btn-secondary">See it in action</a>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="why">
+  <div class="container">
+    <h2>Why Turnfile exists</h2>
+    <p>Pairwise relays and fragmented context create delay. Collaboration state drifts when multiple agents edit shared files without a strict contract. Most frameworks optimize for local speed but under-optimize collaborative intelligence quality. Turnfile is a <strong>Structured Negotiation of Autonomous Peers (SNAP)</strong> &mdash; consent-based, peer multi-LLM collaboration with human-on-the-loop governance and public auditability.</p>
+
+    <div class="pillars">
+      <div class="pillar">
+        <h3>Peers, no hierarchy</h3>
+        <p>Agents propose within owned lanes. No orchestrator commands another model. File-level ownership prevents merge conflicts before they happen.</p>
+      </div>
+      <div class="pillar">
+        <h3>Adversarial by design</h3>
+        <p>Counter-recommendations are first-class. Disagreement is signal, not error &mdash; it surfaces <em>before</em> action and produces better outcomes than silent compliance.</p>
+      </div>
+      <div class="pillar">
+        <h3>Audit-visible by default</h3>
+        <p>Every decision lives in plain markdown. Mailbox messages, worklogs, and the Turnfile itself are recoverable without specialized tooling.</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top: 2rem;">What Turnfile rejects &mdash; and what it chooses instead</h3>
+    <table>
+      <thead>
+        <tr><th>Common pattern</th><th>Turnfile&rsquo;s answer</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="reject">Orchestrator-led pipelines</td><td class="accept">Peer agents with owned lanes</td></tr>
+        <tr><td class="reject">Shared-memory merge hell</td><td class="accept">File-level lane ownership</td></tr>
+        <tr><td class="reject">Silent consensus</td><td class="accept">Counter-recommendations as first-class events</td></tr>
+        <tr><td class="reject">Hidden state in runtime memory</td><td class="accept">Append-only markdown, readable without tools</td></tr>
+        <tr><td class="reject">Human as copy-paste relay</td><td class="accept">Human as arbiter, holding intent and veto</td></tr>
+        <tr><td class="reject">Provider-locked runtimes</td><td class="accept">Runtime-agnostic across Claude, Codex, and beyond</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="install">
+  <div class="container">
+    <h2>Run your own session</h2>
+    <p>Turnfile is a protocol standard, not a centralized runtime. You clone the repo, copy the working-session templates, and point each agent at its onboarding guide. The shared Turnfile and mailbox coordinate the work; the human maintainer arbitrates.</p>
+
+    <div class="code-grid">
+      <div class="code-block">
+        <h3>Clone and scaffold</h3>
+<pre>git clone https://github.com/snapsynapse/turnfile
+cd turnfile
+
+# Copy the working-session templates
+cp -r templates/working-session/ my-session/
+
+# Each agent reads its onboarding guide
+#   docs/LLM_ONBOARDING.md
+#   skills/claude-opus_4.6/SKILL.md
+#   skills/codex_5.3/SKILL.md</pre>
+        <p class="annotation">No SDK, no runtime to install. The protocol lives in markdown and YAML.</p>
+      </div>
+
+      <div class="code-block">
+        <h3>Validate coordination state</h3>
+<pre>npm install  # ajv + js-yaml only
+
+# Lint the Turnfile against the JSON Schema
+node tools/turnfile-lint.mjs
+
+# Check mailbox invariants
+node tools/validate-mailbox-invariants.mjs
+
+# Verify PRD promotion gates
+node tools/validate-prd-promotion.mjs</pre>
+        <p class="annotation">Validators are plain Node scripts. No hidden orchestrator, no network calls.</p>
+      </div>
+
+      <div class="code-block">
+        <h3>The core protocol files</h3>
+<pre># Invariant rules + handoff format
+docs/PROTOCOL_CORE.md
+
+# Mailbox format + 5-status lifecycle
+docs/NOTIFICATION_PROTOCOL.md
+
+# Escalation + counter-recommendations
+docs/CONFLICT_RESOLUTION.md
+
+# Maintainer role + approval bands
+docs/HUMAN_GOVERNANCE.md</pre>
+      </div>
+
+      <div class="code-block">
+        <h3>The 12 promoted PRDs</h3>
+<pre># Protocol contracts (see docs/prds/)
+PRD-003  Message lifecycle + SLA
+PRD-004  Maintainer decision contract
+PRD-005  Protocol data schema
+PRD-006  Session promotion pipeline
+PRD-007  Trust + provenance layer
+PRD-008  Cross-sandbox handoff
+PRD-009  Cross-document reconciliation
+PRD-010  Shared-file transaction locking
+PRD-011  Session resumption
+PRD-012  Protocol skills pack
+PRD-013  Turnfile coordination format
+PRD-014  Session closeout + boot handoff</pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="inception">
+  <div class="container">
+    <div class="demo-block">
+      <h2>See it in action</h2>
+      <p>The <strong>inception archive</strong> is the unedited record of two LLM agents &mdash; Claude Opus 4.6 and OpenAI Codex 5.3 &mdash; building this protocol together across 11 sessions. No human wrote their messages. No orchestrator commanded them. Zero file collisions.</p>
+      <p>Start with <a href="https://github.com/snapsynapse/turnfile/blob/main/examples/inception/WORKLOG.md" target="_blank" rel="noopener">WORKLOG.md</a> for the session-by-session narrative, or jump straight to <a href="https://github.com/snapsynapse/turnfile/blob/main/examples/inception/MAILBOX.md" target="_blank" rel="noopener">MAILBOX.md</a> to read the actual agent-to-agent messages &mdash; proposals, reviews, and counter-recommendations.</p>
+      <div class="cta-row">
+        <a href="https://github.com/snapsynapse/turnfile/tree/main/examples/inception" class="btn btn-primary" target="_blank" rel="noopener">Open the inception archive &rarr;</a>
+        <a href="https://github.com/snapsynapse/turnfile" class="btn btn-secondary" target="_blank" rel="noopener">View on GitHub</a>
+      </div>
+    </div>
+
+    <aside class="canonical-note" role="note">
+      <strong>Canonical reference.</strong> This page is the authoritative landing for the Turnfile protocol. The maintainer&rsquo;s intent and alignment source is
+      <a href="https://github.com/snapsynapse/turnfile/blob/main/VISION.md" target="_blank" rel="noopener">VISION.md</a>
+      in the repository; any cross-posts on LinkedIn, PAICE.work, or other platforms are derived from those sources and should cite
+      <a href="https://turnfile.work/">turnfile.work</a> as canonical.
+      Last substantive revision: <time datetime="2026-04-09">2026-04-09</time>.
+      <a href="https://github.com/snapsynapse/turnfile/commits/main/VISION.md" target="_blank" rel="noopener">Revision history &rarr;</a>
+    </aside>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-meta">
+        <p>Turnfile v0.1.0-draft &middot; <a href="https://creativecommons.org/licenses/by/4.0/" rel="license" target="_blank">CC BY 4.0</a> (this page) &middot; <a href="https://github.com/snapsynapse/turnfile/blob/main/LICENSE" target="_blank" rel="noopener">Apache 2.0</a> (code)</p>
+        <p>A <a href="https://paice.work/" target="_blank" rel="noopener">PAICE.work PBC</a> project by <a href="https://paice.work/" target="_blank" rel="noopener author">Sam Rogers</a>.</p>
+        <p style="margin-top: 0.5rem;">See also: <a href="https://gracefulboundaries.dev/" target="_blank" rel="noopener">Graceful Boundaries</a> &middot; <a href="https://hardguard25.com/" target="_blank" rel="noopener">HardGuard25</a> &middot; <a href="https://knowledge-as-code.com/" target="_blank" rel="noopener">Knowledge as Code</a> &middot; <a href="https://skillprovenance.dev/" target="_blank" rel="noopener">Skill Provenance</a></p>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/snapsynapse/turnfile" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/snapsynapse/turnfile/blob/main/VISION.md" target="_blank" rel="noopener">Vision</a>
+        <a href="https://github.com/snapsynapse/turnfile/blob/main/docs/PROTOCOL_CORE.md" target="_blank" rel="noopener">Protocol Core</a>
+        <a href="https://github.com/snapsynapse/turnfile/tree/main/docs/prds" target="_blank" rel="noopener">PRDs</a>
+        <a href="https://github.com/snapsynapse/turnfile/blob/main/CHANGELOG.md" target="_blank" rel="noopener">Changelog</a>
+        <a href="https://github.com/snapsynapse/turnfile/commits/main/VISION.md" target="_blank" rel="noopener">Revisions</a>
+        <a href="https://github.com/sponsors/snapsynapse" target="_blank" rel="noopener">Sponsor</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
