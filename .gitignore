@@ -24,3 +24,13 @@ node_modules/
 
 # Research / scratch
 .perplexity-research/
+
+# --- baseline additions (automated audit 2026-04-21) ---
+.env
+.env.*
+__pycache__/
+*.pyc
+dist/
+build/
+.venv/
+venv/
