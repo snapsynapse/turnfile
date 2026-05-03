@@ -81,7 +81,8 @@ function parseTableAt(lines, tableHeaderIndex) {
 }
 
 function parseSectionTable(lines, headingText) {
-  const headingIndex = lines.findIndex((line) => line.trim() === headingText);
+  const headingTexts = Array.isArray(headingText) ? headingText : [headingText];
+  const headingIndex = lines.findIndex((line) => headingTexts.includes(line.trim()));
   if (headingIndex < 0) {
     return [];
   }
@@ -140,7 +141,9 @@ function parseActiveMessages(lines) {
   }
 
   const end = lines.findIndex(
-    (line, idx) => idx > start && line.trim() === "## Closed Summary (Newest First)",
+    (line, idx) =>
+      idx > start &&
+      ["## Closed Summary (Newest First)", "## Closed Summary"].includes(line.trim()),
   );
   const sliceEnd = end >= 0 ? end : lines.length;
   const section = lines.slice(start + 1, sliceEnd);
@@ -290,7 +293,7 @@ function main() {
     ),
     active_messages: parseActiveMessages(lines),
     closed_summary: addStandardKeys(
-      parseSectionTable(lines, "## Closed Summary (Newest First)"),
+      parseSectionTable(lines, ["## Closed Summary (Newest First)", "## Closed Summary"]),
     ),
   };
 

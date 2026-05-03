@@ -260,10 +260,18 @@ function checkSemanticInvariants(turnfile, errors, warnings, fixHints) {
   // 5. Signal ID monotonicity (SIG-NNN should be decreasing in the array = newest-first)
   if (messages.length > 1) {
     for (let i = 0; i < messages.length - 1; i++) {
-      const currentNum = parseInt(messages[i].id.replace("SIG-", ""), 10);
-      const nextNum = parseInt(messages[i + 1].id.replace("SIG-", ""), 10);
+      const current = messages[i];
+      const next = messages[i + 1];
+      if (typeof current?.id !== "string" || typeof next?.id !== "string") {
+        continue;
+      }
+      const currentNum = parseInt(current.id.replace("SIG-", ""), 10);
+      const nextNum = parseInt(next.id.replace("SIG-", ""), 10);
+      if (Number.isNaN(currentNum) || Number.isNaN(nextNum)) {
+        continue;
+      }
       if (currentNum <= nextNum) {
-        warnings.push(`Signal log: ${messages[i].id} is not newer than ${messages[i + 1].id}. Expected newest-first ordering.`);
+        warnings.push(`Signal log: ${current.id} is not newer than ${next.id}. Expected newest-first ordering.`);
         break; // Only report once
       }
     }
@@ -271,8 +279,11 @@ function checkSemanticInvariants(turnfile, errors, warnings, fixHints) {
 
   // 6. Signal rev should not exceed coordination.revision
   for (const sig of messages) {
+    if (!sig || typeof sig !== "object") {
+      continue;
+    }
     if (sig.rev > rev) {
-      errors.push(`Signal '${sig.id}': rev (${sig.rev}) exceeds coordination.revision (${rev}).`);
+      errors.push(`Signal '${sig.id ?? "(missing id)"}': rev (${sig.rev}) exceeds coordination.revision (${rev}).`);
     }
   }
 
@@ -295,6 +306,9 @@ function checkSemanticInvariants(turnfile, errors, warnings, fixHints) {
   // 9. Duplicate signal IDs
   const sigIds = new Set();
   for (const sig of messages) {
+    if (!sig || typeof sig.id !== "string") {
+      continue;
+    }
     if (sigIds.has(sig.id)) {
       errors.push(`Duplicate signal ID: ${sig.id}`);
     }
@@ -353,7 +367,11 @@ function main() {
   const schemaValid = validateSchema(turnfile, args.schema, errors);
 
   // Phase 3: Semantic invariants
-  checkSemanticInvariants(turnfile, errors, warnings, args.fixHints);
+  if (schemaValid) {
+    checkSemanticInvariants(turnfile, errors, warnings, args.fixHints);
+  } else {
+    warnings.push("Semantic invariant checks skipped because schema validation failed.");
+  }
 
   // 4. Report
   const revision = turnfile.coordination?.revision ?? "?";

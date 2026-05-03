@@ -54,10 +54,10 @@ per PRD-008 payload-first rule.
 
 ## Closed Summary
 
-| ID | From -> To | Subject | Final status | Closed by |
-|----|------------|---------|--------------|-----------|
+| ID | Date | From -> To | Final status | Outcome |
+|----|------|------------|--------------|---------|
 
 <!--
 Example row:
-| MSG-YYYYMMDD-001 | Claude -> Gemini | PRD review findings | actioned | Claude |
+| MSG-YYYYMMDD-001 | YYYY-MM-DD | Claude -> Gemini | closed | PRD review findings resolved. |
 -->

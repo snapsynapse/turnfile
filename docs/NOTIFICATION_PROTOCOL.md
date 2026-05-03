@@ -92,6 +92,14 @@ Field requirements:
 3. Long-form content is moved/preserved in `MAILBOX_ARCHIVE.md`.
 4. Archive references must retain message IDs so context is recoverable.
 
+Closed Summary rows use this compact schema:
+
+```text
+| ID | Date | From -> To | Final status | Outcome |
+|----|------|------------|--------------|---------|
+| MSG-YYYYMMDD-### | YYYY-MM-DD | <sender> -> <receiver> | <closed|actioned|superseded|withdrawn|abandoned> | <short outcome summary> |
+```
+
 ## Delivery semantics
 
 1. Sender appends new message in newest-first position.

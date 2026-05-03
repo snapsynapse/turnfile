@@ -10,6 +10,7 @@ const TERMINAL_STATUSES = new Set([
   "withdrawn",
   "abandoned",
 ]);
+const OPEN_QUEUE_STATUSES = new Set(["unread", "acknowledged", "blocked", "actioned"]);
 
 function usage() {
   console.error("Usage: node tools/validate-mailbox-invariants.mjs [--mailbox <path>]");
@@ -149,6 +150,8 @@ function parseOpenQueue(lines) {
   return rows
     .map((row) => ({
       id: row.id || "",
+      from_to: row.from_to || "",
+      priority: row.priority || "",
       subject: row.subject || "",
     }))
     .filter((row) => row.id !== "");
@@ -177,7 +180,11 @@ function parseActiveMessages(lines) {
 
     let from = "";
     let to = "";
+    let date = "";
+    let type = "";
+    let priority = "";
     let status = "";
+    let subject = "";
     for (let j = i + 1; j < msgEnd; j += 1) {
       const candidate = lines[j].trim();
       const fromMatch = /^\*\*From:\*\*\s*(.+?)\s*->\s*(.+?)\s*$/.exec(candidate);
@@ -185,15 +192,45 @@ function parseActiveMessages(lines) {
         from = fromMatch[1].trim();
         to = fromMatch[2].trim();
       }
+      const dateMatch = /^\*\*Date:\*\*\s*(.+?)\s*$/.exec(candidate);
+      if (dateMatch) {
+        date = dateMatch[1].trim();
+      }
+      const typeMatch = /^\*\*Type:\*\*\s*(.+?)\s*$/.exec(candidate);
+      if (typeMatch) {
+        type = typeMatch[1].trim().toLowerCase();
+      }
+      const priorityMatch = /^\*\*Priority:\*\*\s*(.+?)\s*$/.exec(candidate);
+      if (priorityMatch) {
+        priority = priorityMatch[1].trim();
+      }
       const statusMatch = /^\*\*Status:\*\*\s*(.+?)\s*$/.exec(candidate);
       if (statusMatch) {
         status = statusMatch[1].trim().toLowerCase();
       }
+      const subjectMatch = /^\*\*Subject:\*\*\s*(.+?)\s*$/.exec(candidate);
+      if (subjectMatch) {
+        subject = subjectMatch[1].trim();
+      }
     }
 
-    messages.push({ id, from, to, status, index: messages.length });
+    messages.push({ id, from, to, date, type, priority, status, subject, index: messages.length });
   }
   return messages;
+}
+
+function parseClosedSummary(lines) {
+  const rows = [
+    ...parseSectionTable(lines, "## Closed Summary"),
+    ...parseSectionTable(lines, "## Closed Summary (Newest First)"),
+  ];
+  return rows.map((row) => ({
+    id: row.id || "",
+    date: row.date || "",
+    from_to: row.from_to || "",
+    final_status: row.final_status || "",
+    outcome: row.outcome || "",
+  }));
 }
 
 function main() {
@@ -209,16 +246,44 @@ function main() {
   const inbox = parseInboxSnapshot(lines);
   const openQueue = parseOpenQueue(lines);
   const active = parseActiveMessages(lines);
+  const closedSummary = parseClosedSummary(lines);
 
   const errors = [];
   const warnings = [];
 
   const seen = new Set();
+  const closedSummaryIds = new Set();
   for (const msg of active) {
     if (seen.has(msg.id)) {
       errors.push(`Duplicate active message ID: ${msg.id}`);
     }
     seen.add(msg.id);
+
+    if (TERMINAL_STATUSES.has(msg.status)) {
+      errors.push(
+        `Closed/terminal message ${msg.id} remains in Active Messages (move body to MAILBOX_ARCHIVE.md and keep a Closed Summary row).`,
+      );
+    }
+  }
+
+  for (const row of closedSummary) {
+    if (!row.id) {
+      errors.push("Closed Summary row missing ID");
+      continue;
+    }
+    if (closedSummaryIds.has(row.id)) {
+      errors.push(`Duplicate Closed Summary message ID: ${row.id}`);
+    }
+    closedSummaryIds.add(row.id);
+
+    const missing = [];
+    if (!row.date) missing.push("Date");
+    if (!row.from_to) missing.push("From -> To");
+    if (!row.final_status) missing.push("Final status");
+    if (!row.outcome) missing.push("Outcome");
+    if (missing.length > 0) {
+      errors.push(`Closed Summary row ${row.id} missing required field(s): ${missing.join(", ")}`);
+    }
   }
 
   for (const entry of openQueue) {
@@ -230,6 +295,15 @@ function main() {
     if (TERMINAL_STATUSES.has(match.status)) {
       errors.push(
         `Open queue entry ${entry.id} has terminal status '${match.status}' (should not remain in open queue).`,
+      );
+    }
+  }
+
+  const openQueueIds = new Set(openQueue.map((entry) => entry.id));
+  for (const msg of active) {
+    if (OPEN_QUEUE_STATUSES.has(msg.status) && !openQueueIds.has(msg.id)) {
+      errors.push(
+        `Active non-terminal message ${msg.id} has status '${msg.status}' but is missing from Open Queue.`,
       );
     }
   }
@@ -260,7 +334,7 @@ function main() {
 
   console.log(`Mailbox: ${args.mailbox}`);
   console.log(
-    `Summary: inbox_agents=${inbox.length}, open_queue=${openQueue.length}, active_messages=${active.length}`,
+    `Summary: inbox_agents=${inbox.length}, open_queue=${openQueue.length}, active_messages=${active.length}, closed_summary=${closedSummary.length}`,
   );
   console.log("");
 

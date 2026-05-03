@@ -12,9 +12,10 @@ All files must encode the same protocol outcomes while using agent-specific tool
 
 ## Shared Metaskills
 
-1. `skills/skill-versioning/` — shared cross-agent metaskill for skill bundle version tracking (`SKILL.md`, `MANIFEST.yaml`, `CHANGELOG.md`, `README.md`, `evals.json`).
+1. `skills/skill-versioning/` — repo-local compatibility path for the shared cross-agent metaskill for skill bundle version tracking (`SKILL.md`, `MANIFEST.yaml`, `CHANGELOG.md`, `README.md`, `evals.json`).
 
 This metaskill is jointly consumed by all agents (Codex, Claude, Gemini) and versioned as part of the Turnfile repository.
+Current installs may expose the same bundle identity as `skill-provenance`; tools should accept both `skill-versioning` and `skill-provenance` while preserving `skills/skill-versioning/` as the stable repository path.
 
 ## Shared Policy Assertions
 

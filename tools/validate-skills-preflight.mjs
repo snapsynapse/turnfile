@@ -9,9 +9,10 @@ const require = createRequire(import.meta.url);
 
 const DEFAULT_REPO_TURNFILE_SKILL = "skills/codex_5.3/SKILL.md";
 const DEFAULT_REPO_VERSIONING_DIR = "skills/skill-versioning";
+const VERSIONING_SKILL_NAMES = new Set(["skill-versioning", "skill-provenance"]);
 const DEFAULT_REQUIRED_GLOBAL_SKILLS = [
   "turnfile-codex-collaboration",
-  "skill-versioning",
+  "skill-versioning|skill-provenance",
 ];
 
 function defaultGlobalSkillsDir() {
@@ -115,6 +116,32 @@ function validateMinimalFrontmatter(keys, label, errors) {
   }
 }
 
+function validateFrontmatterForMode(keys, mode, label, errors) {
+  if (mode === "minimal") {
+    validateMinimalFrontmatter(keys, label, errors);
+    return;
+  }
+
+  if (mode === "metadata") {
+    const allowed = new Set(["name", "description", "metadata"]);
+    for (const key of keys) {
+      if (!allowed.has(key)) {
+        errors.push(`${label}: SKILL.md frontmatter key '${key}' is not allowed for metadata mode`);
+      }
+    }
+    return;
+  }
+
+  errors.push(`${label}: unsupported frontmatter mode '${mode}'`);
+}
+
+function isIntegerOrSemver(value) {
+  if (Number.isInteger(value)) {
+    return true;
+  }
+  return typeof value === "string" && /^\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?$/.test(value);
+}
+
 function validateManifest(bundleDir, label, errors, warnings) {
   const manifestPath = path.join(bundleDir, "MANIFEST.yaml");
   if (!fs.existsSync(manifestPath)) {
@@ -146,8 +173,8 @@ function validateManifest(bundleDir, label, errors, warnings) {
   if (!manifest.bundle) {
     errors.push(`${label}: manifest missing 'bundle'`);
   }
-  if (!Number.isInteger(manifest.bundle_version)) {
-    errors.push(`${label}: manifest 'bundle_version' must be an integer`);
+  if (!isIntegerOrSemver(manifest.bundle_version)) {
+    errors.push(`${label}: manifest 'bundle_version' must be an integer or semver string`);
   }
   if (!Array.isArray(manifest.files)) {
     errors.push(`${label}: manifest 'files' must be an array`);
@@ -155,8 +182,8 @@ function validateManifest(bundleDir, label, errors, warnings) {
   }
 
   const frontmatterMode = manifest.compatibility?.frontmatter_mode;
-  if (frontmatterMode !== "minimal") {
-    warnings.push(`${label}: manifest frontmatter_mode is '${frontmatterMode ?? "unset"}' (expected 'minimal')`);
+  if (!["minimal", "metadata"].includes(frontmatterMode)) {
+    errors.push(`${label}: manifest frontmatter_mode is '${frontmatterMode ?? "unset"}' (expected 'minimal' or 'metadata')`);
   }
 
   for (const entry of manifest.files) {
@@ -190,6 +217,21 @@ function validateManifest(bundleDir, label, errors, warnings) {
     } else if (entry.hash !== null) {
       warnings.push(`${label}: file '${relPath}' hash is ${String(entry.hash)} (expected sha256:* or null)`);
     }
+  }
+}
+
+function readManifestMode(bundleDir) {
+  const manifestPath = path.join(bundleDir, "MANIFEST.yaml");
+  if (!fs.existsSync(manifestPath)) {
+    return null;
+  }
+
+  try {
+    const yaml = require("js-yaml");
+    const manifest = yaml.load(mustReadText(manifestPath));
+    return manifest?.compatibility?.frontmatter_mode || null;
+  } catch {
+    return null;
   }
 }
 
@@ -245,14 +287,24 @@ function main() {
   }
 
   const repoVersioningSkillAbs = path.join(repoVersioningDirAbs, "SKILL.md");
+  let repoVersioningFrontmatterMode = null;
+  if (fs.existsSync(repoVersioningDirAbs)) {
+    repoVersioningFrontmatterMode = readManifestMode(repoVersioningDirAbs);
+  }
+
   if (!fs.existsSync(repoVersioningSkillAbs)) {
     errors.push(`Missing repo versioning SKILL.md: ${path.join(args.repoVersioningDir, "SKILL.md")}`);
   } else {
     const { name, keys } = parseFrontmatterNameAndKeys(repoVersioningSkillAbs);
-    if (name !== "skill-versioning") {
-      errors.push(`Repo versioning skill name mismatch: expected 'skill-versioning', got '${name}'`);
+    if (!VERSIONING_SKILL_NAMES.has(name)) {
+      errors.push(`Repo versioning skill name mismatch: expected one of '${[...VERSIONING_SKILL_NAMES].join(", ")}', got '${name}'`);
     }
-    validateMinimalFrontmatter(keys, "Repo versioning skill", errors);
+    validateFrontmatterForMode(
+      keys,
+      repoVersioningFrontmatterMode || "minimal",
+      "Repo versioning skill",
+      errors,
+    );
   }
 
   if (fs.existsSync(repoVersioningDirAbs)) {
@@ -285,8 +337,9 @@ function main() {
       errors.push(`Global skills directory not found: ${args.globalSkillsDir}`);
     }
     for (const skillName of DEFAULT_REQUIRED_GLOBAL_SKILLS) {
-      if (!globalNameToPath.has(skillName)) {
-        errors.push(`Required global skill missing: ${skillName}`);
+      const acceptableNames = skillName.split("|");
+      if (!acceptableNames.some((name) => globalNameToPath.has(name))) {
+        errors.push(`Required global skill missing: ${acceptableNames.join(" or ")}`);
       }
     }
   } else if (!fs.existsSync(args.globalSkillsDir)) {
@@ -304,14 +357,19 @@ function main() {
     errors.push("Cannot run Turnfile global parity check (missing global or repo skill)");
   }
 
-  const globalVersioningSkill = globalNameToPath.get("skill-versioning");
+  const globalVersioningSkill =
+    globalNameToPath.get("skill-versioning") || globalNameToPath.get("skill-provenance");
   if (globalVersioningSkill) {
     const globalVersioningDir = path.dirname(globalVersioningSkill);
-    const { keys } = parseFrontmatterNameAndKeys(globalVersioningSkill);
-    validateMinimalFrontmatter(keys, "Global skill-versioning", errors);
+    const mode = readManifestMode(globalVersioningDir) || "minimal";
+    const { name, keys } = parseFrontmatterNameAndKeys(globalVersioningSkill);
+    if (!VERSIONING_SKILL_NAMES.has(name)) {
+      errors.push(`Global versioning skill name mismatch: expected one of '${[...VERSIONING_SKILL_NAMES].join(", ")}', got '${name}'`);
+    }
+    validateFrontmatterForMode(keys, mode, "Global versioning skill", errors);
     validateManifest(globalVersioningDir, "Global skill-versioning bundle", errors, warnings);
   } else if (args.strictGlobal) {
-    errors.push("Cannot validate global skill-versioning bundle (skill not installed)");
+    errors.push("Cannot validate global versioning bundle (skill-versioning or skill-provenance not installed)");
   }
 
   console.log("Skills Preflight");

@@ -3,6 +3,14 @@
 .AppleDouble
 .LSOverride
 ._*
+.Spotlight-V100
+.Trashes
+Icon?
+
+# Windows local metadata
+Thumbs.db
+ehthumbs.db
+Desktop.ini
 
 # Editor / IDE
 *.swp

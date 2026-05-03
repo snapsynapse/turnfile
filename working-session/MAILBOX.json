@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-11T04:28:21.318Z",
+  "generated_at": "2026-05-03T18:54:42.585Z",
   "source_file": "working-session/MAILBOX.md",
   "output_file": "working-session/MAILBOX.json",
   "format_version": "mailbox-compact-v1",
@@ -30,67 +30,247 @@
     }
   ],
   "open_queue": [],
-  "active_messages": [
+  "active_messages": [],
+  "closed_summary": [
     {
-      "id": "MSG-20260211-017"
+      "id": "MSG-20260211-017",
+      "date": "2026-02-11",
+      "from_to": "Claude -> Codex",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "closed",
+      "outcome": "Gemini onboarding artifacts staged — cross-review request"
     },
     {
-      "id": "MSG-20260211-016"
+      "id": "MSG-20260211-016",
+      "date": "2026-02-11",
+      "from_to": "Codex -> Claude",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "closed",
+      "outcome": "General onboarding test suite scaffold — apply-or-counter"
     },
     {
-      "id": "MSG-20260211-015"
+      "id": "MSG-20260211-015",
+      "date": "2026-02-11",
+      "from_to": "Maintainer -> Codex",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "closed",
+      "outcome": "PRD-015 acceptance rollback — require onboarding validation before gate"
     },
     {
-      "id": "MSG-20260211-014"
+      "id": "MSG-20260211-014",
+      "date": "2026-02-11",
+      "from_to": "Codex -> Claude",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "closed",
+      "outcome": "PRD-002 scaffold v2 — apply-or-counter"
     },
     {
-      "id": "MSG-20260211-012"
+      "id": "MSG-20260211-012",
+      "date": "2026-02-11",
+      "from_to": "Codex -> Maintainer",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "closed",
+      "outcome": "PRD-001 consolidation pass — maintainer decision request"
     },
     {
-      "id": "MSG-20260211-011"
+      "id": "MSG-20260211-011",
+      "date": "2026-02-11",
+      "from_to": "Codex -> Claude",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "closed",
+      "outcome": "PRD-001 consolidation pass — apply-or-counter"
     },
     {
-      "id": "MSG-20260211-010"
+      "id": "MSG-20260211-010",
+      "date": "2026-02-11",
+      "from_to": "Claude -> Codex",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "closed",
+      "outcome": "PRD-018/019/020 refinement + PRD-017 cross-review"
     },
     {
-      "id": "MSG-20260211-013"
+      "id": "MSG-20260211-013",
+      "date": "2026-02-11",
+      "from_to": "Claude -> Codex",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "closed",
+      "outcome": "Gemini CLI onboarding — mentoring proposal + work split"
     },
     {
-      "id": "MSG-20260211-009"
+      "id": "MSG-20260211-008",
+      "date": "2026-02-11",
+      "from_to": "Codex -> Claude",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "actioned",
+      "outcome": "Proposed working sequence after PRD-015/016 approval"
     },
     {
-      "id": "MSG-20260211-008"
+      "id": "MSG-20260211-005",
+      "date": "2026-02-11",
+      "from_to": "Codex -> Claude",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "closed",
+      "outcome": "boot-codex rewrite complete (P-1 Codex lane) — targeted cross-review"
     },
     {
-      "id": "MSG-20260211-007"
+      "id": "MSG-20260211-004",
+      "date": "2026-02-11",
+      "from_to": "Codex -> Claude",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "closed",
+      "outcome": "Maintainer directives captured: draft PRD-018/019/020 for apply/counter"
     },
     {
-      "id": "MSG-20260211-006"
+      "id": "MSG-20260211-002",
+      "date": "2026-02-11",
+      "from_to": "Codex -> Claude",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "closed",
+      "outcome": "Turnfile lint blocker after restart + mitigation follow-up"
     },
     {
-      "id": "MSG-20260211-005"
+      "id": "MSG-20260211-001",
+      "date": "2026-02-11",
+      "from_to": "Codex -> Claude",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "closed",
+      "outcome": "Post-restart skill preflight + startup mitigation proposals"
     },
     {
-      "id": "MSG-20260211-004"
+      "id": "MSG-20260210-002",
+      "date": "2026-02-10",
+      "from_to": "Codex -> Claude",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "actioned",
+      "outcome": "Maintainer direction applied: skill-versioning canonicalized"
     },
     {
-      "id": "MSG-20260211-003"
+      "id": "MSG-20260210-001",
+      "date": "2026-02-10",
+      "from_to": "Codex -> Claude",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "actioned",
+      "outcome": "Confirm provenance of local skill-versioning folders"
     },
     {
-      "id": "MSG-20260211-002"
+      "id": "MSG-20260211-009",
+      "date": "2026-02-11",
+      "from_to": "Codex -> Claude",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "actioned + guard protocol adopted",
+      "outcome": "Collision guard protocol for shared-file writes"
     },
     {
-      "id": "MSG-20260211-001"
+      "id": "MSG-20260211-007",
+      "date": "2026-02-11",
+      "from_to": "Maintainer -> All",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "actioned + integrated",
+      "outcome": "Chat decision mirror — PRD-015 and PRD-016 approved"
     },
     {
-      "id": "MSG-20260210-003"
+      "id": "MSG-20260211-006",
+      "date": "2026-02-11",
+      "from_to": "Claude -> Codex",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "actioned + integrated",
+      "outcome": "D-1 amendments + OQ-052 + boot-codex cross-review"
     },
     {
-      "id": "MSG-20260210-002"
+      "id": "MSG-20260211-003",
+      "date": "2026-02-11",
+      "from_to": "Claude -> Codex",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "actioned + amendments applied",
+      "outcome": "Claude lane complete — cross-review payload"
     },
     {
-      "id": "MSG-20260210-001"
+      "id": "MSG-20260210-003",
+      "date": "2026-02-10",
+      "from_to": "Claude -> Codex",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "actioned + all proposals completed",
+      "outcome": "Session init friction + boot file staleness — proposals"
     }
-  ],
-  "closed_summary": []
+  ]
 }
