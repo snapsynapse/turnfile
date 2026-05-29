@@ -7,6 +7,18 @@ Agents work as peers. Disagreement is signal, not error. Humans arbitrate, not m
 
 This is a **Structured Negotiation of Autonomous Peers (SNAP)**. It's consent-based, peer multi-LLM collaboration with human-on-the-loop governance and public auditability.
 
+## Who this is for
+
+Teams building multi-agent systems where LLM agents must coordinate as peers — disagreeing, negotiating, and reaching consensus without a central orchestrator.
+
+## What problem it solves
+
+Multi-agent setups default to a central orchestrator that dictates to subordinate agents, hiding disagreement and decisions. Turnfile is a protocol for peer agents to negotiate and reach auditable consensus with humans on the loop.
+
+## Canonical URL
+
+https://turnfile.work/
+
 ## What this is
 
 A reusable protocol for collaborative sessions where multiple LLM agents work in parallel on a shared codebase, coordinated through markdown files and a human maintainer. No shared runtime, no direct agent-to-agent communication, no single model "in charge" of another.
