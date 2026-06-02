@@ -10,6 +10,7 @@ Active iteration documents for the current local session workspace.
 4. `PRD-018-maintainer-approval-authority-matrix-contract.md`
 5. `PRD-019-mailbox-first-approval-and-polling-cadence-contract.md`
 6. `PRD-020-boot-artifact-completeness-and-chat-log-contract.md`
+7. `PRD-021-conflict-loop-bound-and-selective-unlock-gradient-contract.md`
 
 ## Actioned PRDs Promoted To `docs/prds/`
 

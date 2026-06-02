@@ -592,6 +592,35 @@
         "Maintainer acceptance pending"
       ],
       "eligible_for_docs_prds": false
+    },
+    {
+      "id": "PRD-021",
+      "title": "Conflict Loop Bound and Selective-Unlock Gradient Contract",
+      "path": "working-session/docs/PRD-021-conflict-loop-bound-and-selective-unlock-gradient-contract.md",
+      "shelf": "working-session/docs",
+      "state": "draft",
+      "acceptance": {
+        "codex": {
+          "status": "pending",
+          "evidence": []
+        },
+        "claude": {
+          "status": "pending",
+          "evidence": []
+        },
+        "maintainer": {
+          "status": "pending",
+          "evidence": [
+            "Design decisions logged as resolved OQ-058–061 (Maintainer, 2026-06-01); PRD-document acceptance still requires agent cross-review"
+          ]
+        }
+      },
+      "blocking_items": [
+        "Codex cross-review pending",
+        "Claude cross-review pending",
+        "Maintainer PRD-document acceptance pending"
+      ],
+      "eligible_for_docs_prds": false
     }
   ]
 }
