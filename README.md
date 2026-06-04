@@ -52,8 +52,8 @@ Want a single example? [MSG-20260208-027](examples/inception/MAILBOX.md#msg-2026
 
 ## Quick start
 
-1. **Read the stance:** [VISION.md](VISION.md) — what this protocol believes
-2. **See it work:** [examples/inception/WORKLOG.md](examples/inception/WORKLOG.md) — real session record
+1. **Read the stance:** [INTENT.md](INTENT.md): where this protocol is going
+2. **See it work:** [examples/inception/WORKLOG.md](examples/inception/WORKLOG.md): real session record
 3. **Run your own:** Copy [templates/working-session/](templates/working-session/) and follow [LLM Onboarding](docs/LLM_ONBOARDING.md)
 
 Deeper dive: [Protocol Core](docs/PROTOCOL_CORE.md) defines the invariant rules. PRDs in [docs/prds/](docs/prds/) define the contracts.
@@ -79,6 +79,17 @@ This repository is intentionally scoped to maximize interoperability and auditab
 4. **Human intent authority**: maintainer sets direction and resolves disputes through logged decisions
 5. **Explicit non-goal**: not an autonomous agent-command system
 ## Document map
+
+### Direction (where the project is going)
+
+| Document | Purpose |
+|----------|---------|
+| [INTENT](INTENT.md) | Forward strategy: Turnfile as a thin governance layer for auditable peer disagreement across existing agent platforms |
+| [Specification](SPEC.md) | Concise normative contract for the narrowed Turnfile protocol |
+| [Definitions](DEFINITIONS.md) | Controlled vocabulary for Turnfile terms, roles, statuses, and governance concepts |
+| [Roadmap](ROADMAP.md) | Non-normative planning notes for the narrowed project direction |
+| [Security](SECURITY.md) | Vulnerability reporting, trust model, and runtime security boundaries |
+| [Vision](VISION.md) | Historical and explanatory maintainer intent document, superseded by INTENT.md for forward development direction |
 
 ### Protocol (the rules)
 
@@ -183,12 +194,14 @@ npm run validate:skills:ci   # repo-only checks (CI-safe)
 
 ## Status
 
-This protocol has been tested across 11+ real collaboration sessions with two LLM agents (Claude by Anthropic, Codex by OpenAI) and a human maintainer. The core rules are stable. Twelve PRDs have been promoted to canonical status. The protocol is being extended for 3+ agent support.
+This protocol has been tested across 11+ real collaboration sessions with two LLM agents (Claude by Anthropic, Codex by OpenAI) and a human maintainer. The historical PRD stack is stable enough to validate the concept. Forward development now narrows Turnfile into a thin governance layer for auditable peer disagreement and maintainer-governed resolution across existing agent platforms.
 
 ## Next
 
-- Third agent onboarding (Gemini) — validates the onboarding guide and skill template with a non-incumbent agent
-- GitHub repository polish: issue templates, PR templates, CI workflows (`.github/` directory)
+- Reconcile the historical PRD shelf against the narrowed `SPEC.md`.
+- Produce a minimal starter workflow that does not require reading the inception archive.
+- Add small CLI helpers only where they reduce clerical overhead.
+- Document integration patterns for current agent platforms, MCP, A2A, and GitHub review flows.
 
 ## Sponsor
 
