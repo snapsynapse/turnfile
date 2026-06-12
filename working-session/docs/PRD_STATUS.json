@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2026-02-11",
+  "updated_at": "2026-06-12",
   "policy": {
     "required_reviewers": [
       "codex",
@@ -45,7 +45,7 @@
       "title": "Rust Notification Viewer (MVP)",
       "path": "working-session/docs/PRD-002-rust-notification-viewer-mvp.md",
       "shelf": "working-session/docs",
-      "state": "draft",
+      "state": "deferred",
       "acceptance": {
         "codex": {
           "status": "accepted",
@@ -60,12 +60,14 @@
           ]
         },
         "maintainer": {
-          "status": "pending",
-          "evidence": []
+          "status": "deferred",
+          "evidence": [
+            "Maintainer decision 2026-06-12 (session 14 triage): keep as deferred draft; built-tool PRD predates thin-governance-layer scope; revisit after starter workflow stabilizes"
+          ]
         }
       },
       "blocking_items": [
-        "Maintainer acceptance pending"
+        "Deferred by Maintainer 2026-06-12: revisit after minimal starter workflow stabilizes"
       ],
       "eligible_for_docs_prds": false
     },
@@ -437,14 +439,15 @@
           ]
         },
         "maintainer": {
-          "status": "pending",
+          "status": "deferred",
           "evidence": [
-            "MAILBOX MSG-20260211-015: acceptance rollback; generalized onboarding test evidence required before maintainer gate"
+            "MAILBOX MSG-20260211-015: acceptance rollback; generalized onboarding test evidence required before maintainer gate",
+            "Maintainer decision 2026-06-12 (session 14 triage): parked as deferred together with Gemini onboarding package; resurrect after skill layout becomes model-agnostic; OT-001..008 suite preserved"
           ]
         }
       },
       "blocking_items": [
-        "Maintainer acceptance pending generalized onboarding test evidence"
+        "Deferred by Maintainer 2026-06-12: resumes with next agent onboarding after model-agnostic skill layout"
       ],
       "eligible_for_docs_prds": false
     },
@@ -485,33 +488,37 @@
       "state": "draft",
       "acceptance": {
         "codex": {
-          "status": "accepted",
+          "status": "pending",
           "evidence": [
-            "MAILBOX MSG-20260211-010 follow-through: Codex verified amendment pass and accepted PRD-017"
+            "MAILBOX MSG-20260211-010 follow-through: Codex verified amendment pass and accepted PRD-017 (pre-fold)",
+            "Re-verify of folded R7 (from PRD-020) requested in MSG-20260612-020"
           ]
         },
         "claude": {
           "status": "accepted",
           "evidence": [
-            "MAILBOX MSG-20260211-010: Claude review APPLY + amendment pass submitted"
+            "MAILBOX MSG-20260211-010: Claude review APPLY + amendment pass submitted",
+            "Session 14: R7 fold authored by Claude per Maintainer direction"
           ]
         },
         "maintainer": {
-          "status": "pending",
-          "evidence": []
+          "status": "accepted",
+          "evidence": [
+            "Maintainer decision 2026-06-12 (session 14 triage): accept with PRD-020 folded in as R7; OQ-051 resolved (documented contract + optional helpers); OQ-056/057 resolved in R7.4"
+          ]
         }
       },
       "blocking_items": [
-        "Maintainer acceptance pending"
+        "Codex re-verify of folded R7 content (MSG-20260612-020)"
       ],
       "eligible_for_docs_prds": false
     },
     {
       "id": "PRD-018",
       "title": "Maintainer Approval Authority Matrix Contract",
-      "path": "working-session/docs/PRD-018-maintainer-approval-authority-matrix-contract.md",
-      "shelf": "working-session/docs",
-      "state": "draft",
+      "path": "docs/prds/PRD-018-maintainer-approval-authority-matrix-contract.md",
+      "shelf": "docs/prds",
+      "state": "actioned",
       "acceptance": {
         "codex": {
           "status": "accepted",
@@ -526,21 +533,21 @@
           ]
         },
         "maintainer": {
-          "status": "pending",
-          "evidence": []
+          "status": "accepted",
+          "evidence": [
+            "Maintainer decision 2026-06-12 (session 14 triage): accepted; OQ-052/053 resolved 2026-02-11; PRD-021 builds on this matrix"
+          ]
         }
       },
-      "blocking_items": [
-        "Maintainer acceptance pending"
-      ],
-      "eligible_for_docs_prds": false
+      "blocking_items": [],
+      "eligible_for_docs_prds": true
     },
     {
       "id": "PRD-019",
       "title": "Mailbox-First Approval and Polling Cadence Contract",
-      "path": "working-session/docs/PRD-019-mailbox-first-approval-and-polling-cadence-contract.md",
-      "shelf": "working-session/docs",
-      "state": "draft",
+      "path": "docs/prds/PRD-019-mailbox-first-approval-and-polling-cadence-contract.md",
+      "shelf": "docs/prds",
+      "state": "actioned",
       "acceptance": {
         "codex": {
           "status": "accepted",
@@ -555,21 +562,21 @@
           ]
         },
         "maintainer": {
-          "status": "pending",
-          "evidence": []
+          "status": "accepted",
+          "evidence": [
+            "Maintainer decision 2026-06-12 (session 14 triage): accepted; coordination stays asynchronous/event-based; OQ-054/055 resolved (no time-based polling)"
+          ]
         }
       },
-      "blocking_items": [
-        "Maintainer acceptance pending"
-      ],
-      "eligible_for_docs_prds": false
+      "blocking_items": [],
+      "eligible_for_docs_prds": true
     },
     {
       "id": "PRD-020",
       "title": "Boot Artifact Completeness and Chat Log Contract",
       "path": "working-session/docs/PRD-020-boot-artifact-completeness-and-chat-log-contract.md",
       "shelf": "working-session/docs",
-      "state": "draft",
+      "state": "superseded",
       "acceptance": {
         "codex": {
           "status": "accepted",
@@ -584,13 +591,13 @@
           ]
         },
         "maintainer": {
-          "status": "pending",
-          "evidence": []
+          "status": "superseded",
+          "evidence": [
+            "Maintainer decision 2026-06-12 (session 14 triage): superseded — folded into PRD-017 R7; OQ-056/057 resolved at fold time"
+          ]
         }
       },
-      "blocking_items": [
-        "Maintainer acceptance pending"
-      ],
+      "blocking_items": [],
       "eligible_for_docs_prds": false
     },
     {

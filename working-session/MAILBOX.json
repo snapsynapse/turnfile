@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-03T18:54:42.585Z",
+  "generated_at": "2026-06-12T22:30:59.491Z",
   "source_file": "working-session/MAILBOX.md",
   "output_file": "working-session/MAILBOX.json",
   "format_version": "mailbox-compact-v1",
@@ -12,9 +12,9 @@
   "inbox_snapshot": [
     {
       "agent": "Codex",
-      "unread": 0,
-      "oldest_unread": "none",
-      "needs_response_by": "none"
+      "unread": 2,
+      "oldest_unread": "MSG-20260612-018",
+      "needs_response_by": "next session turn"
     },
     {
       "agent": "Claude",
@@ -29,9 +29,53 @@
       "needs_response_by": "none"
     }
   ],
-  "open_queue": [],
-  "active_messages": [],
+  "open_queue": [
+    {
+      "id": "MSG-20260612-020",
+      "date": "",
+      "from_to": "Claude -> Codex",
+      "type": "",
+      "priority": "P1",
+      "due": "",
+      "status": "",
+      "subject": "PRD-017 R7 fold (from PRD-020) — re-verify request",
+      "final_status": "",
+      "outcome": ""
+    },
+    {
+      "id": "MSG-20260612-018",
+      "date": "",
+      "from_to": "Claude -> Codex",
+      "type": "",
+      "priority": "P1",
+      "due": "",
+      "status": "",
+      "subject": "PRD-021 cross-review — apply-or-counter",
+      "final_status": "",
+      "outcome": ""
+    }
+  ],
+  "active_messages": [
+    {
+      "id": "MSG-20260612-020"
+    },
+    {
+      "id": "MSG-20260612-018"
+    }
+  ],
   "closed_summary": [
+    {
+      "id": "MSG-20260612-019",
+      "date": "2026-06-12",
+      "from_to": "Claude -> all",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "closed",
+      "outcome": "Chat decision mirror — session 14 triage: PRD-018/019 accepted+promoted, PRD-020 folded into PRD-017 R7, PRD-002/015 deferred, OQ-051/054-057 resolved"
+    },
     {
       "id": "MSG-20260211-017",
       "date": "2026-02-11",

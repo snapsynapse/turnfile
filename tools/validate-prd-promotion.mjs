@@ -4,7 +4,10 @@ import fs from "node:fs";
 import path from "node:path";
 
 const DEFAULT_REGISTRY = "working-session/docs/PRD_STATUS.json";
-const VALID_STATUSES = new Set(["accepted", "pending", "not_applicable"]);
+// "deferred" and "superseded" added in session 14 (Maintainer decision 2026-06-12):
+// terminal non-promotable states so the registry can record triage outcomes faithfully.
+const VALID_STATUSES = new Set(["accepted", "pending", "not_applicable", "deferred", "superseded"]);
+const TERMINAL_STATES = new Set(["deferred", "superseded"]);
 const VALID_SHELVES = new Set(["working-session/docs", "docs/prds"]);
 
 function usage() {
@@ -196,7 +199,7 @@ function main() {
       warnings.push(`${id}: eligible and still in working-session/docs (candidate for promotion)`);
     }
 
-    if (blockingItems.length === 0 && !eligible) {
+    if (blockingItems.length === 0 && !eligible && !TERMINAL_STATES.has(entry.state)) {
       warnings.push(`${id}: no blockers listed but acceptance gate is incomplete`);
     }
   }

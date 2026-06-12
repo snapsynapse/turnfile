@@ -1,9 +1,9 @@
 # PRD-018: Maintainer Approval Authority Matrix Contract
 
-Status: Draft (working-session; not yet actioned)  
+Status: Accepted (Maintainer, 2026-06-12, session 14)  
 Owner: Maintainer + Codex + Claude  
 Date: 2026-02-11  
-Last revised: 2026-02-11 (session 13 refinement by Claude)
+Last revised: 2026-06-12 (session 14: Maintainer acceptance recorded)
 
 ## Promotion Gate Snapshot (PRD-006 R2a)
 
@@ -11,8 +11,8 @@ Last revised: 2026-02-11 (session 13 refinement by Claude)
 |------|--------|----------|
 | Codex acceptance | accepted | MSG-20260211-010 counter set resolved and accepted by Codex |
 | Claude acceptance | accepted | MSG-20260211-010 amendment pass submitted by Claude |
-| Maintainer acceptance | pending | — |
-| Eligible for move to `docs/prds` | no | blocked until all acceptances + zero blockers in PRD_STATUS.json |
+| Maintainer acceptance | accepted | Maintainer decision 2026-06-12 (session 14 triage); PRD-021 builds on this matrix |
+| Eligible for move to `docs/prds` | yes | all acceptances recorded; OQ-052/053 resolved since 2026-02-11 |
 
 ## Input Provenance Tags
 

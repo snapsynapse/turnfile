@@ -1,18 +1,18 @@
 # PRD-017: Boot Sequence Commands and Documentation Contract
 
-Status: Draft (working-session; not yet actioned)  
+Status: Draft (working-session; Maintainer-accepted, pending Codex re-verify of folded R7)  
 Owner: Maintainer + Codex + Claude  
 Date: 2026-02-10
-Last revised: 2026-02-11
+Last revised: 2026-06-12 (session 14: PRD-020 folded in as R7; OQ-051 resolved)
 
 ## Promotion Gate Snapshot (PRD-006 R2a)
 
 | Gate | Status | Evidence |
 |------|--------|----------|
-| Codex acceptance | accepted | MSG-20260211-010 amendment pass verified and accepted by Codex |
-| Claude acceptance | accepted | MSG-20260211-010 review + amendment pass from Claude |
-| Maintainer acceptance | pending | — |
-| Eligible for move to `docs/prds` | no | blocked until all acceptances + zero blockers in PRD_STATUS.json |
+| Codex acceptance | accepted (pre-fold); re-verify of R7 fold pending | MSG-20260211-010 amendment pass verified and accepted by Codex; R7 fold re-verify requested in MSG-20260612-020 |
+| Claude acceptance | accepted | MSG-20260211-010 review + amendment pass from Claude; R7 fold authored by Claude session 14 |
+| Maintainer acceptance | accepted | Maintainer decision 2026-06-12 (session 14 triage): accept with PRD-020 folded in; OQ-051 resolved as documented contract + optional helpers |
+| Eligible for move to `docs/prds` | no | blocked on Codex re-verify of folded R7 content only |
 
 ## Alignment reference
 
@@ -146,13 +146,51 @@ Each required startup step must map to at least one skill module or explicit pro
 
 New agent vetting (PRD-015) must include one boot-sequence conformance scenario.
 
+*Session 14 note: PRD-015 is deferred (Maintainer decision 2026-06-12). This requirement activates when PRD-015 resumes; it is not a promotion blocker for PRD-017.*
+
+## R7. Boot artifact completeness and chat log contract (folded from PRD-020)
+
+*Folded from PRD-020 by Maintainer decision 2026-06-12 (session 14). PRD-020 is superseded by this section. Rationale: PRD-020's own scope-relationship note anticipated consolidation; artifact completeness is a boot concern and INTENT.md directs reducing protocol mass.*
+
+### R7.1 Mandatory artifact set
+
+Boot must ensure the booting agent's own chat file exists (create from `templates/working-session/chat-agent.md` if missing):
+
+1. `working-session/chat-<agent>.md` (own file only).
+2. Control-plane artifacts already required by R1-R2 (TURNFILE.yaml, MAILBOX.md, WORKLOG.md).
+
+Each agent creates its own chat file only. Peer chat files are validated as existing-or-absent; absence of a peer chat file is a logged warning, never a boot-blocking condition (the peer creates it on its own next boot — deadlock-free by construction).
+
+### R7.2 Unconditional per-agent instantiation
+
+Any agent-parameterized template in `templates/working-session/` (`chat-agent.md`, `boot-agent.md`, or similar) must be instantiated by each agent for itself during bootstrap. The primary fix is procedural (skill Module 0 includes explicit creation); the R7.3 boot gate is defense-in-depth.
+
+### R7.3 Boot gate
+
+After initialization, boot validates:
+
+1. Own-agent chat file exists — blocks if missing.
+2. Control-plane artifacts exist — blocks if missing.
+3. Peer chat file — warning only, non-blocking.
+
+### R7.4 Chat file template contract
+
+Per-agent chat files share a minimal template: title and purpose, session header block, state snapshot section. Session headers include fixed metadata fields for machine parsing: branch, Turnfile revision, phase, session ID, date (OQ-056 resolution). Session subsection structure remains manual; boot does not auto-create timestamped subsections (OQ-057 resolution).
+
+### R7.5 Ownership
+
+Each agent owns edits to its own chat file. Maintainer and peer agents retain read access. Decision authority remains in mailbox/WORKLOG; chat files are scratchpads and snapshots, not decision records.
+
 ## Acceptance criteria
 
 1. A canonical boot command manifest exists and is referenced by both active agent workflows.
 2. A startup run can be executed end-to-end with deterministic results from a clean checkout.
 3. Validation failures produce explicit, documented escalation behavior.
 4. Active startup docs no longer mix authoritative active paths with historical paths without labels.
-5. At least one onboarding scenario verifies boot-sequence conformance for a candidate agent.
+5. At least one onboarding scenario verifies boot-sequence conformance for a candidate agent. *(Deferred with PRD-015; not a promotion blocker.)*
+6. Clean-start boot creates the booting agent's own chat file when absent (R7).
+7. Boot validation fails when required control-plane artifacts are missing; missing peer chat file warns without blocking (R7.3).
+8. At least one test scenario covers missing peer chat file recovery (R7).
 
 ## Risks
 
@@ -194,4 +232,6 @@ New agent vetting (PRD-015) must include one boot-sequence conformance scenario.
 
 | OQ | Question | Resolution | Applied to |
 |----|----------|------------|------------|
-| OQ-051 | Should boot sequence be codified as a single script or remain a documented command contract with optional helper scripts? | pending | R1, R5 |
+| OQ-051 | Should boot sequence be codified as a single script or remain a documented command contract with optional helper scripts? | **resolved** | R1, R5 — Documented command contract with optional helper scripts. No mandatory boot script; helpers must stay optional and hand-runnable. (Maintainer, 2026-06-12.) |
+| OQ-056 | Should chat logs include fixed metadata fields (branch, rev, phase) for machine parsing? | **resolved** | R7.4 — Yes: branch, Turnfile revision, phase, session ID, date in session headers. (Maintainer, 2026-06-12.) |
+| OQ-057 | Should boot create timestamped session subsections automatically or leave structure manual? | **resolved** | R7.4 — Manual structure. (Maintainer, 2026-06-12.) |

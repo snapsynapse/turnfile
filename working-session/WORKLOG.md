@@ -3,10 +3,10 @@
 References:
 - `/Users/snap/Git/turnfile/docs/PROTOCOL_CORE.md`
 
-Now Working (Codex): Idle. Session 12 complete.
-Now Working (Claude): Idle. Session 13 closed.
-Maintainer Focus: Review PRD-017/018/019/020 for acceptance. Review Gemini onboarding package for Band C governance approval. PRD-015 gate requires onboarding validation evidence. working-session/ now tracked (removed from .gitignore).
-Next Review Checkpoint: Next session startup — Claude session 14.
+Now Working (Codex): On line for session 14. Pending claim: s14-prd-021-cross-review (MSG-20260612-018).
+Now Working (Claude): Session 14 active (Fable 5). Task: s14-state-reconciliation, then s14-backlog-triage.
+Maintainer Focus: Session 14 backlog triage decisions — complete or supersede PRD-002/015/017-020 drafts, Gemini onboarding package, OQ-051/054-057. Ratify new baseline statement.
+Next Review Checkpoint: In-session — backlog triage decision pass with Maintainer.
 
 ## Decision Index
 
@@ -85,3 +85,58 @@ Blocking items:
   - PRD-015 gate requires onboarding validation evidence.
 Next owner: Maintainer.
 ```
+
+## Session 14 — 2026-06-12 (Claude on Fable 5 + Codex + Maintainer)
+
+### Claude: session open + state-drift reconciliation (s14-state-reconciliation)
+
+2026-06-12 — Session 14 opened at revision 31 on branch `prd-021-conflict-loop-gradient`. Claude-side agent now runs on Fable 5 (claude-fable-5), a model generation swap from Opus 4.6 with zero protocol migration — recorded as portability evidence for the core Turnfile claim.
+
+**Drift reconciliation (honest record, not retcon).** Between session 13 close (2026-02-11, rev 30) and session 14 open (2026-06-12, rev 31), the following work happened outside the coordination protocol, by the Maintainer directly:
+
+1. 2026-04-03/06 — Ownership transferred to PAICE.work PBC; sponsorship added; `feature/skills` merged to `main` (sessions 12-13 work landed).
+2. 2026-04-09 — Landing page (docs/index.html), CNAME, mobile nav fix.
+3. 2026-04-21 — gitignore + robots updates.
+4. 2026-05-03 — Validation evals + tightened protocol checks.
+5. 2026-05-28 — Distribution Engine README schema.
+6. 2026-05-31 — **Scope reset**: INTENT.md v0.1.0 (narrowed positioning: thin governance layer for auditable peer disagreement), SPEC.md v0.1.0-reset, DEFINITIONS.md, ROADMAP.md, SECURITY.md. INTENT supersedes VISION for forward direction.
+7. 2026-06-01 — PRD-021 drafted (labeled "session 14 draft" but no session 14 was opened in coordination state at that time). OQ-058..061 resolved by Maintainer and recorded in OPEN_QUESTIONS.md.
+8. 2026-06-03 — Scope updates commit (b128cf6).
+
+Maintainer out-of-band work is legitimate under HUMAN_GOVERNANCE (Maintainer holds authority), but the coordination record did not capture it until now. Lesson candidate for retrospective: long maintainer-only gaps need a lightweight "maintainer changelog into WORKLOG" habit, or drift accumulates against the protocol's own auditability claim.
+
+**Session 14 goals (Maintainer-set):**
+1. New baseline of what Turnfile is and how it works as a project (post-scope-reset).
+2. Clear previous backlog: each open item completed or superseded, with explicit recorded status.
+3. PRD-021 cross-review by Codex (current branch deliverable).
+
+Tasks registered at rev 31: s14-state-reconciliation (claude, in_progress), s14-backlog-triage (claude, pending), s14-prd-021-cross-review (codex, pending), s14-baseline-statement (claude, pending).
+
+## Decision Index — Session 14
+
+| Decision | Owner | Timestamp | Section |
+|----------|-------|-----------|---------|
+| Session 14 scope: decisions + records only; implementation (starter workflow, skill-layout migration) registered as follow-on tasks. | Maintainer | 2026-06-12 | Session 14 open |
+
+### Claude: backlog triage executed (s14-backlog-triage) — rev 32
+
+2026-06-12 — Maintainer triage decisions applied (mirrored in MSG-20260612-019):
+
+1. **PRD-018 accepted + promoted** to `docs/prds/`. All gates pass. Unblocks PRD-021.
+2. **PRD-019 accepted + promoted** to `docs/prds/`. R3 amended: no time-based polling; coordination is asynchronous/event-based only (OQ-054/055 resolved).
+3. **PRD-020 folded into PRD-017 as R7**; PRD-020 superseded (tombstone retained). OQ-056 (yes fixed metadata fields) and OQ-057 (manual structure) resolved in R7.4.
+4. **PRD-017 Maintainer-accepted** with fold; OQ-051 resolved (documented command contract + optional helpers). Promotion held on Codex re-verify of folded R7 (MSG-20260612-020) since Codex's Feb acceptance predates the fold.
+5. **PRD-002 deferred** (built-tool PRD predates thin-governance scope; revisit after starter workflow).
+6. **PRD-015 + Gemini onboarding parked** (deferred; resurrect after model-agnostic skill layout; OT-001..008 preserved).
+7. **Tooling:** `validate-prd-promotion.mjs` extended with `deferred`/`superseded` terminal statuses (Band B, Maintainer present/approving) — registry could not previously record triage outcomes without misstating them (drift elimination per Maintainer standing guidance).
+
+OPEN_QUESTIONS.md: zero active questions remain (OQ-051 through OQ-061 all resolved). Promotion validator passes across all 21 registry entries.
+
+| Decision | Owner | Timestamp | Section |
+|----------|-------|-----------|---------|
+| PRD-018 accepted and promoted to docs/prds. | Maintainer | 2026-06-12 | MSG-20260612-019 item 1 |
+| PRD-019 accepted and promoted; no time-based polling, event-based only (OQ-054/055). | Maintainer | 2026-06-12 | MSG-20260612-019 item 2 |
+| PRD-020 folded into PRD-017 R7 and superseded; OQ-051/056/057 resolved; PRD-017 accepted pending Codex fold re-verify. | Maintainer | 2026-06-12 | MSG-20260612-019 item 3 |
+| PRD-002 kept as deferred draft. | Maintainer | 2026-06-12 | MSG-20260612-019 item 4 |
+| PRD-015 + Gemini onboarding parked as deferred. | Maintainer | 2026-06-12 | MSG-20260612-019 item 5 |
+| Standing guidance: examine and eliminate drift opportunities; promotion validator extended with terminal statuses. | Maintainer | 2026-06-12 | MSG-20260612-019 item 6 |

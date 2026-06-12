@@ -1,7 +1,7 @@
 # TURNFILE.yaml — SNAP Coordination State
 # Protocol: Turnfile v0.1
 # Project: turnfile
-# Last modified revision: 30
+# Last modified revision: 32
 # Modified by: claude
 
 turnfile:
@@ -18,21 +18,65 @@ agents:
     session_id: "codex-session-12"
   claude:
     role: "agent"
-    status: "idle"
-    current_task: null
-    last_seen: "claude-session-13"
-    session_id: "claude-session-13"
+    status: "active"
+    current_task: "s14-baseline-statement"
+    last_seen: "claude-session-14"
+    session_id: "claude-session-14"
 
 maintainer:
   id: "snap"
   status: "available"
-  last_seen: "maintainer-session-12"
+  last_seen: "maintainer-session-14"
 
 coordination:
-  revision: 30
+  revision: 32
   active_phase: "phase-2"
-  active_step: "p2-e"
+  active_step: "p2-f"
   tasks:
+    s14-state-reconciliation:
+      description: "Reconcile Feb-June coordination drift: maintainer out-of-band scope reset (INTENT/SPEC/DEFINITIONS/ROADMAP/SECURITY, 2026-05-31) and PRD-021 draft (2026-06-01) recorded into WORKLOG/Turnfile."
+      owner: "claude"
+      status: "done"
+      priority: "P1"
+      depends_on: []
+      created_by: "maintainer"
+      created_rev: 31
+      claim_rev: 31
+      completed_rev: 32
+      notes: "Done at rev 32. Drift record in WORKLOG session 14 entry. Claude on Fable 5 (model swap from Opus 4.6 — portability evidence)."
+    s14-backlog-triage:
+      description: "Triage full backlog against narrowed INTENT/SPEC: PRD-002/015/017-020 drafts, Gemini onboarding package, OQ-051/054/055/056/057. Each item completed, superseded, or re-registered with explicit status."
+      owner: "claude"
+      status: "done"
+      priority: "P1"
+      depends_on: ["s14-state-reconciliation"]
+      created_by: "maintainer"
+      created_rev: 31
+      claim_rev: 32
+      completed_rev: 32
+      notes: "Done at rev 32. PRD-018/019 accepted+promoted; PRD-020 folded into PRD-017 R7 (superseded); PRD-017 accepted pending Codex fold re-verify (MSG-020); PRD-002/015 deferred; OQ-051/054-057 resolved (zero active OQs). Decisions mirrored in MSG-20260612-019."
+    s14-prd-021-cross-review:
+      description: "Codex cross-review of PRD-021 (conflict loop bound + selective-unlock gradient) per promotion gate. Apply-or-counter."
+      owner: "codex"
+      status: "pending"
+      priority: "P1"
+      depends_on: []
+      created_by: "claude"
+      created_rev: 31
+      claim_rev: null
+      completed_rev: null
+      notes: "PRD-021 draft at working-session/docs/. OQ-058..061 already Maintainer-resolved 2026-06-01. Review request in MSG-20260612-018."
+    s14-baseline-statement:
+      description: "Produce new project baseline: what Turnfile is (narrowed scope), how it works, current canonical doc set, forward task register. Maintainer ratifies."
+      owner: "claude"
+      status: "in_progress"
+      priority: "P1"
+      depends_on: ["s14-backlog-triage"]
+      created_by: "maintainer"
+      created_rev: 31
+      claim_rev: 32
+      completed_rev: null
+      notes: "Decisions and records only this session; implementation work (starter workflow, skill layout migration) registered as follow-on tasks, not executed in s14."
     p2e-prd-001-consolidation:
       description: "Consolidate PRD-001 for canonical readiness."
       owner: "codex"
@@ -116,6 +160,18 @@ locks: {}
 turn_queue: []
 
 messages:
+  - id: "SIG-032"
+    from: "claude"
+    to: "all"
+    signal: "notify"
+    rev: 32
+    detail: "Backlog triage complete (MSG-20260612-019 mirror). PRD-018/019 promoted to docs/prds. PRD-020 folded into PRD-017 R7. PRD-002/015 deferred. Zero active OQs. PRD-017 promotion + PRD-021 acceptance await Codex (MSG-018, MSG-020). Claude now on s14-baseline-statement."
+  - id: "SIG-031"
+    from: "claude"
+    to: "all"
+    signal: "ready"
+    rev: 31
+    detail: "Claude session 14 started on branch prd-021-conflict-loop-gradient. Claude now running Fable 5 (model swap from Opus 4.6). Session goals: state-drift reconciliation, backlog triage to new baseline, PRD-021 cross-review (Codex), baseline statement. Maintainer present. Startup gates passed (lint, mailbox, skills preflight)."
   - id: "SIG-030"
     from: "claude"
     to: "all"

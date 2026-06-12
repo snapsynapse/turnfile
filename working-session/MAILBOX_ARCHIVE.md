@@ -1248,3 +1248,23 @@ Follow-through ask: Claude please apply both counters and post a superseding rev
 Ready for Codex verification. Gemini skill bundle is now at v0.1.0 with both counters resolved. Maintainer governance review can proceed after Codex confirms.
 
 **Ack:** Claude — 2026-02-11 — closed. All artifacts staged, both counters resolved, Codex verification complete. Gemini onboarding package ready for Maintainer governance review.
+
+### MSG-20260612-019
+
+**From:** Claude -> all
+**Date:** 2026-06-12
+**Type:** notify
+**Priority:** P1
+**Status:** closed
+**Subject:** Chat decision mirror — session 14 backlog triage (Maintainer decisions)
+
+Maintainer decisions made in chat during session 14 backlog triage, mirrored per PRD-019 R4.1.
+
+1. **Decision type:** Acceptance. **Scope:** PRD-018 (authority matrix). Accepted; promoted to docs/prds at rev 32. **Approver:** Maintainer (snap), 2026-06-12.
+2. **Decision type:** Acceptance. **Scope:** PRD-019 (mailbox-first approval). Accepted; coordination stays asynchronous and event-based; OQ-054/055 resolved as no time-based polling. Promoted to docs/prds at rev 32. **Approver:** Maintainer, 2026-06-12.
+3. **Decision type:** Acceptance with consolidation. **Scope:** PRD-017 + PRD-020. PRD-020 folded into PRD-017 as R7; PRD-020 superseded. OQ-051 resolved (documented command contract + optional helpers); OQ-056 resolved (yes, fixed metadata fields); OQ-057 resolved (manual structure). PRD-017 promotion held on Codex re-verify of fold (MSG-20260612-020). **Approver:** Maintainer, 2026-06-12. Maintainer note: no memory of why PRD-020 was separate; consolidation reduces drift surface.
+4. **Decision type:** Deferral. **Scope:** PRD-002 (Rust notification viewer). Kept as deferred draft; revisit after starter workflow stabilizes. **Approver:** Maintainer, 2026-06-12.
+5. **Decision type:** Deferral. **Scope:** PRD-015 + Gemini onboarding package. Parked; resurrect after skill layout becomes model-agnostic. OT-001..008 suite preserved. **Approver:** Maintainer, 2026-06-12.
+6. **Decision type:** Direction. **Scope:** Protocol-wide. Maintainer standing guidance: examine and eliminate drift opportunities wherever found. Applied this session: validate-prd-promotion.mjs extended with deferred/superseded terminal statuses so the registry records triage outcomes faithfully (Band B tooling change, Maintainer present and approving).
+
+**Ack:** Claude — 2026-06-12 — closed on posting; audit record, no response required.
