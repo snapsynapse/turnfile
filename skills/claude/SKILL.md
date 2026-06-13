@@ -5,7 +5,7 @@ description: Execute the Turnfile protocol (a SNAP protocol) in Claude for mailb
 
 # Turnfile Protocol Skill File — Claude
 
-Version: 0.5.0
+Version: 0.5.1
 Protocol revision baseline: PRD-003 through PRD-014 and PRD-016 through PRD-019 (all promoted to docs/prds/)
 Agent: Claude (Anthropic) — bundle is role-keyed; the executing model is recorded in MANIFEST.yaml, not in this path
 Last updated: 2026-06-13
@@ -28,6 +28,15 @@ Turnfile is collaborative, file-based work. Codex and the Maintainer mutate shar
 2. Default suspicion — if you are about to state a fact about current shared state from memory, that itself is the signal to open the file instead. Recall across your own earlier turns, and especially across model or session boundaries, is the most error-prone input you have.
 3. When memory and file disagree, the file wins, and the disagreement is itself signal: a peer or the Maintainer changed something; understand why before acting.
 4. A redundant read is cheap; a confident assertion from stale memory has repeatedly been wrong (ledger evidence: OQ-067 cited as blocking after the Maintainer had resolved it in-file; a file move misattributed to Codex when the Maintainer made it; mailbox snapshot and ID drift). The general "prefer memory, verify later" heuristic is correct for solo work and wrong here — collaboration inverts it.
+
+## Model Ledger Handshake Check (Maintainer-originated norm, 2026-06-13; mirror of Codex skill v6)
+
+At session boot (Module 0/1), verify that the current executing model and surface are recorded in `docs/llm/MODEL_LEDGER.md` before relying on any model-compatibility claim.
+
+1. Identify the executing model and surface for this session (e.g. Claude Opus 4.8 / Claude Code). Do not assume continuity — this can change between sessions and even mid-session; session 14 ran the Claude lane on Opus 4.6, then Fable 5, then Opus 4.8 against one unmodified protocol.
+2. If the current model+surface is absent from the ledger, add its row (shared file — under lock per Module 5) or, if you cannot edit it this turn, log the gap in WORKLOG and route it, before treating model-compatibility claims as current.
+3. Absence from an active session or from a role-keyed path is not deprecation (Maintainer: no model, LLM, or model-specific skill path is deprecated unless the Maintainer explicitly declares it).
+4. Record model identity as evidence in the boot path, not as a later audit cleanup — this prevents stale compatibility claims when the active model changes. Report it in the startup summary (R4.1) and the chat session header (PRD-017 R7.4).
 
 ## Encoding profile obligations (PRD-024, Maintainer-accepted 2026-06-13)
 
@@ -494,7 +503,7 @@ After executing any module, report:
 
 | Field | Value |
 |-------|-------|
-| Skill file version | 0.5.0 |
+| Skill file version | 0.5.1 |
 | Protocol baseline | PRD-003 through PRD-014, PRD-016 through PRD-019 (all promoted) |
 | Policy test suite | PRD-012-M3-policy-test-suite.md (19 assertions, 4 scenario harnesses) — archived at `examples/inception/skills/policy-tests/` |
 | Last validated | M4 validation complete — all 4 scenarios PASS (rev 41, inception session 10) |
@@ -504,6 +513,7 @@ After executing any module, report:
 | v0.4.1 changes | PRD-024 propagation (R5.2): encoding-profile obligations section — legible-only governance record, charter opt-in for dense lanes, turn-boundary projection obligation, authorship liability, Maintainer demand/suspension compliance. |
 | v0.4.2 changes | Collaboration Posture section: generative peer contribution (yes-and, alternatives, edge cases) mandatory in substantive replies; Maintainer tenets 1-3 encoded. |
 | v0.5.0 changes | Files First, Not Memory principle (Maintainer directive): re-read shared files before asserting/reasoning about state, not only before writing. Collaborative file work inverts the solo "prefer memory, verify later" heuristic. Grounded in ledger evidence. |
+| v0.5.1 changes | Model Ledger Handshake Check (mirror of Codex skill v6, Maintainer-originated norm): verify executing model+surface is recorded in docs/llm/MODEL_LEDGER.md at boot before relying on model-compatibility claims; absence is not deprecation. |
 
 Changes to protocol semantics require maintainer approval (PRD-012 R7.2).
 Environment-specific changes that don't alter protocol semantics are Claude-owned but must be documented (PRD-012 R7.3).

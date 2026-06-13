@@ -1,5 +1,5 @@
 bundle: turnfile-protocol-claude
-bundle_version: 7
+bundle_version: 8
 bundle_date: 2026-06-13
 description: >
   Claude's protocol execution guide for the Turnfile protocol (a SNAP protocol).
@@ -30,6 +30,16 @@ compatibility:
         (boot, drift reconciliation, backlog triage, cross-review closure,
         PRD promotion, concurrent-edit recovery) before this v4 upgrade —
         model-generation portability evidence.
+    - platform: Anthropic Claude
+      model: Claude Opus 4.8
+      surface: Code
+      status: pass
+      date: 2026-06-13
+      notes: >
+        Session 14 continued on Opus 4.8 (third Claude model this session, after
+        Opus 4.6 and Fable 5) against the same role-keyed bundle: PRD-028
+        implementation, PRD-014 amendment draft, skill v0.5.x. Files-First and
+        Model-Ledger-Handshake norms added this run.
   spec_version: agentskills.io/1.0
   frontmatter_mode: minimal
     # minimal = name + description only (max portability)
@@ -43,8 +53,8 @@ provenance:
 files:
   - path: SKILL.md
     role: skill
-    version: 7
-    hash: sha256:baec74b7fce42981b3c1f5199213f0d396f890fe95888c419745aed2e4e832e5
+    version: 8
+    hash: sha256:5e7cc425d5fcb08b48065869d16e17976846c6c576febebf77d9f62a143b756c
     note: >
       Claude protocol execution guide v0.4.0. 9 modules (M0-M8). Baseline
       PRD-003..014 + PRD-016..019. Adds PRD-017 R7 chat-file rules, PRD-019
@@ -52,8 +62,8 @@ files:
 
   - path: CHANGELOG.md
     role: reference
-    version: 7
-    hash: sha256:c12befe0ead11262cbd1a36c5f05282a91893588fb4123a4ff1ba657aabfbe0b
+    version: 8
+    hash: sha256:c6e0b727637823052ed077af3e454548166a797542427bfcb764e6492fbf3794
     note: Bundle change history.
 
   - path: MANIFEST.yaml

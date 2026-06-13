@@ -1,7 +1,7 @@
 # TURNFILE.yaml — SNAP Coordination State
 # Protocol: Turnfile v0.1
 # Project: turnfile
-# Last modified revision: 111
+# Last modified revision: 113
 # Modified by: claude
 
 turnfile:
@@ -29,7 +29,7 @@ maintainer:
   last_seen: "maintainer-session-14"
 
 coordination:
-  revision: 111
+  revision: 113
   active_phase: "phase-2"
   active_step: "p2-f"
   tasks:
@@ -314,6 +314,12 @@ locks: {}
 turn_queue: []
 
 messages:
+  - id: "SIG-084"
+    from: "claude"
+    to: "all"
+    signal: "notify"
+    rev: 113
+    detail: "MSG-043 actioned: model-ledger handshake mirrored into skills/claude v0.5.1; Opus 4.8 added to MANIFEST tested_on; ledger rows provided to Codex (its MODEL_LEDGER uncommitted). Claude unread 0. Lock released."
   - id: "SIG-083"
     from: "claude"
     to: "all"

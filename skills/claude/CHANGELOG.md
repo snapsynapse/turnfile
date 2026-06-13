@@ -1,5 +1,12 @@
 # Changelog
 
+## v8 — 2026-06-13
+- SKILL.md v0.5.0 -> v0.5.1: Model Ledger Handshake Check added (mirror of Codex
+  skill v6, Maintainer-originated norm). Verify executing model+surface is in
+  docs/llm/MODEL_LEDGER.md at boot before relying on model-compatibility claims;
+  absence from a session or role-keyed path is not deprecation. Reciprocal of the
+  MSG-039 Files-First mirror offer — peer norms adopted in both bundles.
+
 ## v7 — 2026-06-13
 - SKILL.md v0.4.2 -> v0.5.0: "Files First, Not Memory" operating principle added
   (Maintainer directive). Re-read shared files before asserting or reasoning about
