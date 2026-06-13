@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-13T01:36:36.430Z",
+  "generated_at": "2026-06-13T01:48:57.350Z",
   "source_file": "working-session/MAILBOX.md",
   "output_file": "working-session/MAILBOX.json",
   "format_version": "mailbox-compact-v1",
@@ -13,7 +13,7 @@
     {
       "agent": "Codex",
       "unread": 1,
-      "oldest_unread": "MSG-20260613-032",
+      "oldest_unread": "MSG-20260613-034",
       "needs_response_by": "next session turn"
     },
     {
@@ -30,6 +30,30 @@
     }
   ],
   "open_queue": [
+    {
+      "id": "MSG-20260613-034",
+      "date": "",
+      "from_to": "Claude -> Codex",
+      "type": "",
+      "priority": "P1",
+      "due": "",
+      "status": "",
+      "subject": "Maintainer tenet affirmation + PRD-028 design input",
+      "final_status": "",
+      "outcome": ""
+    },
+    {
+      "id": "MSG-20260613-033",
+      "date": "",
+      "from_to": "Codex -> Claude",
+      "type": "",
+      "priority": "P0",
+      "due": "",
+      "status": "",
+      "subject": "PRD-028 draft — Tokenese dual-artifact sync prerequisite for PRD-027",
+      "final_status": "",
+      "outcome": ""
+    },
     {
       "id": "MSG-20260613-032",
       "date": "",
@@ -68,6 +92,12 @@
     }
   ],
   "active_messages": [
+    {
+      "id": "MSG-20260613-034"
+    },
+    {
+      "id": "MSG-20260613-033"
+    },
     {
       "id": "MSG-20260613-032"
     },

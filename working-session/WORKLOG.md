@@ -3,15 +3,17 @@
 References:
 - `/Users/snap/Git/turnfile/docs/PROTOCOL_CORE.md`
 
-Now Working (Codex): Session 14 active. MSG-20260613-031 actioned; PRD-022/023/026 promotion mirror acknowledged; Codex unread 0.
-Now Working (Claude): Session 14 active (Fable 5). PRD-022/023/026 promotions posted; Claude unread 0.
+Now Working (Codex): Session 14 active. PRD-028 drafted and routed to Claude; Codex retains claimed implementation for PRD-021/022/024 and eval authoring for PRD-023/026. Codex unread 0.
+Now Working (Claude): Session 14 active (Fable 5). PRD-006 A1 proposer/reviewer for PRD-021/022/024 implementation lane; Claude unread 0.
 Maintainer Focus: PRD-027 is held until every other PRD item is complete, then commit, push, and Maintainer checkpoint discussion happen before PRD-027 initiation.
-Next Review Checkpoint: Complete the pre-PRD-027 register: PRD-021 R5 propagation/worked examples, PRD-014 amendment, PRD-022 R5 propagation, PRD-023 R6 propagation, PRD-026 R4 validator, PRD-024 R5.1 validator, then commit/push/checkpoint.
+Next Review Checkpoint: Claude reviews PRD-028 apply-or-counter; Codex then resumes PRD-021/022/024 implementation and PRD-023/026 eval authoring through the A1 loop.
 
 ## Decision Index
 
 | Decision | Owner | Timestamp | Section |
 |----------|-------|-----------|---------|
+| Maintainer requested PRD-028 for Tokenese dual English/Tokenese artifacts, sync, peer-only authority, own-file boundaries, and Maintainer legibility; Codex drafted and routed it as a prerequisite to PRD-027 initiation. | Maintainer + Codex | 2026-06-13 | PRD-028 draft + MSG-20260613-033 |
+| Codex accepted PRD-006 A1 eight-step implementation loop and claimed PRD-021/022/024 implementation plus PRD-023/026 eval-author lanes. | Codex + Claude | 2026-06-13 | MSG-20260613-032 |
 | Maintainer approved PRD-022, PRD-023, and PRD-026; Claude promoted them to `docs/prds/`; Codex acknowledged the delivery mirror. | Maintainer + Claude + Codex | 2026-06-13 | MSG-20260613-031 |
 | Maintainer held PRD-027 until every other PRD item is complete, with commit, push, and checkpoint discussion required before initiation. | Maintainer | 2026-06-13 | PRD-027 hold gate |
 | Codex acknowledged PRD-024 delivery mirror and propagated PRD-024 R5.2 encoding-profile obligations into `skills/codex/` v3. | Codex | 2026-06-13 | MSG-20260613-030 |
@@ -444,3 +446,21 @@ Installed:
 |----------|-------|-----------|---------|
 | Eight-step PRD lifecycle stated and installation approved; acceptance ≠ done; proposer evals + counterpart implementation mandatory. | Maintainer | 2026-06-13 | PRD-006 A1 / MSG-032 |
 | Session-14 promoted PRDs retrofitted into implementation tracking; PRD-027 held until all lanes reach done. | Maintainer | 2026-06-13 | Registry restructure |
+
+### Claude: Maintainer tenets affirmed + PRD-028 design input routed — rev 78
+
+2026-06-13 — Maintainer affirmed three core tenets (verbatim in MSG-20260613-033, delivery-mirror): (1) peers request/propose, never direct — no subagent relationships; (2) own-files-only write boundaries between agents; (3) every decision legible and traceable to the Maintainer, whose involvement level is session-affirmable. Maintainer further directed: English AND Tokenese versions of all Turnfile artifacts going forward, kept in sync, human-legible, architecture built through the protocol. Codex is proposer on PRD-028 (dual-corpus sync architecture); Claude routed eight design inputs as consideration-requests per standard process (MAILBOX.json lineage, author-writes-twin rule, English-authoritative inheritance, hash-paired sync tiers, PRD-024 R2 amendment hook, proposer evals, pilot-informed two-phase calibration, sidecar naming). Claude self-noted tenet-1 phrasing discipline for prior handoff language.
+
+| Decision | Owner | Timestamp | Section |
+|----------|-------|-----------|---------|
+| Core tenets 1-3 affirmed (peer non-direction; own-file boundaries; Maintainer legibility/traceability). | Maintainer | 2026-06-13 | MSG-033 item 1 |
+| Dual English+Tokenese corpus for all artifacts going forward, in sync, built through protocol; PRD-028 lane with Codex as proposer. | Maintainer | 2026-06-13 | MSG-033 item 1 |
+
+### Claude: PRD-028 cross-review — APPLY with 3 counters — rev 81
+
+2026-06-13 — Codex drafted PRD-028 (dual-artifact sync, prerequisite gate for PRD-027) independently converging with Claude's crossed-in-flight design input (MSG-034). Claude review (MSG-033 reply): APPLY with 3 counters — (P1) OQ-067 proposed scope (Tokenese-active only) contradicts Maintainer's verbatim "all Turnfile artifacts going forward"; routed to Maintainer, not agent-resolvable; (P2) PRD-024 R2 profile-table amendment hook missing (twins are a new artifact class, Band C); (P2) shared-artifact twin-update obligation unspecified (proposed R5.6: mutating agent owes twin update or english-ahead declaration in the same lock window). Standalone PRD confirmed over PRD-027 amendment. Ledger item 5: MSG ID collision (033) from out-of-lock ID allocation by Claude; caught by validator, renumbered to 034 per PRD-010 R4.5 — same lesson class as ledger 3, now twice; eval-encoding obligation noted for the PRD-026 lane.
+
+| Decision | Owner | Timestamp | Section |
+|----------|-------|-----------|---------|
+| PRD-028 standalone (not PRD-027 amendment); Claude accepted-with-amendment. | Codex + Claude | 2026-06-13 | MSG-033 review |
+| OQ-067 scope (all artifacts vs Tokenese-active subset) escalated to Maintainer. | Claude (escalation) | 2026-06-13 | MSG-033 counter 1 |

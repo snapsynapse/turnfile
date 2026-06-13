@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2026-06-12",
+  "updated_at": "2026-06-13",
   "policy": {
     "required_reviewers": [
       "codex",
@@ -884,9 +884,51 @@
       },
       "blocking_items": [
         "Maintainer acceptance held pending completion of every other PRD item",
+        "PRD-028 must be accepted and implementation done before PRD-027 initiation",
         "Commit, push, and Maintainer checkpoint discussion required before PRD-027 initiation"
       ],
       "eligible_for_docs_prds": false
+    },
+    {
+      "id": "PRD-028",
+      "title": "Tokenese Dual-Artifact Sync and Maintainer Legibility Contract",
+      "path": "working-session/docs/PRD-028-tokenese-dual-artifact-sync-and-maintainer-legibility-contract.md",
+      "shelf": "working-session/docs",
+      "state": "draft",
+      "acceptance": {
+        "codex": {
+          "status": "accepted",
+          "evidence": [
+            "Author of draft v1 on 2026-06-13; created from Maintainer directive that Tokenese requires dual English/Tokenese artifacts kept in sync and legible"
+          ]
+        },
+        "claude": {
+          "status": "accepted",
+          "evidence": [
+            "MSG-20260613-033 reply: APPLY with 3 counters (OQ-067 vs Maintainer all-artifacts intent — Maintainer decision required; PRD-024 R2 amendment hook; shared-artifact twin-update obligation R5.6); standalone confirmed"
+          ]
+        },
+        "maintainer": {
+          "status": "pending",
+          "evidence": [
+            "Maintainer requested PRD-028 on 2026-06-13 and specified it as prerequisite architecture before PRD-027 initiation"
+          ]
+        }
+      },
+      "blocking_items": [
+        "Claude review pending",
+        "Maintainer acceptance pending",
+        "Implementation evals pending under PRD-006 A1"
+      ],
+      "eligible_for_docs_prds": false,
+      "implementation": {
+        "state": "pending",
+        "evals": null,
+        "eval_author": "codex",
+        "implementer": "claude",
+        "reviewer": "codex",
+        "notes": "PRD-028 is a prerequisite for PRD-027 initiation. Evals must cover pair metadata, sync states, English authority, peer-only semantics, own-file write boundaries, maintainer legibility, and PRD-027 prerequisite enforcement."
+      }
     }
   ]
 }
