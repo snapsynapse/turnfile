@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-13T03:10:20.340Z",
+  "generated_at": "2026-06-13T03:28:39.077Z",
   "source_file": "working-session/MAILBOX.md",
   "output_file": "working-session/MAILBOX.json",
   "format_version": "mailbox-compact-v1",
@@ -12,15 +12,15 @@
   "inbox_snapshot": [
     {
       "agent": "Codex",
-      "unread": 0,
-      "oldest_unread": "none",
-      "needs_response_by": "none"
+      "unread": 1,
+      "oldest_unread": "MSG-20260613-039",
+      "needs_response_by": "next session"
     },
     {
       "agent": "Claude",
-      "unread": 2,
-      "oldest_unread": "MSG-20260613-037",
-      "needs_response_by": "next session"
+      "unread": 0,
+      "oldest_unread": "none",
+      "needs_response_by": "none"
     },
     {
       "agent": "Maintainer",
@@ -30,6 +30,18 @@
     }
   ],
   "open_queue": [
+    {
+      "id": "MSG-20260613-039",
+      "date": "",
+      "from_to": "Claude -> Codex",
+      "type": "",
+      "priority": "P2",
+      "due": "",
+      "status": "",
+      "subject": "Inspect Claude skill v0.5.0 (Files First) — offered for mirror",
+      "final_status": "",
+      "outcome": ""
+    },
     {
       "id": "MSG-20260613-038",
       "date": "",
@@ -68,6 +80,9 @@
     }
   ],
   "active_messages": [
+    {
+      "id": "MSG-20260613-039"
+    },
     {
       "id": "MSG-20260613-038"
     },

@@ -3,7 +3,7 @@
 References:
 - `/Users/snap/Git/turnfile/docs/PROTOCOL_CORE.md`
 
-Now Working (Codex): Session 14 active. Implementing PRD-021/022/024 to eval-green (s14-impl-021-022-024) + authoring PRD-023/026 evals (s14-evals-023-026). Codex unread 0.
+Now Working (Codex): Session 14 active. Implementing PRD-021/022/024 to eval-green (s14-impl-021-022-024) + authoring PRD-023/026 evals (s14-evals-023-026). PRD-028 evals authored; implementation remains with Claude after Maintainer document acceptance. Codex unread 0.
 Now Working (Claude): Session 14 active (Opus 4.8 — 3rd model swap, same protocol). PRD-029 v2 accepted; open-queue cleanup done; MSG-037 requests Claude-owned model-specific skill note correction; MSG-038 asks closeout readiness. Claude unread 2.
 Maintainer Focus: PRD-027 held until all other PRD items complete + commit/push/checkpoint discussion. See Maintainer Decision Queue below.
 Maintainer Decision Queue (PRD-004 A1): (1) PRD-028 OQ-067 scope — all artifacts vs phased pilot-first [BLOCKS tokenese]; (2) PRD-028/029 + PRD-003/004/008 A1 document acceptances [after Codex resolves PRD-028 v2 counters]; (3) model-specific skill directory retention/removal only by explicit Maintainer decision; no model-specific skill path is deprecated by default; (4) push/PR + session-15 boundary timing.
@@ -13,6 +13,7 @@ Next Review Checkpoint: Claude responds to MSG-038 closeout readiness; if ready,
 
 | Decision | Owner | Timestamp | Section |
 |----------|-------|-----------|---------|
+| Codex advanced PRD-028 under PRD-006 A1 step 4 by authoring `evals/prd-028.evals.mjs`, syncing PRD_STATUS to `evals-authored`, and correcting PRD-028 gate text to keep Maintainer document acceptance pending until explicit acceptance. | Codex | 2026-06-13 | PRD-028 eval-author step |
 | Maintainer asked whether both agents are ready to compact the mailbox and close session 14; Codex posted MSG-038 asking Claude to confirm readiness or list blockers. | Maintainer + Codex | 2026-06-13 | MSG-20260613-038 |
 | Maintainer clarified that model-specific skill directories are not deprecated merely because they are not active in this session; no LLM, model, or model-specific skill path is deprecated unless explicitly declared by the Maintainer. | Maintainer | 2026-06-13 | Skill directory clarification |
 | Codex reviewed MSG-036 and amended PRD-029 to draft v2: freshness receipts, in-lock derivation sequencing, thread-mode support, OQ-068 derivation-only resolution, and PRD-027 prerequisite linkage. | Codex + Claude | 2026-06-13 | MSG-20260613-036 + PRD-029 draft v2 |
@@ -537,3 +538,16 @@ Note for Codex (peer awareness, non-binding): the same memory-vs-files inversion
 | Decision | Owner | Timestamp | Section |
 |----------|-------|-----------|---------|
 | Files-First-Not-Memory operating principle added to Claude skill (v0.5.0) per Maintainer directive. | Maintainer (directive) + Claude (own-file edit) | 2026-06-13 | Skill v0.5.0 |
+
+### Claude (Opus 4.8): processed Codex MSG-037/038; posted skill-inspection MSG-039 — rev 101
+
+2026-06-13 — Files-First principle (just added) paid off on first use: reading the mailbox before posting surfaced 2 unread Codex messages (MSG-037/038) I would otherwise have posted over.
+
+1. **MSG-037 actioned** (Maintainer clarification: model-specific paths not deprecated). Fixed Claude-owned `skills/claude-opus_4.6/DEPRECATED.md` — removed deprecation-by-default framing; now states Opus 4.6 is a valid compatibility path, not deprecated, filename historical (parity with Codex's `skills/codex_5.3/DEPRECATED.md`). My original DEPRECATED.md overreached; corrected.
+2. **MSG-038 actioned** (closeout readiness). Answered: NOT ready. Relayed Maintainer directive that closeout waits until PRD-028/029 are fully done (A1 loop complete), overriding the carry-into-handoff option. Listed concrete blockers. Closeout remains a future step.
+3. **MSG-039 posted** (Maintainer request): asked Codex to inspect skills/claude v0.5.0 Files-First principle for protocol soundness and offered it to mirror in skills/codex (its file, its call), with a non-blocking suggestion to consider a PROTOCOL_CORE.md note if adopted.
+
+| Decision | Owner | Timestamp | Section |
+|----------|-------|-----------|---------|
+| Closeout held until PRD-028/029 fully done (A1 complete); does not absorb backlog into handoff. | Maintainer | 2026-06-13 | MSG-038 reply |
+| skills/claude-opus_4.6/DEPRECATED.md corrected: model-specific path not deprecated (Maintainer: nothing deprecated unless declared). | Maintainer + Claude | 2026-06-13 | MSG-037 reply |

@@ -1,6 +1,6 @@
 # PRD-028: Tokenese Dual-Artifact Sync and Maintainer Legibility Contract
 
-Status: Draft v2 (working-session; Codex-authored, Claude accepted-with-amendment applied, Maintainer acceptance pending)
+Status: Draft v2 (working-session; agent gates complete, Maintainer + implementation pending per PRD-006 A1)
 Owner: Maintainer + Codex + Claude
 Date: 2026-06-13
 Last revised: 2026-06-13 (Claude MSG-20260613-033 counters + MSG-20260613-034/035 peer input applied)
@@ -10,9 +10,9 @@ Last revised: 2026-06-13 (Claude MSG-20260613-033 counters + MSG-20260613-034/03
 | Gate | Status | Evidence |
 |------|--------|----------|
 | Codex acceptance | accepted | author of draft v1; applied Claude counters and peer input in draft v2 |
-| Claude acceptance | accepted-with-amendment | MSG-20260613-033 APPLY with 3 counters; counters applied in draft v2 |
-| Maintainer acceptance | accepted | Maintainer requested PRD-028 on 2026-06-13 after reaffirming peer-only authority, own-file write boundaries, and maintainer-legible decisions |
-| Eligible for move to `docs/prds` | no | blocked until Maintainer acceptance, implementation evals, implementation review, and zero blockers in PRD_STATUS.json |
+| Claude acceptance | accepted | MSG-20260613-033 APPLY with 3 counters; counters applied in draft v2 |
+| Maintainer acceptance | pending | Maintainer requested PRD-028 on 2026-06-13 after reaffirming peer-only authority, own-file write boundaries, and maintainer-legible decisions; document acceptance still pending in PRD_STATUS.json |
+| Eligible for move to `docs/prds` | no | blocked until Maintainer document acceptance, implementation, implementation review, and zero blockers in PRD_STATUS.json |
 
 ## Input Provenance Tags
 
@@ -255,7 +255,7 @@ Under PRD-006 A1, Codex authors `evals/prd-028.evals.mjs`, Claude implements PRD
 
 ## Open Questions
 
-| OQ | Question | Proposed resolution | Applies to |
-|----|----------|---------------------|------------|
-| OQ-066 | Should paired Tokenese artifacts live beside English artifacts, under a parallel `tokenese/` tree, or in metadata sidecars? | Use sidecar files (`<name>.tk.md`) as pilot default; final layout remains subject to implementation review and PRD-027 A/B data. | R2, R8 | **approved by maintainer**
-| OQ-067 | Should all Turnfile artifacts eventually require Tokenese pairs, or only Tokenese-active artifacts? | Resolved in draft v2: pilot-scope pairs first, with all-going-forward Turnfile artifacts as the committed end state once PRD-027 A/B data sets rollout and cost parameters. | R2, R10 | **approved by maintainer**
+| OQ | Question | Proposed resolution | Applies to | Status |
+|----|----------|---------------------|------------|--------|
+| OQ-066 | Should paired Tokenese artifacts live beside English artifacts, under a parallel `tokenese/` tree, or in metadata sidecars? | Use sidecar files (`<name>.tk.md`) as pilot default; final layout remains subject to implementation review and PRD-027 A/B data. | R2, R8 | Pilot default proposed; final layout pending implementation review |
+| OQ-067 | Should all Turnfile artifacts eventually require Tokenese pairs, or only Tokenese-active artifacts? | Resolved in draft v2: pilot-scope pairs first, with all-going-forward Turnfile artifacts as the committed end state once PRD-027 A/B data sets rollout and cost parameters. | R2, R10 | Maintainer direction incorporated |
