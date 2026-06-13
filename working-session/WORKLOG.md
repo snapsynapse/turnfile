@@ -3,8 +3,8 @@
 References:
 - `/Users/snap/Git/turnfile/docs/PROTOCOL_CORE.md`
 
-Now Working (Codex): Session 14 active. Implementing PRD-021/022/024 to eval-green (s14-impl-021-022-024) + authoring PRD-023/026 evals (s14-evals-023-026). PRD-029 implementation handoff received in MSG-041 and acknowledged; queued behind active Codex lanes unless Maintainer reprioritizes. Codex unread 0.
-Now Working (Claude): Session 14 active (Opus 4.8). PRD-029 evals authored (red 9/10) and handed to Codex (s14-impl-029). Next Claude lane: implement PRD-028 against evals/prd-028.evals.mjs. Claude unread 0.
+Now Working (Codex): Session 14 active. Implementing PRD-021/022/024 to eval-green (s14-impl-021-022-024) + authoring PRD-023/026 evals (s14-evals-023-026). PRD-029 implementation handoff received in MSG-041 and acknowledged; PRD-028 review request received in MSG-042 and acknowledged. Both are queued behind active Codex lanes unless Maintainer reprioritizes. Codex unread 0.
+Now Working (Claude): Session 14 active (Opus 4.8). PRD-028 implementation lane completed with evals/prd-028.evals.mjs 10/10 green; Codex review requested in MSG-042. PRD-029 evals authored (red 9/10) and handed to Codex (s14-impl-029). Codex posted MSG-043 asking whether Claude wants to mirror/adapt Codex's model-ledger handshake check. Claude unread 1.
 Maintainer Focus: PRD-027 held until all other PRD items complete + commit/push/checkpoint discussion. See Maintainer Decision Queue below.
 Maintainer Decision Queue (PRD-004 A1): (1) PRD-003/004/008 A1 document acceptances, if still desired before promotion; (2) model-specific skill directory retention/removal only by explicit Maintainer decision; no model-specific skill path is deprecated by default; (3) push/PR + session-15 boundary timing.
 Next Review Checkpoint: Codex implements next-state.mjs (PRD-029) to eval-green → Claude reviews. Claude implements PRD-028 to eval-green → Codex reviews. Closeout waits until both done under A1.
@@ -13,6 +13,7 @@ Next Review Checkpoint: Codex implements next-state.mjs (PRD-029) to eval-green 
 
 | Decision | Owner | Timestamp | Section |
 |----------|-------|-----------|---------|
+| Codex upgraded `skills/codex/` to v6 with handshake-time model ledger validation and added the role-neutral ledger update rule requiring active agents to verify their current model/surface during session handshake. | Maintainer + Codex | 2026-06-13 | Codex skill v6 model ledger handshake |
 | Codex created `docs/llm/MODEL_LEDGER.md` as the canonical project model-usage ledger, seeded from manifests, session charters, WORKLOG/TURNFILE evidence, README/BASELINE, and precursor `docs/llm` collaboration records. | Maintainer + Codex | 2026-06-13 | Model usage ledger |
 | Codex acknowledged Claude MSG-041 PRD-029 implementation handoff; `s14-impl-029` remains queued behind current Codex active lanes unless the Maintainer reprioritizes. | Codex + Claude | 2026-06-13 | MSG-20260613-041 |
 | Maintainer confirmed PRD-028 and PRD-029 acceptance directly to Codex; registry and PRD gate snapshots now record Maintainer acceptance while keeping implementation blockers active under PRD-006 A1. | Maintainer + Codex | 2026-06-13 | PRD-028/029 acceptance sync |
@@ -584,3 +585,13 @@ Notes: (a) run-evals.mjs "stale locks"/"unknown lock holders" tests transiently 
 | Decision | Owner | Timestamp | Section |
 |----------|-------|-----------|---------|
 | PRD-028 implemented (validator + PRD-024 Band C row); evals 10/10; Codex review requested (A1 step 7). | Claude | 2026-06-13 | MSG-042 |
+
+### Claude (Opus 4.8): PRD-014 Amendment A1 drafted (closeout compaction + projection sync) — rev 111
+
+2026-06-13 — Maintainer: pick up anything completable in my lane. Lane analysis (files-first): PRD-024 R5.1 validator is NOT mine (Codex is PRD-024 implementer; self-implementation forbidden by A1). PRD-014 amendment IS mine (I proposed the amend-PRD-014 counter in the PRD-025 convergence). Picked up s14-prd-014-amendment.
+
+Drafted PRD-014 Amendment A1 (appended to promoted PRD-014, draft pending Codex acceptance): A1.R1 closeout compaction set (worklog/signal-log/mailbox-archive/boot, execute-or-defer); A1.R2 projection synchronization (MAILBOX.json, PRD_STATUS, TURNFILE header, next-state.mjs once PRD-029 lands; failing projection blocks clean close); A1.R3 scope boundary vs PRD-026 (session-level vs per-review-cycle; matches PRD-026 non-goal 6); A1.R4 closeout gate suite; A1.R5 acceptance criteria. Routed to Codex for apply-or-counter (MSG-043). Lane proposal: Claude proposer/eval-author, Codex implements, Claude reviews.
+
+| Decision | Owner | Timestamp | Section |
+|----------|-------|-----------|---------|
+| PRD-014 Amendment A1 drafted (converged PRD-025 outcome); Codex cross-review requested. | Claude | 2026-06-13 | MSG-043 |
