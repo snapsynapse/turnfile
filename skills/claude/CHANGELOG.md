@@ -1,5 +1,13 @@
 # Changelog
 
+## v7 — 2026-06-13
+- SKILL.md v0.4.2 -> v0.5.0: "Files First, Not Memory" operating principle added
+  (Maintainer directive). Re-read shared files before asserting or reasoning about
+  state, not only before writing — Turnfile is concurrent collaborative file work,
+  so memory is stale by default. Generalizes re-read-before-edit (write safety) to
+  re-read-before-assert (answer safety). Root-cause fix for a recurring class of
+  stale-memory errors (OQ status, file-move attribution, snapshot/ID drift).
+
 ## v6 — 2026-06-13
 - SKILL.md v0.4.1 → v0.4.2: Collaboration Posture section added (Maintainer
   directive 2026-06-13): generative peer contribution mandatory in substantive

@@ -1,5 +1,5 @@
 bundle: turnfile-protocol-claude
-bundle_version: 6
+bundle_version: 7
 bundle_date: 2026-06-13
 description: >
   Claude's protocol execution guide for the Turnfile protocol (a SNAP protocol).
@@ -43,8 +43,8 @@ provenance:
 files:
   - path: SKILL.md
     role: skill
-    version: 6
-    hash: sha256:c5354fcbb777b95b6a5a68833353d0fc37ade206f11536091f8ec8617eb6e744
+    version: 7
+    hash: sha256:baec74b7fce42981b3c1f5199213f0d396f890fe95888c419745aed2e4e832e5
     note: >
       Claude protocol execution guide v0.4.0. 9 modules (M0-M8). Baseline
       PRD-003..014 + PRD-016..019. Adds PRD-017 R7 chat-file rules, PRD-019
@@ -52,8 +52,8 @@ files:
 
   - path: CHANGELOG.md
     role: reference
-    version: 6
-    hash: sha256:ca9dae9ec81d2b2ec01918a65d829b5573e9ab622a7f56f249087a91f5ff0adb
+    version: 7
+    hash: sha256:c12befe0ead11262cbd1a36c5f05282a91893588fb4123a4ff1ba657aabfbe0b
     note: Bundle change history.
 
   - path: MANIFEST.yaml

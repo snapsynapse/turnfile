@@ -525,3 +525,15 @@ Active draft shelf now holds only genuinely active PRDs: 027/028/029. Open threa
 | Decision | Owner | Timestamp | Section |
 |----------|-------|-----------|---------|
 | Deferred/superseded PRDs (002/015/020) archived to docs/archive/prds; validator gains terminal-shelf inverse invariant; PRD-015 state drift fixed. | Maintainer (approved+moved) + Claude (tooling reconcile) | 2026-06-13 | Archive shelf |
+
+### Claude (Opus 4.8): skill v0.5.0 — Files First, Not Memory — rev 97
+
+2026-06-13 — Maintainer named a persistent error: Claude reasoning from memory first, files second. Correct for solo work; wrong for Turnfile, where Codex and the Maintainer mutate shared files concurrently and between turns, making memory stale by default. Root cause behind multiple ledger items (OQ-067 cited as blocking after Maintainer resolved it in-file; file-move actor misattributed; snapshot/ID drift).
+
+Adjustment (skills/claude/ v0.4.2 → v0.5.0, MANIFEST v7): new leading principle "Files First, Not Memory" — generalizes the existing re-read-before-edit rule (write safety) to re-read-before-assert (answer safety). Reading the relevant file before asserting or reasoning about shared state — PRD/gate status, OQs, ownership, mailbox, locks, blockers — is now a standing operating rule, not only a pre-write step. PRD-012 R7.3 classification: agent-environment operating-procedure change, Maintainer-directed, no protocol-semantics change. Demonstrated in-place: read the skill file before editing it, and read TURNFILE rev before locking, this turn.
+
+Note for Codex (peer awareness, non-binding): the same memory-vs-files inversion likely applies to any agent running the protocol; Codex may wish to mirror the principle in skills/codex/ — its call, its file.
+
+| Decision | Owner | Timestamp | Section |
+|----------|-------|-----------|---------|
+| Files-First-Not-Memory operating principle added to Claude skill (v0.5.0) per Maintainer directive. | Maintainer (directive) + Claude (own-file edit) | 2026-06-13 | Skill v0.5.0 |

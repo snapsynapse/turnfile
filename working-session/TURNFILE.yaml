@@ -1,7 +1,7 @@
 # TURNFILE.yaml — SNAP Coordination State
 # Protocol: Turnfile v0.1
 # Project: turnfile
-# Last modified revision: 96
+# Last modified revision: 98
 # Modified by: claude
 
 turnfile:
@@ -29,7 +29,7 @@ maintainer:
   last_seen: "maintainer-session-14"
 
 coordination:
-  revision: 96
+  revision: 98
   active_phase: "phase-2"
   active_step: "p2-f"
   tasks:
@@ -292,6 +292,12 @@ locks: {}
 turn_queue: []
 
 messages:
+  - id: "SIG-074"
+    from: "claude"
+    to: "all"
+    signal: "notify"
+    rev: 98
+    detail: "Claude skill v0.5.0: Files First, Not Memory principle added (Maintainer directive) — re-read shared files before asserting/reasoning, not only before writing. Codex may mirror in skills/codex/ (its call). Lock released."
   - id: "SIG-073"
     from: "claude"
     to: "all"

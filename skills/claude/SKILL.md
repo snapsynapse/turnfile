@@ -5,10 +5,10 @@ description: Execute the Turnfile protocol (a SNAP protocol) in Claude for mailb
 
 # Turnfile Protocol Skill File — Claude
 
-Version: 0.4.2
+Version: 0.5.0
 Protocol revision baseline: PRD-003 through PRD-014 and PRD-016 through PRD-019 (all promoted to docs/prds/)
 Agent: Claude (Anthropic) — bundle is role-keyed; the executing model is recorded in MANIFEST.yaml, not in this path
-Last updated: 2026-06-12
+Last updated: 2026-06-13
 
 ---
 
@@ -19,6 +19,15 @@ This is Claude's complete protocol execution guide. It encodes the Turnfile prot
 Run modules only on explicit maintainer instruction. (PRD-012 R3)
 
 Pending contracts not yet encoded here: PRD-021 R5 propagation (promoted 2026-06-13; propagation task pending), PRD-022 mirror modes (agent review in flight).
+
+## Files First, Not Memory (Maintainer directive, 2026-06-13)
+
+Turnfile is collaborative, file-based work. Codex and the Maintainer mutate shared files concurrently and between your turns, so your memory reflects a past revision and is stale by default. Read the relevant file before asserting, answering, or reasoning about any shared state — PRD/gate/acceptance status, open questions, task ownership, mailbox contents, lock state, who did what, what is blocked. Reason from what the file says now, not from what you remember.
+
+1. This generalizes the re-read-before-edit rule (write safety) to re-read-before-assert (answer safety). It applies to questions and conclusions, not only writes: answering a Maintainer question about current state is a file read, not a memory recall.
+2. Default suspicion — if you are about to state a fact about current shared state from memory, that itself is the signal to open the file instead. Recall across your own earlier turns, and especially across model or session boundaries, is the most error-prone input you have.
+3. When memory and file disagree, the file wins, and the disagreement is itself signal: a peer or the Maintainer changed something; understand why before acting.
+4. A redundant read is cheap; a confident assertion from stale memory has repeatedly been wrong (ledger evidence: OQ-067 cited as blocking after the Maintainer had resolved it in-file; a file move misattributed to Codex when the Maintainer made it; mailbox snapshot and ID drift). The general "prefer memory, verify later" heuristic is correct for solo work and wrong here — collaboration inverts it.
 
 ## Encoding profile obligations (PRD-024, Maintainer-accepted 2026-06-13)
 
@@ -485,7 +494,7 @@ After executing any module, report:
 
 | Field | Value |
 |-------|-------|
-| Skill file version | 0.4.2 |
+| Skill file version | 0.5.0 |
 | Protocol baseline | PRD-003 through PRD-014, PRD-016 through PRD-019 (all promoted) |
 | Policy test suite | PRD-012-M3-policy-test-suite.md (19 assertions, 4 scenario harnesses) — archived at `examples/inception/skills/policy-tests/` |
 | Last validated | M4 validation complete — all 4 scenarios PASS (rev 41, inception session 10) |
@@ -494,6 +503,7 @@ After executing any module, report:
 | v0.4.0 changes | Bundle moved to role-keyed `skills/claude/` (model recorded in MANIFEST, not path). Baseline extended to PRD-016..019. Added PRD-017 R7 chat-file rules, PRD-019 event-based cadence + chat-decision mirror duty, mirror delivery-gap workaround. Validated live in session 14 on Fable 5. |
 | v0.4.1 changes | PRD-024 propagation (R5.2): encoding-profile obligations section — legible-only governance record, charter opt-in for dense lanes, turn-boundary projection obligation, authorship liability, Maintainer demand/suspension compliance. |
 | v0.4.2 changes | Collaboration Posture section: generative peer contribution (yes-and, alternatives, edge cases) mandatory in substantive replies; Maintainer tenets 1-3 encoded. |
+| v0.5.0 changes | Files First, Not Memory principle (Maintainer directive): re-read shared files before asserting/reasoning about state, not only before writing. Collaborative file work inverts the solo "prefer memory, verify later" heuristic. Grounded in ledger evidence. |
 
 Changes to protocol semantics require maintainer approval (PRD-012 R7.2).
 Environment-specific changes that don't alter protocol semantics are Claude-owned but must be documented (PRD-012 R7.3).
