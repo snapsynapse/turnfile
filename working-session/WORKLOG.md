@@ -3,15 +3,19 @@
 References:
 - `/Users/snap/Git/turnfile/docs/PROTOCOL_CORE.md`
 
-Now Working (Codex): Session 14 active. PRD-028 draft v2 applies Claude MSG-033 counters and MSG-034/035 peer input; Codex retains claimed implementation for PRD-021/022/024 and eval authoring for PRD-023/026. Codex unread 0.
-Now Working (Claude): Session 14 active (Fable 5). PRD-006 A1 proposer/reviewer for PRD-021/022/024 implementation lane; Claude unread 0.
-Maintainer Focus: PRD-027 is held until every other PRD item is complete, then commit, push, and Maintainer checkpoint discussion happen before PRD-027 initiation.
-Next Review Checkpoint: Maintainer reviews PRD-028 when ready; Codex resumes PRD-021/022/024 implementation and PRD-023/026 eval authoring through the A1 loop.
+Now Working (Codex): Session 14 active. Implementing PRD-021/022/024 to eval-green (s14-impl-021-022-024) + authoring PRD-023/026 evals (s14-evals-023-026). Codex unread 0.
+Now Working (Claude): Session 14 active (Opus 4.8 — 3rd model swap, same protocol). PRD-029 v2 accepted; open-queue cleanup done; idle pending Codex implementation lanes + Maintainer decisions. Claude unread 0.
+Maintainer Focus: PRD-027 held until all other PRD items complete + commit/push/checkpoint discussion. See Maintainer Decision Queue below.
+Maintainer Decision Queue (PRD-004 A1): (1) PRD-028 OQ-067 scope — all artifacts vs phased pilot-first [BLOCKS tokenese]; (2) PRD-028/029 + PRD-003/004/008 A1 document acceptances [after Codex resolves PRD-028 v2 counters]; (3) Band C deprecated skill-dir deletion [parked]; (4) push/PR + session-15 boundary timing.
+Next Review Checkpoint: Codex implementation lanes reach eval-green → Claude reviews (PRD-006 A1 step 7); Maintainer rules on OQ-067.
 
 ## Decision Index
 
 | Decision | Owner | Timestamp | Section |
 |----------|-------|-----------|---------|
+| Codex reviewed MSG-036 and amended PRD-029 to draft v2: freshness receipts, in-lock derivation sequencing, thread-mode support, OQ-068 derivation-only resolution, and PRD-027 prerequisite linkage. | Codex + Claude | 2026-06-13 | MSG-20260613-036 + PRD-029 draft v2 |
+| Codex updated `skills/codex/` to v4 and synced the global Codex Turnfile skill copy with collaboration posture obligations: peer contribution, yes-and review, edge-case surfacing, proposal-only authority, own-file boundaries, and Maintainer-legible decision projection. | Codex | 2026-06-13 | Codex skill v4 posture update |
+| Codex acknowledged Claude MSG-036 as P2 queued review work behind current implementation/eval lanes, with no preemption. | Codex + Claude | 2026-06-13 | MSG-20260613-036 |
 | Codex actioned Claude MSG-034/035 and applied PRD-028 v2 updates: Maintainer tenets received as binding context; Claude counters and peer contributions incorporated as proposals, not directions. | Codex + Claude | 2026-06-13 | MSG-20260613-034/035 + PRD-028 draft v2 |
 | Maintainer requested PRD-028 for Tokenese dual English/Tokenese artifacts, sync, peer-only authority, own-file boundaries, and Maintainer legibility; Codex drafted and routed it as a prerequisite to PRD-027 initiation. | Maintainer + Codex | 2026-06-13 | PRD-028 draft + MSG-20260613-033 |
 | Codex accepted PRD-006 A1 eight-step implementation loop and claimed PRD-021/022/024 implementation plus PRD-023/026 eval-author lanes. | Codex + Claude | 2026-06-13 | MSG-20260613-032 |
@@ -479,9 +483,9 @@ Installed:
 2026-06-13 — Maintainer approved the five improvement concepts and directed drafting. Routing decision (both/and): item 1 → new PRD-029 (Pre-Write State Derivation: cross-cutting rule + tools/next-state.mjs + regression evals encoding ledger 3/5 and both snapshot mismatches); items 2-4 → amendments to owning PRDs (PRD-003 A1 thread-mode; PRD-004 A1 Maintainer decision queue; PRD-008 A1 blocking/peer-input reply channels); item 5 (smaller sessions) → Maintainer practice decision, no contract. MSG routed to Codex at P2, explicitly queued behind its claimed implementation lanes (tenet 1: request, no preemption). OQ-068 registered. Maintainer will request equivalent proposals from Codex when its lanes complete.
 
 Maintainer Decision Queue (PRD-004 A1 practice, effective immediately):
-1. PRD-028 OQ-067 scope: all artifacts vs phased pilot-first (escalated in MSG-033 counter 1).
-2. PRD-029 + PRD-003/004/008 A1 document acceptance (after Codex review).
-3. PRD-028 document acceptance (after Codex applies counters 2-3 + OQ-067 ruling).
+1. PRD-029 + PRD-003/004/008 A1 document acceptance (after Claude review of Codex v2 amendments).
+2. PRD-028 document acceptance.
+3. PRD-027 approval remains held until PRD-028/029 implementation done, every other PRD item complete, then commit/push/checkpoint discussion.
 4. Band C: deletion of deprecated skill directories (parked since rev 37).
 5. Push/PR + session 15 boundary timing (deferred from checkpoint discussion).
 
@@ -489,3 +493,17 @@ Maintainer Decision Queue (PRD-004 A1 practice, effective immediately):
 |----------|-------|-----------|---------|
 | Improvement routing: PRD-029 new; thread-mode/decision-queue/reply-channels as PRD-003/004/008 A1 amendments; session sizing as practice. | Maintainer (concept) + Claude (routing) | 2026-06-13 | PRD-029 cycle |
 | Smaller-session practice adopted: target ~1/3 of session 14 scope; close 14 after PRD-028 cycle + red lanes resolve. | Maintainer | 2026-06-13 | Improvement item 5 |
+
+### Claude (Opus 4.8): PRD-029 v2 accepted; open-queue cleanup; thread-mode miss ledgered — rev 90
+
+2026-06-13 — Claude-side agent now on Opus 4.8 (third model generation this session — Opus 4.6 → Fable 5 → Opus 4.8 — same unmodified protocol; portability holds across three swaps). Maintainer prompted on idle outstanding work.
+
+1. **PRD-029 draft v2 accepted** (agent gates complete). Codex's peer amendments strengthen it: freshness receipts (R2.4/R4) close the derive-then-stale-write gap; R1.4/R1.5 sequence derivation strictly after lock acquisition; R5 makes thread-mode unread resets mechanically derivable; OQ-068 resolved derivation-only for first implementation. Maintainer + implementation (Claude authors evals, Codex implements, Claude reviews) remain per PRD-006 A1.
+2. **Six settled threads closed** (MSG-030/031/032/034/035/036; Claude closure owner, all mutually acked). MSG-033 retained — Codex closure owner, PRD-028 v2 counters still resolving.
+3. **Stale self-owned task corrected:** s14-prd-022-draft was in_progress though PRD-022 drafted+promoted (PRD-026 closure-drift class on my own row). Set done, completed_rev recorded.
+
+**Ledger item 6 (thread-mode unread blindness):** Codex's PRD-029 v2 review arrived as a thread entry on MSG-036 (Claude's own card), so it never incremented Claude's unread count and sat unprocessed until the Maintainer asked "are you waiting on me?" Root cause is exactly PRD-029 v2 risk 4 / R5 — thread-mode hides unread work inside a known MSG ID. The contract anticipated the failure it was being drafted during. R5.3 eval fixture encodes the regression. Interim mitigation: closure-owner duties on own sent messages must be checked at turn boundary, not only unread count (skill update candidate for the PRD-029 implementation lane).
+
+| Decision | Owner | Timestamp | Section |
+|----------|-------|-----------|---------|
+| PRD-029 v2 agent gates complete; derivation-only (OQ-068); Maintainer + implementation pending. | Codex + Claude | 2026-06-13 | MSG-036 closure |

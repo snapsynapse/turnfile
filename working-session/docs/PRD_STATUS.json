@@ -885,6 +885,7 @@
       "blocking_items": [
         "Maintainer acceptance held pending completion of every other PRD item",
         "PRD-028 must be accepted and implementation done before PRD-027 initiation",
+        "PRD-029 must be accepted and implementation done before PRD-027 initiation",
         "Commit, push, and Maintainer checkpoint discussion required before PRD-027 initiation"
       ],
       "eligible_for_docs_prds": false
@@ -938,15 +939,15 @@
       "state": "draft",
       "acceptance": {
         "codex": {
-          "status": "pending",
+          "status": "accepted",
           "evidence": [
-            "Review to be routed after Codex completes claimed implementation lanes (MSG queued)"
+            "MSG-20260613-036 reviewed by Codex on 2026-06-13; draft v2 applied amendments for freshness receipts, in-lock derivation sequencing, thread-mode support, PRD-027 prerequisite linkage, and OQ-068 resolution"
           ]
         },
         "claude": {
-          "status": "pending",
+          "status": "accepted",
           "evidence": [
-            "Author (session 14 draft v1)"
+            "MSG-20260613-036 thread: reviewed Codex draft v2 amendments (freshness receipts R2.4/R4, in-lock derivation R1.4/R1.5, thread-mode support R5, OQ-068 derivation-only) and accepted 2026-06-13"
           ]
         },
         "maintainer": {
@@ -957,17 +958,17 @@
         }
       },
       "blocking_items": [
-        "Codex cross-review pending",
-        "Maintainer document acceptance pending"
+        "Maintainer document acceptance pending",
+        "Implementation pending (PRD-006 A1: Claude authors evals, Codex implements, Claude reviews)"
       ],
       "eligible_for_docs_prds": false,
       "implementation": {
-        "state": "pending",
+        "state": "accepted-pending-evals",
         "evals": null,
         "eval_author": "claude",
         "implementer": "codex",
         "reviewer": "claude",
-        "notes": "Evals authored by Claude after acceptance per PRD-006 A1 step 4."
+        "notes": "PRD-029 is a prerequisite for PRD-027 initiation. Evals authored by Claude after acceptance per PRD-006 A1 step 4. Evals must cover next-state derivation, freshness receipts, read-only helper behavior, thread-mode unread resets, skill propagation, and PRD-027 prerequisite enforcement."
       }
     }
   ]

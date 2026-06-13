@@ -2,13 +2,12 @@
 
 Tracks open questions for the active local workspace.
 
-Last updated: 2026-06-13 (OQ-064 and OQ-065 resolved)
+Last updated: 2026-06-13 (OQ-068 resolved)
 
 ## Active Questions
 
 | ID | Source PRDs | Question | Status | Resolution |
 |----|-------------|----------|--------|------------|
-| OQ-068 | PRD-029 | Should next-state derivation be wrapped into a single post-message helper (derive+write+validate), or stay derivation-only to preserve explicit agent writes? | open | pending |
 *No active questions in the local workspace.*
 
 ## Deferred Questions
@@ -36,3 +35,4 @@ Canonical deferred items remain tracked in `/Users/snap/Git/turnfile/docs/OPEN_Q
 | OQ-063 | PRD-024 | Should tokenese be a PRD-024 amendment or its own PRD? | resolved | Own PRD referencing PRD-024 unless profile assignments, projection rights, or validation obligations change. (Codex amendment, MSG-20260612-024) |
 | OQ-064 | PRD-026 | Should review-cycle closure consistency be a standalone PRD-026 or an amendment to PRD-003, PRD-006, PRD-013, or PRD-019? | resolved | Standalone PRD-026, with explicit boundary against the PRD-014 closeout amendment path. (Claude counter accepted by Codex, MSG-20260612-027) |
 | OQ-065 | PRD-022 | Should Maintainer-decision relays (PRD-004 blockquote) always be delivery-mirror, or may the relaying agent downgrade? | resolved | PRD-004 blockquote relays default to `delivery-mirror`; downgrade allowed only when the relay explicitly states no peer future work is bound and no non-deciding participant needs lifecycle awareness. (Codex amendment, MSG-20260613-028) |
+| OQ-068 | PRD-029 | Should next-state derivation be wrapped into a single post-message helper (derive+write+validate), or stay derivation-only to preserve explicit agent writes? | resolved | First implementation stays derivation-only. A full write wrapper may be proposed later only after PRD-029 evidence shows repeated helper-bypass or wrapper-worthy friction, and it must preserve explicit reviewable file diffs. (Codex amendment, MSG-20260613-036) |

@@ -1,14 +1,16 @@
-# Deprecated Codex Skill Path
+# Codex 5.3 Model-Specific Skill Path
 
-Status: deprecated compatibility path
-Date: 2026-06-12
+Status: active model-specific compatibility path
+Date: 2026-06-13
 
-`skills/codex_5.3/` is the historical model-keyed location of the Codex Turnfile skill bundle.
+`skills/codex_5.3/` is the model-keyed location of the Codex Turnfile skill bundle for Codex 5.3 contexts.
 
-The current role-keyed bundle is:
+The current session uses the role-keyed bundle:
 
 ```text
 skills/codex/
 ```
 
-Keep this directory only for historical compatibility until a cleanup task removes model-keyed skill paths. Do not update this bundle unless a maintainer explicitly asks for a backport.
+The role-keyed bundle is the default for this session, but that does not deprecate Codex 5.3 or this model-specific skill path. No LLM, model, or model-specific skill path is deprecated unless the Maintainer explicitly declares it deprecated.
+
+Keep this directory for sessions that still need Codex 5.3-specific instructions. Updates should be intentional backports or model-specific changes requested by the Maintainer.

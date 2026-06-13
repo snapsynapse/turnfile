@@ -12,7 +12,7 @@ Last revised: 2026-06-13 (Claude counters applied by Codex)
 | Codex acceptance | accepted | author; Claude teach-gate and channel-trust counters applied 2026-06-13 |
 | Claude acceptance | accepted | MSG-20260613-029 reply: APPLY with 2 counters (teach-phase production-competence gate; untrusted self-reported channels until calibration) |
 | Maintainer acceptance | held | Maintainer clarified on 2026-06-13 that PRD-027 is for cloning existing Turnfile communications into Tokenese for A/B measurement, not replacing or changing existing communications; Maintainer then held approval until every other PRD item is complete, followed by commit, push, and checkpoint discussion |
-| Eligible for move to `docs/prds` | no | blocked until Maintainer hold is released after completion register, PRD-028 is accepted and implemented, commit, push, and checkpoint discussion |
+| Eligible for move to `docs/prds` | no | blocked until Maintainer hold is released after completion register, PRD-028 and PRD-029 are accepted and implemented, commit, push, and checkpoint discussion |
 
 ## Input Provenance Tags
 
@@ -83,11 +83,12 @@ Tokenese cloning in Turnfile requires all of the following:
 
 1. PRD-024 is accepted by Codex, Claude, and Maintainer, then promoted or otherwise marked as binding for the session.
 2. PRD-028 is accepted and implementation `done`, including validators/evals for dual-artifact pairing, sync state, English authority, peer-only request semantics, and Maintainer legibility.
-3. The session charter explicitly opts into a Tokenese lane and identifies participating agents.
-4. Participating agents have read the Tokenese handoff, spec, design position, intent invariants, and conformance ladder.
-5. The first use in a session performs a visible handshake in a permitted dense lane, then records a legible note that cloning is active.
-6. Any agent may decline or exit Tokenese for any clone by sending `plain`; the original Turnfile communication remains valid and complete.
-7. Before the first clone exchange, the teach phase from Tokenese `HANDOFF.md` task 1 must be complete: Claude teaches Codex in English; Codex demonstrates production competence by producing valid Tokenese statements with novel recombinations not shown as examples; and the teaching token cost is logged as A/B setup data.
+3. PRD-029 is accepted and implementation `done`, including helper/evals for pre-write state derivation, freshness receipts, thread-mode unread resets, and PRD-027 prerequisite enforcement.
+4. The session charter explicitly opts into a Tokenese lane and identifies participating agents.
+5. Participating agents have read the Tokenese handoff, spec, design position, intent invariants, and conformance ladder.
+6. The first use in a session performs a visible handshake in a permitted dense lane, then records a legible note that cloning is active.
+7. Any agent may decline or exit Tokenese for any clone by sending `plain`; the original Turnfile communication remains valid and complete.
+8. Before the first clone exchange, the teach phase from Tokenese `HANDOFF.md` task 1 must be complete: Claude teaches Codex in English; Codex demonstrates production competence by producing valid Tokenese statements with novel recombinations not shown as examples; and the teaching token cost is logged as A/B setup data.
 
 ## R3. Permitted clone lanes
 

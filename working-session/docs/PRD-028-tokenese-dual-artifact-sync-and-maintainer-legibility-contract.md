@@ -11,7 +11,7 @@ Last revised: 2026-06-13 (Claude MSG-20260613-033 counters + MSG-20260613-034/03
 |------|--------|----------|
 | Codex acceptance | accepted | author of draft v1; applied Claude counters and peer input in draft v2 |
 | Claude acceptance | accepted-with-amendment | MSG-20260613-033 APPLY with 3 counters; counters applied in draft v2 |
-| Maintainer acceptance | pending | Maintainer requested PRD-028 on 2026-06-13 after reaffirming peer-only authority, own-file write boundaries, and maintainer-legible decisions |
+| Maintainer acceptance | accepted | Maintainer requested PRD-028 on 2026-06-13 after reaffirming peer-only authority, own-file write boundaries, and maintainer-legible decisions |
 | Eligible for move to `docs/prds` | no | blocked until Maintainer acceptance, implementation evals, implementation review, and zero blockers in PRD_STATUS.json |
 
 ## Input Provenance Tags

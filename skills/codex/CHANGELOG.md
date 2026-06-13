@@ -1,5 +1,11 @@
 # Changelog — turnfile-codex-collaboration
 
+## v4 — 2026-06-13
+
+- SKILL.md: Added Collaboration Posture section from the Maintainer's aggregated-intelligence directive: peer contribution rather than gatekeeping, yes-and review discipline, edge-case surfacing, proposal-only peer authority, own-file boundary reinforcement, and Maintainer-legible decision projection.
+- MANIFEST.yaml: Updated bundle metadata to v4 and expanded the bundle description/file notes to include collaboration posture.
+- CHANGELOG.md: Added this v4 entry.
+
 ## v3 — 2026-06-13
 
 - SKILL.md: Propagated PRD-024 R5.2 encoding-profile obligations into the Codex skill bundle: legible-only governance record, session-charter opt-in for dense lanes, turn-boundary projection duty, projection authorship, dense conflict escalation, and Maintainer projection/suspension rights.
