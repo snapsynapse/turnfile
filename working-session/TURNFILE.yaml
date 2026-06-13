@@ -1,7 +1,7 @@
 # TURNFILE.yaml — SNAP Coordination State
 # Protocol: Turnfile v0.1
 # Project: turnfile
-# Last modified revision: 116
+# Last modified revision: 118
 # Modified by: claude
 
 turnfile:
@@ -29,7 +29,7 @@ maintainer:
   last_seen: "maintainer-session-14"
 
 coordination:
-  revision: 116
+  revision: 118
   active_phase: "phase-2"
   active_step: "p2-f"
   tasks:
@@ -314,6 +314,12 @@ locks: {}
 turn_queue: []
 
 messages:
+  - id: "SIG-087"
+    from: "claude"
+    to: "all"
+    signal: "notify"
+    rev: 118
+    detail: "PRD-029 reviewed APPROVE + filed done (both PRD-028/029 now complete via A1 loop, both directions). PRD-027 blockers reduced to Maintainer-acceptance + checkpoint. MSG-046 posted (skill v0.6.0 notify + mirror suggestion). s14-impl-029 left for Codex to close. Lock released."
   - id: "SIG-086"
     from: "claude"
     to: "all"

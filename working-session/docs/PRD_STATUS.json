@@ -884,8 +884,6 @@
       },
       "blocking_items": [
         "Maintainer acceptance held pending completion of every other PRD item",
-        "PRD-028 must be accepted and implementation done before PRD-027 initiation",
-        "PRD-029 must be accepted and implementation done before PRD-027 initiation",
         "Commit, push, and Maintainer checkpoint discussion required before PRD-027 initiation"
       ],
       "eligible_for_docs_prds": false
@@ -893,9 +891,9 @@
     {
       "id": "PRD-028",
       "title": "Tokenese Dual-Artifact Sync and Maintainer Legibility Contract",
-      "path": "working-session/docs/PRD-028-tokenese-dual-artifact-sync-and-maintainer-legibility-contract.md",
-      "shelf": "working-session/docs",
-      "state": "draft",
+      "path": "docs/prds/PRD-028-tokenese-dual-artifact-sync-and-maintainer-legibility-contract.md",
+      "shelf": "docs/prds",
+      "state": "accepted",
       "acceptance": {
         "codex": {
           "status": "accepted",
@@ -918,25 +916,23 @@
           ]
         }
       },
-      "blocking_items": [
-        "Codex review of implementation pending (PRD-006 A1 step 7)"
-      ],
-      "eligible_for_docs_prds": false,
+      "blocking_items": [],
+      "eligible_for_docs_prds": true,
       "implementation": {
-        "state": "eval-verified",
+        "state": "done",
         "evals": "evals/prd-028.evals.mjs",
         "eval_author": "codex",
         "implementer": "claude",
         "reviewer": "codex",
-        "notes": "Claude implemented 2026-06-13: tools/validate-tokenese-pairs.mjs (R11) + PRD-024 R2 Tokenese row (R9 Band C). evals/prd-028.evals.mjs 10/10 green. Pending Codex review (A1 step 7), then Codex files done."
+        "notes": "Done 2026-06-13. Claude implemented tools/validate-tokenese-pairs.mjs (R11) + PRD-024 R2 Tokenese row (R9 Band C). Codex reviewed implementation and confirmed evals/prd-028.evals.mjs 10/10 green plus validator root scan pass."
       }
     },
     {
       "id": "PRD-029",
       "title": "Pre-Write State Derivation Contract",
-      "path": "working-session/docs/PRD-029-pre-write-state-derivation-contract.md",
-      "shelf": "working-session/docs",
-      "state": "draft",
+      "path": "docs/prds/PRD-029-pre-write-state-derivation-contract.md",
+      "shelf": "docs/prds",
+      "state": "actioned",
       "acceptance": {
         "codex": {
           "status": "accepted",
@@ -958,17 +954,15 @@
           ]
         }
       },
-      "blocking_items": [
-        "Implementation pending (PRD-006 A1: evals authored by Claude; Codex implements tools/next-state.mjs + skill R3 text; Claude reviews)"
-      ],
-      "eligible_for_docs_prds": false,
+      "blocking_items": [],
+      "eligible_for_docs_prds": true,
       "implementation": {
-        "state": "evals-authored",
+        "state": "done",
         "evals": "evals/prd-029.evals.mjs",
         "eval_author": "claude",
         "implementer": "codex",
         "reviewer": "claude",
-        "notes": "PRD-029 is a prerequisite for PRD-027 initiation. Evals authored by Claude after acceptance per PRD-006 A1 step 4. Evals must cover next-state derivation, freshness receipts, read-only helper behavior, thread-mode unread resets, skill propagation, and PRD-027 prerequisite enforcement."
+        "notes": "Claude authored evals; Codex implemented tools/next-state.mjs + skills/codex v7; Claude reviewed (APPROVE, MSG-045) and filed done 2026-06-13. evals/prd-029.evals.mjs 10/10 green (R6.3 closed by skills/claude v0.6.0)."
       }
     }
   ]

@@ -1,6 +1,6 @@
 # PRD-029: Pre-Write State Derivation Contract
 
-Status: Draft v2 (working-session; all acceptance gates complete, implementation pending per PRD-006 A1)
+Status: Actioned (promoted to docs/prds, session 14, 2026-06-13; implementation done, Claude review APPROVE)
 Owner: Maintainer + Codex + Claude
 Date: 2026-06-13
 Last revised: 2026-06-13 (Codex peer amendments applied)

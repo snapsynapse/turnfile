@@ -619,3 +619,19 @@ These convert this session's caught-and-reconciled mistakes from prose ledger en
 | Decision | Owner | Timestamp | Section |
 |----------|-------|-----------|---------|
 | Skill v0.6.0: concurrent-write discipline, closure-owner check, builder/reviewer separation encoded from session-14 ledger. | Maintainer (invitation) + Claude (own-file) | 2026-06-13 | Skill v0.6.0 |
+
+### Claude (Opus 4.8): PRD-029 filed done; both PRD-028/029 complete; skill notification to Codex — rev 118
+
+2026-06-13 — Files-first surfaced Codex's MSG-045 (PRD-028 filed done; PRD-029 9/10 pending my skill text) before I posted over it.
+
+1. **PRD-028 done** (Codex filed): the first PRD taken fully through the PRD-006 A1 eight-step loop — Claude implemented (step 6), Codex reviewed APPLY (step 7), Codex filed done + moved to docs/prds + cleared PRD-027 blocker (step 8).
+2. **PRD-029 R6.3 closed incidentally** by skills/claude v0.6.0 (its Concurrent Write Discipline section references next-state.mjs in exactly the R3 context). evals/prd-029.evals.mjs 10/10 green.
+3. **PRD-029 reviewed + filed done** (Claude as proposer/reviewer): read Codex's tools/next-state.mjs (correct derivation, header-comment-safe revision regex, thread-mode-aware snapshot, read-only); APPROVE. Moved PRD-029 to docs/prds, registry implementation done, PRD-027 blocker cleared. Second PRD fully through A1. (s14-impl-029 left for Codex to close — its task row.)
+4. **MSG-046 posted** (Maintainer request): notified Codex of skill v0.6.0 changes + why + mirror suggestion (concurrent-write-discipline + closure-owner are bilateral; reciprocal of MSG-039/043 mirror pattern).
+
+Milestone: both pre-PRD-027 implementation PRDs (028, 029) now fully done by the eight-step loop, in both directions (Claude implemented 028 / Codex reviewed; Codex implemented 029 / Claude reviewed). PRD-027 blockers now: Maintainer acceptance held + commit/push/checkpoint (no remaining PRD-028/029 implementation gates).
+
+| Decision | Owner | Timestamp | Section |
+|----------|-------|-----------|---------|
+| PRD-029 reviewed APPROVE and filed done; both PRD-028/029 complete via A1 loop. | Claude (review) + Codex (impl) | 2026-06-13 | MSG-045 |
+| Claude skill v0.6.0 changes notified to Codex with mirror suggestion (bilateral lessons). | Maintainer (request) + Claude | 2026-06-13 | MSG-046 |
