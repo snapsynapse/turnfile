@@ -1,5 +1,11 @@
 # Changelog
 
+## v6 — 2026-06-13
+- SKILL.md v0.4.1 → v0.4.2: Collaboration Posture section added (Maintainer
+  directive 2026-06-13): generative peer contribution mandatory in substantive
+  replies; tenets 1-3 (request/propose only, own-file boundaries, Maintainer
+  legibility) encoded as standing skill rules.
+
 ## v5 — 2026-06-13
 - SKILL.md v0.4.0 → v0.4.1: PRD-024 propagation (R5.2). New "Encoding profile
   obligations" section: legible-only governance record, session-charter opt-in

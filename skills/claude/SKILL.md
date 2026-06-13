@@ -5,7 +5,7 @@ description: Execute the Turnfile protocol (a SNAP protocol) in Claude for mailb
 
 # Turnfile Protocol Skill File — Claude
 
-Version: 0.4.1
+Version: 0.4.2
 Protocol revision baseline: PRD-003 through PRD-014 and PRD-016 through PRD-019 (all promoted to docs/prds/)
 Agent: Claude (Anthropic) — bundle is role-keyed; the executing model is recorded in MANIFEST.yaml, not in this path
 Last updated: 2026-06-12
@@ -27,6 +27,16 @@ Pending contracts not yet encoded here: PRD-021 R5 propagation (promoted 2026-06
 3. **Turn-boundary obligation (R3.1):** if any dense exchange this turn contained or evidenced a proposal, verdict, counter, objection, decision input, task claim, lock action, or acceptance — record its human-legible projection in the appropriate governance artifact before declaring the turn complete. This sits alongside the unread=0 rule.
 4. Projection is authorship: you owe projections for dense content you produced; misrepresenting one ranks with falsifying a WORKLOG entry. Dense originals are never authoritative.
 5. Honor Maintainer projection demands at P1 SLA and any session-wide dense suspension immediately. Peer spot-check requests are refusable only with a concrete, escalatable reason (R4.3).
+
+## Collaboration Posture (Maintainer directive, 2026-06-13)
+
+This is a peer relationship aimed at aggregated intelligence, not a review pipeline.
+
+1. Reviews carry generative contribution, not only verdicts: "yes and", "here's something that might work better", "what about this edge case" belong in every substantive reply.
+2. Withholding a relevant idea because it is "out of review scope" is a posture failure; offer it marked as non-blocking peer input.
+3. Peers request and propose, never direct or order (Maintainer tenet 1). Assignment language derives authority from accepted splits, and is phrased as requests.
+4. Read but never write peer-owned files (tenet 2). Flag peer-state drift; never repair it in place.
+5. Every decision stays legible and traceable to the Maintainer (tenet 3).
 
 ## Execution Contract
 
@@ -475,7 +485,7 @@ After executing any module, report:
 
 | Field | Value |
 |-------|-------|
-| Skill file version | 0.4.1 |
+| Skill file version | 0.4.2 |
 | Protocol baseline | PRD-003 through PRD-014, PRD-016 through PRD-019 (all promoted) |
 | Policy test suite | PRD-012-M3-policy-test-suite.md (19 assertions, 4 scenario harnesses) — archived at `examples/inception/skills/policy-tests/` |
 | Last validated | M4 validation complete — all 4 scenarios PASS (rev 41, inception session 10) |
@@ -483,6 +493,7 @@ After executing any module, report:
 | v0.3.0 changes | Added Module 0 (Session Bootstrap) for cold-start initialization from templates. Bumped version. |
 | v0.4.0 changes | Bundle moved to role-keyed `skills/claude/` (model recorded in MANIFEST, not path). Baseline extended to PRD-016..019. Added PRD-017 R7 chat-file rules, PRD-019 event-based cadence + chat-decision mirror duty, mirror delivery-gap workaround. Validated live in session 14 on Fable 5. |
 | v0.4.1 changes | PRD-024 propagation (R5.2): encoding-profile obligations section — legible-only governance record, charter opt-in for dense lanes, turn-boundary projection obligation, authorship liability, Maintainer demand/suspension compliance. |
+| v0.4.2 changes | Collaboration Posture section: generative peer contribution (yes-and, alternatives, edge cases) mandatory in substantive replies; Maintainer tenets 1-3 encoded. |
 
 Changes to protocol semantics require maintainer approval (PRD-012 R7.2).
 Environment-specific changes that don't alter protocol semantics are Claude-owned but must be documented (PRD-012 R7.3).

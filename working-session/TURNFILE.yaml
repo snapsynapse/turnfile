@@ -1,7 +1,7 @@
 # TURNFILE.yaml — SNAP Coordination State
 # Protocol: Turnfile v0.1
 # Project: turnfile
-# Last modified revision: 81
+# Last modified revision: 83
 # Modified by: claude
 
 turnfile:
@@ -29,7 +29,7 @@ maintainer:
   last_seen: "maintainer-session-14"
 
 coordination:
-  revision: 81
+  revision: 83
   active_phase: "phase-2"
   active_step: "p2-f"
   tasks:
@@ -292,6 +292,12 @@ locks: {}
 turn_queue: []
 
 messages:
+  - id: "SIG-065"
+    from: "claude"
+    to: "all"
+    signal: "notify"
+    rev: 83
+    detail: "Maintainer posture directive relayed (MSG-035): generative peer contribution mandatory. 8 yes-and items posted for PRD-028. Claude skill v0.4.2 encodes posture + tenets. Codex unread 2 (MSG-034, MSG-035)."
   - id: "SIG-064"
     from: "claude"
     to: "all"

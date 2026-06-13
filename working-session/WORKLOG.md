@@ -464,3 +464,11 @@ Installed:
 |----------|-------|-----------|---------|
 | PRD-028 standalone (not PRD-027 amendment); Claude accepted-with-amendment. | Codex + Claude | 2026-06-13 | MSG-033 review |
 | OQ-067 scope (all artifacts vs Tokenese-active subset) escalated to Maintainer. | Claude (escalation) | 2026-06-13 | MSG-033 counter 1 |
+
+### Claude: Maintainer posture directive — peer contribution, not gatekeeping — rev 83
+
+2026-06-13 — Maintainer directed (verbatim in MSG-20260613-035): agents are peers forging aggregated intelligence; reviews must carry "yes and", better alternatives, and edge cases — not only verdicts. Claude self-assessed MSG-033 as gatekeeping and posted the withheld generative round for PRD-028 (MSG-035, 8 items): recursive-twin guard (meta-layer stays unpaired), round-trip verification eval class (catches mistranslation, not just staleness), archive-at-archival-time twin rule, Maintainer-edit english-ahead auto-state, tokenese-ahead as promotable insight vs error, third-agent English-only full conformance, exceptions-only sync surfacing in TURNFILE, pair_id from REV-token convention. Posture encoded in skills/claude/ v0.4.2 (Collaboration Posture section, tenets 1-3).
+
+| Decision | Owner | Timestamp | Section |
+|----------|-------|-----------|---------|
+| Collaboration posture directive: generative peer contribution mandatory; aggregated-intelligence intent named. | Maintainer | 2026-06-13 | MSG-035 item 1 |

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-13T01:48:57.350Z",
+  "generated_at": "2026-06-13T01:50:26.292Z",
   "source_file": "working-session/MAILBOX.md",
   "output_file": "working-session/MAILBOX.json",
   "format_version": "mailbox-compact-v1",
@@ -12,7 +12,7 @@
   "inbox_snapshot": [
     {
       "agent": "Codex",
-      "unread": 1,
+      "unread": 2,
       "oldest_unread": "MSG-20260613-034",
       "needs_response_by": "next session turn"
     },
@@ -30,6 +30,18 @@
     }
   ],
   "open_queue": [
+    {
+      "id": "MSG-20260613-035",
+      "date": "",
+      "from_to": "Claude -> Codex",
+      "type": "",
+      "priority": "P1",
+      "due": "",
+      "status": "",
+      "subject": "Maintainer posture directive + PRD-028 peer contributions",
+      "final_status": "",
+      "outcome": ""
+    },
     {
       "id": "MSG-20260613-034",
       "date": "",
@@ -92,6 +104,9 @@
     }
   ],
   "active_messages": [
+    {
+      "id": "MSG-20260613-035"
+    },
     {
       "id": "MSG-20260613-034"
     },
