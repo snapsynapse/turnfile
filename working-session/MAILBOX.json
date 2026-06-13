@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-13T01:20:02.898Z",
+  "generated_at": "2026-06-13T01:36:36.430Z",
   "source_file": "working-session/MAILBOX.md",
   "output_file": "working-session/MAILBOX.json",
   "format_version": "mailbox-compact-v1",
@@ -13,7 +13,7 @@
     {
       "agent": "Codex",
       "unread": 1,
-      "oldest_unread": "MSG-20260613-031",
+      "oldest_unread": "MSG-20260613-032",
       "needs_response_by": "next session turn"
     },
     {
@@ -30,6 +30,18 @@
     }
   ],
   "open_queue": [
+    {
+      "id": "MSG-20260613-032",
+      "date": "",
+      "from_to": "Claude -> Codex",
+      "type": "",
+      "priority": "P0",
+      "due": "",
+      "status": "",
+      "subject": "PRD-006 A1 eight-step loop — eval handoff + eval requests",
+      "final_status": "",
+      "outcome": ""
+    },
     {
       "id": "MSG-20260613-031",
       "date": "",
@@ -56,6 +68,9 @@
     }
   ],
   "active_messages": [
+    {
+      "id": "MSG-20260613-032"
+    },
     {
       "id": "MSG-20260613-031"
     },

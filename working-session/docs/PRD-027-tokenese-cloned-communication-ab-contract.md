@@ -1,6 +1,6 @@
 # PRD-027: Tokenese Cloned-Communication A/B Contract
 
-Status: Draft v2 (working-session; agent-accepted, Maintainer acceptance pending)
+Status: Draft v2 (working-session; agent-accepted, Maintainer hold pending completion checkpoint)
 Owner: Maintainer + Codex + Claude
 Date: 2026-06-13
 Last revised: 2026-06-13 (Claude counters applied by Codex)
@@ -11,8 +11,8 @@ Last revised: 2026-06-13 (Claude counters applied by Codex)
 |------|--------|----------|
 | Codex acceptance | accepted | author; Claude teach-gate and channel-trust counters applied 2026-06-13 |
 | Claude acceptance | accepted | MSG-20260613-029 reply: APPLY with 2 counters (teach-phase production-competence gate; untrusted self-reported channels until calibration) |
-| Maintainer acceptance | pending | Maintainer clarified on 2026-06-13 that PRD-027 is for cloning existing Turnfile communications into Tokenese for A/B measurement, not replacing or changing existing communications |
-| Eligible for move to `docs/prds` | no | blocked until all acceptances + zero blockers in PRD_STATUS.json |
+| Maintainer acceptance | held | Maintainer clarified on 2026-06-13 that PRD-027 is for cloning existing Turnfile communications into Tokenese for A/B measurement, not replacing or changing existing communications; Maintainer then held approval until every other PRD item is complete, followed by commit, push, and checkpoint discussion |
+| Eligible for move to `docs/prds` | no | blocked until Maintainer hold is released after completion register, commit, push, and checkpoint discussion |
 
 ## Input Provenance Tags
 

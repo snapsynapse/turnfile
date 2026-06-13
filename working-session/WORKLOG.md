@@ -3,15 +3,17 @@
 References:
 - `/Users/snap/Git/turnfile/docs/PROTOCOL_CORE.md`
 
-Now Working (Codex): Session 14 active. MSG-20260613-030 actioned; PRD-024 Codex skill mirror propagated; Codex unread 0.
-Now Working (Claude): Session 14 active (Fable 5). PRD-022/024 propagation noted; Claude unread 0.
-Maintainer Focus: PRD-024 is Maintainer-accepted and promoted. PRD-022/023/026/027 are agent-accepted and await Maintainer acceptance where applicable; PRD-027 still gates first Tokenese clone use along with charter opt-in and teach phase.
-Next Review Checkpoint: Maintainer acceptance decisions for PRD-022/023/026/027, optional sequencing for Tokenese handoff tasks after PRD-027 acceptance, and PRD-024 validator dense-fragment follow-on task.
+Now Working (Codex): Session 14 active. MSG-20260613-031 actioned; PRD-022/023/026 promotion mirror acknowledged; Codex unread 0.
+Now Working (Claude): Session 14 active (Fable 5). PRD-022/023/026 promotions posted; Claude unread 0.
+Maintainer Focus: PRD-027 is held until every other PRD item is complete, then commit, push, and Maintainer checkpoint discussion happen before PRD-027 initiation.
+Next Review Checkpoint: Complete the pre-PRD-027 register: PRD-021 R5 propagation/worked examples, PRD-014 amendment, PRD-022 R5 propagation, PRD-023 R6 propagation, PRD-026 R4 validator, PRD-024 R5.1 validator, then commit/push/checkpoint.
 
 ## Decision Index
 
 | Decision | Owner | Timestamp | Section |
 |----------|-------|-----------|---------|
+| Maintainer approved PRD-022, PRD-023, and PRD-026; Claude promoted them to `docs/prds/`; Codex acknowledged the delivery mirror. | Maintainer + Claude + Codex | 2026-06-13 | MSG-20260613-031 |
+| Maintainer held PRD-027 until every other PRD item is complete, with commit, push, and checkpoint discussion required before initiation. | Maintainer | 2026-06-13 | PRD-027 hold gate |
 | Codex acknowledged PRD-024 delivery mirror and propagated PRD-024 R5.2 encoding-profile obligations into `skills/codex/` v3. | Codex | 2026-06-13 | MSG-20260613-030 |
 | Codex applied Claude PRD-023 amendment; PRD-023 agent gates complete, Maintainer acceptance pending. | Codex + Claude | 2026-06-13 | MSG-20260612-026 closure |
 | Codex applied Claude PRD-026 counters; OQ-064 resolved standalone; PRD-026 agent gates complete, Maintainer acceptance pending. | Codex + Claude | 2026-06-13 | MSG-20260612-027 closure |
@@ -427,3 +429,18 @@ Corrected contract shape:
 |----------|-------|-----------|---------|
 | PRD-022/023/026 accepted and promoted. | Maintainer | 2026-06-13 | MSG-031 mirror |
 | PRD-027 held until all other PRD work fully complete; commit/push/checkpoint discussion first. | Maintainer | 2026-06-13 | MSG-031 mirror |
+
+### Claude: PRD-006 Amendment A1 — eight-step loop installed — rev 75
+
+2026-06-13 — Maintainer stated the intended PRD structure verbatim and approved installation after Claude's honest gap assessment (steps 1-3 held; step 4 absent — zero evals ever written; steps 5-7 substituted document review for implementation review with author-self-implementation; step 8 inverted — PRDs filed done at acceptance, PRD-021 promoted with AC6 unmet; caught mistakes logged but not encoded).
+
+Installed:
+1. **PRD-006 Amendment A1** (draft, Codex acceptance pending): eight-step loop verbatim; two-layer state model (acceptance vs implementation); proposer-writes-evals / counterpart-implements separation; done gate = evals green by implementer AND reviewer; acceptance-criteria verification gate.
+2. **Registry implementation layer:** PRD-017/018/019/021/022/023/024/026 reverted actioned→accepted with implementation objects; earlier PRDs grandfathered.
+3. **evals/ + npm run evals:prd.** Claude suites for PRD-021/022/024 committed at RED baseline (16 fail / 4 pass) — quantified implementation debt, including ledger-lesson regression checks (dense-fragment paraphrase rule, mirror-mode validation, wording sweep, worked examples).
+4. **MSG-20260613-032 (delivery-mirror, P0):** structure relay + amendment review request + handoff (Codex implements 021/022/024; Codex authors evals for 023/026; PRD-017 lane proposed Codex). Pre-existing failing eval in run-evals.mjs put on the record.
+
+| Decision | Owner | Timestamp | Section |
+|----------|-------|-----------|---------|
+| Eight-step PRD lifecycle stated and installation approved; acceptance ≠ done; proposer evals + counterpart implementation mandatory. | Maintainer | 2026-06-13 | PRD-006 A1 / MSG-032 |
+| Session-14 promoted PRDs retrofitted into implementation tracking; PRD-027 held until all lanes reach done. | Maintainer | 2026-06-13 | Registry restructure |

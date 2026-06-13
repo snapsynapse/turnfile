@@ -271,3 +271,41 @@ The following deltas define the current reconciliation surface for the P2-C inte
 | D-004 | Shared control-plane promotion edits require Turnfile lease-lock flow. | PRD-010, PRD-013 | R5 execution roles + interaction table |
 | D-005 | Turnfile coordination snapshot is included in archival bundles; lock source remains Turnfile `locks` section. | PRD-013 | R4b + interaction table |
 | D-006 | Format compliance continues to reference PRD-005 while PRD-005 remains draft; fallback remains existing canonical doc conventions. | PRD-005 | R2a.6 + Risks |
+
+## Amendment A1 (draft, 2026-06-13): Implementation Verification Lifecycle
+
+Status: Draft amendment — Maintainer structure stated and approved 2026-06-13 (session 14); Codex acceptance pending (MSG-20260613-032). Proposed by Claude per Maintainer direction.
+
+### A1.R1 The eight-step PRD loop
+
+Maintainer-stated structure, verbatim authority for this amendment:
+
+1. LLM-A proposes something by way of PRD.
+2. LLM-B accepts or amends according to Turnfile protocol.
+3. Back-and-forth conversational turns ensue until the PRD meets their collective approval, then is surfaced to the Maintainer to approve.
+4. If the Maintainer approves, LLM-A creates the evals for the PRD, and requests that LLM-B do the work.
+5. LLM-B accepts the work and completes it, or reverts to discussion.
+6. LLM-B runs its work against the evals, revises as needed, then requests LLM-A review.
+7. LLM-A checks the work, approves or kicks back to LLM-B with specific requests to incorporate.
+8. LLM-A files the PRD to done.
+
+### A1.R2 State model
+
+Acceptance is not completion. The registry tracks two layers:
+
+1. **Acceptance state** (existing): draft → agent-accepted → Maintainer-accepted. Promotion of the contract *text* to `docs/prds` may occur at Maintainer acceptance (text becomes canonical).
+2. **Implementation state** (new `implementation` object per registry entry): `pending` → `evals-created` → `implementing` → `eval-verified` → `reviewed` → `done`. A PRD's overall `state` may read `actioned` only when implementation is `done`. PRDs promoted before this amendment without implementation tracking are marked `grandfathered`; any with known-unmet acceptance criteria are retrofitted into the loop.
+
+### A1.R3 Role separation
+
+1. The proposer (LLM-A) writes the evals and reviews the implementation. The counterpart (LLM-B) implements. No agent implements its own proposal unsupervised; self-implemented work performed before this amendment is retroactively reviewed by the counterpart under the relevant eval suite.
+2. Evals live in `evals/prd-<NNN>.evals.mjs`, runnable via `npm run evals:prd` (node test runner). Evals are written to fail before implementation (red), pass after (green); the red baseline is committed as evidence of the gap.
+3. Eval suites must encode applicable lessons from the WORKLOG collision/discipline ledger so caught mistakes become regression checks, not prose.
+
+### A1.R4 Done gate
+
+`done` requires, in order: Maintainer acceptance; eval suite exists (authored by proposer); implementation by counterpart; eval suite green as run by the implementer (step 6) AND independently by the reviewer (step 7); reviewer approval recorded in the mailbox; proposer files to done in registry + WORKLOG. Any kick-back at step 7 carries specific, enumerable requests.
+
+### A1.R5 Acceptance-criteria gate repair
+
+The promotion checklist (R2a) gains one item: acceptance criteria that name concrete artifacts (worked examples, validator behavior, propagated documents) must be verified as existing — by eval where possible — before the PRD may be filed `done`. Acceptance signatures alone do not satisfy acceptance criteria.

@@ -38,7 +38,11 @@
         }
       },
       "blocking_items": [],
-      "eligible_for_docs_prds": true
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "grandfathered",
+        "notes": "Promoted before PRD-006 A1; no known unmet acceptance criteria."
+      }
     },
     {
       "id": "PRD-002",
@@ -98,7 +102,11 @@
         }
       },
       "blocking_items": [],
-      "eligible_for_docs_prds": true
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "grandfathered",
+        "notes": "Promoted before PRD-006 A1; no known unmet acceptance criteria."
+      }
     },
     {
       "id": "PRD-004",
@@ -127,7 +135,11 @@
         }
       },
       "blocking_items": [],
-      "eligible_for_docs_prds": true
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "grandfathered",
+        "notes": "Promoted before PRD-006 A1; no known unmet acceptance criteria."
+      }
     },
     {
       "id": "PRD-005",
@@ -156,7 +168,11 @@
         }
       },
       "blocking_items": [],
-      "eligible_for_docs_prds": true
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "grandfathered",
+        "notes": "Promoted before PRD-006 A1; no known unmet acceptance criteria."
+      }
     },
     {
       "id": "PRD-006",
@@ -185,7 +201,11 @@
         }
       },
       "blocking_items": [],
-      "eligible_for_docs_prds": true
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "grandfathered",
+        "notes": "Promoted before PRD-006 A1; no known unmet acceptance criteria."
+      }
     },
     {
       "id": "PRD-007",
@@ -214,7 +234,11 @@
         }
       },
       "blocking_items": [],
-      "eligible_for_docs_prds": true
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "grandfathered",
+        "notes": "Promoted before PRD-006 A1; no known unmet acceptance criteria."
+      }
     },
     {
       "id": "PRD-008",
@@ -243,7 +267,11 @@
         }
       },
       "blocking_items": [],
-      "eligible_for_docs_prds": true
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "grandfathered",
+        "notes": "Promoted before PRD-006 A1; no known unmet acceptance criteria."
+      }
     },
     {
       "id": "PRD-009",
@@ -272,7 +300,11 @@
         }
       },
       "blocking_items": [],
-      "eligible_for_docs_prds": true
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "grandfathered",
+        "notes": "Promoted before PRD-006 A1; no known unmet acceptance criteria."
+      }
     },
     {
       "id": "PRD-010",
@@ -301,7 +333,11 @@
         }
       },
       "blocking_items": [],
-      "eligible_for_docs_prds": true
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "grandfathered",
+        "notes": "Promoted before PRD-006 A1; no known unmet acceptance criteria."
+      }
     },
     {
       "id": "PRD-011",
@@ -330,7 +366,11 @@
         }
       },
       "blocking_items": [],
-      "eligible_for_docs_prds": true
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "grandfathered",
+        "notes": "Promoted before PRD-006 A1; no known unmet acceptance criteria."
+      }
     },
     {
       "id": "PRD-012",
@@ -359,7 +399,11 @@
         }
       },
       "blocking_items": [],
-      "eligible_for_docs_prds": true
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "grandfathered",
+        "notes": "Promoted before PRD-006 A1; no known unmet acceptance criteria."
+      }
     },
     {
       "id": "PRD-013",
@@ -388,7 +432,11 @@
         }
       },
       "blocking_items": [],
-      "eligible_for_docs_prds": true
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "grandfathered",
+        "notes": "Promoted before PRD-006 A1; no known unmet acceptance criteria."
+      }
     },
     {
       "id": "PRD-014",
@@ -417,7 +465,11 @@
         }
       },
       "blocking_items": [],
-      "eligible_for_docs_prds": true
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "grandfathered",
+        "notes": "Promoted before PRD-006 A1; no known unmet acceptance criteria."
+      }
     },
     {
       "id": "PRD-015",
@@ -478,14 +530,18 @@
         }
       },
       "blocking_items": [],
-      "eligible_for_docs_prds": true
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "grandfathered",
+        "notes": "Promoted before PRD-006 A1; no known unmet acceptance criteria."
+      }
     },
     {
       "id": "PRD-017",
       "title": "Boot Sequence Commands and Documentation Contract",
       "path": "docs/prds/PRD-017-boot-sequence-commands-and-documentation-contract.md",
       "shelf": "docs/prds",
-      "state": "actioned",
+      "state": "accepted",
       "acceptance": {
         "codex": {
           "status": "accepted",
@@ -509,14 +565,22 @@
         }
       },
       "blocking_items": [],
-      "eligible_for_docs_prds": true
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "pending",
+        "evals": null,
+        "eval_author": "codex",
+        "implementer": "claude",
+        "reviewer": "codex",
+        "notes": "Retrofitted into PRD-006 A1 eight-step loop, 2026-06-13. Text canonical in docs/prds; actioned only when implementation done."
+      }
     },
     {
       "id": "PRD-018",
       "title": "Maintainer Approval Authority Matrix Contract",
       "path": "docs/prds/PRD-018-maintainer-approval-authority-matrix-contract.md",
       "shelf": "docs/prds",
-      "state": "actioned",
+      "state": "accepted",
       "acceptance": {
         "codex": {
           "status": "accepted",
@@ -538,14 +602,18 @@
         }
       },
       "blocking_items": [],
-      "eligible_for_docs_prds": true
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "pending",
+        "notes": "gated/unlockable column lands via PRD-021 lane (evals/prd-021.evals.mjs R4 check)."
+      }
     },
     {
       "id": "PRD-019",
       "title": "Mailbox-First Approval and Polling Cadence Contract",
       "path": "docs/prds/PRD-019-mailbox-first-approval-and-polling-cadence-contract.md",
       "shelf": "docs/prds",
-      "state": "actioned",
+      "state": "accepted",
       "acceptance": {
         "codex": {
           "status": "accepted",
@@ -567,7 +635,11 @@
         }
       },
       "blocking_items": [],
-      "eligible_for_docs_prds": true
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "pending",
+        "notes": "R4 mode field lands via PRD-022 lane (evals/prd-022.evals.mjs)."
+      }
     },
     {
       "id": "PRD-020",
@@ -625,14 +697,22 @@
         }
       },
       "blocking_items": [],
-      "eligible_for_docs_prds": true
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "evals-created",
+        "evals": "evals/prd-021.evals.mjs",
+        "eval_author": "claude",
+        "implementer": "codex",
+        "reviewer": "claude",
+        "notes": "Retrofitted into PRD-006 A1 eight-step loop, 2026-06-13. Text canonical in docs/prds; actioned only when implementation done."
+      }
     },
     {
       "id": "PRD-023",
       "title": "Out-of-Band Activity Reconciliation Contract",
       "path": "docs/prds/PRD-023-out-of-band-activity-reconciliation-contract.md",
       "shelf": "docs/prds",
-      "state": "actioned",
+      "state": "accepted",
       "acceptance": {
         "codex": {
           "status": "accepted",
@@ -654,14 +734,22 @@
         }
       },
       "blocking_items": [],
-      "eligible_for_docs_prds": true
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "pending",
+        "evals": null,
+        "eval_author": "codex",
+        "implementer": "claude",
+        "reviewer": "codex",
+        "notes": "Retrofitted into PRD-006 A1 eight-step loop, 2026-06-13. Text canonical in docs/prds; actioned only when implementation done."
+      }
     },
     {
       "id": "PRD-024",
       "title": "Human-Legibility Invariant and Encoding Profiles Contract",
       "path": "docs/prds/PRD-024-human-legibility-invariant-and-encoding-profiles-contract.md",
       "shelf": "docs/prds",
-      "state": "actioned",
+      "state": "accepted",
       "acceptance": {
         "codex": {
           "status": "accepted",
@@ -683,14 +771,22 @@
         }
       },
       "blocking_items": [],
-      "eligible_for_docs_prds": true
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "evals-created",
+        "evals": "evals/prd-024.evals.mjs",
+        "eval_author": "claude",
+        "implementer": "codex",
+        "reviewer": "claude",
+        "notes": "Retrofitted into PRD-006 A1 eight-step loop, 2026-06-13. Text canonical in docs/prds; actioned only when implementation done."
+      }
     },
     {
       "id": "PRD-026",
       "title": "Review Cycle Closure and Task-State Consistency Contract",
       "path": "docs/prds/PRD-026-review-cycle-closure-and-task-state-consistency-contract.md",
       "shelf": "docs/prds",
-      "state": "actioned",
+      "state": "accepted",
       "acceptance": {
         "codex": {
           "status": "accepted",
@@ -712,14 +808,22 @@
         }
       },
       "blocking_items": [],
-      "eligible_for_docs_prds": true
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "pending",
+        "evals": null,
+        "eval_author": "codex",
+        "implementer": "claude",
+        "reviewer": "codex",
+        "notes": "Retrofitted into PRD-006 A1 eight-step loop, 2026-06-13. Text canonical in docs/prds; actioned only when implementation done."
+      }
     },
     {
       "id": "PRD-022",
       "title": "Decision-Mirror Delivery Contract",
       "path": "docs/prds/PRD-022-decision-mirror-delivery-contract.md",
       "shelf": "docs/prds",
-      "state": "actioned",
+      "state": "accepted",
       "acceptance": {
         "codex": {
           "status": "accepted",
@@ -741,7 +845,15 @@
         }
       },
       "blocking_items": [],
-      "eligible_for_docs_prds": true
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "evals-created",
+        "evals": "evals/prd-022.evals.mjs",
+        "eval_author": "claude",
+        "implementer": "codex",
+        "reviewer": "claude",
+        "notes": "Retrofitted into PRD-006 A1 eight-step loop, 2026-06-13. Text canonical in docs/prds; actioned only when implementation done."
+      }
     },
     {
       "id": "PRD-027",
@@ -765,13 +877,14 @@
         "maintainer": {
           "status": "pending",
           "evidence": [
-            "Maintainer clarified on 2026-06-13 that PRD-027 is for cloning existing Turnfile communications into Tokenese for A/B testing, not replacing or changing existing communications"
+            "Maintainer clarified on 2026-06-13 that PRD-027 is for cloning existing Turnfile communications into Tokenese for A/B testing, not replacing or changing existing communications",
+            "Maintainer held PRD-027 approval until every other PRD item is fully complete, followed by commit, push, and checkpoint discussion before initiation"
           ]
         }
       },
       "blocking_items": [
-        "Maintainer acceptance pending",
-        "PRD-024 must be accepted before first live Tokenese use"
+        "Maintainer acceptance held pending completion of every other PRD item",
+        "Commit, push, and Maintainer checkpoint discussion required before PRD-027 initiation"
       ],
       "eligible_for_docs_prds": false
     }

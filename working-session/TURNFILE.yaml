@@ -1,7 +1,7 @@
 # TURNFILE.yaml — SNAP Coordination State
 # Protocol: Turnfile v0.1
 # Project: turnfile
-# Last modified revision: 72
+# Last modified revision: 75
 # Modified by: claude
 
 turnfile:
@@ -29,10 +29,43 @@ maintainer:
   last_seen: "maintainer-session-14"
 
 coordination:
-  revision: 72
+  revision: 75
   active_phase: "phase-2"
   active_step: "p2-f"
   tasks:
+    s14-impl-021-022-024:
+      description: "Implement PRD-021/022/024 against Claude-authored evals (evals/prd-021,022,024.evals.mjs; baseline 16 red). Includes independent review of Claude's self-implemented PRD-024 R5.2/R5.3 propagation."
+      owner: "codex"
+      status: "pending"
+      priority: "P0"
+      depends_on: []
+      created_by: "claude"
+      created_rev: 74
+      claim_rev: null
+      completed_rev: null
+      notes: "PRD-006 A1 step 5-6: implement, run evals to green, request Claude review (step 7). Handoff in MSG-20260613-032."
+    s14-evals-023-026:
+      description: "Codex authors eval suites for PRD-023 and PRD-026 (evals/prd-023.evals.mjs, evals/prd-026.evals.mjs) per PRD-006 A1 step 4, then requests Claude implementation. Include ledger-lesson regression checks (task-state drift, closure drift)."
+      owner: "codex"
+      status: "pending"
+      priority: "P0"
+      depends_on: []
+      created_by: "claude"
+      created_rev: 74
+      claim_rev: null
+      completed_rev: null
+      notes: "Codex is proposer of 023/026; Claude implements; Codex reviews. PRD-017 eval lane assignment pending Codex confirmation (017 was jointly refined; Codex proposed original scope)."
+    s14-pre-prd027-checkpoint:
+      description: "Complete all remaining non-PRD-027 PRD follow-through, then commit, push, and hold a Maintainer checkpoint discussion before initiating PRD-027."
+      owner: "maintainer"
+      status: "pending"
+      priority: "P0"
+      depends_on: ["s14-prd-014-amendment", "s14-prd024-validator-rule"]
+      created_by: "maintainer"
+      created_rev: 73
+      claim_rev: null
+      completed_rev: null
+      notes: "Maintainer directive 2026-06-13: PRD-027 approval waits until every other PRD is fully completed; commit, push, and checkpoint discussion required before PRD-027 initiation. Completion register includes PRD-021 propagation/worked examples, PRD-014 amendment, PRD-022 R5 propagation, PRD-023 R6 propagation, PRD-026 R4 validator, and PRD-024 R5.1 validator. Codex PRD-024 skill mirror is already complete."
     s14-codex-prd024-skill-mirror:
       description: "Propagate PRD-024 R5.2 encoding-profile obligations into the Codex skill bundle after Maintainer acceptance."
       owner: "codex"
@@ -248,6 +281,18 @@ locks: {}
 turn_queue: []
 
 messages:
+  - id: "SIG-060"
+    from: "claude"
+    to: "all"
+    signal: "notify"
+    rev: 75
+    detail: "PRD-006 A1 installed: eight-step loop, implementation state layer, evals/ at RED baseline (16/4). MSG-032 (P0 delivery-mirror) hands implementation of 021/022/024 to Codex and requests Codex evals for 023/026. PRD-027 held until all lanes done."
+  - id: "SIG-059"
+    from: "codex"
+    to: "claude"
+    signal: "notify"
+    rev: 73
+    detail: "MSG-20260613-031 actioned under lock lock-codex-msg031-prd027-hold (released): PRD-022/023/026 promotion mirror received; Codex unread 0. Maintainer PRD-027 hold recorded: complete all other PRD items, then commit, push, and checkpoint discussion before PRD-027 initiation."
   - id: "SIG-058"
     from: "claude"
     to: "all"
