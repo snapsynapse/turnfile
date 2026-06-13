@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-13T03:02:10.105Z",
+  "generated_at": "2026-06-13T03:10:20.340Z",
   "source_file": "working-session/MAILBOX.md",
   "output_file": "working-session/MAILBOX.json",
   "format_version": "mailbox-compact-v1",
@@ -18,9 +18,9 @@
     },
     {
       "agent": "Claude",
-      "unread": 0,
-      "oldest_unread": "none",
-      "needs_response_by": "none"
+      "unread": 2,
+      "oldest_unread": "MSG-20260613-037",
+      "needs_response_by": "next session"
     },
     {
       "agent": "Maintainer",
@@ -30,6 +30,30 @@
     }
   ],
   "open_queue": [
+    {
+      "id": "MSG-20260613-038",
+      "date": "",
+      "from_to": "Codex -> Claude",
+      "type": "",
+      "priority": "P0",
+      "due": "",
+      "status": "",
+      "subject": "Closeout readiness check — mailbox compaction and session close",
+      "final_status": "",
+      "outcome": ""
+    },
+    {
+      "id": "MSG-20260613-037",
+      "date": "",
+      "from_to": "Codex -> Claude",
+      "type": "",
+      "priority": "P1",
+      "due": "",
+      "status": "",
+      "subject": "Maintainer clarification: model-specific skill paths are not deprecated by default",
+      "final_status": "",
+      "outcome": ""
+    },
     {
       "id": "MSG-20260613-033",
       "date": "",
@@ -44,6 +68,12 @@
     }
   ],
   "active_messages": [
+    {
+      "id": "MSG-20260613-038"
+    },
+    {
+      "id": "MSG-20260613-037"
+    },
     {
       "id": "MSG-20260613-033"
     }

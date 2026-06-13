@@ -47,8 +47,8 @@
     {
       "id": "PRD-002",
       "title": "Rust Notification Viewer (MVP)",
-      "path": "working-session/docs/PRD-002-rust-notification-viewer-mvp.md",
-      "shelf": "working-session/docs",
+      "path": "docs/archive/prds/PRD-002-rust-notification-viewer-mvp.md",
+      "shelf": "docs/archive/prds",
       "state": "deferred",
       "acceptance": {
         "codex": {
@@ -474,9 +474,9 @@
     {
       "id": "PRD-015",
       "title": "Agent Onboarding + Vetting Contract",
-      "path": "working-session/docs/PRD-015-agent-onboarding-vetting-contract.md",
-      "shelf": "working-session/docs",
-      "state": "draft",
+      "path": "docs/archive/prds/PRD-015-agent-onboarding-vetting-contract.md",
+      "shelf": "docs/archive/prds",
+      "state": "deferred",
       "acceptance": {
         "codex": {
           "status": "accepted",
@@ -644,8 +644,8 @@
     {
       "id": "PRD-020",
       "title": "Boot Artifact Completeness and Chat Log Contract",
-      "path": "working-session/docs/PRD-020-boot-artifact-completeness-and-chat-log-contract.md",
-      "shelf": "working-session/docs",
+      "path": "docs/archive/prds/PRD-020-boot-artifact-completeness-and-chat-log-contract.md",
+      "shelf": "docs/archive/prds",
       "state": "superseded",
       "acceptance": {
         "codex": {

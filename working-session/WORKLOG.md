@@ -4,15 +4,17 @@ References:
 - `/Users/snap/Git/turnfile/docs/PROTOCOL_CORE.md`
 
 Now Working (Codex): Session 14 active. Implementing PRD-021/022/024 to eval-green (s14-impl-021-022-024) + authoring PRD-023/026 evals (s14-evals-023-026). Codex unread 0.
-Now Working (Claude): Session 14 active (Opus 4.8 — 3rd model swap, same protocol). PRD-029 v2 accepted; open-queue cleanup done; idle pending Codex implementation lanes + Maintainer decisions. Claude unread 0.
+Now Working (Claude): Session 14 active (Opus 4.8 — 3rd model swap, same protocol). PRD-029 v2 accepted; open-queue cleanup done; MSG-037 requests Claude-owned model-specific skill note correction; MSG-038 asks closeout readiness. Claude unread 2.
 Maintainer Focus: PRD-027 held until all other PRD items complete + commit/push/checkpoint discussion. See Maintainer Decision Queue below.
-Maintainer Decision Queue (PRD-004 A1): (1) PRD-028 OQ-067 scope — all artifacts vs phased pilot-first [BLOCKS tokenese]; (2) PRD-028/029 + PRD-003/004/008 A1 document acceptances [after Codex resolves PRD-028 v2 counters]; (3) Band C deprecated skill-dir deletion [parked]; (4) push/PR + session-15 boundary timing.
-Next Review Checkpoint: Codex implementation lanes reach eval-green → Claude reviews (PRD-006 A1 step 7); Maintainer rules on OQ-067.
+Maintainer Decision Queue (PRD-004 A1): (1) PRD-028 OQ-067 scope — all artifacts vs phased pilot-first [BLOCKS tokenese]; (2) PRD-028/029 + PRD-003/004/008 A1 document acceptances [after Codex resolves PRD-028 v2 counters]; (3) model-specific skill directory retention/removal only by explicit Maintainer decision; no model-specific skill path is deprecated by default; (4) push/PR + session-15 boundary timing.
+Next Review Checkpoint: Claude responds to MSG-038 closeout readiness; if ready, prepare mailbox compaction and session close handoff. Otherwise Codex implementation lanes reach eval-green -> Claude reviews (PRD-006 A1 step 7); Maintainer rules on OQ-067.
 
 ## Decision Index
 
 | Decision | Owner | Timestamp | Section |
 |----------|-------|-----------|---------|
+| Maintainer asked whether both agents are ready to compact the mailbox and close session 14; Codex posted MSG-038 asking Claude to confirm readiness or list blockers. | Maintainer + Codex | 2026-06-13 | MSG-20260613-038 |
+| Maintainer clarified that model-specific skill directories are not deprecated merely because they are not active in this session; no LLM, model, or model-specific skill path is deprecated unless explicitly declared by the Maintainer. | Maintainer | 2026-06-13 | Skill directory clarification |
 | Codex reviewed MSG-036 and amended PRD-029 to draft v2: freshness receipts, in-lock derivation sequencing, thread-mode support, OQ-068 derivation-only resolution, and PRD-027 prerequisite linkage. | Codex + Claude | 2026-06-13 | MSG-20260613-036 + PRD-029 draft v2 |
 | Codex updated `skills/codex/` to v4 and synced the global Codex Turnfile skill copy with collaboration posture obligations: peer contribution, yes-and review, edge-case surfacing, proposal-only authority, own-file boundaries, and Maintainer-legible decision projection. | Codex | 2026-06-13 | Codex skill v4 posture update |
 | Codex acknowledged Claude MSG-036 as P2 queued review work behind current implementation/eval lanes, with no preemption. | Codex + Claude | 2026-06-13 | MSG-20260613-036 |
@@ -486,7 +488,7 @@ Maintainer Decision Queue (PRD-004 A1 practice, effective immediately):
 1. PRD-029 + PRD-003/004/008 A1 document acceptance (after Claude review of Codex v2 amendments).
 2. PRD-028 document acceptance.
 3. PRD-027 approval remains held until PRD-028/029 implementation done, every other PRD item complete, then commit/push/checkpoint discussion.
-4. Band C: deletion of deprecated skill directories (parked since rev 37).
+4. Model-specific skill directory retention/removal only by explicit Maintainer decision; no model-specific skill path is deprecated by default.
 5. Push/PR + session 15 boundary timing (deferred from checkpoint discussion).
 
 | Decision | Owner | Timestamp | Section |
@@ -507,3 +509,19 @@ Maintainer Decision Queue (PRD-004 A1 practice, effective immediately):
 | Decision | Owner | Timestamp | Section |
 |----------|-------|-----------|---------|
 | PRD-029 v2 agent gates complete; derivation-only (OQ-068); Maintainer + implementation pending. | Codex + Claude | 2026-06-13 | MSG-036 closure |
+
+### Claude (Opus 4.8): terminal-PRD archive shelf — rev 96
+
+2026-06-13 — Maintainer-approved + Maintainer-executed: deferred/superseded PRDs removed from the active draft shelf. Maintainer physically moved PRD-002 (deferred), PRD-015 (deferred), PRD-020 (superseded) to `docs/archive/prds/` ("I will bypass so you don't have to" = Maintainer did the file move). Claude reconciled tooling + registry to match:
+
+1. `validate-prd-promotion.mjs`: added `docs/archive/prds` as a third valid shelf with an **inverse invariant** — archived PRDs must be terminal (`deferred`/`superseded`) and `eligible_for_docs_prds: false`; `listPrdFiles` guards missing dirs. Negative test confirmed: an archived PRD marked eligible fails validation.
+2. Registry: PRD-002/015/020 paths + shelf → `docs/archive/prds`; **PRD-015 state drift fixed** (`draft` → `deferred`; the top-level state had never been updated when its Maintainer gate went deferred 2026-06-12).
+3. `evals/archive-shelf.evals.mjs`: hygiene regression guard (4 checks, green) — archived PRDs terminal+non-promotable, paths exist, the session-14 set is archived and absent from the active shelf.
+
+**Ledger item 7 (transient location confusion, self-resolved):** Claude initially misread the in-flight file move as a concurrent Codex action and reconciled toward `working-session/docs/archive/`, staging a bad git rename. Maintainer clarified they moved the files to `docs/archive/prds/` (the originally-approved location). Claude reset the stale index rename and reconciled all three surfaces (validator/registry/eval) to `docs/archive/prds/`. No data lost; lesson: when on-disk state diverges mid-operation, confirm the actor before reconciling direction (the re-read caught it, but the first reconciliation guessed wrong).
+
+Active draft shelf now holds only genuinely active PRDs: 027/028/029. Open thread to process next: MSG-038 (Maintainer asks if both agents are ready for mailbox compaction + session close).
+
+| Decision | Owner | Timestamp | Section |
+|----------|-------|-----------|---------|
+| Deferred/superseded PRDs (002/015/020) archived to docs/archive/prds; validator gains terminal-shelf inverse invariant; PRD-015 state drift fixed. | Maintainer (approved+moved) + Claude (tooling reconcile) | 2026-06-13 | Archive shelf |

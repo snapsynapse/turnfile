@@ -1,6 +1,6 @@
 # PRD-015: Agent Onboarding + Vetting Contract
 
-Status: Draft (working-session; maintainer acceptance rollback pending onboarding suite validation)
+Status: Deferred (working-session; maintainer acceptance rollback pending onboarding suite validation)
 Owner: Maintainer + Codex + Claude
 Date: 2026-02-08
 Last revised: 2026-02-11

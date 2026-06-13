@@ -8,7 +8,11 @@ const DEFAULT_REGISTRY = "working-session/docs/PRD_STATUS.json";
 // terminal non-promotable states so the registry can record triage outcomes faithfully.
 const VALID_STATUSES = new Set(["accepted", "pending", "not_applicable", "deferred", "superseded"]);
 const TERMINAL_STATES = new Set(["deferred", "superseded"]);
-const VALID_SHELVES = new Set(["working-session/docs", "docs/prds"]);
+// "docs/archive/prds" added session 14 (Maintainer-approved + Maintainer-moved 2026-06-13):
+// terminal home for deferred/superseded PRDs, beside the existing docs/archive/ convention.
+// Archived PRDs MUST be terminal and non-promotable (enforced below).
+const VALID_SHELVES = new Set(["working-session/docs", "docs/prds", "docs/archive/prds"]);
+const ARCHIVE_SHELF = "docs/archive/prds";
 
 function usage() {
   console.error(
@@ -59,6 +63,9 @@ function mustReadJson(filePath) {
 
 function listPrdFiles(rootDir, subdir) {
   const dirPath = path.join(rootDir, subdir);
+  if (!fs.existsSync(dirPath)) {
+    return [];
+  }
   return fs
     .readdirSync(dirPath)
     .filter((name) => /^PRD-\d{3}-.+\.md$/.test(name))
@@ -199,6 +206,17 @@ function main() {
       warnings.push(`${id}: eligible and still in working-session/docs (candidate for promotion)`);
     }
 
+    if (shelf === ARCHIVE_SHELF) {
+      if (!TERMINAL_STATES.has(entry.state)) {
+        errors.push(
+          `${id}: in ${ARCHIVE_SHELF} but state '${entry.state}' is not terminal (must be deferred or superseded)`,
+        );
+      }
+      if (entry.eligible_for_docs_prds === true) {
+        errors.push(`${id}: in ${ARCHIVE_SHELF} but marked eligible_for_docs_prds (archived PRDs are not promotable)`);
+      }
+    }
+
     if (blockingItems.length === 0 && !eligible && !TERMINAL_STATES.has(entry.state)) {
       warnings.push(`${id}: no blockers listed but acceptance gate is incomplete`);
     }
@@ -207,6 +225,7 @@ function main() {
   const diskPaths = new Set([
     ...listPrdFiles(repoRoot, "working-session/docs"),
     ...listPrdFiles(repoRoot, "docs/prds"),
+    ...listPrdFiles(repoRoot, ARCHIVE_SHELF),
   ]);
 
   for (const diskPath of diskPaths) {
