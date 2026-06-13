@@ -3,16 +3,19 @@
 References:
 - `/Users/snap/Git/turnfile/docs/PROTOCOL_CORE.md`
 
-Now Working (Codex): Session 14 active. PRD-028 reviewed and filed done. PRD-029 implementation partially complete: `tools/next-state.mjs` built and `skills/codex/` v7 updated; evals are 9/10 green pending Claude-owned skill text. Codex also has active prior lanes: PRD-021/022/024 implementation and PRD-023/026 eval authoring. Codex unread 0.
-Now Working (Claude): Session 14 active (Opus 4.8). Claude has PRD-029 own-file propagation requested in MSG-045. PRD-014 A1 amendment drafted and awaiting Codex review (MSG-044 acknowledged). Claude unread 1.
+Now Working (Codex): Session 14 CLOSED. PRD-028 and PRD-029 are filed done. MSG-046 is acknowledged; Codex accepted the concurrent-write and closure-owner scan suggestions as Codex-owned skill hygiene, not as a peer directive. Codex unread 0; no locks. Carry-forward in closeout entry below.
+Now Working (Claude): Session 14 CLOSED (Opus 4.8). All Claude lanes complete or handed off; unread 0; no locks. Carry-forward in closeout entry below.
 Maintainer Focus: PRD-027 held until all other PRD items complete + commit/push/checkpoint discussion. See Maintainer Decision Queue below.
 Maintainer Decision Queue (PRD-004 A1): (1) PRD-003/004/008 A1 document acceptances, if still desired before promotion; (2) model-specific skill directory retention/removal only by explicit Maintainer decision; no model-specific skill path is deprecated by default; (3) push/PR + session-15 boundary timing.
-Next Review Checkpoint: Claude adds/adapts PRD-029 `next-state.mjs` obligation in `skills/claude/`; Codex reruns PRD-029 evals to green and routes implementation review to Claude. Closeout still waits until PRD-029 is done under A1.
+Next Review Checkpoint: Next session boot - run deferred WORKLOG and signal compaction first (see closeout), then PRD-014 A1 review, Codex implementation lanes (PRD-021/022/024, PRD-023/026), and Maintainer checkpoint before PRD-027.
 
 ## Decision Index
 
 | Decision | Owner | Timestamp | Section |
 |----------|-------|-----------|---------|
+| Codex closed session 14 from its side: Codex idle in TURNFILE rev 124, boot handoff refreshed to v5, previous boot archived as `boot-codex_v4`, chat close snapshot written, and unresolved work explicitly carried forward. | Codex | 2026-06-13 | Codex session 14 close |
+| Codex acknowledged Claude MSG-046 and accepted concurrent-write discipline plus closure-owner scanning as Codex-owned skill hygiene for a later Codex skill mirror/adaptation. | Codex + Claude | 2026-06-13 | MSG-20260613-046 |
+| Claude reviewed Codex's PRD-029 implementation, approved `tools/next-state.mjs`, closed the Claude-owned skill propagation gap, and filed PRD-029 implementation done with evals 10/10 green. Codex closed its PRD-029 task row after receiving the review. | Codex + Claude | 2026-06-13 | MSG-20260613-045 + PRD-029 done |
 | Codex reviewed Claude's PRD-028 implementation, confirmed `evals/prd-028.evals.mjs` 10/10 green plus Tokenese validator root scan pass, moved PRD-028 to `docs/prds/`, marked implementation done, and removed PRD-028 from PRD-027 blockers. | Codex + Claude | 2026-06-13 | MSG-20260613-042 + PRD-028 done |
 | Codex partially implemented PRD-029: `tools/next-state.mjs` added, `skills/codex/` upgraded to v7 with the in-lock derivation obligation, and PRD-029 evals are 9/10 green pending Claude-owned skill propagation. | Codex + Claude | 2026-06-13 | MSG-20260613-041/045 + PRD-029 implementation |
 | Codex upgraded `skills/codex/` to v6 with handshake-time model ledger validation and added the role-neutral ledger update rule requiring active agents to verify their current model/surface during session handshake. | Maintainer + Codex | 2026-06-13 | Codex skill v6 model ledger handshake |
@@ -635,3 +638,18 @@ Milestone: both pre-PRD-027 implementation PRDs (028, 029) now fully done by the
 |----------|-------|-----------|---------|
 | PRD-029 reviewed APPROVE and filed done; both PRD-028/029 complete via A1 loop. | Claude (review) + Codex (impl) | 2026-06-13 | MSG-045 |
 | Claude skill v0.6.0 changes notified to Codex with mirror suggestion (bilateral lessons). | Maintainer (request) + Claude | 2026-06-13 | MSG-046 |
+
+### Claude (Opus 4.8): SESSION 14 CLOSEOUT — rev (see TURNFILE)
+
+2026-06-13 — Coordinated Claude-side close (Codex closing in parallel per Maintainer). Module 6 + PRD-014 followed.
+
+**Session 14 outcome (the floor that was poured):** reset Turnfile after a 4-month gap; reconciled Feb-June drift; triaged the full backlog to a clean baseline (BASELINE.md, README index); promoted PRD-017/018/019/021/022/023/024/026 and folded PRD-020; installed PRD-006 A1 eight-step loop (eval-gated implementation); both PRD-028 and PRD-029 taken fully through the loop in both directions (Claude impl 028 / Codex review; Codex impl 029 / Claude review); tools/validate-tokenese-pairs.mjs and tools/next-state.mjs built; archived terminal PRDs (002/015/020) to docs/archive/prds. Claude skill v0.3.0 → v0.6.0 (Files-First, Concurrent-Write Discipline, Model-Ledger Handshake, Collaboration Posture, encoding obligations). Three Claude model generations (Opus 4.6 → Fable 5 → Opus 4.8) on one unmodified protocol; one full rebuttal-loop convergence (PRD-025 → PRD-014 path).
+
+**Closeout actions:** closed Claude-owned terminal messages (039/041/042); Claude idle, unread 0, no locks; chat-claude.md snapshot written; boot-claude rolled over.
+
+**Deferred (PRD-014 R4 / draft A1.R1 execute-or-defer):**
+- WORKLOG compaction (639 lines > 500 trigger) — DEFERRED to next-session boot. Reason: concurrent dual-agent close makes a full WORKLOG rewrite collision-prone; a single-agent boot can compact cleanly. Next owner: next session opener.
+- Signal-log compaction — DEFERRED, same reason; both agents are posting signals during close.
+- Mailbox archival sweep of terminal Codex-owned messages — Codex's close handles its side.
+
+**Carry-forward to session 15:** PRD-014 A1 review (Codex, MSG-044 open); PRD-021/022/024 implementation + PRD-023/026 evals (Codex lanes); PRD-024 R5.1 validator (Codex); push/PR decision + Maintainer pre-PRD-027 checkpoint; then PRD-027 (tokenese) initiation.
