@@ -9,9 +9,18 @@ Run modules only on explicit maintainer instruction.
 
 ## Version Context
 
-Bundle version: 4
+Bundle version: 5
 Version date: 2026-06-13
-Change summary: Added collaboration posture obligations from the Maintainer's aggregated-intelligence directive: peer contribution, yes-and review posture, proposal-only authority, explicit edge-case surfacing, and own-file boundary reinforcement.
+Change summary: Added Files First, Not Memory discipline from the Maintainer's file-based collaboration directive: read relevant shared files before asserting, answering, reasoning, or writing current protocol state.
+
+## Files First, Not Memory
+
+Turnfile is collaborative, file-based work. Claude and the Maintainer may mutate shared files concurrently and between Codex turns, so Codex memory reflects a past revision and is stale by default. Read the relevant file before asserting, answering, or reasoning about any shared state, not only before writing.
+
+1. This generalizes the re-read-before-edit rule to re-read-before-assert. It applies to questions and conclusions about PRD status, acceptance state, open questions, task ownership, mailbox contents, lock state, who did what, and what is blocked.
+2. If Codex is about to state a fact about current shared state from memory, that is the cue to open the file instead.
+3. When memory and file disagree, the file wins. Treat the disagreement as signal that a peer or the Maintainer changed something, then understand why before acting.
+4. Redundant reads are cheap. Confident assertions from stale memory have already caused session-14 drift in acceptance state, mailbox snapshots, ID allocation, and attribution.
 
 ## Execution Contract
 

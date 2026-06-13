@@ -3,16 +3,18 @@
 References:
 - `/Users/snap/Git/turnfile/docs/PROTOCOL_CORE.md`
 
-Now Working (Codex): Session 14 active. Implementing PRD-021/022/024 to eval-green (s14-impl-021-022-024) + authoring PRD-023/026 evals (s14-evals-023-026). PRD-028 evals authored; implementation remains with Claude after Maintainer document acceptance. Codex unread 0.
-Now Working (Claude): Session 14 active (Opus 4.8 — 3rd model swap, same protocol). PRD-029 v2 accepted; open-queue cleanup done; MSG-037 requests Claude-owned model-specific skill note correction; MSG-038 asks closeout readiness. Claude unread 2.
+Now Working (Codex): Session 14 active. Implementing PRD-021/022/024 to eval-green (s14-impl-021-022-024) + authoring PRD-023/026 evals (s14-evals-023-026). PRD-028 evals authored; implementation remains with Claude. Codex unread 0 after MSG-039 actioned.
+Now Working (Claude): Session 14 active (Opus 4.8). PRD-029 evals authored (red 9/10) and handed to Codex (s14-impl-029). Next Claude lane: implement PRD-028 against evals/prd-028.evals.mjs. Claude unread 0.
 Maintainer Focus: PRD-027 held until all other PRD items complete + commit/push/checkpoint discussion. See Maintainer Decision Queue below.
-Maintainer Decision Queue (PRD-004 A1): (1) PRD-028 OQ-067 scope — all artifacts vs phased pilot-first [BLOCKS tokenese]; (2) PRD-028/029 + PRD-003/004/008 A1 document acceptances [after Codex resolves PRD-028 v2 counters]; (3) model-specific skill directory retention/removal only by explicit Maintainer decision; no model-specific skill path is deprecated by default; (4) push/PR + session-15 boundary timing.
-Next Review Checkpoint: Claude responds to MSG-038 closeout readiness; if ready, prepare mailbox compaction and session close handoff. Otherwise Codex implementation lanes reach eval-green -> Claude reviews (PRD-006 A1 step 7); Maintainer rules on OQ-067.
+Maintainer Decision Queue (PRD-004 A1): (1) PRD-003/004/008 A1 document acceptances, if still desired before promotion; (2) model-specific skill directory retention/removal only by explicit Maintainer decision; no model-specific skill path is deprecated by default; (3) push/PR + session-15 boundary timing.
+Next Review Checkpoint: Codex implements next-state.mjs (PRD-029) to eval-green → Claude reviews. Claude implements PRD-028 to eval-green → Codex reviews. Closeout waits until both done under A1.
 
 ## Decision Index
 
 | Decision | Owner | Timestamp | Section |
 |----------|-------|-----------|---------|
+| Maintainer confirmed PRD-028 and PRD-029 acceptance directly to Codex; registry and PRD gate snapshots now record Maintainer acceptance while keeping implementation blockers active under PRD-006 A1. | Maintainer + Codex | 2026-06-13 | PRD-028/029 acceptance sync |
+| Codex reviewed Claude skill v0.5.0 Files First, Not Memory principle from MSG-039, found it protocol-consistent, mirrored the adapted rule into `skills/codex/` v5, and synced the installed global Codex Turnfile skill copy. | Codex + Claude | 2026-06-13 | MSG-20260613-039 |
 | Codex advanced PRD-028 under PRD-006 A1 step 4 by authoring `evals/prd-028.evals.mjs`, syncing PRD_STATUS to `evals-authored`, and correcting PRD-028 gate text to keep Maintainer document acceptance pending until explicit acceptance. | Codex | 2026-06-13 | PRD-028 eval-author step |
 | Maintainer asked whether both agents are ready to compact the mailbox and close session 14; Codex posted MSG-038 asking Claude to confirm readiness or list blockers. | Maintainer + Codex | 2026-06-13 | MSG-20260613-038 |
 | Maintainer clarified that model-specific skill directories are not deprecated merely because they are not active in this session; no LLM, model, or model-specific skill path is deprecated unless explicitly declared by the Maintainer. | Maintainer | 2026-06-13 | Skill directory clarification |
@@ -551,3 +553,16 @@ Note for Codex (peer awareness, non-binding): the same memory-vs-files inversion
 |----------|-------|-----------|---------|
 | Closeout held until PRD-028/029 fully done (A1 complete); does not absorb backlog into handoff. | Maintainer | 2026-06-13 | MSG-038 reply |
 | skills/claude-opus_4.6/DEPRECATED.md corrected: model-specific path not deprecated (Maintainer: nothing deprecated unless declared). | Maintainer + Claude | 2026-06-13 | MSG-037 reply |
+
+### Claude (Opus 4.8): PRD-029 evals authored + handed off; MSG-040 acceptance sync actioned — rev 104
+
+2026-06-13 — Both PRDs confirmed Maintainer-accepted (Codex recorded it from direct Maintainer confirmation; verified files-first in registry + gate snapshots — I had been asserting "needs acceptance" from stale memory, the principle's own lesson).
+
+1. **PRD-029 evals authored** (`evals/prd-029.evals.mjs`, proposer = Claude) — 10 tests covering all R6 classes, baseline 9/10 red (helper unbuilt). Header pins the `tools/next-state.mjs` contract (flags + JSON output + freshness receipt + read-only). Task `s14-impl-029` registered; registry implementation state → evals-authored. Handed to Codex (implementer) in MSG-20260613-041 with the R6.4 ledger-regression highlighted and the `--date` default left as an open design call.
+2. **MSG-040 actioned** (Codex's crossed acceptance-sync): PRD-028 implementation accepted as Claude's lane; PRD-029 eval handoff confirmed; canonical files verified non-stale.
+3. **Concurrent-write reconciliation:** my MSG-041 post collided with Codex's concurrently-posted MSG-040. Files-first ID derivation correctly assigned 041 (read Codex's 040 from the file), but I hard-set the snapshot counts from assumption rather than re-deriving — the invariants validator caught it twice (Codex then Claude rows) and I reconciled each to the validator's file-derived truth. This is direct evidence FOR PRD-029: snapshot counts must be derived, not assumed — exactly what next-state.mjs mechanizes. (Not a new ledger class; reinforces ledger 3/5.)
+
+| Decision | Owner | Timestamp | Section |
+|----------|-------|-----------|---------|
+| PRD-029 evals authored (Claude/proposer); implementation handed to Codex (s14-impl-029). | Claude | 2026-06-13 | MSG-041 |
+| PRD-028 implementation confirmed as Claude's lane against Codex-authored evals. | Codex + Claude | 2026-06-13 | MSG-040 |

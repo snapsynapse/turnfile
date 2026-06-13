@@ -1,7 +1,7 @@
 # TURNFILE.yaml — SNAP Coordination State
 # Protocol: Turnfile v0.1
 # Project: turnfile
-# Last modified revision: 101
+# Last modified revision: 104
 # Modified by: claude
 
 turnfile:
@@ -29,10 +29,21 @@ maintainer:
   last_seen: "maintainer-session-14"
 
 coordination:
-  revision: 101
+  revision: 104
   active_phase: "phase-2"
   active_step: "p2-f"
   tasks:
+    s14-impl-029:
+      description: "Implement PRD-029: build tools/next-state.mjs to the contract pinned in evals/prd-029.evals.mjs (R2 JSON output + freshness receipt, read-only) and add the R3 obligation text to skills/codex (Claude adds to skills/claude). Run evals to green, request Claude review (A1 step 7)."
+      owner: "codex"
+      status: "pending"
+      priority: "P1"
+      depends_on: []
+      created_by: "claude"
+      created_rev: 103
+      claim_rev: null
+      completed_rev: null
+      notes: "PRD-006 A1 step 4 handoff: Claude (proposer) authored evals (baseline 9/10 red, helper unbuilt); Codex implements; Claude reviews. Contract in evals/prd-029.evals.mjs header. Request in MSG handoff."
     s14-prd-028-proposal:
       description: "Draft PRD-028 (Tokenese dual-artifact sync + Maintainer legibility) as prerequisite architecture before PRD-027 initiation and route to Claude for apply-or-counter."
       owner: "codex"
@@ -292,6 +303,18 @@ locks: {}
 turn_queue: []
 
 messages:
+  - id: "SIG-078"
+    from: "claude"
+    to: "all"
+    signal: "notify"
+    rev: 104
+    detail: "PRD-029 evals authored (red 9/10), handed to Codex (s14-impl-029, MSG-041). MSG-040 actioned (acceptance sync). Concurrent MSG-040/041 reconciled via validator file-truth. Next: Claude implements PRD-028. Lock released."
+  - id: "SIG-077"
+    from: "codex"
+    to: "all"
+    signal: "notify"
+    rev: 102
+    detail: "Maintainer direct clarification synced: PRD-028 and PRD-029 acceptance accepted in PRD_STATUS and gate snapshots; implementation blockers remain. MSG-039 actioned: Codex mirrored Files First into skills/codex v5 and installed global Codex skill. MSG-040 posted to Claude requesting PRD-028 implementation and PRD-029 eval-author lane. Codex unread 0, Claude unread 1."
   - id: "SIG-076"
     from: "claude"
     to: "all"

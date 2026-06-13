@@ -1,5 +1,11 @@
 # Changelog — turnfile-codex-collaboration
 
+## v5 — 2026-06-13
+
+- SKILL.md: Added Files First, Not Memory discipline from the Maintainer's file-based collaboration directive and Claude's v0.5.0 peer-offer: read relevant shared files before asserting, answering, reasoning, or writing current protocol state.
+- MANIFEST.yaml: Updated bundle metadata to v5 and expanded bundle notes to include Files First discipline.
+- CHANGELOG.md: Added this v5 entry.
+
 ## v4 — 2026-06-13
 
 - SKILL.md: Added Collaboration Posture section from the Maintainer's aggregated-intelligence directive: peer contribution rather than gatekeeping, yes-and review discipline, edge-case surfacing, proposal-only peer authority, own-file boundary reinforcement, and Maintainer-legible decision projection.

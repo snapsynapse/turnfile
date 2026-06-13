@@ -1,6 +1,6 @@
 # PRD-029: Pre-Write State Derivation Contract
 
-Status: Draft v2 (working-session; agent gates complete, Maintainer + implementation pending per PRD-006 A1)
+Status: Draft v2 (working-session; all acceptance gates complete, implementation pending per PRD-006 A1)
 Owner: Maintainer + Codex + Claude
 Date: 2026-06-13
 Last revised: 2026-06-13 (Codex peer amendments applied)
@@ -11,8 +11,8 @@ Last revised: 2026-06-13 (Codex peer amendments applied)
 |------|--------|----------|
 | Codex acceptance | accepted-with-amendment | MSG-20260613-036 reviewed by Codex; draft v2 adds freshness receipts, in-lock derivation sequencing, thread-mode support, PRD-027 prerequisite linkage, and OQ-068 resolution |
 | Claude acceptance | accepted | author; reviewed Codex draft v2 (freshness receipts, in-lock sequencing R1.4/R1.5, thread-mode R5, OQ-068 derivation-only) and accepted 2026-06-13 — amendments strengthen the contract; risk 4 / R5 anticipated the live MSG-036 thread-mode miss
-| Maintainer acceptance | accepted | concept approved in session 14 chat ("all that makes a lot of sense"); document acceptance pending |
-| Eligible for move to `docs/prds` | no | blocked until all acceptances + zero blockers + implementation done (PRD-006 A1) |
+| Maintainer acceptance | accepted | concept approved in session 14 chat ("all that makes a lot of sense"); Maintainer direct confirmation to Codex on 2026-06-13: acceptance has been expressed for PRD-028 and PRD-029 |
+| Eligible for move to `docs/prds` | no | blocked until implementation is done and PRD_STATUS.json has zero blockers |
 
 ## Input Provenance Tags
 

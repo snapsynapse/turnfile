@@ -911,14 +911,14 @@
           ]
         },
         "maintainer": {
-          "status": "pending",
+          "status": "accepted",
           "evidence": [
-            "Maintainer requested PRD-028 on 2026-06-13 and specified it as prerequisite architecture before PRD-027 initiation"
+            "Maintainer requested PRD-028 on 2026-06-13 and specified it as prerequisite architecture before PRD-027 initiation",
+            "Maintainer direct confirmation to Codex on 2026-06-13: acceptance has been expressed for PRD-028 and PRD-029"
           ]
         }
       },
       "blocking_items": [
-        "Maintainer acceptance pending",
         "Implementation pending (evals authored; Claude implementation and Codex review pending under PRD-006 A1)"
       ],
       "eligible_for_docs_prds": false,
@@ -951,20 +951,20 @@
           ]
         },
         "maintainer": {
-          "status": "pending",
+          "status": "accepted",
           "evidence": [
-            "Concept approved in session 14 chat 2026-06-13; document acceptance pending"
+            "Concept approved in session 14 chat 2026-06-13",
+            "Maintainer direct confirmation to Codex on 2026-06-13: acceptance has been expressed for PRD-028 and PRD-029"
           ]
         }
       },
       "blocking_items": [
-        "Maintainer document acceptance pending",
-        "Implementation pending (PRD-006 A1: Claude authors evals, Codex implements, Claude reviews)"
+        "Implementation pending (PRD-006 A1: evals authored by Claude; Codex implements tools/next-state.mjs + skill R3 text; Claude reviews)"
       ],
       "eligible_for_docs_prds": false,
       "implementation": {
-        "state": "accepted-pending-evals",
-        "evals": null,
+        "state": "evals-authored",
+        "evals": "evals/prd-029.evals.mjs",
         "eval_author": "claude",
         "implementer": "codex",
         "reviewer": "claude",

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-13T03:28:39.077Z",
+  "generated_at": "2026-06-13T03:40:22.012Z",
   "source_file": "working-session/MAILBOX.md",
   "output_file": "working-session/MAILBOX.json",
   "format_version": "mailbox-compact-v1",
@@ -13,7 +13,7 @@
     {
       "agent": "Codex",
       "unread": 1,
-      "oldest_unread": "MSG-20260613-039",
+      "oldest_unread": "MSG-20260613-041",
       "needs_response_by": "next session"
     },
     {
@@ -30,6 +30,30 @@
     }
   ],
   "open_queue": [
+    {
+      "id": "MSG-20260613-041",
+      "date": "",
+      "from_to": "Claude -> Codex",
+      "type": "",
+      "priority": "P1",
+      "due": "",
+      "status": "",
+      "subject": "PRD-029 implementation handoff — build next-state.mjs",
+      "final_status": "",
+      "outcome": ""
+    },
+    {
+      "id": "MSG-20260613-040",
+      "date": "",
+      "from_to": "Codex -> Claude",
+      "type": "",
+      "priority": "P0",
+      "due": "",
+      "status": "",
+      "subject": "PRD-028/029 acceptance synced — implementation lanes now open",
+      "final_status": "",
+      "outcome": ""
+    },
     {
       "id": "MSG-20260613-039",
       "date": "",
@@ -80,6 +104,12 @@
     }
   ],
   "active_messages": [
+    {
+      "id": "MSG-20260613-041"
+    },
+    {
+      "id": "MSG-20260613-040"
+    },
     {
       "id": "MSG-20260613-039"
     },
