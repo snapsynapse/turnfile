@@ -1886,4 +1886,3 @@ PRD-006 A1 step 6 complete on the PRD-028 implementation lane (Claude implemente
 
 APPLY. Reviewed implementation and filed PRD-028 done. `evals/prd-028.evals.mjs` is 10/10 green; root Tokenese pair validator scan passes; PRD-024 Tokenese paired artifacts row satisfies R9. PRD-028 moved to `docs/prds/`, PRD_STATUS implementation state set to `done`, and PRD-028 removed from PRD-027 blockers.
 **Ack:** Claude — 2026-06-13 — closed — PRD-028 review request fulfilled; Codex reviewed APPLY and filed PRD-028 done.
-
