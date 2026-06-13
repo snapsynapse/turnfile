@@ -1,16 +1,16 @@
 # PRD-026: Review Cycle Closure and Task-State Consistency Contract
 
-Status: Draft v1 (working-session; Codex-authored, awaiting Claude cross-review)
+Status: Draft v2 (working-session; agent-accepted, Maintainer acceptance pending)
 Owner: Maintainer + Codex + Claude
 Date: 2026-06-13
-Last revised: 2026-06-13 (session 14 draft by Codex)
+Last revised: 2026-06-13 (Claude counters applied by Codex)
 
 ## Promotion Gate Snapshot (PRD-006 R2a)
 
 | Gate | Status | Evidence |
 |------|--------|----------|
-| Codex acceptance | pending | author; acceptance recorded after Claude cross-review cycle |
-| Claude acceptance | pending | document review requested in MSG-20260612-027 |
+| Codex acceptance | accepted | author; Claude counters applied 2026-06-13 |
+| Claude acceptance | accepted | MSG-20260612-027 reply: APPLY with 2 counters (cross-ownership repair prohibition; standalone PRD-026 with PRD-014 boundary) |
 | Maintainer acceptance | pending | Maintainer requested Codex proposal 2026-06-13 |
 | Eligible for move to `docs/prds` | no | blocked until all acceptances + zero blockers in PRD_STATUS.json |
 
@@ -41,6 +41,7 @@ Session 14 examples:
 3. A task carried `completed_rev` while still reading `in_progress`.
 4. Review messages remained `actioned` in the open queue while closure-owner follow-up was pending.
 5. PRD acceptance evidence was split across `MAILBOX.md`, `WORKLOG.md`, `TURNFILE.yaml`, and `PRD_STATUS.json`.
+6. Non-owner repair of another agent's owned task row converted visible drift into a false projection (for example, marking another agent's task `done` when no draft existed on disk).
 
 These issues are not semantic disagreement. They are closure drift: the review cycle is substantively complete, but one or more state projections lag behind.
 
@@ -58,6 +59,7 @@ These issues are not semantic disagreement. They are closure drift: the review c
 3. Creating a new collision-control mechanism.
 4. Replacing mailbox lifecycle rules in PRD-003.
 5. Requiring automated mutation of shared files.
+6. Governing session-level closeout compaction or projection synchronization. That belongs to the PRD-014 amendment path converged in MSG-20260612-024; this PRD governs review-cycle closure tied to mailbox review messages.
 
 ## Requirements
 
@@ -116,6 +118,7 @@ This PRD is process/tooling only.
 2. It does not let agents close another participant's owned message without permission.
 3. It does not create an auto-merge or auto-promote path.
 4. It does not supersede collision discipline; PRD-010 and PRD-013 remain the collision-control source.
+5. It does not let an agent repair another participant's owned task fields. Drift observed in another agent's owned rows is flagged via signal or mailbox; it is never repaired in place by a non-owner.
 
 ## Acceptance criteria
 
@@ -161,4 +164,4 @@ This PRD is process/tooling only.
 
 | OQ | Question | Resolution | Applied to |
 |----|----------|------------|------------|
-| OQ-064 | Should review-cycle closure consistency be a standalone PRD-026 or an amendment to PRD-003, PRD-006, PRD-013, or PRD-019? | open | AC5, R2-R4 |
+| OQ-064 | Should review-cycle closure consistency be a standalone PRD-026 or an amendment to PRD-003, PRD-006, PRD-013, or PRD-019? | resolved: standalone PRD-026, with explicit scope boundary against the PRD-014 closeout amendment path | AC5, non-goals, R5 |

@@ -601,9 +601,9 @@
     {
       "id": "PRD-021",
       "title": "Conflict Loop Bound and Selective-Unlock Gradient Contract",
-      "path": "working-session/docs/PRD-021-conflict-loop-bound-and-selective-unlock-gradient-contract.md",
-      "shelf": "working-session/docs",
-      "state": "draft",
+      "path": "docs/prds/PRD-021-conflict-loop-bound-and-selective-unlock-gradient-contract.md",
+      "shelf": "docs/prds",
+      "state": "accepted",
       "acceptance": {
         "codex": {
           "status": "accepted",
@@ -618,16 +618,14 @@
           ]
         },
         "maintainer": {
-          "status": "pending",
+          "status": "accepted",
           "evidence": [
-            "Design decisions logged as resolved OQ-058–061 (Maintainer, 2026-06-01); PRD-document acceptance still requires agent cross-review"
+            "Maintainer accepted PRD-021 as-is in chat on 2026-06-13 after agent cross-review"
           ]
         }
       },
-      "blocking_items": [
-        "Maintainer PRD-document acceptance pending"
-      ],
-      "eligible_for_docs_prds": false
+      "blocking_items": [],
+      "eligible_for_docs_prds": true
     },
     {
       "id": "PRD-023",
@@ -637,9 +635,9 @@
       "state": "draft",
       "acceptance": {
         "codex": {
-          "status": "pending",
+          "status": "accepted",
           "evidence": [
-            "Author (session 14 draft v1); acceptance after Claude cross-review cycle"
+            "Author (session 14 draft v1); Claude R4 amendment applied and accepted by Codex on 2026-06-13"
           ]
         },
         "claude": {
@@ -656,8 +654,6 @@
         }
       },
       "blocking_items": [
-        "Claude cross-review pending",
-        "Codex post-review acceptance pending",
         "Maintainer acceptance pending"
       ],
       "eligible_for_docs_prds": false
@@ -665,9 +661,9 @@
     {
       "id": "PRD-024",
       "title": "Human-Legibility Invariant and Encoding Profiles Contract",
-      "path": "working-session/docs/PRD-024-human-legibility-invariant-and-encoding-profiles-contract.md",
-      "shelf": "working-session/docs",
-      "state": "draft",
+      "path": "docs/prds/PRD-024-human-legibility-invariant-and-encoding-profiles-contract.md",
+      "shelf": "docs/prds",
+      "state": "actioned",
       "acceptance": {
         "codex": {
           "status": "accepted",
@@ -682,16 +678,14 @@
           ]
         },
         "maintainer": {
-          "status": "pending",
+          "status": "accepted",
           "evidence": [
-            "Drafting green-lit by Maintainer 2026-06-12 (session 14)"
+            "Maintainer approval 2026-06-13 (session 14); mirrored in MSG-20260613-030"
           ]
         }
       },
-      "blocking_items": [
-        "Maintainer acceptance pending"
-      ],
-      "eligible_for_docs_prds": false
+      "blocking_items": [],
+      "eligible_for_docs_prds": true
     },
     {
       "id": "PRD-026",
@@ -701,15 +695,15 @@
       "state": "draft",
       "acceptance": {
         "codex": {
-          "status": "pending",
+          "status": "accepted",
           "evidence": [
-            "Author (session 14 draft v1); acceptance after Claude cross-review cycle"
+            "Author (session 14 draft v1); Claude counters applied and accepted by Codex on 2026-06-13"
           ]
         },
         "claude": {
-          "status": "pending",
+          "status": "accepted",
           "evidence": [
-            "Document cross-review requested in MSG-20260612-027"
+            "MSG-20260612-027 reply: APPLY with 2 counters (cross-ownership repair prohibition; standalone PRD-026 with PRD-014 boundary)"
           ]
         },
         "maintainer": {
@@ -720,10 +714,70 @@
         }
       },
       "blocking_items": [
-        "Claude cross-review pending",
-        "Codex post-review acceptance pending",
+        "Maintainer acceptance pending"
+      ],
+      "eligible_for_docs_prds": false
+    },
+    {
+      "id": "PRD-022",
+      "title": "Decision-Mirror Delivery Contract",
+      "path": "working-session/docs/PRD-022-decision-mirror-delivery-contract.md",
+      "shelf": "working-session/docs",
+      "state": "draft",
+      "acceptance": {
+        "codex": {
+          "status": "accepted",
+          "evidence": [
+            "MSG-20260613-028 reply: Codex APPLY with amendment resolving OQ-065 and adding delivery-mirror bound-party receiver validation"
+          ]
+        },
+        "claude": {
+          "status": "accepted",
+          "evidence": [
+            "Author; Codex amendment (R2.5 relay default resolving OQ-065, R5.4 bound-party check) accepted 2026-06-13 in MSG-20260613-028 closure"
+          ]
+        },
+        "maintainer": {
+          "status": "pending",
+          "evidence": [
+            "Drafting green-lit 2026-06-12"
+          ]
+        }
+      },
+      "blocking_items": [
+        "Maintainer acceptance pending"
+      ],
+      "eligible_for_docs_prds": false
+    },
+    {
+      "id": "PRD-027",
+      "title": "Tokenese Cloned-Communication A/B Contract",
+      "path": "working-session/docs/PRD-027-tokenese-cloned-communication-ab-contract.md",
+      "shelf": "working-session/docs",
+      "state": "draft",
+      "acceptance": {
+        "codex": {
+          "status": "accepted",
+          "evidence": [
+            "Author (session 14 draft v1); Claude teach-gate and channel-trust counters applied and accepted by Codex on 2026-06-13"
+          ]
+        },
+        "claude": {
+          "status": "accepted",
+          "evidence": [
+            "MSG-20260613-029 reply: APPLY with 2 counters (teach-phase gate per handoff task 1; untrusted-by-default self-reported channels until calibration); flips clean on counter application"
+          ]
+        },
+        "maintainer": {
+          "status": "pending",
+          "evidence": [
+            "Maintainer clarified on 2026-06-13 that PRD-027 is for cloning existing Turnfile communications into Tokenese for A/B testing, not replacing or changing existing communications"
+          ]
+        }
+      },
+      "blocking_items": [
         "Maintainer acceptance pending",
-        "OQ-064 unresolved: standalone PRD vs amendment target"
+        "PRD-024 must be accepted before first live Tokenese use"
       ],
       "eligible_for_docs_prds": false
     }

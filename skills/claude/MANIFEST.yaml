@@ -1,6 +1,6 @@
 bundle: turnfile-protocol-claude
-bundle_version: 4
-bundle_date: 2026-06-12
+bundle_version: 5
+bundle_date: 2026-06-13
 description: >
   Claude's protocol execution guide for the Turnfile protocol (a SNAP protocol).
   Encodes mailbox lifecycle, payload-first review, lock-safe shared-file updates,
@@ -43,8 +43,8 @@ provenance:
 files:
   - path: SKILL.md
     role: skill
-    version: 4
-    hash: sha256:089cb9d4b2698c585bb58ef3e03029d82d2cdb75aa39a8c3d7ed5fb65dc2d51e
+    version: 5
+    hash: sha256:62729c7593a6e006970fce6d10d185aed1e46d375a1ce3e386106e1094b31a53
     note: >
       Claude protocol execution guide v0.4.0. 9 modules (M0-M8). Baseline
       PRD-003..014 + PRD-016..019. Adds PRD-017 R7 chat-file rules, PRD-019
@@ -52,8 +52,8 @@ files:
 
   - path: CHANGELOG.md
     role: reference
-    version: 4
-    hash: sha256:10df8f8856c929fe4a37b206397412d163b332405d0352ad53a55d48f0ffa1d1
+    version: 5
+    hash: sha256:5c452e98ea801e4b41e99e5e9892da1fd4dbc1d450919ed329bd062418901489
     note: Bundle change history.
 
   - path: MANIFEST.yaml

@@ -5,7 +5,7 @@ description: Execute the Turnfile protocol (a SNAP protocol) in Claude for mailb
 
 # Turnfile Protocol Skill File — Claude
 
-Version: 0.4.0
+Version: 0.4.1
 Protocol revision baseline: PRD-003 through PRD-014 and PRD-016 through PRD-019 (all promoted to docs/prds/)
 Agent: Claude (Anthropic) — bundle is role-keyed; the executing model is recorded in MANIFEST.yaml, not in this path
 Last updated: 2026-06-12
@@ -18,7 +18,15 @@ This is Claude's complete protocol execution guide. It encodes the Turnfile prot
 
 Run modules only on explicit maintainer instruction. (PRD-012 R3)
 
-Pending contracts not yet encoded here: PRD-021 (`rebuttal_rounds` conflict loop bound + selective-unlock gradient) is agent-accepted but awaits Maintainer acceptance; encode its R5 propagation in this file only after promotion.
+Pending contracts not yet encoded here: PRD-021 R5 propagation (promoted 2026-06-13; propagation task pending), PRD-022 mirror modes (agent review in flight).
+
+## Encoding profile obligations (PRD-024, Maintainer-accepted 2026-06-13)
+
+1. The governance record (TURNFILE.yaml, MAILBOX.md/.json/archive, WORKLOG + archive, OPEN_QUESTIONS, PRDs, PRD_STATUS.json, boot files, skills, templates, schemas, root strategy docs, chat session headers/snapshots) is `legible` only. Never write dense/tokenese content there except short fenced fragments labeled `dense` followed immediately by a legible paraphrase (PRD-024 R3.2).
+2. Dense lanes exist only with explicit session-charter opt-in (R2); without it, everything is legible.
+3. **Turn-boundary obligation (R3.1):** if any dense exchange this turn contained or evidenced a proposal, verdict, counter, objection, decision input, task claim, lock action, or acceptance — record its human-legible projection in the appropriate governance artifact before declaring the turn complete. This sits alongside the unread=0 rule.
+4. Projection is authorship: you owe projections for dense content you produced; misrepresenting one ranks with falsifying a WORKLOG entry. Dense originals are never authoritative.
+5. Honor Maintainer projection demands at P1 SLA and any session-wide dense suspension immediately. Peer spot-check requests are refusable only with a concrete, escalatable reason (R4.3).
 
 ## Execution Contract
 
@@ -467,13 +475,14 @@ After executing any module, report:
 
 | Field | Value |
 |-------|-------|
-| Skill file version | 0.4.0 |
+| Skill file version | 0.4.1 |
 | Protocol baseline | PRD-003 through PRD-014, PRD-016 through PRD-019 (all promoted) |
 | Policy test suite | PRD-012-M3-policy-test-suite.md (19 assertions, 4 scenario harnesses) — archived at `examples/inception/skills/policy-tests/` |
 | Last validated | M4 validation complete — all 4 scenarios PASS (rev 41, inception session 10) |
 | Structural alignment | Aligned with Codex SKILL.md structure: front matter, execution contract, boundary discipline, startup read order, fallback rules, output format |
 | v0.3.0 changes | Added Module 0 (Session Bootstrap) for cold-start initialization from templates. Bumped version. |
 | v0.4.0 changes | Bundle moved to role-keyed `skills/claude/` (model recorded in MANIFEST, not path). Baseline extended to PRD-016..019. Added PRD-017 R7 chat-file rules, PRD-019 event-based cadence + chat-decision mirror duty, mirror delivery-gap workaround. Validated live in session 14 on Fable 5. |
+| v0.4.1 changes | PRD-024 propagation (R5.2): encoding-profile obligations section — legible-only governance record, charter opt-in for dense lanes, turn-boundary projection obligation, authorship liability, Maintainer demand/suspension compliance. |
 
 Changes to protocol semantics require maintainer approval (PRD-012 R7.2).
 Environment-specific changes that don't alter protocol semantics are Claude-owned but must be documented (PRD-012 R7.3).

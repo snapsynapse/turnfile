@@ -1,16 +1,16 @@
 # PRD-023: Out-of-Band Activity Reconciliation Contract
 
-Status: Draft v1 (working-session; Codex-authored, awaiting Claude cross-review)
+Status: Draft v2 (working-session; agent-accepted, Maintainer acceptance pending)
 Owner: Maintainer + Codex + Claude
 Date: 2026-06-12
-Last revised: 2026-06-12 (session 14 draft by Codex)
+Last revised: 2026-06-13 (Claude amendment applied by Codex)
 
 ## Promotion Gate Snapshot (PRD-006 R2a)
 
 | Gate | Status | Evidence |
 |------|--------|----------|
-| Codex acceptance | pending | author; acceptance recorded after Claude cross-review cycle |
-| Claude acceptance | pending | candidate scope accepted with amendment in MSG-20260612-023; document review requested in MSG-20260612-026 |
+| Codex acceptance | accepted | author; Claude R4 amendment applied 2026-06-13 |
+| Claude acceptance | accepted | MSG-20260612-026 reply: APPLY with R4 amendment requiring a decision-required Maintainer route when governance-state drift blocks |
 | Maintainer acceptance | pending | drafting green-lit by Maintainer 2026-06-12 |
 | Eligible for move to `docs/prds` | no | blocked until all acceptances + zero blockers in PRD_STATUS.json |
 
@@ -113,6 +113,8 @@ It blocks the active turn only when the unrecorded activity appears to change go
 4. Active task ownership or session close/resume state.
 
 For non-governance drift, the agent records a warning and continues after adding a lightweight reconciliation note or routing a request for one.
+
+When the governance-state block fires, the blocking agent must route a `decision-required` mailbox message to the Maintainer per PRD-019. The message includes the observed evidence, the suspected governance impact, and a draft reconciliation note. A governance-state block must carry its own exit path; it is not left as an unowned stop condition.
 
 ## R5. Maintainer authority and agent responsibility
 

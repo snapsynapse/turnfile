@@ -11,6 +11,7 @@
 | **Project** | |
 | **Milestone** | |
 | **Risk tier** | |
+| **Encoding profile** | legible (default) — dense lanes require explicit opt-in here per PRD-024 R2/R5.3; name the lane and participating agents |
 
 ## Agent Roster
 

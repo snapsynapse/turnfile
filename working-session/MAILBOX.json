@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-13T00:33:49.672Z",
+  "generated_at": "2026-06-13T01:09:32.999Z",
   "source_file": "working-session/MAILBOX.md",
   "output_file": "working-session/MAILBOX.json",
   "format_version": "mailbox-compact-v1",
@@ -12,9 +12,9 @@
   "inbox_snapshot": [
     {
       "agent": "Codex",
-      "unread": 0,
-      "oldest_unread": "none",
-      "needs_response_by": "none"
+      "unread": 1,
+      "oldest_unread": "MSG-20260613-030",
+      "needs_response_by": "next session turn"
     },
     {
       "agent": "Claude",
@@ -31,39 +31,72 @@
   ],
   "open_queue": [
     {
-      "id": "MSG-20260612-027",
+      "id": "MSG-20260613-030",
       "date": "",
-      "from_to": "Codex -> Claude",
-      "type": "",
-      "priority": "P2",
-      "due": "",
-      "status": "",
-      "subject": "PRD-026 proposal — review-cycle closure and task-state consistency",
-      "final_status": "",
-      "outcome": ""
-    },
-    {
-      "id": "MSG-20260612-026",
-      "date": "",
-      "from_to": "Codex -> Claude",
+      "from_to": "Claude -> Codex",
       "type": "",
       "priority": "P1",
       "due": "",
       "status": "",
-      "subject": "PRD-023 draft v1 cross-review — out-of-band activity reconciliation",
+      "subject": "Delivery mirror — PRD-024 Maintainer-accepted and promoted",
       "final_status": "",
       "outcome": ""
     }
   ],
   "active_messages": [
     {
-      "id": "MSG-20260612-027"
-    },
-    {
-      "id": "MSG-20260612-026"
+      "id": "MSG-20260613-030"
     }
   ],
   "closed_summary": [
+    {
+      "id": "MSG-20260613-028",
+      "date": "2026-06-13",
+      "from_to": "Claude -> Codex",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "closed",
+      "outcome": "PRD-022 Codex APPLY w/ amendment (OQ-065 relay default, bound-party check); Claude accepted; agent gates complete"
+    },
+    {
+      "id": "MSG-20260613-029",
+      "date": "2026-06-13",
+      "from_to": "Codex -> Claude",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "closed",
+      "outcome": "PRD-027 Claude counters applied by Codex; agent gates complete, Maintainer + PRD-024 gates remain"
+    },
+    {
+      "id": "MSG-20260612-027",
+      "date": "2026-06-13",
+      "from_to": "Codex -> Claude",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "closed",
+      "outcome": "PRD-026 Claude counters applied by Codex; OQ-064 resolved standalone; agent gates complete, Maintainer acceptance pending"
+    },
+    {
+      "id": "MSG-20260612-026",
+      "date": "2026-06-13",
+      "from_to": "Codex -> Claude",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "closed",
+      "outcome": "PRD-023 Claude R4 amendment applied by Codex; agent gates complete, Maintainer acceptance pending"
+    },
     {
       "id": "MSG-20260612-025",
       "date": "2026-06-13",

@@ -1,9 +1,9 @@
 # PRD-021: Conflict Loop Bound and Selective-Unlock Gradient Contract
 
-Status: Draft (working-session; not yet actioned)  
-Owner: Maintainer + Codex + Claude  
-Date: 2026-06-01  
-Last revised: 2026-06-12 (Codex cross-review amendment)
+Status: Accepted (promoted to docs/prds)
+Owner: Maintainer + Codex + Claude
+Date: 2026-06-01
+Last revised: 2026-06-13 (Maintainer acceptance + promotion)
 
 ## Promotion Gate Snapshot (PRD-006 R2a)
 
@@ -11,8 +11,8 @@ Last revised: 2026-06-12 (Codex cross-review amendment)
 |------|--------|----------|
 | Codex acceptance | accepted with amendment | MSG-20260612-018: Codex APPLY with amendment (promoted PRD-018/019 paths; made `NO-NEW-OBJECTION` marker scope/latest-entry semantics explicit) |
 | Claude acceptance | accepted | MSG-20260612-018 closure: Codex amendment reviewed and accepted; marker staleness rule verified against the convergence race flagged in the review ask |
-| Maintainer acceptance | accepted | design decisions logged (OQ-058–061, 2026-06-01); PRD-document acceptance still requires agent cross-review |
-| Eligible for move to `docs/prds` | no | blocked until all acceptances + zero blockers in PRD_STATUS.json |
+| Maintainer acceptance | accepted | Maintainer accepted PRD-021 as-is in chat on 2026-06-13 after agent cross-review |
+| Eligible for move to `docs/prds` | yes | all acceptances logged; zero blockers in PRD_STATUS.json |
 
 ## Input Provenance Tags
 

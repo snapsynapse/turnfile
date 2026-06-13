@@ -133,7 +133,12 @@ PRDs live on two shelves. Promoted, Maintainer-accepted contracts live in [docs/
 | [PRD-018](docs/prds/PRD-018-maintainer-approval-authority-matrix-contract.md) | Maintainer approval authority matrix | Promoted |
 | [PRD-019](docs/prds/PRD-019-mailbox-first-approval-and-polling-cadence-contract.md) | Mailbox-first approval, event-based cadence | Promoted |
 | [PRD-020](working-session/docs/PRD-020-boot-artifact-completeness-and-chat-log-contract.md) | Boot artifact completeness + chat log contract | Superseded (folded into PRD-017 R7) |
-| [PRD-021](working-session/docs/PRD-021-conflict-loop-bound-and-selective-unlock-gradient-contract.md) | Conflict loop bound + selective-unlock gradient | Agent-accepted; Maintainer acceptance pending |
+| [PRD-021](docs/prds/PRD-021-conflict-loop-bound-and-selective-unlock-gradient-contract.md) | Conflict loop bound + selective-unlock gradient | Promoted |
+| [PRD-022](working-session/docs/PRD-022-decision-mirror-delivery-contract.md) | Decision-mirror delivery contract | Draft; Codex accepted with amendment |
+| [PRD-023](working-session/docs/PRD-023-out-of-band-activity-reconciliation-contract.md) | Out-of-band activity reconciliation | Agent-accepted; Maintainer acceptance pending |
+| [PRD-024](working-session/docs/PRD-024-human-legibility-invariant-and-encoding-profiles-contract.md) | Human-legibility invariant + encoding profiles | Agent-accepted; Maintainer acceptance pending |
+| [PRD-026](working-session/docs/PRD-026-review-cycle-closure-and-task-state-consistency-contract.md) | Review-cycle closure + task-state consistency | Agent-accepted; Maintainer acceptance pending |
+| [PRD-027](working-session/docs/PRD-027-tokenese-cloned-communication-ab-contract.md) | Tokenese cloned-communication A/B | Agent-accepted; Maintainer + PRD-024 gates pending |
 
 ### Skills (per-agent execution guides)
 

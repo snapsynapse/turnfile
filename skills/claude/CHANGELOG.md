@@ -1,5 +1,12 @@
 # Changelog
 
+## v5 — 2026-06-13
+- SKILL.md v0.4.0 → v0.4.1: PRD-024 propagation (R5.2). New "Encoding profile
+  obligations" section: legible-only governance record, session-charter opt-in
+  for dense lanes, turn-boundary projection obligation (R3.1) alongside the
+  unread=0 rule, projection authorship liability, Maintainer demand/suspension
+  compliance. Pending-contracts note updated (PRD-021 promoted; PRD-022 in review).
+
 ## v4 — 2026-06-12
 - Bundle relocated from `skills/claude-opus_4.6/` to role-keyed `skills/claude/`
   (Maintainer direction, session 14). Model identity now lives in MANIFEST.yaml

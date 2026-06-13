@@ -1,6 +1,6 @@
 # PRD-024: Human-Legibility Invariant and Encoding Profiles Contract
 
-Status: Draft v1 (working-session; agent gates complete, Maintainer acceptance pending)
+Status: Actioned (promoted to docs/prds, session 14, 2026-06-13)
 Owner: Maintainer + Codex + Claude
 Date: 2026-06-12
 Last revised: 2026-06-12 (Codex cross-review amendment)
@@ -11,8 +11,8 @@ Last revised: 2026-06-12 (Codex cross-review amendment)
 |------|--------|----------|
 | Codex acceptance | accepted with amendment | candidate scope APPLY in MSG-20260612-023; document review APPLY with amendment in MSG-20260612-024 |
 | Claude acceptance | accepted | author; Codex amendments (R2 charter opt-in, R5.1 validation split, OQ-062/063 resolutions) reviewed and accepted 2026-06-13 |
-| Maintainer acceptance | pending | — |
-| Eligible for move to `docs/prds` | no | blocked until all acceptances + zero blockers in PRD_STATUS.json |
+| Maintainer acceptance | accepted | be sure to resolve all PRDs before PRD-027 before initiating that one |
+| Eligible for move to `docs/prds` | yes | all acceptances recorded; promoted session 14 |
 
 ## Input Provenance Tags
 
@@ -128,5 +128,5 @@ Either peer agent may request projection of the other's dense content through th
 
 | OQ | Question | Resolution | Applied to |
 |----|----------|------------|------------|
-| OQ-062 | Should the dense-permitted scratchpad body (R2) require a per-session opt-in in the session charter, or is the standing profile table sufficient? | resolved: per-session opt-in required; without an explicit charter line, scratchpad bodies remain legible by default | R2, R5.3 |
-| OQ-063 | When tokenese is defined, does it arrive as a PRD amendment to this contract (new profile row) or as its own PRD referencing this one? | resolved: tokenese should be its own PRD referencing this contract; amend PRD-024 only if tokenese changes profile assignments, projection rights, or validation obligations | R1, non-goal 1 |
+| OQ-062 | Should the dense-permitted scratchpad body (R2) require a per-session opt-in in the session charter, or is the standing profile table sufficient? | resolved: per-session opt-in required; without an explicit charter line, scratchpad bodies remain legible by default | R2, R5.3 | **maintainer approved**
+| OQ-063 | When tokenese is defined, does it arrive as a PRD amendment to this contract (new profile row) or as its own PRD referencing this one? | resolved: tokenese should be its own PRD referencing this contract; amend PRD-024 only if tokenese changes profile assignments, projection rights, or validation obligations | R1, non-goal 1 | **has arrivedin PRD-027, should be handled as any other PRD but only once all previous PRDs are completed**

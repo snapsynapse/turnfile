@@ -2,13 +2,13 @@
 
 Tracks open questions for the active local workspace.
 
-Last updated: 2026-06-13 (OQ-064 registered for PRD-026)
+Last updated: 2026-06-13 (OQ-064 and OQ-065 resolved)
 
 ## Active Questions
 
 | ID | Source PRDs | Question | Status | Resolution |
 |----|-------------|----------|--------|------------|
-| OQ-064 | PRD-026 | Should review-cycle closure consistency be a standalone PRD-026 or an amendment to PRD-003, PRD-006, PRD-013, or PRD-019? | open | pending Claude cross-review and Maintainer decision |
+*No active questions in the local workspace.*
 
 ## Deferred Questions
 
@@ -33,3 +33,5 @@ Canonical deferred items remain tracked in `/Users/snap/Git/turnfile/docs/OPEN_Q
 | OQ-061 | PRD-021 | Should Turnfile adopt an enumerate-only review lane? | resolved | No. Peer counter-recommendation stays as-is. (Maintainer, 2026-06-01) |
 | OQ-062 | PRD-024 | Should the dense-permitted scratchpad body require per-session charter opt-in? | resolved | Per-session opt-in required; default remains legible. (Codex amendment, MSG-20260612-024) |
 | OQ-063 | PRD-024 | Should tokenese be a PRD-024 amendment or its own PRD? | resolved | Own PRD referencing PRD-024 unless profile assignments, projection rights, or validation obligations change. (Codex amendment, MSG-20260612-024) |
+| OQ-064 | PRD-026 | Should review-cycle closure consistency be a standalone PRD-026 or an amendment to PRD-003, PRD-006, PRD-013, or PRD-019? | resolved | Standalone PRD-026, with explicit boundary against the PRD-014 closeout amendment path. (Claude counter accepted by Codex, MSG-20260612-027) |
+| OQ-065 | PRD-022 | Should Maintainer-decision relays (PRD-004 blockquote) always be delivery-mirror, or may the relaying agent downgrade? | resolved | PRD-004 blockquote relays default to `delivery-mirror`; downgrade allowed only when the relay explicitly states no peer future work is bound and no non-deciding participant needs lifecycle awareness. (Codex amendment, MSG-20260613-028) |

@@ -3,15 +3,21 @@
 References:
 - `/Users/snap/Git/turnfile/docs/PROTOCOL_CORE.md`
 
-Now Working (Codex): Session 14 active. PRD-023 draft v1 posted to Claude in MSG-20260612-026; PRD-026 proposal posted to Claude in MSG-20260612-027; Codex unread 0.
-Now Working (Claude): Session 14 active (Fable 5). PRD-024 draft v1 authored; PRD-022 lane pending after PRD-024 review cycle; Claude unread 0.
-Maintainer Focus: PRD-021 Maintainer PRD-document acceptance remains pending. PRD-024 now needs Claude post-amendment acceptance and Maintainer acceptance before tokenese.
-Next Review Checkpoint: Claude cross-review of PRD-023 (MSG-20260612-026), PRD-026 proposal review (MSG-20260612-027), and Claude closure/acceptance on MSG-20260612-024.
+Now Working (Codex): Session 14 active. PRD-023/026/027 counters applied and Codex-owned review threads closed; PRD-022 reviewed with amendment; Codex unread 0.
+Now Working (Claude): Session 14 active (Fable 5). PRD-022 closure owner; Claude unread 0.
+Maintainer Focus: PRD-023/026 are agent-accepted and await Maintainer acceptance. PRD-024 still needs Maintainer acceptance before first live Tokenese clone use; PRD-027 is agent-accepted with PRD-024 + Maintainer gates pending.
+Next Review Checkpoint: Claude closure/post-review acceptance on PRD-022 (MSG-20260613-028), Maintainer acceptance decisions for PRD-023/024/026/027, and optional sequencing for tokenese handoff tasks after PRD-024+027 acceptance.
 
 ## Decision Index
 
 | Decision | Owner | Timestamp | Section |
 |----------|-------|-----------|---------|
+| Codex applied Claude PRD-023 amendment; PRD-023 agent gates complete, Maintainer acceptance pending. | Codex + Claude | 2026-06-13 | MSG-20260612-026 closure |
+| Codex applied Claude PRD-026 counters; OQ-064 resolved standalone; PRD-026 agent gates complete, Maintainer acceptance pending. | Codex + Claude | 2026-06-13 | MSG-20260612-027 closure |
+| Codex applied Claude PRD-027 counters; PRD-027 agent gates complete, Maintainer + PRD-024 gates pending before tokenese clone use. | Codex + Claude | 2026-06-13 | MSG-20260613-029 closure |
+| Codex reviewed PRD-022 APPLY with amendment; OQ-065 resolved; Claude post-review acceptance pending. | Codex | 2026-06-13 | MSG-20260613-028 |
+| Maintainer accepted PRD-021 as-is; Codex promoted PRD-021 to `docs/prds/`. | Maintainer + Codex | 2026-06-13 | PRD-021 promotion — rev 61 |
+| Codex corrected PRD-027 to Tokenese cloned-communication A/B after Maintainer clarified that Tokenese replicates existing communication for measurement and replaces nothing. | Maintainer + Codex | 2026-06-13 | PRD-027 clarification — rev 63 |
 | Codex adopted Maintainer collision directive: full Module 5 revision-lease locks for shared-file writes while both agents are active; new PRD only if collisions continue despite existing structures. | Codex | 2026-06-12 | MSG-20260612-025 |
 | Codex accepted PRD-024 document with amendment: dense scratchpads require session-charter opt-in; labeled dense blocks without immediate paraphrase are validation errors; OQ-062/063 resolved. | Codex | 2026-06-12 | MSG-20260612-024 |
 | Codex accepted PRD-023 drafting lane and withdrew the PRD-025 new-PRD position in favor of a PRD-014 amendment for closeout compaction/projection sync. | Codex | 2026-06-12 | MSG-20260612-024 |
@@ -331,3 +337,74 @@ OQ-064 registered: decide whether this should remain standalone PRD-026 or becom
 |----------|-------|-----------|---------|
 | PRD-025 scope resolved by convergence: PRD-014 amendment path (first full rebuttal-loop convergence). | Codex + Claude | 2026-06-13 | MSG-024 closure |
 | PRD-024 agent acceptance complete (both agents); Maintainer gate remains. | Codex + Claude | 2026-06-13 | PRD-024 gate |
+
+### Codex: PRD-021 promotion + PRD-027 Tokenese adoption draft — rev 60/61
+
+2026-06-13 — Maintainer accepted PRD-021 as-is after agent review. Codex recorded Maintainer acceptance in the PRD gate, promoted `PRD-021-conflict-loop-bound-and-selective-unlock-gradient-contract.md` to `docs/prds/`, updated the registry and visible PRD indexes, and drafted `working-session/docs/PRD-027-tokenese-cloned-communication-ab-contract.md`.
+
+Tokenese source review:
+
+1. `/Users/snap/Git/tokenese/HANDOFF.md`
+2. `/Users/snap/Git/tokenese/spec.md`
+3. `/Users/snap/Git/tokenese/DESIGN.md`
+4. `/Users/snap/Git/tokenese/INTENT.md`
+5. `/Users/snap/Git/tokenese/CONFORMANCE.md`
+
+The requested path `~/git/tokenese/working-session` was not present locally; root `HANDOFF.md` was the available handoff artifact. PRD-027 follows the Tokenese handoff gate by making PRD-024 Maintainer acceptance a sequencing requirement before first live Tokenese use. The initial draft described a parallel adoption layer; Maintainer clarified this was too broad. Corrected framing: Tokenese replicates existing Turnfile communications as cloned A/B copies only. The existing human-legible communication remains the control, authority, and source of truth.
+
+| Decision | Owner | Timestamp | Section |
+|----------|-------|-----------|---------|
+| PRD-021 accepted by Maintainer and promoted to `docs/prds/`. | Maintainer + Codex | 2026-06-13 | PRD-021 promotion |
+| PRD-027 draft v1 staged and routed to Claude for full review. | Codex | 2026-06-13 | MSG-20260613-029 |
+
+### Codex: PRD-027 clarification applied — rev 62/63
+
+2026-06-13 — Maintainer clarified that PRD-027 should not adopt Tokenese as a replacement or alternate communication authority. It should clone existing Turnfile communications into Tokenese so the Tokenese layer is a clear A/B test. Codex revised PRD-027, the active mailbox review card, PRD_STATUS, README index, and Turnfile signal/task notes accordingly.
+
+Corrected contract shape:
+
+1. Every Tokenese item is a clone paired to a normal human-legible Turnfile source communication.
+2. The source communication remains the control, authority, and source of truth.
+3. Tokenese clones cannot change lifecycle status, create or close tasks, claim locks, record acceptance, or substitute for mailbox/worklog/Turnfile entries.
+4. Divergence between clone and source is A/B data; the source wins.
+
+| Decision | Owner | Timestamp | Section |
+|----------|-------|-----------|---------|
+| PRD-027 intent clarified: Tokenese replicates existing communications as cloned A/B copies and replaces nothing. | Maintainer | 2026-06-13 | Maintainer chat clarification |
+
+### Claude: PRD-027 review vs tokenese handoff + PRD-022 routed — rev 65
+
+2026-06-13 — Maintainer requested PRD-027 evaluation against /Users/snap/Git/tokenese/HANDOFF.md. Verdict: APPLY with 2 counters (MSG-029 reply): (P1) missing teach-phase gate — handoff task 1 requires Codex production competence (novel recombinations) before A/B, R2.3 read-requirement insufficient and confounds the experiment; (P2) self-reported channels (^N, ev:) untrusted-by-default until calibration-audit passes. Notes: Codex nominates expected-to-lose tasks; spec v0.1.0 frozen with DESIGN.md precedence. Handoff's five tokenese tasks to be registered gated on PRD-024+027 acceptance, on Maintainer direction. MSG-028 (PRD-022 draft v1 review request) posted to Codex. Ledger item 4 (near-miss): Claude wrote PRD_STATUS/OQ registry while Codex held lock-codex-prd021-prd027 (lock-check ordering error); no conflict resulted — Codex merged around the writes. Lesson: lock check precedes ALL shared-file writes in a batch, not just mailbox.
+
+| Decision | Owner | Timestamp | Section |
+|----------|-------|-----------|---------|
+| PRD-027 Claude review: accepted-with-amendment (teach gate + channel trust rule). | Claude | 2026-06-13 | MSG-029 reply |
+
+### Codex: PRD-023/026/027 closure + PRD-022 review — rev 66/67
+
+2026-06-13 — Maintainer directed Codex to advance approved work. Under `lock-codex-prd-review-closure`, Codex applied approved counters and synchronized the review cycle state.
+
+1. **PRD-023 (MSG-026):** Applied Claude R4 amendment. Governance-state drift blocks now route a `decision-required` Maintainer message with observed evidence, suspected governance impact, and draft reconciliation note. PRD-023 agent gates complete; Maintainer acceptance remains.
+2. **PRD-026 (MSG-027):** Applied Claude counters. Added explicit cross-ownership repair prohibition; non-owners flag another agent's task-row drift rather than repairing it in place. Resolved OQ-064 as standalone PRD-026 with boundary against the PRD-014 closeout amendment path. PRD-026 agent gates complete; Maintainer acceptance remains.
+3. **PRD-027 (MSG-029):** Applied Claude counters. Added Tokenese teach-phase production-competence gate, teaching-token-cost logging, untrusted-by-default rule for `^N` and `ev:` until calibration, Codex nomination of expected-to-lose tasks, and spec/design precedence note. PRD-027 agent gates complete; Maintainer + PRD-024 gates remain before first live Tokenese clone use.
+4. **PRD-022 (MSG-028):** Codex reviewed APPLY with amendment. Resolved OQ-065: PRD-004 blockquote relays default to `delivery-mirror`; downgrade requires explicit no-peer-binding/no-awareness-needed statement. Added validator warning for delivery-mirror receiver sets that appear not to include all bound parties. Claude post-review acceptance remains.
+
+| Decision | Owner | Timestamp | Section |
+|----------|-------|-----------|---------|
+| PRD-023, PRD-026, and PRD-027 approved counters applied; Codex-owned review threads closed. | Codex | 2026-06-13 | MSG-026/027/029 closure |
+| PRD-022 reviewed APPLY with amendment; OQ-065 resolved. | Codex | 2026-06-13 | MSG-028 reply |
+
+### Claude: PRD-024 promoted; PRD-022 agent gates complete; PRD-024 propagation — rev 69
+
+2026-06-13 — Under lock-claude-prd024-promotion:
+
+1. **PRD-024 Maintainer-accepted and promoted to docs/prds** (validator pass). Tokenese sequencing gate at the PRD-024 level is satisfied; remaining stack: PRD-027 Maintainer acceptance → charter opt-in → teach phase (R2.6) → A/B pilot.
+2. **PRD-024 R5 propagation executed (Claude side):** skills/claude/ SKILL.md v0.4.1 + MANIFEST v5 (encoding-profile obligations: legible-only governance record, charter opt-in, turn-boundary projection obligation, authorship liability); session-charter template gains encoding-profile line (R5.3). R5.1 validator dense-fragment rule registered as follow-on tooling task per AC4. Codex owes the skills/codex/ mirror per R5.2.
+3. **PRD-022 Codex amendment accepted** (R2.5 relay default resolving OQ-065; R5.4 bound-party check). Agent gates complete; Maintainer acceptance pending. MSG-028 closed.
+4. **MSG-030 posted as the first live delivery-mirror** (PRD-022 draft semantics dogfooded): PRD-024 acceptance binds both agents, so it ships unread with ack requirement rather than closed-on-posting — the exact failure mode PRD-022 fixes, now demonstrably not repeated.
+5. Codex's counter-applications verified: PRD-023 R4 decision-required route, PRD-026 cross-ownership repair prohibition + PRD-014 boundary, PRD-027 R2.6 teach gate + channel-trust rule + spec-freeze note. Agent gates complete on PRD-022/023/026/027 — all four await only Maintainer acceptance.
+
+| Decision | Owner | Timestamp | Section |
+|----------|-------|-----------|---------|
+| PRD-024 accepted and promoted (tokenese legibility gate live). | Maintainer | 2026-06-13 | MSG-20260613-030 mirror |
+| PRD-022/023/026/027 agent gates complete; queued for Maintainer acceptance. | Codex + Claude | 2026-06-13 | Review cycle closures |
