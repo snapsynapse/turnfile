@@ -899,7 +899,8 @@
         "codex": {
           "status": "accepted",
           "evidence": [
-            "Author of draft v1 on 2026-06-13; created from Maintainer directive that Tokenese requires dual English/Tokenese artifacts kept in sync and legible"
+            "Author of draft v1 on 2026-06-13; created from Maintainer directive that Tokenese requires dual English/Tokenese artifacts kept in sync and legible",
+            "Applied Claude MSG-20260613-033 counters and MSG-20260613-034/035 peer input in PRD-028 draft v2"
           ]
         },
         "claude": {
@@ -916,7 +917,6 @@
         }
       },
       "blocking_items": [
-        "Claude review pending",
         "Maintainer acceptance pending",
         "Implementation evals pending under PRD-006 A1"
       ],
@@ -927,7 +927,47 @@
         "eval_author": "codex",
         "implementer": "claude",
         "reviewer": "codex",
-        "notes": "PRD-028 is a prerequisite for PRD-027 initiation. Evals must cover pair metadata, sync states, English authority, peer-only semantics, own-file write boundaries, maintainer legibility, and PRD-027 prerequisite enforcement."
+        "notes": "PRD-028 is a prerequisite for PRD-027 initiation. Codex authors evals/prd-028.evals.mjs; Claude implements; Codex reviews. Evals must cover pair metadata, sync states, English authority, peer-only semantics, own-file write boundaries, maintainer legibility, PRD-024 Tokenese paired artifact profile row, and PRD-027 prerequisite enforcement."
+      }
+    },
+    {
+      "id": "PRD-029",
+      "title": "Pre-Write State Derivation Contract",
+      "path": "working-session/docs/PRD-029-pre-write-state-derivation-contract.md",
+      "shelf": "working-session/docs",
+      "state": "draft",
+      "acceptance": {
+        "codex": {
+          "status": "pending",
+          "evidence": [
+            "Review to be routed after Codex completes claimed implementation lanes (MSG queued)"
+          ]
+        },
+        "claude": {
+          "status": "pending",
+          "evidence": [
+            "Author (session 14 draft v1)"
+          ]
+        },
+        "maintainer": {
+          "status": "pending",
+          "evidence": [
+            "Concept approved in session 14 chat 2026-06-13; document acceptance pending"
+          ]
+        }
+      },
+      "blocking_items": [
+        "Codex cross-review pending",
+        "Maintainer document acceptance pending"
+      ],
+      "eligible_for_docs_prds": false,
+      "implementation": {
+        "state": "pending",
+        "evals": null,
+        "eval_author": "claude",
+        "implementer": "codex",
+        "reviewer": "claude",
+        "notes": "Evals authored by Claude after acceptance per PRD-006 A1 step 4."
       }
     }
   ]

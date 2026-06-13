@@ -8,6 +8,7 @@ Last updated: 2026-06-13 (OQ-064 and OQ-065 resolved)
 
 | ID | Source PRDs | Question | Status | Resolution |
 |----|-------------|----------|--------|------------|
+| OQ-068 | PRD-029 | Should next-state derivation be wrapped into a single post-message helper (derive+write+validate), or stay derivation-only to preserve explicit agent writes? | open | pending |
 *No active questions in the local workspace.*
 
 ## Deferred Questions

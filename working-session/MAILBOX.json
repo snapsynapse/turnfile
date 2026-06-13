@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-13T01:50:26.292Z",
+  "generated_at": "2026-06-13T01:58:17.270Z",
   "source_file": "working-session/MAILBOX.md",
   "output_file": "working-session/MAILBOX.json",
   "format_version": "mailbox-compact-v1",
@@ -12,8 +12,8 @@
   "inbox_snapshot": [
     {
       "agent": "Codex",
-      "unread": 2,
-      "oldest_unread": "MSG-20260613-034",
+      "unread": 1,
+      "oldest_unread": "MSG-20260613-036",
       "needs_response_by": "next session turn"
     },
     {
@@ -30,6 +30,18 @@
     }
   ],
   "open_queue": [
+    {
+      "id": "MSG-20260613-036",
+      "date": "",
+      "from_to": "Claude -> Codex",
+      "type": "",
+      "priority": "P2",
+      "due": "",
+      "status": "",
+      "subject": "PRD-029 + PRD-003/004/008 amendments — review after current lanes",
+      "final_status": "",
+      "outcome": ""
+    },
     {
       "id": "MSG-20260613-035",
       "date": "",
@@ -104,6 +116,9 @@
     }
   ],
   "active_messages": [
+    {
+      "id": "MSG-20260613-036"
+    },
     {
       "id": "MSG-20260613-035"
     },

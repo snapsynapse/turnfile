@@ -3,15 +3,16 @@
 References:
 - `/Users/snap/Git/turnfile/docs/PROTOCOL_CORE.md`
 
-Now Working (Codex): Session 14 active. PRD-028 drafted and routed to Claude; Codex retains claimed implementation for PRD-021/022/024 and eval authoring for PRD-023/026. Codex unread 0.
+Now Working (Codex): Session 14 active. PRD-028 draft v2 applies Claude MSG-033 counters and MSG-034/035 peer input; Codex retains claimed implementation for PRD-021/022/024 and eval authoring for PRD-023/026. Codex unread 0.
 Now Working (Claude): Session 14 active (Fable 5). PRD-006 A1 proposer/reviewer for PRD-021/022/024 implementation lane; Claude unread 0.
 Maintainer Focus: PRD-027 is held until every other PRD item is complete, then commit, push, and Maintainer checkpoint discussion happen before PRD-027 initiation.
-Next Review Checkpoint: Claude reviews PRD-028 apply-or-counter; Codex then resumes PRD-021/022/024 implementation and PRD-023/026 eval authoring through the A1 loop.
+Next Review Checkpoint: Maintainer reviews PRD-028 when ready; Codex resumes PRD-021/022/024 implementation and PRD-023/026 eval authoring through the A1 loop.
 
 ## Decision Index
 
 | Decision | Owner | Timestamp | Section |
 |----------|-------|-----------|---------|
+| Codex actioned Claude MSG-034/035 and applied PRD-028 v2 updates: Maintainer tenets received as binding context; Claude counters and peer contributions incorporated as proposals, not directions. | Codex + Claude | 2026-06-13 | MSG-20260613-034/035 + PRD-028 draft v2 |
 | Maintainer requested PRD-028 for Tokenese dual English/Tokenese artifacts, sync, peer-only authority, own-file boundaries, and Maintainer legibility; Codex drafted and routed it as a prerequisite to PRD-027 initiation. | Maintainer + Codex | 2026-06-13 | PRD-028 draft + MSG-20260613-033 |
 | Codex accepted PRD-006 A1 eight-step implementation loop and claimed PRD-021/022/024 implementation plus PRD-023/026 eval-author lanes. | Codex + Claude | 2026-06-13 | MSG-20260613-032 |
 | Maintainer approved PRD-022, PRD-023, and PRD-026; Claude promoted them to `docs/prds/`; Codex acknowledged the delivery mirror. | Maintainer + Claude + Codex | 2026-06-13 | MSG-20260613-031 |
@@ -472,3 +473,19 @@ Installed:
 | Decision | Owner | Timestamp | Section |
 |----------|-------|-----------|---------|
 | Collaboration posture directive: generative peer contribution mandatory; aggregated-intelligence intent named. | Maintainer | 2026-06-13 | MSG-035 item 1 |
+
+### Claude: PRD-029 + three amendments drafted (session-evidence improvements) — rev 85
+
+2026-06-13 — Maintainer approved the five improvement concepts and directed drafting. Routing decision (both/and): item 1 → new PRD-029 (Pre-Write State Derivation: cross-cutting rule + tools/next-state.mjs + regression evals encoding ledger 3/5 and both snapshot mismatches); items 2-4 → amendments to owning PRDs (PRD-003 A1 thread-mode; PRD-004 A1 Maintainer decision queue; PRD-008 A1 blocking/peer-input reply channels); item 5 (smaller sessions) → Maintainer practice decision, no contract. MSG routed to Codex at P2, explicitly queued behind its claimed implementation lanes (tenet 1: request, no preemption). OQ-068 registered. Maintainer will request equivalent proposals from Codex when its lanes complete.
+
+Maintainer Decision Queue (PRD-004 A1 practice, effective immediately):
+1. PRD-028 OQ-067 scope: all artifacts vs phased pilot-first (escalated in MSG-033 counter 1).
+2. PRD-029 + PRD-003/004/008 A1 document acceptance (after Codex review).
+3. PRD-028 document acceptance (after Codex applies counters 2-3 + OQ-067 ruling).
+4. Band C: deletion of deprecated skill directories (parked since rev 37).
+5. Push/PR + session 15 boundary timing (deferred from checkpoint discussion).
+
+| Decision | Owner | Timestamp | Section |
+|----------|-------|-----------|---------|
+| Improvement routing: PRD-029 new; thread-mode/decision-queue/reply-channels as PRD-003/004/008 A1 amendments; session sizing as practice. | Maintainer (concept) + Claude (routing) | 2026-06-13 | PRD-029 cycle |
+| Smaller-session practice adopted: target ~1/3 of session 14 scope; close 14 after PRD-028 cycle + red lanes resolve. | Maintainer | 2026-06-13 | Improvement item 5 |

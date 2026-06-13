@@ -1,18 +1,18 @@
 # PRD-028: Tokenese Dual-Artifact Sync and Maintainer Legibility Contract
 
-Status: Draft v1 (working-session; Codex-authored, Claude review pending, Maintainer acceptance pending)
+Status: Draft v2 (working-session; Codex-authored, Claude accepted-with-amendment applied, Maintainer acceptance pending)
 Owner: Maintainer + Codex + Claude
 Date: 2026-06-13
-Last revised: 2026-06-13 (initial Codex draft)
+Last revised: 2026-06-13 (Claude MSG-20260613-033 counters + MSG-20260613-034/035 peer input applied)
 
 ## Promotion Gate Snapshot (PRD-006 R2a)
 
 | Gate | Status | Evidence |
 |------|--------|----------|
-| Codex acceptance | accepted | author of draft v1 |
-| Claude acceptance | pending | routed in MSG-20260613-033 for apply-or-counter |
+| Codex acceptance | accepted | author of draft v1; applied Claude counters and peer input in draft v2 |
+| Claude acceptance | accepted-with-amendment | MSG-20260613-033 APPLY with 3 counters; counters applied in draft v2 |
 | Maintainer acceptance | pending | Maintainer requested PRD-028 on 2026-06-13 after reaffirming peer-only authority, own-file write boundaries, and maintainer-legible decisions |
-| Eligible for move to `docs/prds` | no | blocked until Claude + Maintainer acceptance, implementation evals, and zero blockers in PRD_STATUS.json |
+| Eligible for move to `docs/prds` | no | blocked until Maintainer acceptance, implementation evals, implementation review, and zero blockers in PRD_STATUS.json |
 
 ## Input Provenance Tags
 
@@ -23,6 +23,8 @@ Last revised: 2026-06-13 (initial Codex draft)
 5. `derived`: PRD-024 requires legible governance records and projection of protocol-relevant dense content.
 6. `derived`: PRD-027 defines Tokenese as a cloned A/B layer, not a replacement for existing Turnfile communications.
 7. `derived`: PRD-006 A1 requires evals and implementation review before PRDs are filed done.
+8. `derived`: `working-session/MAILBOX.json` is an existing parallel projection of `working-session/MAILBOX.md`, regenerated in the same transaction and validated for source/projection consistency.
+9. `peer-input`: Claude MSG-20260613-033/034/035 proposed profile-table hooks, sync tiers, shared-artifact twin obligations, sidecar naming, recursive-twin guards, round-trip verification, archive handling, Maintainer-edit handling, `tokenese-ahead` promotion semantics, third-agent English-only conformance, TURNFILE exception surfacing, and REV-token pair IDs.
 
 ## Alignment Reference
 
@@ -43,6 +45,8 @@ This PRD aligns with:
 ## Problem
 
 PRD-027 can safely define Tokenese as a cloned communication layer, but Turnfile does not yet have the artifact architecture needed to run that layer.
+
+Turnfile already has one proven parallel-projection pattern: `MAILBOX.json` is a machine-readable projection of `MAILBOX.md`, regenerated in the same transaction as mailbox source edits and checked by validator. Tokenese paired artifacts generalize that pattern from a machine projection into a bilingual communication layer, with stricter authority and human-legibility constraints.
 
 Without a dual-artifact contract:
 
@@ -69,6 +73,7 @@ Without a dual-artifact contract:
 3. Permitting Tokenese-only governance records.
 4. Allowing agents to edit peer-owned files.
 5. Deciding the exact repository layout for every future Tokenese artifact beyond the minimum contract needed for safe initiation.
+6. Requiring any agent or Maintainer to understand Tokenese before participating fully in Turnfile.
 
 ## Requirements
 
@@ -90,7 +95,9 @@ Each Tokenese-enabled Turnfile artifact has an English artifact and a Tokenese p
 
 1. The English artifact is the maintainer-legible control and authority.
 2. The Tokenese artifact is a clone, projection, or operational aid paired to the English artifact.
-3. Every pair must carry stable pairing metadata:
+3. This model inherits from the existing `MAILBOX.md` plus `MAILBOX.json` projection discipline: the source remains legible, the projection is generated or updated in a controlled transaction, and drift is validator-visible.
+4. Pilot Tokenese twins default to sidecar files beside the English artifact using `<name>.tk.md`, unless implementation review finds a stronger layout before PRD-027 initiation.
+5. Every pair must carry stable pairing metadata:
    - `pair_id`
    - English source path or message ID
    - Tokenese clone path or message ID
@@ -99,8 +106,10 @@ Each Tokenese-enabled Turnfile artifact has an English artifact and a Tokenese p
    - sync state
    - last sync actor
    - last sync evidence
-4. Pairing metadata must be readable without Tokenese tooling.
-5. A Tokenese artifact without a paired English source is invalid.
+6. `pair_id` should reuse the existing revision-token style where practical, such as `REV-YYYYMMDD-topic-seq-hash`, instead of inventing a new namespace.
+7. Pairing metadata must be readable without Tokenese tooling.
+8. A Tokenese artifact without a paired English source is invalid.
+9. Pair metadata, sync-issue records, and sync-state registries are the meta-layer for the dual corpus. They remain English-only and are not themselves recursively paired.
 
 ## R3. Authority and divergence
 
@@ -111,8 +120,9 @@ Each Tokenese-enabled Turnfile artifact has an English artifact and a Tokenese p
    - observed difference
    - proposed repair
    - owner of the repair request
-3. Tokenese divergence cannot create or close tasks, change acceptance state, acquire or release locks, or record approval.
-4. Tokenese may help detect or summarize state, but English artifacts carry final governance state.
+3. Divergence handling distinguishes mistranslation from unprojected insight. Mistranslation is corrected against English; protocol-relevant Tokenese-only insight is promoted into English before it can govern.
+4. Tokenese divergence cannot create or close tasks, change acceptance state, acquire or release locks, or record approval.
+5. Tokenese may help detect or summarize state, but English artifacts carry final governance state.
 
 ## R4. Peer-only authority semantics
 
@@ -131,6 +141,8 @@ Tokenese exchanges must preserve the same peer relationship as English Turnfile 
 3. Agent-owned Tokenese files follow the same ownership rule as agent-owned English files.
 4. Shared governance artifacts remain shared-file transactions subject to Turnfile locks, revision updates, mailbox lifecycle, and validation.
 5. If a Tokenese clone is required for a peer-owned artifact, the requesting agent asks the owner to produce or update it rather than editing it directly.
+6. For shared English artifacts, the mutating agent owes the paired Tokenese update or an `english-ahead` state declaration in the same lock window.
+7. Maintainer-authored English edits never create a Maintainer obligation to write Tokenese. They automatically set affected pairs to `english-ahead`; the artifact owner, or the next mutating agent for shared artifacts, handles catch-up under protocol.
 
 ## R6. Maintainer legibility
 
@@ -141,6 +153,7 @@ Every protocol-relevant Tokenese artifact or exchange has a human-legible Englis
 3. Session summaries and checkpoint discussions cite English artifacts first.
 4. Dense Tokenese fragments in governance artifacts follow PRD-024 R3.2: labeled, fenced, and immediately paraphrased.
 5. Maintainer projection demands have P1 priority and block Tokenese continuation for the affected pair until satisfied.
+6. Tokenese competence is never a participation requirement. A third agent that can only read and write English remains fully conformant.
 
 ## R7. Sync states
 
@@ -158,7 +171,36 @@ Each pair has exactly one sync state:
 
 `tokenese-ahead` and `diverged` are blocking states for any protocol-relevant use of the Tokenese artifact.
 
-## R8. Validation requirements
+## R8. Sync trigger tiers
+
+Tokenese pairs use tiered sync obligations.
+
+1. Governance artifacts use same-transaction sync, matching the `MAILBOX.md` plus `MAILBOX.json` discipline.
+2. Low-churn non-governance docs may use turn-end sync if the pair metadata records the temporary `english-ahead` state.
+3. Active artifacts carry live twins once they are in Tokenese scope.
+4. Archive files receive Tokenese twins at archival time and are archived together. They are not retroactively tokenized unless the Maintainer requests that work.
+5. `TURNFILE.yaml` should surface only non-`in-sync` active pairs to avoid bloat while keeping divergence boot-visible.
+
+## R9. PRD-024 profile-table amendment hook
+
+On acceptance, PRD-024 R2 gains a Band C profile-table amendment row for Tokenese paired artifacts:
+
+| Artifact class | Encoding profile | Rule |
+|----------------|------------------|------|
+| Tokenese paired artifacts | Dense permitted | Always paired to a legible English source per PRD-028 R2; never authoritative; protocol-relevant dense content must project to English before governing. |
+
+This row is part of PRD-028 implementation and must be represented in the implementation evals.
+
+## R10. Scope and rollout
+
+The rollout is phased but the end-state commitment is not optional.
+
+1. PRD-028 defines architecture and contracts now.
+2. PRD-027 may later pilot pairs on a bounded set of active artifacts for A/B measurement.
+3. The committed end state is English and Tokenese versions of all Turnfile artifacts going forward, kept in sync and legible to humans.
+4. Binding layout, cost parameters, and scaling thresholds are calibrated after PRD-027 A/B data exists.
+
+## R11. Validation requirements
 
 The implementation must add or register validators that detect:
 
@@ -170,8 +212,12 @@ The implementation must add or register validators that detect:
 6. Governance artifact dense fragments without immediate paraphrase.
 7. Peer-owned file modification attempt when detectable from known paths or ownership metadata.
 8. PRD-027 initiation while PRD-028 is not implementation `done`.
+9. Missing PRD-024 profile-table amendment row for Tokenese paired artifacts.
+10. Semantic mistranslation through round-trip verification: regenerate English from the Tokenese twin alone and compare to the English source.
 
-## R9. Session and checkpoint behavior
+Under PRD-006 A1, Codex authors `evals/prd-028.evals.mjs`, Claude implements PRD-028, and Codex reviews implementation before filing done.
+
+## R12. Session and checkpoint behavior
 
 1. Session charter declares whether Tokenese is disabled, proposed, pilot-only, or active.
 2. Session closeout lists Tokenese pair sync state for every active pair.
@@ -189,6 +235,8 @@ The implementation must add or register validators that detect:
 7. English authority and Maintainer legibility are explicit.
 8. A session-close or checkpoint rule records pair sync state.
 9. Evals cover missing pair, stale/diverged pair, Tokenese-only decision, and PRD-027 prerequisite enforcement.
+10. PRD-024 R2 has an explicit Tokenese paired artifact profile row.
+11. `evals/prd-028.evals.mjs` starts red before implementation and encodes pairing, authority, authorship, sync, PRD-024, and PRD-027 prerequisite gates.
 
 ## Risks
 
@@ -200,11 +248,14 @@ The implementation must add or register validators that detect:
    Mitigation: peer-only request semantics and Maintainer projection rights remain substantive requirements.
 4. Pair metadata could become noisy.
    Mitigation: metadata is minimal and machine-checkable.
+5. Recursive pairing of sync metadata could create infinite governance overhead.
+   Mitigation: the meta-layer remains English-only.
+6. Hash checks could miss semantic mistranslation.
+   Mitigation: round-trip verification catches semantic loss in addition to stale content.
 
 ## Open Questions
 
 | OQ | Question | Proposed resolution | Applies to |
 |----|----------|---------------------|------------|
-| OQ-066 | Should paired Tokenese artifacts live beside English artifacts, under a parallel `tokenese/` tree, or in metadata sidecars? | Defer layout until implementation design; PRD-028 requires pair metadata but does not force final layout. | R2, R8 |
-| OQ-067 | Should all Turnfile artifacts eventually require Tokenese pairs, or only Tokenese-active artifacts? | Start with Tokenese-active artifacts only; expand only by Maintainer-approved PRD amendment. | R2, R7 |
-
+| OQ-066 | Should paired Tokenese artifacts live beside English artifacts, under a parallel `tokenese/` tree, or in metadata sidecars? | Use sidecar files (`<name>.tk.md`) as pilot default; final layout remains subject to implementation review and PRD-027 A/B data. | R2, R8 |
+| OQ-067 | Should all Turnfile artifacts eventually require Tokenese pairs, or only Tokenese-active artifacts? | Resolved in draft v2: pilot-scope pairs first, with all-going-forward Turnfile artifacts as the committed end state once PRD-027 A/B data sets rollout and cost parameters. | R2, R10 |

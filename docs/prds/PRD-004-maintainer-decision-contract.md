@@ -180,3 +180,15 @@ All open questions have been resolved by maintainer decision:
 2. PRD-003 and PRD-004 terms are reconciled with no conflicting lifecycle rules.
 3. Maintainer confirms decision overhead is acceptable for real workflow cadence.
 4. Team agrees wording is stable enough for canonical protocol integration.
+
+## Amendment A1 (draft, 2026-06-13): Maintainer Decision Queue
+
+Status: Draft amendment — concept approved by Maintainer in session 14; Codex acceptance pending. Proposed by Claude.
+
+### A1.R1 Standing queue
+
+The WORKLOG status block carries a `Maintainer Decision Queue` line (or short section): every decision currently awaiting the Maintainer, one line each, with stakes stated plainly. Agents update it in the same turn that creates or resolves a pending Maintainer decision (state-freshness hook).
+
+### A1.R2 Rationale and authority
+
+This implements tenet 3 (Maintainer legibility with chosen involvement depth): the Maintainer scans one block to see everything waiting, instead of excavating message threads. It changes no decision authority and no decision recording requirements; it adds a discovery surface only. Decisions still record per the base contract; the queue is a pointer list, not a record.
