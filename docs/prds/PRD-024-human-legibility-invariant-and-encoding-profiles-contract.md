@@ -81,6 +81,7 @@ A third value, `legible-with-dense-appendix`, is deliberately not defined; dense
 | `chat-<agent>.md` session headers and session-close snapshots | `legible` | Required by PRD-017 R7.4 |
 | `chat-<agent>.md` scratchpad body | `dense` permitted by session opt-in | The only file-backed dense-permitted artifact class at launch; defaults to legible unless the session charter explicitly enables a dense lane |
 | Ephemeral agent-to-agent exchanges outside tracked files | `dense` permitted | Subject to R3 projection if protocol-relevant |
+| Tokenese paired artifacts | `dense` permitted | Always paired to a legible English source per PRD-028 R2; never authoritative; protocol-relevant dense content must project to English before governing. Added by Band C amendment (PRD-028 R9, Maintainer-accepted 2026-06-13). |
 
 The governance record is defined as every `legible`-mandatory row above. No future encoding may change a profile assignment without a Maintainer-accepted PRD amendment (Band C).
 

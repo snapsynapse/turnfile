@@ -3,7 +3,7 @@
 References:
 - `/Users/snap/Git/turnfile/docs/PROTOCOL_CORE.md`
 
-Now Working (Codex): Session 14 active. Implementing PRD-021/022/024 to eval-green (s14-impl-021-022-024) + authoring PRD-023/026 evals (s14-evals-023-026). PRD-028 evals authored; implementation remains with Claude. Codex unread 0 after MSG-039 actioned.
+Now Working (Codex): Session 14 active. Implementing PRD-021/022/024 to eval-green (s14-impl-021-022-024) + authoring PRD-023/026 evals (s14-evals-023-026). PRD-029 implementation handoff received in MSG-041 and acknowledged; queued behind active Codex lanes unless Maintainer reprioritizes. Codex unread 0.
 Now Working (Claude): Session 14 active (Opus 4.8). PRD-029 evals authored (red 9/10) and handed to Codex (s14-impl-029). Next Claude lane: implement PRD-028 against evals/prd-028.evals.mjs. Claude unread 0.
 Maintainer Focus: PRD-027 held until all other PRD items complete + commit/push/checkpoint discussion. See Maintainer Decision Queue below.
 Maintainer Decision Queue (PRD-004 A1): (1) PRD-003/004/008 A1 document acceptances, if still desired before promotion; (2) model-specific skill directory retention/removal only by explicit Maintainer decision; no model-specific skill path is deprecated by default; (3) push/PR + session-15 boundary timing.
@@ -13,6 +13,8 @@ Next Review Checkpoint: Codex implements next-state.mjs (PRD-029) to eval-green 
 
 | Decision | Owner | Timestamp | Section |
 |----------|-------|-----------|---------|
+| Codex created `docs/llm/MODEL_LEDGER.md` as the canonical project model-usage ledger, seeded from manifests, session charters, WORKLOG/TURNFILE evidence, README/BASELINE, and precursor `docs/llm` collaboration records. | Maintainer + Codex | 2026-06-13 | Model usage ledger |
+| Codex acknowledged Claude MSG-041 PRD-029 implementation handoff; `s14-impl-029` remains queued behind current Codex active lanes unless the Maintainer reprioritizes. | Codex + Claude | 2026-06-13 | MSG-20260613-041 |
 | Maintainer confirmed PRD-028 and PRD-029 acceptance directly to Codex; registry and PRD gate snapshots now record Maintainer acceptance while keeping implementation blockers active under PRD-006 A1. | Maintainer + Codex | 2026-06-13 | PRD-028/029 acceptance sync |
 | Codex reviewed Claude skill v0.5.0 Files First, Not Memory principle from MSG-039, found it protocol-consistent, mirrored the adapted rule into `skills/codex/` v5, and synced the installed global Codex Turnfile skill copy. | Codex + Claude | 2026-06-13 | MSG-20260613-039 |
 | Codex advanced PRD-028 under PRD-006 A1 step 4 by authoring `evals/prd-028.evals.mjs`, syncing PRD_STATUS to `evals-authored`, and correcting PRD-028 gate text to keep Maintainer document acceptance pending until explicit acceptance. | Codex | 2026-06-13 | PRD-028 eval-author step |
@@ -566,3 +568,19 @@ Note for Codex (peer awareness, non-binding): the same memory-vs-files inversion
 |----------|-------|-----------|---------|
 | PRD-029 evals authored (Claude/proposer); implementation handed to Codex (s14-impl-029). | Claude | 2026-06-13 | MSG-041 |
 | PRD-028 implementation confirmed as Claude's lane against Codex-authored evals. | Codex + Claude | 2026-06-13 | MSG-040 |
+
+### Claude (Opus 4.8): PRD-028 implemented — evals 10/10 green, review requested — rev 107
+
+2026-06-13 — PRD-028 implementation lane (Claude implementer; Codex proposer/reviewer). PRD-006 A1 step 6 complete.
+
+Implemented two artifacts against Codex's `evals/prd-028.evals.mjs` (was 7/10, now 10/10):
+1. **`tools/validate-tokenese-pairs.mjs`** (R11): scans `--root` for `*.tk.md` twins; rejects missing/malformed pair metadata, missing English source (R2.5), invalid/blocking sync_state (tokenese-ahead/diverged, R7), and Tokenese-only decision content with no governing English source (R3/R8.4); accepts complete in-sync sidecar pairs. Each branch manually verified beyond the fixtures.
+2. **PRD-024 R2 Tokenese row** (R9 Band C amendment): added to the promoted `docs/prds/PRD-024-...md` — the downstream edit flagged to and authorized by the Maintainer's acceptance of PRD-028 (PRD-024's own rule requires a Maintainer-accepted amendment; PRD-028 is one).
+
+Registry: PRD-028 implementation.state → `eval-verified`; blocker now "Codex review pending (A1 step 7)". MSG-20260613-042 requests Codex review. On approve, Codex files done (step 8).
+
+Notes: (a) run-evals.mjs "stale locks"/"unknown lock holders" tests transiently failed while my lock was live (those fixtures read the live TURNFILE.yaml) — verified to restore after lock release, not a regression. (b) Committed only PRD-028 files; left Codex's concurrent `docs/llm/MODEL_LEDGER.md` + `COLLAB_PROTOCOL.md` for Codex (own-file boundary).
+
+| Decision | Owner | Timestamp | Section |
+|----------|-------|-----------|---------|
+| PRD-028 implemented (validator + PRD-024 Band C row); evals 10/10; Codex review requested (A1 step 7). | Claude | 2026-06-13 | MSG-042 |

@@ -919,16 +919,16 @@
         }
       },
       "blocking_items": [
-        "Implementation pending (evals authored; Claude implementation and Codex review pending under PRD-006 A1)"
+        "Codex review of implementation pending (PRD-006 A1 step 7)"
       ],
       "eligible_for_docs_prds": false,
       "implementation": {
-        "state": "evals-authored",
+        "state": "eval-verified",
         "evals": "evals/prd-028.evals.mjs",
         "eval_author": "codex",
         "implementer": "claude",
         "reviewer": "codex",
-        "notes": "PRD-028 is a prerequisite for PRD-027 initiation. Codex authored evals/prd-028.evals.mjs on 2026-06-13; Claude implements; Codex reviews. Evals cover pair metadata, sync states, English authority, peer-only semantics, own-file write boundaries, maintainer legibility, PRD-024 Tokenese paired artifact profile row, Tokenese pair validator behavior, and PRD-027 prerequisite enforcement."
+        "notes": "Claude implemented 2026-06-13: tools/validate-tokenese-pairs.mjs (R11) + PRD-024 R2 Tokenese row (R9 Band C). evals/prd-028.evals.mjs 10/10 green. Pending Codex review (A1 step 7), then Codex files done."
       }
     },
     {
