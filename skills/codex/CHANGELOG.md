@@ -1,5 +1,17 @@
 # Changelog — turnfile-codex-collaboration
 
+## v7 - 2026-06-13
+
+- SKILL.md: Added PRD-029 R3 obligation to derive mailbox IDs, Turnfile signal IDs, revision, unread counts, and oldest unread pointers with `tools/next-state.mjs` inside shared-file transaction windows, with an explicit fresh-file read fallback when unavailable.
+- MANIFEST.yaml: Updated bundle metadata to v7 and expanded bundle notes to include PRD-029 pre-write state derivation.
+- CHANGELOG.md: Added this v7 entry.
+
+## v6 - 2026-06-13
+
+- SKILL.md: Added a Model Ledger Handshake Check requiring Codex to verify the current executing model and surface in `docs/llm/MODEL_LEDGER.md` during session bootstrap before making model-compatibility claims.
+- MANIFEST.yaml: Updated bundle metadata to v6 and expanded bundle notes to include model ledger handshake validation.
+- CHANGELOG.md: Added this v6 entry.
+
 ## v5 — 2026-06-13
 
 - SKILL.md: Added Files First, Not Memory discipline from the Maintainer's file-based collaboration directive and Claude's v0.5.0 peer-offer: read relevant shared files before asserting, answering, reasoning, or writing current protocol state.

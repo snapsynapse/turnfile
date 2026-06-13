@@ -1,9 +1,9 @@
 # PRD-028: Tokenese Dual-Artifact Sync and Maintainer Legibility Contract
 
-Status: Draft v2 (working-session; all acceptance gates complete, implementation pending per PRD-006 A1)
+Status: Accepted (promoted to docs/prds; implementation done)
 Owner: Maintainer + Codex + Claude
 Date: 2026-06-13
-Last revised: 2026-06-13 (Claude MSG-20260613-033 counters + MSG-20260613-034/035 peer input applied)
+Last revised: 2026-06-13 (implementation reviewed by Codex; evals green; promoted)
 
 ## Promotion Gate Snapshot (PRD-006 R2a)
 
@@ -12,7 +12,7 @@ Last revised: 2026-06-13 (Claude MSG-20260613-033 counters + MSG-20260613-034/03
 | Codex acceptance | accepted | author of draft v1; applied Claude counters and peer input in draft v2 |
 | Claude acceptance | accepted | MSG-20260613-033 APPLY with 3 counters; counters applied in draft v2 |
 | Maintainer acceptance | accepted | Maintainer direct confirmation to Codex on 2026-06-13: acceptance has been expressed for PRD-028 and PRD-029 |
-| Eligible for move to `docs/prds` | no | blocked until implementation, implementation review, and zero blockers in PRD_STATUS.json |
+| Eligible for move to `docs/prds` | yes | implementation reviewed by Codex; `evals/prd-028.evals.mjs` green; zero blockers in PRD_STATUS.json |
 
 ## Input Provenance Tags
 

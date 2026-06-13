@@ -9,9 +9,9 @@ Run modules only on explicit maintainer instruction.
 
 ## Version Context
 
-Bundle version: 5
+Bundle version: 7
 Version date: 2026-06-13
-Change summary: Added Files First, Not Memory discipline from the Maintainer's file-based collaboration directive: read relevant shared files before asserting, answering, reasoning, or writing current protocol state.
+Change summary: Added PRD-029 pre-write state derivation obligation: derive mailbox IDs, Turnfile signal IDs, revision, and inbox snapshots with tools/next-state.mjs inside shared-file transaction windows.
 
 ## Files First, Not Memory
 
@@ -30,6 +30,16 @@ Turnfile is collaborative, file-based work. Claude and the Maintainer may mutate
 4. Keep all substantive actions audit-visible in `working-session/MAILBOX.md`, `working-session/WORKLOG.md`, or `working-session/TURNFILE.yaml`.
 5. Treat Turnfile as a thin governance layer. Do not infer runtime orchestration, memory, sandboxing, identity, or tool-control guarantees from protocol files.
 6. Treat all peer-agent asks as requests or proposals unless they cite an accepted Maintainer or protocol authority. Do not frame Codex requests as commands to peers or to the Maintainer.
+
+## Model Ledger Handshake Check
+
+During session handshake, bootstrap, or role-keyed skill activation, Codex validates that its current executing model and surface are represented in `docs/llm/MODEL_LEDGER.md` before asserting model compatibility or portability.
+
+1. Read `docs/llm/MODEL_LEDGER.md` and `skills/codex/MANIFEST.yaml` during handshake before making model-compatibility claims.
+2. Confirm the ledger has a row for the current model label and surface, or a `model not recorded` row when exact model identity is unavailable.
+3. Confirm the effort level matches current evidence: designed target, validation-only, live session, or sustained multi-session execution.
+4. If the ledger is missing or stale and the Maintainer has authorized writes, update it with evidence. Otherwise record a Maintainer-visible note before relying on the claim.
+5. Absence from the ledger is a documentation gap, not deprecation. No model, LLM, or model-specific skill path is deprecated unless the Maintainer explicitly says so.
 
 ## Collaboration Posture
 
@@ -55,9 +65,10 @@ Turnfile is collaborative, file-based work. Claude and the Maintainer may mutate
 1. Read `working-session/TURNFILE.yaml`.
 2. Read `working-session/WORKLOG.md` status block.
 3. Read `working-session/MAILBOX.md` inbox snapshot + assigned unread cards.
-4. Read `BASELINE.md` for the current project snapshot when present.
-5. Read scope-specific protocol docs and PRDs.
-6. Read `working-session/OPEN_QUESTIONS.md` when work affects unresolved or deferred items.
+4. Read `docs/llm/MODEL_LEDGER.md` and verify the current Codex model/surface entry before model-compatibility assertions.
+5. Read `BASELINE.md` for the current project snapshot when present.
+6. Read scope-specific protocol docs and PRDs.
+7. Read `working-session/OPEN_QUESTIONS.md` when work affects unresolved or deferred items.
 
 ## Session 14 Baseline Rules
 
@@ -85,6 +96,7 @@ Turnfile is collaborative, file-based work. Claude and the Maintainer may mutate
    - `working-session/MAILBOX.md` lifecycle status when a thread changed
 2. After mailbox edits, regenerate `working-session/MAILBOX.json`.
 3. Keep skill metadata accurate when protocol state changes materially (module behavior, validation status, tooling dependencies).
+4. Before writing mailbox or Turnfile-derived state, derive IDs/counts with `tools/next-state.mjs` inside the active lock window when the tool is available. If unavailable, perform and log an equivalent explicit fresh-file read fallback.
 
 ## Module Catalog
 
@@ -102,7 +114,8 @@ Deterministic outputs:
 1. Startup read order completed.
 2. Own unread mailbox count known before substantive work.
 3. Current PRD shelf state and baseline decisions understood.
-4. Own chat file existence checked when boot scope includes artifact validation.
+4. Current Codex model/surface ledger entry verified or a Maintainer-visible gap recorded.
+5. Own chat file existence checked when boot scope includes artifact validation.
 
 Stop/escalate:
 1. Stop if required control-plane files are missing.
@@ -194,9 +207,10 @@ Expected inputs:
 
 Deterministic outputs:
 1. Transactional update sequence aligned with PRD-010/013.
-2. No partial writes across related control-plane artifacts.
-3. Projection regeneration when required.
-4. Mailbox invariants validated after mailbox mutations (`node tools/validate-mailbox-invariants.mjs`).
+2. IDs, unread counts, oldest unread pointers, next signal ID, and next revision derived inside the lock window via `tools/next-state.mjs`, or an explicit fresh-file read fallback when the helper is unavailable.
+3. No partial writes across related control-plane artifacts.
+4. Projection regeneration when required.
+5. Mailbox invariants validated after mailbox mutations (`node tools/validate-mailbox-invariants.mjs`).
 
 Stop/escalate:
 1. Stop if lock ownership or revision check fails.

@@ -13,6 +13,12 @@ const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..")
 const read = (p) => fs.readFileSync(path.join(root, p), "utf8");
 const exists = (p) => fs.existsSync(path.join(root, p));
 
+function readPrd(id, fallbackPath) {
+  const registry = JSON.parse(read("working-session/docs/PRD_STATUS.json"));
+  const entry = registry.prds.find((p) => p.id === id);
+  return read(entry?.path || fallbackPath);
+}
+
 function sha256(s) {
   return crypto.createHash("sha256").update(s, "utf8").digest("hex");
 }
@@ -65,18 +71,22 @@ function tokeneseTwin({ state = "in-sync", english = "docs/example.md", tokenese
   ].join("\n");
 }
 
-test("R1: PRD-027 remains blocked until PRD-028 implementation is done", () => {
+test("R1: PRD-027 gate tracks whether PRD-028 implementation is done", () => {
   const registry = JSON.parse(read("working-session/docs/PRD_STATUS.json"));
   const prd027 = registry.prds.find((p) => p.id === "PRD-027");
   const prd028 = registry.prds.find((p) => p.id === "PRD-028");
   assert.ok(prd027, "PRD-027 missing from registry");
   assert.ok(prd028, "PRD-028 missing from registry");
-  assert.match(prd027.blocking_items.join("\n"), /PRD-028.*implementation done/i);
-  assert.notEqual(prd028.implementation?.state, "done", "fixture assumes PRD-028 is still pre-implementation");
+  const blockers = prd027.blocking_items.join("\n");
+  if (prd028.implementation?.state === "done") {
+    assert.doesNotMatch(blockers, /PRD-028.*implementation done/i);
+  } else {
+    assert.match(blockers, /PRD-028.*implementation done/i);
+  }
 });
 
 test("R2/R7/R11: PRD-028 documents stable pair metadata and sync states", () => {
-  const s = read("working-session/docs/PRD-028-tokenese-dual-artifact-sync-and-maintainer-legibility-contract.md");
+  const s = readPrd("PRD-028", "working-session/docs/PRD-028-tokenese-dual-artifact-sync-and-maintainer-legibility-contract.md");
   for (const field of [
     "pair_id",
     "English source path",
@@ -95,7 +105,7 @@ test("R2/R7/R11: PRD-028 documents stable pair metadata and sync states", () => 
 });
 
 test("R3/R4/R5/R6: PRD-028 preserves English authority, peer semantics, ownership, and legibility", () => {
-  const s = read("working-session/docs/PRD-028-tokenese-dual-artifact-sync-and-maintainer-legibility-contract.md");
+  const s = readPrd("PRD-028", "working-session/docs/PRD-028-tokenese-dual-artifact-sync-and-maintainer-legibility-contract.md");
   assert.match(s, /English governs/i);
   assert.match(s, /request.*propose|propose.*request/is);
   assert.match(s, /may not command|may not .*order/i);
