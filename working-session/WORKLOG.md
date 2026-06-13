@@ -3,16 +3,18 @@
 References:
 - `/Users/snap/Git/turnfile/docs/PROTOCOL_CORE.md`
 
-Now Working (Codex): Session 14 active. Implementing PRD-021/022/024 to eval-green (s14-impl-021-022-024) + authoring PRD-023/026 evals (s14-evals-023-026). PRD-029 implementation handoff received in MSG-041 and acknowledged; PRD-028 review request received in MSG-042 and acknowledged. Both are queued behind active Codex lanes unless Maintainer reprioritizes. Codex unread 0.
-Now Working (Claude): Session 14 active (Opus 4.8). PRD-028 implementation lane completed with evals/prd-028.evals.mjs 10/10 green; Codex review requested in MSG-042. PRD-029 evals authored (red 9/10) and handed to Codex (s14-impl-029). Codex posted MSG-043 asking whether Claude wants to mirror/adapt Codex's model-ledger handshake check. Claude unread 1.
+Now Working (Codex): Session 14 active. PRD-028 reviewed and filed done. PRD-029 implementation partially complete: `tools/next-state.mjs` built and `skills/codex/` v7 updated; evals are 9/10 green pending Claude-owned skill text. Codex also has active prior lanes: PRD-021/022/024 implementation and PRD-023/026 eval authoring. Codex unread 0.
+Now Working (Claude): Session 14 active (Opus 4.8). Claude has PRD-029 own-file propagation requested in MSG-045. PRD-014 A1 amendment drafted and awaiting Codex review (MSG-044 acknowledged). Claude unread 1.
 Maintainer Focus: PRD-027 held until all other PRD items complete + commit/push/checkpoint discussion. See Maintainer Decision Queue below.
 Maintainer Decision Queue (PRD-004 A1): (1) PRD-003/004/008 A1 document acceptances, if still desired before promotion; (2) model-specific skill directory retention/removal only by explicit Maintainer decision; no model-specific skill path is deprecated by default; (3) push/PR + session-15 boundary timing.
-Next Review Checkpoint: Codex implements next-state.mjs (PRD-029) to eval-green → Claude reviews. Claude implements PRD-028 to eval-green → Codex reviews. Closeout waits until both done under A1.
+Next Review Checkpoint: Claude adds/adapts PRD-029 `next-state.mjs` obligation in `skills/claude/`; Codex reruns PRD-029 evals to green and routes implementation review to Claude. Closeout still waits until PRD-029 is done under A1.
 
 ## Decision Index
 
 | Decision | Owner | Timestamp | Section |
 |----------|-------|-----------|---------|
+| Codex reviewed Claude's PRD-028 implementation, confirmed `evals/prd-028.evals.mjs` 10/10 green plus Tokenese validator root scan pass, moved PRD-028 to `docs/prds/`, marked implementation done, and removed PRD-028 from PRD-027 blockers. | Codex + Claude | 2026-06-13 | MSG-20260613-042 + PRD-028 done |
+| Codex partially implemented PRD-029: `tools/next-state.mjs` added, `skills/codex/` upgraded to v7 with the in-lock derivation obligation, and PRD-029 evals are 9/10 green pending Claude-owned skill propagation. | Codex + Claude | 2026-06-13 | MSG-20260613-041/045 + PRD-029 implementation |
 | Codex upgraded `skills/codex/` to v6 with handshake-time model ledger validation and added the role-neutral ledger update rule requiring active agents to verify their current model/surface during session handshake. | Maintainer + Codex | 2026-06-13 | Codex skill v6 model ledger handshake |
 | Codex created `docs/llm/MODEL_LEDGER.md` as the canonical project model-usage ledger, seeded from manifests, session charters, WORKLOG/TURNFILE evidence, README/BASELINE, and precursor `docs/llm` collaboration records. | Maintainer + Codex | 2026-06-13 | Model usage ledger |
 | Codex acknowledged Claude MSG-041 PRD-029 implementation handoff; `s14-impl-029` remains queued behind current Codex active lanes unless the Maintainer reprioritizes. | Codex + Claude | 2026-06-13 | MSG-20260613-041 |
@@ -603,3 +605,17 @@ Drafted PRD-014 Amendment A1 (appended to promoted PRD-014, draft pending Codex 
 | Decision | Owner | Timestamp | Section |
 |----------|-------|-----------|---------|
 | Model Ledger Handshake Check mirrored into skills/claude v0.5.1; Opus 4.8 recorded in MANIFEST. | Maintainer (norm) + Claude (own-file) | 2026-06-13 | MSG-043 |
+
+### Claude (Opus 4.8): skill v0.6.0 — concurrent-write discipline encoded — rev 114
+
+2026-06-13 — Maintainer invited skill enhancement from session learnings. Encoded three session-14 ledger lessons not previously captured (skills/claude/ v0.5.1 → v0.6.0, MANIFEST v9):
+
+1. **Concurrent Write Discipline ("Derive, Don't Assume")** — the write-side complement to Files First. Derive every written value (IDs, counts, pointers) from the in-lock fresh read; a validator's "expected" is file-truth (reconcile, don't argue); lock the whole batch up front; commit only own paths when a peer has uncommitted work; allocate IDs in-window with abort-retry. Grounded in ~4 snapshot/ID drift incidents + ledger items 3/4/5.
+2. **Active-turn closure-owner check** — replies/thread entries on your own sent cards do not raise your unread count; scan sent messages for closure duties (ledger item 6).
+3. **Builder/reviewer separation as operating rule** — decline self-implementation of a PRD whose evals you authored (demonstrated by declining s14-prd024-validator-rule).
+
+These convert this session's caught-and-reconciled mistakes from prose ledger entries into standing skill rules — "logged → mitigated," the gap the eight-step loop and these encodings exist to close. Self-applied throughout this turn (read anchors before editing; re-read MANIFEST after concurrent change; committed own paths only).
+
+| Decision | Owner | Timestamp | Section |
+|----------|-------|-----------|---------|
+| Skill v0.6.0: concurrent-write discipline, closure-owner check, builder/reviewer separation encoded from session-14 ledger. | Maintainer (invitation) + Claude (own-file) | 2026-06-13 | Skill v0.6.0 |

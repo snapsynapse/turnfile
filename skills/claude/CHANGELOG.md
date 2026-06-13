@@ -1,5 +1,14 @@
 # Changelog
 
+## v9 — 2026-06-13
+- SKILL.md v0.5.1 -> v0.6.0: encoded three session-14 ledger lessons.
+  (1) Concurrent Write Discipline ("Derive, Don't Assume") — write-side complement
+  to Files First: derive written values (IDs, counts, pointers) from the in-lock
+  read; a validator's "expected" is file-truth; lock the whole batch up front;
+  commit only own paths when a peer has uncommitted work; allocate IDs in-window.
+  (2) Active-turn closure-owner check on own sent messages (thread-mode replies do
+  not raise unread). (3) Builder/reviewer separation as an operating rule.
+
 ## v8 — 2026-06-13
 - SKILL.md v0.5.0 -> v0.5.1: Model Ledger Handshake Check added (mirror of Codex
   skill v6, Maintainer-originated norm). Verify executing model+surface is in

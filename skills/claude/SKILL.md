@@ -5,7 +5,7 @@ description: Execute the Turnfile protocol (a SNAP protocol) in Claude for mailb
 
 # Turnfile Protocol Skill File — Claude
 
-Version: 0.5.1
+Version: 0.6.0
 Protocol revision baseline: PRD-003 through PRD-014 and PRD-016 through PRD-019 (all promoted to docs/prds/)
 Agent: Claude (Anthropic) — bundle is role-keyed; the executing model is recorded in MANIFEST.yaml, not in this path
 Last updated: 2026-06-13
@@ -28,6 +28,16 @@ Turnfile is collaborative, file-based work. Codex and the Maintainer mutate shar
 2. Default suspicion — if you are about to state a fact about current shared state from memory, that itself is the signal to open the file instead. Recall across your own earlier turns, and especially across model or session boundaries, is the most error-prone input you have.
 3. When memory and file disagree, the file wins, and the disagreement is itself signal: a peer or the Maintainer changed something; understand why before acting.
 4. A redundant read is cheap; a confident assertion from stale memory has repeatedly been wrong (ledger evidence: OQ-067 cited as blocking after the Maintainer had resolved it in-file; a file move misattributed to Codex when the Maintainer made it; mailbox snapshot and ID drift). The general "prefer memory, verify later" heuristic is correct for solo work and wrong here — collaboration inverts it.
+
+## Concurrent Write Discipline — Derive, Don't Assume (session 14 ledger)
+
+The write-side complement to Files First. Reading from files is not enough if you then write a value you computed from memory. Every value you write to a shared file must be derived from that file as it exists inside the active lock window.
+
+1. **Derive every written value from the in-lock fresh read** — next MSG ID, next SIG ID, next revision, inbox unread counts, oldest-unread pointers. Never carry a value computed earlier in the turn or assumed from context; a peer may have changed the file since. When `tools/next-state.mjs` exists (PRD-029), derive through it. Session 14 hard-coded snapshot counts and IDs from assumption roughly four times; the validator caught each, but each was an avoidable repair cycle.
+2. **A validator's reported "expected" value is file-derived truth.** When `validate-mailbox-invariants` (or any validator) says `expected=X`, reconcile to X — it computed X from the file. Do not argue with it or re-derive by hand.
+3. **Lock the whole batch up front.** Before a multi-file shared write, acquire one lock listing every shared file the batch will touch, and check for competing locks before the first write — not per-file mid-batch. Ledger item 4: a registry write landed inside a peer's lock because only the mailbox write had been lock-checked.
+4. **Commit only your own changed paths.** When a peer may have uncommitted work in the shared tree, `git add <explicit paths>`, never `git add -A`. Session 14 twice required keeping Codex's uncommitted `docs/llm/` out of a Claude commit (tenet 2 extends to commits).
+5. **Allocate IDs inside the lock window; abort and retry on collision** (Module 5 / PRD-010 R4.4-5). A duplicate-ID write means a peer posted concurrently — re-read, re-derive, retry; the collision is signal, not error.
 
 ## Model Ledger Handshake Check (Maintainer-originated norm, 2026-06-13; mirror of Codex skill v6)
 
@@ -55,6 +65,7 @@ This is a peer relationship aimed at aggregated intelligence, not a review pipel
 3. Peers request and propose, never direct or order (Maintainer tenet 1). Assignment language derives authority from accepted splits, and is phrased as requests.
 4. Read but never write peer-owned files (tenet 2). Flag peer-state drift; never repair it in place.
 5. Every decision stays legible and traceable to the Maintainer (tenet 3).
+6. **Builder/reviewer separation (PRD-006 A1).** Do not implement a PRD whose evals you authored, and do not review your own implementation. If a task would have you build what you specced, decline it and route it to the counterpart — the separation is the point, not an obstacle. Session 14: Claude correctly declined `s14-prd024-validator-rule` (Claude authored that eval) rather than self-implement.
 
 ## Execution Contract
 
@@ -73,6 +84,7 @@ Note: this is the *active-turn* boundary check (mailbox-first). It is distinct f
 4. If unread cannot be cleared in-turn, keep turn open and escalate to maintainer with explicit blocker context.
 5. Close or explicitly defer Claude-owned actionable threads before turn completion.
 6. Verify open queue does not retain stale entries for threads Claude just resolved.
+7. **Check closure-owner duties on your own sent messages, not only your unread count.** A peer's reply or thread-mode entry on a card *you* sent does not raise your unread count — it lands as an `Ack`/`Reply` under your message ID. At the turn boundary, scan your open sent messages for peer responses and closure obligations. Ledger item 6: a Codex review sat unprocessed on Claude's own card because it never lit the unread counter.
 
 ## Startup Orientation Read Order (PRD-011 R3 + PRD-013 R5.1)
 
@@ -503,7 +515,7 @@ After executing any module, report:
 
 | Field | Value |
 |-------|-------|
-| Skill file version | 0.5.1 |
+| Skill file version | 0.6.0 |
 | Protocol baseline | PRD-003 through PRD-014, PRD-016 through PRD-019 (all promoted) |
 | Policy test suite | PRD-012-M3-policy-test-suite.md (19 assertions, 4 scenario harnesses) — archived at `examples/inception/skills/policy-tests/` |
 | Last validated | M4 validation complete — all 4 scenarios PASS (rev 41, inception session 10) |
@@ -514,6 +526,7 @@ After executing any module, report:
 | v0.4.2 changes | Collaboration Posture section: generative peer contribution (yes-and, alternatives, edge cases) mandatory in substantive replies; Maintainer tenets 1-3 encoded. |
 | v0.5.0 changes | Files First, Not Memory principle (Maintainer directive): re-read shared files before asserting/reasoning about state, not only before writing. Collaborative file work inverts the solo "prefer memory, verify later" heuristic. Grounded in ledger evidence. |
 | v0.5.1 changes | Model Ledger Handshake Check (mirror of Codex skill v6, Maintainer-originated norm): verify executing model+surface is recorded in docs/llm/MODEL_LEDGER.md at boot before relying on model-compatibility claims; absence is not deprecation. |
+| v0.6.0 changes | Three session-14 ledger lessons encoded: (1) Concurrent Write Discipline "Derive, Don't Assume" — the write-side complement to Files First (derive written values from the in-lock read; validator-expected is truth; lock the whole batch; commit own paths only; IDs in-window). (2) Active-turn closure-owner check on own sent messages (thread-mode unread blindness). (3) Builder/reviewer separation as an operating rule (decline self-implementation). |
 
 Changes to protocol semantics require maintainer approval (PRD-012 R7.2).
 Environment-specific changes that don't alter protocol semantics are Claude-owned but must be documented (PRD-012 R7.3).
