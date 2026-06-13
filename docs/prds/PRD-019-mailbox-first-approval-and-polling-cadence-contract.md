@@ -1,9 +1,9 @@
 # PRD-019: Mailbox-First Approval and Polling Cadence Contract
 
-Status: Draft (working-session; not yet actioned)  
+Status: Accepted (Maintainer, 2026-06-12, session 14)  
 Owner: Maintainer + Codex + Claude  
 Date: 2026-02-11  
-Last revised: 2026-02-11 (session 13 refinement by Claude)
+Last revised: 2026-06-12 (session 14: OQ-054/055 resolved — no time-based polling)
 
 ## Promotion Gate Snapshot (PRD-006 R2a)
 
@@ -11,8 +11,8 @@ Last revised: 2026-02-11 (session 13 refinement by Claude)
 |------|--------|----------|
 | Codex acceptance | accepted | MSG-20260211-010 mirror-field counter resolved and accepted by Codex |
 | Claude acceptance | accepted | MSG-20260211-010 amendment pass submitted by Claude |
-| Maintainer acceptance | pending | — |
-| Eligible for move to `docs/prds` | no | blocked until all acceptances + zero blockers in PRD_STATUS.json |
+| Maintainer acceptance | accepted | Maintainer decision 2026-06-12 (session 14 triage): accept; coordination stays asynchronous and event-based, no time-based polling layer |
+| Eligible for move to `docs/prds` | yes | all acceptances recorded; OQ-054/055 resolved |
 
 ## Input Provenance Tags
 
@@ -71,13 +71,11 @@ The Maintainer's interaction pattern maps to these events as:
 3. **Step 2:** Propose new action via mailbox message and wait for agent response.
 4. **Step 3:** Periodically check mailbox for agent follow-through and new proposals.
 
-## R3. Time-based polling (optional/pilot)
+## R3. Time-based polling (resolved: not adopted)
 
-Define an optional time-based cadence mode with explicit tradeoffs, including:
+**Resolved (OQ-054/055, Maintainer, 2026-06-12):** Turnfile coordination is asynchronous and event-based only. No time-based polling cadence is defined. Rationale: agents are stateless and session-bounded; SLAs are already measured in session boundaries (PRD-003), so a wall-clock polling layer adds overhead without improving responsiveness. The R2 event triggers are the complete polling contract.
 
-1. Suggested interval.
-2. Conditions when polling may be skipped.
-3. Escalation when polling misses SLA.
+This satisfies acceptance criterion 2 via the explicit-defer path. If a future deployment introduces long-lived or scheduled agents, time-based cadence may be re-proposed as a new PRD.
 
 ## R4. Chat-to-mailbox mirroring
 
@@ -126,5 +124,5 @@ For each approval/counter event, include:
 
 | OQ | Question | Resolution | Applied to |
 |----|----------|------------|------------|
-| OQ-054 | What default time-based interval (if any) balances responsiveness and overhead? | pending | R3 |
-| OQ-055 | Should time-based polling be manual checklist only, or supported by automation/tooling hooks? | pending | R3 |
+| OQ-054 | What default time-based interval (if any) balances responsiveness and overhead? | **resolved** | R3 — None. No time-based polling; event-based triggers only. (Maintainer, 2026-06-12.) |
+| OQ-055 | Should time-based polling be manual checklist only, or supported by automation/tooling hooks? | **resolved** | R3 — Moot: time-based polling not adopted. (Maintainer, 2026-06-12.) |

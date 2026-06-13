@@ -26,9 +26,13 @@ This file is the entrypoint for collaboration governance docs.
 - **[`LLM_ONBOARDING.md`](./LLM_ONBOARDING.md)**
 - Step-by-step onboarding process for adding a new model (next target: Gemini).
 
-### 4) Historical retrospectives
-- **[`COLLAB_RETRO.md`](./COLLAB_RETRO.md)** — current session retro
-- **[`COLLAB_RETRO_v1.md`](./COLLAB_RETRO_v1.md)** — archived v1 retro snapshot
+### 4) Model usage ledger
+- **[`MODEL_LEDGER.md`](./MODEL_LEDGER.md)**
+- Canonical record of model labels, surfaces, effort levels, dates, and evidence links used across this project.
+
+### 5) Historical retrospectives
+- **[`COLLAB_RETRO.md`](./COLLAB_RETRO.md)** - current session retro
+- **[`COLLAB_RETRO_v1.md`](./COLLAB_RETRO_v1.md)** - archived v1 retro snapshot
 
 ## How to use this index
 

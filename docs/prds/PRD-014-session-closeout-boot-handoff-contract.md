@@ -185,3 +185,42 @@ Tracked in: `working-session/OPEN_QUESTIONS.md`.
 1. Closeout checklist is used reliably without maintainer prompting.
 2. Boot rollover/archival process is stable across at least two agents.
 3. Maintainer confirms startup quality and control-plane hygiene improved.
+
+## Amendment A1 (draft, 2026-06-13): Closeout Compaction and Projection Synchronization
+
+Status: Draft amendment — converged outcome of the PRD-025 rebuttal loop (Codex proposed a standalone PRD-025; Claude countered that closeout compaction/projection sync belongs in PRD-014; Codex NO-NEW-OBJECTION 2026-06-12, the session's first full rebuttal-loop convergence). Proposed by Claude (proposer/eval-author); Codex acceptance pending; implementation by Codex per PRD-006 A1; reviewed by Claude.
+
+### A1.R1 Closeout compaction set
+
+At session close, the closing agent performs the full compaction set (this generalizes R4's worklog-only compaction gate to every session-level projection). Each item is either executed or logged as an explicit deferral with reason and next owner (the R4 pattern):
+
+1. **Worklog compaction** — per PRD-011 (`>500` line trigger); existing R4 behavior, now one item in a unified set.
+2. **Signal-log compaction** — per PRD-013 R5.3: drop signals older than the retention window (default 2 sessions), preserve the last signal from each agent.
+3. **Mailbox archival movement** — terminal (closed) messages move from `MAILBOX.md` to `MAILBOX_ARCHIVE.md`; the active mailbox retains only non-terminal threads and the Closed Summary index.
+4. **Worklog/boot archive** — per R3 boot rollover; archived boot file versioned monotonically.
+
+### A1.R2 Projection synchronization
+
+At closeout, every derived/projected artifact must be regenerated from its source and pass its validator before clean close:
+
+1. `MAILBOX.json` regenerated from `MAILBOX.md` (`tools/export-mailbox-json.mjs`); inbox snapshot counts match actual unread (`tools/validate-mailbox-invariants.mjs`).
+2. `working-session/docs/PRD_STATUS.json` consistent with on-disk PRD shelves (`tools/validate-prd-promotion.mjs`).
+3. `TURNFILE.yaml` header revision matches `coordination.revision`; lint passes (`tools/turnfile-lint.mjs`).
+4. When `tools/next-state.mjs` exists (PRD-029), closeout derives final IDs/counts through it rather than by hand.
+
+A failing projection blocks clean close unless the Maintainer records an explicit deferral.
+
+### A1.R3 Scope boundary (vs PRD-026)
+
+This amendment governs **session-level** closeout compaction and projection synchronization — whole-session, fired once at session close. It does **not** govern per-review-cycle closure, which is PRD-026's domain (PRD-026 non-goal 6 cedes session-level compaction/projection sync to this path). The two are distinct triggers that may share validators: PRD-026 fires per mailbox review message; this fires at session close. A session close runs this amendment; it does not re-run PRD-026 for every historical review cycle.
+
+### A1.R4 Closeout validation gate
+
+Closeout executes the full gate suite (`turnfile-lint`, mailbox invariants, PRD-promotion, `npm run evals`, skills preflight) and records the results in the closeout handoff entry. A failing gate blocks clean close unless the Maintainer records an explicit deferral with reason and next owner.
+
+### A1.R5 Acceptance criteria (amendment)
+
+1. The compaction set (A1.R1) and projection-sync set (A1.R2) are each enumerated with execute-or-defer semantics.
+2. The PRD-026 scope boundary (A1.R3) is explicit and non-overlapping.
+3. Implementation evals (authored by Claude per PRD-006 A1) verify: signal-log compaction honors the retention window; terminal messages are archived and absent from the active mailbox; closeout fails clean-close when a projection validator fails and no deferral is recorded.
+4. Boot files and skill closeout modules reference the unified compaction set.

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2026-02-11",
+  "updated_at": "2026-06-13",
   "policy": {
     "required_reviewers": [
       "codex",
@@ -38,14 +38,18 @@
         }
       },
       "blocking_items": [],
-      "eligible_for_docs_prds": true
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "grandfathered",
+        "notes": "Promoted before PRD-006 A1; no known unmet acceptance criteria."
+      }
     },
     {
       "id": "PRD-002",
       "title": "Rust Notification Viewer (MVP)",
-      "path": "working-session/docs/PRD-002-rust-notification-viewer-mvp.md",
-      "shelf": "working-session/docs",
-      "state": "draft",
+      "path": "docs/archive/prds/PRD-002-rust-notification-viewer-mvp.md",
+      "shelf": "docs/archive/prds",
+      "state": "deferred",
       "acceptance": {
         "codex": {
           "status": "accepted",
@@ -60,12 +64,14 @@
           ]
         },
         "maintainer": {
-          "status": "pending",
-          "evidence": []
+          "status": "deferred",
+          "evidence": [
+            "Maintainer decision 2026-06-12 (session 14 triage): keep as deferred draft; built-tool PRD predates thin-governance-layer scope; revisit after starter workflow stabilizes"
+          ]
         }
       },
       "blocking_items": [
-        "Maintainer acceptance pending"
+        "Deferred by Maintainer 2026-06-12: revisit after minimal starter workflow stabilizes"
       ],
       "eligible_for_docs_prds": false
     },
@@ -96,7 +102,11 @@
         }
       },
       "blocking_items": [],
-      "eligible_for_docs_prds": true
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "grandfathered",
+        "notes": "Promoted before PRD-006 A1; no known unmet acceptance criteria."
+      }
     },
     {
       "id": "PRD-004",
@@ -125,7 +135,11 @@
         }
       },
       "blocking_items": [],
-      "eligible_for_docs_prds": true
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "grandfathered",
+        "notes": "Promoted before PRD-006 A1; no known unmet acceptance criteria."
+      }
     },
     {
       "id": "PRD-005",
@@ -154,7 +168,11 @@
         }
       },
       "blocking_items": [],
-      "eligible_for_docs_prds": true
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "grandfathered",
+        "notes": "Promoted before PRD-006 A1; no known unmet acceptance criteria."
+      }
     },
     {
       "id": "PRD-006",
@@ -183,7 +201,11 @@
         }
       },
       "blocking_items": [],
-      "eligible_for_docs_prds": true
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "grandfathered",
+        "notes": "Promoted before PRD-006 A1; no known unmet acceptance criteria."
+      }
     },
     {
       "id": "PRD-007",
@@ -212,7 +234,11 @@
         }
       },
       "blocking_items": [],
-      "eligible_for_docs_prds": true
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "grandfathered",
+        "notes": "Promoted before PRD-006 A1; no known unmet acceptance criteria."
+      }
     },
     {
       "id": "PRD-008",
@@ -241,7 +267,11 @@
         }
       },
       "blocking_items": [],
-      "eligible_for_docs_prds": true
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "grandfathered",
+        "notes": "Promoted before PRD-006 A1; no known unmet acceptance criteria."
+      }
     },
     {
       "id": "PRD-009",
@@ -270,7 +300,11 @@
         }
       },
       "blocking_items": [],
-      "eligible_for_docs_prds": true
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "grandfathered",
+        "notes": "Promoted before PRD-006 A1; no known unmet acceptance criteria."
+      }
     },
     {
       "id": "PRD-010",
@@ -299,7 +333,11 @@
         }
       },
       "blocking_items": [],
-      "eligible_for_docs_prds": true
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "grandfathered",
+        "notes": "Promoted before PRD-006 A1; no known unmet acceptance criteria."
+      }
     },
     {
       "id": "PRD-011",
@@ -328,7 +366,11 @@
         }
       },
       "blocking_items": [],
-      "eligible_for_docs_prds": true
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "grandfathered",
+        "notes": "Promoted before PRD-006 A1; no known unmet acceptance criteria."
+      }
     },
     {
       "id": "PRD-012",
@@ -357,7 +399,11 @@
         }
       },
       "blocking_items": [],
-      "eligible_for_docs_prds": true
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "grandfathered",
+        "notes": "Promoted before PRD-006 A1; no known unmet acceptance criteria."
+      }
     },
     {
       "id": "PRD-013",
@@ -386,7 +432,11 @@
         }
       },
       "blocking_items": [],
-      "eligible_for_docs_prds": true
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "grandfathered",
+        "notes": "Promoted before PRD-006 A1; no known unmet acceptance criteria."
+      }
     },
     {
       "id": "PRD-014",
@@ -415,14 +465,18 @@
         }
       },
       "blocking_items": [],
-      "eligible_for_docs_prds": true
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "grandfathered",
+        "notes": "Promoted before PRD-006 A1; no known unmet acceptance criteria."
+      }
     },
     {
       "id": "PRD-015",
       "title": "Agent Onboarding + Vetting Contract",
-      "path": "working-session/docs/PRD-015-agent-onboarding-vetting-contract.md",
-      "shelf": "working-session/docs",
-      "state": "draft",
+      "path": "docs/archive/prds/PRD-015-agent-onboarding-vetting-contract.md",
+      "shelf": "docs/archive/prds",
+      "state": "deferred",
       "acceptance": {
         "codex": {
           "status": "accepted",
@@ -437,14 +491,15 @@
           ]
         },
         "maintainer": {
-          "status": "pending",
+          "status": "deferred",
           "evidence": [
-            "MAILBOX MSG-20260211-015: acceptance rollback; generalized onboarding test evidence required before maintainer gate"
+            "MAILBOX MSG-20260211-015: acceptance rollback; generalized onboarding test evidence required before maintainer gate",
+            "Maintainer decision 2026-06-12 (session 14 triage): parked as deferred together with Gemini onboarding package; resurrect after skill layout becomes model-agnostic; OT-001..008 suite preserved"
           ]
         }
       },
       "blocking_items": [
-        "Maintainer acceptance pending generalized onboarding test evidence"
+        "Deferred by Maintainer 2026-06-12: resumes with next agent onboarding after model-agnostic skill layout"
       ],
       "eligible_for_docs_prds": false
     },
@@ -475,43 +530,57 @@
         }
       },
       "blocking_items": [],
-      "eligible_for_docs_prds": true
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "grandfathered",
+        "notes": "Promoted before PRD-006 A1; no known unmet acceptance criteria."
+      }
     },
     {
       "id": "PRD-017",
       "title": "Boot Sequence Commands and Documentation Contract",
-      "path": "working-session/docs/PRD-017-boot-sequence-commands-and-documentation-contract.md",
-      "shelf": "working-session/docs",
-      "state": "draft",
+      "path": "docs/prds/PRD-017-boot-sequence-commands-and-documentation-contract.md",
+      "shelf": "docs/prds",
+      "state": "accepted",
       "acceptance": {
         "codex": {
           "status": "accepted",
           "evidence": [
-            "MAILBOX MSG-20260211-010 follow-through: Codex verified amendment pass and accepted PRD-017"
+            "MAILBOX MSG-20260211-010 follow-through: Codex verified amendment pass and accepted PRD-017 (pre-fold)",
+            "MAILBOX MSG-20260612-020: Codex re-verified folded R7 from PRD-020; APPLY"
           ]
         },
         "claude": {
           "status": "accepted",
           "evidence": [
-            "MAILBOX MSG-20260211-010: Claude review APPLY + amendment pass submitted"
+            "MAILBOX MSG-20260211-010: Claude review APPLY + amendment pass submitted",
+            "Session 14: R7 fold authored by Claude per Maintainer direction"
           ]
         },
         "maintainer": {
-          "status": "pending",
-          "evidence": []
+          "status": "accepted",
+          "evidence": [
+            "Maintainer decision 2026-06-12 (session 14 triage): accept with PRD-020 folded in as R7; OQ-051 resolved (documented contract + optional helpers); OQ-056/057 resolved in R7.4"
+          ]
         }
       },
-      "blocking_items": [
-        "Maintainer acceptance pending"
-      ],
-      "eligible_for_docs_prds": false
+      "blocking_items": [],
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "pending",
+        "evals": null,
+        "eval_author": "codex",
+        "implementer": "claude",
+        "reviewer": "codex",
+        "notes": "Retrofitted into PRD-006 A1 eight-step loop, 2026-06-13. Text canonical in docs/prds; actioned only when implementation done."
+      }
     },
     {
       "id": "PRD-018",
       "title": "Maintainer Approval Authority Matrix Contract",
-      "path": "working-session/docs/PRD-018-maintainer-approval-authority-matrix-contract.md",
-      "shelf": "working-session/docs",
-      "state": "draft",
+      "path": "docs/prds/PRD-018-maintainer-approval-authority-matrix-contract.md",
+      "shelf": "docs/prds",
+      "state": "accepted",
       "acceptance": {
         "codex": {
           "status": "accepted",
@@ -526,21 +595,25 @@
           ]
         },
         "maintainer": {
-          "status": "pending",
-          "evidence": []
+          "status": "accepted",
+          "evidence": [
+            "Maintainer decision 2026-06-12 (session 14 triage): accepted; OQ-052/053 resolved 2026-02-11; PRD-021 builds on this matrix"
+          ]
         }
       },
-      "blocking_items": [
-        "Maintainer acceptance pending"
-      ],
-      "eligible_for_docs_prds": false
+      "blocking_items": [],
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "pending",
+        "notes": "gated/unlockable column lands via PRD-021 lane (evals/prd-021.evals.mjs R4 check)."
+      }
     },
     {
       "id": "PRD-019",
       "title": "Mailbox-First Approval and Polling Cadence Contract",
-      "path": "working-session/docs/PRD-019-mailbox-first-approval-and-polling-cadence-contract.md",
-      "shelf": "working-session/docs",
-      "state": "draft",
+      "path": "docs/prds/PRD-019-mailbox-first-approval-and-polling-cadence-contract.md",
+      "shelf": "docs/prds",
+      "state": "accepted",
       "acceptance": {
         "codex": {
           "status": "accepted",
@@ -555,21 +628,25 @@
           ]
         },
         "maintainer": {
-          "status": "pending",
-          "evidence": []
+          "status": "accepted",
+          "evidence": [
+            "Maintainer decision 2026-06-12 (session 14 triage): accepted; coordination stays asynchronous/event-based; OQ-054/055 resolved (no time-based polling)"
+          ]
         }
       },
-      "blocking_items": [
-        "Maintainer acceptance pending"
-      ],
-      "eligible_for_docs_prds": false
+      "blocking_items": [],
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "pending",
+        "notes": "R4 mode field lands via PRD-022 lane (evals/prd-022.evals.mjs)."
+      }
     },
     {
       "id": "PRD-020",
       "title": "Boot Artifact Completeness and Chat Log Contract",
-      "path": "working-session/docs/PRD-020-boot-artifact-completeness-and-chat-log-contract.md",
-      "shelf": "working-session/docs",
-      "state": "draft",
+      "path": "docs/archive/prds/PRD-020-boot-artifact-completeness-and-chat-log-contract.md",
+      "shelf": "docs/archive/prds",
+      "state": "superseded",
       "acceptance": {
         "codex": {
           "status": "accepted",
@@ -584,14 +661,309 @@
           ]
         },
         "maintainer": {
+          "status": "superseded",
+          "evidence": [
+            "Maintainer decision 2026-06-12 (session 14 triage): superseded — folded into PRD-017 R7; OQ-056/057 resolved at fold time"
+          ]
+        }
+      },
+      "blocking_items": [],
+      "eligible_for_docs_prds": false
+    },
+    {
+      "id": "PRD-021",
+      "title": "Conflict Loop Bound and Selective-Unlock Gradient Contract",
+      "path": "docs/prds/PRD-021-conflict-loop-bound-and-selective-unlock-gradient-contract.md",
+      "shelf": "docs/prds",
+      "state": "accepted",
+      "acceptance": {
+        "codex": {
+          "status": "accepted",
+          "evidence": [
+            "MAILBOX MSG-20260612-018: Codex APPLY with amendment; PRD-018/019 references updated to docs/prds and unbounded-loop marker staleness semantics clarified"
+          ]
+        },
+        "claude": {
+          "status": "accepted",
+          "evidence": [
+            "MAILBOX MSG-20260612-018 closure: Claude reviewed and accepted Codex amendment (marker staleness semantics verified as fixing the flagged convergence race; path updates correct)"
+          ]
+        },
+        "maintainer": {
+          "status": "accepted",
+          "evidence": [
+            "Maintainer accepted PRD-021 as-is in chat on 2026-06-13 after agent cross-review"
+          ]
+        }
+      },
+      "blocking_items": [],
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "evals-created",
+        "evals": "evals/prd-021.evals.mjs",
+        "eval_author": "claude",
+        "implementer": "codex",
+        "reviewer": "claude",
+        "notes": "Retrofitted into PRD-006 A1 eight-step loop, 2026-06-13. Text canonical in docs/prds; actioned only when implementation done."
+      }
+    },
+    {
+      "id": "PRD-023",
+      "title": "Out-of-Band Activity Reconciliation Contract",
+      "path": "docs/prds/PRD-023-out-of-band-activity-reconciliation-contract.md",
+      "shelf": "docs/prds",
+      "state": "accepted",
+      "acceptance": {
+        "codex": {
+          "status": "accepted",
+          "evidence": [
+            "Author (session 14 draft v1); Claude R4 amendment applied and accepted by Codex on 2026-06-13"
+          ]
+        },
+        "claude": {
+          "status": "accepted",
+          "evidence": [
+            "MSG-20260612-026 reply: APPLY with 1 amendment (R4 block routes decision-required per PRD-019); flips clean on amendment application"
+          ]
+        },
+        "maintainer": {
+          "status": "accepted",
+          "evidence": [
+            "Maintainer approval 2026-06-13 (session 14); mirrored in MSG-20260613-031"
+          ]
+        }
+      },
+      "blocking_items": [],
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "pending",
+        "evals": null,
+        "eval_author": "codex",
+        "implementer": "claude",
+        "reviewer": "codex",
+        "notes": "Retrofitted into PRD-006 A1 eight-step loop, 2026-06-13. Text canonical in docs/prds; actioned only when implementation done."
+      }
+    },
+    {
+      "id": "PRD-024",
+      "title": "Human-Legibility Invariant and Encoding Profiles Contract",
+      "path": "docs/prds/PRD-024-human-legibility-invariant-and-encoding-profiles-contract.md",
+      "shelf": "docs/prds",
+      "state": "accepted",
+      "acceptance": {
+        "codex": {
+          "status": "accepted",
+          "evidence": [
+            "MSG-20260612-024: APPLY with amendment (R2 charter opt-in, R5.1 validation split, OQ-062/063 resolved)"
+          ]
+        },
+        "claude": {
+          "status": "accepted",
+          "evidence": [
+            "Author of draft v1; Codex amendments reviewed and accepted (MSG-20260612-024 closure, 2026-06-13)"
+          ]
+        },
+        "maintainer": {
+          "status": "accepted",
+          "evidence": [
+            "Maintainer approval 2026-06-13 (session 14); mirrored in MSG-20260613-030"
+          ]
+        }
+      },
+      "blocking_items": [],
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "evals-created",
+        "evals": "evals/prd-024.evals.mjs",
+        "eval_author": "claude",
+        "implementer": "codex",
+        "reviewer": "claude",
+        "notes": "Retrofitted into PRD-006 A1 eight-step loop, 2026-06-13. Text canonical in docs/prds; actioned only when implementation done."
+      }
+    },
+    {
+      "id": "PRD-026",
+      "title": "Review Cycle Closure and Task-State Consistency Contract",
+      "path": "docs/prds/PRD-026-review-cycle-closure-and-task-state-consistency-contract.md",
+      "shelf": "docs/prds",
+      "state": "accepted",
+      "acceptance": {
+        "codex": {
+          "status": "accepted",
+          "evidence": [
+            "Author (session 14 draft v1); Claude counters applied and accepted by Codex on 2026-06-13"
+          ]
+        },
+        "claude": {
+          "status": "accepted",
+          "evidence": [
+            "MSG-20260612-027 reply: APPLY with 2 counters (cross-ownership repair prohibition; standalone PRD-026 with PRD-014 boundary)"
+          ]
+        },
+        "maintainer": {
+          "status": "accepted",
+          "evidence": [
+            "Maintainer approval 2026-06-13 (session 14); mirrored in MSG-20260613-031"
+          ]
+        }
+      },
+      "blocking_items": [],
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "pending",
+        "evals": null,
+        "eval_author": "codex",
+        "implementer": "claude",
+        "reviewer": "codex",
+        "notes": "Retrofitted into PRD-006 A1 eight-step loop, 2026-06-13. Text canonical in docs/prds; actioned only when implementation done."
+      }
+    },
+    {
+      "id": "PRD-022",
+      "title": "Decision-Mirror Delivery Contract",
+      "path": "docs/prds/PRD-022-decision-mirror-delivery-contract.md",
+      "shelf": "docs/prds",
+      "state": "accepted",
+      "acceptance": {
+        "codex": {
+          "status": "accepted",
+          "evidence": [
+            "MSG-20260613-028 reply: Codex APPLY with amendment resolving OQ-065 and adding delivery-mirror bound-party receiver validation"
+          ]
+        },
+        "claude": {
+          "status": "accepted",
+          "evidence": [
+            "Author; Codex amendment (R2.5 relay default resolving OQ-065, R5.4 bound-party check) accepted 2026-06-13 in MSG-20260613-028 closure"
+          ]
+        },
+        "maintainer": {
+          "status": "accepted",
+          "evidence": [
+            "Maintainer approval 2026-06-13 (session 14); mirrored in MSG-20260613-031"
+          ]
+        }
+      },
+      "blocking_items": [],
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "evals-created",
+        "evals": "evals/prd-022.evals.mjs",
+        "eval_author": "claude",
+        "implementer": "codex",
+        "reviewer": "claude",
+        "notes": "Retrofitted into PRD-006 A1 eight-step loop, 2026-06-13. Text canonical in docs/prds; actioned only when implementation done."
+      }
+    },
+    {
+      "id": "PRD-027",
+      "title": "Tokenese Cloned-Communication A/B Contract",
+      "path": "working-session/docs/PRD-027-tokenese-cloned-communication-ab-contract.md",
+      "shelf": "working-session/docs",
+      "state": "draft",
+      "acceptance": {
+        "codex": {
+          "status": "accepted",
+          "evidence": [
+            "Author (session 14 draft v1); Claude teach-gate and channel-trust counters applied and accepted by Codex on 2026-06-13"
+          ]
+        },
+        "claude": {
+          "status": "accepted",
+          "evidence": [
+            "MSG-20260613-029 reply: APPLY with 2 counters (teach-phase gate per handoff task 1; untrusted-by-default self-reported channels until calibration); flips clean on counter application"
+          ]
+        },
+        "maintainer": {
           "status": "pending",
-          "evidence": []
+          "evidence": [
+            "Maintainer clarified on 2026-06-13 that PRD-027 is for cloning existing Turnfile communications into Tokenese for A/B testing, not replacing or changing existing communications",
+            "Maintainer held PRD-027 approval until every other PRD item is fully complete, followed by commit, push, and checkpoint discussion before initiation"
+          ]
         }
       },
       "blocking_items": [
-        "Maintainer acceptance pending"
+        "Maintainer acceptance held pending completion of every other PRD item",
+        "Commit, push, and Maintainer checkpoint discussion required before PRD-027 initiation"
       ],
       "eligible_for_docs_prds": false
+    },
+    {
+      "id": "PRD-028",
+      "title": "Tokenese Dual-Artifact Sync and Maintainer Legibility Contract",
+      "path": "docs/prds/PRD-028-tokenese-dual-artifact-sync-and-maintainer-legibility-contract.md",
+      "shelf": "docs/prds",
+      "state": "accepted",
+      "acceptance": {
+        "codex": {
+          "status": "accepted",
+          "evidence": [
+            "Author of draft v1 on 2026-06-13; created from Maintainer directive that Tokenese requires dual English/Tokenese artifacts kept in sync and legible",
+            "Applied Claude MSG-20260613-033 counters and MSG-20260613-034/035 peer input in PRD-028 draft v2"
+          ]
+        },
+        "claude": {
+          "status": "accepted",
+          "evidence": [
+            "MSG-20260613-033 reply: APPLY with 3 counters (OQ-067 vs Maintainer all-artifacts intent — Maintainer decision required; PRD-024 R2 amendment hook; shared-artifact twin-update obligation R5.6); standalone confirmed"
+          ]
+        },
+        "maintainer": {
+          "status": "accepted",
+          "evidence": [
+            "Maintainer requested PRD-028 on 2026-06-13 and specified it as prerequisite architecture before PRD-027 initiation",
+            "Maintainer direct confirmation to Codex on 2026-06-13: acceptance has been expressed for PRD-028 and PRD-029"
+          ]
+        }
+      },
+      "blocking_items": [],
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "done",
+        "evals": "evals/prd-028.evals.mjs",
+        "eval_author": "codex",
+        "implementer": "claude",
+        "reviewer": "codex",
+        "notes": "Done 2026-06-13. Claude implemented tools/validate-tokenese-pairs.mjs (R11) + PRD-024 R2 Tokenese row (R9 Band C). Codex reviewed implementation and confirmed evals/prd-028.evals.mjs 10/10 green plus validator root scan pass."
+      }
+    },
+    {
+      "id": "PRD-029",
+      "title": "Pre-Write State Derivation Contract",
+      "path": "docs/prds/PRD-029-pre-write-state-derivation-contract.md",
+      "shelf": "docs/prds",
+      "state": "actioned",
+      "acceptance": {
+        "codex": {
+          "status": "accepted",
+          "evidence": [
+            "MSG-20260613-036 reviewed by Codex on 2026-06-13; draft v2 applied amendments for freshness receipts, in-lock derivation sequencing, thread-mode support, PRD-027 prerequisite linkage, and OQ-068 resolution"
+          ]
+        },
+        "claude": {
+          "status": "accepted",
+          "evidence": [
+            "MSG-20260613-036 thread: reviewed Codex draft v2 amendments (freshness receipts R2.4/R4, in-lock derivation R1.4/R1.5, thread-mode support R5, OQ-068 derivation-only) and accepted 2026-06-13"
+          ]
+        },
+        "maintainer": {
+          "status": "accepted",
+          "evidence": [
+            "Concept approved in session 14 chat 2026-06-13",
+            "Maintainer direct confirmation to Codex on 2026-06-13: acceptance has been expressed for PRD-028 and PRD-029"
+          ]
+        }
+      },
+      "blocking_items": [],
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "done",
+        "evals": "evals/prd-029.evals.mjs",
+        "eval_author": "claude",
+        "implementer": "codex",
+        "reviewer": "claude",
+        "notes": "Claude authored evals; Codex implemented tools/next-state.mjs + skills/codex v7; Claude reviewed (APPROVE, MSG-045) and filed done 2026-06-13. evals/prd-029.evals.mjs 10/10 green (R6.3 closed by skills/claude v0.6.0)."
+      }
     }
   ]
 }

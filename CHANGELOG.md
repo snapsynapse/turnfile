@@ -8,6 +8,12 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+#### Direction reset
+- Added `INTENT.md` to reposition Turnfile as a thin governance layer for auditable peer disagreement and maintainer-governed resolution across existing agent platforms.
+- Added `SPEC.md` as the concise forward normative contract for the narrowed protocol.
+- Added `DEFINITIONS.md`, `ROADMAP.md`, and `SECURITY.md` to align Turnfile with the repository conventions used across related PAICE projects.
+- Updated README document map to distinguish forward direction docs from historical protocol and inception artifacts.
+
 #### PRDs (Product Requirement Documents)
 - 12 promoted PRDs defining the full protocol contract stack:
   - PRD-003: Message lifecycle + SLA contract

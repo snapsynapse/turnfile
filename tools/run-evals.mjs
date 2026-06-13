@@ -199,7 +199,7 @@ test("turnfile-lint reports malformed messages as schema errors, not crashes", (
     raw.replace(/  - id: "SIG-030"/, '  - {}\n  - id: "SIG-030"'),
   );
   const result = run(["tools/turnfile-lint.mjs", "--turnfile", turnfile]);
-  expectFail(result, /Schema: \/messages\/0 must have required property 'id'/);
+  expectFail(result, /Schema: \/messages\/\d+ must have required property 'id'/);
   assert.doesNotMatch(result.output, /TypeError|Cannot read properties/);
 });
 

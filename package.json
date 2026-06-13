@@ -1,7 +1,7 @@
 {
   "name": "turnfile",
   "version": "0.1.0",
-  "description": "SNAP — Structured Negotiation of Autonomous Peers. File-based LLM collaboration protocol.",
+  "description": "SNAP \u2014 Structured Negotiation of Autonomous Peers. File-based LLM collaboration protocol.",
   "license": "Apache-2.0",
   "private": true,
   "repository": {
@@ -16,7 +16,8 @@
     "export:mailbox": "node tools/export-mailbox-json.mjs",
     "validate:skills": "node tools/validate-skills-preflight.mjs --strict-global",
     "validate:skills:ci": "node tools/validate-skills-preflight.mjs",
-    "evals": "node tools/run-evals.mjs"
+    "evals": "node tools/run-evals.mjs",
+    "evals:prd": "node --test evals/"
   },
   "devDependencies": {
     "ajv": "^8.17.1",

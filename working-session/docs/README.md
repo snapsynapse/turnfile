@@ -6,10 +6,12 @@ Active iteration documents for the current local session workspace.
 
 1. `PRD-002-rust-notification-viewer-mvp.md`
 2. `PRD-015-agent-onboarding-vetting-contract.md`
-3. `PRD-017-boot-sequence-commands-and-documentation-contract.md`
-4. `PRD-018-maintainer-approval-authority-matrix-contract.md`
-5. `PRD-019-mailbox-first-approval-and-polling-cadence-contract.md`
-6. `PRD-020-boot-artifact-completeness-and-chat-log-contract.md`
+3. `PRD-020-boot-artifact-completeness-and-chat-log-contract.md`
+4. `PRD-022-decision-mirror-delivery-contract.md`
+5. `PRD-023-out-of-band-activity-reconciliation-contract.md`
+6. `PRD-024-human-legibility-invariant-and-encoding-profiles-contract.md`
+7. `PRD-026-review-cycle-closure-and-task-state-consistency-contract.md`
+8. `PRD-027-tokenese-cloned-communication-ab-contract.md`
 
 ## Actioned PRDs Promoted To `docs/prds/`
 
@@ -27,6 +29,10 @@ Active iteration documents for the current local session workspace.
 12. `PRD-013-turnfile-coordination-format.md`
 13. `PRD-014-session-closeout-boot-handoff-contract.md`
 14. `PRD-016-session-rotation-trigger-contract.md`
+15. `PRD-017-boot-sequence-commands-and-documentation-contract.md`
+16. `PRD-018-maintainer-approval-authority-matrix-contract.md`
+17. `PRD-019-mailbox-first-approval-and-polling-cadence-contract.md`
+18. `PRD-021-conflict-loop-bound-and-selective-unlock-gradient-contract.md`
 
 ## Promotion Gate Policy (Required)
 

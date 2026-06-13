@@ -118,3 +118,53 @@ State at start:
 
 - No new OQs registered this session
 - Active: OQ-051, OQ-054, OQ-055, OQ-056, OQ-057
+
+---
+
+## Session 14 Close Snapshot — Claude
+
+```yaml
+session_id: claude-session-14
+agent: Claude
+models: [Claude Opus 4.6, Claude Fable 5, Claude Opus 4.8]   # three generations, one protocol
+surface: Claude Code
+timestamp: 2026-06-13
+close_reason: Maintainer-directed coordinated close (Codex closing in parallel)
+revision_token: REV-20260613-snapshot-claude-14-h2ab83ed3
+branch: prd-021-conflict-loop-gradient
+turnfile_revision: 123
+phase: phase-2 / p2-f
+```
+
+### Active task status
+- Claude lanes: all complete or handed off. PRD-028 implemented+filed done; PRD-029 evals authored, reviewed Codex impl, filed done; PRD-014 A1 drafted (awaiting Codex review, MSG-044 open); skill v0.6.0.
+- Open Claude-owned messages (carry): MSG-044 (PRD-014 A1 review), MSG-046 (skill v0.6.0 notify; Codex acknowledged).
+
+### Mailbox state
+- Claude unread 0, no locks held, Claude idle.
+- Closed this session-close: MSG-039/041/042. Codex closes its own terminal messages.
+
+### Open commitments / carry-forward to session 15
+1. Deferred WORKLOG compaction (639>500) + signal-log compaction — run at next boot FIRST (single-agent, safe).
+2. PRD-014 A1 amendment — Codex review pending (MSG-044).
+3. Codex lanes: PRD-021/022/024 implementation, PRD-023/026 eval authoring → then Claude implements 023/026.
+4. PRD-024 R5.1 dense-fragment validator (Codex lane).
+5. Maintainer pre-PRD-027 checkpoint + push/PR decision → then PRD-027 (tokenese) initiation.
+
+### Key files changed this session
+- New: BASELINE.md, tools/validate-tokenese-pairs.mjs, tools/next-state.mjs, evals/{prd-021,022,024,028,029,archive-shelf}.evals.mjs, docs/archive/prds/ (002/015/020), skills/claude/ (role-keyed v0.6.0).
+- Promoted to docs/prds: PRD-017,018,019,021,022,023,024,026,028,029. Folded: PRD-020→PRD-017 R7. Amendments: PRD-006 A1, PRD-003/004/008 A1 (draft), PRD-014 A1 (draft).
+
+### Files to read on resume (ordered)
+1. working-session/boot-claude.md (v8) — orientation (~900 tokens)
+2. working-session/TURNFILE.yaml — coordination state (~400 tokens)
+3. working-session/WORKLOG.md status block + closeout entry (~400 tokens)
+4. working-session/MAILBOX.md inbox snapshot (~150 tokens)
+5. This snapshot (carry-forward) (~400 tokens)
+
+### Decision context
+- Eight-step A1 loop is now the law for PRD implementation (acceptance ≠ done). PRD-027 double-gated behind PRD-028 (done) + Maintainer checkpoint.
+- Files-First + Concurrent-Write Discipline (skill v0.5.0/v0.6.0) are the session's hardest-won operating lessons.
+
+### OQs touched
+- Session 14 resolved OQ-051 through OQ-068 (zero active OQs at close). Registry: working-session/OPEN_QUESTIONS.md.

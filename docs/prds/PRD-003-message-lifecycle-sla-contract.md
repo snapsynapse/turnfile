@@ -205,3 +205,22 @@ PRD-003 (this document) and PRD-004 (Maintainer Decision Contract) have a depend
 **Interface contract:** PRD-004 should reference PRD-003's state machine and SLA tiers rather than redefining them. If PRD-004 needs decision-specific lifecycle extensions (e.g., a `deferred` status), those should be proposed back to PRD-003 as amendments.
 
 Codex: please flag any conflicts when reviewing this draft. If PRD-004 needs lifecycle semantics not covered here, post a mailbox message and we'll reconcile before either doc goes to maintainer for approval.
+
+## Amendment A1 (draft, 2026-06-13): Thread-Mode for Review Dialogues
+
+Status: Draft amendment — concept approved by Maintainer in session 14; Codex acceptance pending. Proposed by Claude.
+
+### A1.R1 Thread accumulation
+
+A review dialogue (request → ack → reply → counter-reply → … → closure) MAY accumulate within a single message card under one MSG ID, as alternating dated `Ack`/`Reply` entries, instead of spawning a new MSG ID per utterance. Session 14 evidence: MSG-20260612-018, MSG-20260613-033 evolved this pattern organically; this amendment makes it a rule rather than a habit.
+
+### A1.R2 Boundaries
+
+1. Thread-mode applies to exchanges within one review cycle and one card. New scope, new decision subject, or new closure owner requires a new message.
+2. Each thread entry is dated and attributed; entries are append-only (no editing prior entries).
+3. Lifecycle status reflects the latest entry's effect; the 5-status state machine and closure-owner rules are unchanged.
+4. Full lock-and-validate ceremony applies per write to the card; thread-mode reduces message proliferation, not transaction discipline.
+
+### A1.R3 Snapshot semantics
+
+A thread entry that requests a response from the counterpart resets the card to `unread` for that counterpart (it must appear in their unread count); informational entries do not.

@@ -181,3 +181,18 @@ All open questions have been resolved by maintainer decision:
 2. No unresolved sandbox-visibility blocker remains for active collaboration.
 3. Maintainer confirms relay burden is materially reduced.
 4. Team agrees format is stable enough for canonical documentation.
+
+## Amendment A1 (draft, 2026-06-13): Structured Review Replies — Blocking and Peer-Input Channels
+
+Status: Draft amendment — concept approved by Maintainer in session 14; Codex acceptance pending. Proposed by Claude.
+
+### A1.R1 Reply channels
+
+Review replies to payload-first envelopes carry two labeled channels:
+
+1. `Counters (blocking)`: findings that gate acceptance; each enumerable and addressable.
+2. `Peer input (non-blocking)`: yes-and contributions, alternatives, edge cases, and questions offered for the author's disposal — explicitly not gating.
+
+### A1.R2 Rationale
+
+Maintainer posture directive (2026-06-13, session 14): agents are peers forging aggregated intelligence; reviews must carry generative contribution, not only verdicts. This amendment gives that material a sanctioned structural home so it survives independent of any one agent's habits. An empty peer-input channel is permitted but is a signal worth noticing.

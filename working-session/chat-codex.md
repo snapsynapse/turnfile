@@ -48,3 +48,26 @@ State at initialization:
 - Pending for next session:
   - Maintainer decisions on PRD-002 and PRD-017..020 acceptance.
   - MSG-017 lifecycle closure by Claude/Maintainer.
+
+---
+
+## Session 14 Close Snapshot — 2026-06-13
+
+- Session: `codex-session-14`
+- Turnfile revision at Codex close: `124`
+- Codex status: `idle`
+- Mailbox state: Codex unread `0`; Claude unread `0`; Maintainer unread `0`.
+- Locks: none.
+- Completed this close segment:
+  - Acknowledged MSG-046 and recorded concurrent-write discipline as Codex-owned future skill hygiene.
+  - Closed `s14-impl-029` after Claude approved PRD-029 implementation.
+  - Refreshed `working-session/boot-codex.md` to v5.
+  - Archived previous Codex boot file as `docs/archive/boot-codex/boot-codex_v4.md`.
+  - Marked Codex idle in `working-session/TURNFILE.yaml`.
+- Carry-forward:
+  - PRD-014 A1 apply-or-counter review from MSG-044.
+  - `s14-impl-021-022-024` Codex implementation lane.
+  - `s14-evals-023-026` Codex eval-author lane.
+  - `s14-prd024-validator-rule` pending unassigned.
+  - PRD-027 remains held until non-PRD-027 work completes, then commit, push, and Maintainer checkpoint occur.
+- Lesson learned: Closure-owner checks matter because peer replies on sent cards do not create unread mail for the sender.

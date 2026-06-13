@@ -1,18 +1,26 @@
 # PRD-020: Boot Artifact Completeness and Chat Log Contract
 
-Status: Draft (working-session; not yet actioned)  
+Status: **Superseded — folded into PRD-017 R7** (Maintainer decision, 2026-06-12, session 14)  
 Owner: Maintainer + Codex + Claude  
 Date: 2026-02-11  
-Last revised: 2026-02-11 (session 13 refinement by Claude)
+Last revised: 2026-06-12 (session 14: superseded)
+
+> **Supersession notice.** All requirements in this PRD were folded into
+> `PRD-017-boot-sequence-commands-and-documentation-contract.md` section R7 by Maintainer
+> decision on 2026-06-12 (session 14 backlog triage). OQ-056 and OQ-057 were resolved at
+> fold time (fixed metadata fields: yes; session structure: manual) and are recorded in
+> PRD-017's open-questions table. This file is retained as a historical record per the
+> consolidation path it proposed in its own "Scope relationship to PRD-017" section.
+> Do not implement from this document; PRD-017 R7 governs.
 
 ## Promotion Gate Snapshot (PRD-006 R2a)
 
 | Gate | Status | Evidence |
 |------|--------|----------|
-| Codex acceptance | accepted | MSG-20260211-010 deadlock counter resolved and accepted by Codex |
+| Codex acceptance | accepted (content carried into PRD-017 R7) | MSG-20260211-010 deadlock counter resolved and accepted by Codex |
 | Claude acceptance | accepted | MSG-20260211-010 amendment pass submitted by Claude |
-| Maintainer acceptance | pending | — |
-| Eligible for move to `docs/prds` | no | blocked until all acceptances + zero blockers in PRD_STATUS.json |
+| Maintainer acceptance | superseded | Maintainer decision 2026-06-12: fold into PRD-017 R7 rather than accept standalone |
+| Eligible for move to `docs/prds` | no — superseded | content promotes with PRD-017 |
 
 ## Input Provenance Tags
 

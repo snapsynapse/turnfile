@@ -1,4 +1,4 @@
-# Boot File — Claude (v7)
+# Boot File — Claude (v8)
 
 Read this first on session start. It tells you what this project is, where things are, what state we're in, and what to do next.
 
@@ -85,70 +85,58 @@ If TURNFILE.yaml exists, skip to resumption read order.
 6. `working-session/chat-claude.md` session close snapshot (bottom of file) — ~2K tokens
 7. Then read whatever files are relevant to the current task
 
-## Current state (as of session 13 close, 2026-02-11)
+## Current state (as of session 14 close, 2026-06-13)
 
-### Branch: `feature/skills` (forked from `main` after session 11)
+### Branch: `prd-021-conflict-loop-gradient`
 
-Session numbering is global-monotonic across branches. This branch forked from main after session 11 (inception pilot close).
+Session numbering is global-monotonic across branches. Session 14 ran the Claude lane on three model generations (Opus 4.6 → Fable 5 → Opus 4.8) against one unmodified protocol — portability evidence, recorded in `docs/llm/MODEL_LEDGER.md` and `skills/claude/MANIFEST.yaml`.
 
-### Phase 2 — P2-E in progress
+### FIRST ACTION ON RESUME: run deferred compaction
 
-**Completed prior:**
-- Phase 1: PRD-003/004/008/009 finalized and promoted.
-- P2-A through P2-D: All done. PRD-012/013 milestones, deferred validations, PRD-014/015/016 drafted.
-- Inception pilot archived to `examples/inception/`.
+Session 14 closed under concurrent dual-agent close and DEFERRED these (PRD-014 R4 execute-or-defer) to avoid collision:
+1. WORKLOG compaction — WORKLOG.md exceeds the 500-line trigger (PRD-011 R5). Compact session 13 + 14 narrative to `WORKLOG_ARCHIVE.md`, preserving the status block, Decision Index, and Archived Sessions table.
+2. Signal-log compaction in `TURNFILE.yaml` (PRD-013 R5.3: keep last per agent + recent window).
+Do these first, single-agent, before substantive work.
 
-**Session 12 work:** (compacted to WORKLOG_ARCHIVE.md)
-- Bootstrapped working-session/, skill validation, boot file rewrites (v6/v3 parity), PRD-018/019/020 drafted, skill-versioning applied.
+### Session 14 summary (the reset)
 
-**Session 13 work:**
-- PRD-001 full review (3 amendments), reviewed and promoted to docs/prds/ (by Codex at rev 27).
-- PRD-002 scaffold review (3 counters, applied by Codex).
-- PRD-017/018/019/020 refinement complete (6 counters from Codex, all resolved). Agent acceptance complete; Maintainer acceptance pending.
-- Onboarding test suite review (OT-008 counter, applied by Codex).
-- Gemini onboarding artifacts staged: GEMINI.md, boot-gemini.md, skills/gemini-3/ (v0.1.0), vetting-plan.md.
-- Gemini skill counters resolved (Module 5 lock rules, Module 2 stale messages).
-- `.gitignore` updated: working-session/ now tracked.
-- WORKLOG compacted (session 12 archived).
+Reset Turnfile after a 4-month gap; reconciled Feb-June drift; triaged the backlog to a clean baseline. Headline outcomes:
+- `BASELINE.md` created (ratified project snapshot); README rewritten with full PRD status index.
+- Installed `PRD-006 Amendment A1` — the eight-step implementation loop (propose → accept → proposer writes evals → counterpart implements → eval-green → review → file done). **Acceptance ≠ done.** `evals/` directory + `npm run evals:prd`.
+- Both PRD-028 and PRD-029 taken fully through the loop in both directions. Built `tools/validate-tokenese-pairs.mjs` (PRD-028) and `tools/next-state.mjs` (PRD-029).
+- Terminal PRDs (002/015/020) archived to `docs/archive/prds/`; validator enforces terminal-only there.
+- Claude skill `skills/claude/` v0.3.0 → v0.6.0: Files-First, Concurrent-Write Discipline, Model-Ledger Handshake, Collaboration Posture, encoding obligations. **Read these — they are the session's hardest-won operating lessons.**
 
-**Turnfile tasks:**
+### PRD landscape (authoritative: `working-session/docs/PRD_STATUS.json`)
 
-| Task | Owner | Status |
-|------|-------|--------|
-| p2e-prd-001-consolidation | codex | done |
-| p2e-prd-002-planning | codex | done |
-| p2e-prd-018-020-refinement | claude | done |
-| p2e-prd-015-onboarding-suite | codex | done |
-| p2e-prd-017-020-acceptance-sync | codex | done |
-| prd-015-maintainer-acceptance | maintainer | in_progress (requires onboarding evidence) |
-| prd-016-maintainer-acceptance | maintainer | done |
+| PRD | Status |
+|-----|--------|
+| 001, 003-014, 016, 017, 018, 019, 021, 022, 023, 024, 026, 028, 029 | Promoted (docs/prds/) |
+| 020 | Superseded (folded into PRD-017 R7) |
+| 002, 015 | Deferred (docs/archive/prds/) |
+| 025 | Resolved by convergence → PRD-014 A1 amendment path |
+| 027 | Tokenese A/B — agent+Maintainer accepted; HELD, double-gated behind PRD-028 (done) + Maintainer checkpoint |
+| Draft amendments | PRD-003/004/008 A1 (Codex review pending), PRD-014 A1 (Codex review pending, MSG-044) |
 
-### PRD landscape
+### Carry-forward to session 15
+1. Deferred compaction (above) — first.
+2. PRD-014 A1 review (Codex, MSG-044 open); PRD-003/004/008 A1 acceptances.
+3. Codex implementation lanes: PRD-021/022/024 (evals red), PRD-023/026 (Codex authors evals → Claude implements), PRD-024 R5.1 validator.
+4. Maintainer pre-PRD-027 checkpoint + push/PR decision → then PRD-027 (tokenese) initiation. Tokenese coordination workspace + handoff: `~/Git/tokenese/HANDOFF.md`.
 
-| PRD | Status | Location |
-|-----|--------|----------|
-| PRD-001 | Promoted | docs/prds/ |
-| PRD-002 | Draft (scaffold v2, agent-reviewed) | working-session/docs/ |
-| PRD-003 through PRD-014 | Promoted | docs/prds/ |
-| PRD-015 | Draft (acceptance withdrawn, requires onboarding evidence) | working-session/docs/ |
-| PRD-016 | Promoted | docs/prds/ |
-| PRD-017 through PRD-020 | Draft (agent acceptance done, Maintainer pending) | working-session/docs/ |
-
-### Gemini onboarding
-
-Artifacts staged in `working-session/docs/gemini-onboarding/` and `skills/gemini-3/`. Cross-reviewed by Codex, counters resolved. Awaiting Maintainer Band C governance approval before onboarding execution begins.
+### Operating norms now in force (skill v0.6.0)
+- Files First: read shared files before asserting/reasoning, not only before writing.
+- Concurrent Write Discipline: derive written values (IDs/counts) from the in-lock read; validator-expected is truth; lock the whole batch; commit own paths only; IDs in-window.
+- Eight-step loop: never self-implement a PRD whose evals you authored.
+- Model Ledger Handshake: verify executing model is in `docs/llm/MODEL_LEDGER.md` at boot.
 
 ### Open questions
-- Active: OQ-051, OQ-054, OQ-055, OQ-056, OQ-057. Resolved: OQ-052, OQ-053.
+- Zero active. OQ-051 through OQ-068 all resolved (`working-session/OPEN_QUESTIONS.md`).
 
-### Mailbox
-- All queues clear. 0 unread for all agents. 0 open queue items.
-- All 17 messages closed.
-- `working-session/MAILBOX.json` is a machine-readable projection for quick state checks.
-
-### Coordination
-- TURNFILE.yaml revision: 30. Claude idle. Codex idle.
-- No active locks or turn queue entries.
+### Mailbox & coordination
+- At Claude close: Claude idle, unread 0, no locks. Open Claude-owned: MSG-044 (PRD-014 A1), MSG-046 (skill notify, acknowledged). Codex closes its own messages + commits its own files (skills/codex v7, docs/llm).
+- TURNFILE.yaml revision ~123 at Claude close (Codex may advance it). Read it fresh (Files-First).
+- Detailed resume snapshot: bottom of `working-session/chat-claude.md`.
 
 ## Session close protocol
 

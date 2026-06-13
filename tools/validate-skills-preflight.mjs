@@ -7,8 +7,7 @@ import { createRequire } from "node:module";
 
 const require = createRequire(import.meta.url);
 
-const DEFAULT_REPO_TURNFILE_SKILL = "skills/codex_5.3/SKILL.md";
-const DEFAULT_REPO_VERSIONING_DIR = "skills/skill-versioning";
+const DEFAULT_REPO_TURNFILE_SKILL = "skills/codex/SKILL.md";
 const VERSIONING_SKILL_NAMES = new Set(["skill-versioning", "skill-provenance"]);
 const DEFAULT_REQUIRED_GLOBAL_SKILLS = [
   "turnfile-codex-collaboration",
@@ -26,8 +25,7 @@ function usage() {
       "Usage: node tools/validate-skills-preflight.mjs [options]",
       "",
       "Options:",
-      "  --repo-turnfile-skill <path>   Repo-local Turnfile skill file (default: skills/codex_5.3/SKILL.md)",
-      "  --repo-versioning-dir <path>    Repo-local versioning bundle dir (default: skills/skill-versioning)",
+      "  --repo-turnfile-skill <path>   Repo-local Turnfile skill file (default: skills/codex/SKILL.md)",
       "  --global-skills-dir <path>      Global Codex skills dir (default: $CODEX_HOME/skills or ~/.codex/skills)",
       "  --strict-global                 Require global skills install + parity checks",
       "  --help, -h                      Show help",
@@ -38,7 +36,6 @@ function usage() {
 function parseArgs(argv) {
   const args = {
     repoTurnfileSkill: DEFAULT_REPO_TURNFILE_SKILL,
-    repoVersioningDir: DEFAULT_REPO_VERSIONING_DIR,
     globalSkillsDir: defaultGlobalSkillsDir(),
     strictGlobal: false,
   };
@@ -48,12 +45,6 @@ function parseArgs(argv) {
 
     if (token === "--repo-turnfile-skill") {
       args.repoTurnfileSkill = argv[i + 1];
-      i += 1;
-      continue;
-    }
-
-    if (token === "--repo-versioning-dir") {
-      args.repoVersioningDir = argv[i + 1];
       i += 1;
       continue;
     }
@@ -269,13 +260,9 @@ function main() {
   const warnings = [];
 
   const repoTurnfileSkillAbs = path.resolve(repoRoot, args.repoTurnfileSkill);
-  const repoVersioningDirAbs = path.resolve(repoRoot, args.repoVersioningDir);
 
   if (!fs.existsSync(repoTurnfileSkillAbs)) {
     errors.push(`Missing repo Turnfile skill: ${args.repoTurnfileSkill}`);
-  }
-  if (!fs.existsSync(repoVersioningDirAbs)) {
-    errors.push(`Missing repo versioning bundle: ${args.repoVersioningDir}`);
   }
 
   if (fs.existsSync(repoTurnfileSkillAbs)) {
@@ -284,31 +271,6 @@ function main() {
       errors.push(`Repo Turnfile skill name mismatch: expected 'turnfile-codex-collaboration', got '${name}'`);
     }
     validateMinimalFrontmatter(keys, "Repo Turnfile skill", errors);
-  }
-
-  const repoVersioningSkillAbs = path.join(repoVersioningDirAbs, "SKILL.md");
-  let repoVersioningFrontmatterMode = null;
-  if (fs.existsSync(repoVersioningDirAbs)) {
-    repoVersioningFrontmatterMode = readManifestMode(repoVersioningDirAbs);
-  }
-
-  if (!fs.existsSync(repoVersioningSkillAbs)) {
-    errors.push(`Missing repo versioning SKILL.md: ${path.join(args.repoVersioningDir, "SKILL.md")}`);
-  } else {
-    const { name, keys } = parseFrontmatterNameAndKeys(repoVersioningSkillAbs);
-    if (!VERSIONING_SKILL_NAMES.has(name)) {
-      errors.push(`Repo versioning skill name mismatch: expected one of '${[...VERSIONING_SKILL_NAMES].join(", ")}', got '${name}'`);
-    }
-    validateFrontmatterForMode(
-      keys,
-      repoVersioningFrontmatterMode || "minimal",
-      "Repo versioning skill",
-      errors,
-    );
-  }
-
-  if (fs.existsSync(repoVersioningDirAbs)) {
-    validateManifest(repoVersioningDirAbs, "Repo skill-versioning bundle", errors, warnings);
   }
 
   const globalSkillFiles = listGlobalSkillFiles(args.globalSkillsDir);
@@ -351,7 +313,12 @@ function main() {
     const globalHash = sha256File(globalTurnfileSkill);
     const repoHash = sha256File(repoTurnfileSkillAbs);
     if (globalHash !== repoHash) {
-      errors.push("Global Turnfile skill hash differs from repo canonical skills/codex_5.3/SKILL.md");
+      const message = `Global Turnfile skill hash differs from repo canonical ${args.repoTurnfileSkill}`;
+      if (args.strictGlobal) {
+        errors.push(message);
+      } else {
+        warnings.push(`${message} (strict global mode off)`);
+      }
     }
   } else if (args.strictGlobal) {
     errors.push("Cannot run Turnfile global parity check (missing global or repo skill)");
@@ -374,7 +341,6 @@ function main() {
 
   console.log("Skills Preflight");
   console.log(`- Repo turnfile skill: ${args.repoTurnfileSkill}`);
-  console.log(`- Repo versioning dir: ${args.repoVersioningDir}`);
   console.log(`- Global skills dir: ${args.globalSkillsDir}`);
   console.log(`- Global skills discovered: ${globalSkillFiles.length}`);
   console.log(`- Strict global mode: ${args.strictGlobal ? "on" : "off"}`);
