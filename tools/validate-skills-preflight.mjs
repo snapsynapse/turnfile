@@ -26,6 +26,7 @@ function usage() {
       "",
       "Options:",
       "  --repo-turnfile-skill <path>   Repo-local Turnfile skill file (default: skills/codex/SKILL.md)",
+      "  --repo-versioning-dir <path>   Repo-local versioning bundle directory",
       "  --global-skills-dir <path>      Global Codex skills dir (default: $CODEX_HOME/skills or ~/.codex/skills)",
       "  --strict-global                 Require global skills install + parity checks",
       "  --help, -h                      Show help",
@@ -36,6 +37,7 @@ function usage() {
 function parseArgs(argv) {
   const args = {
     repoTurnfileSkill: DEFAULT_REPO_TURNFILE_SKILL,
+    repoVersioningDir: null,
     globalSkillsDir: defaultGlobalSkillsDir(),
     strictGlobal: false,
   };
@@ -45,6 +47,12 @@ function parseArgs(argv) {
 
     if (token === "--repo-turnfile-skill") {
       args.repoTurnfileSkill = argv[i + 1];
+      i += 1;
+      continue;
+    }
+
+    if (token === "--repo-versioning-dir") {
+      args.repoVersioningDir = argv[i + 1];
       i += 1;
       continue;
     }
@@ -273,6 +281,26 @@ function main() {
     validateMinimalFrontmatter(keys, "Repo Turnfile skill", errors);
   }
 
+  // Validate repo versioning directory if provided
+  if (args.repoVersioningDir) {
+    const repoVersioningDirAbs = path.resolve(repoRoot, args.repoVersioningDir);
+    const repoVersioningSkillPath = path.join(repoVersioningDirAbs, "SKILL.md");
+
+    if (!fs.existsSync(repoVersioningDirAbs)) {
+      errors.push(`Repo versioning directory not found: ${args.repoVersioningDir}`);
+    } else if (!fs.existsSync(repoVersioningSkillPath)) {
+      errors.push(`Repo versioning skill not found: ${path.join(args.repoVersioningDir, "SKILL.md")}`);
+    } else {
+      const { name, keys } = parseFrontmatterNameAndKeys(repoVersioningSkillPath);
+      if (!VERSIONING_SKILL_NAMES.has(name)) {
+        errors.push(`Repo versioning skill name mismatch: expected one of '${[...VERSIONING_SKILL_NAMES].join(", ")}', got '${name}'`);
+      }
+      const mode = readManifestMode(repoVersioningDirAbs) || "minimal";
+      validateFrontmatterForMode(keys, mode, "Repo versioning skill", errors);
+      validateManifest(repoVersioningDirAbs, "Repo skill-versioning bundle", errors, warnings);
+    }
+  }
+
   const globalSkillFiles = listGlobalSkillFiles(args.globalSkillsDir);
   const globalNameToPath = new Map();
   const duplicateNames = new Set();
@@ -341,6 +369,9 @@ function main() {
 
   console.log("Skills Preflight");
   console.log(`- Repo turnfile skill: ${args.repoTurnfileSkill}`);
+  if (args.repoVersioningDir) {
+    console.log(`- Repo versioning dir: ${args.repoVersioningDir}`);
+  }
   console.log(`- Global skills dir: ${args.globalSkillsDir}`);
   console.log(`- Global skills discovered: ${globalSkillFiles.length}`);
   console.log(`- Strict global mode: ${args.strictGlobal ? "on" : "off"}`);
