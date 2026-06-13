@@ -52,9 +52,10 @@ Want a single example? [MSG-20260208-027](examples/inception/MAILBOX.md#msg-2026
 
 ## Quick start
 
-1. **Read the stance:** [INTENT.md](INTENT.md): where this protocol is going
-2. **See it work:** [examples/inception/WORKLOG.md](examples/inception/WORKLOG.md): real session record
-3. **Run your own:** Copy [templates/working-session/](templates/working-session/) and follow [LLM Onboarding](docs/LLM_ONBOARDING.md)
+1. **Read the baseline:** [BASELINE.md](BASELINE.md): what Turnfile is and how the project works right now
+2. **Read the stance:** [INTENT.md](INTENT.md): where this protocol is going
+3. **See it work:** [examples/inception/WORKLOG.md](examples/inception/WORKLOG.md): real session record
+4. **Run your own:** Copy [templates/working-session/](templates/working-session/) and follow [LLM Onboarding](docs/LLM_ONBOARDING.md)
 
 Deeper dive: [Protocol Core](docs/PROTOCOL_CORE.md) defines the invariant rules. PRDs in [docs/prds/](docs/prds/) define the contracts.
 
@@ -84,6 +85,7 @@ This repository is intentionally scoped to maximize interoperability and auditab
 
 | Document | Purpose |
 |----------|---------|
+| [BASELINE](BASELINE.md) | Ratified project snapshot: current state, PRD shelf statuses, standing decisions, forward task register |
 | [INTENT](INTENT.md) | Forward strategy: Turnfile as a thin governance layer for auditable peer disagreement across existing agent platforms |
 | [Specification](SPEC.md) | Concise normative contract for the narrowed Turnfile protocol |
 | [Definitions](DEFINITIONS.md) | Controlled vocabulary for Turnfile terms, roles, statuses, and governance concepts |
@@ -107,31 +109,42 @@ This repository is intentionally scoped to maximize interoperability and auditab
 
 ### PRDs (protocol contracts)
 
-Promoted PRDs define the detailed contracts that govern agent coordination. See [docs/prds/](docs/prds/) for the full (actioned) set. More are pending.
+PRDs live on two shelves. Promoted, Maintainer-accepted contracts live in [docs/prds/](docs/prds/). Drafts and deferred PRDs live in [working-session/docs/](working-session/docs/), with [PRD_STATUS.json](working-session/docs/PRD_STATUS.json) as the authoritative status registry. This index covers both shelves.
 
-| PRD | Title |
-|-----|-------|
-| [PRD-003](docs/prds/PRD-003-message-lifecycle-sla-contract.md) | Message lifecycle + SLA contract |
-| [PRD-004](docs/prds/PRD-004-maintainer-decision-contract.md) | Maintainer decision contract |
-| [PRD-005](docs/prds/PRD-005-protocol-data-schema-compatibility.md) | Protocol data schema + compatibility |
-| [PRD-006](docs/prds/PRD-006-session-promotion-pipeline.md) | Session promotion pipeline |
-| [PRD-007](docs/prds/PRD-007-trust-provenance-layer.md) | Trust + provenance layer |
-| [PRD-008](docs/prds/PRD-008-cross-sandbox-handoff-contract.md) | Cross-sandbox handoff contract (payload-first) |
-| [PRD-009](docs/prds/PRD-009-cross-document-reconciliation.md) | Cross-document reconciliation + OQ triage |
-| [PRD-010](docs/prds/PRD-010-shared-file-transaction-locking.md) | Shared-file transaction + Turnfile lease locking |
-| [PRD-011](docs/prds/PRD-011-session-resumption-contract.md) | Session resumption contract |
-| [PRD-012](docs/prds/PRD-012-protocol-skills-codex-claude.md) | Protocol skills pack for Codex + Claude |
-| [PRD-013](docs/prds/PRD-013-turnfile-coordination-format.md) | Turnfile coordination format |
-| [PRD-014](docs/prds/PRD-014-session-closeout-boot-handoff-contract.md) | Session closeout + boot handoff contract |
+| PRD | Title | Status |
+|-----|-------|--------|
+| [PRD-001](docs/prds/PRD-001-maintainer-interaction-model.md) | Maintainer interaction model | Promoted |
+| [PRD-002](working-session/docs/PRD-002-rust-notification-viewer-mvp.md) | Rust notification viewer MVP | Deferred |
+| [PRD-003](docs/prds/PRD-003-message-lifecycle-sla-contract.md) | Message lifecycle + SLA contract | Promoted |
+| [PRD-004](docs/prds/PRD-004-maintainer-decision-contract.md) | Maintainer decision contract | Promoted |
+| [PRD-005](docs/prds/PRD-005-protocol-data-schema-compatibility.md) | Protocol data schema + compatibility | Promoted |
+| [PRD-006](docs/prds/PRD-006-session-promotion-pipeline.md) | Session promotion pipeline | Promoted |
+| [PRD-007](docs/prds/PRD-007-trust-provenance-layer.md) | Trust + provenance layer | Promoted |
+| [PRD-008](docs/prds/PRD-008-cross-sandbox-handoff-contract.md) | Cross-sandbox handoff contract (payload-first) | Promoted |
+| [PRD-009](docs/prds/PRD-009-cross-document-reconciliation.md) | Cross-document reconciliation + OQ triage | Promoted |
+| [PRD-010](docs/prds/PRD-010-shared-file-transaction-locking.md) | Shared-file transaction + Turnfile lease locking | Promoted |
+| [PRD-011](docs/prds/PRD-011-session-resumption-contract.md) | Session resumption contract | Promoted |
+| [PRD-012](docs/prds/PRD-012-protocol-skills-codex-claude.md) | Protocol skills pack for Codex + Claude | Promoted |
+| [PRD-013](docs/prds/PRD-013-turnfile-coordination-format.md) | Turnfile coordination format | Promoted |
+| [PRD-014](docs/prds/PRD-014-session-closeout-boot-handoff-contract.md) | Session closeout + boot handoff contract | Promoted |
+| [PRD-015](working-session/docs/PRD-015-agent-onboarding-vetting-contract.md) | Agent onboarding + vetting contract | Deferred |
+| [PRD-016](docs/prds/PRD-016-session-rotation-trigger-contract.md) | Session rotation + new thread trigger contract | Promoted |
+| [PRD-017](docs/prds/PRD-017-boot-sequence-commands-and-documentation-contract.md) | Boot sequence + documentation contract (includes folded PRD-020 as R7) | Promoted |
+| [PRD-018](docs/prds/PRD-018-maintainer-approval-authority-matrix-contract.md) | Maintainer approval authority matrix | Promoted |
+| [PRD-019](docs/prds/PRD-019-mailbox-first-approval-and-polling-cadence-contract.md) | Mailbox-first approval, event-based cadence | Promoted |
+| [PRD-020](working-session/docs/PRD-020-boot-artifact-completeness-and-chat-log-contract.md) | Boot artifact completeness + chat log contract | Superseded (folded into PRD-017 R7) |
+| [PRD-021](working-session/docs/PRD-021-conflict-loop-bound-and-selective-unlock-gradient-contract.md) | Conflict loop bound + selective-unlock gradient | Agent-accepted; Maintainer acceptance pending |
 
 ### Skills (per-agent execution guides)
 
 Each agent maintains a self-contained skill file encoding the full protocol workflow (PRD-012). Skill files are reconciled by shared policy tests, not by sharing code.
 
+Bundles are migrating to role-keyed directories with model compatibility recorded in each MANIFEST.yaml rather than the path. The Claude and Codex bundles migrated in session 14; Gemini remains deferred with PRD-015. The protocol itself is model-agnostic: session 14 ran the Claude lane on a new model generation (Fable 5) against the unmodified v3 bundle before upgrading it.
+
 | Path | Description |
 |------|-------------|
-| [skills/claude-opus_4.6/SKILL.md](skills/claude-opus_4.6/SKILL.md) | Claude protocol execution guide (v0.2.0) |
-| [skills/codex_5.3/SKILL.md](skills/codex_5.3/SKILL.md) | Codex protocol execution guide |
+| [skills/claude/SKILL.md](skills/claude/SKILL.md) | Claude protocol execution guide (v0.4.0, role-keyed) |
+| [skills/codex/SKILL.md](skills/codex/SKILL.md) | Codex protocol execution guide (v2, role-keyed) |
 | [skills/skill-versioning/SKILL.md](skills/skill-versioning/SKILL.md) | Shared metaskill for versioning skill bundles across Codex + Claude. Current installs may expose the same bundle as `skill-provenance`. |
 | [templates/SKILL.md](templates/SKILL.md) | Skill template for onboarding new agents |
 
@@ -194,14 +207,16 @@ npm run validate:skills:ci   # repo-only checks (CI-safe)
 
 ## Status
 
-This protocol has been tested across 11+ real collaboration sessions with two LLM agents (Claude by Anthropic, Codex by OpenAI) and a human maintainer. The historical PRD stack is stable enough to validate the concept. Forward development now narrows Turnfile into a thin governance layer for auditable peer disagreement and maintainer-governed resolution across existing agent platforms.
+This protocol has been tested across 14 real collaboration sessions with two LLM agents (Claude by Anthropic, Codex by OpenAI) and a human maintainer. Session 14 (2026-06-12) established a ratified [baseline](BASELINE.md): every PRD carries an explicit status, the open-question registry is clear, and the Claude lane survived a model generation swap (Opus 4.6 to Fable 5) with zero protocol migration. Forward development narrows Turnfile into a thin governance layer for auditable peer disagreement and maintainer-governed resolution across existing agent platforms.
 
 ## Next
 
-- Reconcile the historical PRD shelf against the narrowed `SPEC.md`.
-- Produce a minimal starter workflow that does not require reading the inception archive.
-- Add small CLI helpers only where they reduce clerical overhead.
-- Document integration patterns for current agent platforms, MCP, A2A, and GitHub review flows.
+The authoritative forward task register lives in [BASELINE.md](BASELINE.md). Headlines:
+
+- Model-agnostic skill layout (role-keyed directories, model in manifest).
+- Root `AGENTS.md` / `CLAUDE.md` bootstrap files for cold-start agent interop.
+- Minimal starter workflow: adopt Turnfile by copying one folder and reading one guide.
+- Platform integration notes for current agent platforms, MCP, A2A, and GitHub review flows.
 
 ## Sponsor
 

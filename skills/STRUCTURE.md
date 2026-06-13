@@ -4,11 +4,13 @@ This file defines the repository-managed skill layout.
 
 ## Per-Agent Skill Files
 
-1. `skills/claude-opus_4.6/SKILL.md` — Claude-owned skill implementation (v0.3.0).
-2. `skills/codex_5.3/SKILL.md` — Codex-owned skill implementation.
-3. `skills/gemini-3/SKILL.md` — Gemini-owned skill implementation (v0.1.0, onboarding candidate).
+1. `skills/claude/SKILL.md` — Claude-owned skill implementation (v0.4.0, role-keyed; model recorded in MANIFEST.yaml).
+2. `skills/codex/SKILL.md` — Codex-owned skill implementation (v2, role-keyed; model recorded in MANIFEST.yaml).
+3. `skills/gemini-3/SKILL.md` — Gemini-owned skill implementation (v0.1.0, onboarding deferred; migrates with PRD-015 resumption).
+4. `skills/claude-opus_4.6/` — deprecated historical location of the Claude bundle (v3); see its DEPRECATED.md.
+5. `skills/codex_5.3/` — deprecated historical location of the Codex bundle (v1); see its DEPRECATED.md.
 
-All files must encode the same protocol outcomes while using agent-specific tooling and instructions. New agents should copy `templates/SKILL.md` to `skills/<agent>/SKILL.md`.
+All files must encode the same protocol outcomes while using agent-specific tooling and instructions. New agents should copy `templates/SKILL.md` to `skills/<agent>/SKILL.md`, where `<agent>` is the role name without a model identifier; record model compatibility in the bundle's MANIFEST.yaml.
 
 ## Shared Metaskills
 

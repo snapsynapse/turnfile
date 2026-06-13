@@ -15,7 +15,7 @@ Turnfile (SNAP — Structured Negotiation of Autonomous Peers) is a file-based c
 - `examples/` — Historical reference: `ai-feature-tracker/` (first project) and `inception/` (11-session pilot archive)
 - `tools/` — Project tooling (`export-mailbox-json.mjs`, `new-payload-envelope.mjs`, `turnfile-lint.mjs`, `validate-mailbox-invariants.mjs`, `validate-prd-promotion.mjs`, `validate-skills-preflight.mjs`)
 - `skills/` — Per-agent protocol skill files and shared metaskills:
-  - `skills/codex_5.3/SKILL.md` — Codex protocol execution guide
+  - `skills/codex/SKILL.md` — Codex protocol execution guide
   - `skills/claude-opus_4.6/SKILL.md` — Claude protocol execution guide
   - `skills/skill-versioning/` — Shared metaskill for skill bundle version tracking (v3)
   - `skills/STRUCTURE.md` — Skill layout and ownership rules
@@ -70,7 +70,7 @@ If `working-session/TURNFILE.yaml` exists, skip to resumption read order.
 - **Turnfile (PRD-013):** YAML coordination artifact for tasks, locks, and signals. Revision-based leases, no wall-clock expiry. Section ownership model applies.
 - **Locking (PRD-010 + PRD-013):** Locks live under `TURNFILE.yaml` `locks`; expiry check is `(coordination.revision - acquired_rev) > lease_revs`. Default `lease_revs: 2`.
 - **Session closeout (PRD-014):** Use explicit checklist (mailbox clearance, worklog sync, turnfile sync, validation, boot rollover).
-- **Skill file (PRD-012):** Codex execution contract is `skills/codex_5.3/SKILL.md` (module map `M-01` through `M-08`).
+- **Skill file (PRD-012):** Codex execution contract is `skills/codex/SKILL.md` (module map `M-00` through `M-08`).
 - **Skill versioning:** Shared metaskill at `skills/skill-versioning/SKILL.md` governs manifest/changelog/hash discipline for skill bundles.
 
 ## Resumption read order (PRD-011 R3)

@@ -1,0 +1,63 @@
+bundle: turnfile-protocol-claude
+bundle_version: 4
+bundle_date: 2026-06-12
+description: >
+  Claude's protocol execution guide for the Turnfile protocol (a SNAP protocol).
+  Encodes mailbox lifecycle, payload-first review, lock-safe shared-file updates,
+  session bootstrap/start/close, Turnfile task/lock coordination, and OQ management
+  as operational instructions for Claude's environment. Bundle is role-keyed:
+  this manifest, not the directory path, records model compatibility.
+
+compatibility:
+  designed_for:
+    platform: Anthropic Claude
+    model: model-agnostic (Claude role; current generation at upgrade was Fable 5)
+    surface: Code
+  tested_on:
+    - platform: Anthropic Claude
+      model: Claude Opus 4.6
+      surface: Code
+      status: pass
+      date: 2026-02-11
+      notes: Full protocol execution across 12 sessions (inception pilot + feature/skills branch) on the v3 bundle.
+    - platform: Anthropic Claude
+      model: Claude Fable 5
+      surface: Code
+      status: pass
+      date: 2026-06-12
+      notes: >
+        Session 14 ran the complete protocol live on the unmodified v3 bundle
+        (boot, drift reconciliation, backlog triage, cross-review closure,
+        PRD promotion, concurrent-edit recovery) before this v4 upgrade —
+        model-generation portability evidence.
+  spec_version: agentskills.io/1.0
+  frontmatter_mode: minimal
+    # minimal = name + description only (max portability)
+    # Version info tracked here in manifest, not in SKILL.md frontmatter
+
+provenance:
+  superseded_path: skills/claude-opus_4.6/
+  superseded_bundle_version: 3
+  relocation_decision: Maintainer direction, session 14 (2026-06-12); WORKLOG decision index
+
+files:
+  - path: SKILL.md
+    role: skill
+    version: 4
+    hash: sha256:089cb9d4b2698c585bb58ef3e03029d82d2cdb75aa39a8c3d7ed5fb65dc2d51e
+    note: >
+      Claude protocol execution guide v0.4.0. 9 modules (M0-M8). Baseline
+      PRD-003..014 + PRD-016..019. Adds PRD-017 R7 chat-file rules, PRD-019
+      event-based cadence + chat-decision mirror duty, pending PRD-021 note.
+
+  - path: CHANGELOG.md
+    role: reference
+    version: 4
+    hash: sha256:10df8f8856c929fe4a37b206397412d163b332405d0352ad53a55d48f0ffa1d1
+    note: Bundle change history.
+
+  - path: MANIFEST.yaml
+    role: reference
+    version: 4
+    hash: null
+    note: Self-referential file; hash tracked externally when needed.

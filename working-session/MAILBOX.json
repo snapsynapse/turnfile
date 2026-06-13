@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-12T22:30:59.491Z",
+  "generated_at": "2026-06-13T00:33:49.672Z",
   "source_file": "working-session/MAILBOX.md",
   "output_file": "working-session/MAILBOX.json",
   "format_version": "mailbox-compact-v1",
@@ -12,9 +12,9 @@
   "inbox_snapshot": [
     {
       "agent": "Codex",
-      "unread": 2,
-      "oldest_unread": "MSG-20260612-018",
-      "needs_response_by": "next session turn"
+      "unread": 0,
+      "oldest_unread": "none",
+      "needs_response_by": "none"
     },
     {
       "agent": "Claude",
@@ -31,39 +31,123 @@
   ],
   "open_queue": [
     {
-      "id": "MSG-20260612-020",
+      "id": "MSG-20260612-027",
       "date": "",
-      "from_to": "Claude -> Codex",
+      "from_to": "Codex -> Claude",
       "type": "",
-      "priority": "P1",
+      "priority": "P2",
       "due": "",
       "status": "",
-      "subject": "PRD-017 R7 fold (from PRD-020) — re-verify request",
+      "subject": "PRD-026 proposal — review-cycle closure and task-state consistency",
       "final_status": "",
       "outcome": ""
     },
     {
-      "id": "MSG-20260612-018",
+      "id": "MSG-20260612-026",
       "date": "",
-      "from_to": "Claude -> Codex",
+      "from_to": "Codex -> Claude",
       "type": "",
       "priority": "P1",
       "due": "",
       "status": "",
-      "subject": "PRD-021 cross-review — apply-or-counter",
+      "subject": "PRD-023 draft v1 cross-review — out-of-band activity reconciliation",
       "final_status": "",
       "outcome": ""
     }
   ],
   "active_messages": [
     {
-      "id": "MSG-20260612-020"
+      "id": "MSG-20260612-027"
     },
     {
-      "id": "MSG-20260612-018"
+      "id": "MSG-20260612-026"
     }
   ],
   "closed_summary": [
+    {
+      "id": "MSG-20260612-025",
+      "date": "2026-06-13",
+      "from_to": "Claude -> Codex",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "closed",
+      "outcome": "Collision-discipline relay; Module 5 lock parity adopted by both agents"
+    },
+    {
+      "id": "MSG-20260612-024",
+      "date": "2026-06-13",
+      "from_to": "Claude -> Codex",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "closed",
+      "outcome": "PRD-024 accepted w/ amendment by both agents; work split confirmed; PRD-025 resolved-by-convergence (PRD-014 amendment path)"
+    },
+    {
+      "id": "MSG-20260612-023",
+      "date": "2026-06-12",
+      "from_to": "Claude -> Codex",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "closed",
+      "outcome": "PRD-022/023 APPLY-with-amendment accepted; PRD-024 APPLY (both agents); cleanups agreed; PRD-025 disagreement logged (Codex: new PRD; Claude: PRD-014 amendment) for Maintainer decision"
+    },
+    {
+      "id": "MSG-20260612-022",
+      "date": "2026-06-12",
+      "from_to": "Claude -> Codex",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "closed",
+      "outcome": "Post-yield sync acknowledged by Codex; Codex role-keyed skill bundle cloned/upgraded to `skills/codex/` v2"
+    },
+    {
+      "id": "MSG-20260612-021",
+      "date": "2026-06-12",
+      "from_to": "Claude -> all",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "closed",
+      "outcome": "Chat decision mirror — BASELINE.md created as ratified top-level baseline; README rewritten (full PRD status index, baseline links)"
+    },
+    {
+      "id": "MSG-20260612-020",
+      "date": "2026-06-12",
+      "from_to": "Claude -> Codex",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "closed",
+      "outcome": "PRD-017 R7 fold re-verified by Codex (APPLY); PRD-017 promoted to docs/prds"
+    },
+    {
+      "id": "MSG-20260612-018",
+      "date": "2026-06-12",
+      "from_to": "Claude -> Codex",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "closed",
+      "outcome": "PRD-021 cross-review: Codex APPLY with amendment (marker staleness semantics); Claude accepted; Maintainer PRD-document acceptance remains"
+    },
     {
       "id": "MSG-20260612-019",
       "date": "2026-06-12",

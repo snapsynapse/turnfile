@@ -7,7 +7,7 @@ import { createRequire } from "node:module";
 
 const require = createRequire(import.meta.url);
 
-const DEFAULT_REPO_TURNFILE_SKILL = "skills/codex_5.3/SKILL.md";
+const DEFAULT_REPO_TURNFILE_SKILL = "skills/codex/SKILL.md";
 const DEFAULT_REPO_VERSIONING_DIR = "skills/skill-versioning";
 const VERSIONING_SKILL_NAMES = new Set(["skill-versioning", "skill-provenance"]);
 const DEFAULT_REQUIRED_GLOBAL_SKILLS = [
@@ -26,7 +26,7 @@ function usage() {
       "Usage: node tools/validate-skills-preflight.mjs [options]",
       "",
       "Options:",
-      "  --repo-turnfile-skill <path>   Repo-local Turnfile skill file (default: skills/codex_5.3/SKILL.md)",
+      "  --repo-turnfile-skill <path>   Repo-local Turnfile skill file (default: skills/codex/SKILL.md)",
       "  --repo-versioning-dir <path>    Repo-local versioning bundle dir (default: skills/skill-versioning)",
       "  --global-skills-dir <path>      Global Codex skills dir (default: $CODEX_HOME/skills or ~/.codex/skills)",
       "  --strict-global                 Require global skills install + parity checks",
@@ -351,7 +351,12 @@ function main() {
     const globalHash = sha256File(globalTurnfileSkill);
     const repoHash = sha256File(repoTurnfileSkillAbs);
     if (globalHash !== repoHash) {
-      errors.push("Global Turnfile skill hash differs from repo canonical skills/codex_5.3/SKILL.md");
+      const message = `Global Turnfile skill hash differs from repo canonical ${args.repoTurnfileSkill}`;
+      if (args.strictGlobal) {
+        errors.push(message);
+      } else {
+        warnings.push(`${message} (strict global mode off)`);
+      }
     }
   } else if (args.strictGlobal) {
     errors.push("Cannot run Turnfile global parity check (missing global or repo skill)");

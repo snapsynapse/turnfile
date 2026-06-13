@@ -2,18 +2,13 @@
 
 Tracks open questions for the active local workspace.
 
-Last updated: 2026-06-12
+Last updated: 2026-06-13 (OQ-064 registered for PRD-026)
 
 ## Active Questions
 
-*No active questions. All OQ-051 through OQ-061 resolved as of session 14 (2026-06-12).*
-
 | ID | Source PRDs | Question | Status | Resolution |
 |----|-------------|----------|--------|------------|
-| OQ-058 | PRD-021 | What should the rebuttal loop bound count, where is it configured, and how does the unbounded mode terminate? | resolved | Fixed round counts; `rebuttal_rounds` in `TURNFILE.yaml` (charter may override); min `1`, max `"unbounded"`; unbounded terminates on `NO-NEW-OBJECTION` convergence signal or Maintainer circuit-breaker. (Maintainer, 2026-06-01) |
-| OQ-059 | PRD-021 | When a finite rebuttal bound is exhausted without agreement, does the existing escalation ladder still fire? | resolved | Skip Level 3; escalate directly to Level 4 Maintainer adjudication. Level 3 available only by explicit Maintainer instruction. (Maintainer, 2026-06-01) |
-| OQ-060 | PRD-021 | How is the selective-unlock gradient structured, what does it drive, and who assigns it? | resolved | Binary `gated` / `unlockable` flag extending the PRD-018 matrix; governs Maintainer-gate unlock eligibility only; proposing agent self-tags, Maintainer ratifies. (Maintainer, 2026-06-01) |
-| OQ-061 | PRD-021 | Should Turnfile adopt an enumerate-only review lane (reviewer lists issues, does not propose the fix)? | resolved | No. Peer counter-recommendation stays as-is; peers are equals and proposing an alternative is intended. (Maintainer, 2026-06-01) |
+| OQ-064 | PRD-026 | Should review-cycle closure consistency be a standalone PRD-026 or an amendment to PRD-003, PRD-006, PRD-013, or PRD-019? | open | pending Claude cross-review and Maintainer decision |
 
 ## Deferred Questions
 
@@ -36,3 +31,5 @@ Canonical deferred items remain tracked in `/Users/snap/Git/turnfile/docs/OPEN_Q
 | OQ-059 | PRD-021 | When a finite rebuttal bound is exhausted without agreement, does the existing escalation ladder still fire? | resolved | Skip Level 3; escalate directly to Level 4 Maintainer adjudication. (Maintainer, 2026-06-01) |
 | OQ-060 | PRD-021 | How is the selective-unlock gradient structured, what does it drive, and who assigns it? | resolved | Binary `gated` / `unlockable` flag extending PRD-018 matrix; unlock eligibility only; agent self-tags, Maintainer ratifies. (Maintainer, 2026-06-01) |
 | OQ-061 | PRD-021 | Should Turnfile adopt an enumerate-only review lane? | resolved | No. Peer counter-recommendation stays as-is. (Maintainer, 2026-06-01) |
+| OQ-062 | PRD-024 | Should the dense-permitted scratchpad body require per-session charter opt-in? | resolved | Per-session opt-in required; default remains legible. (Codex amendment, MSG-20260612-024) |
+| OQ-063 | PRD-024 | Should tokenese be a PRD-024 amendment or its own PRD? | resolved | Own PRD referencing PRD-024 unless profile assignments, projection rights, or validation obligations change. (Codex amendment, MSG-20260612-024) |

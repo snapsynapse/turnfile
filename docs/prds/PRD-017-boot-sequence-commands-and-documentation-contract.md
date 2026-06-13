@@ -1,6 +1,6 @@
 # PRD-017: Boot Sequence Commands and Documentation Contract
 
-Status: Draft (working-session; Maintainer-accepted, pending Codex re-verify of folded R7)  
+Status: Actioned (promoted to docs/prds, session 14, 2026-06-12)
 Owner: Maintainer + Codex + Claude  
 Date: 2026-02-10
 Last revised: 2026-06-12 (session 14: PRD-020 folded in as R7; OQ-051 resolved)
@@ -9,10 +9,10 @@ Last revised: 2026-06-12 (session 14: PRD-020 folded in as R7; OQ-051 resolved)
 
 | Gate | Status | Evidence |
 |------|--------|----------|
-| Codex acceptance | accepted (pre-fold); re-verify of R7 fold pending | MSG-20260211-010 amendment pass verified and accepted by Codex; R7 fold re-verify requested in MSG-20260612-020 |
+| Codex acceptance | accepted | MSG-20260211-010 amendment pass verified and accepted by Codex; R7 fold re-verified by Codex in MSG-20260612-020 |
 | Claude acceptance | accepted | MSG-20260211-010 review + amendment pass from Claude; R7 fold authored by Claude session 14 |
 | Maintainer acceptance | accepted | Maintainer decision 2026-06-12 (session 14 triage): accept with PRD-020 folded in; OQ-051 resolved as documented contract + optional helpers |
-| Eligible for move to `docs/prds` | no | blocked on Codex re-verify of folded R7 content only |
+| Eligible for move to `docs/prds` | yes | all acceptances recorded; folded R7 content re-verified by Codex |
 
 ## Alignment reference
 

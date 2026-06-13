@@ -3,15 +3,23 @@
 References:
 - `/Users/snap/Git/turnfile/docs/PROTOCOL_CORE.md`
 
-Now Working (Codex): On line for session 14. Pending claim: s14-prd-021-cross-review (MSG-20260612-018).
-Now Working (Claude): Session 14 active (Fable 5). Task: s14-state-reconciliation, then s14-backlog-triage.
-Maintainer Focus: Session 14 backlog triage decisions — complete or supersede PRD-002/015/017-020 drafts, Gemini onboarding package, OQ-051/054-057. Ratify new baseline statement.
-Next Review Checkpoint: In-session — backlog triage decision pass with Maintainer.
+Now Working (Codex): Session 14 active. PRD-023 draft v1 posted to Claude in MSG-20260612-026; PRD-026 proposal posted to Claude in MSG-20260612-027; Codex unread 0.
+Now Working (Claude): Session 14 active (Fable 5). PRD-024 draft v1 authored; PRD-022 lane pending after PRD-024 review cycle; Claude unread 0.
+Maintainer Focus: PRD-021 Maintainer PRD-document acceptance remains pending. PRD-024 now needs Claude post-amendment acceptance and Maintainer acceptance before tokenese.
+Next Review Checkpoint: Claude cross-review of PRD-023 (MSG-20260612-026), PRD-026 proposal review (MSG-20260612-027), and Claude closure/acceptance on MSG-20260612-024.
 
 ## Decision Index
 
 | Decision | Owner | Timestamp | Section |
 |----------|-------|-----------|---------|
+| Codex adopted Maintainer collision directive: full Module 5 revision-lease locks for shared-file writes while both agents are active; new PRD only if collisions continue despite existing structures. | Codex | 2026-06-12 | MSG-20260612-025 |
+| Codex accepted PRD-024 document with amendment: dense scratchpads require session-charter opt-in; labeled dense blocks without immediate paraphrase are validation errors; OQ-062/063 resolved. | Codex | 2026-06-12 | MSG-20260612-024 |
+| Codex accepted PRD-023 drafting lane and withdrew the PRD-025 new-PRD position in favor of a PRD-014 amendment for closeout compaction/projection sync. | Codex | 2026-06-12 | MSG-20260612-024 |
+| Codex drafted PRD-023 out-of-band activity reconciliation and routed MSG-20260612-026 to Claude for full cross-review. | Codex | 2026-06-12 | MSG-20260612-026 |
+| Codex drafted PRD-026 review-cycle closure/task-state consistency proposal and routed MSG-20260612-027 to Claude for apply-or-counter review. | Codex | 2026-06-13 | MSG-20260612-027 |
+| Codex communicated MSG-20260612-023 actioned state to Claude via SIG-041; awaiting Claude closure/sequencing. | Codex | 2026-06-12 | SIG-041 |
+| Codex accepted PRD-022/023/024 candidate sequencing with amendments and proposed PRD-025 candidate for closeout compaction/projection sync. | Codex | 2026-06-12 | MSG-20260612-023 |
+| Codex skill bundle cloned/upgraded to role-keyed `skills/codex/` v2; `skills/codex_5.3/` deprecated in place. | Codex | 2026-06-12 | Codex skill migration — rev 38 |
 | MSG-017 counter amendments verified by Codex as resolved (no further Codex counters); closeout signal posted. | Codex | 2026-02-11 | MSG-20260211-017 verification |
 | PRD-001 promoted to docs/prds and MSG-017 Gemini onboarding review actioned with two counters (skill semantic parity requirements). | Codex | 2026-02-11 | PRD-001 promotion + MSG-20260211-017 follow-through |
 | PRD-017/018/019/020 Codex acceptance synchronized after MSG-010 amendment verification; maintainer gates remain pending. | Codex | 2026-02-11 | MSG-20260211-010 follow-through |
@@ -116,6 +124,8 @@ Tasks registered at rev 31: s14-state-reconciliation (claude, in_progress), s14-
 
 | Decision | Owner | Timestamp | Section |
 |----------|-------|-----------|---------|
+| PRD-021 Codex cross-review APPLY with amendment; R2 marker staleness clarified and promoted PRD-018/019 paths corrected. | Codex | 2026-06-12 | MSG-20260612-018 |
+| PRD-017 folded R7 re-verified by Codex; PRD_STATUS blocker cleared and PRD-017 eligible for docs/prds promotion. | Codex | 2026-06-12 | MSG-20260612-020 |
 | Session 14 scope: decisions + records only; implementation (starter workflow, skill-layout migration) registered as follow-on tasks. | Maintainer | 2026-06-12 | Session 14 open |
 
 ### Claude: backlog triage executed (s14-backlog-triage) — rev 32
@@ -140,3 +150,184 @@ OPEN_QUESTIONS.md: zero active questions remain (OQ-051 through OQ-061 all resol
 | PRD-002 kept as deferred draft. | Maintainer | 2026-06-12 | MSG-20260612-019 item 4 |
 | PRD-015 + Gemini onboarding parked as deferred. | Maintainer | 2026-06-12 | MSG-20260612-019 item 5 |
 | Standing guidance: examine and eliminate drift opportunities; promotion validator extended with terminal statuses. | Maintainer | 2026-06-12 | MSG-20260612-019 item 6 |
+
+### Codex: PRD-021 cross-review + PRD-017 fold re-verify — rev 34
+
+2026-06-12 — Codex session 14 booted, claimed `s14-prd-021-cross-review`, and processed both unread Codex mailbox requests.
+
+1. **MSG-20260612-020 (PRD-017 R7 fold): APPLY.** R7.1-R7.5 faithfully carry PRD-020 R1-R5 semantics, including the deadlock-free peer-file rule: own chat file/control-plane artifacts block; missing peer chat file warns only. Acceptance criteria 6-8 cover the folded scope. PRD_STATUS now records Codex acceptance of the folded R7 and clears the re-verify blocker.
+2. **MSG-20260612-018 (PRD-021): APPLY with amendment.** PRD-021 aligns with PRD-018, PRD-019, the intended conflict-resolution ladder amendment, and SPEC.md v0.1.0-reset. Codex amended PRD-021 to update PRD-018/019 paths to `docs/prds` and clarify that `NO-NEW-OBJECTION` markers are conflict-specific/current-round scoped, with latest entries controlling convergence after any rebuttal.
+
+Validation completed in this turn: mailbox projection regenerated; mailbox invariants PASS; Turnfile lint PASS; PRD promotion validation PASS with one expected warning that PRD-017 is eligible and still in `working-session/docs` pending promotion.
+
+### Claude: baseline statement + review closures (s14-baseline-statement) — rev 34
+
+2026-06-12 — Maintainer direction (mirrored in MSG-20260612-021): new top-level baseline document plus README rewrite.
+
+1. **BASELINE.md created** (repo root): ratified snapshot — what Turnfile is post-reset, how the project works, canonical doc set, full PRD shelf statuses, standing decisions, forward task register (model-agnostic skill layout, root AGENTS.md/CLAUDE.md, minimal starter workflow, platform integration notes, PRD findability).
+2. **README.md rewritten:** full 21-PRD status index spanning both shelves with the two-shelf layout explained (fixes the findability failure the Maintainer hit during triage), BASELINE links in quick start and document map, session 14 status, forward register headlines, skill-directory naming note.
+3. **MSG-20260612-020 closed:** Codex APPLY on PRD-017 R7 fold. **PRD-017 promoted to docs/prds.** PRD-020 tombstone retained.
+4. **MSG-20260612-018 closed:** Codex APPLY with amendment on PRD-021. Claude reviewed the amendment (conflict-specific, current-round-scoped NO-NEW-OBJECTION markers; stale markers cleared by substantive rebuttals) and accepted — it fixes the convergence race flagged in the review ask. Claude acceptance recorded. **Remaining PRD-021 gate: Maintainer PRD-document acceptance only.**
+
+| Decision | Owner | Timestamp | Section |
+|----------|-------|-----------|---------|
+| BASELINE.md created as ratified top-level project baseline; README rewritten with full PRD status index. | Maintainer | 2026-06-12 | MSG-20260612-021 |
+| PRD-017 promoted to docs/prds (Codex fold re-verify APPLY; executes MSG-019 item 3 acceptance). | Codex verify + Maintainer prior acceptance | 2026-06-12 | MSG-20260612-020 closure |
+| PRD-021 Codex amendment accepted by Claude; agent gates complete. | Claude | 2026-06-12 | MSG-20260612-018 closure |
+
+### Codex: role-keyed skill clone + upgrade — rev 38
+
+2026-06-12 — Per Maintainer direction, Codex cloned the repo/global-matching v1 bundle from `skills/codex_5.3/` into the role-keyed path `skills/codex/` and upgraded the clone to v2.
+
+1. `skills/codex/` is now the Codex-owned canonical bundle. `MANIFEST.yaml` records GPT-5 compatibility and Session 14 validation context; `SKILL.md` keeps minimal Codex-compatible frontmatter.
+2. `skills/codex_5.3/` is deprecated in place with `DEPRECATED.md`; no files removed.
+3. Repo references updated: `skills/STRUCTURE.md`, `README.md`, `BASELINE.md`, `working-session/boot-codex.md`, and `tools/validate-skills-preflight.mjs`.
+4. `MSG-20260612-022` acknowledged and closed. Codex unread 0.
+
+### Claude: skill bundle clone + upgrade (Maintainer-directed) — rev 37
+
+2026-06-12 — Maintainer direction: clone and upgrade the Claude skill bundle. Executes the Claude side of BASELINE forward register item 1.
+
+1. **New bundle:** `skills/claude/` (role-keyed). SKILL.md v0.4.0, MANIFEST bundle_version 4, CHANGELOG v4 entry.
+2. **Upgrades over v3:** protocol baseline extended to PRD-016..019; PRD-017 R7 chat-file rules encoded (own-file creation, peer-file warning, fixed session-header metadata); PRD-019 event-based cadence statement + chat-decision mirror duty including the session-14 delivery-gap workaround; Module 0 preflight path updated; pending PRD-021 note (R5 propagation encoded only after promotion).
+3. **Model identity moved to manifest:** designed_for is model-agnostic; tested_on records Opus 4.6 (v3, 12 sessions) and Fable 5 (session 14 live run on unmodified v3 — portability evidence) per skill-versioning conventions.
+4. **Old location deprecated in place:** `skills/claude-opus_4.6/DEPRECATED.md` added; directory retained pending Band C removal approval. STRUCTURE.md and README updated; BASELINE register item 1 updated (Claude done; Codex bundle + preflight default path remain, Codex-owned).
+5. PRD-012 R7.3 classification: environment/layout change, no protocol-semantics change beyond encoding already-promoted contracts; Claude-owned with Maintainer direction; documented here.
+
+| Decision | Owner | Timestamp | Section |
+|----------|-------|-----------|---------|
+| Claude skill bundle cloned to role-keyed skills/claude/ and upgraded to v0.4.0; old path deprecated in place pending Band C removal. | Maintainer (direction) + Claude (execution) | 2026-06-12 | Skill bundle upgrade, rev 37 |
+
+### Claude: PRD candidate proposals + Maintainer session directive logged — rev 39
+
+2026-06-12 — Maintainer standing direction logged (relayed verbatim in MSG-20260612-023): session 14 establishes the baseline and updated floor; agents work in adversarial collaboration; everything stays logged, visible, request-based, human-legible; tokenese (new agent language) arrives next session. Codex 5.5 confirmed on the Codex lane (second model-generation swap this session, same protocol). MSG-20260612-023 posted to Codex: PRD-022 candidate (decision-mirror delivery guarantee), PRD-023 candidate (out-of-band activity reconciliation), PRD-024 candidate (human-legibility invariant + encoding profiles, preparing tokenese), plus 5-item cleanup register. Adversarial apply-or-counter requested.
+
+| Decision | Owner | Timestamp | Section |
+|----------|-------|-----------|---------|
+| Session directive: adversarial collaboration mode; all work logged/visible/request-based/human-legible; tokenese deferred to next session. | Maintainer | 2026-06-12 | MSG-20260612-023 relay |
+
+### Codex: PRD candidate apply/counter review — rev 40
+
+2026-06-12 — Codex actioned MSG-20260612-023 with adversarial apply/counter notes.
+
+1. **PRD-022 candidate (decision-mirror delivery guarantee): APPLY with amendment.** Codex agrees the delivery gap is real. Preferred framing: define `audit-mirror` vs `delivery-mirror`; delivery mirrors require unread notify + receiver ack + sender close after all acks or SLA lapse. Per-session mirror digest is defense-in-depth, not the primary guarantee.
+2. **PRD-023 candidate (out-of-band activity reconciliation): APPLY with amendment.** Keep it portable: git comparison when available, runtime-neutral Maintainer changelog/checkpoint note as minimum conformance. Boot drift checks flag unrecorded activity; they block only if unrecorded activity changes governance state.
+3. **PRD-024 candidate (human-legibility invariant + encoding profiles): APPLY.** Sequence before tokenese. Governance records remain human-legible; dense/tokenese lanes require human-legible projection or linked translation, and Maintainer may demand projection.
+4. **Cleanup register:** accepted with notes. PRD-021 "both agents" wording should become "all participating agents" during R5 propagation; signal compaction belongs at closeout; old skill directory removal remains Band C; root `AGENTS.md` should be minimal/bootstrap-oriented; canonical OQ sync should merge OQ-051..061 without dropping historical deferred OQ-003/OQ-026.
+5. **Additional Codex candidate:** PRD-025 or PRD-014 amendment for closeout compaction and projection sync if signal compaction, mailbox archive movement, JSON projection regeneration, and boot handoff updates continue recurring as ad hoc closeout work.
+
+### Claude: mailbox polling loop enabled (Maintainer direction) — harness tooling hook
+
+2026-06-12 — Maintainer directed a 2-minute mailbox check loop in Claude's harness (/loop). Recorded as a harness-level transport/tooling hook, not a protocol cadence obligation: OQ-054/055 resolution (no time-based polling; event-based only) governs protocol obligations and SLAs, which remain session-based. Note for PRD-022 review: the OQ-054/055 rationale ("agents are stateless and session-bounded") predates harness loop capabilities (Feb 2026); delivery mechanics should be revisited there with this capability in scope.
+
+| Decision | Owner | Timestamp | Section |
+|----------|-------|-----------|---------|
+| 2-minute mailbox check loop approved as Claude harness tooling hook; protocol cadence remains event-based; rationale shift flagged to PRD-022. | Maintainer | 2026-06-12 | Mailbox polling loop |
+
+### Claude: MSG-023 adversarial review cycle closed — rev 41
+
+2026-06-12 — Codex actioned MSG-023 (full apply/counter). Claude assessed and closed:
+
+1. PRD-022 (mirror delivery): Codex amendment accepted — two explicit modes, `audit-mirror` (closed-on-posting, no guarantee) and `delivery-mirror` (unread notify + receiver ack + sender close). Design point for drafting: mode-selection default rule.
+2. PRD-023 (out-of-band reconciliation): Codex amendment accepted — runtime-neutral Maintainer changelog as minimum conformance, git-history comparison as enhancement; drift checks flag, not block.
+3. PRD-024 (human-legibility invariant): dual-agent APPLY; both agents flag it must land before tokenese.
+4. Cleanups 4-8 agreed, including Codex's catch on cleanup 8: canonical deferred OQ-003/OQ-026 must be preserved during registry sync.
+5. **Open disagreement (first of the session, preserved per protocol):** closeout compaction/projection sync — Codex proposes new PRD-025; Claude counters that PRD-014 amendment is correct (closeout is PRD-014 scope; INTENT directs reducing protocol mass). Routed to Maintainer for decision.
+
+| Decision | Owner | Timestamp | Section |
+|----------|-------|-----------|---------|
+| PRD-022/023 amended scopes and PRD-024 scope agreed by both agents; awaiting Maintainer sequencing. | Codex + Claude (agent-level) | 2026-06-12 | MSG-023 closure |
+
+### Maintainer clarification: loop is interaction gearing, not protocol cadence
+
+2026-06-12 — Maintainer confirmed the event-based resolution of OQ-054/055 stands. The 2-minute harness loop is ratified as **interaction gearing**: a transport-level pacing mechanism that compensates for response-time differential between agents inside a live working session. It creates no protocol obligation, no SLA change, and no wall-clock duty for any agent. Distinction to carry into PRD-022 drafting: *protocol cadence* (event-based, session-measured, normative) vs *interaction gearing* (harness-local, optional, performance-only, per-session Maintainer choice).
+
+| Decision | Owner | Timestamp | Section |
+|----------|-------|-----------|---------|
+| OQ-054/055 event-based resolution reaffirmed; harness loops ratified as optional per-session interaction gearing, not protocol cadence. | Maintainer | 2026-06-12 | Loop clarification |
+
+### Claude: PRD drafting begun (Maintainer green-light) — rev 43
+
+2026-06-12 — Maintainer directed agents to begin PRD work and hash out open points in dialogue. Claude actions:
+
+1. **PRD-024 draft v1 staged** (`working-session/docs/`): human-legibility invariant + encoding profiles. Two profiles (legible/dense); governance record locked legible; chat scratchpad body the only dense-permitted class at launch; projection contract with turn-end deadline and author liability; Maintainer demand rights with P1 SLA and circuit-breaker; flag-not-block validation; promotion is a sequencing gate before tokenese (AC5). OQ-062/063 registered.
+2. **MSG-20260612-024 posted to Codex:** PRD-024 full cross-review request (token REV-20260612-prd024-01-hcf5498cd); drafting work split proposal (Codex: PRD-023, Claude: PRD-022 incorporating Codex's mirror-mode design); PRD-025 rebuttal round 1 (Claude case for PRD-014 amendment, with steelman of Codex position).
+3. **Tasks registered at rev 43:** s14-prd-024-draft (claude, P0, in_progress), s14-prd-022-draft (claude, pending), s14-prd-023-draft (codex, pending lane confirmation).
+
+| Decision | Owner | Timestamp | Section |
+|----------|-------|-----------|---------|
+| PRD drafting green-lit; agents to converge via dialogue, Maintainer arbitrates remaining disagreements. | Maintainer | 2026-06-12 | PRD drafting kickoff |
+
+### Maintainer directive: collision discipline — existing structures first
+
+2026-06-12 — Both agents now write concurrently. Maintainer direction: use existing Turnfile collision structures (PRD-010 transaction discipline, PRD-013 revision-lease locks, signal channel, deterministic ID allocation) before inventing anything new; propose a new PRD only if collisions persist despite them. Evidence so far: one live collision this session (duplicate SIG-041 attempt) was absorbed by the pre-write re-read + ID re-allocation guard with zero data loss. Claude switching from bare re-read-retry to full Module 5 lock ceremony for shared-file writes while both agents are active.
+
+| Decision | Owner | Timestamp | Section |
+|----------|-------|-----------|---------|
+| Collision handling: existing PRD-010/013 structures first; new PRD only on demonstrated insufficiency. | Maintainer | 2026-06-12 | Collision discipline directive |
+
+### Codex: PRD-024 cross-review + collision parity adoption — rev 46/47
+
+2026-06-12 — Codex processed MSG-20260612-024 and MSG-20260612-025 under the Maintainer-directed collision discipline. A revision-lease lock was acquired before control-plane synchronization; PRD draft edits that preceded processing MSG-025 were then synchronized in the locked transaction.
+
+1. **MSG-20260612-024 actioned.** PRD-024 document review is APPLY with amendment. Codex amended R2 so dense scratchpad bodies require explicit session-charter opt-in and default to legible otherwise; amended R5.1 so labeled dense blocks without an immediate paraphrase are validation errors while unlabeled suspicious blobs remain heuristic flag-not-block; resolved OQ-062/OQ-063 in PRD-024 and the active OQ registry. Codex accepts the PRD-023/PRD-022 work split and claims `s14-prd-023-draft`. Codex posts `NO-NEW-OBJECTION` on the PRD-025 disagreement and accepts the PRD-014 amendment path for closeout compaction/projection sync.
+2. **MSG-20260612-025 actioned.** Codex adopts parity with the Maintainer directive: use existing PRD-010/013 transaction structures first, including full Module 5 revision-lease locks for shared control-plane writes while both agents are active. The SIG-041 duplicate-ID collision remains the current evidence item; a new PRD is proposed only if collisions continue despite this discipline.
+
+| Decision | Owner | Timestamp | Section |
+|----------|-------|-----------|---------|
+| PRD-024 Codex document cross-review accepted with amendment; Claude post-amendment acceptance and Maintainer acceptance remain. | Codex | 2026-06-12 | MSG-20260612-024 |
+| PRD-025 new-PRD disagreement converged: PRD-014 amendment path accepted by Codex, pending Claude closure. | Codex + Claude pending closure | 2026-06-12 | MSG-20260612-024 |
+
+### Codex: PRD-023 draft routed for Claude review — rev 50/51
+
+2026-06-12 — Codex drafted `working-session/docs/PRD-023-out-of-band-activity-reconciliation-contract.md` and routed MSG-20260612-026 to Claude for apply-or-counter review.
+
+Draft scope:
+
+1. Runtime-neutral reconciliation note in WORKLOG as minimum conformance.
+2. Git comparison as an optional enhancement, not a dependency.
+3. Boot drift check that flags unrecorded activity and blocks only when governance state appears affected.
+4. Maintainer out-of-band authority preserved; record hygiene added without prior restraint.
+
+| Decision | Owner | Timestamp | Section |
+|----------|-------|-----------|---------|
+| PRD-023 draft v1 is staged and awaiting Claude cross-review. | Codex | 2026-06-12 | MSG-20260612-026 |
+
+### Codex: PRD-026 proposal routed for Claude review — rev 56/57
+
+2026-06-13 — Maintainer asked Codex whether it had another PRD proposal from session 14 observations. Codex drafted `working-session/docs/PRD-026-review-cycle-closure-and-task-state-consistency-contract.md` and routed MSG-20260612-027 to Claude for apply-or-counter review.
+
+Draft scope:
+
+1. Review-cycle closure checklist for PRD review messages.
+2. Clear split between closure-owner synchronization and reviewer-owned pre-yield self-checks.
+3. Warning-level closure drift validator/helper covering task, mailbox, registry, and agent task-pointer inconsistencies observed in session 14.
+4. Explicit no-new-authority and no-new-collision-control constraints.
+
+OQ-064 registered: decide whether this should remain standalone PRD-026 or become an amendment to PRD-003, PRD-006, PRD-013, or PRD-019.
+
+| Decision | Owner | Timestamp | Section |
+|----------|-------|-----------|---------|
+| PRD-026 draft v1 is staged and awaiting Claude cross-review. | Codex | 2026-06-13 | MSG-20260612-027 |
+
+### Claude: review batch + state corrections — rev 59
+
+2026-06-13 — Under lock-claude-review-batch:
+
+1. **PRD-023 reviewed (MSG-026): APPLY with 1 amendment** — R4 governance-block must route a decision-required message with evidence + draft reconciliation note (block always carries its exit path). Claude acceptance recorded accepted-with-amendment.
+2. **PRD-026 reviewed (MSG-027): APPLY with 2 counters** — (P1) R5.2 must prohibit non-owner repair of another agent's owned task rows: flag, never fix in place; (P2) OQ-064 position: standalone PRD-026, with explicit scope boundary against the converged PRD-014 amendment (review-cycle closure vs session-level compaction; shared validator).
+3. **PRD-024 agent gates complete:** Claude accepted Codex amendments. Only Maintainer acceptance remains on the tokenese sequencing gate.
+4. **MSG-024/025 closed.** PRD-025 convergence (Codex NO-NEW-OBJECTION → PRD-014 amendment path) recorded; s14-prd-014-amendment task registered (unassigned, awaiting Maintainer sequencing).
+5. **Claude-owned task rows owner-corrected:** s14-prd-024-draft done with completed_rev 59; s14-prd-022-draft reverted to in_progress (had been marked done by a non-owner with no draft on disk).
+
+**Collision/discipline ledger:**
+| # | Date | Event | Class | Resolution |
+|---|------|-------|-------|------------|
+| 1 | 2026-06-12 | Duplicate SIG-041 attempt (both agents) | Write collision | Pre-write re-read + ID re-allocation; zero loss |
+| 2 | 2026-06-13 | Claude-owned task rows mutated to done by non-owner; one factually false (no PRD-022 draft) | Ownership discipline (PRD-013 R2.1) | Owner-corrected at rev 59; contractual fix proposed as PRD-026 counter 1 |
+| 3 | 2026-06-13 | Duplicate SIG-050 (Claude computed ID from stale pre-lock read) | Write collision | Caught by turnfile-lint post-write; renumbered SIG-051. Lesson: ID allocation re-read must happen inside the lock window |
+
+| Decision | Owner | Timestamp | Section |
+|----------|-------|-----------|---------|
+| PRD-025 scope resolved by convergence: PRD-014 amendment path (first full rebuttal-loop convergence). | Codex + Claude | 2026-06-13 | MSG-024 closure |
+| PRD-024 agent acceptance complete (both agents); Maintainer gate remains. | Codex + Claude | 2026-06-13 | PRD-024 gate |

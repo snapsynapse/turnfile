@@ -3,15 +3,15 @@
 Status: Draft (working-session; not yet actioned)  
 Owner: Maintainer + Codex + Claude  
 Date: 2026-06-01  
-Last revised: 2026-06-01 (session 14 draft by Claude)
+Last revised: 2026-06-12 (Codex cross-review amendment)
 
 ## Promotion Gate Snapshot (PRD-006 R2a)
 
 | Gate | Status | Evidence |
 |------|--------|----------|
-| Codex acceptance | pending | — |
-| Claude acceptance | pending | — |
-| Maintainer acceptance | pending | design decisions logged (OQ-058–061, 2026-06-01); PRD-document acceptance still requires agent cross-review |
+| Codex acceptance | accepted with amendment | MSG-20260612-018: Codex APPLY with amendment (promoted PRD-018/019 paths; made `NO-NEW-OBJECTION` marker scope/latest-entry semantics explicit) |
+| Claude acceptance | accepted | MSG-20260612-018 closure: Codex amendment reviewed and accepted; marker staleness rule verified against the convergence race flagged in the review ask |
+| Maintainer acceptance | accepted | design decisions logged (OQ-058–061, 2026-06-01); PRD-document acceptance still requires agent cross-review |
 | Eligible for move to `docs/prds` | no | blocked until all acceptances + zero blockers in PRD_STATUS.json |
 
 ## Input Provenance Tags
@@ -28,8 +28,8 @@ This PRD aligns with:
 
 1. `docs/CONFLICT_RESOLUTION.md`
 2. `docs/prds/PRD-004-maintainer-decision-contract.md`
-3. `working-session/docs/PRD-018-maintainer-approval-authority-matrix-contract.md`
-4. `working-session/docs/PRD-019-mailbox-first-approval-and-polling-cadence-contract.md`
+3. `docs/prds/PRD-018-maintainer-approval-authority-matrix-contract.md`
+4. `docs/prds/PRD-019-mailbox-first-approval-and-polling-cadence-contract.md`
 5. `docs/HUMAN_GOVERNANCE.md`
 
 ## Problem
@@ -82,7 +82,7 @@ When `rebuttal_rounds` is `"unbounded"`, the loop must still have a deterministi
 1. **Convergence signal.** Both agents post a `NO-NEW-OBJECTION` marker for the conflict in the same WORKLOG cycle. This signals that neither agent has a new substantive edit to add. The conflict is then recorded as resolved-by-convergence.
 2. **Maintainer circuit-breaker.** The Maintainer may stop any active loop at any time via a turn- or time-boxed break recorded in the WORKLOG, regardless of the configured bound. This is the same circuit-breaker role described in `docs/HUMAN_GOVERNANCE.md`.
 
-A `NO-NEW-OBJECTION` marker posted by only one agent does not terminate the loop; the other agent may still post a rebuttal, which clears the marker.
+A `NO-NEW-OBJECTION` marker posted by only one agent does not terminate the loop; the other agent may still post a rebuttal, which clears the marker. Markers are conflict-specific and current-round scoped: after any substantive rebuttal for that conflict, prior markers are stale, and convergence requires both agents' latest entries for that conflict in the same WORKLOG cycle to be `NO-NEW-OBJECTION`.
 
 ## R3. Escalation on bound exhaustion
 
@@ -119,7 +119,7 @@ On acceptance, the following are updated:
 
 1. `docs/CONFLICT_RESOLUTION.md`: Level 2 references `rebuttal_rounds`; the ladder notes bound-exhaustion routing to Level 4 (R3); `NO-NEW-OBJECTION` convergence marker is documented.
 2. `TURNFILE.yaml`: `coordination.conflict.rebuttal_rounds` key added (R1.1).
-3. `working-session/docs/PRD-018-...`: matrix annotated with the `gated` / `unlockable` flag column (R4).
+3. `docs/prds/PRD-018-...`: matrix annotated with the `gated` / `unlockable` flag column (R4).
 4. Boot files (`boot-claude.md`, `boot-codex.md`, `boot-gemini.md`) reference the configurable bound and the gradient flag as authoritative.
 
 ## Acceptance criteria
