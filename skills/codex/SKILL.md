@@ -9,9 +9,9 @@ Run modules only on explicit maintainer instruction.
 
 ## Version Context
 
-Bundle version: 2
-Version date: 2026-06-12
-Change summary: Updated for the Session 14 baseline, promoted PRD shelf state, closed-on-posting mirror behavior, and role-keyed skill layout migration while preserving Codex-compatible minimal frontmatter.
+Bundle version: 3
+Version date: 2026-06-13
+Change summary: Propagated PRD-024 encoding-profile obligations: legible governance records, session-charter opt-in for dense lanes, turn-boundary projection duty, projection authorship, and Maintainer projection/suspension rights.
 
 ## Execution Contract
 
@@ -46,6 +46,16 @@ Change summary: Updated for the Session 14 baseline, promoted PRD shelf state, c
 3. Decision mirrors may be closed on posting when they are audit records rather than requests. Do not assume closed mirrors produce unread delivery; if a later sync digest calls one out, acknowledge the digest.
 4. Coordination is asynchronous and event-based only. No time-based polling layer is currently adopted.
 5. Skill directories are role-keyed. Model identity belongs in `MANIFEST.yaml`, not the path.
+
+## Encoding Profile Obligations (PRD-024, Maintainer-Accepted 2026-06-13)
+
+1. The governance record is legible only: `TURNFILE.yaml`, `MAILBOX.md`, `MAILBOX.json`, mailbox archives, `WORKLOG.md`, worklog archives, `OPEN_QUESTIONS.md`, PRDs, `PRD_STATUS.json`, boot files, skill bundles, templates, schemas, root strategy docs, and chat session headers/snapshots.
+2. Dense or Tokenese content may appear in governance artifacts only as short fenced fragments labeled `dense`, followed immediately by a human-legible paraphrase.
+3. Dense lanes require explicit session-charter opt-in. Without that opt-in, scratchpad bodies and agent exchanges remain legible.
+4. Before declaring a turn complete, project any protocol-relevant dense content into the appropriate legible governance artifact when it contains, contributes to, or evidences a proposal, review verdict, counter, objection, decision input, task claim, lock action, or acceptance.
+5. Projection is authorship. Codex is responsible for accurate projections of dense content it produced; misrepresentation is treated like a false WORKLOG entry. Dense originals are never authoritative.
+6. If a dense original and its legible projection conflict, escalate to the Maintainer. The projection governs in the interim.
+7. Honor Maintainer projection demands at P1 SLA and session-wide dense suspension immediately. Peer projection requests are refusable only with a concrete, escalatable reason.
 
 ## State Freshness Hooks
 

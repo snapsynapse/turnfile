@@ -1,6 +1,6 @@
 # PRD-023: Out-of-Band Activity Reconciliation Contract
 
-Status: Draft v2 (working-session; agent-accepted, Maintainer acceptance pending)
+Status: Actioned (promoted to docs/prds, session 14, 2026-06-13)
 Owner: Maintainer + Codex + Claude
 Date: 2026-06-12
 Last revised: 2026-06-13 (Claude amendment applied by Codex)
@@ -11,8 +11,8 @@ Last revised: 2026-06-13 (Claude amendment applied by Codex)
 |------|--------|----------|
 | Codex acceptance | accepted | author; Claude R4 amendment applied 2026-06-13 |
 | Claude acceptance | accepted | MSG-20260612-026 reply: APPLY with R4 amendment requiring a decision-required Maintainer route when governance-state drift blocks |
-| Maintainer acceptance | pending | drafting green-lit by Maintainer 2026-06-12 |
-| Eligible for move to `docs/prds` | no | blocked until all acceptances + zero blockers in PRD_STATUS.json |
+| Maintainer acceptance | accepted | drafting green-lit by Maintainer 2026-06-12 |
+| Eligible for move to `docs/prds` | yes | all acceptances recorded; promoted session 14 |
 
 ## Input Provenance Tags
 

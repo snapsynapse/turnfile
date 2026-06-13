@@ -1,5 +1,11 @@
 # Changelog — turnfile-codex-collaboration
 
+## v3 — 2026-06-13
+
+- SKILL.md: Propagated PRD-024 R5.2 encoding-profile obligations into the Codex skill bundle: legible-only governance record, session-charter opt-in for dense lanes, turn-boundary projection duty, projection authorship, dense conflict escalation, and Maintainer projection/suspension rights.
+- MANIFEST.yaml: Updated bundle metadata to v3.
+- CHANGELOG.md: Added this v3 entry.
+
 ## v2 — 2026-06-12
 
 - SKILL.md: Added version context, Session 14 baseline rules, and M-00 bootstrap/baseline orientation. Updated startup read order to include `BASELINE.md`; clarified promoted/draft PRD shelves, closed-on-posting mirror behavior, event-only coordination, lifecycle handling for `actioned` messages, and role-keyed skill directory expectations.

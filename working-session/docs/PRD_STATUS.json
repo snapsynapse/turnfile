@@ -630,9 +630,9 @@
     {
       "id": "PRD-023",
       "title": "Out-of-Band Activity Reconciliation Contract",
-      "path": "working-session/docs/PRD-023-out-of-band-activity-reconciliation-contract.md",
-      "shelf": "working-session/docs",
-      "state": "draft",
+      "path": "docs/prds/PRD-023-out-of-band-activity-reconciliation-contract.md",
+      "shelf": "docs/prds",
+      "state": "actioned",
       "acceptance": {
         "codex": {
           "status": "accepted",
@@ -647,16 +647,14 @@
           ]
         },
         "maintainer": {
-          "status": "pending",
+          "status": "accepted",
           "evidence": [
-            "Drafting green-lit by Maintainer 2026-06-12 (session 14)"
+            "Maintainer approval 2026-06-13 (session 14); mirrored in MSG-20260613-031"
           ]
         }
       },
-      "blocking_items": [
-        "Maintainer acceptance pending"
-      ],
-      "eligible_for_docs_prds": false
+      "blocking_items": [],
+      "eligible_for_docs_prds": true
     },
     {
       "id": "PRD-024",
@@ -690,9 +688,9 @@
     {
       "id": "PRD-026",
       "title": "Review Cycle Closure and Task-State Consistency Contract",
-      "path": "working-session/docs/PRD-026-review-cycle-closure-and-task-state-consistency-contract.md",
-      "shelf": "working-session/docs",
-      "state": "draft",
+      "path": "docs/prds/PRD-026-review-cycle-closure-and-task-state-consistency-contract.md",
+      "shelf": "docs/prds",
+      "state": "actioned",
       "acceptance": {
         "codex": {
           "status": "accepted",
@@ -707,23 +705,21 @@
           ]
         },
         "maintainer": {
-          "status": "pending",
+          "status": "accepted",
           "evidence": [
-            "Maintainer asked Codex to make this proposal on 2026-06-13"
+            "Maintainer approval 2026-06-13 (session 14); mirrored in MSG-20260613-031"
           ]
         }
       },
-      "blocking_items": [
-        "Maintainer acceptance pending"
-      ],
-      "eligible_for_docs_prds": false
+      "blocking_items": [],
+      "eligible_for_docs_prds": true
     },
     {
       "id": "PRD-022",
       "title": "Decision-Mirror Delivery Contract",
-      "path": "working-session/docs/PRD-022-decision-mirror-delivery-contract.md",
-      "shelf": "working-session/docs",
-      "state": "draft",
+      "path": "docs/prds/PRD-022-decision-mirror-delivery-contract.md",
+      "shelf": "docs/prds",
+      "state": "actioned",
       "acceptance": {
         "codex": {
           "status": "accepted",
@@ -738,16 +734,14 @@
           ]
         },
         "maintainer": {
-          "status": "pending",
+          "status": "accepted",
           "evidence": [
-            "Drafting green-lit 2026-06-12"
+            "Maintainer approval 2026-06-13 (session 14); mirrored in MSG-20260613-031"
           ]
         }
       },
-      "blocking_items": [
-        "Maintainer acceptance pending"
-      ],
-      "eligible_for_docs_prds": false
+      "blocking_items": [],
+      "eligible_for_docs_prds": true
     },
     {
       "id": "PRD-027",

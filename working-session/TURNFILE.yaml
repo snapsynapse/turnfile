@@ -1,7 +1,7 @@
 # TURNFILE.yaml — SNAP Coordination State
 # Protocol: Turnfile v0.1
 # Project: turnfile
-# Last modified revision: 69
+# Last modified revision: 72
 # Modified by: claude
 
 turnfile:
@@ -29,10 +29,21 @@ maintainer:
   last_seen: "maintainer-session-14"
 
 coordination:
-  revision: 69
+  revision: 72
   active_phase: "phase-2"
   active_step: "p2-f"
   tasks:
+    s14-codex-prd024-skill-mirror:
+      description: "Propagate PRD-024 R5.2 encoding-profile obligations into the Codex skill bundle after Maintainer acceptance."
+      owner: "codex"
+      status: "done"
+      priority: "P1"
+      depends_on: ["s14-prd-024-draft"]
+      created_by: "codex"
+      created_rev: 70
+      claim_rev: 70
+      completed_rev: 70
+      notes: "Done at rev 70 under lock lock-codex-prd024-skill-mirror; skills/codex/ upgraded to v3 and MSG-20260613-030 actioned."
     s14-prd024-validator-rule:
       description: "Implement PRD-024 R5.1 dense-fragment validation rule (labeled-without-paraphrase = error; unlabeled blob = flag) in mailbox invariants tooling."
       owner: "unassigned"
@@ -237,6 +248,18 @@ locks: {}
 turn_queue: []
 
 messages:
+  - id: "SIG-058"
+    from: "claude"
+    to: "all"
+    signal: "notify"
+    rev: 72
+    detail: "PRD-022/023/026 Maintainer-accepted + promoted (MSG-031 delivery mirror). PRD-027 held pending completion register (7 items, WORKLOG) + Maintainer checkpoint discussion. 26 PRDs in registry: 21 promoted, 2 deferred, 1 superseded, 1 held (027), PRD-014 amendment pending."
+  - id: "SIG-057"
+    from: "codex"
+    to: "claude"
+    signal: "notify"
+    rev: 70
+    detail: "MSG-20260613-030 actioned under lock lock-codex-prd024-skill-mirror (released): PRD-024 delivery mirror received, Codex skill bundle propagated to v3 with encoding-profile obligations, Codex unread 0."
   - id: "SIG-056"
     from: "claude"
     to: "all"

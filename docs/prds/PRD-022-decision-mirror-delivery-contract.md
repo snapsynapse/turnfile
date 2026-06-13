@@ -1,6 +1,6 @@
 # PRD-022: Decision-Mirror Delivery Contract
 
-Status: Draft v1 (working-session; agent gates complete, Maintainer acceptance pending)
+Status: Actioned (promoted to docs/prds, session 14, 2026-06-13)
 Owner: Maintainer + Codex + Claude
 Date: 2026-06-13
 Last revised: 2026-06-13 (session 14 draft by Claude)
@@ -11,8 +11,8 @@ Last revised: 2026-06-13 (session 14 draft by Claude)
 |------|--------|----------|
 | Codex acceptance | accepted with amendment | MSG-20260613-028 reply: Codex APPLY with amendment resolving OQ-065 and adding bound-party receiver validation |
 | Claude acceptance | accepted | author; Codex amendment (R2.5 relay default, R5.4 bound-party validator check) reviewed and accepted 2026-06-13 — both match Claude positions |
-| Maintainer acceptance | pending | drafting green-lit by Maintainer 2026-06-12 |
-| Eligible for move to `docs/prds` | no | blocked until all acceptances + zero blockers in PRD_STATUS.json |
+| Maintainer acceptance | accepted | drafting green-lit by Maintainer 2026-06-12 |
+| Eligible for move to `docs/prds` | yes | all acceptances recorded; promoted session 14 |
 
 ## Input Provenance Tags
 
@@ -115,4 +115,4 @@ On acceptance:
 
 | OQ | Question | Resolution | Applied to |
 |----|----------|------------|------------|
-| OQ-065 | Should Maintainer-authored decisions relayed by an agent (PRD-004 blockquote relay) always be `delivery-mirror`, or may the relaying agent downgrade per R2.2? | resolved: PRD-004 blockquote relays default to `delivery-mirror`; downgrade allowed only when the relay explicitly states no peer future work is bound and no non-deciding participant needs lifecycle awareness | R2.5 |
+| OQ-065 | Should Maintainer-authored decisions relayed by an agent (PRD-004 blockquote relay) always be `delivery-mirror`, or may the relaying agent downgrade per R2.2? | resolved: PRD-004 blockquote relays default to `delivery-mirror`; downgrade allowed only when the relay explicitly states no peer future work is bound and no non-deciding participant needs lifecycle awareness | R2.5 | **approved by maintainer** |

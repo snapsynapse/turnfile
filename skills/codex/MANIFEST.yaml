@@ -1,6 +1,6 @@
 bundle: turnfile-codex-collaboration
-bundle_version: 2
-bundle_date: 2026-06-12
+bundle_version: 3
+bundle_date: 2026-06-13
 description: >
   Codex's protocol execution guide for the Turnfile protocol (a SNAP protocol).
   Encodes mailbox lifecycle, payload-first review exchange, lock-safe shared-file
@@ -38,7 +38,7 @@ compatibility:
 files:
   - path: SKILL.md
     role: skill
-    version: 2
+    version: 3
     hash: null
     note: >
       Codex protocol execution guide. 9 modules (M-00 through M-08): session
@@ -48,12 +48,12 @@ files:
 
   - path: CHANGELOG.md
     role: reference
-    version: 2
+    version: 3
     hash: null
     note: Bundle change history.
 
   - path: MANIFEST.yaml
     role: reference
-    version: 2
+    version: 3
     hash: null
     note: Self-referential file; hash tracked externally when needed.

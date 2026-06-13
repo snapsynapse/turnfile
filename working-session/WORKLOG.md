@@ -3,15 +3,16 @@
 References:
 - `/Users/snap/Git/turnfile/docs/PROTOCOL_CORE.md`
 
-Now Working (Codex): Session 14 active. PRD-023/026/027 counters applied and Codex-owned review threads closed; PRD-022 reviewed with amendment; Codex unread 0.
-Now Working (Claude): Session 14 active (Fable 5). PRD-022 closure owner; Claude unread 0.
-Maintainer Focus: PRD-023/026 are agent-accepted and await Maintainer acceptance. PRD-024 still needs Maintainer acceptance before first live Tokenese clone use; PRD-027 is agent-accepted with PRD-024 + Maintainer gates pending.
-Next Review Checkpoint: Claude closure/post-review acceptance on PRD-022 (MSG-20260613-028), Maintainer acceptance decisions for PRD-023/024/026/027, and optional sequencing for tokenese handoff tasks after PRD-024+027 acceptance.
+Now Working (Codex): Session 14 active. MSG-20260613-030 actioned; PRD-024 Codex skill mirror propagated; Codex unread 0.
+Now Working (Claude): Session 14 active (Fable 5). PRD-022/024 propagation noted; Claude unread 0.
+Maintainer Focus: PRD-024 is Maintainer-accepted and promoted. PRD-022/023/026/027 are agent-accepted and await Maintainer acceptance where applicable; PRD-027 still gates first Tokenese clone use along with charter opt-in and teach phase.
+Next Review Checkpoint: Maintainer acceptance decisions for PRD-022/023/026/027, optional sequencing for Tokenese handoff tasks after PRD-027 acceptance, and PRD-024 validator dense-fragment follow-on task.
 
 ## Decision Index
 
 | Decision | Owner | Timestamp | Section |
 |----------|-------|-----------|---------|
+| Codex acknowledged PRD-024 delivery mirror and propagated PRD-024 R5.2 encoding-profile obligations into `skills/codex/` v3. | Codex | 2026-06-13 | MSG-20260613-030 |
 | Codex applied Claude PRD-023 amendment; PRD-023 agent gates complete, Maintainer acceptance pending. | Codex + Claude | 2026-06-13 | MSG-20260612-026 closure |
 | Codex applied Claude PRD-026 counters; OQ-064 resolved standalone; PRD-026 agent gates complete, Maintainer acceptance pending. | Codex + Claude | 2026-06-13 | MSG-20260612-027 closure |
 | Codex applied Claude PRD-027 counters; PRD-027 agent gates complete, Maintainer + PRD-024 gates pending before tokenese clone use. | Codex + Claude | 2026-06-13 | MSG-20260613-029 closure |
@@ -408,3 +409,21 @@ Corrected contract shape:
 |----------|-------|-----------|---------|
 | PRD-024 accepted and promoted (tokenese legibility gate live). | Maintainer | 2026-06-13 | MSG-20260613-030 mirror |
 | PRD-022/023/026/027 agent gates complete; queued for Maintainer acceptance. | Codex + Claude | 2026-06-13 | Review cycle closures |
+
+### Claude: PRD-022/023/026 promoted; PRD-027 held — rev 72
+
+2026-06-13 — Maintainer accepted PRD-022, PRD-023, PRD-026 (mirrored in MSG-20260613-031, delivery mode, now under live PRD-022 contract). All three promoted to docs/prds, validator pass. PRD-027 held by Maintainer until all other PRD work fully completes; commit/push/checkpoint discussion precedes its initiation.
+
+**Completion register before PRD-027** (the "fully completed" bar):
+1. PRD-021 R5 propagation: CONFLICT_RESOLUTION.md Level 2 rewrite, TURNFILE schema `coordination.conflict.rebuttal_rounds`, PRD-018 matrix gated/unlockable column, boot file refs, AC6 worked examples, "all participating agents" wording fix.
+2. PRD-014 amendment: closeout compaction + projection sync (converged PRD-025 outcome; s14-prd-014-amendment task).
+3. PRD-022 R5: PRD-019 R4 mode field, card template, skill bundles, validator checks.
+4. PRD-023 R6: boot files, skill bundles, charter/closeout template line.
+5. PRD-026 R4: closure-drift validator (claimable).
+6. PRD-024 R5.1: dense-fragment validator rule (s14-prd024-validator-rule task).
+7. Codex skills bundle PRD-024 R5.2 mirror (Codex-owned).
+
+| Decision | Owner | Timestamp | Section |
+|----------|-------|-----------|---------|
+| PRD-022/023/026 accepted and promoted. | Maintainer | 2026-06-13 | MSG-031 mirror |
+| PRD-027 held until all other PRD work fully complete; commit/push/checkpoint discussion first. | Maintainer | 2026-06-13 | MSG-031 mirror |

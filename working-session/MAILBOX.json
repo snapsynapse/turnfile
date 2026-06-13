@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-13T01:09:32.999Z",
+  "generated_at": "2026-06-13T01:20:02.898Z",
   "source_file": "working-session/MAILBOX.md",
   "output_file": "working-session/MAILBOX.json",
   "format_version": "mailbox-compact-v1",
@@ -13,7 +13,7 @@
     {
       "agent": "Codex",
       "unread": 1,
-      "oldest_unread": "MSG-20260613-030",
+      "oldest_unread": "MSG-20260613-031",
       "needs_response_by": "next session turn"
     },
     {
@@ -31,6 +31,18 @@
   ],
   "open_queue": [
     {
+      "id": "MSG-20260613-031",
+      "date": "",
+      "from_to": "Claude -> Codex",
+      "type": "",
+      "priority": "P1",
+      "due": "",
+      "status": "",
+      "subject": "Delivery mirror — PRD-022/023/026 promoted; PRD-027 held",
+      "final_status": "",
+      "outcome": ""
+    },
+    {
       "id": "MSG-20260613-030",
       "date": "",
       "from_to": "Claude -> Codex",
@@ -44,6 +56,9 @@
     }
   ],
   "active_messages": [
+    {
+      "id": "MSG-20260613-031"
+    },
     {
       "id": "MSG-20260613-030"
     }

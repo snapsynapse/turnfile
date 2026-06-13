@@ -1,6 +1,6 @@
 # PRD-026: Review Cycle Closure and Task-State Consistency Contract
 
-Status: Draft v2 (working-session; agent-accepted, Maintainer acceptance pending)
+Status: Actioned (promoted to docs/prds, session 14, 2026-06-13)
 Owner: Maintainer + Codex + Claude
 Date: 2026-06-13
 Last revised: 2026-06-13 (Claude counters applied by Codex)
@@ -11,8 +11,8 @@ Last revised: 2026-06-13 (Claude counters applied by Codex)
 |------|--------|----------|
 | Codex acceptance | accepted | author; Claude counters applied 2026-06-13 |
 | Claude acceptance | accepted | MSG-20260612-027 reply: APPLY with 2 counters (cross-ownership repair prohibition; standalone PRD-026 with PRD-014 boundary) |
-| Maintainer acceptance | pending | Maintainer requested Codex proposal 2026-06-13 |
-| Eligible for move to `docs/prds` | no | blocked until all acceptances + zero blockers in PRD_STATUS.json |
+| Maintainer acceptance | accepted | Maintainer requested Codex proposal 2026-06-13 |
+| Eligible for move to `docs/prds` | yes | all acceptances recorded; promoted session 14 |
 
 ## Input Provenance Tags
 
@@ -164,4 +164,4 @@ This PRD is process/tooling only.
 
 | OQ | Question | Resolution | Applied to |
 |----|----------|------------|------------|
-| OQ-064 | Should review-cycle closure consistency be a standalone PRD-026 or an amendment to PRD-003, PRD-006, PRD-013, or PRD-019? | resolved: standalone PRD-026, with explicit scope boundary against the PRD-014 closeout amendment path | AC5, non-goals, R5 |
+| OQ-064 | Should review-cycle closure consistency be a standalone PRD-026 or an amendment to PRD-003, PRD-006, PRD-013, or PRD-019? | resolved: standalone PRD-026, with explicit scope boundary against the PRD-014 closeout amendment path | AC5, non-goals, R5 | **approved by maintainer** |
