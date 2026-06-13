@@ -1,0 +1,114 @@
+bundle: skill-provenance
+bundle_version: 4.12.0
+bundle_date: 2026-06-10
+description: >
+  Metaskill for portable provenance, integrity, and drift control across
+  Agent Skills local folders, registries, platform uploads, and multi-agent
+  sessions. Manifest, changelog, deployment notes, hashes, and portable
+  internal version markers prevent version confusion during iterative
+  skill development and cross-surface deployment.
+
+compatibility:
+  designed_for:
+    surfaces:
+      - chat
+      - cli
+      - ide
+      - api
+    capabilities:
+      - metadata or minimal SKILL.md frontmatter
+      - local filesystem access
+      - optional git workflow
+      - deployment drift tracking
+      - hash-based audit trail
+      - derived install and publish package generation
+  tested_on:
+    - platform: Anthropic Claude
+      model: Claude Opus 4.6
+      surface: Chat
+      status: pass
+      date: 2026-02-10
+      notes: Full bootstrap and round-trip validated with .skill ZIP
+    - platform: Anthropic Claude
+      model: Claude Opus 4.6
+      surface: Code
+      status: pass
+      date: 2026-02-28
+      notes: Full session protocol, validate.sh, git commit workflow
+    - platform: Anthropic Claude
+      model: Claude Opus 4.6
+      surface: Cowork
+      status: pass
+      date: 2026-02-28
+      notes: Filesystem persistence, manifest verification
+    - platform: OpenAI Codex
+      model: N/A
+      surface: CLI
+      status: pass
+      date: 2026-02-27
+      notes: Minimal frontmatter mode, local editing workflow
+    - platform: Google Gemini CLI
+      model: Gemini 2.5 Pro
+      surface: CLI
+      status: pass
+      date: 2026-03-07
+      notes: Skill loading, bootstrap, and Gems workflow validated.
+    - platform: Perplexity Computer
+      model: N/A
+      surface: Computer
+      status: pass
+      date: 2026-03-07
+      notes: .zip upload path works. Trigger-oriented description improves discovery.
+  compatible_with:
+    - Claude API (/v1/skills)
+    - Claude Agent SDK
+    - GitHub Copilot / VS Code
+    - Cursor
+    - Any agentskills.io-compatible agent (30+ adopters)
+  spec_version: agentskills.io/1.0
+  frontmatter_mode: metadata
+
+dependencies: []
+
+files:
+  - path: SKILL.md
+    role: skill
+    version: 18
+    hash: sha256:ecb7a351a50fab3fac0e7113d355538a1c468249c6ed2935525c80090f5576dc
+    note: Canonical skill definition with validate-only protocol guidance, package validation gate guidance, agentic surface disclosure, complementary-tool positioning, and full provenance metadata in frontmatter.
+
+  - path: README.md
+    role: reference
+    version: 21
+    hash: sha256:af290ea3cc3e0a107a1b38fb9eb570e3063e47c7c2cb37fd0309f78edf1f469b
+    note: Human-facing instructions, GuideCheck pre-install verification, worked example, three-state bundle model, local validation, complementary-tool guidance, trust model, packaging, use case walkthroughs, troubleshooting, references
+
+  - path: evals.json
+    role: evals
+    version: 11
+    hash: sha256:a4466f3d4b2bc2b2374db6e04099e1c243a2706c020573d5ad3fbde49b0e8765
+    note: 30 evals covering bootstrap, verify, save, conflict, optional handoff, cross-platform, frontmatter mode, compatibility block, Gemini CLI, Gemini Gems, git commit messaging, per-file handoff, local validation, API surface, dependencies, deployment drift, multi-surface installs, trust checks, redeploy events, deployment conflicts, hash mismatches, packaged subsets, Settings UI round-trip, Copilot/VS Code bootstrap, Cursor bootstrap, Cowork persistence, validate-only behavior, complementary-tool positioning, integrity trust model, derived-copy validation
+
+  - path: evals-distribution.json
+    role: evals
+    version: 5
+    hash: sha256:64518967a6c1c18107820c947b5b1b8c2759f196849667238cebbe15d236196d
+    note: 15 supplemental evals covering strict-platform copies, ClawHub package preparation, publish confirmation, registry installs versus canonical bundles, and repo-integrity checks for changelog retention, eval counts, inventory drift, release metadata alignment, source validation before packaging, assistant-guide sidecar alignment, .skill ZIP freshness, agentic surface disclosure, package gate failure behavior, source-backed strategy handoffs, and upstream contribution channel selection
+
+  - path: CHANGELOG.md
+    role: reference
+    version: 24
+    hash: sha256:422f55179851eebba9ae2e5efaf7b5f973178a4f7c905fce8e8d262161bf3fe2
+    note: Active in-bundle changelog with the 5 most recent entries; older history lives in the repo root
+
+  - path: validate.sh
+    role: script
+    version: 5
+    hash: sha256:333b6585a72818ae2d0196ef517bebf4e4b909e4a17405b526c6d1ec37be0406
+    note: Zero-dependency bash script for local hash verification and update against MANIFEST.yaml
+
+  - path: package.sh
+    role: script
+    version: 3
+    hash: sha256:95f23c54b1f8a260c13cb71df353c1ce5ca17f6504efdce53808d42b46756b6b
+    note: Zero-dependency bash script for derived strict-platform copies and ClawHub upload packages

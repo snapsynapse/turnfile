@@ -318,8 +318,10 @@ function main() {
     }
   }
 
-  for (const dup of [...duplicateNames].sort()) {
-    errors.push(`Duplicate global skill name detected: '${dup}'`);
+  if (args.strictGlobal) {
+    for (const dup of [...duplicateNames].sort()) {
+      errors.push(`Duplicate global skill name detected: '${dup}'`);
+    }
   }
 
   if (args.strictGlobal) {
@@ -336,35 +338,32 @@ function main() {
     warnings.push(`Global skills directory not found: ${args.globalSkillsDir} (global checks skipped)`);
   }
 
-  const globalTurnfileSkill = globalNameToPath.get("turnfile-codex-collaboration");
-  if (globalTurnfileSkill && fs.existsSync(repoTurnfileSkillAbs)) {
-    const globalHash = sha256File(globalTurnfileSkill);
-    const repoHash = sha256File(repoTurnfileSkillAbs);
-    if (globalHash !== repoHash) {
-      const message = `Global Turnfile skill hash differs from repo canonical ${args.repoTurnfileSkill}`;
-      if (args.strictGlobal) {
-        errors.push(message);
-      } else {
-        warnings.push(`${message} (strict global mode off)`);
+  if (args.strictGlobal) {
+    const globalTurnfileSkill = globalNameToPath.get("turnfile-codex-collaboration");
+    if (globalTurnfileSkill && fs.existsSync(repoTurnfileSkillAbs)) {
+      const globalHash = sha256File(globalTurnfileSkill);
+      const repoHash = sha256File(repoTurnfileSkillAbs);
+      if (globalHash !== repoHash) {
+        errors.push(`Global Turnfile skill hash differs from repo canonical ${args.repoTurnfileSkill}`);
       }
+    } else {
+      errors.push("Cannot run Turnfile global parity check (missing global or repo skill)");
     }
-  } else if (args.strictGlobal) {
-    errors.push("Cannot run Turnfile global parity check (missing global or repo skill)");
-  }
 
-  const globalVersioningSkill =
-    globalNameToPath.get("skill-versioning") || globalNameToPath.get("skill-provenance");
-  if (globalVersioningSkill) {
-    const globalVersioningDir = path.dirname(globalVersioningSkill);
-    const mode = readManifestMode(globalVersioningDir) || "minimal";
-    const { name, keys } = parseFrontmatterNameAndKeys(globalVersioningSkill);
-    if (!VERSIONING_SKILL_NAMES.has(name)) {
-      errors.push(`Global versioning skill name mismatch: expected one of '${[...VERSIONING_SKILL_NAMES].join(", ")}', got '${name}'`);
+    const globalVersioningSkill =
+      globalNameToPath.get("skill-versioning") || globalNameToPath.get("skill-provenance");
+    if (globalVersioningSkill) {
+      const globalVersioningDir = path.dirname(globalVersioningSkill);
+      const mode = readManifestMode(globalVersioningDir) || "minimal";
+      const { name, keys } = parseFrontmatterNameAndKeys(globalVersioningSkill);
+      if (!VERSIONING_SKILL_NAMES.has(name)) {
+        errors.push(`Global versioning skill name mismatch: expected one of '${[...VERSIONING_SKILL_NAMES].join(", ")}', got '${name}'`);
+      }
+      validateFrontmatterForMode(keys, mode, "Global versioning skill", errors);
+      validateManifest(globalVersioningDir, "Global skill-versioning bundle", errors, warnings);
+    } else {
+      errors.push("Cannot validate global versioning bundle (skill-versioning or skill-provenance not installed)");
     }
-    validateFrontmatterForMode(keys, mode, "Global versioning skill", errors);
-    validateManifest(globalVersioningDir, "Global skill-versioning bundle", errors, warnings);
-  } else if (args.strictGlobal) {
-    errors.push("Cannot validate global versioning bundle (skill-versioning or skill-provenance not installed)");
   }
 
   console.log("Skills Preflight");

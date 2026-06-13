@@ -24,7 +24,7 @@
   <meta property="og:url" content="https://turnfile.work/">
   <meta property="og:locale" content="en_US">
   <meta property="article:published_time" content="2026-02-08T00:00:00Z">
-  <meta property="article:modified_time" content="2026-04-09T00:00:00Z">
+  <meta property="article:modified_time" content="2026-06-13T00:00:00Z">
   <meta property="article:author" content="Sam Rogers">
   <meta property="article:publisher" content="https://paice.work/">
   <meta property="article:section" content="Open Patterns">
@@ -54,7 +54,7 @@
     "url": "https://turnfile.work/",
     "mainEntityOfPage": { "@type": "WebPage", "@id": "https://turnfile.work/" },
     "datePublished": "2026-02-08",
-    "dateModified": "2026-04-09",
+    "dateModified": "2026-06-13",
     "author": {
       "@type": "Person",
       "name": "Sam Rogers",
@@ -457,7 +457,7 @@
       <span class="sep">&middot;</span>
       Published <time datetime="2026-02-08">February 8, 2026</time>
       <span class="sep">&middot;</span>
-      Updated <time datetime="2026-04-09">April 9, 2026</time>
+      Updated <time datetime="2026-06-13">June 13, 2026</time>
       <span class="sep">&middot;</span>
       <span class="version">v0.1.0-draft</span>
       <span class="sep">&middot;</span>
@@ -533,7 +533,8 @@ cp -r templates/working-session/ my-session/
 # Each agent reads its onboarding guide
 #   docs/LLM_ONBOARDING.md
 #   skills/claude-opus_4.6/SKILL.md
-#   skills/codex_5.3/SKILL.md</pre>
+#   skills/codex_5.3/SKILL.md
+#   skills/gemini-3/SKILL.md</pre>
         <p class="annotation">No SDK, no runtime to install. The protocol lives in markdown and YAML.</p>
       </div>
 
@@ -568,8 +569,9 @@ docs/HUMAN_GOVERNANCE.md</pre>
       </div>
 
       <div class="code-block">
-        <h3>The 12 promoted PRDs</h3>
+        <h3>The 14 actioned PRDs</h3>
 <pre># Protocol contracts (see docs/prds/)
+PRD-001  Maintainer interaction model
 PRD-003  Message lifecycle + SLA
 PRD-004  Maintainer decision contract
 PRD-005  Protocol data schema
@@ -581,7 +583,8 @@ PRD-010  Shared-file transaction locking
 PRD-011  Session resumption
 PRD-012  Protocol skills pack
 PRD-013  Turnfile coordination format
-PRD-014  Session closeout + boot handoff</pre>
+PRD-014  Session closeout + boot handoff
+PRD-016  Session rotation trigger</pre>
       </div>
     </div>
   </div>
@@ -592,6 +595,7 @@ PRD-014  Session closeout + boot handoff</pre>
     <div class="demo-block">
       <h2>See it in action</h2>
       <p>The <strong>inception archive</strong> is the unedited record of two LLM agents &mdash; Claude Opus 4.6 and OpenAI Codex 5.3 &mdash; building this protocol together across 11 sessions. No human wrote their messages. No orchestrator commanded them. Zero file collisions.</p>
+      <p>The current working session extends that baseline into third-agent onboarding, with Gemini boot artifacts, a Gemini skill bundle, and PRD gates for onboarding validation, maintainer approval authority, mailbox-first polling, and boot artifact completeness.</p>
       <p>Start with <a href="https://github.com/snapsynapse/turnfile/blob/main/examples/inception/WORKLOG.md" target="_blank" rel="noopener">WORKLOG.md</a> for the session-by-session narrative, or jump straight to <a href="https://github.com/snapsynapse/turnfile/blob/main/examples/inception/MAILBOX.md" target="_blank" rel="noopener">MAILBOX.md</a> to read the actual agent-to-agent messages &mdash; proposals, reviews, and counter-recommendations.</p>
       <div class="cta-row">
         <a href="https://github.com/snapsynapse/turnfile/tree/main/examples/inception" class="btn btn-primary" target="_blank" rel="noopener">Open the inception archive &rarr;</a>
@@ -604,7 +608,7 @@ PRD-014  Session closeout + boot handoff</pre>
       <a href="https://github.com/snapsynapse/turnfile/blob/main/VISION.md" target="_blank" rel="noopener">VISION.md</a>
       in the repository; any cross-posts on LinkedIn, PAICE.work, or other platforms are derived from those sources and should cite
       <a href="https://turnfile.work/">turnfile.work</a> as canonical.
-      Last substantive revision: <time datetime="2026-04-09">2026-04-09</time>.
+      Last substantive revision: <time datetime="2026-06-13">2026-06-13</time>.
       <a href="https://github.com/snapsynapse/turnfile/commits/main/VISION.md" target="_blank" rel="noopener">Revision history &rarr;</a>
     </aside>
   </div>

@@ -501,6 +501,44 @@ test("skills preflight only requires global skills in strict mode", () => {
   );
 });
 
+test("skills preflight skips global parity outside strict mode", () => {
+  const fixture = skillFixture({ global: true });
+  writeFile(
+    path.join(fixture.globalSkillsDir, "turnfile-codex-collaboration/SKILL.md"),
+    [
+      "---",
+      "name: turnfile-codex-collaboration",
+      "description: Drifted global fixture.",
+      "---",
+      "",
+      "# Drifted Fixture",
+      "",
+    ].join("\n"),
+  );
+  expectPass(run([
+    "tools/validate-skills-preflight.mjs",
+    "--repo-turnfile-skill",
+    fixture.repoTurnfileSkill,
+    "--repo-versioning-dir",
+    fixture.repoVersioningDir,
+    "--global-skills-dir",
+    fixture.globalSkillsDir,
+  ]));
+  expectFail(
+    run([
+      "tools/validate-skills-preflight.mjs",
+      "--repo-turnfile-skill",
+      fixture.repoTurnfileSkill,
+      "--repo-versioning-dir",
+      fixture.repoVersioningDir,
+      "--global-skills-dir",
+      fixture.globalSkillsDir,
+      "--strict-global",
+    ]),
+    /Global Turnfile skill hash differs/,
+  );
+});
+
 test("skills preflight passes strict mode when required globals exist", () => {
   const fixture = skillFixture({ global: true });
   expectPass(run([

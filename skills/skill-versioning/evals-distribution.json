@@ -1,0 +1,307 @@
+{
+  "skill_name": "skill-provenance",
+  "suite_name": "distribution-packaging-and-integrity",
+  "evals": [
+    {
+      "id": 101,
+      "name": "canonical_metadata_to_strict_copy",
+      "description": "Tests deriving a strict-platform install copy from a canonical metadata-mode bundle without mutating the canonical source.",
+      "prompt": "This bundle is maintained in metadata mode for Claude and registry publishing, but I need to install it in Codex and Gemini CLI too. Please prepare the strict-platform copy without changing the canonical source bundle.",
+      "files": [
+        "MANIFEST.yaml",
+        "CHANGELOG.md",
+        "SKILL.md",
+        "README.md",
+        "evals.json",
+        "package.sh"
+      ],
+      "expectations": [
+        "Creates a derived install copy rather than editing the canonical bundle in place",
+        "Derived SKILL.md omits the metadata block while preserving name and description",
+        "Derived MANIFEST.yaml switches frontmatter_mode to minimal",
+        "Hashes are recomputed for the derived copy only",
+        "Canonical bundle remains in metadata mode unless the user explicitly promotes the strict copy"
+      ]
+    },
+    {
+      "id": 102,
+      "name": "clawhub_package_prepublish",
+      "description": "Tests preparing a ClawHub upload package from the canonical bundle before the upload has happened.",
+      "prompt": "I updated this skill locally and now need a clean ClawHub upload package. Prepare the package, but do not mark it as published yet.",
+      "files": [
+        "MANIFEST.yaml",
+        "CHANGELOG.md",
+        "SKILL.md",
+        "README.md",
+        "evals.json",
+        "evals-distribution.json",
+        "validate.sh",
+        "package.sh"
+      ],
+      "expectations": [
+        "Produces a derived consumer package containing SKILL.md, README.md, MANIFEST.yaml, and eval files",
+        "Removes development-only files such as CHANGELOG.md and shell helpers from the package manifest",
+        "Keeps the SKILL.md metadata block and attribution intact in the published copy",
+        "Does not add or update deployments.clawhub before an actual publish is confirmed",
+        "Keeps bundle_version aligned between the canonical bundle and the upload package"
+      ]
+    },
+    {
+      "id": 103,
+      "name": "clawhub_publish_confirmation_record",
+      "description": "Tests recording a ClawHub deployment only after the user confirms that publication actually succeeded.",
+      "prompt": "The ClawHub upload is done and the published page is live now. Please update the canonical bundle records to reflect that deployment.",
+      "files": [
+        "MANIFEST.yaml",
+        "CHANGELOG.md",
+        "SKILL.md",
+        "README.md"
+      ],
+      "expectations": [
+        "Updates deployments.clawhub only because the user confirmed a real publish",
+        "Records version, date, and URL or slug when the user provides them",
+        "Adds a changelog note describing the publish event",
+        "Does not reinterpret the publish event as a reason to bump unchanged file versions"
+      ]
+    },
+    {
+      "id": 104,
+      "name": "registry_install_vs_canonical_bundle",
+      "description": "Tests distinguishing a registry-installed consumer package from the fuller canonical source bundle in git or local storage.",
+      "prompt": "I installed this skill from ClawHub/OpenClaw and it only has the user-facing files, but the GitHub repo includes CHANGELOG.md, validate.sh, and packaging scripts. Which copy should I treat as canonical?",
+      "files": [
+        "MANIFEST.yaml",
+        "CHANGELOG.md",
+        "SKILL.md",
+        "README.md",
+        "evals-distribution.json"
+      ],
+      "expectations": [
+        "Explains that registry installs are consumer packages, not automatically the canonical authoring bundle",
+        "Uses the package's own MANIFEST.yaml to assess completeness instead of assuming repo-only files are missing",
+        "Explains that the canonical source bundle may intentionally include additional development files",
+        "Recommends returning to the canonical bundle before editing, repackaging, or republishing"
+      ]
+    },
+    {
+      "id": 105,
+      "name": "rolling_changelog_window_enforcement",
+      "description": "Tests enforcing the documented rolling-history policy for the in-bundle changelog instead of allowing the active bundle changelog to grow without bound.",
+      "prompt": "Please verify this bundle's changelog state before release. The in-bundle changelog is supposed to keep only the newest five entries while the repo root keeps the full archive.",
+      "files": [
+        "MANIFEST.yaml",
+        "CHANGELOG.md",
+        "../CHANGELOG.md",
+        "README.md"
+      ],
+      "expectations": [
+        "Checks that the in-bundle CHANGELOG.md contains exactly 5 release headings",
+        "Checks that those 5 entries are the newest 5 entries from the repo-level changelog",
+        "Flags the bundle changelog as inconsistent if it contains fewer or more than 5 entries",
+        "Treats the root CHANGELOG.md as the full append-only archive"
+      ]
+    },
+    {
+      "id": 106,
+      "name": "declared_eval_counts_match_files",
+      "description": "Tests preventing stale human-facing eval counts by requiring documented totals to match the JSON files on disk.",
+      "prompt": "Before publishing this update, confirm that every README and manifest note describing the eval suite still matches the actual eval files.",
+      "files": [
+        "MANIFEST.yaml",
+        "README.md",
+        "../README.md",
+        "evals.json",
+        "evals-distribution.json"
+      ],
+      "expectations": [
+        "Counts scenarios directly from evals.json and evals-distribution.json",
+        "Checks that README references to core, supplemental, and total eval counts match those file counts",
+        "Checks that MANIFEST.yaml notes describing eval inventory use the same counts",
+        "Flags stale prose such as outdated core or supplemental totals before release"
+      ]
+    },
+    {
+      "id": 107,
+      "name": "repo_docs_match_bundle_inventory",
+      "description": "Tests repo-level structure documentation against the canonical bundle inventory so file lists and bundle summaries do not drift.",
+      "prompt": "Review the repo documentation and make sure the documented bundle structure still matches the canonical bundle inventory in MANIFEST.yaml.",
+      "files": [
+        "MANIFEST.yaml",
+        "README.md",
+        "../README.md",
+        "../AGENTS.md"
+      ],
+      "expectations": [
+        "Cross-checks documented bundle structure against the MANIFEST.yaml file list",
+        "Verifies that named bundle artifacts in repo docs still exist and are described with current counts",
+        "Flags repo-level documentation when it claims stale bundle contents or inventory details",
+        "Preserves the distinction between canonical bundle files and repo-only files"
+      ]
+    },
+    {
+      "id": 108,
+      "name": "release_metadata_and_changelog_alignment",
+      "description": "Tests that a new release entry, manifest version, and rolling changelog policy all stay aligned after a bundle update.",
+      "prompt": "We just bumped the bundle version and updated release notes. Please confirm the manifest and both changelogs are aligned before we package the bundle.",
+      "files": [
+        "MANIFEST.yaml",
+        "CHANGELOG.md",
+        "../CHANGELOG.md"
+      ],
+      "expectations": [
+        "Checks that the top release heading in both changelogs matches bundle_version in MANIFEST.yaml",
+        "Checks that bundle_date is consistent with the new release entry",
+        "Checks that the in-bundle changelog still satisfies the rolling 5-entry policy after adding the new release",
+        "Flags mismatches between release metadata and changelog headings before packaging"
+      ]
+    },
+    {
+      "id": 109,
+      "name": "derived_package_requires_clean_source",
+      "description": "Tests that derived package generation refuses to package a canonical bundle whose manifest no longer verifies.",
+      "prompt": "Before preparing strict-platform and ClawHub package outputs, confirm that the canonical source bundle is clean and that the repo discloses assistant-facing trust boundaries.",
+      "files": [
+        "MANIFEST.yaml",
+        "package.sh",
+        "validate.sh",
+        "README.md",
+        "../AGENTIC_SURFACES.md",
+        "../SECURITY.md"
+      ],
+      "expectations": [
+        "Runs validate.sh against the canonical bundle before building derived package outputs",
+        "Stops package generation if manifest hashes mismatch or listed files are missing",
+        "Does not treat generated strict or registry packages as canonical source bundles",
+        "Checks that assistant-facing surfaces are inventoried as data rather than authority",
+        "Flags release preparation as incomplete if the disclosure is missing after assistant-facing surfaces change"
+      ]
+    },
+    {
+      "id": 110,
+      "name": "assistant_guide_manifest_hash_alignment",
+      "description": "Tests that the GuideCheck sidecar manifest stays aligned with the public assistant guide before release.",
+      "prompt": "Please verify the GuideCheck assistant guide sidecar before release. The manifest should disclose the current guide hash, byte count, immutable release URL, and source anchor.",
+      "files": [
+        "../.well-known/assistant-guide.txt",
+        "../.well-known/assistant-guide-manifest.txt",
+        "../SECURITY.md",
+        "../CHANGELOG.md"
+      ],
+      "expectations": [
+        "Computes the SHA-256 hash of .well-known/assistant-guide.txt and compares it to guide-sha256",
+        "Computes the assistant guide byte count and compares it to guide-bytes",
+        "Checks that canonical-url, repository-url, immutable-release-url, profile, and profile-version are present",
+        "Flags the release as incomplete when guide content changes without sidecar manifest updates",
+        "Does not treat sidecar manifest alignment as proof that the guide is safe"
+      ]
+    },
+    {
+      "id": 111,
+      "name": "skill_zip_matches_canonical_bundle",
+      "description": "Tests that the Claude Settings .skill ZIP wrapper is rebuilt from the current canonical bundle after bundle file changes.",
+      "prompt": "Before publishing this bundle, verify that skill-provenance.skill contains the current canonical bundle files and not a stale ZIP from a prior release.",
+      "files": [
+        "MANIFEST.yaml",
+        "SKILL.md",
+        "README.md",
+        "evals.json",
+        "evals-distribution.json",
+        "CHANGELOG.md",
+        "validate.sh",
+        "package.sh",
+        "../skill-provenance.skill"
+      ],
+      "expectations": [
+        "Inspects the .skill ZIP file list and confirms it contains the canonical bundle directory",
+        "Confirms each manifest-listed canonical file is present in the archive under the expected path",
+        "Compares archived file contents or hashes against the current canonical bundle files",
+        "Flags stale ZIP artifacts when bundle files changed after the archive was built",
+        "Reports the .skill artifact digest for release notes when packaging is in scope"
+      ]
+    },
+    {
+      "id": 112,
+      "name": "agentic_surface_inventory_drift",
+      "description": "Tests that known assistant-facing and machine-readable repo surfaces are disclosed in the trust-boundary inventory.",
+      "prompt": "Review the repo's assistant-facing surfaces before release and confirm AGENTIC_SURFACES.md is complete.",
+      "files": [
+        "../AGENTIC_SURFACES.md",
+        "../llms.txt",
+        "../.well-known/assistant-guide.txt",
+        "../.well-known/assistant-guide-manifest.txt",
+        "../.claude-plugin/plugin.json",
+        "../.github/workflows/validate.yml",
+        "../robots.txt",
+        "../sitemap.xml",
+        "../index.html",
+        "SKILL.md",
+        "../skills/validate/SKILL.md"
+      ],
+      "expectations": [
+        "Scans for assistant-facing files, plugin metadata, public guides, CI checkers, crawler hints, landing metadata, and release artifacts",
+        "Checks that each discovered surface is named in AGENTIC_SURFACES.md or explicitly classified as out of scope",
+        "Verifies that the disclosure states surfaces are data rather than authority",
+        "Flags new surfaces that change trust boundaries, executable behavior, package paths, or public verification story",
+        "Does not allow README or llms.txt links to substitute for the disclosure inventory"
+      ]
+    },
+    {
+      "id": 113,
+      "name": "package_gate_blocks_dirty_manifest",
+      "description": "Tests that package.sh exits nonzero and creates no derived package when canonical bundle validation fails.",
+      "prompt": "Simulate a dirty canonical bundle and confirm package.sh refuses to produce strict or ClawHub outputs.",
+      "files": [
+        "MANIFEST.yaml",
+        "package.sh",
+        "validate.sh",
+        "README.md"
+      ],
+      "expectations": [
+        "Introduces or detects a controlled manifest mismatch in a disposable copy rather than damaging the source tree",
+        "Runs package.sh against that dirty copy and observes a nonzero exit before package output is created",
+        "Confirms strict and ClawHub package directories are absent or empty after the failed run",
+        "Restores or discards the dirty disposable copy after the negative test",
+        "Treats package creation after failed canonical validation as a release blocker"
+      ]
+    },
+    {
+      "id": 114,
+      "name": "source_backed_strategy_handoff",
+      "description": "Tests that strategy handoffs with external competitive claims preserve enough source evidence for later agents to safely publish or implement from them.",
+      "prompt": "Review this adoption strategy handoff before we use it to rewrite public positioning. It says several competitor facts were verified by a prior research run, but only the conclusions are written down.",
+      "files": [
+        "../handoffs/2026-06-09-adoption-strategy-handoff.md",
+        "../README.md",
+        "../index.html",
+        "../llms.txt",
+        "MANIFEST.yaml"
+      ],
+      "expectations": [
+        "Separates repo-local facts from external competitive or ecosystem claims",
+        "Requires source URLs, saved research artifacts, or reproducible search notes before treating external claims as verified",
+        "Flags unsupported claims before they are used in README, landing page, llms.txt, outreach, or spec-proposal copy",
+        "Identifies time-sensitive claims that should be re-verified before outward-facing use",
+        "Does not block local planning language merely because public citations are not yet present"
+      ]
+    },
+    {
+      "id": 115,
+      "name": "upstream_contribution_channel_selection",
+      "description": "Tests that outward-facing upstream spec work follows the target project's current contribution process instead of assuming issue, PR, or discussion workflow.",
+      "prompt": "Prepare the next step for proposing optional version and integrity metadata to an upstream Agent Skills spec repo. The handoff says to file an issue, but we have not checked the upstream contribution guide yet.",
+      "files": [
+        "../handoffs/2026-06-09-adoption-strategy-handoff.md",
+        "../README.md",
+        "README.md",
+        "SKILL.md"
+      ],
+      "expectations": [
+        "Checks the upstream repository or documentation contribution guidance before choosing Issue, Discussion, or PR",
+        "Uses the maintainer-preferred channel for proposals and reserves issues for bugs when the upstream docs say so",
+        "Includes AI-assistance disclosure when the upstream project requires it",
+        "Drafts outward-facing proposal text for Sam's review rather than posting without explicit approval",
+        "Frames the proposal around concrete implementation evidence and portability needs rather than branding alone"
+      ]
+    }
+  ]
+}
