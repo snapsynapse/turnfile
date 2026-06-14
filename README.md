@@ -114,11 +114,11 @@ PRDs live on two shelves. Promoted, Maintainer-accepted contracts live in [docs/
 | PRD | Title | Status |
 |-----|-------|--------|
 | [PRD-001](docs/prds/PRD-001-maintainer-interaction-model.md) | Maintainer interaction model | Promoted |
-| [PRD-002](working-session/docs/PRD-002-rust-notification-viewer-mvp.md) | Rust notification viewer MVP | Deferred |
+| [PRD-002](docs/archive/prds/PRD-002-rust-notification-viewer-mvp.md) | Rust notification viewer MVP | Deferred (archived) |
 | [PRD-003](docs/prds/PRD-003-message-lifecycle-sla-contract.md) | Message lifecycle + SLA contract | Promoted |
 | [PRD-004](docs/prds/PRD-004-maintainer-decision-contract.md) | Maintainer decision contract | Promoted |
 | [PRD-005](docs/prds/PRD-005-protocol-data-schema-compatibility.md) | Protocol data schema + compatibility | Promoted |
-| [PRD-006](docs/prds/PRD-006-session-promotion-pipeline.md) | Session promotion pipeline | Promoted |
+| [PRD-006](docs/prds/PRD-006-session-promotion-pipeline.md) | Session promotion pipeline + eight-step implementation loop (A1) | Promoted |
 | [PRD-007](docs/prds/PRD-007-trust-provenance-layer.md) | Trust + provenance layer | Promoted |
 | [PRD-008](docs/prds/PRD-008-cross-sandbox-handoff-contract.md) | Cross-sandbox handoff contract (payload-first) | Promoted |
 | [PRD-009](docs/prds/PRD-009-cross-document-reconciliation.md) | Cross-document reconciliation + OQ triage | Promoted |
@@ -127,18 +127,20 @@ PRDs live on two shelves. Promoted, Maintainer-accepted contracts live in [docs/
 | [PRD-012](docs/prds/PRD-012-protocol-skills-codex-claude.md) | Protocol skills pack for Codex + Claude | Promoted |
 | [PRD-013](docs/prds/PRD-013-turnfile-coordination-format.md) | Turnfile coordination format | Promoted |
 | [PRD-014](docs/prds/PRD-014-session-closeout-boot-handoff-contract.md) | Session closeout + boot handoff contract | Promoted |
-| [PRD-015](working-session/docs/PRD-015-agent-onboarding-vetting-contract.md) | Agent onboarding + vetting contract | Deferred |
+| [PRD-015](docs/archive/prds/PRD-015-agent-onboarding-vetting-contract.md) | Agent onboarding + vetting contract | Deferred (archived) |
 | [PRD-016](docs/prds/PRD-016-session-rotation-trigger-contract.md) | Session rotation + new thread trigger contract | Promoted |
 | [PRD-017](docs/prds/PRD-017-boot-sequence-commands-and-documentation-contract.md) | Boot sequence + documentation contract (includes folded PRD-020 as R7) | Promoted |
 | [PRD-018](docs/prds/PRD-018-maintainer-approval-authority-matrix-contract.md) | Maintainer approval authority matrix | Promoted |
 | [PRD-019](docs/prds/PRD-019-mailbox-first-approval-and-polling-cadence-contract.md) | Mailbox-first approval, event-based cadence | Promoted |
-| [PRD-020](working-session/docs/PRD-020-boot-artifact-completeness-and-chat-log-contract.md) | Boot artifact completeness + chat log contract | Superseded (folded into PRD-017 R7) |
+| [PRD-020](docs/archive/prds/PRD-020-boot-artifact-completeness-and-chat-log-contract.md) | Boot artifact completeness + chat log contract | Superseded (archived; folded into PRD-017 R7) |
 | [PRD-021](docs/prds/PRD-021-conflict-loop-bound-and-selective-unlock-gradient-contract.md) | Conflict loop bound + selective-unlock gradient | Promoted |
-| [PRD-022](working-session/docs/PRD-022-decision-mirror-delivery-contract.md) | Decision-mirror delivery contract | Draft; Codex accepted with amendment |
-| [PRD-023](working-session/docs/PRD-023-out-of-band-activity-reconciliation-contract.md) | Out-of-band activity reconciliation | Agent-accepted; Maintainer acceptance pending |
-| [PRD-024](working-session/docs/PRD-024-human-legibility-invariant-and-encoding-profiles-contract.md) | Human-legibility invariant + encoding profiles | Agent-accepted; Maintainer acceptance pending |
-| [PRD-026](working-session/docs/PRD-026-review-cycle-closure-and-task-state-consistency-contract.md) | Review-cycle closure + task-state consistency | Agent-accepted; Maintainer acceptance pending |
-| [PRD-027](working-session/docs/PRD-027-tokenese-cloned-communication-ab-contract.md) | Tokenese cloned-communication A/B | Agent-accepted; Maintainer + PRD-024 gates pending |
+| [PRD-022](docs/prds/PRD-022-decision-mirror-delivery-contract.md) | Decision-mirror delivery contract | Promoted |
+| [PRD-023](docs/prds/PRD-023-out-of-band-activity-reconciliation-contract.md) | Out-of-band activity reconciliation | Promoted |
+| [PRD-024](docs/prds/PRD-024-human-legibility-invariant-and-encoding-profiles-contract.md) | Human-legibility invariant + encoding profiles | Promoted |
+| [PRD-026](docs/prds/PRD-026-review-cycle-closure-and-task-state-consistency-contract.md) | Review-cycle closure + task-state consistency | Promoted |
+| [PRD-027](working-session/docs/PRD-027-tokenese-cloned-communication-ab-contract.md) | Tokenese cloned-communication A/B | HELD (pending Maintainer checkpoint + commit/push) |
+| [PRD-028](docs/prds/PRD-028-tokenese-dual-artifact-sync-and-maintainer-legibility-contract.md) | Tokenese dual-artifact sync + Maintainer legibility | Promoted; implementation done (session 14) |
+| [PRD-029](docs/prds/PRD-029-pre-write-state-derivation-contract.md) | Pre-write state derivation contract | Promoted; implementation done (session 14) |
 
 ### Skills (per-agent execution guides)
 
@@ -148,7 +150,7 @@ Bundles are migrating to role-keyed directories with model compatibility recorde
 
 | Path | Description |
 |------|-------------|
-| [skills/claude/SKILL.md](skills/claude/SKILL.md) | Claude protocol execution guide (v0.4.0, role-keyed) |
+| [skills/claude/SKILL.md](skills/claude/SKILL.md) | Claude protocol execution guide (v0.6.0, role-keyed; bundle version 9) |
 | [skills/codex/SKILL.md](skills/codex/SKILL.md) | Codex protocol execution guide (v2, role-keyed) |
 | [skills/skill-versioning/SKILL.md](skills/skill-versioning/SKILL.md) | Shared metaskill for versioning skill bundles across Codex + Claude. Current installs may expose the same bundle as `skill-provenance`. |
 | [templates/SKILL.md](templates/SKILL.md) | Skill template for onboarding new agents |
@@ -200,6 +202,8 @@ node tools/validate-prd-promotion.mjs           # verify PRD promotion gates
 node tools/export-mailbox-json.mjs              # export mailbox to JSON
 node tools/new-payload-envelope.mjs             # generate payload envelopes
 node tools/validate-skills-preflight.mjs        # verify skill install/parity/versioning integrity
+node tools/validate-tokenese-pairs.mjs          # verify tokenese dual-artifact sync (PRD-028)
+node tools/next-state.mjs --mailbox <path> --turnfile <path>  # derive next IDs/counts before writing (PRD-029)
 ```
 
 Package scripts:
@@ -212,7 +216,7 @@ npm run validate:skills:ci   # repo-only checks (CI-safe)
 
 ## Status
 
-This protocol has been tested across 14 real collaboration sessions with two LLM agents (Claude by Anthropic, Codex by OpenAI) and a human maintainer. Session 14 (2026-06-12) established a ratified [baseline](BASELINE.md): every PRD carries an explicit status, the open-question registry is clear, and the Claude lane survived a model generation swap (Opus 4.6 to Fable 5) with zero protocol migration. Forward development narrows Turnfile into a thin governance layer for auditable peer disagreement and maintainer-governed resolution across existing agent platforms.
+This protocol has been tested across 14 real collaboration sessions with two LLM agents (Claude by Anthropic, Codex by OpenAI) and a human maintainer. Session 14 (2026-06-12 to 2026-06-13) closed with a full PRD-backlog sweep: 29 PRDs have explicit statuses, zero active open questions, and the first end-to-end runs of the eight-step implementation loop (PRD-006 A1). The Claude lane ran across three model generations (Opus 4.6, Fable 5, Opus 4.8) in a single session against one unmodified protocol. Forward development narrows Turnfile into a thin governance layer for auditable peer disagreement and maintainer-governed resolution across existing agent platforms.
 
 ## Next
 
