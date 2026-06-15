@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Turnfile &mdash; Making adversarial agents play nice</title>
-  <meta name="description" content="Turnfile is an open protocol for LLM agents that disagree, negotiate, and build consensus &mdash; without an orchestrator telling them what to do. Peer agents, file-level lane ownership, human arbiter, and every decision auditable in plain markdown.">
+  <title>Turnfile &mdash; Auditable peer disagreement for agents</title>
+  <meta name="description" content="Turnfile is a thin governance layer for auditable peer disagreement between LLM agents. Session 14 baseline: 24 promoted PRDs, 28 registry-tracked PRDs, PRD-028/029 implemented, and no central orchestrator.">
   <meta name="keywords" content="turnfile, SNAP, structured negotiation of autonomous peers, multi-agent protocol, LLM collaboration, peer agents, counter-recommendation, human-in-the-loop, agent arbitration, mailbox protocol, markdown coordination, auditable AI">
   <meta name="author" content="Sam Rogers">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
@@ -19,7 +19,7 @@
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Turnfile">
   <meta property="og:title" content="Turnfile">
-  <meta property="og:description" content="A protocol for LLM agents that disagree, negotiate, and build consensus &mdash; without an orchestrator telling them what to do.">
+  <meta property="og:description" content="A thin governance layer for auditable peer disagreement between LLM agents. Session 14 baseline: 24 promoted PRDs, 28 registry-tracked PRDs, and no central orchestrator.">
   <meta property="og:image" content="https://turnfile.work/imgs/og.png">
   <meta property="og:url" content="https://turnfile.work/">
   <meta property="og:locale" content="en_US">
@@ -38,7 +38,7 @@
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Turnfile">
-  <meta name="twitter:description" content="A protocol for LLM agents that disagree, negotiate, and build consensus &mdash; without an orchestrator telling them what to do.">
+  <meta name="twitter:description" content="A thin governance layer for auditable peer disagreement between LLM agents. Session 14 baseline: 24 promoted PRDs, 28 registry-tracked PRDs, and no central orchestrator.">
   <meta name="twitter:image" content="https://turnfile.work/imgs/og.png">
   <meta name="twitter:creator" content="@snapsynapse">
 
@@ -48,8 +48,8 @@
     "@context": "https://schema.org",
     "@type": "TechArticle",
     "headline": "Turnfile",
-    "alternativeHeadline": "A protocol for LLM agents that disagree, negotiate, and build consensus",
-    "description": "Turnfile defines Structured Negotiation of Autonomous Peers (SNAP) — a protocol for multi-LLM collaboration with file-level lane ownership, first-class counter-recommendations, a human maintainer as arbiter, and audit-visible markdown state. There is no orchestrator; peer agents coordinate through a shared Turnfile, mailbox, and worklog.",
+    "alternativeHeadline": "A thin governance layer for auditable peer disagreement between LLM agents",
+    "description": "Turnfile defines a narrowed Structured Negotiation of Autonomous Peers (SNAP) protocol: a thin governance layer for multi-LLM disagreement with file-level lane ownership, first-class counter-recommendations, a human maintainer as arbiter, and audit-visible markdown state. There is no orchestrator; peer agents coordinate through a shared Turnfile, mailbox, and worklog.",
     "inLanguage": "en",
     "url": "https://turnfile.work/",
     "mainEntityOfPage": { "@type": "WebPage", "@id": "https://turnfile.work/" },
@@ -89,7 +89,7 @@
     "@type": "DefinedTerm",
     "name": "Turnfile",
     "alternateName": ["turnfile", "SNAP", "Structured Negotiation of Autonomous Peers"],
-    "description": "A file-based protocol for peer-based multi-LLM collaboration. A Turnfile is the runtime coordination artifact that captures turn-taking, ownership, lock state, and next-action state in a structured, human-legible format. There is no orchestrator; agents propose within owned lanes and a human maintainer arbitrates.",
+    "description": "A file-based protocol for auditable peer disagreement between LLM agents. A Turnfile is the runtime coordination artifact that captures turn-taking, ownership, lock state, and next-action state in a structured, human-legible format. There is no orchestrator; agents propose within owned lanes and a human maintainer arbitrates.",
     "url": "https://turnfile.work/",
     "inDefinedTermSet": {
       "@type": "DefinedTermSet",
@@ -450,20 +450,20 @@
 <main id="main-content">
 <section class="hero">
   <div class="container">
-    <h1>Making adversarial agents play nice.</h1>
-    <p class="subtitle">An open protocol for LLM agents that disagree, negotiate, and build consensus &mdash; without an orchestrator telling them what to do.</p>
+    <h1>Auditable peer disagreement for agents.</h1>
+    <p class="subtitle">A thin governance layer for LLM agents that disagree, negotiate, and resolve work under human authority &mdash; without a central orchestrator.</p>
     <p class="byline">
       By <a href="https://paice.work/" target="_blank" rel="noopener author">Sam Rogers</a>, <a href="https://paice.work/" target="_blank" rel="noopener">PAICE.work PBC</a>
       <span class="sep">&middot;</span>
-      Published <time datetime="2026-02-08">February 8, 2026</time>
+      Session 14 baseline <time datetime="2026-06-15">June 15, 2026</time>
       <span class="sep">&middot;</span>
-      Updated <time datetime="2026-06-15">June 15, 2026</time>
+      24 promoted PRDs
       <span class="sep">&middot;</span>
-      <span class="version">v0.1.0-draft</span>
+      <span class="version">v0.1.0-reset</span>
       <span class="sep">&middot;</span>
       <a href="https://creativecommons.org/licenses/by/4.0/" rel="license" target="_blank">CC&nbsp;BY&nbsp;4.0</a>
     </p>
-    <p class="hook">Most multi-agent frameworks assume a boss. One model plans, others execute, and failure cascades before anyone catches it. Turnfile inverts that: peer agents own their lanes, counter-recommendations are first-class, and a human arbitrates &mdash; without copy-paste relay duty.</p>
+    <p class="hook">Session 14 narrowed Turnfile into a portable governance layer: 24 promoted PRDs, 28 registry-tracked PRDs, zero active open questions, PRD-028/029 implemented end-to-end, and one protocol surviving Opus 4.6, Fable 5, and Opus 4.8 without migration.</p>
 
     <div class="turnfile-snippet" role="img" tabindex="0" aria-label="Example Turnfile coordination artifact showing two peer agents Claude and Codex with owned lanes, a human maintainer as arbiter, and the current turn being handed from Codex to Claude"><span class="tk-cm"># turnfile.yaml</span>
 <span class="tk-key">agents</span>:
@@ -482,20 +482,20 @@
 <section class="alt" id="why">
   <div class="container">
     <h2>Why Turnfile exists</h2>
-    <p>Pairwise relays and fragmented context create delay. Collaboration state drifts when multiple agents edit shared files without a strict contract. Most frameworks optimize for local speed but under-optimize collaborative intelligence quality. Turnfile is a <strong>Structured Negotiation of Autonomous Peers (SNAP)</strong> &mdash; consent-based, peer multi-LLM collaboration with human-on-the-loop governance and public auditability.</p>
+    <p>Agent platforms can already produce work. Turnfile focuses on the harder governance surface: what happens when peer agents disagree, drift, collide, or need human authority without turning one model into the boss. Turnfile is a <strong>Structured Negotiation of Autonomous Peers (SNAP)</strong> &mdash; a thin, file-based protocol for auditable disagreement, resolution, and handoff.</p>
 
     <div class="pillars">
       <div class="pillar">
         <h3>Peers, no hierarchy</h3>
-        <p>Agents propose within owned lanes. No orchestrator commands another model. File-level ownership prevents merge conflicts before they happen.</p>
+        <p>Agents propose within owned lanes. No orchestrator commands another model. File-level ownership and transaction locks keep shared state coherent.</p>
       </div>
       <div class="pillar">
         <h3>Adversarial by design</h3>
-        <p>Counter-recommendations are first-class. Disagreement is signal, not error &mdash; it surfaces <em>before</em> action and produces better outcomes than silent compliance.</p>
+        <p>Counter-recommendations are first-class. Disagreement is signal, not error &mdash; it is routed, bounded, and resolved without hiding dissent.</p>
       </div>
       <div class="pillar">
         <h3>Audit-visible by default</h3>
-        <p>Every decision lives in plain markdown. Mailbox messages, worklogs, and the Turnfile itself are recoverable without specialized tooling.</p>
+        <p>Every decision lives in plain markdown. Mailbox messages, worklogs, PRD gates, and the Turnfile itself are recoverable without specialized tooling.</p>
       </div>
     </div>
 
@@ -633,7 +633,7 @@ PRD-029  Pre-write state derivation</pre>
   <div class="container">
     <div class="footer-grid">
       <div class="footer-meta">
-        <p>Turnfile v0.1.0-draft &middot; <a href="https://creativecommons.org/licenses/by/4.0/" rel="license" target="_blank">CC BY 4.0</a> (this page) &middot; <a href="https://github.com/snapsynapse/turnfile/blob/main/LICENSE" target="_blank" rel="noopener">Apache 2.0</a> (code)</p>
+        <p>Turnfile v0.1.0-reset &middot; <a href="https://creativecommons.org/licenses/by/4.0/" rel="license" target="_blank">CC BY 4.0</a> (this page) &middot; <a href="https://github.com/snapsynapse/turnfile/blob/main/LICENSE" target="_blank" rel="noopener">Apache 2.0</a> (code)</p>
         <p>A <a href="https://paice.work/" target="_blank" rel="noopener">PAICE.work PBC</a> project by <a href="https://paice.work/" target="_blank" rel="noopener author">Sam Rogers</a>.</p>
         <p style="margin-top: 0.5rem;">See also: <a href="https://gracefulboundaries.dev/" target="_blank" rel="noopener">Graceful Boundaries</a> &middot; <a href="https://hardguard25.com/" target="_blank" rel="noopener">HardGuard25</a> &middot; <a href="https://knowledge-as-code.com/" target="_blank" rel="noopener">Knowledge as Code</a> &middot; <a href="https://skillprovenance.dev/" target="_blank" rel="noopener">Skill Provenance</a></p>
       </div>
