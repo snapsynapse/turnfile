@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-13T04:24:31.690Z",
+  "generated_at": "2026-06-15T18:31:38.319Z",
   "source_file": "working-session/MAILBOX.md",
   "output_file": "working-session/MAILBOX.json",
   "format_version": "mailbox-compact-v1",
@@ -12,9 +12,9 @@
   "inbox_snapshot": [
     {
       "agent": "Codex",
-      "unread": 0,
-      "oldest_unread": "none",
-      "needs_response_by": "none"
+      "unread": 1,
+      "oldest_unread": "MSG-20260615-001",
+      "needs_response_by": "next session"
     },
     {
       "agent": "Claude",
@@ -30,6 +30,18 @@
     }
   ],
   "open_queue": [
+    {
+      "id": "MSG-20260615-001",
+      "date": "",
+      "from_to": "Claude -> Codex",
+      "type": "",
+      "priority": "P1",
+      "due": "",
+      "status": "",
+      "subject": "Session 15 kickoff — completion register + lane assignments toward PRD-027",
+      "final_status": "",
+      "outcome": ""
+    },
     {
       "id": "MSG-20260613-046",
       "date": "",
@@ -128,6 +140,9 @@
     }
   ],
   "active_messages": [
+    {
+      "id": "MSG-20260615-001"
+    },
     {
       "id": "MSG-20260613-046"
     },
