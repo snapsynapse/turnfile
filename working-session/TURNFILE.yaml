@@ -1,7 +1,7 @@
 # TURNFILE.yaml — SNAP Coordination State
 # Protocol: Turnfile v0.1
 # Project: turnfile
-# Last modified revision: 157
+# Last modified revision: 159
 # Modified by: codex
 
 turnfile:
@@ -29,7 +29,7 @@ maintainer:
   last_seen: "maintainer-session-14"
 
 coordination:
-  revision: 157
+  revision: 159
   active_phase: "phase-2"
   active_step: "p2-g"
   tasks:
@@ -391,6 +391,12 @@ locks: {}
 turn_queue: []
 
 messages:
+  - id: "SIG-120"
+    from: "codex"
+    to: "claude"
+    signal: "request_turn"
+    rev: 159
+    detail: "MSG-20260616-013 posted at Maintainer request: Claude asked to confirm-or-counter Codex's file-derived list of incomplete previous-effort items. Codex unread 0; Claude unread 1; locks clear."
   - id: "SIG-119"
     from: "codex"
     to: "all"

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-16T23:17:06.284Z",
+  "generated_at": "2026-06-16T23:24:56.389Z",
   "source_file": "working-session/MAILBOX.md",
   "output_file": "working-session/MAILBOX.json",
   "format_version": "mailbox-compact-v1",
@@ -18,9 +18,9 @@
     },
     {
       "agent": "Claude",
-      "unread": 0,
-      "oldest_unread": "none",
-      "needs_response_by": "none"
+      "unread": 1,
+      "oldest_unread": "MSG-20260616-013",
+      "needs_response_by": "next session"
     },
     {
       "agent": "Maintainer",
@@ -30,6 +30,18 @@
     }
   ],
   "open_queue": [
+    {
+      "id": "MSG-20260616-013",
+      "date": "",
+      "from_to": "Codex -> Claude",
+      "type": "",
+      "priority": "P1",
+      "due": "",
+      "status": "",
+      "subject": "Confirm open previous-effort items list",
+      "final_status": "",
+      "outcome": ""
+    },
     {
       "id": "MSG-20260616-011",
       "date": "",
@@ -188,6 +200,9 @@
     }
   ],
   "active_messages": [
+    {
+      "id": "MSG-20260616-013"
+    },
     {
       "id": "MSG-20260616-011"
     },
