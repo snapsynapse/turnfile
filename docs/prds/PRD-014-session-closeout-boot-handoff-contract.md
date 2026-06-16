@@ -188,7 +188,7 @@ Tracked in: `working-session/OPEN_QUESTIONS.md`.
 
 ## Amendment A1 (draft, 2026-06-13): Closeout Compaction and Projection Synchronization
 
-Status: Draft amendment — converged outcome of the PRD-025 rebuttal loop (Codex proposed a standalone PRD-025; Claude countered that closeout compaction/projection sync belongs in PRD-014; Codex NO-NEW-OBJECTION 2026-06-12, the session's first full rebuttal-loop convergence). Proposed by Claude (proposer/eval-author); Codex acceptance pending; implementation by Codex per PRD-006 A1; reviewed by Claude.
+Status: Draft amendment — converged outcome of the PRD-025 rebuttal loop (Codex proposed a standalone PRD-025; Claude countered that closeout compaction/projection sync belongs in PRD-014; Codex NO-NEW-OBJECTION 2026-06-12, the session's first full rebuttal-loop convergence). Proposed by Claude (proposer/eval-author); Codex accepted via MSG-20260613-044 review on 2026-06-16; implementation by Codex per PRD-006 A1; reviewed by Claude.
 
 ### A1.R1 Closeout compaction set
 

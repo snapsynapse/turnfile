@@ -3,16 +3,17 @@
 References:
 - `/Users/snap/Git/turnfile/docs/PROTOCOL_CORE.md`
 
-Now Working (Codex): Session 15 CLOSED (Codex 5.5) at rev 145. Codex actioned MSG-20260616-008, posted SIG-112 closeout yield, and has no further counters. Codex unread 0; no locks.
+Now Working (Codex): Session 15 CLOSED (Codex 5.5) at rev 146. Codex actioned MSG-20260616-008, posted SIG-112 closeout yield, then applied a post-close PRD-014 A1 review correction in MSG-044/SIG-113. Codex unread 0; no locks.
 Now Working (Claude): Session 15 CLOSING (Opus 4.8) at rev 141. tk-teach-tokenese done; tk-ab-suite-design DONE (suite agreed both agents, PRD-027 AC5 met); charter draft v2 signed by both agents (awaiting Maintainer ratification); PRD-030 reviewed + C1-C5 applied (awaiting Maintainer acceptance). Closed 7 fulfilled Claude-owned threads. Heartbeat loop f77ecc36 DELETED at clean close (PRD-030 AC6 worked example). Claude unread 0; no locks.
 Maintainer Focus (between sessions): two approvals are yours to make before session 16 — (1) ratify the PRD-027 session charter (working-session/SESSION_CHARTER.md, R2.4); (2) accept PRD-030. Next session opens with Claude boot + confirmation of these approvals.
 Maintainer Decision Queue (PRD-004 A1): (1) ratify PRD-027 session charter (R2.4); (2) accept PRD-030 (session heartbeat); (3) PRD-003/004/008 A1 document acceptances if still desired; (4) model-specific skill directory retention only by explicit decision; (5) push/PR timing.
-Next Review Checkpoint (session 16 plan): Claude boot -> confirm Maintainer approvals (charter + PRD-030) -> deep-inspect + apply Perplexity's deterministic checker/decoder (eval against the pre-eval checklist in the closeout entry) -> then tk-ab-run mini-pilot (W1+L1) once charter ratified. Parallel carry-forward (Codex lanes, unchanged): PRD-014 A1 review (MSG-044 open); PRD-021/022/024 impl (evals red); PRD-023/026/017 eval-authoring -> Claude implements; PRD-024 R5.1 validator.
+Next Review Checkpoint (session 16 plan): Claude boot -> confirm Maintainer approvals (charter + PRD-030) -> deep-inspect + apply Perplexity's deterministic checker/decoder (eval against the pre-eval checklist in the closeout entry) -> then tk-ab-run mini-pilot (W1+L1) once charter ratified. Parallel carry-forward (Codex lanes, updated): PRD-014 A1 now awaits Claude closure/eval handoff after Codex APPLY; PRD-021/022/024 impl (evals red); PRD-023/026/017 eval-authoring -> Claude implements; PRD-024 R5.1 validator.
 
 ## Decision Index
 
 | Decision | Owner | Timestamp | Section |
 |----------|-------|-----------|---------|
+| Codex reviewed Claude's PRD-014 A1 amendment and returned APPLY with no counters: PRD-026 boundary is clean, compaction set is sufficient, and the lane is Claude eval-author / Codex implement / Claude review under PRD-006 A1. | Codex + Claude | 2026-06-16 | MSG-20260613-044 |
 | Claude accepted all Codex amendments from MSG-20260616-007 in MSG-20260616-008. The A/B suite is agreed by both agents and `tk-ab-suite-design` is done. The session charter is signed by both agents and ready for Maintainer ratification before any live Tokenese clone traffic. PRD-030 counters C1-C5 are confirmed applied; PRD-030 awaits Maintainer acceptance. | Claude + Codex | 2026-06-16 | Charter and A/B suite accepted |
 | Codex completed the PRD-027 charter and A/B suite counter-review. Codex signed `working-session/SESSION_CHARTER.md`, accepted the narrowed dense-lane scope, confirmed W1+L1 mini-pilot and direction balance, added W1 evidential discipline, stable source IDs, a mini-pilot dense-reasoning failure criterion, and concrete L1-L3 inputs. Review posted to Claude in MSG-20260616-007; Maintainer ratification remains required before live Tokenese clone traffic. | Codex + Claude | 2026-06-16 | Charter and A/B suite counter-review complete |
 | Claude reviewed PRD-030 APPLY with five counters in MSG-20260616-006. Codex applied C1-C5: PRD-014 A1 seam, mandatory WORKLOG entries for carried-forward heartbeats, no `automation_state` in Turnfile, heartbeat as interaction gearing not protocol cadence, and false-idle/prolonged-silence rule. PRD-030 agent acceptance gates are now accepted; Maintainer acceptance remains pending. | Claude + Codex | 2026-06-16 | PRD-030 counters applied |
@@ -102,7 +103,7 @@ Carry-forward to session 16 (next-session plan, Maintainer-agreed):
 1. Claude boot -> confirm Maintainer approvals: (a) charter ratification (R2.4), (b) PRD-030 acceptance.
 2. Deep-inspect + apply Perplexity's deterministic checker/decoder against the pre-eval checklist (below).
 3. Then tk-ab-run mini-pilot (W1 + L1) once charter ratified; scored by Perplexity's checker.
-4. Codex lanes unchanged: PRD-014 A1 review (MSG-044 open); PRD-021/022/024 impl (evals red); PRD-023/026/017 eval-authoring -> Claude implements; PRD-024 R5.1 validator.
+4. Codex lanes updated: PRD-014 A1 awaits Claude closure/eval handoff after Codex APPLY; PRD-021/022/024 impl (evals red); PRD-023/026/017 eval-authoring -> Claude implements; PRD-024 R5.1 validator.
 
 Perplexity pre-eval checklist (verify against the delivered tokenese-translator before trusting its scores):
 1. BLOCKER if missing — grammar target covers spec v0.1 PLUS DESIGN section 7 sigils (@noun, ??slot, because, square-hole / dagger / check / brace-quote / not() / ev: / dense-plain); pin the spec+DESIGN commit it locks to.
@@ -117,3 +118,4 @@ Perplexity pre-eval checklist (verify against the delivered tokenese-translator 
 | Decision | Owner | Timestamp | Section |
 |----------|-------|-----------|---------|
 | Session 15 closed with PRD-027 Tokenese pilot fully staged: teach done, suite agreed, charter signed by both agents (awaiting Maintainer ratification), PRD-030 reviewed (awaiting Maintainer acceptance), Perplexity checker scoped + delivered (next-session eval). Heartbeat loop deleted at clean close (PRD-030 AC6). | Maintainer + Claude + Codex | 2026-06-16 | Session 15 closeout |
+| Post-close correction: Codex PRD-014 A1 review from MSG-044 is actioned APPLY, so session 16 should treat the review as complete and await Claude closure/eval handoff. | Codex | 2026-06-16 | MSG-20260613-044 |
