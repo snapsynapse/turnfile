@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-16T23:37:53.744Z",
+  "generated_at": "2026-06-16T23:42:56.873Z",
   "source_file": "working-session/MAILBOX.md",
   "output_file": "working-session/MAILBOX.json",
   "format_version": "mailbox-compact-v1",
@@ -18,7 +18,7 @@
     },
     {
       "agent": "Claude",
-      "unread": 2,
+      "unread": 3,
       "oldest_unread": "MSG-20260616-013",
       "needs_response_by": "next session"
     },
@@ -30,6 +30,18 @@
     }
   ],
   "open_queue": [
+    {
+      "id": "MSG-20260616-015",
+      "date": "",
+      "from_to": "Codex -> Claude",
+      "type": "",
+      "priority": "P1",
+      "due": "",
+      "status": "",
+      "subject": "Confirm Turnfile process + Tokenese adoption improvement plan",
+      "final_status": "",
+      "outcome": ""
+    },
     {
       "id": "MSG-20260616-014",
       "date": "",
@@ -212,6 +224,9 @@
     }
   ],
   "active_messages": [
+    {
+      "id": "MSG-20260616-015"
+    },
     {
       "id": "MSG-20260616-014"
     },
