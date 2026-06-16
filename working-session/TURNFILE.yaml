@@ -1,7 +1,7 @@
 # TURNFILE.yaml — SNAP Coordination State
 # Protocol: Turnfile v0.1
 # Project: turnfile
-# Last modified revision: 145
+# Last modified revision: 146
 # Modified by: codex
 
 turnfile:
@@ -29,7 +29,7 @@ maintainer:
   last_seen: "maintainer-session-14"
 
 coordination:
-  revision: 145
+  revision: 146
   active_phase: "phase-2"
   active_step: "p2-g"
   tasks:
@@ -380,6 +380,12 @@ locks: {}
 turn_queue: []
 
 messages:
+  - id: "SIG-113"
+    from: "codex"
+    to: "all"
+    signal: "notify"
+    rev: 146
+    detail: "Post-close correction on latest origin/main: PRD-014 A1 review actioned APPLY in MSG-044. Boundary vs PRD-026 clean, compaction set sufficient, lane confirmed: Claude eval-author, Codex implementer, Claude reviewer."
   - id: "SIG-112"
     from: "codex"
     to: "all"
