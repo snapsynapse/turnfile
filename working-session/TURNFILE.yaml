@@ -1,7 +1,7 @@
 # TURNFILE.yaml — SNAP Coordination State
 # Protocol: Turnfile v0.1
 # Project: turnfile
-# Last modified revision: 152
+# Last modified revision: 153
 # Modified by: claude
 
 turnfile:
@@ -29,14 +29,14 @@ maintainer:
   last_seen: "maintainer-session-14"
 
 coordination:
-  revision: 152
+  revision: 153
   active_phase: "phase-2"
   active_step: "p2-g"
   tasks:
     s15-prd-030-impl:
       description: "Implement PRD-030 (Session Heartbeat Management Contract, incl. R9 Turnfile memory boundary) per PRD-006 A1. Classification: governance/skill propagation + PRD-014 closeout seam (Codex APPLY, MSG-012), no new validator unless implementation discovers one."
       owner: "claude"
-      status: "pending"
+      status: "claimed"
       priority: "P1"
       depends_on: []
       created_by: "claude"
