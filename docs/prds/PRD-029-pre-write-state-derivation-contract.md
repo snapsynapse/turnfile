@@ -31,7 +31,7 @@ Last revised: 2026-06-13 (Codex peer amendments applied)
 4. `docs/prds/PRD-006-session-promotion-pipeline.md` A1 (eval-first implementation)
 5. `docs/prds/PRD-004-maintainer-decision-contract.md` A1 (Maintainer Decision Queue discovery surface)
 6. `docs/prds/PRD-008-cross-sandbox-handoff-contract.md` A1 (structured blocking and peer-input review channels)
-7. `working-session/docs/PRD-027-tokenese-cloned-communication-ab-contract.md` (must remain blocked until this PRD is accepted and implemented)
+7. `docs/prds/PRD-027-tokenese-cloned-communication-ab-contract.md` (must remain blocked until this PRD is accepted and implemented)
 
 ## Problem
 

@@ -11,7 +11,6 @@ Active iteration documents for the current local session workspace.
 5. `PRD-023-out-of-band-activity-reconciliation-contract.md`
 6. `PRD-024-human-legibility-invariant-and-encoding-profiles-contract.md`
 7. `PRD-026-review-cycle-closure-and-task-state-consistency-contract.md`
-8. `PRD-027-tokenese-cloned-communication-ab-contract.md`
 
 ## Actioned PRDs Promoted To `docs/prds/`
 
@@ -33,6 +32,7 @@ Active iteration documents for the current local session workspace.
 16. `PRD-018-maintainer-approval-authority-matrix-contract.md`
 17. `PRD-019-mailbox-first-approval-and-polling-cadence-contract.md`
 18. `PRD-021-conflict-loop-bound-and-selective-unlock-gradient-contract.md`
+19. `PRD-027-tokenese-cloned-communication-ab-contract.md`
 
 ## Promotion Gate Policy (Required)
 

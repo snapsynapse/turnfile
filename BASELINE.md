@@ -50,7 +50,7 @@ Session 14 (2026-06-12) reset the project to a clean state after a four-month ga
 | 024 | Human-legibility invariant + encoding profiles | Promoted |
 | 025 | — | Resolved by convergence; folded into PRD-014 A1 amendment path |
 | 026 | Review-cycle closure + task-state consistency | Promoted |
-| 027 | Tokenese cloned-communication A/B | Agent-accepted; HELD pending Maintainer checkpoint + commit/push |
+| 027 | Tokenese cloned-communication A/B | Accepted; initiation approved |
 | 028 | Tokenese dual-artifact sync + Maintainer legibility | Promoted; implementation done via eight-step loop |
 | 029 | Pre-write state derivation contract | Promoted; implementation done via eight-step loop |
 `working-session/docs/PRD_STATUS.json` is the source of truth for this table. PRDs 002/015/020 are terminal and the validator enforces the archived-only invariant for `docs/archive/prds/`.
@@ -65,7 +65,7 @@ Session 14 (2026-06-12) reset the project to a clean state after a four-month ga
 8. Files-First operating norm (skill v0.5.0): read shared files before asserting or reasoning about state, not only before writing.
 9. Concurrent-Write Discipline (skill v0.6.0): derive all written values (IDs, counts, pointers) from an in-lock fresh read; never from memory.
 10. Model-Ledger Handshake: verify executing model is in `docs/llm/MODEL_LEDGER.md` at boot before relying on model-compatibility claims.
-11. Tokenese sequencing gate: PRD-028 (done) → PRD-029 (done) → Maintainer checkpoint → PRD-027 initiation → teach phase → A/B pilot.
+11. Tokenese sequencing gate: PRD-028 (done) -> PRD-029 (done) -> PRD-027 initiation approved -> teach phase -> A/B pilot.
 12. Maintainer-decision relays (PRD-004 blockquote) default to `delivery-mirror` mode unless explicitly downgraded with rationale (OQ-065).
 ## Forward task register (as of session 14 close)
 1. **Model-agnostic skill layout** — done: `skills/claude/` v0.6.0 (bundle 9), `skills/codex/` v7, both role-keyed; old paths deprecated in place. Remaining: `skills/gemini-3/` migrates when PRD-015 resumes.
@@ -74,8 +74,8 @@ Session 14 (2026-06-12) reset the project to a clean state after a four-month ga
 4. **Codex implementation lanes** — PRD-021/022/024 evals are red (16 tests); Codex implements. PRD-023/026: Codex writes evals, Claude implements.
 5. **PRD-024 R5.1 dense-fragment validator** — Codex lane (Claude cannot take it; Claude authored those evals).
 6. **Deferred compaction** — WORKLOG.md > 500 lines; compact sessions 13+14 narrative to WORKLOG_ARCHIVE.md at session 15 boot (single-agent, first action).
-7. **Maintainer pre-PRD-027 checkpoint + push/PR discussion** — required before tokenese initiation.
-8. **PRD-027 (tokenese A/B)** — HELD; gating stack: PRD-028 ✓ + PRD-029 ✓ + Maintainer checkpoint → PRD-027 → teach phase → A/B pilot. Tokenese workspace: `~/Git/tokenese/HANDOFF.md`.
+7. **Maintainer pre-PRD-027 checkpoint + push/PR discussion** — completed/superseded for initiation by Maintainer approval on 2026-06-15; push/PR timing remains a separate Maintainer queue item.
+8. **PRD-027 (tokenese A/B)** — accepted and initiated. Gating stack now: session-charter opt-in -> Claude teach phase -> Codex production-competence check -> measured A/B pilot. Tokenese workspace: `~/Git/tokenese/HANDOFF.md`.
 9. **Root `AGENTS.md` and `CLAUDE.md` bootstrap files** — so any cold-start agent lands on the boot sequence without manual orientation (`GEMINI.md` already exists).
 10. **Minimal starter workflow** (ROADMAP item 2): copy one folder, read one guide. Two starters: two-agents-plus-maintainer, single-agent-plus-independent-review.
 11. **Platform integration notes** (ROADMAP item 4), starting with Claude Code and Codex as execution substrates.

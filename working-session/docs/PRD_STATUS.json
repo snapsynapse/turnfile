@@ -858,9 +858,9 @@
     {
       "id": "PRD-027",
       "title": "Tokenese Cloned-Communication A/B Contract",
-      "path": "working-session/docs/PRD-027-tokenese-cloned-communication-ab-contract.md",
-      "shelf": "working-session/docs",
-      "state": "draft",
+      "path": "docs/prds/PRD-027-tokenese-cloned-communication-ab-contract.md",
+      "shelf": "docs/prds",
+      "state": "accepted",
       "acceptance": {
         "codex": {
           "status": "accepted",
@@ -875,18 +875,15 @@
           ]
         },
         "maintainer": {
-          "status": "pending",
+          "status": "accepted",
           "evidence": [
             "Maintainer clarified on 2026-06-13 that PRD-027 is for cloning existing Turnfile communications into Tokenese for A/B testing, not replacing or changing existing communications",
-            "Maintainer held PRD-027 approval until every other PRD item is fully complete, followed by commit, push, and checkpoint discussion before initiation"
+            "Maintainer approved PRD-027 on 2026-06-15 (session 15): 'I have approved PRD-027.' This releases the completion-register hold; the open register items (PRD-021/022/024 implementation, PRD-023/026/017 evals, PRD-014 A1, PRD-024 R5.1 validator) continue as parallel lanes rather than PRD-027 blockers. Initiation begins with governance sync, session-charter opt-in, Claude teach phase, and Codex production-competence check before live Tokenese clone traffic."
           ]
         }
       },
-      "blocking_items": [
-        "Maintainer acceptance held pending completion of every other PRD item",
-        "Commit, push, and Maintainer checkpoint discussion required before PRD-027 initiation"
-      ],
-      "eligible_for_docs_prds": false
+      "blocking_items": [],
+      "eligible_for_docs_prds": true
     },
     {
       "id": "PRD-028",

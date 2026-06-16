@@ -40,7 +40,7 @@ This PRD aligns with:
 8. `docs/prds/PRD-019-mailbox-first-approval-and-polling-cadence-contract.md`
 9. `docs/prds/PRD-022-decision-mirror-delivery-contract.md`
 10. `docs/prds/PRD-024-human-legibility-invariant-and-encoding-profiles-contract.md`
-11. `working-session/docs/PRD-027-tokenese-cloned-communication-ab-contract.md`
+11. `docs/prds/PRD-027-tokenese-cloned-communication-ab-contract.md`
 
 ## Problem
 

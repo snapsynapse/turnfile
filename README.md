@@ -138,7 +138,7 @@ PRDs live on two shelves. Promoted, Maintainer-accepted contracts live in [docs/
 | [PRD-023](docs/prds/PRD-023-out-of-band-activity-reconciliation-contract.md) | Out-of-band activity reconciliation | Promoted |
 | [PRD-024](docs/prds/PRD-024-human-legibility-invariant-and-encoding-profiles-contract.md) | Human-legibility invariant + encoding profiles | Promoted |
 | [PRD-026](docs/prds/PRD-026-review-cycle-closure-and-task-state-consistency-contract.md) | Review-cycle closure + task-state consistency | Promoted |
-| [PRD-027](working-session/docs/PRD-027-tokenese-cloned-communication-ab-contract.md) | Tokenese cloned-communication A/B | HELD (pending Maintainer checkpoint + commit/push) |
+| [PRD-027](docs/prds/PRD-027-tokenese-cloned-communication-ab-contract.md) | Tokenese cloned-communication A/B | Accepted; initiation approved |
 | [PRD-028](docs/prds/PRD-028-tokenese-dual-artifact-sync-and-maintainer-legibility-contract.md) | Tokenese dual-artifact sync + Maintainer legibility | Promoted; implementation done (session 14) |
 | [PRD-029](docs/prds/PRD-029-pre-write-state-derivation-contract.md) | Pre-write state derivation contract | Promoted; implementation done (session 14) |
 
