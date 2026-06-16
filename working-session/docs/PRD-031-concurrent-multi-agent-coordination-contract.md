@@ -1,10 +1,17 @@
 # PRD-031: Concurrent Multi-Agent Coordination Contract
 
-Status: Draft v2 (working-session)
+Status: Draft v3 (working-session)
 Owner: Maintainer + Claude (proposer) + Codex (reviewer)
 Date: 2026-06-16
 
-Supersedes draft v1 ("Enforced Shared-File Mutual Exclusion"). v1 proposed a global control-plane mutex; the Maintainer redirected (2026-06-16): Turnfile must let multiple LLMs work the same branch of the same repo at the same time, delivering independently and simultaneously, and reconcile adversarially — not serialize into one-turn-at-a-time with idle gaps. A global mutex would entrench the very serialization we are leaving behind. This draft re-centers on safe concurrency.
+Supersedes draft v1 ("Enforced Shared-File Mutual Exclusion"). v1 proposed a global control-plane mutex; the Maintainer redirected (2026-06-16): Turnfile must let multiple LLMs work the same branch of the same repo at the same time, delivering independently and simultaneously, and reconcile adversarially — not serialize into one-turn-at-a-time with idle gaps. A global mutex would entrench the very serialization we are leaving behind. This draft re-centers on safe concurrency. v3 applies Maintainer decisions on the four design questions (see Resolved questions).
+
+## Definitions
+
+- DAG (Directed Acyclic Graph): a set of nodes joined by one-way links with no cycles — you can never follow the arrows back to where you started, so nothing is its own ancestor. Git's commit history is a DAG: every commit points to its parent(s), so the graph itself records what-came-after-what and shows parallel work as a branch that later merges. PRD-031 uses this existing structure as the ordering/causality source instead of a single shared revision counter.
+- Shard: a per-agent directory under `working-session/agents/<agent>/` that only that agent writes.
+- Aggregate (or derived view): a human-legible file (MAILBOX, WORKLOG, TURNFILE snapshot) regenerated from all shards by a tool; read-mostly, not hand-edited.
+- Append-only log: a file that is only ever added to, never edited in place, so writes from different agents never touch the same bytes.
 
 ## Promotion Gate Snapshot (PRD-006 R2a)
 
@@ -75,12 +82,14 @@ The root cause is a shared mutable write target, not a missing lock. As agent co
 2. No event is mutated in place; corrections are new superseding events that reference the prior event id (consistent with PRD-009 revision-token linkage).
 3. Append-only growth is bounded by compaction at closeout (PRD-011 R5, PRD-014 A1), applied per shard.
 
-## R3. Derived aggregate views
+## R3. Derived aggregate views (build artifacts, not merge targets)
 
-1. A derivation tool (e.g. `tools/aggregate-coordination.mjs`) reads all shards and regenerates the legible aggregates: the `TURNFILE.yaml` agents/tasks/signal snapshot, `MAILBOX.md` + `MAILBOX.json`, and a merged `WORKLOG.md` view, ordered by causal/logical time.
-2. Aggregates are read-mostly projections. The Maintainer and agents read them; agents do not write them by hand.
-3. Derivation runs after merge (git post-merge / pre-read step) and as part of validation. A stale aggregate is a derivation-not-run signal, never a source of truth (extends PRD-030 R9: shards are authoritative, aggregate is cache).
-4. Aggregates must satisfy PRD-024 legibility: a human can read current state without replaying raw logs.
+Resolves OQ-3: aggregates are build artifacts regenerated on read, NOT committed merge targets. This removes the last shared-file merge surface — there is nothing left for two agents to collide on.
+
+1. A derivation tool (e.g. `tools/aggregate-coordination.mjs`) reads all shards and regenerates the legible aggregates: the `TURNFILE.yaml` agents/tasks/signal snapshot, `MAILBOX.md` + `MAILBOX.json`, and a merged `WORKLOG.md` view, ordered by the git DAG (R6).
+2. Aggregates are generated on read (boot, pre-report, validation), not hand-edited and not a git merge target. Shards are the only committed authoritative state (extends PRD-030 R9: shards authoritative, aggregate is cache).
+3. Because aggregates are deterministic functions of the shards, the legible view for ANY commit can be regenerated from that commit's shards — git-history legibility is preserved without committing the aggregate as a mergeable file.
+4. Maintainer legibility (PRD-024): regeneration is cheap and runs automatically before any Maintainer-facing read; a CI/boot step may also publish a read-only rendered snapshot (force-overwritten, never 3-way merged) for GitHub browsing. A stale or missing aggregate is a derivation-not-run signal, never a source of truth.
 
 ## R4. Namespaced identifiers (no allocation race)
 
@@ -90,14 +99,17 @@ The root cause is a shared mutable write target, not a missing lock. As agent co
 ## R5. Event-sourced tasks and concurrent-claim handling
 
 1. Task state (create/claim/update/complete) is expressed as append-only task events in each agent's shard and folded into the task table by derivation.
-2. If two agents claim the same unassigned task concurrently, derivation detects two claims on one task and emits a `claim-conflict` for resolution, rather than silently losing one. Default resolution: earliest causal claim wins; the later claimant is notified to pick another lane or co-deliver. Maintainer may override.
+2. If two agents claim the same unassigned task concurrently, derivation detects two claims on one task and emits a `claim-conflict`. Resolves OQ-2: the default is allow-parallel-then-review — both claimants may proceed and deliver independently, and the competing deliveries are routed to the review/rebuttal loop (R9) to converge on the stronger result. This matches the adversarial-collaboration vision: parallel attempts are a feature, not a fault. (Earliest-causal-wins and Maintainer-arbitration remain available overrides per task when parallel delivery is wasteful.)
 3. Two agents may deliberately deliver competing implementations of the same task (adversarial parallel attempts); the protocol records both and routes them to the review/rebuttal loop to converge on the stronger result (PRD-021 conflict-loop bound applies).
 
-## R6. Causal ordering without a global counter
+## R6. Causal ordering via the git DAG
 
-1. The single `coordination.revision` integer is replaced by per-agent logical clocks (Lamport/vector). Each agent increments its own clock; cross-agent ordering uses happens-before edges (an event that reads/acks another carries its id) and the git commit DAG.
-2. Lease/staleness semantics (formerly `revision - acquired_rev > lease_revs`) are redefined against the holder's own clock plus a wall-clock fallback and liveness check; they apply only to the rare optional fine-grained lease (R7), not to the control plane as a whole.
-3. A derived, monotonic display value (e.g. total event count) may be shown in aggregates for readability; it is never a write target.
+Resolves OQ-1: ordering uses the git commit DAG plus happens-before edges, not a new clock system. The git history is already a DAG (see Definitions); we use the structure we already maintain rather than building Lamport or vector clocks.
+
+1. The single `coordination.revision` integer is retired as a write target. Cross-agent ordering comes from (a) the git commit DAG — parent links record what-came-after-what, and concurrent work appears as branches that merge — and (b) explicit happens-before edges inside events (an event that reads/acks another carries that event's id).
+2. Lease/staleness semantics (formerly `revision - acquired_rev > lease_revs`) are redefined against commit-DAG distance plus a wall-clock fallback and liveness check; they apply only to the rare optional fine-grained lease (R7), not to the control plane as a whole.
+3. A derived, monotonic display value (e.g. total event count or commit height) may be shown in aggregates for human readability; it is computed, never a write target.
+4. Lamport or vector clocks are explicitly NOT adopted (rejected for added machinery the git DAG already provides); they may be revisited only if a future need shows the DAG plus happens-before edges is insufficient.
 
 ## R7. Optional fine-grained leases (not a global lock)
 
@@ -141,7 +153,7 @@ The root cause is a shared mutable write target, not a missing lock. As agent co
 
 ## Migration / phasing
 
-1. Phase 1 (kills the common collisions, low risk): per-agent namespaced ids + per-agent append-only signal/message/read-state logs + a derivation tool that regenerates `MAILBOX.md`/`.json` and the `TURNFILE` signal snapshot. Tasks/agents tables stay as today but become derived outputs.
+1. Phase 1 — APPROVED as the immediate scope (resolves OQ-4): per-agent namespaced ids + per-agent append-only signal/message/read-state logs + a derivation tool that regenerates `MAILBOX.md`/`.json` and the `TURNFILE` signal snapshot. Tasks/agents tables stay as today but become derived outputs. This alone removes today's two-agent collisions and is built first, before the larger redesign.
 2. Phase 2: event-source tasks and per-agent status shards; derive the `TURNFILE` agents/tasks tables; retire hand-editing of `TURNFILE.yaml`.
 3. Phase 3: replace `coordination.revision` with per-agent logical clocks; redefine lease semantics; remove the advisory global lock entirely.
 4. Each phase ships under PRD-006 A1 (evals first) and keeps the aggregate views byte-stable for the Maintainer at every step.
@@ -172,7 +184,13 @@ The root cause is a shared mutable write target, not a missing lock. As agent co
 
 ## Open questions
 
-1. OQ-1: Causal-ordering mechanism — per-agent Lamport clocks, vector clocks, or lean entirely on the git commit DAG plus happens-before edges? (Phase 3.)
-2. OQ-2: Default resolution for a concurrent same-task claim — earliest-causal-wins, Maintainer-arbitrated, or always-allow-parallel-then-review? (R5.2.)
-3. OQ-3: Does the derived aggregate stay committed in the repo (legible in git history, but a merge target) or become a build artifact regenerated on read (not committed, no merge target)? Trade-off: git-history legibility vs zero aggregate-merge surface.
-4. OQ-4: Minimum viable Phase 1 scope — is namespaced-ids + append-only mailbox/signal logs enough to unblock current two-agent concurrency before the larger redesign?
+No open questions in this draft.
+
+## Resolved questions
+
+Resolved by Maintainer 2026-06-16:
+
+1. OQ-1 (causal ordering): use the git commit DAG plus happens-before edges. Lamport/vector clocks rejected as unnecessary machinery. (R6.)
+2. OQ-2 (concurrent same-task claim): default to allow-parallel-then-review — both deliver, the review/rebuttal loop converges. Earliest-causal-wins and Maintainer-arbitration remain per-task overrides. (R5.2.)
+3. OQ-3 (aggregate storage): aggregates are build artifacts regenerated on read, not committed merge targets; any commit's view is regenerable from its shards; a force-overwritten read-only snapshot may be published for GitHub browsing. (R3.)
+4. OQ-4 (Phase 1 scope): yes — namespaced ids + append-only mailbox/signal logs + derivation is the approved immediate scope, built first. (Migration Phase 1.)
