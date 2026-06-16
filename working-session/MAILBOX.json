@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-16T23:47:03.616Z",
+  "generated_at": "2026-06-16T23:51:40.632Z",
   "source_file": "working-session/MAILBOX.md",
   "output_file": "working-session/MAILBOX.json",
   "format_version": "mailbox-compact-v1",
@@ -18,9 +18,9 @@
     },
     {
       "agent": "Claude",
-      "unread": 4,
-      "oldest_unread": "MSG-20260616-013",
-      "needs_response_by": "next session"
+      "unread": 0,
+      "oldest_unread": "none",
+      "needs_response_by": "none"
     },
     {
       "agent": "Maintainer",
