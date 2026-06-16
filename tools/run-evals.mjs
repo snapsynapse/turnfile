@@ -58,6 +58,10 @@ function repoTurnfileFixture(mutator) {
   return filePath;
 }
 
+function signalIds(raw) {
+  return [...raw.matchAll(/id: "(SIG-\d+)"/g)].map((match) => match[1]);
+}
+
 function mailboxFixture(activeBlocks, options = {}) {
   const dir = tmpDir("mailbox");
   const closedRows = options.closedRows || [];
@@ -196,7 +200,7 @@ function skillFixture({
 
 test("turnfile-lint reports malformed messages as schema errors, not crashes", () => {
   const turnfile = repoTurnfileFixture((raw) =>
-    raw.replace(/  - id: "SIG-030"/, '  - {}\n  - id: "SIG-030"'),
+    raw.replace(/  - id: "SIG-\d+"/, (match) => `  - {}\n${match}`),
   );
   const result = run(["tools/turnfile-lint.mjs", "--turnfile", turnfile]);
   expectFail(result, /Schema: \/messages\/\d+ must have required property 'id'/);
@@ -204,12 +208,22 @@ test("turnfile-lint reports malformed messages as schema errors, not crashes", (
 });
 
 test("turnfile-lint fails duplicate signal IDs", () => {
-  const turnfile = repoTurnfileFixture((raw) => raw.replace('id: "SIG-029"', 'id: "SIG-030"'));
-  expectFail(run(["tools/turnfile-lint.mjs", "--turnfile", turnfile]), /Duplicate signal ID: SIG-030/);
+  let duplicateId = "";
+  const turnfile = repoTurnfileFixture((raw) => {
+    const ids = signalIds(raw);
+    duplicateId = ids[0];
+    return raw.replace(`id: "${ids[1]}"`, `id: "${ids[0]}"`);
+  });
+  expectFail(
+    run(["tools/turnfile-lint.mjs", "--turnfile", turnfile]),
+    new RegExp(`Duplicate signal ID: ${duplicateId}`),
+  );
 });
 
 test("turnfile-lint warns on out-of-order signal IDs", () => {
-  const turnfile = repoTurnfileFixture((raw) => raw.replace('id: "SIG-030"', 'id: "SIG-000"'));
+  const turnfile = repoTurnfileFixture((raw) =>
+    raw.replace(/id: "SIG-\d+"/, 'id: "SIG-000"'),
+  );
   const result = run(["tools/turnfile-lint.mjs", "--turnfile", turnfile]);
   expectPass(result);
   assert.match(result.output, /Expected newest-first ordering/);

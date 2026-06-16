@@ -967,7 +967,7 @@
       "title": "Session Heartbeat Management Contract",
       "path": "working-session/docs/PRD-030-session-heartbeat-management-contract.md",
       "shelf": "working-session/docs",
-      "state": "draft",
+      "state": "accepted",
       "acceptance": {
         "codex": {
           "status": "accepted",
@@ -983,19 +983,18 @@
           ]
         },
         "maintainer": {
-          "status": "pending",
+          "status": "accepted",
           "evidence": [
-            "Maintainer requested the PRD on 2026-06-16 after Codex deleted the obsolete turnfile-mailbox-heartbeat automation during closeout"
+            "Maintainer requested the PRD on 2026-06-16 after Codex deleted the obsolete turnfile-mailbox-heartbeat automation during closeout",
+            "Maintainer accepted PRD-030 on 2026-06-16 as optional negotiation between LLMs using Turnfile protocol, not as a Turnfile requirement"
           ]
         }
       },
-      "blocking_items": [
-        "Maintainer acceptance pending"
-      ],
-      "eligible_for_docs_prds": false,
+      "blocking_items": [],
+      "eligible_for_docs_prds": true,
       "implementation": {
         "state": "not-started",
-        "notes": "Draft only. Claude counters applied. Proposed changes: handshake heartbeat negotiation, runtime heartbeat discipline, and PRD-014 closeout heartbeat lifecycle check."
+        "notes": "Accepted contract. Claude counters applied. Proposed changes: handshake heartbeat negotiation, runtime heartbeat discipline, and PRD-014 closeout heartbeat lifecycle check."
       }
     }
   ]

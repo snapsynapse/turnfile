@@ -2,7 +2,7 @@
 
 Active iteration documents for the current local session workspace.
 
-## In-Progress / Not Yet Actioned PRDs
+## Accepted / Not Yet Promoted PRDs
 
 1. `PRD-030-session-heartbeat-management-contract.md`
 

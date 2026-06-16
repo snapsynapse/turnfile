@@ -1,6 +1,6 @@
 # PRD-030: Session Heartbeat Management Contract
 
-Status: Draft (working-session)
+Status: Accepted (working-session)
 Owner: Maintainer + Codex + Claude
 Date: 2026-06-16
 
@@ -10,8 +10,8 @@ Date: 2026-06-16
 |------|--------|----------|
 | Codex acceptance | accepted | Codex authored draft in response to Maintainer request on 2026-06-16; applied Claude C1-C5 counters |
 | Claude acceptance | accepted | MSG-20260616-006: APPLY with 5 counters; flips clean when C1-C5 land |
-| Maintainer acceptance | pending | Awaiting Maintainer acceptance after agent review |
-| Eligible for move to `docs/prds` | no | Draft review and Maintainer acceptance pending |
+| Maintainer acceptance | accepted | approved as optional negotiation between LLMs using Turnfile protocol, not a Turnfile requirement, a Turnfile-based agreement |
+| Eligible for move to `docs/prds` | yes | Codex, Claude, and Maintainer accepted; no blocking items remain |
 
 ## Input Provenance Tags
 
