@@ -999,8 +999,8 @@
     },
     {
       "id": "PRD-031",
-      "title": "Enforced Shared-File Mutual Exclusion Contract",
-      "path": "working-session/docs/PRD-031-enforced-shared-file-mutual-exclusion-contract.md",
+      "title": "Concurrent Multi-Agent Coordination Contract",
+      "path": "working-session/docs/PRD-031-concurrent-multi-agent-coordination-contract.md",
       "shelf": "working-session/docs",
       "state": "draft",
       "acceptance": {
@@ -1011,7 +1011,7 @@
         "claude": {
           "status": "pending",
           "evidence": [
-            "Claude-authored draft v1 present on disk 2026-06-16"
+            "Claude-authored draft v3 on disk 2026-06-16 (pivoted from mutex to concurrent coordination per Maintainer redirect; 4 design decisions resolved: git DAG ordering, allow-parallel-then-review, build-artifact aggregates, Phase 1 first)"
           ]
         },
         "maintainer": {
@@ -1029,7 +1029,7 @@
       "eligible_for_docs_prds": false,
       "implementation": {
         "state": "not-started",
-        "notes": "Draft registry repair only. No agent or Maintainer acceptance recorded by Codex in this update."
+        "notes": "Draft v3 (concurrent multi-agent coordination). Phased: Phase 1 (namespaced ids + append-only mailbox/signal logs + derivation) approved as immediate scope. Eval-gated under PRD-006 A1. Next: Codex apply-or-counter on v3, then Claude acceptance, then Maintainer acceptance, then Phase 1 implementation."
       }
     }
   ]
