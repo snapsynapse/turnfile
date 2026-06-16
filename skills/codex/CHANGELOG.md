@@ -1,5 +1,14 @@
 # Changelog — turnfile-codex-collaboration
 
+## v8 - 2026-06-16
+
+- SKILL.md: Added PRD-030 heartbeat and automation lifecycle instructions, including memory-boundary behavior, quiet no-op reports, and closeout handling for carried-forward/deleted heartbeats.
+- SKILL.md: Added PRD-031 concurrent-work transition guidance so Codex inspects git state before edits, avoids touching peer-owned unstaged changes, stages only intentional files, and treats per-agent shards/derived aggregates as the structural path forward.
+- SKILL.md: Added Tokenese adoption guardrails and a new M-09 Tokenese Parallel Adoption module covering W1+L1 sequencing, English source authority, `plain` as compliant fallback, scorer fallback fields, and active-artifact twin-lane gating.
+- SKILL.md: Expanded output requirements to call out relevant uncommitted peer-owned changes intentionally left untouched.
+- MANIFEST.yaml: Updated bundle metadata to v8 and expanded module count/notes to include PRD-030, PRD-031, and Tokenese adoption behavior.
+- CHANGELOG.md: Added this v8 entry.
+
 ## v7 - 2026-06-13
 
 - SKILL.md: Added PRD-029 R3 obligation to derive mailbox IDs, Turnfile signal IDs, revision, unread counts, and oldest unread pointers with `tools/next-state.mjs` inside shared-file transaction windows, with an explicit fresh-file read fallback when unavailable.

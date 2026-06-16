@@ -9,9 +9,9 @@ Run modules only on explicit maintainer instruction.
 
 ## Version Context
 
-Bundle version: 7
-Version date: 2026-06-13
-Change summary: Added PRD-029 pre-write state derivation obligation: derive mailbox IDs, Turnfile signal IDs, revision, and inbox snapshots with tools/next-state.mjs inside shared-file transaction windows.
+Bundle version: 8
+Version date: 2026-06-16
+Change summary: Added PRD-030 heartbeat and memory-boundary discipline, PRD-031 concurrent-work transition guidance, and Tokenese twin-lane adoption guardrails.
 
 ## Files First, Not Memory
 
@@ -21,6 +21,8 @@ Turnfile is collaborative, file-based work. Claude and the Maintainer may mutate
 2. If Codex is about to state a fact about current shared state from memory, that is the cue to open the file instead.
 3. When memory and file disagree, the file wins. Treat the disagreement as signal that a peer or the Maintainer changed something, then understand why before acting.
 4. Redundant reads are cheap. Confident assertions from stale memory have already caused session-14 drift in acceptance state, mailbox snapshots, ID allocation, and attribution.
+5. Treat model, platform, thread, and automation memory as non-authoritative cache. Durable session memory belongs in Turnfile project artifacts or, after PRD-031 implementation, the authoritative per-agent shards from which those artifacts are derived.
+6. When a helper such as `tools/session-orient.mjs` exists, run it before substantive current-state claims. Until then, perform the equivalent reads manually: mailbox, Turnfile state, worklog status block, PRD status, relevant PRDs/tasks, git status, and validator status when applicable.
 
 ## Execution Contract
 
@@ -97,6 +99,42 @@ During session handshake, bootstrap, or role-keyed skill activation, Codex valid
 2. After mailbox edits, regenerate `working-session/MAILBOX.json`.
 3. Keep skill metadata accurate when protocol state changes materially (module behavior, validation status, tooling dependencies).
 4. Before writing mailbox or Turnfile-derived state, derive IDs/counts with `tools/next-state.mjs` inside the active lock window when the tool is available. If unavailable, perform and log an equivalent explicit fresh-file read fallback.
+
+## Heartbeat and Automation Lifecycle
+
+PRD-030 governs session heartbeat automations. Heartbeats are optional session aids, not Turnfile protocol authority.
+
+1. Use an automation only after Maintainer direction or explicit session-handshake agreement.
+2. Heartbeat prompts must be self-contained: workspace path, files to inspect, what counts as work, write policy, validation expectations, notification policy, and stop condition.
+3. Every heartbeat run that reports current Turnfile state must refresh project files first and treat model/platform memory as cache.
+4. Heartbeats may process Codex mailbox work only under ordinary mailbox lifecycle, `tools/next-state.mjs` derivation before writes, projection regeneration, and validators.
+5. Quiet no-op heartbeat reports should include refreshed unread counts and current revision or derived equivalent without creating governance churn.
+6. Closeout must inspect active heartbeats and record deleted, updated, carried forward, or not applicable. Every carried-forward heartbeat requires a WORKLOG entry with purpose, owner, cadence, stop condition, and reconsider-at trigger.
+7. Delete or update stale heartbeats at session close or when their handoff purpose no longer applies.
+
+## Concurrent Work Transition
+
+PRD-031 shifts Turnfile toward concurrent multi-agent work with per-agent shards, append-only logs, namespaced ids, and derived aggregate views. Until that implementation lands, shared files remain collision-prone.
+
+1. Before editing shared files, inspect `git status --short --branch` and relevant diffs. Do not overwrite or normalize peer-owned unstaged changes.
+2. Stage and commit only the files intentionally changed by Codex. Leave unrelated peer changes unstaged and mention them in the handoff.
+3. Prefer path ownership: Codex-owned skill files, Codex-authored evals, and explicitly assigned shared governance edits. Read rather than edit Claude-owned files.
+4. Treat PRD-031 Phase 1 as the structural answer to coordination collisions: per-agent namespaced ids, append-only message/signal/read-state logs, and derived aggregates.
+5. After PRD-031 Phase 1 is implemented, write normal coordination events to Codex's own shard and regenerate aggregate views instead of hand-editing aggregate control files.
+6. Concurrent same-task claims are not automatically errors under the PRD-031 direction. Surface them as review/rebuttal candidates unless a task explicitly declares a single-writer override.
+
+## Tokenese Adoption Guardrails
+
+PRD-027 keeps English authoritative while Tokenese is measured as cloned communication.
+
+1. Do not broaden Tokenese use beyond the accepted charter/suite. The first live run is the W1 + L1 mini-pilot unless the Maintainer changes the sequence.
+2. Every Tokenese clone needs a stable English source ID or path. The source is the authority and wins on conflict.
+3. Tokenese clones may not record acceptance, lifecycle status, lock actions, task claims, or normative PRD text.
+4. Treat `plain` as a successful behavior for reasoning-heavy, design-heavy, or exact-diff-heavy cases. Refusing dense mode for inadmissible content is compliance, not failure.
+5. Keep `^N` and `ev:` untrusted for decisions until `tk-calibration-audit` passes. Log them only as measurement data.
+6. If the Perplexity checker/decoder is unavailable, manual scoring is an explicit fallback only when it captures the same fields: source id, clone id, direction, author, artifact type, scorer, conformance, token counts, readback/mismatch data, repair events, and outcome.
+7. After a clean mini-pilot, recommend a non-authoritative twin lane such as `working-session/tokenese-pairs/` before cloning every active artifact.
+8. Broad adoption should use bands: operational status and handoffs first; code-review findings and task claims as clones only second; PRD summaries third; normative PRD text, reasoning/proofs, and exact diffs never by default.
 
 ## Module Catalog
 
@@ -273,6 +311,31 @@ Stop/escalate:
 1. Stop if resolution authority is ambiguous.
 2. Escalate when OQ resolution would alter required protocol semantics without maintainer decision.
 
+### M-09 Tokenese Parallel Adoption
+
+Trigger examples:
+1. "Start the Tokenese mini-pilot."
+2. "Set up active-artifact Tokenese twins."
+3. "Evaluate Tokenese scoring fallback."
+
+Expected inputs:
+1. Current PRD-027 contract, session charter, A/B suite, and relevant Tokenese repo state.
+2. Maintainer direction or peer agreement for the requested lane.
+3. Scoring mode: deterministic checker/decoder or documented manual fallback.
+
+Deterministic outputs:
+1. Confirmation that English source artifacts remain authoritative.
+2. Stable source/clone identifiers for every pair.
+3. Visible first-use handshake and legible activation note before live clone traffic.
+4. Metrics record for each pair: token counts, conformance, task success from source, repair events, readback mismatch, construct family, scorer, and outcome.
+5. Clear stop/fallback behavior for `plain`, `??`, three-repair termination, and source/clone conflict.
+
+Stop/escalate:
+1. Stop if the charter does not authorize the requested Tokenese lane.
+2. Stop if no English source exists for a clone.
+3. Escalate if a Tokenese clone conflicts with its source in a protocol-relevant way.
+4. Escalate before broad active-artifact adoption if the mini-pilot has not passed cleanly.
+
 ## Fallback Rules
 
 1. If helper tooling is unavailable, run manual equivalent steps and log the fallback.
@@ -286,3 +349,4 @@ Stop/escalate:
 3. List changed files with exact paths.
 4. List verification commands and outcomes.
 5. List blockers and next owner.
+6. List relevant uncommitted peer-owned changes that were intentionally not touched.

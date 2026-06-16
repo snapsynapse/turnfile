@@ -1,13 +1,14 @@
 bundle: turnfile-codex-collaboration
-bundle_version: 7
-bundle_date: 2026-06-13
+bundle_version: 8
+bundle_date: 2026-06-16
 description: >
   Codex's protocol execution guide for the Turnfile protocol (a SNAP protocol).
   Encodes mailbox lifecycle, payload-first review exchange, lock-safe shared-file
   updates, session close/resume, Turnfile task/lock coordination, Files First
   discipline, model ledger handshake validation, PRD-029 pre-write state
-  derivation, and peer collaboration posture as operational instructions for
-  Codex's environment.
+  derivation, PRD-030 heartbeat and memory-boundary discipline, PRD-031
+  concurrent-work transition guidance, Tokenese adoption guardrails, and peer
+  collaboration posture as operational instructions for Codex's environment.
 
 compatibility:
   designed_for:
@@ -40,26 +41,28 @@ compatibility:
 files:
   - path: SKILL.md
     role: skill
-    version: 7
+    version: 8
     hash: null
     note: >
-      Codex protocol execution guide. 9 modules (M-00 through M-08): session
+      Codex protocol execution guide. 10 modules (M-00 through M-09): session
       bootstrap/baseline orientation, mailbox lifecycle, maintainer decision,
       payload-first review, cross-PRD reconciliation, shared-file transaction,
-      session close/resume, Turnfile coordination, OQ registry. Includes Files
-      First, Not Memory discipline, model ledger handshake validation,
-      PRD-029 next-state.mjs pre-write derivation, and collaboration posture
-      obligations for peer contribution, yes-and review, proposal-only
+      session close/resume, Turnfile coordination, OQ registry, and Tokenese
+      parallel adoption. Includes Files First, Not Memory discipline, model
+      ledger handshake validation, PRD-029 next-state.mjs pre-write derivation,
+      PRD-030 heartbeat and memory-boundary discipline, PRD-031 concurrent-work
+      transition guidance, Tokenese twin-lane guardrails, and collaboration
+      posture obligations for peer contribution, yes-and review, proposal-only
       authority, edge-case surfacing, and Maintainer legibility.
 
   - path: CHANGELOG.md
     role: reference
-    version: 7
+    version: 8
     hash: null
     note: Bundle change history.
 
   - path: MANIFEST.yaml
     role: reference
-    version: 7
+    version: 8
     hash: null
     note: Self-referential file; hash tracked externally when needed.
