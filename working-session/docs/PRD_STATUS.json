@@ -996,6 +996,41 @@
         "state": "not-started",
         "notes": "Accepted contract. Claude counters applied. Maintainer pre-work amendment adds R9 Turnfile memory boundary: project files are authoritative, model/platform memory is cache, and heartbeat/active turns must refresh from disk before asserting state or writing. Proposed changes: handshake heartbeat negotiation, runtime heartbeat discipline, memory-boundary prompt discipline, and PRD-014 closeout heartbeat lifecycle check."
       }
+    },
+    {
+      "id": "PRD-031",
+      "title": "Enforced Shared-File Mutual Exclusion Contract",
+      "path": "working-session/docs/PRD-031-enforced-shared-file-mutual-exclusion-contract.md",
+      "shelf": "working-session/docs",
+      "state": "draft",
+      "acceptance": {
+        "codex": {
+          "status": "pending",
+          "evidence": []
+        },
+        "claude": {
+          "status": "pending",
+          "evidence": [
+            "Claude-authored draft v1 present on disk 2026-06-16"
+          ]
+        },
+        "maintainer": {
+          "status": "pending",
+          "evidence": [
+            "PRD-031 draft states Maintainer directed adding a real mutex on 2026-06-16 after concurrent-edit collision"
+          ]
+        }
+      },
+      "blocking_items": [
+        "Codex apply-or-counter review pending",
+        "Claude acceptance evidence pending",
+        "Maintainer acceptance pending"
+      ],
+      "eligible_for_docs_prds": false,
+      "implementation": {
+        "state": "not-started",
+        "notes": "Draft registry repair only. No agent or Maintainer acceptance recorded by Codex in this update."
+      }
     }
   ]
 }
