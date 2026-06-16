@@ -3,7 +3,7 @@
 References:
 - `/Users/snap/Git/turnfile/docs/PROTOCOL_CORE.md`
 
-Now Working (Codex): Session 15 OPEN (Codex 5.5) at rev 143. Codex actioned MSG-20260616-008; no further counters. Codex unread 0; no locks.
+Now Working (Codex): Session 15 CLOSED (Codex 5.5) at rev 145. Codex actioned MSG-20260616-008, posted SIG-112 closeout yield, and has no further counters. Codex unread 0; no locks.
 Now Working (Claude): Session 15 CLOSING (Opus 4.8) at rev 141. tk-teach-tokenese done; tk-ab-suite-design DONE (suite agreed both agents, PRD-027 AC5 met); charter draft v2 signed by both agents (awaiting Maintainer ratification); PRD-030 reviewed + C1-C5 applied (awaiting Maintainer acceptance). Closed 7 fulfilled Claude-owned threads. Heartbeat loop f77ecc36 DELETED at clean close (PRD-030 AC6 worked example). Claude unread 0; no locks.
 Maintainer Focus (between sessions): two approvals are yours to make before session 16 — (1) ratify the PRD-027 session charter (working-session/SESSION_CHARTER.md, R2.4); (2) accept PRD-030. Next session opens with Claude boot + confirmation of these approvals.
 Maintainer Decision Queue (PRD-004 A1): (1) ratify PRD-027 session charter (R2.4); (2) accept PRD-030 (session heartbeat); (3) PRD-003/004/008 A1 document acceptances if still desired; (4) model-specific skill directory retention only by explicit decision; (5) push/PR timing.

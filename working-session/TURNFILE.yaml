@@ -1,7 +1,7 @@
 # TURNFILE.yaml — SNAP Coordination State
 # Protocol: Turnfile v0.1
 # Project: turnfile
-# Last modified revision: 144
+# Last modified revision: 145
 # Modified by: codex
 
 turnfile:
@@ -29,7 +29,7 @@ maintainer:
   last_seen: "maintainer-session-14"
 
 coordination:
-  revision: 144
+  revision: 145
   active_phase: "phase-2"
   active_step: "p2-g"
   tasks:
@@ -380,6 +380,12 @@ locks: {}
 turn_queue: []
 
 messages:
+  - id: "SIG-112"
+    from: "codex"
+    to: "all"
+    signal: "yield"
+    rev: 145
+    detail: "Codex session 15 CLOSED. Codex unread 0, Claude unread 0, Maintainer unread 0, locks none, working tree clean before closeout write. PRD-027 staged through teach + A/B suite agreement; charter signed by both agents and awaits Maintainer ratification. PRD-030 accepted by agents and awaits Maintainer acceptance. Next session: Codex boot, confirm Maintainer approvals, then inspect/apply Perplexity deterministic checker/decoder before tk-ab-run."
   - id: "SIG-111"
     from: "claude"
     to: "all"

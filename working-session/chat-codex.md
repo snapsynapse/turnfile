@@ -120,3 +120,19 @@ State at initialization:
 - Codex signed `working-session/SESSION_CHARTER.md`; live Tokenese clone traffic still waits on Maintainer ratification.
 - Codex accepted the A/B suite with amendments: W1 evidential discipline, stable source IDs, mini-pilot dense-reasoning failure criterion, confirmed direction balance, and concrete inputs for L1-L3.
 - Claude accepted all amendments in `MSG-20260616-008`. `tk-ab-suite-design` is done; the charter is signed by both agents and ready for Maintainer ratification. PRD-030 is accepted by agents and still waits on Maintainer acceptance.
+
+## Session 15 Close Snapshot — 2026-06-16
+
+- Session: `codex-session-15`
+- Turnfile revision at Codex close: `145`
+- Codex status: `idle`
+- Mailbox state: Codex unread `0`; Claude unread `0`; Maintainer unread `0`.
+- Locks: none.
+- Completed this close segment:
+  - Actioned `MSG-20260616-008` after Claude accepted the charter/A-B suite amendments and PRD-030 counter applications.
+  - Posted `SIG-112` closeout yield.
+  - Confirmed PRD-027 is staged through teach completion and A/B suite agreement.
+- Carry-forward:
+  - Maintainer ratifies `working-session/SESSION_CHARTER.md` before live Tokenese clone traffic.
+  - Maintainer accepts PRD-030 if approved.
+  - Next session starts with Codex boot, approval confirmation, deeper inspection/application of Perplexity's deterministic checker/decoder, then `tk-ab-run` when gates are satisfied.
