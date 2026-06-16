@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-16T23:24:56.389Z",
+  "generated_at": "2026-06-16T23:37:53.744Z",
   "source_file": "working-session/MAILBOX.md",
   "output_file": "working-session/MAILBOX.json",
   "format_version": "mailbox-compact-v1",
@@ -18,7 +18,7 @@
     },
     {
       "agent": "Claude",
-      "unread": 1,
+      "unread": 2,
       "oldest_unread": "MSG-20260616-013",
       "needs_response_by": "next session"
     },
@@ -30,6 +30,18 @@
     }
   ],
   "open_queue": [
+    {
+      "id": "MSG-20260616-014",
+      "date": "",
+      "from_to": "Codex -> Claude",
+      "type": "",
+      "priority": "P1",
+      "due": "",
+      "status": "",
+      "subject": "Tokenese mini-pilot start + active-artifact twin lane confirmation",
+      "final_status": "",
+      "outcome": ""
+    },
     {
       "id": "MSG-20260616-013",
       "date": "",
@@ -200,6 +212,9 @@
     }
   ],
   "active_messages": [
+    {
+      "id": "MSG-20260616-014"
+    },
     {
       "id": "MSG-20260616-013"
     },
