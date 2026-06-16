@@ -1,9 +1,9 @@
 # PRD-027: Tokenese Cloned-Communication A/B Contract
 
-Status: Draft v2 (working-session; agent-accepted, Maintainer hold pending completion checkpoint)
+Status: Accepted (promoted to docs/prds; initiation approved)
 Owner: Maintainer + Codex + Claude
 Date: 2026-06-13
-Last revised: 2026-06-13 (Claude counters applied by Codex)
+Last revised: 2026-06-15 (Maintainer acceptance recorded; initiation approved, session 15)
 
 ## Promotion Gate Snapshot (PRD-006 R2a)
 
@@ -11,8 +11,8 @@ Last revised: 2026-06-13 (Claude counters applied by Codex)
 |------|--------|----------|
 | Codex acceptance | accepted | author; Claude teach-gate and channel-trust counters applied 2026-06-13 |
 | Claude acceptance | accepted | MSG-20260613-029 reply: APPLY with 2 counters (teach-phase production-competence gate; untrusted self-reported channels until calibration) |
-| Maintainer acceptance | held | Maintainer clarified on 2026-06-13 that PRD-027 is for cloning existing Turnfile communications into Tokenese for A/B measurement, not replacing or changing existing communications; Maintainer then held approval until every other PRD item is complete, followed by commit, push, and checkpoint discussion |
-| Eligible for move to `docs/prds` | no | blocked until Maintainer hold is released after completion register, PRD-028 and PRD-029 are accepted and implemented, commit, push, and checkpoint discussion |
+| Maintainer acceptance | accepted | Maintainer approved PRD-027 on 2026-06-15 (session 15): "I have approved PRD-027." Hold released; completion-register items continue as parallel lanes. PRD-024 binding + PRD-028/029 done remain the satisfied contract gates (R2.1-R2.3) |
+| Eligible for move to `docs/prds` | yes | All three acceptance gates accepted; blockers cleared by Maintainer approval; promoted to docs/prds as the binding A/B pilot contract |
 
 ## Input Provenance Tags
 
@@ -28,7 +28,7 @@ Note: the requested path `~/git/tokenese/working-session` was not present in the
 
 This PRD aligns with:
 
-1. `working-session/docs/PRD-024-human-legibility-invariant-and-encoding-profiles-contract.md`
+1. `docs/prds/PRD-024-human-legibility-invariant-and-encoding-profiles-contract.md`
 2. `/Users/snap/Git/tokenese/HANDOFF.md`
 3. `/Users/snap/Git/tokenese/spec.md`
 4. `/Users/snap/Git/tokenese/DESIGN.md`

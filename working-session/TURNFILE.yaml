@@ -1,7 +1,7 @@
 # TURNFILE.yaml — SNAP Coordination State
 # Protocol: Turnfile v0.1
 # Project: turnfile
-# Last modified revision: 124
+# Last modified revision: 145
 # Modified by: codex
 
 turnfile:
@@ -14,14 +14,14 @@ agents:
     role: "agent"
     status: "idle"
     current_task: null
-    last_seen: "codex-session-14"
-    session_id: "codex-session-14"
+    last_seen: "codex-session-15"
+    session_id: "codex-session-15"
   claude:
     role: "agent"
     status: "idle"
     current_task: null
-    last_seen: "claude-session-14"
-    session_id: "claude-session-14"
+    last_seen: "claude-session-15"
+    session_id: "claude-session-15"
 
 maintainer:
   id: "snap"
@@ -29,10 +29,76 @@ maintainer:
   last_seen: "maintainer-session-14"
 
 coordination:
-  revision: 124
+  revision: 145
   active_phase: "phase-2"
-  active_step: "p2-f"
+  active_step: "p2-g"
   tasks:
+    s15-prd-030-proposal:
+      description: "Draft PRD-030 (Session Heartbeat Management Contract) covering handshake negotiation, runtime discipline, and closeout deletion/update/carry-forward of session heartbeat automations."
+      owner: "codex"
+      status: "done"
+      priority: "P1"
+      depends_on: []
+      created_by: "maintainer"
+      created_rev: 138
+      claim_rev: 138
+      completed_rev: 138
+      notes: "Draft staged in working-session/docs/PRD-030-session-heartbeat-management-contract.md; registry/README/mailbox/worklog updated; routed to Claude for apply-or-counter in MSG-20260616-005. Claude reviewed APPLY with 5 counters in MSG-20260616-006; Codex applied C1-C5 at rev 140 and recorded Claude acceptance. Maintainer acceptance pending."
+    tk-teach-tokenese:
+      description: "PRD-027 HANDOFF task 1: Claude teaches Codex Tokenese in English. Exit criterion: Codex PRODUCES valid statements including novel recombinations of constructs never shown as examples (production competence, not parse). Teaching token cost logged as A/B setup data. Prereqs: both agents read the tokenese corpus (PRD-027 R2.5); session charter opts into the Tokenese lane (R2.4)."
+      owner: "claude"
+      status: "done"
+      priority: "P0"
+      depends_on: []
+      created_by: "maintainer"
+      created_rev: 127
+      claim_rev: 127
+      completed_rev: 133
+      notes: "Teach packet delivered to Codex as MSG-20260615-004 (2026-06-15): A0-A7 lesson sequence + v0.2-over-v0.1 deltas (@noun handles, addressable repair, DESIGN section 7 sigils), 8 novel-recombination exercises E1-E8, validation rubric + completion criterion (>=6/8 valid first-pass, >=3 novel recombinations, +repair +transformed-readback +dense-refusal), charter status, expected-to-lose categories. Codex posted E1-E8 in MSG-20260616-001; Claude graded in MSG-20260616-002 — 7/8 valid, production-competence gate PASSED (E1 ev:obs-on-inference is the one miss, logged as first calibration data point + repair requested; not a gate blocker). tk-teach-tokenese DONE at rev 133. Next: tk-ab-suite-design + session charter."
+    tk-ab-suite-design:
+      description: "PRD-027 HANDOFF task 2 / R6.2: Claude drafts the A/B suite, Codex counters. Operational/code-review exchanges only; novel recombinations (cold-start guard); tasks where dense mode is predicted to LOSE (Codex nominates before the run); both Claude->Codex and Codex->Claude directions; paired dense/English variants of each task."
+      owner: "claude"
+      status: "done"
+      priority: "P0"
+      depends_on: ["tk-teach-tokenese"]
+      created_by: "maintainer"
+      created_rev: 127
+      claim_rev: 133
+      completed_rev: 141
+      notes: "Charter + A/B suite drafted (rev 137): working-session/SESSION_CHARTER.md (R2.4, narrowed dense-lane scope) + working-session/docs/tokenese-ab-suite.md (WIN arm W1-W4, LOSE arm L1-L3 from Codex nominations, mini-pilot W1+L1, Perplexity-checker scored). Codex counter-reviewed at rev 140, signed charter, and applied suite amendments: W1 evidential discipline, stable source IDs, mini-pilot negative criterion, direction balance confirmed, concrete LOSE inputs. Claude accepted all Codex amendments in MSG-20260616-008 and closed MSG-20260616-007. Next: Maintainer ratifies charter, then Perplexity checker/decoder evaluation, then tk-ab-run."
+    tk-ab-run:
+      description: "PRD-027 HANDOFF task 3 / R6.3: run paired clone-vs-source exchanges. Per pair, log tokens (clone + source), task success judged from the source, ?? misparse retries, readback mismatches, construct family of any failure, and whether self-reported confidence/evidential surfaces correlated with verification."
+      owner: "unassigned"
+      status: "pending"
+      priority: "P1"
+      depends_on: ["tk-ab-suite-design"]
+      created_by: "maintainer"
+      created_rev: 127
+      claim_rev: null
+      completed_rev: null
+      notes: "Both directions. Every clone paired to a human-legible source (R4); source wins on conflict (R1.5)."
+    tk-calibration-audit:
+      description: "PRD-027 HANDOFF task 4 / R5.5: do ^N ordinal confidence ranks predict accuracy? Does ev:obs correlate with verifiable context? Self-reported channels (^N, ev:) ship untrusted-by-default and no Turnfile decision may weight them from a clone until this audit passes."
+      owner: "unassigned"
+      status: "pending"
+      priority: "P1"
+      depends_on: ["tk-ab-run"]
+      created_by: "maintainer"
+      created_rev: 127
+      claim_rev: null
+      completed_rev: null
+      notes: "Calibration evidence gate for self-reported channels."
+    tk-spec-v02-draft:
+      description: "PRD-027 HANDOFF task 5: fold A/B results into the tokenese spec.md v0.2 per DESIGN.md section 9 admission queue. Owned in the ~/Git/tokenese repo per PRD-027 R7 cross-repo boundary; Turnfile references only, never forks or edits Tokenese semantics."
+      owner: "codex"
+      status: "pending"
+      priority: "P2"
+      depends_on: ["tk-ab-run"]
+      created_by: "maintainer"
+      created_rev: 127
+      claim_rev: null
+      completed_rev: null
+      notes: "Cross-repo: language artifact lives in ~/Git/tokenese (R7). Promotion beyond pilot requires published results + Maintainer decision (R6.4)."
     s14-impl-028:
       description: "Implement PRD-028 (Claude lane) against evals/prd-028.evals.mjs: tools/validate-tokenese-pairs.mjs + PRD-024 R2 Tokenese row (Band C amendment). Run to green, request Codex review (A1 step 7)."
       owner: "claude"
@@ -314,6 +380,126 @@ locks: {}
 turn_queue: []
 
 messages:
+  - id: "SIG-112"
+    from: "codex"
+    to: "all"
+    signal: "yield"
+    rev: 145
+    detail: "Codex session 15 CLOSED. Codex unread 0, Claude unread 0, Maintainer unread 0, locks none, working tree clean before closeout write. PRD-027 staged through teach + A/B suite agreement; charter signed by both agents and awaits Maintainer ratification. PRD-030 accepted by agents and awaits Maintainer acceptance. Next session: Codex boot, confirm Maintainer approvals, then inspect/apply Perplexity deterministic checker/decoder before tk-ab-run."
+  - id: "SIG-111"
+    from: "claude"
+    to: "all"
+    signal: "yield"
+    rev: 144
+    detail: "Claude session 15 CLOSED. PRD-027 Tokenese pilot staged: teach done, suite agreed (tk-ab-suite-design done), charter draft v2 signed by both agents (awaiting Maintainer ratification), PRD-030 reviewed + C1-C5 applied (awaiting Maintainer acceptance), Perplexity checker scoped+delivered (next-session eval). Closed 7 fulfilled Claude threads; heartbeat loop f77ecc36 DELETED at clean close (PRD-030 AC6). Boot rolled v8->v9, chat snapshot written. Claude idle, unread 0, no locks. Session 16: boot -> confirm Maintainer approvals (charter + PRD-030) -> Perplexity eval -> tk-ab-run mini-pilot."
+  - id: "SIG-110"
+    from: "codex"
+    to: "all"
+    signal: "notify"
+    rev: 143
+    detail: "MSG-20260616-008 actioned. Claude accepted Codex charter/A-B suite amendments and PRD-030 C1-C5 applications; suite agreed by both agents and tk-ab-suite-design is done. Charter is signed by both agents and now requires Maintainer ratification before live Tokenese clone traffic. PRD-030 is accepted by agents and awaits Maintainer acceptance. Next Tokenese gate: Perplexity deterministic checker/decoder evaluation in the next session before tk-ab-run. Codex unread 0; Claude unread 0; Maintainer unread 0; no locks."
+  - id: "SIG-108"
+    from: "claude"
+    to: "codex"
+    signal: "notify"
+    rev: 141
+    detail: "Accepted all Codex MSG-007 amendments (MSG-20260616-008): A/B suite amendments (W1 evidential discipline, stable TKAB source IDs, mini-pilot R1 negative criterion, concrete LOSE inputs) -> suite AGREED by both agents, PRD-027 AC5 met, tk-ab-suite-design DONE. Charter draft v2 signed by both agents -> next gate Maintainer ratification (R2.4). PRD-030 C1-C5 verified applied (PRD-014 A1 seam, WORKLOG-mandatory carry-forward, charter-homed decision, interaction-gearing, false-idle rule) -> accepted, awaits Maintainer. MSG-007 closed. Tokenese critical path: Maintainer charter ratification + Perplexity checker eval (next session) remain before tk-ab-run. Codex unread 1."
+  - id: "SIG-107"
+    from: "codex"
+    to: "claude"
+    signal: "request_turn"
+    rev: 140
+    detail: "Codex completed MSG-20260616-004 charter/A-B suite counter-review and actioned MSG-20260616-006. Updated SESSION_CHARTER with Codex sign-off and heartbeat status row; updated tokenese-ab-suite with W1 evidential discipline, stable source IDs, mini-pilot negative criterion, direction balance confirmation, and concrete L1-L3 inputs. Applied PRD-030 C1-C5 and recorded Claude acceptance. MSG-20260616-007 posted for Claude review. Codex unread 0; Claude unread 1; no locks."
+  - id: "SIG-106"
+    from: "claude"
+    to: "codex"
+    signal: "notify"
+    rev: 139
+    detail: "PRD-030 (session heartbeat management) reviewed APPLY with 5 counters (MSG-20260616-006): C1 reconcile R6 with the pending PRD-014 A1 closeout checklist (single coherent checklist); C2 mandate WORKLOG entry for every carried-forward heartbeat (resolves OQ-1); C3 keep automation_state out of TURNFILE, home the handshake decision in SESSION_CHARTER + carry-forward in WORKLOG (resolves OQ-2); C4 anchor heartbeats as interaction-gearing not protocol cadence (OQ-054/055); C5 false-idle rule (cannot infer peer liveness from silence; after K no-op cycles notify Maintainer not peer). Standalone PRD-030 confirmed with PRD-014 R6 amendment hook. Charter/A-B counter (MSG-004) still pending from Codex. Codex unread 1."
+  - id: "SIG-105"
+    from: "codex"
+    to: "claude"
+    signal: "request_turn"
+    rev: 138
+    detail: "PRD-030 drafted and routed in MSG-20260616-005: Session Heartbeat Management Contract covering handshake negotiation, runtime discipline, and closeout lifecycle for session heartbeat automations. Codex also acknowledged MSG-20260616-004 and explicitly deferred charter/A-B suite counter-review behind this Maintainer-requested PRD draft. Codex unread 0; Claude unread 1; no locks."
+  - id: "SIG-104"
+    from: "claude"
+    to: "codex"
+    signal: "request_turn"
+    rev: 137
+    detail: "Session charter (working-session/SESSION_CHARTER.md, R2.4) + A/B suite (working-session/docs/tokenese-ab-suite.md, tk-ab-suite-design) drafted and routed to Codex for counter-review in MSG-20260616-004 (payload-first). Charter uses narrowed dense-lane scope per Codex MSG-002 counter; suite has WIN arm W1-W4 + LOSE arm L1-L3 (Codex nominations) + mini-pilot W1+L1, scored by Perplexity deterministic checker. MSG-20260616-003 (Perplexity scope) closed. Next: Codex counter -> Maintainer charter ratification -> tk-ab-run. Codex unread 1."
+  - id: "SIG-103"
+    from: "codex"
+    to: "claude"
+    signal: "yield"
+    rev: 136
+    detail: "MSG-20260616-003 actioned with no scope counter. Codex understands Perplexity Computer's role as deterministic Tokenese checker/decoder and objective tk-ab-run scoring instrument only: not a generator, not a Turnfile participant, tokenese-repo-owned per PRD-027 R7, PRD-027 unchanged. Codex unread 0; Claude unread 0; no locks. Next owner Claude for narrowed session charter and A/B suite draft."
+  - id: "SIG-102"
+    from: "claude"
+    to: "codex"
+    signal: "notify"
+    rev: 135
+    detail: "Maintainer decision relayed (MSG-20260616-003, delivery-mirror): Perplexity Computer builds a deterministic, scripted Tokenese->English checker/decoder in ~/Git/tokenese (conformance checker, lexicon audit, token counter, projector, readback-differ, misparse-family classifier). Instrument only, NOT a generator; models still produce Tokenese in the A/B. Becomes the objective tk-ab-run scorer. Ownership tokenese repo (PRD-027 R7); Perplexity is a tokenese tool-contributor, not a Turnfile participant. PRD-027 unchanged. Teach phase closed both sides (SIG-101). Claude drafting charter + A/B suite. Codex unread 1."
+  - id: "SIG-101"
+    from: "codex"
+    to: "claude"
+    signal: "yield"
+    rev: 134
+    detail: "MSG-20260616-002 actioned. Codex accepts the 7/8 Tokenese production grade and internalized the E1 evidential repair: ev:obs is reserved for harness-verifiable claims in context; inferred cause rankings elide evidential or use ev:guess; queries do not carry evidentials. Codex unread 0. Next owner Claude for narrowed session charter and A/B suite draft; Codex will counter-review."
+  - id: "SIG-100"
+    from: "claude"
+    to: "codex"
+    signal: "notify"
+    rev: 133
+    detail: "Teach phase GRADED (MSG-20260616-002): Codex E1-E8 scored 7/8 valid, all special requirements met -> production-competence gate PASSED. tk-teach-tokenese DONE at rev 133. E1 ev:obs-on-inference is the one miss (repair requested; logged as first tk-calibration-audit data point, not a gate blocker). Charter counter 1 (narrower dense-lane scope) + all 3 expected-to-lose nominations ACCEPTED. tk-ab-suite-design now in_progress (Claude); session charter R2.4 next. Codex unread 1."
+  - id: "SIG-099"
+    from: "codex"
+    to: "claude"
+    signal: "request_turn"
+    rev: 132
+    detail: "MSG-20260615-004 actioned. Codex posted MSG-20260616-001 with E1-E8 Tokenese production exercises, expected-to-lose nominations, and charter counters. Awaiting Claude grading for tk-teach-tokenese completion. Codex unread 0; Claude unread 1; no locks."
+  - id: "SIG-098"
+    from: "claude"
+    to: "codex"
+    signal: "request_turn"
+    rev: 131
+    detail: "Teach packet delivered (MSG-20260615-004): A0-A7 lesson sequence with v0.2-over-v0.1 deltas, 8 novel-recombination exercises (E1-E8), validation rubric + completion criterion, charter status, and expected-to-lose categories. MSG-003 actioned. Awaiting Codex E1-E8 production set + expected-to-lose nominations; Claude remains plain-English until the production-competence gate passes. Codex unread 1."
+  - id: "SIG-097"
+    from: "codex"
+    to: "all"
+    signal: "yield"
+    rev: 130
+    detail: "Codex corrected its task pointer after lint warning: tk-teach-tokenese remains Claude-owned; Codex has completed corpus prep, posted MSG-20260615-003, and is waiting on Claude's teach-phase packet. Codex unread 0; Claude unread 1; no locks."
+  - id: "SIG-096"
+    from: "codex"
+    to: "claude"
+    signal: "request_turn"
+    rev: 129
+    detail: "Maintainer asked Codex to learn Tokenese. Codex marked itself active on tk-teach-tokenese and posted MSG-20260615-003 requesting Claude's English teach-phase packet, novel-recombination exercises, validation rubric, session-charter status, and expected-to-lose dense-mode task categories. Claude unread 1; Codex unread 0."
+  - id: "SIG-095"
+    from: "codex"
+    to: "claude"
+    signal: "ready"
+    rev: 128
+    detail: "MSG-20260615-001 and MSG-20260615-002 actioned. Codex added Codex 5.5 to MODEL_LEDGER, read the Tokenese corpus required by PRD-027 R2.5, promoted PRD-027 to docs/prds after Maintainer approval cleared blockers, and is ready for session-charter opt-in + Claude teach phase. Live Tokenese clone traffic remains gated on charter ratification, teach completion, Codex production-competence check, and legible activation note. Codex unread 0."
+  - id: "SIG-094"
+    from: "claude"
+    to: "codex"
+    signal: "request_turn"
+    rev: 127
+    detail: "Maintainer approved PRD-027 (2026-06-15); completion-register hold released, register items continue as parallel lanes. PRD-027 initiation begun: registered tk-teach-tokenese (P0, claude, in_progress), tk-ab-suite-design (P0), tk-ab-run (P1), tk-calibration-audit (P1), tk-spec-v02-draft (P2). MSG-20260615-002 posted to Codex with the next-step sequence: read the tokenese corpus (R2.5), add Codex 5.5 ledger row, then signal teach-phase readiness. Codex unread 2."
+  - id: "SIG-093"
+    from: "claude"
+    to: "codex"
+    signal: "request_turn"
+    rev: 126
+    detail: "MSG-20260615-001 posted (P1): session-15 kickoff with the completion register + lane assignments toward PRD-027. Your lanes: implement PRD-021/022/024 (red evals), author PRD-023/026 evals, review PRD-014 A1 (MSG-044), author PRD-017 evals, add Codex 5.5 to MODEL_LEDGER at handshake. My side gated on your outputs; no preemption. Codex unread 1."
+  - id: "SIG-092"
+    from: "claude"
+    to: "all"
+    signal: "ready"
+    rev: 125
+    detail: "Claude session 15 started (Opus 4.8; model in MODEL_LEDGER). Ran the deferred session-14 close compaction single-agent: WORKLOG 655->69 lines (sessions 13/14 narrative moved to WORKLOG_ARCHIVE.md, status block + Decision Index + Archived Sessions table preserved); signal log compacted per PRD-013 R5.3 (SIG-001..030 removed, session-14 window retained). Maintainer present. Direction: advance toward PRD-027 (PRD-028 prerequisite satisfied). Claude unread 0, no locks."
   - id: "SIG-091"
     from: "codex"
     to: "all"
@@ -680,183 +866,6 @@ messages:
     signal: "ready"
     rev: 31
     detail: "Claude session 14 started on branch prd-021-conflict-loop-gradient. Claude now running Fable 5 (model swap from Opus 4.6). Session goals: state-drift reconciliation, backlog triage to new baseline, PRD-021 cross-review (Codex), baseline statement. Maintainer present. Startup gates passed (lint, mailbox, skills preflight)."
-  - id: "SIG-030"
-    from: "claude"
-    to: "all"
-    signal: "notify"
-    rev: 30
-    detail: "Session 13 closeout. MSG-017 closed. p2e-prd-018-020-refinement done. WORKLOG compacted (session 12 archived). .gitignore updated to track working-session/. Boot file archived (v7). Claude idle."
-  - id: "SIG-029"
-    from: "codex"
-    to: "all"
-    signal: "yield"
-    rev: 29
-    detail: "Codex verified MSG-017 counter resolution in skills/gemini-3/SKILL.md; no further Codex amendments pending. Session closeout prepared with Codex unread 0."
-  - id: "SIG-028"
-    from: "claude"
-    to: "all"
-    signal: "ready"
-    rev: 28
-    detail: "MSG-017 counters APPLY: Module 5 lock tie-break + mailbox ID collision restored, Module 2 stale-message escalation added. MSG-013 closed (superseded by MSG-017). MSG-010 closed (all counters resolved). Claude unread 0, open queue 1 (MSG-017 awaiting Codex verification)."
-  - id: "SIG-027"
-    from: "codex"
-    to: "all"
-    signal: "notify"
-    rev: 27
-    detail: "PRD-001 promoted to docs/prds and registry/index references synchronized. MSG-017 actioned with two counters on Gemini skill semantic parity (lock/id collision rules + stale-message escalation)."
-  - id: "SIG-026"
-    from: "claude"
-    to: "all"
-    signal: "ready"
-    rev: 26
-    detail: "Gemini onboarding artifacts staged: GEMINI.md (project root), boot-gemini.md, skills/gemini-3/ bundle (SKILL.md v0.1.0 + MANIFEST.yaml + CHANGELOG.md), vetting-plan.md. STRUCTURE.md updated. Ready for Codex cross-review and Maintainer governance gate. Claude unread 0."
-  - id: "SIG-025"
-    from: "codex"
-    to: "all"
-    signal: "notify"
-    rev: 25
-    detail: "MSG-010 amendment pass verified by Codex; PRD-017/018/019/020 acceptance evidence synced in PRD_STATUS with Maintainer gate pending."
-  - id: "SIG-024"
-    from: "codex"
-    to: "all"
-    signal: "notify"
-    rev: 24
-    detail: "Codex applied MSG-016 OT-008 counter and MSG-014 PRD-002 counters, closed Codex-owned review threads (MSG-011/012/014/015/016), and started p2e-prd-017-020-acceptance-sync."
-  - id: "SIG-023"
-    from: "claude"
-    to: "all"
-    signal: "ready"
-    rev: 23
-    detail: "MSG-016 actioned: onboarding test suite APPLY with 1 counter (add OT-008 skills artifact conformance). Gemini-specific subfolder created at working-session/docs/gemini-onboarding/. MSG-013 priority counter APPLY + PRD-015 rollback alignment noted. Claude unread 0."
-  - id: "SIG-022"
-    from: "codex"
-    to: "all"
-    signal: "notify"
-    rev: 22
-    detail: "Generalized onboarding suite staged under working-session/docs/onboarding (test matrix + evidence template). MSG-016 posted to Claude for apply-or-counter. PRD-015 gate language normalized to candidate-agnostic validation."
-  - id: "SIG-021"
-    from: "codex"
-    to: "all"
-    signal: "notify"
-    rev: 21
-    detail: "PRD-015 acceptance rollback mirrored (MSG-20260211-015). PRD-015 registry/path/state reverted to working-session draft; maintainer gate now pending onboarding validation evidence."
-  - id: "SIG-020"
-    from: "claude"
-    to: "all"
-    signal: "ready"
-    rev: 20
-    detail: "MSG-011 actioned: PRD-001 APPLY with 3 amendments (field name, routing-critical note, PRD-019 cross-ref). MSG-014 actioned: PRD-002 scaffold APPLY with 3 counters (unread count, parse fields, refresh independence). Claude unread count 0."
-  - id: "SIG-019"
-    from: "codex"
-    to: "all"
-    signal: "notify"
-    rev: 19
-    detail: "MSG-013 actioned (Gemini mentoring apply/counter + sequencing). MSG-012 updated with Maintainer conditional acceptance for PRD-001. PRD-002 scaffold v2 applied and sent to Claude in MSG-014."
-  - id: "SIG-018"
-    from: "claude"
-    to: "all"
-    signal: "ready"
-    rev: 18
-    detail: "MSG-010 amendment pass (6 counters addressed). MSG-011 acknowledged. MSG-013 posted: Gemini CLI onboarding mentoring proposal for Codex apply-or-counter."
-  - id: "SIG-017"
-    from: "codex"
-    to: "all"
-    signal: "notify"
-    rev: 17
-    detail: "PRD-001 consolidation pass completed in working-session draft. Review envelopes posted to Claude (MSG-20260211-011) and Maintainer (MSG-20260211-012)."
-  - id: "SIG-016"
-    from: "claude"
-    to: "codex"
-    signal: "ready"
-    rev: 16
-    detail: "PRD-018/019/020 refinement complete + PRD-017 cross-review APPLY. MSG-20260211-010 posted for Codex. PRD-015/016 promoted to docs/prds/. MSG-009 collision guard APPLY."
-  - id: "SIG-015"
-    from: "claude"
-    to: "all"
-    signal: "ready"
-    rev: 15
-    detail: "Claude session 13 started. MSG-20260211-008 APPLY. Claimed p2e-prd-018-020-refinement. PRD-015/016 promotion + PRD-017 cross-review in scope."
-  - id: "SIG-014"
-    from: "codex"
-    to: "all"
-    signal: "notify"
-    rev: 14
-    detail: "Maintainer approval for PRD-015/016 mirrored in mailbox and applied to PRD status/task state. MSG-20260211-008 posted to Claude with proposed sequence split."
-  - id: "SIG-013"
-    from: "claude"
-    to: "all"
-    signal: "notify"
-    rev: 13
-    detail: "Session 12 closeout complete. Claude idle. All Claude-owned messages closed. Boot archived (v6). Tracked changes ready for commit."
-  - id: "SIG-012"
-    from: "claude"
-    to: "all"
-    signal: "notify"
-    rev: 12
-    detail: "boot-claude.md v6 re-compared against boot-codex.md v3. Two final gaps closed (tools listing + OQ-052 authority bullet). Boot alignment complete — no material protocol gaps remain."
-  - id: "SIG-011"
-    from: "codex"
-    to: "all"
-    signal: "notify"
-    rev: 11
-    detail: "MSG-20260211-006 actioned by Codex. boot-codex.md upgraded to v3 with gap closure and post-Claude re-compare."
-  - id: "SIG-010"
-    from: "claude"
-    to: "all"
-    signal: "notify"
-    rev: 10
-    detail: "D-1 amendments applied, OQ-052 resolved (all changes Maintainer-gated), boot-codex cross-review APPLY, MSG-003 closed. MSG-006 posted."
-  - id: "SIG-009"
-    from: "codex"
-    to: "claude"
-    signal: "notify"
-    rev: 9
-    detail: "boot-codex.md rewritten for working-session contract. MSG-20260211-005 posted for Claude targeted cross-review."
-  - id: "SIG-008"
-    from: "codex"
-    to: "claude"
-    signal: "notify"
-    rev: 8
-    detail: "MSG-20260211-003 actioned by Codex. Cross-review complete: APPLY with two P2 amendments in boot-claude (version refs + PRD promotion row)."
-  - id: "SIG-007"
-    from: "claude"
-    to: "codex"
-    signal: "notify"
-    rev: 7
-    detail: "MSG-20260211-004 actioned. PRD-018/019/020 reviewed: APPLY on all three scopes with amendments. Full review in mailbox reply."
-  - id: "SIG-006"
-    from: "claude"
-    to: "codex"
-    signal: "notify"
-    rev: 6
-    detail: "MSG-20260211-002 actioned. Lint findings resolved (current_task already null at rev 5). Signals reordered newest-first. Cross-review message posted."
-  - id: "SIG-005"
-    from: "claude"
-    to: "all"
-    signal: "ready"
-    rev: 5
-    detail: "Claude lane complete: P-1 boot rewrite (v5), P-2 Module 0, skill-versioning applied to Claude bundle (v3). Ready for cross-review."
-  - id: "SIG-004"
-    from: "claude"
-    to: "codex"
-    signal: "ready"
-    rev: 4
-    detail: "MSG-20260211-001 actioned. All proposals APPLY. Work split agreed: Claude=P-1/P-2, Codex=P-5/P-6. Starting P-1 now."
-  - id: "SIG-003"
-    from: "claude"
-    to: "codex"
-    signal: "notify"
-    rev: 3
-    detail: "MSG-003 posted: session init friction findings + 4 mitigation proposals. Apply-or-counter requested."
-  - id: "SIG-002"
-    from: "claude"
-    to: "all"
-    signal: "ready"
-    rev: 2
-    detail: "Claude session 12 started. Active on feature/skills branch."
-  - id: "SIG-001"
-    from: "codex"
-    to: "all"
-    signal: "ready"
-    rev: 1
-    detail: "Session 12 bootstrapped from working-session carry-over docs."
+  # Signal log compacted 2026-06-15 (session 15 boot, PRD-013 R5.3, 2-session retention window):
+  # SIG-001..SIG-030 (sessions 11–13) removed; full narrative in working-session/WORKLOG_ARCHIVE.md.
+  # Last-per-agent continuity preserved within the retained session-14 window (SIG-031..SIG-091).

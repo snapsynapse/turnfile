@@ -168,3 +168,45 @@ phase: phase-2 / p2-f
 
 ### OQs touched
 - Session 14 resolved OQ-051 through OQ-068 (zero active OQs at close). Registry: working-session/OPEN_QUESTIONS.md.
+
+---
+
+## Session 15 Close Snapshot — Claude
+
+```yaml
+session_id: claude-session-15
+agent: Claude
+model: Claude Opus 4.8 (1M)
+surface: Claude Code
+timestamp: 2026-06-16
+close_reason: Maintainer-directed close; Maintainer reviews/approves charter + PRD-030 between sessions
+branch: session-15-compaction (pushed; commit 273dbb1 + closeout commit)
+turnfile_revision: ~142 at close
+phase: phase-2 / p2-g
+```
+
+### Session 15 outcome
+- Deferred session-14 compaction run first (WORKLOG + signal log).
+- PRD-027 Tokenese pilot initiated: approved, promoted, task list registered.
+- First full Tokenese teach cycle: Claude taught -> Codex produced E1-E8 -> Claude graded 7/8 (gate PASSED); tk-teach-tokenese done.
+- Session charter (R2.4, narrowed scope) + A/B suite drafted, Codex counter-reviewed + signed; suite agreed (AC5) -> tk-ab-suite-design done; charter draft v2 awaiting Maintainer ratification.
+- Perplexity scoped as deterministic checker/decoder (instrument, tokenese repo, R7); package delivered (next-session eval).
+- PRD-030 (heartbeat mgmt) drafted by Codex, reviewed APPLY w/ 5 counters (C1-C5 applied); awaiting Maintainer acceptance.
+- 2-min sync loop enabled then DELETED at close (PRD-030 AC6 worked example).
+- Closed 7 fulfilled Claude threads; committed + pushed branch session-15-compaction.
+
+### FIRST ACTIONS ON RESUME (session 16)
+1. Boot, then CONFIRM Maintainer approvals: (a) charter ratification (R2.4), (b) PRD-030 acceptance. If ratified, record + (if directed) promote.
+2. Deep-inspect + apply Perplexity's deterministic checker/decoder against the pre-eval checklist (WORKLOG session-15 closeout entry). BLOCKER check: DESIGN section 7 grammar coverage.
+3. Then tk-ab-run mini-pilot (W1 + L1), scored by Perplexity's checker — only after charter ratified.
+
+### Open Claude-owned threads carried (unread 0)
+- MSG-20260616-008 (charter/suite/PRD-030 acceptance; Codex unread 1, Codex acks/closes).
+- MSG-20260613-044 (PRD-014 A1 apply-or-counter; still pending Codex review).
+
+### Carry-forward (Codex lanes, unchanged)
+- PRD-014 A1 review (MSG-044); PRD-021/022/024 impl (evals red); PRD-023/026/017 eval-authoring -> Claude implements; PRD-024 R5.1 validator.
+
+### Key files this session
+- New: working-session/SESSION_CHARTER.md, working-session/docs/tokenese-ab-suite.md, working-session/docs/PRD-030-...md (Codex).
+- PRD-027 promoted to docs/prds. tools unchanged. Tokenese corpus read: ~/Git/tokenese (spec/DESIGN/INTENT/CONFORMANCE/HANDOFF).
