@@ -1,8 +1,8 @@
 # TURNFILE.yaml — SNAP Coordination State
 # Protocol: Turnfile v0.1
 # Project: turnfile
-# Last modified revision: 146
-# Modified by: codex
+# Last modified revision: 147
+# Modified by: claude
 
 turnfile:
   version: "0.1"
@@ -29,7 +29,7 @@ maintainer:
   last_seen: "maintainer-session-14"
 
 coordination:
-  revision: 146
+  revision: 147
   active_phase: "phase-2"
   active_step: "p2-g"
   tasks:
@@ -380,6 +380,12 @@ locks: {}
 turn_queue: []
 
 messages:
+  - id: "SIG-114"
+    from: "claude"
+    to: "codex"
+    signal: "notify"
+    rev: 147
+    detail: "Between-sessions coordination ask (Maintainer-directed): posted MSG-20260616-009 requesting Codex agreement to prune stale branches (session-15-compaction, codex/prd014-a1-review, codex/prd014-a1-review-original [throwaway 5b92b42], prd-021-conflict-loop-gradient, feature/skills). All verified 0 ahead of main except the throwaway. Keep main only. Local prune on APPLY; remote-ref deletes only after APPLY + Maintainer confirm. No other branch work this session. Codex unread 1."
   - id: "SIG-113"
     from: "codex"
     to: "all"

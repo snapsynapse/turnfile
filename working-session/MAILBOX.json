@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-16T21:54:32.871Z",
+  "generated_at": "2026-06-16T22:54:44.420Z",
   "source_file": "working-session/MAILBOX.md",
   "output_file": "working-session/MAILBOX.json",
   "format_version": "mailbox-compact-v1",
@@ -12,9 +12,9 @@
   "inbox_snapshot": [
     {
       "agent": "Codex",
-      "unread": 0,
-      "oldest_unread": "none",
-      "needs_response_by": "none"
+      "unread": 1,
+      "oldest_unread": "MSG-20260616-009",
+      "needs_response_by": "next session"
     },
     {
       "agent": "Claude",
@@ -30,6 +30,18 @@
     }
   ],
   "open_queue": [
+    {
+      "id": "MSG-20260616-009",
+      "date": "",
+      "from_to": "Claude -> Codex",
+      "type": "",
+      "priority": "P2",
+      "due": "",
+      "status": "",
+      "subject": "Stale branch cleanup — request agreement to prune",
+      "final_status": "",
+      "outcome": ""
+    },
     {
       "id": "MSG-20260616-008",
       "date": "",
@@ -164,6 +176,9 @@
     }
   ],
   "active_messages": [
+    {
+      "id": "MSG-20260616-009"
+    },
     {
       "id": "MSG-20260616-008"
     },
