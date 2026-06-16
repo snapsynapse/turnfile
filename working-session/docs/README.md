@@ -4,13 +4,7 @@ Active iteration documents for the current local session workspace.
 
 ## In-Progress / Not Yet Actioned PRDs
 
-1. `PRD-002-rust-notification-viewer-mvp.md`
-2. `PRD-015-agent-onboarding-vetting-contract.md`
-3. `PRD-020-boot-artifact-completeness-and-chat-log-contract.md`
-4. `PRD-022-decision-mirror-delivery-contract.md`
-5. `PRD-023-out-of-band-activity-reconciliation-contract.md`
-6. `PRD-024-human-legibility-invariant-and-encoding-profiles-contract.md`
-7. `PRD-026-review-cycle-closure-and-task-state-consistency-contract.md`
+1. `PRD-030-session-heartbeat-management-contract.md`
 
 ## Actioned PRDs Promoted To `docs/prds/`
 
@@ -32,7 +26,13 @@ Active iteration documents for the current local session workspace.
 16. `PRD-018-maintainer-approval-authority-matrix-contract.md`
 17. `PRD-019-mailbox-first-approval-and-polling-cadence-contract.md`
 18. `PRD-021-conflict-loop-bound-and-selective-unlock-gradient-contract.md`
-19. `PRD-027-tokenese-cloned-communication-ab-contract.md`
+19. `PRD-022-decision-mirror-delivery-contract.md`
+20. `PRD-023-out-of-band-activity-reconciliation-contract.md`
+21. `PRD-024-human-legibility-invariant-and-encoding-profiles-contract.md`
+22. `PRD-026-review-cycle-closure-and-task-state-consistency-contract.md`
+23. `PRD-027-tokenese-cloned-communication-ab-contract.md`
+24. `PRD-028-tokenese-dual-artifact-sync-and-maintainer-legibility-contract.md`
+25. `PRD-029-pre-write-state-derivation-contract.md`
 
 ## Promotion Gate Policy (Required)
 

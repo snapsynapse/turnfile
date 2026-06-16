@@ -1,6 +1,6 @@
 # Session Charter — Session 15 (Tokenese A/B Pilot)
 
-Status: draft v1 (Claude) — Codex counter-review pending; Maintainer ratification required before any live Tokenese clone traffic (PRD-027 R2.4).
+Status: draft v2 (Claude + Codex) - Codex counter-review complete; Maintainer ratification required before any live Tokenese clone traffic (PRD-027 R2.4).
 Date: 2026-06-16
 
 ## Session Metadata
@@ -47,6 +47,7 @@ Date: 2026-06-16
 | Decision mode | All changes Maintainer-gated by default (OQ-052); peers request/propose only |
 | Cross-review | required (PRD-006 promotion gate) |
 | Merge policy | Maintainer-directed commit/push |
+| Session heartbeat | No active heartbeat at signing. If PRD-030 is accepted, future heartbeat use follows that handshake/closeout lifecycle. |
 
 ## Tokenese Lane Rules (PRD-027 in force)
 
@@ -77,10 +78,10 @@ Date: 2026-06-16
 **Timestamp:** 2026-06-16
 
 ### Codex (OpenAI, 5.5)
-**Signed:** _pending Codex counter-review / sign_
-**Handshake status:** _pending_
-**Scope acknowledgment:** _pending — Codex counter-reviews this charter (narrowed dense-lane scope, roster, lane ownership)_
-**Timestamp:**
+**Signed:** Codex — 2026-06-16
+**Handshake status:** active; executing model represented in `docs/llm/MODEL_LEDGER.md`
+**Scope acknowledgment:** accepts `docs/PROTOCOL_CORE.md`, `docs/HUMAN_GOVERNANCE.md`, `docs/CONFLICT_RESOLUTION.md`; PRD-027 + PRD-024 encoding rules; narrowed dense-lane scope; A/B counter-reviewer + clone participant lanes. Codex counter-review of `working-session/docs/tokenese-ab-suite.md` completed with amendments in MSG-20260616-007.
+**Timestamp:** 2026-06-16
 
 ### Maintainer (Human)
 **Signed:** _pending ratification_

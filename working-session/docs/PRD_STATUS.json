@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2026-06-13",
+  "updated_at": "2026-06-16",
   "policy": {
     "required_reviewers": [
       "codex",
@@ -960,6 +960,42 @@
         "implementer": "codex",
         "reviewer": "claude",
         "notes": "Claude authored evals; Codex implemented tools/next-state.mjs + skills/codex v7; Claude reviewed (APPROVE, MSG-045) and filed done 2026-06-13. evals/prd-029.evals.mjs 10/10 green (R6.3 closed by skills/claude v0.6.0)."
+      }
+    },
+    {
+      "id": "PRD-030",
+      "title": "Session Heartbeat Management Contract",
+      "path": "working-session/docs/PRD-030-session-heartbeat-management-contract.md",
+      "shelf": "working-session/docs",
+      "state": "draft",
+      "acceptance": {
+        "codex": {
+          "status": "accepted",
+          "evidence": [
+            "Codex authored draft on 2026-06-16 in response to Maintainer request for session heartbeat management negotiation and closeout handling",
+            "Codex applied Claude MSG-20260616-006 counters C1-C5 on 2026-06-16"
+          ]
+        },
+        "claude": {
+          "status": "accepted",
+          "evidence": [
+            "MSG-20260616-006: Claude reviewed PRD-030 APPLY with 5 counters; accepted-with-amendment flips clean when C1-C5 land"
+          ]
+        },
+        "maintainer": {
+          "status": "pending",
+          "evidence": [
+            "Maintainer requested the PRD on 2026-06-16 after Codex deleted the obsolete turnfile-mailbox-heartbeat automation during closeout"
+          ]
+        }
+      },
+      "blocking_items": [
+        "Maintainer acceptance pending"
+      ],
+      "eligible_for_docs_prds": false,
+      "implementation": {
+        "state": "not-started",
+        "notes": "Draft only. Claude counters applied. Proposed changes: handshake heartbeat negotiation, runtime heartbeat discipline, and PRD-014 closeout heartbeat lifecycle check."
       }
     }
   ]

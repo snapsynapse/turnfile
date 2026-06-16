@@ -3,16 +3,21 @@
 References:
 - `/Users/snap/Git/turnfile/docs/PROTOCOL_CORE.md`
 
-Now Working (Codex): Session 15 OPEN (Codex 5.5) at rev 136. Codex actioned Claude's Perplexity checker/decoder decision mirror (MSG-20260616-003) with no scope counter. Codex understands Perplexity as deterministic scorer/projector only, not a generator or Turnfile participant. Codex unread 0; no locks.
-Now Working (Claude): Session 15 OPEN (Opus 4.8) at rev 135. `tk-teach-tokenese` done; `tk-ab-suite-design` in progress. Relayed the Maintainer decision (MSG-20260616-003) that Perplexity Computer builds a deterministic Tokenese checker/decoder in ~/Git/tokenese as the objective A/B scoring instrument (not a generator; tokenese-repo-owned per R7; PRD-027 unchanged). Next: Claude drafts the narrowed session charter (R2.4) + A/B suite; Codex counter-reviews. Claude unread 0; no locks.
-Maintainer Focus: PRD-027 initiation approved 2026-06-15. Start with governance sync, session-charter Tokenese opt-in, Claude teach phase, Codex production-competence check, then measured A/B clone pilot. Remaining non-PRD-027 register items continue in parallel and are no longer PRD-027 initiation blockers.
-Maintainer Decision Queue (PRD-004 A1): (1) PRD-003/004/008 A1 document acceptances, if still desired before promotion; (2) model-specific skill directory retention/removal only by explicit Maintainer decision; no model-specific skill path is deprecated by default; (3) push/PR + session-15 boundary timing.
-Next Review Checkpoint: Narrowed session-charter Tokenese opt-in + A/B suite draft from Claude, then Codex counter-review. Parallel carry-forward: PRD-014 A1 review (Codex); Codex implementation lanes PRD-021/022/024 (evals red); eval-author lanes PRD-023/026/017 -> Claude implements; PRD-024 R5.1 validator.
+Now Working (Codex): Session 15 OPEN (Codex 5.5) at rev 143. Codex actioned MSG-20260616-008; no further counters. Codex unread 0; no locks.
+Now Working (Claude): Session 15 CLOSING (Opus 4.8) at rev 141. tk-teach-tokenese done; tk-ab-suite-design DONE (suite agreed both agents, PRD-027 AC5 met); charter draft v2 signed by both agents (awaiting Maintainer ratification); PRD-030 reviewed + C1-C5 applied (awaiting Maintainer acceptance). Closed 7 fulfilled Claude-owned threads. Heartbeat loop f77ecc36 DELETED at clean close (PRD-030 AC6 worked example). Claude unread 0; no locks.
+Maintainer Focus (between sessions): two approvals are yours to make before session 16 — (1) ratify the PRD-027 session charter (working-session/SESSION_CHARTER.md, R2.4); (2) accept PRD-030. Next session opens with Claude boot + confirmation of these approvals.
+Maintainer Decision Queue (PRD-004 A1): (1) ratify PRD-027 session charter (R2.4); (2) accept PRD-030 (session heartbeat); (3) PRD-003/004/008 A1 document acceptances if still desired; (4) model-specific skill directory retention only by explicit decision; (5) push/PR timing.
+Next Review Checkpoint (session 16 plan): Claude boot -> confirm Maintainer approvals (charter + PRD-030) -> deep-inspect + apply Perplexity's deterministic checker/decoder (eval against the pre-eval checklist in the closeout entry) -> then tk-ab-run mini-pilot (W1+L1) once charter ratified. Parallel carry-forward (Codex lanes, unchanged): PRD-014 A1 review (MSG-044 open); PRD-021/022/024 impl (evals red); PRD-023/026/017 eval-authoring -> Claude implements; PRD-024 R5.1 validator.
 
 ## Decision Index
 
 | Decision | Owner | Timestamp | Section |
 |----------|-------|-----------|---------|
+| Claude accepted all Codex amendments from MSG-20260616-007 in MSG-20260616-008. The A/B suite is agreed by both agents and `tk-ab-suite-design` is done. The session charter is signed by both agents and ready for Maintainer ratification before any live Tokenese clone traffic. PRD-030 counters C1-C5 are confirmed applied; PRD-030 awaits Maintainer acceptance. | Claude + Codex | 2026-06-16 | Charter and A/B suite accepted |
+| Codex completed the PRD-027 charter and A/B suite counter-review. Codex signed `working-session/SESSION_CHARTER.md`, accepted the narrowed dense-lane scope, confirmed W1+L1 mini-pilot and direction balance, added W1 evidential discipline, stable source IDs, a mini-pilot dense-reasoning failure criterion, and concrete L1-L3 inputs. Review posted to Claude in MSG-20260616-007; Maintainer ratification remains required before live Tokenese clone traffic. | Codex + Claude | 2026-06-16 | Charter and A/B suite counter-review complete |
+| Claude reviewed PRD-030 APPLY with five counters in MSG-20260616-006. Codex applied C1-C5: PRD-014 A1 seam, mandatory WORKLOG entries for carried-forward heartbeats, no `automation_state` in Turnfile, heartbeat as interaction gearing not protocol cadence, and false-idle/prolonged-silence rule. PRD-030 agent acceptance gates are now accepted; Maintainer acceptance remains pending. | Claude + Codex | 2026-06-16 | PRD-030 counters applied |
+| Maintainer requested a new PRD for session heartbeat management after Codex deleted the obsolete `turnfile-mailbox-heartbeat` automation during closeout. Codex drafted PRD-030 as a standalone proposal covering heartbeat negotiation at session handshake, runtime files-first discipline, notification behavior, and closeout deletion/update/carry-forward. Draft routed to Claude for apply-or-counter in MSG-20260616-005. | Maintainer + Codex | 2026-06-16 | PRD-030 heartbeat management draft |
+| Claude delivered the PRD-027 session charter and A/B suite in MSG-20260616-004. Codex acknowledged the request and explicitly deferred counter-review while drafting the Maintainer-requested PRD-030; Codex still owns the charter/suite counter-review next unless the Maintainer reprioritizes. | Claude + Codex | 2026-06-16 | Charter and A/B suite counter-review queued |
 | Maintainer brought in Perplexity Computer to build a deterministic, scripted Tokenese->English checker/decoder in `~/Git/tokenese` (conformance checker, lexicon audit, token counter, projector, readback-differ, misparse-family classifier). Scope chosen: instrument + decoder only, NOT a generator — models still produce the Tokenese in the A/B, preserving the model-competence claim. It becomes the objective `tk-ab-run` scorer and the audit/projection surface (R4.5/INTENT-7). Ownership stays in the tokenese repo (PRD-027 R7); Perplexity is a tokenese tool-contributor, not yet a Turnfile participant (no PRD-015 onboarding/charter/ledger unless it later joins the A/B as a generating/consuming agent). PRD-027 unchanged. | Maintainer + Claude | 2026-06-16 | Perplexity deterministic checker/decoder scope |
 | Claude graded Codex's Tokenese production attempt from MSG-20260616-001: 7/8 valid first-pass, all special requirements met, production-competence gate passed, and `tk-teach-tokenese` complete. E1's `ev:obs` on inferred cause ranking is recorded as the first calibration datapoint and repair: reserve `ev:obs` for harness-verifiable claims in context, elide evidential or use `ev:guess` for inferred rankings, and do not attach evidentials to queries. Next owner is Claude for narrowed session charter plus A/B suite draft, then Codex counter-review. | Claude + Codex | 2026-06-16 | Tokenese teach-phase grade |
 | Codex completed the first Tokenese production attempt in response to Claude's teach packet: E1-E8 examples, three expected-to-lose dense-mode task nominations, and two charter counters. Claude remains teacher and will grade against the posted rubric before `tk-teach-tokenese` can close. | Codex + Claude | 2026-06-16 | Tokenese production attempt 1 |
@@ -74,3 +79,41 @@ Next Review Checkpoint: Narrowed session-charter Tokenese opt-in + A/B suite dra
 | 12 | 2026-02-10/11 | Full session compacted to WORKLOG_ARCHIVE.md. Bootstrap, skill validation, boot rewrites, PRD-001 promotion, PRD-017-020 refinement, Gemini onboarding staging. 18 entries, revisions 1-29. |
 | 13 | 2026-02-11 | Compacted to WORKLOG_ARCHIVE.md. Claude-only: PRD-001 review, mailbox processing, Gemini onboarding artifacts staged, thread closures; `working-session/` made git-tracked. Revisions ~29–30. |
 | 14 | 2026-06-12/13 | Compacted to WORKLOG_ARCHIVE.md. The reset: 4-month drift reconciled, backlog triaged to a clean baseline (BASELINE.md + README index), PRD-006 A1 eight-step loop installed, PRD-017/018/019/021/022/023/024/026 promoted + PRD-020 folded, PRD-028/029 taken fully through the A1 loop in both directions, terminal PRDs (002/015/020) archived, Claude skill v0.3.0→v0.6.0. Three Claude model generations (Opus 4.6→Fable 5→Opus 4.8) and Codex 5.3→5.5 on one unmodified protocol. Revisions 31–124. |
+
+## Session 15 — 2026-06-15/16 (Claude Opus 4.8 + Codex 5.5 + Maintainer)
+
+### Claude: SESSION 15 CLOSEOUT — rev 141
+
+2026-06-16 — Coordinated close. Module 6 + PRD-014 followed.
+
+Session 15 outcome (the Tokenese pilot, initiated and staged):
+- Ran the deferred session-14 compaction first (WORKLOG 655->69; signal log per PRD-013 R5.3).
+- PRD-027 approved by Maintainer + initiated: acceptance recorded, promoted to docs/prds, Tokenese task list registered (tk-teach/ab-suite-design/ab-run/calibration-audit/spec-v02).
+- First full Tokenese teach cycle through the protocol: Claude taught (packet), Codex produced E1-E8, Claude graded 7/8 -> production-competence gate PASSED; tk-teach-tokenese done. E1 ev:obs-on-inference logged as first calibration datapoint.
+- Session charter (R2.4, narrowed dense-lane scope) + A/B suite drafted, Codex counter-reviewed and signed; suite agreed both agents (AC5) -> tk-ab-suite-design done; charter draft v2 awaiting Maintainer ratification.
+- Perplexity Computer scoped as the deterministic checker/decoder (tokenese repo, R7) and A/B scorer — instrument, not generator, not a Turnfile participant. Delivered a translator package (next-session eval).
+- PRD-030 (session heartbeat management) drafted by Codex, reviewed by Claude APPLY w/ 5 counters (C1-C5 applied) — awaiting Maintainer acceptance.
+- 2-minute mailbox sync loop enabled (interaction gearing) and DELETED at close (PRD-030 AC6 worked example). Committed + pushed branch session-15-compaction (273dbb1).
+- Three+ model generations on one unmodified protocol continues (Claude Opus 4.8 / Codex 5.5).
+
+Closeout actions: closed 7 fulfilled Claude-owned threads (open queue 18->11); heartbeat loop deleted; Claude idle, unread 0, no locks; chat-claude.md snapshot; boot rolled v8->v9.
+
+Carry-forward to session 16 (next-session plan, Maintainer-agreed):
+1. Claude boot -> confirm Maintainer approvals: (a) charter ratification (R2.4), (b) PRD-030 acceptance.
+2. Deep-inspect + apply Perplexity's deterministic checker/decoder against the pre-eval checklist (below).
+3. Then tk-ab-run mini-pilot (W1 + L1) once charter ratified; scored by Perplexity's checker.
+4. Codex lanes unchanged: PRD-014 A1 review (MSG-044 open); PRD-021/022/024 impl (evals red); PRD-023/026/017 eval-authoring -> Claude implements; PRD-024 R5.1 validator.
+
+Perplexity pre-eval checklist (verify against the delivered tokenese-translator before trusting its scores):
+1. BLOCKER if missing — grammar target covers spec v0.1 PLUS DESIGN section 7 sigils (@noun, ??slot, because, square-hole / dagger / check / brace-quote / not() / ev: / dense-plain); pin the spec+DESIGN commit it locks to.
+2. Coverage of the 6 brief deliverables: conformance checker L1/L2/L3; lexicon audit vs anthropic_costs.json; token counter BOTH tokenizers (o200k + Anthropic); Tokenese->English decoder/projector; readback-differ (transformed-vs-verbatim); misparse-family classifier (binding/scope/sense/triangulation).
+3. Determinism: no model calls in decode/score path; no English->Tokenese generation (instrument only).
+4. Machine output schema (JSON per pair: conformance level, token counts both tokenizers, readback-diff, misparse-family); how Anthropic-side tokens are counted (cached vs live API + credentials).
+5. Unparseable input -> explicit marker, never a hallucinated English guess.
+6. A small golden corpus (labeled conformant + failing transcripts with expected verdicts) to validate the oracle; its 16 tests may suffice.
+
+### Decision Index — Session 15 closeout
+
+| Decision | Owner | Timestamp | Section |
+|----------|-------|-----------|---------|
+| Session 15 closed with PRD-027 Tokenese pilot fully staged: teach done, suite agreed, charter signed by both agents (awaiting Maintainer ratification), PRD-030 reviewed (awaiting Maintainer acceptance), Perplexity checker scoped + delivered (next-session eval). Heartbeat loop deleted at clean close (PRD-030 AC6). | Maintainer + Claude + Codex | 2026-06-16 | Session 15 closeout |

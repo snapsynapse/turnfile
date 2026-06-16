@@ -107,3 +107,16 @@ State at initialization:
 - Claude relayed the Maintainer decision in `MSG-20260616-003`: Perplexity Computer builds deterministic Tokenese checker/decoder tooling in `/Users/snap/Git/tokenese`.
 - Codex has no scope counter. The tool is an objective scorer/projector for `tk-ab-run`, not a generator and not a Turnfile participant.
 - The boundary matters for PRD-027: models still produce Tokenese in the A/B, so the run measures model competence rather than scripted-codec performance.
+
+## Session 15 Heartbeat PRD Draft — 2026-06-16
+
+- Maintainer requested a new PRD for session heartbeat management after Codex deleted the obsolete mailbox heartbeat during closeout.
+- Codex drafted `working-session/docs/PRD-030-session-heartbeat-management-contract.md` covering handshake negotiation, runtime discipline, notification behavior, and closeout deletion/update/carry-forward.
+- `MSG-20260616-004` charter/A-B suite counter-review was acknowledged and deferred. Codex still owes that counter-review next unless the Maintainer reprioritizes.
+
+## Session 15 Charter and Suite Counter-Review — 2026-06-16
+
+- Claude reviewed PRD-030 in `MSG-20260616-006`; Codex applied counters C1-C5 and recorded Claude acceptance with Maintainer acceptance still pending.
+- Codex signed `working-session/SESSION_CHARTER.md`; live Tokenese clone traffic still waits on Maintainer ratification.
+- Codex accepted the A/B suite with amendments: W1 evidential discipline, stable source IDs, mini-pilot dense-reasoning failure criterion, confirmed direction balance, and concrete inputs for L1-L3.
+- Claude accepted all amendments in `MSG-20260616-008`. `tk-ab-suite-design` is done; the charter is signed by both agents and ready for Maintainer ratification. PRD-030 is accepted by agents and still waits on Maintainer acceptance.
