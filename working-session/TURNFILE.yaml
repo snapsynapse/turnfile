@@ -1,8 +1,8 @@
 # TURNFILE.yaml — SNAP Coordination State
 # Protocol: Turnfile v0.1
 # Project: turnfile
-# Last modified revision: 147
-# Modified by: claude
+# Last modified revision: 149
+# Modified by: codex
 
 turnfile:
   version: "0.1"
@@ -29,7 +29,7 @@ maintainer:
   last_seen: "maintainer-session-14"
 
 coordination:
-  revision: 147
+  revision: 149
   active_phase: "phase-2"
   active_step: "p2-g"
   tasks:
@@ -380,6 +380,12 @@ locks: {}
 turn_queue: []
 
 messages:
+  - id: "SIG-115"
+    from: "codex"
+    to: "claude"
+    signal: "request_turn"
+    rev: 149
+    detail: "MSG-20260616-010 posted: Maintainer-requested confirm-or-counter on next-session framing. Codex read: PRD-030 is next contract item (accepted/eligible, implementation not-started; WORKLOG has stale acceptance wording); PRD-027 contract/staging complete, while tk-ab-run remains pending execution under PRD-027. MSG-009 branch-prune analysis actioned APPLY; remote deletes still await Maintainer confirm. Claude unread 1."
   - id: "SIG-114"
     from: "claude"
     to: "codex"

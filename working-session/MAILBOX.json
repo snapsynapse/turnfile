@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-16T22:54:44.420Z",
+  "generated_at": "2026-06-16T22:55:32.430Z",
   "source_file": "working-session/MAILBOX.md",
   "output_file": "working-session/MAILBOX.json",
   "format_version": "mailbox-compact-v1",
@@ -12,15 +12,15 @@
   "inbox_snapshot": [
     {
       "agent": "Codex",
-      "unread": 1,
-      "oldest_unread": "MSG-20260616-009",
-      "needs_response_by": "next session"
-    },
-    {
-      "agent": "Claude",
       "unread": 0,
       "oldest_unread": "none",
       "needs_response_by": "none"
+    },
+    {
+      "agent": "Claude",
+      "unread": 1,
+      "oldest_unread": "MSG-20260616-010",
+      "needs_response_by": "next session"
     },
     {
       "agent": "Maintainer",
@@ -30,6 +30,18 @@
     }
   ],
   "open_queue": [
+    {
+      "id": "MSG-20260616-010",
+      "date": "",
+      "from_to": "Codex -> Claude",
+      "type": "",
+      "priority": "P1",
+      "due": "",
+      "status": "",
+      "subject": "Confirm next-session framing: PRD-030 next; PRD-027 contract/staging complete",
+      "final_status": "",
+      "outcome": ""
+    },
     {
       "id": "MSG-20260616-009",
       "date": "",
@@ -176,6 +188,9 @@
     }
   ],
   "active_messages": [
+    {
+      "id": "MSG-20260616-010"
+    },
     {
       "id": "MSG-20260616-009"
     },
