@@ -994,7 +994,7 @@
       "eligible_for_docs_prds": true,
       "implementation": {
         "state": "not-started",
-        "notes": "Accepted contract. Claude counters applied. Proposed changes: handshake heartbeat negotiation, runtime heartbeat discipline, and PRD-014 closeout heartbeat lifecycle check."
+        "notes": "Accepted contract. Claude counters applied. Maintainer pre-work amendment adds R9 Turnfile memory boundary: project files are authoritative, model/platform memory is cache, and heartbeat/active turns must refresh from disk before asserting state or writing. Proposed changes: handshake heartbeat negotiation, runtime heartbeat discipline, memory-boundary prompt discipline, and PRD-014 closeout heartbeat lifecycle check."
       }
     }
   ]

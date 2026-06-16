@@ -21,6 +21,7 @@ Date: 2026-06-16
 4. `derived`: PRD-019 covers mailbox-first approval and polling cadence in protocol terms, but does not govern Codex app heartbeat automations.
 5. `derived`: PRD-024 keeps governance legible; heartbeat outcomes that change protocol state must be projected into legible artifacts.
 6. `derived`: PRD-029 requires fresh state derivation before shared-file writes, which applies when a heartbeat processes mailbox or Turnfile work.
+7. `explicit`: Maintainer stated that external/model memory is getting in the way of Turnfile work and that session state should be stored within the Turnfile project itself, refreshed constantly, because state changes externally.
 
 ## Problem
 
@@ -33,6 +34,7 @@ However, unmanaged heartbeats create their own failure modes:
 3. A heartbeat can blur the line between convenience automation and Turnfile protocol semantics.
 4. A heartbeat can process shared files without explicitly following mailbox, Turnfile, projection, and validator discipline.
 5. Closeout can leave stale automations running unless the close checklist includes automation lifecycle.
+6. A heartbeat or resumed active turn can accidentally treat platform/model memory as current session state even when Turnfile files have changed externally.
 
 Turnfile needs a narrow lifecycle contract for session heartbeats: how participants negotiate them at handshake, how they run during the session, and how they are deleted or deliberately carried forward at closeout.
 
@@ -43,6 +45,7 @@ Turnfile needs a narrow lifecycle contract for session heartbeats: how participa
 3. Standardize heartbeat prompt content, cadence, notification policy, and lifecycle ownership.
 4. Bind heartbeat processing to existing Turnfile mailbox, state-derivation, projection, and validation rules.
 5. Add heartbeat review and deletion/update to session closeout.
+6. Make Turnfile project artifacts the authoritative session-memory surface for heartbeat runs and active-turn refreshes.
 
 ## Non-goals
 
@@ -51,6 +54,7 @@ Turnfile needs a narrow lifecycle contract for session heartbeats: how participa
 3. Requiring every session to use a heartbeat.
 4. Defining product-specific automation APIs beyond the behavior Turnfile needs from the active agent surface.
 5. Allowing heartbeats to create hidden state, hidden authority, or out-of-band governance.
+6. Redirecting or controlling a vendor/model's internal memory implementation. PRD-030 can only define Turnfile project state as authoritative for this workflow.
 
 ## Requirements
 
@@ -147,6 +151,17 @@ Deletion of an obsolete heartbeat is a material lifecycle change and should be r
 5. A heartbeat should not be used to force liveness or responsiveness from another participant; it only checks file-visible state.
 6. A heartbeat must never infer peer liveness from silence. It can report file-visible inactivity or unchanged state only.
 
+## R9. Turnfile memory boundary and refresh discipline
+
+1. Model, platform, thread, or automation memory is a cache only. It is never the source of truth for current Turnfile state.
+2. Durable session memory belongs in Turnfile project artifacts: `working-session/MAILBOX.md`, `working-session/MAILBOX.json`, `working-session/TURNFILE.yaml`, `working-session/WORKLOG.md`, `working-session/docs/PRD_STATUS.json`, relevant PRDs, session charters, boot artifacts, and chat snapshots.
+3. Heartbeat prompts and session handshakes must instruct the active agent to quarantine prior internal memory when asserting current shared state.
+4. Every heartbeat run and every resumed active turn must re-read the relevant Turnfile files from disk before reporting state, choosing next work, or editing shared files.
+5. Refresh discipline applies even when the agent believes it recently read the files, because peers and external tools may have changed state between turns.
+6. Before writes, current IDs, inbox counts, signal IDs, and revision numbers must be derived with `tools/next-state.mjs` inside the write window.
+7. If Turnfile project files conflict with model/platform memory, Turnfile files win and the discrepancy should be treated as a signal to report or correct stale projections.
+8. Heartbeat no-op reports should say which Turnfile state was refreshed, including unread counts and current revision, without creating extra governance churn.
+
 ## Acceptance criteria
 
 1. Session handshake includes an explicit heartbeat decision: none, create, update, or carry forward.
@@ -155,6 +170,8 @@ Deletion of an obsolete heartbeat is a material lifecycle change and should be r
 4. Heartbeat runs that mutate Turnfile state advance revision and pass Turnfile lint.
 5. Session closeout includes heartbeat inspection and deletes or updates obsolete automations.
 6. At least one closeout demonstrates deletion of an obsolete heartbeat after unread counts reach zero.
+7. Heartbeat prompt or handshake artifacts include the memory-boundary instruction: Turnfile project files are authoritative, model/platform memory is non-authoritative cache.
+8. A quiet heartbeat or active-turn status report can show it refreshed current unread counts and Turnfile revision from project files before reporting.
 
 ## Risks
 
@@ -166,15 +183,18 @@ Deletion of an obsolete heartbeat is a material lifecycle change and should be r
    Mitigation: closeout checklist requires deletion, update, or explicit carry-forward.
 4. Heartbeats can race active agents.
    Mitigation: files-first reads, derived-state checks, and existing lock/revision discipline apply.
+5. External/model memory can override fresh file state in agent reasoning.
+   Mitigation: PRD-030 requires a memory boundary, file refresh before assertions, and `tools/next-state.mjs` derivation before writes.
 
 ## Dependencies
 
 1. PRD-003 message lifecycle and SLA contract.
 2. PRD-010 shared-file transaction locking.
-3. PRD-014 session closeout and boot handoff contract.
-4. PRD-019 mailbox-first approval and polling cadence contract.
-5. PRD-024 human-legibility invariant and encoding profiles.
-6. PRD-029 pre-write state derivation contract.
+3. PRD-011 boot/resumption discipline.
+4. PRD-014 session closeout and boot handoff contract.
+5. PRD-019 mailbox-first approval and polling cadence contract.
+6. PRD-024 human-legibility invariant and encoding profiles.
+7. PRD-029 pre-write state derivation contract.
 
 ## Open questions
 
@@ -184,3 +204,4 @@ Resolved during Claude review (MSG-20260616-006):
 
 1. Carried-forward heartbeats always require a WORKLOG entry.
 2. Heartbeat state stays out of `TURNFILE.yaml` for now; record handshake decisions in the session charter and carry-forward decisions in WORKLOG.
+3. Model/platform memory is not authoritative for current Turnfile state. Turnfile project files are the refreshable session-memory surface for heartbeat and active-turn work.
