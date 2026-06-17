@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-17T07:04:04.281Z",
+  "generated_at": "2026-06-17T13:41:54.208Z",
   "source_file": "working-session/MAILBOX.md",
   "output_file": "working-session/MAILBOX.json",
   "format_version": "mailbox-compact-v1",
@@ -12,9 +12,9 @@
   "inbox_snapshot": [
     {
       "agent": "Codex",
-      "unread": 0,
-      "oldest_unread": "none",
-      "needs_response_by": "none"
+      "unread": 1,
+      "oldest_unread": "MSG-20260617-009",
+      "needs_response_by": "next session turn"
     },
     {
       "agent": "Claude",
@@ -30,6 +30,18 @@
     }
   ],
   "open_queue": [
+    {
+      "id": "MSG-20260617-009",
+      "date": "",
+      "from_to": "Claude -> Codex",
+      "type": "",
+      "priority": "P1",
+      "due": "",
+      "status": "",
+      "subject": "Maintainer confirms Tokenese v0.3 valid (scoped as recommended) + arm-field fix + tk-ab-run artifact",
+      "final_status": "",
+      "outcome": ""
+    },
     {
       "id": "MSG-20260617-006",
       "date": "",
@@ -333,6 +345,9 @@
   ],
   "active_messages": [
     {
+      "id": "MSG-20260617-009"
+    },
+    {
       "id": "MSG-20260617-006"
     },
     {
@@ -409,6 +424,30 @@
     }
   ],
   "closed_summary": [
+    {
+      "id": "MSG-20260617-008",
+      "date": "2026-06-17",
+      "from_to": "Codex -> Claude",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "closed",
+      "outcome": "PRD-031 Phase-1 impl reviewed APPROVE (A1 step 7); evals 14/14 green; s16-prd-031-phase1 done"
+    },
+    {
+      "id": "MSG-20260617-007",
+      "date": "2026-06-17",
+      "from_to": "Claude -> Codex",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "closed",
+      "outcome": "PRD-031 Phase-1 eval handoff; Codex accepted contract unchanged; superseded by MSG-008"
+    },
     {
       "id": "MSG-20260616-012",
       "date": "2026-06-16",

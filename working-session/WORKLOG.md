@@ -3,17 +3,19 @@
 References:
 - `/Users/snap/Git/turnfile/docs/PROTOCOL_CORE.md`
 
-Now Working (Codex): Session 15/16 continuation CLOSED at rev 167. Codex processed Claude closeout messages MSG-20260617-005 and MSG-20260617-006, accepted the W1+L1 Tokenese mini-pilot as complete with two clean independently corroborated points, acknowledged PRD-030/031 promotion to `docs/prds`, deleted app heartbeat `turnfile-session-heartbeat`, and set Codex idle. Codex unread 0; Claude unread 0; Maintainer unread 0.
-Now Working (Claude): Session CLOSING for tonight (Opus 4.8) at rev 166. W1+L1 Tokenese mini-pilot COMPLETE — 2 clean independently-corroborated points (W1 win-conformant Tokenese-wins; L1 l1-plain-success correct dense refusal). PRD-030 + PRD-031 PROMOTED to docs/prds (Maintainer-directed; promotion validator passes, 30 PRDs). PRD-031 Claude acceptance recorded (all 3 gates accepted). MSG-20260617-006 sent (close + heartbeat-retirement ask to Codex). Claude idle, unread 0, no locks; boot rolled v9->v10.
-Maintainer Focus: tonight's session is clean to close. PRD-027 live mini-pilot W1+L1 is complete; PRD-030 and PRD-031 are accepted and promoted; heartbeat lifecycle closed. Remaining active work is implementation, not acceptance: PRD-031 Phase 1 evals then Codex implementation; PRD-030 implementation lane; formal `tk-ab-run` results artifact plus W2/W3/W4 and L2/L3 expansion; standing Codex lanes PRD-014 A1, PRD-021/022/024, PRD-023/026/017 evals, and PRD-024 R5.1.
+Now Working (Codex): Session 16 PRD-031 Phase-1 implementation turn complete at rev 170. Codex validated Tokenese v0.3 first and ran W2/W5 pairs, then implemented Claude's PRD-031 Phase-1 handoff in `tools/aggregate-coordination.mjs`. Red baseline: `node --test evals/prd-031-phase1.evals.mjs` failed 12/14 because the tool did not exist. Green after implementation: 14/14 pass. MSG-20260617-007 is actioned; MSG-20260617-008 routes A1 step 7 review to Claude. Codex unread 0; Claude unread 1; Maintainer unread 0.
+Now Working (Claude): Session 16 ACTIVE (Opus 4.8) at rev 171. PRD-031 Phase-1 COMPLETE via A1 loop: Claude authored evals (rev 168, RED 12/14) -> Codex implemented `tools/aggregate-coordination.mjs` (rev 170, 14/14 green) -> Claude reviewed APPROVE at rev 171 (no counters; independently re-ran evals 14/14). `s16-prd-031-phase1` done; MSG-007/008 closed. Maintainer confirmed Tokenese v0.3 valid + scoped as recommended; relayed to Codex in MSG-20260617-009 (delivery-mirror) with arm-field-fix (W2/W5 pairs mislabeled arm:W1) + per-data-point version-tagging asks. Created `working-session/docs/tk-ab-run-results.md` folding W1/L1 (v0.2) + W2/W5 (v0.3), version-tagged, with 2 hygiene flags + R6.4 scope boundary. Claude active, unread 0, no locks. Codex unread 1 (MSG-009).
+Maintainer Focus: tonight's session is clean to close. PRD-027 live mini-pilot W1+L1 is complete; PRD-030 and PRD-031 are accepted and promoted; heartbeat lifecycle closed. Remaining active work is implementation/review, not acceptance: PRD-031 Phase 1 now awaits Claude review; PRD-030 implementation lane; formal `tk-ab-run` results artifact plus W2/W3/W4 and L2/L3 expansion; standing Codex lanes PRD-014 A1, PRD-021/022/024, PRD-023/026/017 evals, and PRD-024 R5.1.
 Maintainer Decision Queue (PRD-004 A1): (1) final confirm for any remote branch deletion still desired; (2) PRD-003/004/008 A1 document acceptances if still desired; (3) model-specific skill directory retention only by explicit decision; (4) later Maintainer decision on broader Tokenese adoption after `tk-ab-run` results and calibration evidence.
-Next Review Checkpoint: next session boots from files, not memory. Claude authors PRD-031 Phase-1 evals; Codex then implements and asks Claude review. Separately, record W1 and L1 as the first formal `tk-ab-run` data points, then expand the remaining suite. PRD-030 implementation remains Codex eval-author -> Claude implementer -> Codex review.
+Next Review Checkpoint: next session boots from files, not memory. Claude reviews PRD-031 Phase-1 implementation from MSG-20260617-008. Separately, record W1 and L1 as the first formal `tk-ab-run` data points, then expand the remaining suite. PRD-030 implementation remains Codex eval-author -> Claude implementer -> Codex review.
 Heartbeat (PRD-030 R5/R9): DELETED at close. App heartbeat `turnfile-session-heartbeat` was deleted by Codex on 2026-06-17 because its stop condition was satisfied and no carried-forward heartbeat is needed for the closed session.
 
 ## Decision Index
 
 | Decision | Owner | Timestamp | Section |
 |----------|-------|-----------|---------|
+| Tokenese v0.3 run confirmed valid, scoped as recommended. Maintainer: "confirm valid to run Tokenese v0.3 as proposed by Codex in this session, scoped as recommended" / "yes". Basis (Claude, files-verified): v0.3 admitted in `~/Git/tokenese` (GRAMMAR-v0.3.md 0.3.0, additive/backward-compatible, R7 boundary intact), checker supports it (124/124; 63/63 focused), W2/W5 pairs source-authoritative, L3, zero misparse, measurement-only. Confirms RUNNING v0.3 in the pilot only; adoption as a Turnfile default / promotion beyond pilot still needs published results + a Maintainer decision (R6.4). Relayed to Codex in MSG-20260617-009 with arm-field-fix + version-tagging asks. | Maintainer + Claude | 2026-06-17 | Tokenese v0.3 run confirmed |
+| PRD-031 Phase-1 COMPLETE via PRD-006 A1: Claude authored `evals/prd-031-phase1.evals.mjs` (proposer), Codex implemented `tools/aggregate-coordination.mjs`, Claude reviewed APPROVE (no counters; evals 14/14 green, independently re-run). Per-agent shard + namespaced-id + derivation contract lands; the two-agent mailbox/signal collision class is removed. Phase 2/3 remain future eval-first lanes. | Claude + Codex | 2026-06-17 | PRD-031 Phase-1 complete |
 | Session closeout accepted Claude's delivery: W1+L1 Tokenese mini-pilot complete with two clean corroborated points; PRD-030 and PRD-031 promoted to `docs/prds`; PRD-031 implementation remains pending under A1 with Claude eval author, Codex implementer, Claude reviewer. | Claude + Codex + Maintainer | 2026-06-17 | Session 15/16 closeout |
 | Codex deleted app heartbeat `turnfile-session-heartbeat` at session close under PRD-030 R5/R9. No heartbeat is carried forward. Future turns must boot from Turnfile files and create a fresh heartbeat only by Maintainer direction or handshake agreement. | Codex | 2026-06-17 | Heartbeat lifecycle close |
 | Tokenese W1+L1 mini-pilot exit condition met: W1 deploy-status passed as `win-conformant` with Tokenese token savings; L1 deadlock-debug passed as `l1-plain-success` with correct dense refusal. Next Tokenese step is formal `tk-ab-run` results artifact and suite expansion. | Claude + Codex | 2026-06-17 | Tokenese mini-pilot complete |
@@ -139,9 +141,40 @@ First live Tokenese A/B data. Both pairs scored by Perplexity's deterministic `t
 
 Findings: both directions exercised; both agents scored identically; the win-case beats English on both tokenizers; the negative control correctly refuses dense reasoning (`dense_statement_count: 0`). W1 also validated the E1/W1 evidential discipline live (`ev:guess` on inferred ranking, `ev:obs` on observed timestamp). Mini-pilot exit condition met. Full suite (W2/W3/W4, L2/L3) + a formal results artifact deferred to next session. Pair fixtures used: `TKAB-W1.claude.codex.live1`, `TKAB-L1.codex.claude.live1`.
 
+## tk-ab-run — v0.3 next iteration (PRD-027 R6.3) — 2026-06-17
+
+Maintainer requested the next Tokenese test iteration and asked Codex to validate Tokenese v0.3 first. Validation passed using the Tokenese repo's local venv and deterministic checker:
+
+| Check | Result |
+|---|---|
+| Tokenese grammar identity | `GRAMMAR-v0.3.md` version 0.3.0; translator package version 0.3.0 |
+| Full translator/checker tests | 124/124 pass |
+| Focused v0.3 + TKAB tests | 63/63 pass |
+| Scorer schema | `tkab-check-1.1`, grammar support `v0.3` |
+
+Codex then ran two v0.3 pairs. Because the current checker outcome classifier is still W1/L1-shaped, both were scored through the generic expected-to-win operational-status ladder while retaining their source IDs and artifact types.
+
+| Pair | Dir | Artifact | Outcome | Conf | anthropic ratio | o200k ratio | Misparse | Verdict |
+|---|---|---|---|---|---:|---:|---|---|
+| TKAB-W2-v03 | Codex->Claude | multi-service-health | win-conformant | L3 | 1.42 | 1.63 | 0/0/0/0 | valid structure, token loss |
+| TKAB-W5-v03 | Codex->Claude | session-status-handoff | win-conformant | L3 | 1.16 | 1.30 | 0/0/0/0 | valid structure, token loss |
+
+Files: `working-session/tokenese-pairs/TKAB-W2-v03.codex.claude.live1.pair.json`, `working-session/tokenese-pairs/TKAB-W2-v03.codex.claude.live1.result.json`, `working-session/tokenese-pairs/TKAB-W5-v03.codex.claude.live1.pair.json`, `working-session/tokenese-pairs/TKAB-W5-v03.codex.claude.live1.result.json`.
+
+Finding: v0.3 handled structured operational/session status cleanly, including source-authority preservation and `ev:` discipline, but the verbose clone style did not compress. Next test should either run W3/W4 with more compact constructs or adjust W2/W5 authoring style before counting them as positive compression evidence.
+
+## PRD-031 Phase 1 implementation - 2026-06-17
+
+Claude authored `evals/prd-031-phase1.evals.mjs` as PRD-006 A1 step 4 and routed MSG-20260617-007 to Codex for implementation. Codex first confirmed the RED baseline: `node --test evals/prd-031-phase1.evals.mjs` failed 12/14 because `tools/aggregate-coordination.mjs` did not exist.
+
+Codex implemented `tools/aggregate-coordination.mjs` as a read-only deterministic derivation tool over per-agent shard directories. The tool supports `--emit json`, `--emit mailbox-md`, and `--emit mailbox-json`; reads `signals.jsonl`, `outbox.jsonl`, and `read-state.jsonl`; enforces namespaced signal/message IDs; reports namespace and duplicate conflicts; orders signals/messages causally by `deps`; derives unread snapshots; and reports per-agent namespace maxima.
+
+Verification after implementation: `node --test evals/prd-031-phase1.evals.mjs` passed 14/14. Codex actioned MSG-20260617-007 and routed MSG-20260617-008 to Claude for A1 step 7 review.
+
 ### Decision Index — close (2026-06-17)
 
 | Decision | Owner | Timestamp | Section |
 |----------|-------|-----------|---------|
 | W1+L1 Tokenese mini-pilot complete: 2 clean independently-corroborated points (W1 win-conformant; L1 l1-plain-success). First live Tokenese A/B data; basis for tk-ab-run record. | Claude + Codex | 2026-06-17 | tk-ab-run mini-pilot |
 | PRD-030 (session heartbeat management) and PRD-031 (concurrent multi-agent coordination) promoted to docs/prds at Maintainer direction; all three acceptance gates recorded, promotion validator passes (30 PRDs). PRD-031 carries an implementation-pending object (A1 Phase-1 lane: Claude authors evals -> Codex implements -> Claude reviews). | Maintainer + Claude + Codex | 2026-06-17 | PRD-030/031 promotion |
+| PRD-031 Phase 1 implementation completed by Codex against Claude-authored evals; 14/14 green and routed to Claude for A1 step 7 review. | Codex | 2026-06-17 | PRD-031 Phase 1 implementation |

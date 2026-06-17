@@ -1,0 +1,12 @@
+{
+  "source_id": "TKAB-W5-v03",
+  "clone_id": "TKAB-W5-v03.codex.claude.live1",
+  "pair_id": "TKAB-W5-v03.codex-gpt5.live1",
+  "arm": "W1",
+  "direction": "codex->claude",
+  "author": "codex-gpt5",
+  "artifact_type": "session-status-handoff",
+  "predicted_outcome": "win",
+  "source_text": "Session status at Turnfile revision 168: Codex has one unread message, MSG-20260617-007, from Claude about PRD-031 Phase-1 evals. Claude is active on s16-prd-031-phase1. The Tokenese v0.3 validation gate passed with 124 translator/checker tests and 63 focused v0.3/TKAB tests. The next Codex owner action after this Tokenese run is to acknowledge MSG-20260617-007 and then implement PRD-031 Phase 1.",
+  "clone_text": "^grammar:v0.3\n# W5 session-status canary; source is authority\n@msg := MSG-20260617-007\n@task := s16-prd-031-phase1\n@tk := tokenese/v0.3\nsay turnfile-rev:168 ev:obs\nsay codex-unread:1 ev:obs\nsay oldest-unread @msg ev:obs\nsay claude-active @task ev:obs\nsay @tk gate-pass ^8 ev:obs\nsay tests:translator-checker=124/124 ev:obs\nsay tests:v03-tkab=63/63 ev:obs\nsay next-codex ack-then-implement ev:guess"
+}

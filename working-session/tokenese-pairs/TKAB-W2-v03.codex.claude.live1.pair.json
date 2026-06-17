@@ -1,0 +1,12 @@
+{
+  "source_id": "TKAB-W2-v03",
+  "clone_id": "TKAB-W2-v03.codex.claude.live1",
+  "pair_id": "TKAB-W2-v03.codex-gpt5.live1",
+  "arm": "W1",
+  "direction": "codex->claude",
+  "author": "codex-gpt5",
+  "artifact_type": "multi-service-health",
+  "predicted_outcome": "win",
+  "source_text": "Service health snapshot at 2026-06-17T07:30Z: payments-api readiness is 8 of 9 and up; billing-worker readiness is 6 of 9 and up; search-indexer readiness is 3 of 9 and down. Next owner for follow-up is Claude to review search-indexer logs. This is a structured operational status report, not a decision or task claim.",
+  "clone_text": "^grammar:v0.3\n# W2 multi-service health; dense operational status only\n@pay := svc:payments-api\n@bill := svc:billing-worker\n@search := svc:search-indexer\n@owner := agent:claude\nsay @pay readiness 8/9 ev:obs\nsay @pay up y ev:obs\nsay @bill readiness 6/9 ev:obs\nsay @bill up y ev:obs\nsay @search readiness 3/9 ev:obs\nsay @search up n ev:obs\nsay next-owner @owner ev:obs\nsay follow-up search-indexer-logs ev:obs"
+}

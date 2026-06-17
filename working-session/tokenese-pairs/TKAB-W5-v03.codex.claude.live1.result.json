@@ -1,0 +1,120 @@
+{
+  "schema_version": "tkab-check-1.1",
+  "source_id": "TKAB-W5-v03",
+  "clone_id": "TKAB-W5-v03.codex.claude.live1",
+  "pair_id": "TKAB-W5-v03.codex-gpt5.live1",
+  "direction": "codex->claude",
+  "author": "codex-gpt5",
+  "artifact_type": "session-status-handoff",
+  "scorer": "perplexity-deterministic-checker",
+  "arm": "W1",
+  "predicted_outcome": "win",
+  "conformance_level": "L3",
+  "conformance_detail": {
+    "L1_lexicon": true,
+    "L2_grammar": true,
+    "L3_repair": true,
+    "session_issues": []
+  },
+  "token_counts": {
+    "source": {
+      "o200k": 112,
+      "o200k_method": "tiktoken",
+      "anthropic": 147,
+      "anthropic_method": "cached_costs+heuristic",
+      "chars": 399
+    },
+    "clone": {
+      "o200k": 146,
+      "o200k_method": "tiktoken",
+      "anthropic": 170,
+      "anthropic_method": "cached_costs+heuristic",
+      "chars": 397
+    },
+    "savings": {
+      "anthropic_delta": -23,
+      "anthropic_ratio": 1.1565,
+      "o200k_delta": -34,
+      "o200k_ratio": 1.3036
+    }
+  },
+  "readback_diff": null,
+  "repair_events": [],
+  "repair_kinds": {
+    "repair-token": 0,
+    "repair-statement": 0,
+    "repair-handle": 0,
+    "repair-explained": 0
+  },
+  "misparse_family": {
+    "by_family": {
+      "binding": 0,
+      "scope": 0,
+      "sense": 0,
+      "triangulation": 0
+    },
+    "hits": []
+  },
+  "source_authority_conflict": [],
+  "unparseable_lines": [],
+  "plain_mode_present": false,
+  "plain_blocks": [],
+  "dense_statement_count": 8,
+  "declared_level": null,
+  "grammar_version": "v0.3",
+  "causal_events": [],
+  "unsupported_causation": [],
+  "comment_lines": [
+    2
+  ],
+  "outcome": "win-conformant",
+  "notes": [
+    "Conformance L3, no readback diff, no misparse."
+  ],
+  "decoded_clone_english": [
+    "[grammar version: v0.3]",
+    "(comment) W5 session-status canary; source is authority",
+    "bind @msg = \"MSG-20260617-007\"",
+    "bind @task = \"s16-prd-031-phase1\"",
+    "bind @tk = \"tokenese/v0.3\"",
+    "say turnfile-rev: 168 [observed]",
+    "say codex-unread: 1 [observed]",
+    "say oldest-unread \"MSG-20260617-007\" (@msg) [observed]",
+    "say claude-active \"s16-prd-031-phase1\" (@task) [observed]",
+    "say \"tokenese/v0.3\" (@tk) gate-pass [confidence 8/9] [observed]",
+    "say tests: translator-checker=124/124 [observed]",
+    "say tests: v03-tkab=63/63 [observed]",
+    "say next-codex ack-then-implement [working assumption]"
+  ],
+  "provenance": {
+    "checker_version": "tkab-check-1.1",
+    "tkab_schema_version": "tkab-check-1.1",
+    "grammar_version_supported": "v0.3",
+    "grammar_version_detected": "v0.3",
+    "scorer": "perplexity-deterministic-checker",
+    "spec_sha": "68cb84e2dbb2aa36f9965c823afab770de64df0bd9df0bc1c878eb3aac5f761e",
+    "design_sha": "5dc9338e7b6386d01ae46b47a6a7ba70478929460ecdea74b67e20afe204d520",
+    "conformance_sha": "0250b71342c49603f40fe667700422d03a95855cd45c0825841a6a8f35e987c6",
+    "intent_sha": "5f783b8367feef6d9ab69a685ea5964419ba7222095b8b29a07aee1a9334ade0",
+    "handoff_sha": "16f948709345ee2d32ff363e90ec8782129be08d9aa3ddb7c4030afeab45c1b3",
+    "anthropic_costs_sha": "12e5fe083ecf44949ec1d55fb43c1f6f547979256f2f832fef4788afbd7c91d2",
+    "prd_027_sha": "unpinned",
+    "ab_suite_sha": "unpinned",
+    "score_pair": {
+      "translator_version": "0.1.0",
+      "schema_version": "1.0",
+      "spec_sha256": "68cb84e2dbb2aa36f9965c823afab770de64df0bd9df0bc1c878eb3aac5f761e",
+      "design_sha256": "5dc9338e7b6386d01ae46b47a6a7ba70478929460ecdea74b67e20afe204d520",
+      "intent_sha256": "5f783b8367feef6d9ab69a685ea5964419ba7222095b8b29a07aee1a9334ade0",
+      "conformance_sha256": "0250b71342c49603f40fe667700422d03a95855cd45c0825841a6a8f35e987c6",
+      "lexicon_sha256": "12e5fe083ecf44949ec1d55fb43c1f6f547979256f2f832fef4788afbd7c91d2",
+      "grammar_target": "v0.3 (GRAMMAR-v0.3.md) over v0.2 (DESIGN.md §7) over v0.1 (spec.md)",
+      "grammar_version_supported": "v0.3",
+      "grammar_version_detected": "v0.3",
+      "prd_027_sha": "unpinned",
+      "ab_suite_sha": "unpinned"
+    }
+  },
+  "source_text": "Session status at Turnfile revision 168: Codex has one unread message, MSG-20260617-007, from Claude about PRD-031 Phase-1 evals. Claude is active on s16-prd-031-phase1. The Tokenese v0.3 validation gate passed with 124 translator/checker tests and 63 focused v0.3/TKAB tests. The next Codex owner action after this Tokenese run is to acknowledge MSG-20260617-007 and then implement PRD-031 Phase 1.",
+  "clone_text": "^grammar:v0.3\n# W5 session-status canary; source is authority\n@msg := MSG-20260617-007\n@task := s16-prd-031-phase1\n@tk := tokenese/v0.3\nsay turnfile-rev:168 ev:obs\nsay codex-unread:1 ev:obs\nsay oldest-unread @msg ev:obs\nsay claude-active @task ev:obs\nsay @tk gate-pass ^8 ev:obs\nsay tests:translator-checker=124/124 ev:obs\nsay tests:v03-tkab=63/63 ev:obs\nsay next-codex ack-then-implement ev:guess"
+}

@@ -1,0 +1,79 @@
+# tk-ab-run — Tokenese A/B Results (PRD-027 R6.3)
+
+Status: living results artifact (pilot). Last updated 2026-06-17 (rev 171).
+Owner: Claude + Codex. Maintainer arbitrates promotion (PRD-027 R6.4).
+
+## What this is
+
+The governance record of PRD-027 `tk-ab-run`: paired Tokenese-clone-vs-English-source
+exchanges, scored by the deterministic checker that lives in `~/Git/tokenese` (PRD-027 R7;
+Perplexity-built instrument, not a generator). English source text is authoritative on every
+pair (R1.5 source wins); the Tokenese clones and these scores are measurement artifacts only
+and change no Turnfile governance state (no lifecycle, ownership, locks, or acceptance).
+
+## Method
+
+- Each pair: one authoritative English `source_text` and one Tokenese `clone_text`, both stored
+  under `working-session/tokenese-pairs/` (and the v0.2 mini-pilot in the tokenese checker env).
+- Scored by the deterministic checker (`tkab-check`, schema `tkab-check-1.1`): conformance level
+  (L0-L3), token counts on two tokenizers, readback-diff, and misparse-family stratification.
+- Token ratio = clone tokens / source tokens. Ratio below 1 = Tokenese win (fewer tokens);
+  ratio above 1 = Tokenese loss (more tokens). Reported per tokenizer (anthropic / o200k).
+- Grammar version is recorded per pair (v0.2 vs v0.3) — see Data hygiene. Mixed versions are not
+  averaged across the compression comparison.
+
+## Results
+
+| Pair | Arm | Dir | Grammar | Artifact | Outcome | Conf. | anthropic (src→clone, ratio) | o200k (src→clone, ratio) | Misparse | Verdict |
+|---|---|---|---|---|---|---|---|---|---|---|
+| TKAB-W1 | W1 | Claude→Codex | v0.2 | deploy-status | win-conformant | L3 | 107→63, 0.59 | 72→52, 0.72 | 0 | WIN — Tokenese fewer tokens both tokenizers |
+| TKAB-L1 | L1 | Codex→Claude | v0.2 | deadlock-debug | l1-plain-success | L3 | 192→183, 0.95 | 115→98, 0.85 | 0 | NEGATIVE CONTROL PASS — correct `plain` refusal, `dense_statement_count: 0` (R1 dense inadmissible) |
+| TKAB-W2-v03 | W2 | Codex→Claude | v0.3 | multi-service-health | win-conformant | L3 | 118→168, 1.42 | 83→135, 1.63 | 0 | LOSS on tokens — valid structure, poor compression |
+| TKAB-W5-v03 | W5 | Codex→Claude | v0.3 | session-status-handoff | win-conformant | L3 | 147→170, 1.16 | 112→146, 1.30 | 0 | LOSS on tokens — valid structure, poor compression |
+
+All four pairs: conformance L3, zero misparse across all families, no unparseable lines, no
+source-authority conflict.
+
+## Findings
+
+1. Both directions exercised (Claude→Codex and Codex→Claude); where independently re-scored
+   (W1, L1) both agents produced identical scores.
+2. The win case (W1) beats English on both tokenizers; the negative control (L1) correctly refuses
+   dense reasoning and stays in prose — R1 compliance demonstrated live.
+3. v0.3 status clones (W2, W5) were structurally valid and fully auditable (L3, zero misparse) but
+   LOST on tokens in the authored style. First evidence that "operational + highly structured"
+   does not guarantee compression: verbose `say … ev:obs` line-per-fact authoring inflated the
+   clone past the English prose. Compression is an authoring-discipline property, not automatic.
+4. W1 also validated the E1/W1 evidential discipline live (`ev:guess` on inferred ranking,
+   `ev:obs` on observed timestamp).
+
+## Data hygiene (fix before these count as final formal points)
+
+1. Arm-field metadata bug: `TKAB-W2-v03` and `TKAB-W5-v03` pair JSONs both carry `"arm": "W1"`.
+   Correct to `W2` / `W5` so the checker's arm stratification and join keys are right. (Flagged to
+   Codex; pairs are Codex-owned.)
+2. Version tagging: keep grammar version per data point (done in the table above). The mini-pilot
+   (W1/L1) ran on v0.2; W2/W5 on v0.3. Do not pool ratios across versions when judging compression.
+
+## Scope boundary (PRD-027 R6.4)
+
+These are pilot execution data. Running Tokenese v0.3 in the A/B is confirmed valid and scoped as
+measurement-only (Maintainer, 2026-06-17). This artifact does NOT adopt v0.3 as a Turnfile default
+or promote Tokenese beyond pilot — that requires published results plus an explicit Maintainer
+decision (R6.4), tracked in the WORKLOG Maintainer Decision Queue.
+
+## Coverage / remaining
+
+- Done: W1, L1 (v0.2 mini-pilot); W2, W5 (v0.3).
+- Pending: W3 (task handoff with typed holes), W4 (structured code-review finding), L2 (open-ended
+  design), L3 (verbatim code review). `tk-calibration-audit` (R5.5) still gates trust in `^N`/`ev:`
+  channels and remains pending.
+
+## Provenance
+
+- v0.3 pair inputs + checker outputs: `working-session/tokenese-pairs/` (`*.pair.json`,
+  `*.result.json`; `anthropic_costs_sha 12e5fe08…`).
+- v0.2 mini-pilot fixtures: `TKAB-W1.claude.codex.live1`, `TKAB-L1.codex.claude.live1` (tokenese
+  checker env).
+- Checker / grammar: `~/Git/tokenese` — `GRAMMAR-v0.3.md` 0.3.0, translator/checker 124/124,
+  focused v0.3+TKAB 63/63, scorer schema `tkab-check-1.1` (PRD-027 R7; Turnfile references only).

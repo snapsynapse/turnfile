@@ -1,0 +1,121 @@
+{
+  "schema_version": "tkab-check-1.1",
+  "source_id": "TKAB-W2-v03",
+  "clone_id": "TKAB-W2-v03.codex.claude.live1",
+  "pair_id": "TKAB-W2-v03.codex-gpt5.live1",
+  "direction": "codex->claude",
+  "author": "codex-gpt5",
+  "artifact_type": "multi-service-health",
+  "scorer": "perplexity-deterministic-checker",
+  "arm": "W1",
+  "predicted_outcome": "win",
+  "conformance_level": "L3",
+  "conformance_detail": {
+    "L1_lexicon": true,
+    "L2_grammar": true,
+    "L3_repair": true,
+    "session_issues": []
+  },
+  "token_counts": {
+    "source": {
+      "o200k": 83,
+      "o200k_method": "tiktoken",
+      "anthropic": 118,
+      "anthropic_method": "cached_costs+heuristic",
+      "chars": 318
+    },
+    "clone": {
+      "o200k": 135,
+      "o200k_method": "tiktoken",
+      "anthropic": 168,
+      "anthropic_method": "cached_costs+heuristic",
+      "chars": 407
+    },
+    "savings": {
+      "anthropic_delta": -50,
+      "anthropic_ratio": 1.4237,
+      "o200k_delta": -52,
+      "o200k_ratio": 1.6265
+    }
+  },
+  "readback_diff": null,
+  "repair_events": [],
+  "repair_kinds": {
+    "repair-token": 0,
+    "repair-statement": 0,
+    "repair-handle": 0,
+    "repair-explained": 0
+  },
+  "misparse_family": {
+    "by_family": {
+      "binding": 0,
+      "scope": 0,
+      "sense": 0,
+      "triangulation": 0
+    },
+    "hits": []
+  },
+  "source_authority_conflict": [],
+  "unparseable_lines": [],
+  "plain_mode_present": false,
+  "plain_blocks": [],
+  "dense_statement_count": 8,
+  "declared_level": null,
+  "grammar_version": "v0.3",
+  "causal_events": [],
+  "unsupported_causation": [],
+  "comment_lines": [
+    2
+  ],
+  "outcome": "win-conformant",
+  "notes": [
+    "Conformance L3, no readback diff, no misparse."
+  ],
+  "decoded_clone_english": [
+    "[grammar version: v0.3]",
+    "(comment) W2 multi-service health; dense operational status only",
+    "bind @pay = \"svc:payments-api\"",
+    "bind @bill = \"svc:billing-worker\"",
+    "bind @search = \"svc:search-indexer\"",
+    "bind @owner = \"agent:claude\"",
+    "say \"svc:payments-api\" (@pay) readiness 8/9 [observed]",
+    "say \"svc:payments-api\" (@pay) up y [observed]",
+    "say \"svc:billing-worker\" (@bill) readiness 6/9 [observed]",
+    "say \"svc:billing-worker\" (@bill) up y [observed]",
+    "say \"svc:search-indexer\" (@search) readiness 3/9 [observed]",
+    "say \"svc:search-indexer\" (@search) up n [observed]",
+    "say next-owner \"agent:claude\" (@owner) [observed]",
+    "say follow-up search-indexer-logs [observed]"
+  ],
+  "provenance": {
+    "checker_version": "tkab-check-1.1",
+    "tkab_schema_version": "tkab-check-1.1",
+    "grammar_version_supported": "v0.3",
+    "grammar_version_detected": "v0.3",
+    "scorer": "perplexity-deterministic-checker",
+    "spec_sha": "68cb84e2dbb2aa36f9965c823afab770de64df0bd9df0bc1c878eb3aac5f761e",
+    "design_sha": "5dc9338e7b6386d01ae46b47a6a7ba70478929460ecdea74b67e20afe204d520",
+    "conformance_sha": "0250b71342c49603f40fe667700422d03a95855cd45c0825841a6a8f35e987c6",
+    "intent_sha": "5f783b8367feef6d9ab69a685ea5964419ba7222095b8b29a07aee1a9334ade0",
+    "handoff_sha": "16f948709345ee2d32ff363e90ec8782129be08d9aa3ddb7c4030afeab45c1b3",
+    "anthropic_costs_sha": "12e5fe083ecf44949ec1d55fb43c1f6f547979256f2f832fef4788afbd7c91d2",
+    "prd_027_sha": "unpinned",
+    "ab_suite_sha": "unpinned",
+    "score_pair": {
+      "translator_version": "0.1.0",
+      "schema_version": "1.0",
+      "spec_sha256": "68cb84e2dbb2aa36f9965c823afab770de64df0bd9df0bc1c878eb3aac5f761e",
+      "design_sha256": "5dc9338e7b6386d01ae46b47a6a7ba70478929460ecdea74b67e20afe204d520",
+      "intent_sha256": "5f783b8367feef6d9ab69a685ea5964419ba7222095b8b29a07aee1a9334ade0",
+      "conformance_sha256": "0250b71342c49603f40fe667700422d03a95855cd45c0825841a6a8f35e987c6",
+      "lexicon_sha256": "12e5fe083ecf44949ec1d55fb43c1f6f547979256f2f832fef4788afbd7c91d2",
+      "grammar_target": "v0.3 (GRAMMAR-v0.3.md) over v0.2 (DESIGN.md §7) over v0.1 (spec.md)",
+      "grammar_version_supported": "v0.3",
+      "grammar_version_detected": "v0.3",
+      "prd_027_sha": "unpinned",
+      "ab_suite_sha": "unpinned"
+    }
+  },
+  "source_text": "Service health snapshot at 2026-06-17T07:30Z: payments-api readiness is 8 of 9 and up; billing-worker readiness is 6 of 9 and up; search-indexer readiness is 3 of 9 and down. Next owner for follow-up is Claude to review search-indexer logs. This is a structured operational status report, not a decision or task claim.",
+  "clone_text": "^grammar:v0.3\n# W2 multi-service health; dense operational status only\n@pay := svc:payments-api\n@bill := svc:billing-worker\n@search := svc:search-indexer\n@owner := agent:claude\nsay @pay readiness 8/9 ev:obs\nsay @pay up y ev:obs\nsay @bill readiness 6/9 ev:obs\nsay @bill up y ev:obs\nsay @search readiness 3/9 ev:obs\nsay @search up n ev:obs\nsay next-owner @owner ev:obs\nsay follow-up search-indexer-logs ev:obs"
+}
