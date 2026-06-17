@@ -1,5 +1,10 @@
 # Changelog — turnfile-codex-collaboration
 
+## v9 - 2026-06-17
+
+- SKILL.md: Added PRD-014 Amendment A1 unified closeout compaction/projection language to M-06, including execute-or-defer semantics for worklog compaction, signal-log compaction, mailbox archival movement, worklog/boot archive, heartbeat lifecycle inspection, projection synchronization, and `tools/next-state.mjs` final derivation.
+- MANIFEST.yaml: Updated bundle metadata to v9 and expanded bundle notes to include the PRD-014 A1 unified closeout set.
+
 ## v8 - 2026-06-16
 
 - SKILL.md: Added PRD-030 heartbeat and automation lifecycle instructions, including memory-boundary behavior, quiet no-op reports, and closeout handling for carried-forward/deleted heartbeats.

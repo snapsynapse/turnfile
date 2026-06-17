@@ -268,6 +268,8 @@ Deterministic outputs:
 1. Updated boot/worklog handoff sections.
 2. Clear carry-over + next-owner designation.
 3. Explicit unresolved blocker list if present.
+4. Unified closeout compaction set (PRD-014 A1.R1) executed or explicitly deferred with reason and next owner: worklog compaction, signal-log compaction, mailbox archival movement, worklog/boot archive, and heartbeat lifecycle inspection.
+5. Projection synchronization (PRD-014 A1.R2) complete before clean close: regenerate `MAILBOX.json`, validate PRD status shelves, verify `TURNFILE.yaml` revision consistency, and derive final IDs/counts through `tools/next-state.mjs` when available.
 
 Stop/escalate:
 1. Stop if closeout would hide unresolved high-priority items.

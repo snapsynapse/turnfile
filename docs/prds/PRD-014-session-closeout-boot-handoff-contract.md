@@ -198,6 +198,7 @@ At session close, the closing agent performs the full compaction set (this gener
 2. **Signal-log compaction** — per PRD-013 R5.3: drop signals older than the retention window (default 2 sessions), preserve the last signal from each agent.
 3. **Mailbox archival movement** — terminal (closed) messages move from `MAILBOX.md` to `MAILBOX_ARCHIVE.md`; the active mailbox retains only non-terminal threads and the Closed Summary index.
 4. **Worklog/boot archive** — per R3 boot rollover; archived boot file versioned monotonically.
+5. **Heartbeat lifecycle (PRD-030 R5/R6)** — inspect active session heartbeats relevant to the thread/workspace; for each, choose one outcome: deleted, updated, intentionally carried forward, or not applicable. Delete any whose stop condition is satisfied. Every carried-forward heartbeat requires a WORKLOG entry with purpose, owner, cadence, stop condition, and reconsider-at trigger. A clean close may not leave a stale heartbeat running silently. (This is PRD-030 R6 landing as one row in the unified set, not a duplicate gate.)
 
 ### A1.R2 Projection synchronization
 

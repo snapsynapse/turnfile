@@ -994,8 +994,12 @@
       "blocking_items": [],
       "eligible_for_docs_prds": true,
       "implementation": {
-        "state": "not-started",
-        "notes": "Accepted contract. Claude counters applied. Maintainer pre-work amendment adds R9 Turnfile memory boundary: project files are authoritative, model/platform memory is cache, and heartbeat/active turns must refresh from disk before asserting state or writing. Proposed changes: handshake heartbeat negotiation, runtime heartbeat discipline, memory-boundary prompt discipline, and PRD-014 closeout heartbeat lifecycle check."
+        "state": "done",
+        "evals": "evals/prd-030.evals.mjs",
+        "eval_author": "codex",
+        "implementer": "claude",
+        "reviewer": "codex",
+        "notes": "DONE at rev 175 via PRD-006 A1. Step 4 (Codex) authored evals/prd-030.evals.mjs at rev 173. Step 6 (Claude) implemented at rev 174: PRD-030 R1-R9 propagated into skills/claude (Session Heartbeat Management section + Module 6 heartbeat-inspection step; skill v0.7.0, bundle v10) and the R6 heartbeat-lifecycle seam added to PRD-014 Amendment A1.R1 item 5. Step 7 (Codex) reviewed APPROVE at rev 175 after independently running evals/prd-030.evals.mjs 9/9 green; no skills/codex mirror needed for PRD-030."
       }
     },
     {
