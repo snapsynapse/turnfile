@@ -188,3 +188,17 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
+
+---
+
+## License scope
+
+This repository is dual-licensed by content type (see also LICENSE-SPEC):
+
+- Reference code, tools, schemas, and configuration (e.g. `tools/`, `schemas/`,
+  `*.mjs`, `*.json`, config): Apache License 2.0 — the terms above, in this file.
+- Specification and documentation text (the Turnfile protocol prose: `docs/`,
+  PRDs, README narrative, and the landing page copy): Creative Commons
+  Attribution 4.0 International (CC BY 4.0) — see LICENSE-SPEC.
+
+When in doubt: code is Apache-2.0, prose is CC BY 4.0. SPDX: `Apache-2.0 AND CC-BY-4.0`.

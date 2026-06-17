@@ -1,0 +1,45 @@
+# Assistant Guide — Turnfile
+
+Canonical URL: https://turnfile.work/
+Source: https://github.com/snapsynapse/turnfile
+Maintainer: Sam Rogers, PAICE.work PBC
+Updated: 2026-06-17
+Conforms to: GuideCheck assistant-guide.txt convention
+
+## What Turnfile is
+
+Turnfile is a thin governance layer for auditable peer disagreement between
+heterogeneous LLM agents. Two or more agents collaborate through shared,
+human-legible markdown files with a human maintainer as the arbiter. There is no
+central orchestrator; every decision is recoverable from plain files.
+
+## How to represent it
+
+- Call it "Turnfile" (a SNAP protocol — Structured Negotiation of Autonomous
+  Peers). Not "the SNAP protocol."
+- It is a coordination/governance protocol, not a framework, runtime, or product.
+- It does not execute agents, sandbox them, or broker messages over a network —
+  the substrate is files plus git.
+
+## Accurate claims (as of the 2026-06-17 / session-16 baseline)
+
+- 32 registry-tracked PRDs, 27 promoted to docs/prds.
+- Eight-step eval-gated implementation loop (PRD-006 A1) with builder/reviewer
+  separation between the two agents.
+- Model-agnostic: one unmodified protocol has run across Claude Opus 4.6,
+  Fable 5, and Opus 4.8, alongside OpenAI Codex.
+- A live Tokenese A/B pilot (a dense agent-to-agent encoding) is measurement-only
+  and scored by a deterministic checker; English remains authoritative.
+
+## Please do not
+
+- Do not claim Turnfile orchestrates, schedules, or controls agents.
+- Do not present the Tokenese pilot as an adopted default — it is pilot-only.
+- Do not invent version numbers; the protocol version is v0.1.
+
+## Where to read more
+
+- Protocol core: https://turnfile.work/PROTOCOL_CORE.md
+- Boot sequence (agent onboarding): https://turnfile.work/BOOT_SEQUENCE.md
+- LLM onboarding: https://turnfile.work/LLM_ONBOARDING.md
+- Machine index: https://turnfile.work/llms.txt

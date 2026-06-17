@@ -92,5 +92,25 @@ Priority order:
 `SECURITY.md` defines reporting and trust boundaries.
 `CHANGELOG.md` records material changes.
 `VISION.md` remains explanatory and historical unless reconciled into this document.
+## Conformance philosophy
+No central oracle. Turnfile makes testable claims that any party — maintainer, agent, or outside reviewer — can verify against the repo's plain files using the validators in `tools/` (see `CONFORMANCE.md`). The maintainer is the human arbiter for decisions, but the conformance of the coordination artifacts (schema validity, mailbox invariants, promotion gates, closeout, skill-bundle integrity, human legibility) is checkable by anyone running the validators. Verifier-anywhere; no privileged Turnfile service.
+
+## Admission criteria for changes
+A change to the protocol is admitted only when it passes:
+1. The eight-step PRD-006 A1 loop: a PRD is proposed, accepted by both agents and the maintainer, the proposer authors evals, the counterpart implements, evals go green, the proposer reviews, and the PRD is filed done — acceptance is not done.
+2. Builder/reviewer separation: the agent that authored a contract's evals does not implement it.
+3. Human legibility (PRD-024): governance artifacts stay legible; dense encodings carry a paraphrase.
+4. Promotion gate (PRD-006 R2a): Codex + Claude + Maintainer accepted with evidence and zero blocking items before a PRD moves to `docs/prds`.
+5. Maintainer arbitration for any unresolved cross-agent conflict (PRD-004), with a bounded rebuttal loop (PRD-021).
+
+## Exceptions to Repo Standards
+Per `~/SynologyDrive/LocalBrain/0_Across/Repo Standards.md`, the following deviations are recorded:
+- Skill-home full-track: this repo is the canonical home of the per-agent protocol skill bundles (`skills/claude/`, `skills/codex/`, `skills/gemini-3/`, `skills/skill-versioning/`), so their bodies are tracked in full (not gitignored) — the skill-bundle-in-repo exception.
+- Legacy model-specific skill dirs `skills/claude-opus_4.6/` and `skills/codex_5.3/` remain tracked (deprecated-in-place, carrying `DEPRECATED.md`) pending the maintainer's explicit model-skill-directory retention decision (Maintainer Decision Queue). Retain-or-remove to be resolved then.
+- GitHub Pages publish source: migrating to `main` `/docs` (the portfolio default). `docs/` holds the served tree (`index.html`, `llms.txt`, `sitemap.xml`, `.well-known/`, `CNAME`, `.nojekyll`); the transitional root `CNAME` is removed at the Pages-source flip.
+- LICENSE split: code is Apache-2.0 (`LICENSE`), specification/documentation prose is CC BY 4.0 (`LICENSE-SPEC`), with a shared scope footer — rather than a single license.
+- `working-session/` is tracked (not gitignored) by design: it is the active, auditable coordination workspace, which is the point of the protocol.
+
 ## Changelog
+- 2026-06-17 - Repo-standards-audit remediation: added Conformance philosophy + Admission criteria + Exceptions to Repo Standards sections; recorded skill-home, legacy-skill-dir, docs/-publish, LICENSE-split, and tracked-working-session exceptions.
 - 2026-05-31 v0.1.0 - Repositioned Turnfile as a thin governance layer for auditable peer disagreement and maintainer-governed resolution across existing agent platforms.

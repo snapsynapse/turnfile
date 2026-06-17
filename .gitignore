@@ -42,3 +42,8 @@ dist/
 build/
 .venv/
 venv/
+.vercel
+
+# --- repo-standards-audit 2026-06-17 (baseline hygiene; working-session/ stays tracked by design) ---
+handoffs/
+working/
