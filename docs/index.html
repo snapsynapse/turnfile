@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Turnfile &mdash; Auditable peer disagreement for agents</title>
-  <meta name="description" content="Turnfile is a thin governance layer for auditable peer disagreement between LLM agents. Session 14 baseline: 24 promoted PRDs, 28 registry-tracked PRDs, PRD-028/029 implemented, and no central orchestrator.">
+  <meta name="description" content="Turnfile is a thin governance layer for auditable peer disagreement between LLM agents. Session 16 baseline: 27 promoted PRDs, 32 registry-tracked PRDs, an eight-step eval-gated implementation loop run end-to-end with builder/reviewer separation, and no central orchestrator.">
   <meta name="keywords" content="turnfile, SNAP, structured negotiation of autonomous peers, multi-agent protocol, LLM collaboration, peer agents, counter-recommendation, human-in-the-loop, agent arbitration, mailbox protocol, markdown coordination, auditable AI">
   <meta name="author" content="Sam Rogers">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
@@ -19,12 +19,12 @@
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Turnfile">
   <meta property="og:title" content="Turnfile">
-  <meta property="og:description" content="A thin governance layer for auditable peer disagreement between LLM agents. Session 14 baseline: 24 promoted PRDs, 28 registry-tracked PRDs, and no central orchestrator.">
+  <meta property="og:description" content="A thin governance layer for auditable peer disagreement between LLM agents. Session 16 baseline: 27 promoted PRDs, 32 registry-tracked PRDs, eval-gated implementation with builder/reviewer separation, and no central orchestrator.">
   <meta property="og:image" content="https://turnfile.work/imgs/og.png">
   <meta property="og:url" content="https://turnfile.work/">
   <meta property="og:locale" content="en_US">
   <meta property="article:published_time" content="2026-02-08T00:00:00Z">
-  <meta property="article:modified_time" content="2026-06-15T00:00:00Z">
+  <meta property="article:modified_time" content="2026-06-17T00:00:00Z">
   <meta property="article:author" content="Sam Rogers">
   <meta property="article:publisher" content="https://paice.work/">
   <meta property="article:section" content="Open Patterns">
@@ -38,7 +38,7 @@
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Turnfile">
-  <meta name="twitter:description" content="A thin governance layer for auditable peer disagreement between LLM agents. Session 14 baseline: 24 promoted PRDs, 28 registry-tracked PRDs, and no central orchestrator.">
+  <meta name="twitter:description" content="A thin governance layer for auditable peer disagreement between LLM agents. Session 16 baseline: 27 promoted PRDs, 32 registry-tracked PRDs, eval-gated implementation with builder/reviewer separation, and no central orchestrator.">
   <meta name="twitter:image" content="https://turnfile.work/imgs/og.png">
   <meta name="twitter:creator" content="@snapsynapse">
 
@@ -54,7 +54,7 @@
     "url": "https://turnfile.work/",
     "mainEntityOfPage": { "@type": "WebPage", "@id": "https://turnfile.work/" },
     "datePublished": "2026-02-08",
-    "dateModified": "2026-06-15",
+    "dateModified": "2026-06-17",
     "author": {
       "@type": "Person",
       "name": "Sam Rogers",
@@ -455,15 +455,15 @@
     <p class="byline">
       By <a href="https://paice.work/" target="_blank" rel="noopener author">Sam Rogers</a>, <a href="https://paice.work/" target="_blank" rel="noopener">PAICE.work PBC</a>
       <span class="sep">&middot;</span>
-      Session 14 baseline <time datetime="2026-06-15">June 15, 2026</time>
+      Session 16 baseline <time datetime="2026-06-17">June 17, 2026</time>
       <span class="sep">&middot;</span>
-      24 promoted PRDs
+      27 promoted PRDs
       <span class="sep">&middot;</span>
       <span class="version">Spec v0.1.0-reset</span>
       <span class="sep">&middot;</span>
       <a href="https://creativecommons.org/licenses/by/4.0/" rel="license" target="_blank">CC&nbsp;BY&nbsp;4.0</a>
     </p>
-    <p class="hook">Session 14 narrowed Turnfile into a portable governance layer: 24 promoted PRDs, 28 registry-tracked PRDs, zero active open questions, PRD-028/029 implemented end-to-end, and one protocol surviving Opus 4.6, Fable 5, and Opus 4.8 without migration.</p>
+    <p class="hook">Session 16: 27 promoted PRDs, 32 registry-tracked PRDs, and the eight-step eval-gated implementation loop run end-to-end across many lanes (PRD-017/021/022/023/024/026/030 implemented, PRD-031 Phase 1 and the PRD-014 closeout amendment landed) &mdash; each with builder/reviewer separation between two heterogeneous agents, and one protocol surviving Opus 4.6, Fable 5, and Opus 4.8 without migration.</p>
 
     <div class="turnfile-snippet" role="img" tabindex="0" aria-label="Example Turnfile coordination artifact showing two peer agents Claude and Codex with owned lanes, a human maintainer as arbiter, and the current turn being handed from Codex to Claude"><span class="tk-cm"># turnfile.yaml</span>
 <span class="tk-key">agents</span>:
@@ -569,7 +569,7 @@ docs/HUMAN_GOVERNANCE.md</pre>
 
       <div class="code-block">
         <h3>The current PRD shelf</h3>
-<pre># 24 promoted PRDs, 28 registry-tracked PRDs
+<pre># 27 promoted PRDs, 32 registry-tracked PRDs
 PRD-001  Maintainer interaction model
 PRD-002  Deferred archive
 PRD-003  Message lifecycle + SLA
@@ -596,9 +596,13 @@ PRD-023  Out-of-band reconciliation
 PRD-024  Human-legibility invariant
 PRD-025  Converged into PRD-014 A1
 PRD-026  Review-cycle closure
-PRD-027  Held for Maintainer checkpoint
+PRD-027  Tokenese A/B pilot (accepted; live mini-pilot scored)
 PRD-028  Tokenese dual-artifact sync
-PRD-029  Pre-write state derivation</pre>
+PRD-029  Pre-write state derivation
+PRD-030  Session heartbeat management
+PRD-031  Concurrent multi-agent coordination (Phase 1 done)
+PRD-032  Session orientation tool (draft)
+PRD-033  Skill ownership integrity guard (draft)</pre>
       </div>
     </div>
   </div>
@@ -609,7 +613,7 @@ PRD-029  Pre-write state derivation</pre>
     <div class="demo-block">
       <h2>See it in action</h2>
       <p>The <strong>inception archive</strong> is the unedited record of two LLM agents &mdash; Claude Opus 4.6 and OpenAI Codex 5.3 &mdash; building this protocol together across 11 sessions. No human wrote their messages. No orchestrator commanded them. Zero file collisions.</p>
-      <p><strong>Session 14</strong> is the current baseline: 14 real collaboration sessions, 28 registry-tracked PRDs, zero active open questions, eight-step eval-gated implementation installed, and PRD-028/029 completed end-to-end. PRD-025 resolved by convergence into the PRD-014 A1 amendment path. The Claude lane ran across Opus 4.6, Fable 5, and Opus 4.8 on one unmodified protocol.</p>
+      <p><strong>Session 16</strong> is the current baseline: 16 real collaboration sessions, 32 registry-tracked PRDs (27 promoted), zero active open questions, and the eight-step eval-gated implementation loop run end-to-end across many lanes with builder/reviewer separation &mdash; PRD-017/021/022/023/024/026/028/029/030 implemented, PRD-031 Phase 1 (per-agent shards + derived aggregates) and the PRD-014 closeout amendment landed, plus a live Tokenese A/B pilot scored by a deterministic checker. The Claude lane ran across Opus 4.6, Fable 5, and Opus 4.8 on one unmodified protocol.</p>
       <p>Start with <a href="https://github.com/snapsynapse/turnfile/blob/main/examples/inception/WORKLOG.md" target="_blank" rel="noopener">WORKLOG.md</a> for the session-by-session narrative, or jump straight to <a href="https://github.com/snapsynapse/turnfile/blob/main/examples/inception/MAILBOX.md" target="_blank" rel="noopener">MAILBOX.md</a> to read the actual agent-to-agent messages &mdash; proposals, reviews, and counter-recommendations.</p>
       <div class="cta-row">
         <a href="https://github.com/snapsynapse/turnfile/tree/main/examples/inception" class="btn btn-primary" target="_blank" rel="noopener">Open the inception archive &rarr;</a>
@@ -622,7 +626,7 @@ PRD-029  Pre-write state derivation</pre>
       <a href="https://github.com/snapsynapse/turnfile/blob/main/INTENT.md" target="_blank" rel="noopener">INTENT.md</a>
       in the repository; any cross-posts on LinkedIn, PAICE.work, or other platforms are derived from those sources and should cite
       <a href="https://turnfile.work/">turnfile.work</a> as canonical.
-      Last substantive revision: <time datetime="2026-06-15">2026-06-15</time>.
+      Last substantive revision: <time datetime="2026-06-17">2026-06-17</time>.
       <a href="https://github.com/snapsynapse/turnfile/commits/main/INTENT.md" target="_blank" rel="noopener">Revision history &rarr;</a>
     </aside>
   </div>

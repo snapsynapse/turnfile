@@ -133,14 +133,18 @@ PRDs live on two shelves. Promoted, Maintainer-accepted contracts live in [docs/
 | [PRD-018](docs/prds/PRD-018-maintainer-approval-authority-matrix-contract.md) | Maintainer approval authority matrix | Promoted |
 | [PRD-019](docs/prds/PRD-019-mailbox-first-approval-and-polling-cadence-contract.md) | Mailbox-first approval, event-based cadence | Promoted |
 | [PRD-020](docs/archive/prds/PRD-020-boot-artifact-completeness-and-chat-log-contract.md) | Boot artifact completeness + chat log contract | Superseded (archived; folded into PRD-017 R7) |
-| [PRD-021](docs/prds/PRD-021-conflict-loop-bound-and-selective-unlock-gradient-contract.md) | Conflict loop bound + selective-unlock gradient | Promoted |
-| [PRD-022](docs/prds/PRD-022-decision-mirror-delivery-contract.md) | Decision-mirror delivery contract | Promoted |
-| [PRD-023](docs/prds/PRD-023-out-of-band-activity-reconciliation-contract.md) | Out-of-band activity reconciliation | Promoted |
-| [PRD-024](docs/prds/PRD-024-human-legibility-invariant-and-encoding-profiles-contract.md) | Human-legibility invariant + encoding profiles | Promoted |
-| [PRD-026](docs/prds/PRD-026-review-cycle-closure-and-task-state-consistency-contract.md) | Review-cycle closure + task-state consistency | Promoted |
-| [PRD-027](docs/prds/PRD-027-tokenese-cloned-communication-ab-contract.md) | Tokenese cloned-communication A/B | Accepted; initiation approved |
+| [PRD-021](docs/prds/PRD-021-conflict-loop-bound-and-selective-unlock-gradient-contract.md) | Conflict loop bound + selective-unlock gradient | Promoted; implementation done (session 16) |
+| [PRD-022](docs/prds/PRD-022-decision-mirror-delivery-contract.md) | Decision-mirror delivery contract | Promoted; implementation done (session 16) |
+| [PRD-023](docs/prds/PRD-023-out-of-band-activity-reconciliation-contract.md) | Out-of-band activity reconciliation | Promoted; implementation done (session 16) |
+| [PRD-024](docs/prds/PRD-024-human-legibility-invariant-and-encoding-profiles-contract.md) | Human-legibility invariant + encoding profiles | Promoted; implementation done (session 16) |
+| [PRD-026](docs/prds/PRD-026-review-cycle-closure-and-task-state-consistency-contract.md) | Review-cycle closure + task-state consistency | Promoted; implementation done (session 16) |
+| [PRD-027](docs/prds/PRD-027-tokenese-cloned-communication-ab-contract.md) | Tokenese cloned-communication A/B | Accepted + promoted; live mini-pilot scored (W1/L1/W2/W5), W3/L2 authored |
 | [PRD-028](docs/prds/PRD-028-tokenese-dual-artifact-sync-and-maintainer-legibility-contract.md) | Tokenese dual-artifact sync + Maintainer legibility | Promoted; implementation done (session 14) |
 | [PRD-029](docs/prds/PRD-029-pre-write-state-derivation-contract.md) | Pre-write state derivation contract | Promoted; implementation done (session 14) |
+| [PRD-030](docs/prds/PRD-030-session-heartbeat-management-contract.md) | Session heartbeat management contract | Promoted; implementation done (session 16) |
+| [PRD-031](docs/prds/PRD-031-concurrent-multi-agent-coordination-contract.md) | Concurrent multi-agent coordination | Promoted; Phase 1 implemented (per-agent shards + derived aggregates) |
+| PRD-032 | Session orientation tool contract | Draft (working-session); both agents reviewed, Maintainer acceptance pending |
+| PRD-033 | Skill ownership integrity guard | Draft (working-session); both agents reviewed, Maintainer acceptance pending |
 
 ### Skills (per-agent execution guides)
 
@@ -216,7 +220,7 @@ npm run validate:skills:ci   # repo-only checks (CI-safe)
 
 ## Status
 
-This protocol has been tested across 14 real collaboration sessions with two LLM agents (Claude by Anthropic, Codex by OpenAI) and a human maintainer. Session 14 (2026-06-12 to 2026-06-13) closed with a full PRD-backlog sweep: 29 PRDs have explicit statuses, zero active open questions, and the first end-to-end runs of the eight-step implementation loop (PRD-006 A1). The Claude lane ran across three model generations (Opus 4.6, Fable 5, Opus 4.8) in a single session against one unmodified protocol. Forward development narrows Turnfile into a thin governance layer for auditable peer disagreement and maintainer-governed resolution across existing agent platforms.
+This protocol has been tested across 16 real collaboration sessions with two LLM agents (Claude by Anthropic, Codex by OpenAI) and a human maintainer. As of the session-16 baseline (2026-06-17): 32 registry-tracked PRDs (27 promoted), zero active open questions, and the eight-step eval-gated implementation loop (PRD-006 A1) run end-to-end across many lanes with builder/reviewer separation between the two heterogeneous agents — PRD-017/021/022/023/024/026/028/029/030 implemented, PRD-031 Phase 1 (per-agent shards + derived aggregates) and the PRD-014 closeout amendment landed, plus a live Tokenese A/B pilot scored by a deterministic checker. The Claude lane ran across three model generations (Opus 4.6, Fable 5, Opus 4.8) against one unmodified protocol. Forward development narrows Turnfile into a thin governance layer for auditable peer disagreement and maintainer-governed resolution across existing agent platforms.
 
 ## Next
 
