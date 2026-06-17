@@ -1,4 +1,4 @@
-# Boot File — Claude (v11)
+# Boot File — Claude (v10)
 
 Read this first on session start. It tells you what this project is, where things are, what state we're in, and what to do next.
 
@@ -93,38 +93,36 @@ The cross-agent command contract for this is the canonical boot command manifest
 6. `working-session/chat-claude.md` session close snapshot (bottom of file) — ~2K tokens
 7. Then read whatever files are relevant to the current task
 
-## Current state (as of session-17 close, 2026-06-17)
+## Current state (as of close, 2026-06-17)
 
-Claude lane on Opus 4.8, Codex lane on Codex 5.5 — model-generation continuity on one unmodified protocol holds (`docs/llm/MODEL_LEDGER.md`). Read the files, not labels. TURNFILE at rev ~209 at close; read it fresh (Files-First). Session 17 committed at `06968d3` (not pushed — push held).
+Claude lane on Opus 4.8, Codex lane on Codex 5.5 — model-generation continuity on one unmodified protocol holds (`docs/llm/MODEL_LEDGER.md`). Note: state has run well past the old "session 15" framing — read the files, not this label.
 
-### FIRST ACTIONS ON RESUME (session 18)
+### FIRST ACTIONS ON RESUME (session 17)
 
-1. Boot via `docs/BOOT_SEQUENCE.md`, then run `working-session/NEXT_SESSION_HANDSHAKE.md` (it has a session-18 addendum) and converge/sign with Codex before any write.
-2. Report guard/commit posture FIRST: the PRD-033 shared guard is LIVE — `core.hooksPath=tools/hooks`, identity from `.turnfile-agent` (currently `codex` in this clone) or `TURNFILE_AGENT`. To commit Claude-owned files, export `TURNFILE_AGENT=claude`; cross-ownership (whole-tree) commits are `TURNFILE_AGENT=maintainer` under Maintainer direction. Run `node tools/validate-ownership-guard.mjs`.
-3. Use `tools/session-orient.mjs` (PRD-032, now live) for the one-shot orientation snapshot instead of manual reads: `node tools/session-orient.mjs --agent claude --emit human` (add `--validate` to run the gates).
-4. Bounded session-18 goal (handshake addendum): `tk-calibration-audit` (PRD-027 R5.5) — do `^N`/`ev:` self-reports predict accuracy? Use W4 (ev:obs winner) + E1/W1 evidence. Then a Maintainer decision on any bounded Tier-B operational/handoff twin lane. Tokenese stays measurement-only; chat dense scratchpads OFF unless explicitly unlocked.
+1. Boot via `docs/BOOT_SEQUENCE.md`, then run `working-session/NEXT_SESSION_HANDSHAKE.md` — the handshake contract (Turnfile version, Tokenese version, skills self-validate, scope + completion criteria, outstanding list, + the 6 additions) and converge/sign it with Codex before any write.
+2. Closure-owner sweep: scan own sent-message threads for peer replies that did not raise the unread count (thread-mode blindness).
+3. Resolve guard/commit posture (PRD-033) before any commit; report enforcing `TURNFILE_AGENT` + `core.hooksPath`. Then pick the bounded session goal from the handshake §5 outstanding list (PRD-032/033 Maintainer acceptance, Tokenese W3/L2 scoring + W4/L3, etc.).
+4. Deferred closeout from session 16 (execute-or-defer): signal-log compaction (~64 eligible, PRD-013 R5.3) + boot-archive rollover.
 
-### Recent milestones (session 17)
+### Recent milestones (this arc)
 
-- PRD-033 Skill Ownership Integrity Guard: built + LIVE. Maintainer-owned/agent-locked `OWNERSHIP.yaml` + `tools/hooks/{pre-commit,guard-check.mjs}` shared Layer-2 guard; Codex Layer-1 adapter; `core.hooksPath=tools/hooks`. evals 12/12. Full A1 loop done.
-- PRD-032 Session Orientation Tool: `tools/session-orient.mjs` (read-only; composes next-state + validate-closeout). evals 11/11. `skills/claude` v0.9.1/bundle 13 prefers it (AC8). Full A1 loop done.
-- Tokenese Tier-A COMPLETE: all 8 A/B pairs scored (W4 WIN both tokenizers; W2/W3/W5 LOSS; L2/L3 correct `plain` controls). `tk-ab-run-results.md` reconciled, version-tagged. `tk-calibration-audit` is the next gate.
-- Signal-log compaction (PRD-013 R5.3): SIG-031..128 removed; window SIG-129..159 retained.
-- PRD-032 + PRD-033 PROMOTED to `docs/prds`. Session committed `06968d3` as `TURNFILE_AGENT=maintainer`.
+- PRD-027 greenlit (charter ratified, PRD-030 accepted). First live Tokenese A/B mini-pilot COMPLETE: W1 win-conformant (Tokenese wins on tokens), L1 l1-plain-success (correct dense refusal). Scored by Perplexity's deterministic checker (`~/Git/tokenese/tools/translator`, 72/72 tests, all pre-eval items cleared).
+- PRD-030 (session heartbeat management) + PRD-031 (concurrent multi-agent coordination) PROMOTED to `docs/prds` (Maintainer-directed). PRD-031 carries an implementation-pending object (A1 Phase-1 lane).
 
 ### PRD landscape (authoritative: `working-session/docs/PRD_STATUS.json`)
 
-- All session-17 implementation lanes done: PRD-032, PRD-033 (impl done, promoted), plus the earlier PRD-017/021/022/023/024/026/030 + PRD-031 Phase 1 + PRD-014 A1.
-- Future eval-first lanes: PRD-031 Phase 2 (event-sourced tasks + per-agent status shards) + Phase 3 (per-agent logical clocks).
+- PRD-027: accepted + promoted; A/B execution underway (mini-pilot done, full suite next).
+- PRD-030, PRD-031: promoted to docs/prds; PRD-031 implementation (Phase 1) pending.
+- Carry-forward (Codex lanes): PRD-014 A1 impl; PRD-021/022/024 impl (evals red); PRD-023/026/017 eval-authoring -> Claude implements; PRD-024 R5.1 validator.
 
-### Operating norms (skill v0.9.1)
-- Files First, Not Memory; Concurrent Write Discipline (derive via `tools/next-state.mjs` in-lock; state moved rev 166→209 with constant concurrent edits this arc — re-ground almost every turn; renumber on collision per PRD-010 R4.5). Only the Read tool satisfies the read-before-edit guard. Eight-step A1 loop; Model Ledger Handshake.
-- Prefer `tools/session-orient.mjs` for orientation (PRD-032). Ownership guard is executable now (PRD-033): edit only own files; commit identity matters.
-- Tokenese pilot (PRD-027 + charter): every clone paired to a legible source; source wins; no dense for reasoning (R1); `^N`/`ev:` untrusted until `tk-calibration-audit`; R7 cross-repo boundary (never edit tokenese semantics from Turnfile).
+### Operating norms (skill v0.6.0)
+- Files First, Not Memory (this whole arc proved it — state moved far past memory between turns); Concurrent Write Discipline (derive via tools/next-state.mjs in-lock; concurrent-close ID collisions WILL happen — renumber per PRD-010 R4.5); eight-step A1 loop; Model Ledger Handshake.
+- Tokenese pilot (PRD-027 + charter): every clone paired to a legible source; source wins; no dense for reasoning (R1); ^N/ev: untrusted until calibration; R7 cross-repo boundary (never edit tokenese semantics — the checker lives there).
 
 ### Mailbox & coordination
-- At Claude close: Claude idle, unread 0/0/0, no locks. All session-17 threads actioned. Codex closed its side at rev 208 (boot v7).
-- Guard LIVE; commit identity required (see FIRST ACTIONS 2). Tree clean at `06968d3`; push held.
+- At Claude close: Claude idle, unread 0, no locks. Open Claude-owned: MSG-20260617-005/006 (mini-pilot + close; Codex acks/closes), MSG-20260613-044 (PRD-014 A1; Codex APPLY'd, impl pending).
+- Heartbeat: Codex's `turnfile-session-heartbeat` retirement requested at close (MSG-006) — verify on resume.
+- TURNFILE revision ~166+ at close. Read it fresh (Files-First).
 - Detailed resume snapshot: bottom of `working-session/chat-claude.md`.
 
 ## Session close protocol

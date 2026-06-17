@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2026-06-17 (session 17: PRD-032 + PRD-033 promoted and implementation done)",
+  "updated_at": "2026-06-17 (post-session audit: PRD-034/035/036 drafts registered)",
   "policy": {
     "required_reviewers": [
       "codex",
@@ -1113,6 +1113,114 @@
         "implementer": "codex",
         "reviewer": "claude",
         "notes": "DONE at rev ~198 via PRD-006 A1. Step 4 (Claude): evals/prd-033.evals.mjs (12/12 green) + Maintainer-owned/agent-locked infra drafted under Maintainer direction (OWNERSHIP.yaml; tools/hooks/pre-commit + guard-check.mjs shared Layer-2; tools/hooks/README.md; tools/validate-ownership-guard.mjs; .gitignore). Step 6 (Codex, MSG-20260617-023): Codex-owned Layer-1 adapter working-session/agents/codex/layer1-pretool-ownership-guard.mjs (reuses shared ownerOf), retired stopgap working-session/agents/codex/hooks/pre-commit, set .turnfile-agent=codex, repointed core.hooksPath=tools/hooks. Step 7 (Claude review APPROVE, MSG-20260617-023): independently re-ran evals 12/12; validate-ownership-guard guard_active:true/enforcing_identity:codex/clean; LIVE active-hook real commit staging a peer-owned path BLOCKED with no commit created (HEAD unchanged); Codex L1 adapter own+shared allow / peer block / maintainer block. No counter. Promoted to docs/prds at rev 207. OPEN (not implementation gaps): locked files (OWNERSHIP.yaml, tools/hooks/**) commit as TURNFILE_AGENT=maintainer; in a single shared working tree each agent must export TURNFILE_AGENT=<self> per commit (per-clone .turnfile-agent fits a true per-agent clone)."
+      }
+    },
+    {
+      "id": "PRD-034",
+      "title": "Public and Agent-Facing Surface Snapshot Reconciliation Contract",
+      "path": "working-session/docs/PRD-034-public-and-agent-surface-snapshot-reconciliation-contract.md",
+      "shelf": "working-session/docs",
+      "state": "draft",
+      "acceptance": {
+        "codex": {
+          "status": "pending",
+          "evidence": [
+            "Codex drafted PRD-034 on 2026-06-17 after Maintainer requested a detection-only audit of documentation, canonical webpage, and agent-facing surfaces."
+          ]
+        },
+        "claude": {
+          "status": "pending",
+          "evidence": []
+        },
+        "maintainer": {
+          "status": "pending",
+          "evidence": []
+        }
+      },
+      "blocking_items": [
+        "Requires Claude review in the next mutual collaboration session.",
+        "Requires Maintainer acceptance before implementation."
+      ],
+      "eligible_for_docs_prds": false,
+      "implementation": {
+        "state": "pending",
+        "evals": null,
+        "eval_author": null,
+        "implementer": null,
+        "reviewer": null,
+        "notes": "Draft only. No implementation action taken in the audit turn per Maintainer instruction."
+      }
+    },
+    {
+      "id": "PRD-035",
+      "title": "Tokenese Integration and Upstream Result Sync Contract",
+      "path": "working-session/docs/PRD-035-tokenese-integration-and-upstream-result-sync-contract.md",
+      "shelf": "working-session/docs",
+      "state": "draft",
+      "acceptance": {
+        "codex": {
+          "status": "pending",
+          "evidence": [
+            "Codex drafted PRD-035 on 2026-06-17 after comparing Turnfile's Tokenese pilot state to the local Tokenese v0.3.2 repo."
+          ]
+        },
+        "claude": {
+          "status": "pending",
+          "evidence": []
+        },
+        "maintainer": {
+          "status": "pending",
+          "evidence": []
+        }
+      },
+      "blocking_items": [
+        "Requires Claude review in the next mutual collaboration session.",
+        "Requires Maintainer acceptance before implementation."
+      ],
+      "eligible_for_docs_prds": false,
+      "implementation": {
+        "state": "pending",
+        "evals": null,
+        "eval_author": null,
+        "implementer": null,
+        "reviewer": null,
+        "notes": "Draft only. No Tokenese repo edits or Turnfile implementation action taken in the audit turn per Maintainer instruction."
+      }
+    },
+    {
+      "id": "PRD-036",
+      "title": "PRD Eval Runner Contract",
+      "path": "working-session/docs/PRD-036-prd-eval-runner-contract.md",
+      "shelf": "working-session/docs",
+      "state": "draft",
+      "acceptance": {
+        "codex": {
+          "status": "pending",
+          "evidence": [
+            "Codex drafted PRD-036 on 2026-06-17 after `npm run evals:prd` failed while focused PRD evals passed."
+          ]
+        },
+        "claude": {
+          "status": "pending",
+          "evidence": []
+        },
+        "maintainer": {
+          "status": "pending",
+          "evidence": []
+        }
+      },
+      "blocking_items": [
+        "Requires Claude review in the next mutual collaboration session.",
+        "Requires Maintainer acceptance before implementation."
+      ],
+      "eligible_for_docs_prds": false,
+      "implementation": {
+        "state": "pending",
+        "evals": null,
+        "eval_author": null,
+        "implementer": null,
+        "reviewer": null,
+        "notes": "Draft only. The broken package script was not repaired in this audit turn per Maintainer instruction."
       }
     }
   ]

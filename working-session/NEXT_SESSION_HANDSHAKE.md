@@ -49,8 +49,9 @@ Suggested session-18 completion criteria:
 - Protocol baseline in force: promoted PRDs 001, 003-014 (incl. PRD-014 Amendment A1),
   016-022, 024, 026, 030; PRD-031 Phase 1; PRD-017/023 propagated. (Authoritative:
   `working-session/docs/PRD_STATUS.json`.)
-- Skill bundles encoding the protocol: `skills/claude` v0.9.0 / bundle v12;
-  `skills/codex` v9 (each agent confirms its own at boot via `validate:skills`).
+- Skill bundles encoding the protocol: `skills/claude` v0.9.1 / bundle v13 (PRD-032
+  orientation-helper preference added); `skills/codex` v9 (each agent confirms its own at
+  boot via `validate:skills`).
 - Both agents state the protocol baseline they will execute and confirm they match.
 
 ### 2. Version of Tokenese agreed

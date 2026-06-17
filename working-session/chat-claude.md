@@ -272,3 +272,39 @@ close_reason: Maintainer-directed close; both agents closed
 
 ### Outstanding (authoritative: NEXT_SESSION_HANDSHAKE.md §5)
 - Maintainer acceptance: PRD-032, PRD-033. Tokenese: W3/L2 verified scoring + W4/L3 + calibration + Tier-B decision. Decision Queue items. PRD-031 Phase 2/3. Deferred closeout: signal-log compaction (64 eligible) + boot-archive rollover.
+
+---
+
+## Session 17 Close Snapshot — Claude — 2026-06-17 (rev ~209)
+
+```yaml
+agent: Claude
+model: Claude Opus 4.8 (1M)
+date: 2026-06-17
+branch: main
+turnfile_revision: ~209
+phase: phase-2 / p2-g
+close_reason: Maintainer-directed close after full 4-lane scope achieved
+commit: 06968d3 (not pushed — push held)
+```
+
+### Done this session (full 4-lane scope achieved)
+- Handshake converged + signed (Claude + Codex + Maintainer rows).
+- PRD-033 Skill Ownership Integrity Guard: built the Maintainer-owned/agent-locked shared guard (OWNERSHIP.yaml + tools/hooks/{pre-commit,guard-check.mjs} + validate-ownership-guard.mjs), authored evals/prd-033.evals.mjs (12/12), Codex implemented Layer-1 adapter + activation (core.hooksPath=tools/hooks), Claude reviewed APPROVE (LIVE active-hook commit-block verified). Guard is LIVE.
+- PRD-032 Session Orientation Tool: implemented tools/session-orient.mjs (read-only; composes next-state + validate-closeout; repo-layout defaults; ownership heuristic; --validate opt-in), evals 11/11, resolved two Codex review counters (defaults; default false-stale projection). skills/claude v0.9.1/bundle 13 prefers it (AC8). Codex APPROVE.
+- Tokenese Tier-A: Codex scored W3/L2 (verified o200k) + authored/scored W4/L3; Claude acked + sanity-checked. All 8 pairs scored; W4 WIN both tokenizers; tk-ab-run-results.md reconciled with version tags; frameset_validation report-only; R7 intact.
+- Deferred closeout: signal-log compaction done (SIG-031..128 removed). PRD-032 + PRD-033 promoted to docs/prds. Session committed 06968d3 (TURNFILE_AGENT=maintainer).
+
+### FIRST ACTIONS ON RESUME (session 18)
+1. Boot via docs/BOOT_SEQUENCE.md + NEXT_SESSION_HANDSHAKE.md (session-18 addendum); converge with Codex.
+2. Report guard posture; use `node tools/session-orient.mjs --agent claude --emit human` for orientation (PRD-032 is live now).
+3. Bounded goal: tk-calibration-audit (PRD-027 R5.5) using W4 + E1/W1 evidence; then Maintainer Tier-B decision. Tokenese measurement-only; chat dense scratchpads OFF.
+
+### Commit identity reminder (guard LIVE)
+- core.hooksPath=tools/hooks; .turnfile-agent=codex in this clone. Claude-owned commits need TURNFILE_AGENT=claude; whole-tree/cross-ownership commits need TURNFILE_AGENT=maintainer (Maintainer-directed). push held.
+
+### Open Claude-owned threads (unread 0)
+- All session-17 mailbox threads actioned. MSG-029 (PRD-032 fix) Codex APPROVE'd. Nothing carried unread.
+
+### Key files this session
+- New: OWNERSHIP.yaml, tools/hooks/{pre-commit,guard-check.mjs,README.md}, tools/validate-ownership-guard.mjs, tools/session-orient.mjs, evals/prd-032.evals.mjs, evals/prd-033.evals.mjs. skills/claude -> v0.9.1/bundle 13. PRD-032/033 docs -> docs/prds.
