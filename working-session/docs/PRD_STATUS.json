@@ -965,8 +965,8 @@
     {
       "id": "PRD-030",
       "title": "Session Heartbeat Management Contract",
-      "path": "working-session/docs/PRD-030-session-heartbeat-management-contract.md",
-      "shelf": "working-session/docs",
+      "path": "docs/prds/PRD-030-session-heartbeat-management-contract.md",
+      "shelf": "docs/prds",
       "state": "accepted",
       "acceptance": {
         "codex": {
@@ -986,7 +986,8 @@
           "status": "accepted",
           "evidence": [
             "Maintainer requested the PRD on 2026-06-16 after Codex deleted the obsolete turnfile-mailbox-heartbeat automation during closeout",
-            "Maintainer accepted PRD-030 on 2026-06-16 as optional negotiation between LLMs using Turnfile protocol, not as a Turnfile requirement"
+            "Maintainer accepted PRD-030 on 2026-06-16 as optional negotiation between LLMs using Turnfile protocol, not as a Turnfile requirement",
+            "Maintainer directed promotion to docs/prds 2026-06-17 (session 15/16)"
           ]
         }
       },
@@ -1000,9 +1001,9 @@
     {
       "id": "PRD-031",
       "title": "Concurrent Multi-Agent Coordination Contract",
-      "path": "working-session/docs/PRD-031-concurrent-multi-agent-coordination-contract.md",
-      "shelf": "working-session/docs",
-      "state": "draft",
+      "path": "docs/prds/PRD-031-concurrent-multi-agent-coordination-contract.md",
+      "shelf": "docs/prds",
+      "state": "accepted",
       "acceptance": {
         "codex": {
           "status": "accepted",
@@ -1012,25 +1013,28 @@
           ]
         },
         "claude": {
-          "status": "pending",
+          "status": "accepted",
           "evidence": [
-            "Claude-authored draft v3 on disk 2026-06-16 (pivoted from mutex to concurrent coordination per Maintainer redirect; 4 design decisions resolved: git DAG ordering, allow-parallel-then-review, build-artifact aggregates, Phase 1 first)"
+            "Author of PRD-031 (v3); Claude acceptance recorded 2026-06-17 after Codex APPLY (MSG-20260616-018) and Maintainer acceptance; A1 implementation lane s16-prd-031-phase1 (Claude authors Phase-1 evals next)"
           ]
         },
         "maintainer": {
           "status": "accepted",
           "evidence": [
-            "PRD-031 draft v3 Promotion Gate Snapshot records Maintainer acceptance for the 2026-06-16 directive to enable concurrent multi-LLM work, tighten cycles as Tokenese lands, and prepare for more than two agents"
+            "PRD-031 draft v3 Promotion Gate Snapshot records Maintainer acceptance for the 2026-06-16 directive to enable concurrent multi-LLM work, tighten cycles as Tokenese lands, and prepare for more than two agents",
+            "Maintainer directed promotion to docs/prds 2026-06-17"
           ]
         }
       },
-      "blocking_items": [
-        "Claude acceptance evidence pending"
-      ],
-      "eligible_for_docs_prds": false,
+      "blocking_items": [],
+      "eligible_for_docs_prds": true,
       "implementation": {
-        "state": "not-started",
-        "notes": "Draft v3 (concurrent multi-agent coordination). Phased: Phase 1 (namespaced ids + append-only mailbox/signal logs + derivation) approved as immediate scope. Eval-gated under PRD-006 A1. Codex APPLY and Maintainer acceptance are recorded; Claude acceptance evidence remains pending before promotion. Claude is expected to author evals/prd-031-phase1.evals.mjs, then Codex implements Phase 1 and Claude reviews."
+        "state": "pending",
+        "evals": null,
+        "eval_author": "claude",
+        "implementer": "codex",
+        "reviewer": "claude",
+        "notes": "PRD-006 A1: Claude (proposer) authors evals/prd-031-phase1.evals.mjs (s16-prd-031-phase1) -> Codex implements -> Claude reviews. Promoted with implementation pending (mirrors PRD-027)."
       }
     }
   ]

@@ -1,4 +1,4 @@
-# Boot File — Claude (v10)
+# Boot File — Claude (v9)
 
 Read this first on session start. It tells you what this project is, where things are, what state we're in, and what to do next.
 
@@ -85,35 +85,43 @@ If TURNFILE.yaml exists, skip to resumption read order.
 6. `working-session/chat-claude.md` session close snapshot (bottom of file) — ~2K tokens
 7. Then read whatever files are relevant to the current task
 
-## Current state (as of close, 2026-06-17)
+## Current state (as of session 15 close, 2026-06-16)
 
-Claude lane on Opus 4.8, Codex lane on Codex 5.5 — model-generation continuity on one unmodified protocol holds (`docs/llm/MODEL_LEDGER.md`). Note: state has run well past the old "session 15" framing — read the files, not this label.
+### Branch: `session-15-compaction` (pushed; commit 273dbb1 + closeout commit)
 
-### FIRST ACTIONS ON RESUME
+Session 15 ran the Claude lane on Opus 4.8 and the Codex lane on Codex 5.5 — model-generation continuity on one unmodified protocol holds (`docs/llm/MODEL_LEDGER.md`).
 
-1. Boot, then CONFIRM Codex retired its `turnfile-session-heartbeat` (PRD-030 R5) — if it is still firing, coordinate deletion or a carry-forward WORKLOG entry.
-2. PRD-031 Phase 1 (now promoted to docs/prds): author `evals/prd-031-phase1.evals.mjs` (PRD-006 A1 step 4, proposer = Claude) -> Codex implements -> Claude reviews. Task `s16-prd-031-phase1`.
-3. Expand the Tokenese A/B suite (W2/W3/W4, L2/L3) and write the formal `tk-ab-run` results artifact (mini-pilot's two points are in the WORKLOG tk-ab-run section).
+### FIRST ACTION ON RESUME (session 16)
 
-### Recent milestones (this arc)
+1. After boot, CONFIRM the Maintainer's two between-session approvals: (a) PRD-027 session charter ratification (`working-session/SESSION_CHARTER.md`, R2.4); (b) PRD-030 acceptance. Record them (and promote PRD-030 if directed) before substantive Tokenese work.
+2. Deep-inspect + apply Perplexity's deterministic Tokenese checker/decoder (delivered to `~/Git/tokenese` as `tokenese-translator`) against the pre-eval checklist in the WORKLOG session-15 closeout entry. BLOCKER check: it must cover spec v0.1 PLUS DESIGN section 7 sigils, or it misparses every clone.
+3. Only after charter ratification: run the `tk-ab-run` mini-pilot (W1 + L1, both directions), scored by Perplexity's checker.
 
-- PRD-027 greenlit (charter ratified, PRD-030 accepted). First live Tokenese A/B mini-pilot COMPLETE: W1 win-conformant (Tokenese wins on tokens), L1 l1-plain-success (correct dense refusal). Scored by Perplexity's deterministic checker (`~/Git/tokenese/tools/translator`, 72/72 tests, all pre-eval items cleared).
-- PRD-030 (session heartbeat management) + PRD-031 (concurrent multi-agent coordination) PROMOTED to `docs/prds` (Maintainer-directed). PRD-031 carries an implementation-pending object (A1 Phase-1 lane).
+### Session 15 summary (PRD-027 Tokenese pilot initiated + staged)
+
+- PRD-027 approved + promoted; Tokenese task list registered (tk-teach/ab-suite-design/ab-run/calibration-audit/spec-v02).
+- First full Tokenese teach cycle through the protocol: Claude taught -> Codex produced E1-E8 -> Claude graded 7/8, production-competence gate PASSED; tk-teach-tokenese done. (E1 ev:obs-on-inference = first calibration datapoint.)
+- Session charter (R2.4, narrowed dense-lane scope) + A/B suite drafted, Codex counter-reviewed + signed; suite agreed both agents (AC5) -> tk-ab-suite-design done. Charter draft v2 awaiting Maintainer ratification.
+- Perplexity Computer scoped as the deterministic checker/decoder + A/B scorer (instrument, NOT a generator, NOT a Turnfile participant; tokenese repo per R7).
+- PRD-030 (session heartbeat management) drafted by Codex, reviewed APPLY w/ 5 counters (C1-C5 applied); awaiting Maintainer acceptance.
+- 2-min mailbox sync loop enabled (interaction gearing) then DELETED at clean close (PRD-030 AC6 worked example).
 
 ### PRD landscape (authoritative: `working-session/docs/PRD_STATUS.json`)
 
-- PRD-027: accepted + promoted; A/B execution underway (mini-pilot done, full suite next).
-- PRD-030, PRD-031: promoted to docs/prds; PRD-031 implementation (Phase 1) pending.
-- Carry-forward (Codex lanes): PRD-014 A1 impl; PRD-021/022/024 impl (evals red); PRD-023/026/017 eval-authoring -> Claude implements; PRD-024 R5.1 validator.
+- PRD-027: accepted + promoted (docs/prds); A/B pilot in initiation; charter awaiting Maintainer ratification.
+- PRD-030: draft (working-session); agent gates accepted; Maintainer acceptance pending.
+- Carry-forward register (Codex lanes, unchanged): PRD-014 A1 review (MSG-044 open); PRD-021/022/024 impl (evals red); PRD-023/026/017 eval-authoring -> Claude implements; PRD-024 R5.1 validator.
 
-### Operating norms (skill v0.6.0)
-- Files First, Not Memory (this whole arc proved it — state moved far past memory between turns); Concurrent Write Discipline (derive via tools/next-state.mjs in-lock; concurrent-close ID collisions WILL happen — renumber per PRD-010 R4.5); eight-step A1 loop; Model Ledger Handshake.
-- Tokenese pilot (PRD-027 + charter): every clone paired to a legible source; source wins; no dense for reasoning (R1); ^N/ev: untrusted until calibration; R7 cross-repo boundary (never edit tokenese semantics — the checker lives there).
+### Operating norms now in force (skill v0.6.0)
+- Files First; Concurrent Write Discipline (derive via tools/next-state.mjs in-lock); eight-step loop (never self-implement a PRD whose evals you authored); Model Ledger Handshake at boot.
+- Tokenese pilot rules (PRD-027 + charter): every clone paired to a legible source (mandatory until the audit card exists, R4.5); source wins; no dense for reasoning (R1); ^N/ev: untrusted until calibration; cross-repo boundary (never edit tokenese semantics, R7).
+
+### Open questions
+- Zero active in the local workspace (`working-session/OPEN_QUESTIONS.md`). PRD-030 OQs resolved in-draft.
 
 ### Mailbox & coordination
-- At Claude close: Claude idle, unread 0, no locks. Open Claude-owned: MSG-20260617-005/006 (mini-pilot + close; Codex acks/closes), MSG-20260613-044 (PRD-014 A1; Codex APPLY'd, impl pending).
-- Heartbeat: Codex's `turnfile-session-heartbeat` retirement requested at close (MSG-006) — verify on resume.
-- TURNFILE revision ~166+ at close. Read it fresh (Files-First).
+- At Claude close: Claude idle, unread 0, no locks. Open Claude-owned: MSG-20260616-008 (charter/suite/PRD-030 acceptance relay; Codex unread 1, Codex acks/closes), MSG-20260613-044 (PRD-014 A1 apply-or-counter; Codex review still pending).
+- TURNFILE.yaml revision ~142 at Claude close. Read it fresh (Files-First).
 - Detailed resume snapshot: bottom of `working-session/chat-claude.md`.
 
 ## Session close protocol

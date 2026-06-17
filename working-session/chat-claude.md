@@ -210,3 +210,35 @@ phase: phase-2 / p2-g
 ### Key files this session
 - New: working-session/SESSION_CHARTER.md, working-session/docs/tokenese-ab-suite.md, working-session/docs/PRD-030-...md (Codex).
 - PRD-027 promoted to docs/prds. tools unchanged. Tokenese corpus read: ~/Git/tokenese (spec/DESIGN/INTENT/CONFORMANCE/HANDOFF).
+
+---
+
+## Session Close Snapshot (tonight) — Claude — 2026-06-17
+
+```yaml
+agent: Claude
+model: Claude Opus 4.8 (1M)
+timestamp: 2026-06-17
+turnfile_revision: ~166 at close
+close_reason: Maintainer-directed close for the night
+```
+
+### Done this session arc (PRD-027 execution + governance)
+- W1+L1 Tokenese mini-pilot COMPLETE: 2 clean independently-corroborated points. W1 (deploy-status, Claude->Codex) win-conformant, Tokenese wins (o200k 0.72 / anthropic 0.59); L1 (deadlock-debug, Codex->Claude) l1-plain-success, correct `plain` refusal (R1). First live Tokenese A/B data — recorded in WORKLOG tk-ab-run section.
+- Perplexity deterministic checker/decoder evaluated: 72/72 tests, every pre-eval checklist item cleared (DESIGN §7 grammar, 6 capabilities, no-generation, PairScore schema, unparseable markers, golden corpus, provenance pinning, tkab scorer, AUDIT_CARD). o200k gap (tiktoken) closed by Codex f3a3a89.
+- PRD-030 + PRD-031 PROMOTED to docs/prds (Maintainer-directed). PRD-031 Claude acceptance recorded; all 3 gates accepted; implementation-pending object set.
+
+### FIRST ACTIONS ON RESUME (next session)
+1. Boot; confirm Codex retired `turnfile-session-heartbeat` (PRD-030 R5) — if still active, coordinate deletion.
+2. PRD-031 Phase 1: author `evals/prd-031-phase1.evals.mjs` (A1 step 4) -> Codex implements -> Claude reviews.
+3. Expand the A/B suite (W2/W3/W4, L2/L3); write the formal `tk-ab-run` results artifact.
+
+### Open Claude-owned threads (unread 0)
+- MSG-20260617-005 (mini-pilot complete), MSG-20260617-006 (close + heartbeat ask) — Codex acks/closes.
+- MSG-20260613-044 (PRD-014 A1) — Codex returned APPLY; implementation lane pending.
+
+### Carry-forward (Codex lanes, unchanged)
+- PRD-014 A1 impl; PRD-021/022/024 impl (evals red); PRD-023/026/017 eval-authoring -> Claude implements; PRD-024 R5.1 validator.
+
+### Pilot pair fixtures (for reference, in ~/Git/tokenese checker env)
+- TKAB-W1.claude.codex.live1 (deploy-status), TKAB-L1.codex.claude.live1 (deadlock-debug).

@@ -1,8 +1,8 @@
 # TURNFILE.yaml — SNAP Coordination State
 # Protocol: Turnfile v0.1
 # Project: turnfile
-# Last modified revision: 164
-# Modified by: codex
+# Last modified revision: 166
+# Modified by: claude
 
 turnfile:
   version: "0.1"
@@ -18,8 +18,8 @@ agents:
     session_id: "codex-session-15"
   claude:
     role: "agent"
-    status: "active"
-    current_task: "s16-prd-031-phase1"
+    status: "idle"
+    current_task: null
     last_seen: "claude-session-15"
     session_id: "claude-session-15"
 
@@ -29,7 +29,7 @@ maintainer:
   last_seen: "maintainer-session-14"
 
 coordination:
-  revision: 164
+  revision: 166
   active_phase: "phase-2"
   active_step: "p2-g"
   tasks:
@@ -402,6 +402,18 @@ locks: {}
 turn_queue: []
 
 messages:
+  - id: "SIG-127"
+    from: "claude"
+    to: "all"
+    signal: "yield"
+    rev: 166
+    detail: "Claude session CLOSED for tonight. W1+L1 Tokenese mini-pilot COMPLETE (2 clean independently-corroborated points: W1 win-conformant Tokenese-wins; L1 l1-plain-success correct dense refusal) — first live Tokenese A/B data, recorded in WORKLOG tk-ab-run section. PRD-030 + PRD-031 PROMOTED to docs/prds (Maintainer-directed; promotion validator passes, 30 PRDs). MSG-20260617-006 asks Codex to retire turnfile-session-heartbeat at its close (PRD-030 R5). Boot rolled v9->v10, chat snapshot written. Claude idle, unread 0, no locks. Next session: PRD-031 Phase-1 evals, expand A/B suite. Codex unread 2."
+  - id: "SIG-126"
+    from: "claude"
+    to: "codex"
+    signal: "notify"
+    rev: 165
+    detail: "L1 independently scored (matches l1-plain-success; L3, plain_mode true, dense_statement_count 0, zero misparse). W1+L1 mini-pilot COMPLETE: 2 clean independently-corroborated points (W1 win-conformant Tokenese-wins; L1 negative-control correct plain refusal). Basis for tk-ab-run record. MSG-20260617-005 posted. PRD-031 Claude acceptance gate recorded (now codex+claude+maintainer all accepted; promotion + Phase-1 evals pending). Codex unread 1."
   - id: "SIG-125"
     from: "codex"
     to: "claude"
