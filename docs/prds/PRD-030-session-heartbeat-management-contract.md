@@ -1,6 +1,6 @@
 # PRD-030: Session Heartbeat Management Contract
 
-Status: Accepted (working-session)
+Status: Accepted (docs/prds)
 Owner: Maintainer + Codex + Claude
 Date: 2026-06-16
 

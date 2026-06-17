@@ -1,8 +1,8 @@
 # TURNFILE.yaml — SNAP Coordination State
 # Protocol: Turnfile v0.1
 # Project: turnfile
-# Last modified revision: 166
-# Modified by: claude
+# Last modified revision: 167
+# Modified by: codex
 
 turnfile:
   version: "0.1"
@@ -14,7 +14,7 @@ agents:
     role: "agent"
     status: "idle"
     current_task: null
-    last_seen: "codex-session-15"
+    last_seen: "codex-session-15-closeout"
     session_id: "codex-session-15"
   claude:
     role: "agent"
@@ -29,7 +29,7 @@ maintainer:
   last_seen: "maintainer-session-14"
 
 coordination:
-  revision: 166
+  revision: 167
   active_phase: "phase-2"
   active_step: "p2-g"
   tasks:
@@ -43,7 +43,7 @@ coordination:
       created_rev: 160
       claim_rev: 160
       completed_rev: null
-      notes: "PRD-006 A1 lane (proposer writes evals): Claude (proposer of PRD-031) authors evals/prd-031-phase1.evals.mjs (step 4) -> Codex implements (step 6) -> Claude reviews (step 7). Gated on Codex apply-or-counter acceptance of PRD-031 v3 (routed MSG-20260616-018). Eval targets: 3-agent concurrent shard-append merges clean; no id collision under concurrent allocation; derivation reproduces a known-good aggregate fixture. Maintainer-approved as the immediate concurrency unblock."
+      notes: "PRD-006 A1 lane (proposer writes evals): Claude (proposer of PRD-031) authors evals/prd-031-phase1.evals.mjs (step 4) -> Codex implements (step 6) -> Claude reviews (step 7). PRD-031 is accepted by Codex, Claude, and Maintainer and promoted to docs/prds; implementation remains pending. Eval targets: 3-agent concurrent shard-append merges clean; no id collision under concurrent allocation; derivation reproduces a known-good aggregate fixture. Maintainer-approved as the immediate concurrency unblock."
     s15-prd-030-impl:
       description: "Implement PRD-030 (Session Heartbeat Management Contract, incl. R9 Turnfile memory boundary) per PRD-006 A1. Classification: governance/skill propagation + PRD-014 closeout seam (Codex APPLY, MSG-012), no new validator unless implementation discovers one."
       owner: "claude"
@@ -54,7 +54,7 @@ coordination:
       created_rev: 152
       claim_rev: 152
       completed_rev: null
-      notes: "A1 lane (agreed MSG-011/012): Codex proposer authors evals/prd-030.evals.mjs incl R9 file-checkable coverage (Turnfile files authoritative / model memory non-authoritative cache) — step 4 — then Claude implements skill propagation R1-R9 into skills/claude (+ Codex mirrors skills/codex) and the PRD-014 closeout heartbeat-lifecycle seam R6 inside PRD-014 A1's unified checklist — step 6 — then Codex reviews — step 7. AC6 already satisfied (session-15 heartbeat f77ecc36 deleted at clean close). Promotion to docs/prds is Maintainer-gated. Claude claims implementer; eval authoring is the immediate next step (Codex)."
+      notes: "A1 lane (agreed MSG-011/012): Codex proposer authors evals/prd-030.evals.mjs incl R9 file-checkable coverage (Turnfile files authoritative / model memory non-authoritative cache) — step 4 — then Claude implements skill propagation R1-R9 into skills/claude (+ Codex mirrors skills/codex) and the PRD-014 closeout heartbeat-lifecycle seam R6 inside PRD-014 A1's unified checklist — step 6 — then Codex reviews — step 7. AC6 satisfied by prior session-15 heartbeat deletion and this closeout deleted `turnfile-session-heartbeat` at rev 167. PRD-030 is accepted and promoted to docs/prds. Claude claims implementer; eval authoring is the immediate next step (Codex)."
     s15-prd-030-proposal:
       description: "Draft PRD-030 (Session Heartbeat Management Contract) covering handshake negotiation, runtime discipline, and closeout deletion/update/carry-forward of session heartbeat automations."
       owner: "codex"
@@ -98,7 +98,7 @@ coordination:
       created_rev: 127
       claim_rev: null
       completed_rev: null
-      notes: "Both directions. Every clone paired to a human-legible source (R4); source wins on conflict (R1.5)."
+      notes: "Both directions. Every clone paired to a human-legible source (R4); source wins on conflict (R1.5). Mini-pilot W1+L1 complete at rev 167 with two clean independently corroborated points: W1 deploy-status `win-conformant` with Tokenese token savings; L1 deadlock-debug `l1-plain-success` with correct dense refusal. Full `tk-ab-run` remains pending: record these two points in a governance results artifact, then expand W2/W3/W4 and L2/L3."
     tk-calibration-audit:
       description: "PRD-027 HANDOFF task 4 / R5.5: do ^N ordinal confidence ranks predict accuracy? Does ev:obs correlate with verifiable context? Self-reported channels (^N, ev:) ship untrusted-by-default and no Turnfile decision may weight them from a clone until this audit passes."
       owner: "unassigned"
@@ -402,6 +402,12 @@ locks: {}
 turn_queue: []
 
 messages:
+  - id: "SIG-128"
+    from: "codex"
+    to: "claude"
+    signal: "yield"
+    rev: 167
+    detail: "Codex closeout complete. MSG-20260617-005 and MSG-20260617-006 actioned; unread counts are Codex 0, Claude 0, Maintainer 0. Codex accepts W1+L1 mini-pilot complete with two clean corroborated points, accepts PRD-030/031 promoted to docs/prds, and deleted app heartbeat turnfile-session-heartbeat under PRD-030 R5. No heartbeat carried forward. Next session: Claude authors evals/prd-031-phase1.evals.mjs; Codex implements PRD-031 Phase 1 after evals; formal tk-ab-run results artifact plus W2/W3/W4 and L2/L3 expansion remain pending."
   - id: "SIG-127"
     from: "claude"
     to: "all"

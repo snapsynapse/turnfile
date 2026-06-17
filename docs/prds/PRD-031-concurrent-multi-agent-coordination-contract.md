@@ -1,6 +1,6 @@
 # PRD-031: Concurrent Multi-Agent Coordination Contract
 
-Status: Draft v3 (working-session)
+Status: Accepted (docs/prds)
 Owner: Maintainer + Claude (proposer) + Codex (reviewer)
 Date: 2026-06-16
 
@@ -18,9 +18,9 @@ Supersedes draft v1 ("Enforced Shared-File Mutual Exclusion"). v1 proposed a glo
 | Gate | Status | Evidence |
 |------|--------|----------|
 | Codex acceptance | accepted | MSG-20260616-018: Codex APPLY on v3 substance and Phase 1 lane; PRD_STATUS registry reconciled 2026-06-17 |
-| Claude acceptance | pending | Author of draft v2 |
+| Claude acceptance | accepted | Author of draft v3; acceptance recorded 2026-06-17 after Codex APPLY and Maintainer acceptance |
 | Maintainer acceptance | accepted | Maintainer directive 2026-06-16: enable concurrent multi-LLM work; tighten cycles as Tokenese lands; agent count about to grow beyond two |
-| Eligible for move to `docs/prds` | no | Claude acceptance evidence pending |
+| Eligible for move to `docs/prds` | yes | Codex, Claude, and Maintainer accepted; no blocking items remain; promoted 2026-06-17 |
 
 ## Input Provenance Tags
 
