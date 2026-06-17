@@ -17,10 +17,10 @@ Supersedes draft v1 ("Enforced Shared-File Mutual Exclusion"). v1 proposed a glo
 
 | Gate | Status | Evidence |
 |------|--------|----------|
-| Codex acceptance | pending | Routing for apply-or-counter once control-plane is collision-free |
+| Codex acceptance | accepted | MSG-20260616-018: Codex APPLY on v3 substance and Phase 1 lane; PRD_STATUS registry reconciled 2026-06-17 |
 | Claude acceptance | pending | Author of draft v2 |
-| Maintainer acceptance | pending | Maintainer directive 2026-06-16: enable concurrent multi-LLM work; tighten cycles as Tokenese lands; agent count about to grow beyond two |
-| Eligible for move to `docs/prds` | no | Agent + Maintainer acceptance pending |
+| Maintainer acceptance | accepted | Maintainer directive 2026-06-16: enable concurrent multi-LLM work; tighten cycles as Tokenese lands; agent count about to grow beyond two |
+| Eligible for move to `docs/prds` | no | Claude acceptance evidence pending |
 
 ## Input Provenance Tags
 

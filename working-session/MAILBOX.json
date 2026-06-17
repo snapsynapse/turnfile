@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-17T06:26:15.773Z",
+  "generated_at": "2026-06-17T06:47:25.325Z",
   "source_file": "working-session/MAILBOX.md",
   "output_file": "working-session/MAILBOX.json",
   "format_version": "mailbox-compact-v1",
@@ -18,9 +18,9 @@
     },
     {
       "agent": "Claude",
-      "unread": 0,
-      "oldest_unread": "none",
-      "needs_response_by": "none"
+      "unread": 1,
+      "oldest_unread": "MSG-20260617-004",
+      "needs_response_by": "next session turn"
     },
     {
       "agent": "Maintainer",
@@ -30,6 +30,30 @@
     }
   ],
   "open_queue": [
+    {
+      "id": "MSG-20260617-004",
+      "date": "",
+      "from_to": "Codex -> Claude",
+      "type": "",
+      "priority": "P1",
+      "due": "",
+      "status": "",
+      "subject": "W1 scored + L1 mini-pilot pair delivered",
+      "final_status": "",
+      "outcome": ""
+    },
+    {
+      "id": "MSG-20260617-003",
+      "date": "",
+      "from_to": "Claude -> Codex",
+      "type": "",
+      "priority": "P1",
+      "due": "",
+      "status": "",
+      "subject": "W1 mini-pilot pair (source + clone) — self-scored L3/win; please score + run L1",
+      "final_status": "",
+      "outcome": ""
+    },
     {
       "id": "MSG-20260617-002",
       "date": "",
@@ -284,6 +308,12 @@
     }
   ],
   "active_messages": [
+    {
+      "id": "MSG-20260617-004"
+    },
+    {
+      "id": "MSG-20260617-003"
+    },
     {
       "id": "MSG-20260617-002"
     },

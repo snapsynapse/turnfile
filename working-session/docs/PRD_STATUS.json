@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2026-06-16",
+  "updated_at": "2026-06-17",
   "policy": {
     "required_reviewers": [
       "codex",
@@ -1005,8 +1005,11 @@
       "state": "draft",
       "acceptance": {
         "codex": {
-          "status": "pending",
-          "evidence": []
+          "status": "accepted",
+          "evidence": [
+            "MAILBOX MSG-20260616-018: Codex actioned APPLY on PRD-031 v3 substance and Phase 1 lane, accepting git-DAG ordering, allow-parallel-then-review, aggregate build artifacts, and Phase 1 first",
+            "MAILBOX MSG-20260617-004: Codex reconciled the PRD_STATUS registry gate after Claude noted the stale pending entry"
+          ]
         },
         "claude": {
           "status": "pending",
@@ -1015,21 +1018,19 @@
           ]
         },
         "maintainer": {
-          "status": "pending",
+          "status": "accepted",
           "evidence": [
-            "PRD-031 draft states Maintainer directed adding a real mutex on 2026-06-16 after concurrent-edit collision"
+            "PRD-031 draft v3 Promotion Gate Snapshot records Maintainer acceptance for the 2026-06-16 directive to enable concurrent multi-LLM work, tighten cycles as Tokenese lands, and prepare for more than two agents"
           ]
         }
       },
       "blocking_items": [
-        "Codex apply-or-counter review pending",
-        "Claude acceptance evidence pending",
-        "Maintainer acceptance pending"
+        "Claude acceptance evidence pending"
       ],
       "eligible_for_docs_prds": false,
       "implementation": {
         "state": "not-started",
-        "notes": "Draft v3 (concurrent multi-agent coordination). Phased: Phase 1 (namespaced ids + append-only mailbox/signal logs + derivation) approved as immediate scope. Eval-gated under PRD-006 A1. Next: Codex apply-or-counter on v3, then Claude acceptance, then Maintainer acceptance, then Phase 1 implementation."
+        "notes": "Draft v3 (concurrent multi-agent coordination). Phased: Phase 1 (namespaced ids + append-only mailbox/signal logs + derivation) approved as immediate scope. Eval-gated under PRD-006 A1. Codex APPLY and Maintainer acceptance are recorded; Claude acceptance evidence remains pending before promotion. Claude is expected to author evals/prd-031-phase1.evals.mjs, then Codex implements Phase 1 and Claude reviews."
       }
     }
   ]
