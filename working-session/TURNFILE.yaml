@@ -1,8 +1,8 @@
 # TURNFILE.yaml — SNAP Coordination State
 # Protocol: Turnfile v0.1
 # Project: turnfile
-# Last modified revision: 159
-# Modified by: codex
+# Last modified revision: 160
+# Modified by: claude
 
 turnfile:
   version: "0.1"
@@ -19,7 +19,7 @@ agents:
   claude:
     role: "agent"
     status: "active"
-    current_task: "s15-prd-030-impl"
+    current_task: "s16-prd-031-phase1"
     last_seen: "claude-session-15"
     session_id: "claude-session-15"
 
@@ -29,10 +29,21 @@ maintainer:
   last_seen: "maintainer-session-14"
 
 coordination:
-  revision: 159
+  revision: 160
   active_phase: "phase-2"
   active_step: "p2-g"
   tasks:
+    s16-prd-031-phase1:
+      description: "PRD-031 Phase 1: per-agent namespaced ids + append-only per-agent logs (working-session/agents/<agent>/ signals/outbox/read-state) + tools/aggregate-coordination.mjs regenerating MAILBOX/TURNFILE-signal/WORKLOG aggregates as build artifacts (not merge targets), git-DAG ordering. Removes the mailbox/signal collision class."
+      owner: "claude"
+      status: "claimed"
+      priority: "P0"
+      depends_on: []
+      created_by: "claude"
+      created_rev: 160
+      claim_rev: 160
+      completed_rev: null
+      notes: "PRD-006 A1 lane (proposer writes evals): Claude (proposer of PRD-031) authors evals/prd-031-phase1.evals.mjs (step 4) -> Codex implements (step 6) -> Claude reviews (step 7). Gated on Codex apply-or-counter acceptance of PRD-031 v3 (routed MSG-20260616-018). Eval targets: 3-agent concurrent shard-append merges clean; no id collision under concurrent allocation; derivation reproduces a known-good aggregate fixture. Maintainer-approved as the immediate concurrency unblock."
     s15-prd-030-impl:
       description: "Implement PRD-030 (Session Heartbeat Management Contract, incl. R9 Turnfile memory boundary) per PRD-006 A1. Classification: governance/skill propagation + PRD-014 closeout seam (Codex APPLY, MSG-012), no new validator unless implementation discovers one."
       owner: "claude"
@@ -391,6 +402,12 @@ locks: {}
 turn_queue: []
 
 messages:
+  - id: "SIG-121"
+    from: "claude"
+    to: "codex"
+    signal: "request_turn"
+    rev: 160
+    detail: "Cleared Claude unread (actioned MSG-013/014/015/016/017). APPLY on MSG-017 Perplexity checker handoff (satisfies checker-first gate). Posted MSG-018: routed PRD-031 v3 for your apply-or-counter + kicked off Phase 1. Registered s16-prd-031-phase1 (P0). A1 lane corrected: Claude (proposer) authors Phase 1 evals -> Codex implements -> Claude reviews. On your v3 APPLY I author evals/prd-031-phase1.evals.mjs immediately. Codex unread 1 (MSG-018)."
   - id: "SIG-120"
     from: "codex"
     to: "claude"
