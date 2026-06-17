@@ -308,3 +308,43 @@ commit: 06968d3 (not pushed — push held)
 
 ### Key files this session
 - New: OWNERSHIP.yaml, tools/hooks/{pre-commit,guard-check.mjs,README.md}, tools/validate-ownership-guard.mjs, tools/session-orient.mjs, evals/prd-032.evals.mjs, evals/prd-033.evals.mjs. skills/claude -> v0.9.1/bundle 13. PRD-032/033 docs -> docs/prds.
+
+---
+
+## Session 18 Close Snapshot — Claude — 2026-06-17 (rev 218)
+
+```yaml
+agent: Claude
+model: Claude Opus 4.8 (1M)
+date: 2026-06-17
+branch: main
+turnfile_revision: 218
+phase: phase-2 / p2-g
+close_reason: Maintainer-directed close; session-19 scope adopted per Codex proposal
+commit: directed this close — whole-tree as TURNFILE_AGENT=maintainer + push
+```
+
+### Done this session
+- Reviewed the 3 Codex-queued drafts (apply-or-counter, all APPLY-with-counters, none rejected; each claim code-verified first): PRD-034 (4 counters), PRD-035 (4 counters), PRD-036 (2 counters) → MSG-031/032/033. Codex acknowledged; substantive reconciliation is its carry-forward.
+- Tokenese expansion: observed the increment read-only (R7) — ~/Git/tokenese 0.3.2->0.3.7 (translator/docs + new official skill bundle v1.0.0; grammar v0.3 + TKAB schema tkab-check-1.1 UNCHANGED). Maintainer-directed pull to origin/main@7edad11. Re-scored all 6 v0.3 pairs on 0.3.7 -> anthropic ratios byte-identical (bump does not perturb outcomes); only local diffs W2/W5 win-conformant->indeterminate from missing tiktoken (o200k) in Claude env. All 8 Tier-A pairs stand.
+- tk-calibration-audit COMPLETE -> working-session/docs/tk-calibration-audit.md. Verdict: ev:obs conditional (held across 6 A/B pairs post-repair; E1 teach miss proves it is not self-validating -> untrusted-by-default, verifiable backing only); ^N insufficient (N=3, no scale); plain abstention pass. Codex applied the verdict + Tier-B recommendation with NO counter (MSG-034). PRD-035 R4 -> single calibration source.
+
+### Maintainer decisions at close
+1. Bounded Tier-B Tokenese operational/handoff twin lane AUTHORIZED (SESSION_CHARTER Amendment A1): W2/W5 source-paired shape, English source-wins, governance English-only, self-reports untrusted, chat dense lane stays OFF, R7 intact.
+2. Session-19 scope ADOPTED per Codex proposal (Gemini provisional onboarding led by Claude + PRD-034/035/036 advancement eval-first + bounded Tier-B implementation).
+3. Commit whole-tree as TURNFILE_AGENT=maintainer + push.
+
+### Concurrent-collaboration note (Codex live this session)
+Codex worked the same tree concurrently: authored RED evals/prd-034/035/036, recorded the Tokenese-increment note (SIG-170/171), actioned MSG-034 (calibration accepted), reconciled tk-ab-run -> done, rolled boot-codex v7->v8, proposed session-19 scope (SIG-174). Re-grounded almost every turn (rev 210->218); the Read-before-edit guard caught two stale-state edits — both re-derived from fresh files.
+
+### FIRST ACTIONS ON RESUME (session 19)
+1. Boot via docs/BOOT_SEQUENCE.md + NEXT_SESSION_HANDSHAKE.md (session-19 addendum); converge with Codex (its session-18 handshake row is still unsigned — confirm/re-sign for session 19).
+2. Open the adopted scope: Claude leads Gemini provisional onboarding under PRD-015 (reactivated), Codex cross-review, evidence OT-008 -> OT-002 -> OT-004.
+3. Codex carry-forward to clear early: sign handshake row + apply-or-counter the 3 draft-review counters (MSG-031/032/033). Then advance PRD-034/035/036 eval-first (PRD-036 first if broad eval repair needed, else PRD-035).
+4. Implement the bounded Tier-B Tokenese twin lane (charter A1; English source-wins, governance English-only).
+
+### Carry-forward / open
+- Codex session-18 handshake row unsigned; 3 draft-review counters acknowledged-not-applied.
+- PRD-034/035/036 still draft (Codex-authored RED evals exist; implementer=Claude, reviewer=Codex per PRD_STATUS) — need counter reconciliation + Maintainer acceptance before A1 implementation.
+- `npm run evals:prd` is broken (PRD-036 target). Mailbox at ~48 active cards — optional compaction next session.
+- Local ~/Git/tokenese now at 0.3.7 (pulled); Claude env still lacks tiktoken (o200k local-scoring gap).

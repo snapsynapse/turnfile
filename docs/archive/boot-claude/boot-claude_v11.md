@@ -1,4 +1,4 @@
-# Boot File — Claude (v12)
+# Boot File — Claude (v11)
 
 Read this first on session start. It tells you what this project is, where things are, what state we're in, and what to do next.
 
@@ -93,40 +93,39 @@ The cross-agent command contract for this is the canonical boot command manifest
 6. `working-session/chat-claude.md` session close snapshot (bottom of file) — ~2K tokens
 7. Then read whatever files are relevant to the current task
 
-## Current state (as of session-18 close, 2026-06-17)
+## Current state (as of session-17 close, 2026-06-17)
 
-Claude lane on Opus 4.8, Codex lane on Codex 5.5 — model-generation continuity on one unmodified protocol holds (`docs/llm/MODEL_LEDGER.md`). Read the files, not labels. TURNFILE at rev 218 at close; read it fresh (Files-First). Session 18 committed whole-tree as `TURNFILE_AGENT=maintainer` and PUSHED (Maintainer-directed at close).
+Claude lane on Opus 4.8, Codex lane on Codex 5.5 — model-generation continuity on one unmodified protocol holds (`docs/llm/MODEL_LEDGER.md`). Read the files, not labels. TURNFILE at rev ~209 at close; read it fresh (Files-First). Session 17 committed at `06968d3` (not pushed — push held).
 
-### FIRST ACTIONS ON RESUME (session 19)
+### FIRST ACTIONS ON RESUME (session 18)
 
-1. Boot via `docs/BOOT_SEQUENCE.md`, then run `working-session/NEXT_SESSION_HANDSHAKE.md` (it has a session-19 addendum) and converge/sign with Codex before any write. Codex's session-18 handshake row was left UNSIGNED — confirm/sign for session 19.
-2. Report guard/commit posture FIRST: the PRD-033 shared guard is LIVE — `core.hooksPath=tools/hooks`, identity from `.turnfile-agent` (currently `codex` in this clone) or `TURNFILE_AGENT`. Claude-owned commits export `TURNFILE_AGENT=claude`; whole-tree/cross-ownership commits `TURNFILE_AGENT=maintainer` under Maintainer direction. Run `node tools/validate-ownership-guard.mjs`.
-3. Use `tools/session-orient.mjs --agent claude --emit human` (PRD-032, live) for the one-shot orientation (add `--validate` for gates).
-4. Adopted session-19 scope (Maintainer, per Codex proposal): (a) Claude LEADS Gemini provisional onboarding under PRD-015 (reactivated for next-agent onboarding), Codex cross-reviews — evidence order OT-008 → OT-002 → OT-004; (b) Codex carry-forward to clear early: sign handshake row + apply-or-counter the 3 draft-review counters (MSG-031/032/033); then advance PRD-034/035/036 eval-first (PRD-036 first if broad eval repair is needed, else PRD-035); (c) implement the bounded Tier-B Tokenese twin lane (AUTHORIZED — charter Amendment A1). Keep small: stop after Gemini provisional evidence + one PRD lane.
+1. Boot via `docs/BOOT_SEQUENCE.md`, then run `working-session/NEXT_SESSION_HANDSHAKE.md` (it has a session-18 addendum) and converge/sign with Codex before any write.
+2. Report guard/commit posture FIRST: the PRD-033 shared guard is LIVE — `core.hooksPath=tools/hooks`, identity from `.turnfile-agent` (currently `codex` in this clone) or `TURNFILE_AGENT`. To commit Claude-owned files, export `TURNFILE_AGENT=claude`; cross-ownership (whole-tree) commits are `TURNFILE_AGENT=maintainer` under Maintainer direction. Run `node tools/validate-ownership-guard.mjs`.
+3. Use `tools/session-orient.mjs` (PRD-032, now live) for the one-shot orientation snapshot instead of manual reads: `node tools/session-orient.mjs --agent claude --emit human` (add `--validate` to run the gates).
+4. Bounded session-18 goal (handshake addendum): `tk-calibration-audit` (PRD-027 R5.5) — do `^N`/`ev:` self-reports predict accuracy? Use W4 (ev:obs winner) + E1/W1 evidence. Then a Maintainer decision on any bounded Tier-B operational/handoff twin lane. Tokenese stays measurement-only; chat dense scratchpads OFF unless explicitly unlocked.
 
-### Recent milestones (session 18)
+### Recent milestones (session 17)
 
-- tk-calibration-audit COMPLETE → `working-session/docs/tk-calibration-audit.md`. Verdict: `ev:obs` conditional (untrusted-by-default, verifiable backing only — E1 teach miss proved it is not self-validating); `^N` insufficient (N=3, no scale); `plain` abstention pass. Codex applied with no counter (MSG-034).
-- Bounded Tier-B Tokenese twin lane AUTHORIZED by Maintainer (SESSION_CHARTER Amendment A1): operational/handoff twins, English source-wins, governance English-only, self-reports untrusted, chat dense lane stays OFF, R7 intact.
-- Tokenese observed at v0.3.7 (read-only, R7) + Maintainer-directed pull to `origin/main@7edad11`. Grammar v0.3 + TKAB schema `tkab-check-1.1` UNCHANGED; re-scored all pairs → anthropic byte-identical; all 8 Tier-A pairs stand. New upstream: official Tokenese skill bundle v1.0.0, 7-tokenizer audit.
-- 3 Codex-queued drafts reviewed (apply-or-counter, code-verified): PRD-034 (surface reconciliation, 4 counters), PRD-035 (Tokenese integration, 4 counters), PRD-036 (eval runner — `npm run evals:prd` is broken, 2 counters). Codex authored RED evals for all three.
+- PRD-033 Skill Ownership Integrity Guard: built + LIVE. Maintainer-owned/agent-locked `OWNERSHIP.yaml` + `tools/hooks/{pre-commit,guard-check.mjs}` shared Layer-2 guard; Codex Layer-1 adapter; `core.hooksPath=tools/hooks`. evals 12/12. Full A1 loop done.
+- PRD-032 Session Orientation Tool: `tools/session-orient.mjs` (read-only; composes next-state + validate-closeout). evals 11/11. `skills/claude` v0.9.1/bundle 13 prefers it (AC8). Full A1 loop done.
+- Tokenese Tier-A COMPLETE: all 8 A/B pairs scored (W4 WIN both tokenizers; W2/W3/W5 LOSS; L2/L3 correct `plain` controls). `tk-ab-run-results.md` reconciled, version-tagged. `tk-calibration-audit` is the next gate.
+- Signal-log compaction (PRD-013 R5.3): SIG-031..128 removed; window SIG-129..159 retained.
+- PRD-032 + PRD-033 PROMOTED to `docs/prds`. Session committed `06968d3` as `TURNFILE_AGENT=maintainer`.
 
 ### PRD landscape (authoritative: `working-session/docs/PRD_STATUS.json`)
 
-- Promoted/done through session 17: PRD-032/033 + earlier PRD-017/021/022/023/024/026/030 + PRD-031 Phase 1 + PRD-014 A1.
-- DRAFT, evals authored (Codex), awaiting Claude-counter reconciliation + Maintainer acceptance, then A1 (Claude implements, Codex reviews): PRD-034, PRD-035, PRD-036.
-- Reactivated for session 19: PRD-015 (agent onboarding/vetting) for Gemini provisional onboarding.
-- Future eval-first lanes: PRD-031 Phase 2/3.
+- All session-17 implementation lanes done: PRD-032, PRD-033 (impl done, promoted), plus the earlier PRD-017/021/022/023/024/026/030 + PRD-031 Phase 1 + PRD-014 A1.
+- Future eval-first lanes: PRD-031 Phase 2 (event-sourced tasks + per-agent status shards) + Phase 3 (per-agent logical clocks).
 
 ### Operating norms (skill v0.9.1)
-- Files First, Not Memory; Concurrent Write Discipline (derive via `tools/next-state.mjs` in-lock; this arc rev 210→218 with Codex live concurrently — re-ground almost every turn; the Read-before-edit guard caught two stale edits). Only the Read tool satisfies that guard. Eight-step A1 loop; Model Ledger Handshake.
-- Prefer `tools/session-orient.mjs` for orientation (PRD-032). Ownership guard executable (PRD-033): edit only own files; commit identity matters.
-- Tokenese (PRD-027 + charter, now incl. Amendment A1 Tier-B): every clone paired to a legible source; source wins; no dense for reasoning (R1); `^N`/`ev:` untrusted (calibration result); governance state English-only; R7 cross-repo boundary (never edit tokenese semantics from Turnfile).
+- Files First, Not Memory; Concurrent Write Discipline (derive via `tools/next-state.mjs` in-lock; state moved rev 166→209 with constant concurrent edits this arc — re-ground almost every turn; renumber on collision per PRD-010 R4.5). Only the Read tool satisfies the read-before-edit guard. Eight-step A1 loop; Model Ledger Handshake.
+- Prefer `tools/session-orient.mjs` for orientation (PRD-032). Ownership guard is executable now (PRD-033): edit only own files; commit identity matters.
+- Tokenese pilot (PRD-027 + charter): every clone paired to a legible source; source wins; no dense for reasoning (R1); `^N`/`ev:` untrusted until `tk-calibration-audit`; R7 cross-repo boundary (never edit tokenese semantics from Turnfile).
 
 ### Mailbox & coordination
-- At Claude close: Claude idle, unread 0/0/0, no locks. Codex closed its side at rev 217 (boot v8, SIG-174). My MSG-034 actioned; MSG-031/032/033 acknowledged by Codex (substantive reconciliation is its carry-forward).
-- Guard LIVE; commit identity required (see FIRST ACTIONS 2). Session 18 committed + pushed at close.
-- Mailbox at ~48 active cards — optional compaction next session. Detailed resume snapshot: bottom of `working-session/chat-claude.md`.
+- At Claude close: Claude idle, unread 0/0/0, no locks. All session-17 threads actioned. Codex closed its side at rev 208 (boot v7).
+- Guard LIVE; commit identity required (see FIRST ACTIONS 2). Tree clean at `06968d3`; push held.
+- Detailed resume snapshot: bottom of `working-session/chat-claude.md`.
 
 ## Session close protocol
 

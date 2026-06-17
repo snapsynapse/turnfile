@@ -17,15 +17,17 @@ Last revised: 2026-06-17
 ## Input Provenance Tags
 
 1. `explicit`: Maintainer asked Codex to compare Turnfile to the newest version of Tokenese and create PRDs for next-session action only.
-2. `observed`: Local Tokenese repo is on `main`, package `tokenese-translator` version `0.3.2`, grammar version `v0.3`, TKAB schema `tkab-check-1.1`, with report-only frameset validation.
+2. `observed`: Draft-time local Tokenese repo inspection showed `main`, package `tokenese-translator` version `0.3.2`, grammar version `v0.3`, TKAB schema `tkab-check-1.1`, with report-only frameset validation.
 3. `observed`: Tokenese roadmap says the validating A/B experiment is still open and is the kill-criterion, while Turnfile has a session-17 Tier-A pilot result set.
 4. `observed`: Turnfile `validate-tokenese-pairs.mjs` reports "Tokenese twins checked: 0" because it scans `*.tk.md`, not the active `working-session/tokenese-pairs/*.pair.json` and `*.result.json` TKAB artifacts.
 5. `observed`: Tokenese docs disagree internally on GuideCheck status: README/assistant guide present Level 4 language, while INTENT/Roadmap say the DNS anchor is pending and current posture is Level 3 plus manifest.
 6. `observed`: Turnfile currently records Tokenese v0.3.2 as no normative grammar change and correctly treats `frameset_validation` as report-only.
+7. `maintainer-reported`: After Codex authored the PRD-035 evals, the Maintainer noted that Tokenese has incremented since Codex last touched it. The local checkout visible to Codex in this turn still reported tag `v0.3.2` at `e3b2839`; therefore implementation must perform a fresh Tokenese observation and must not treat the draft-time v0.3.2 note as current.
 
 ## Problem
 
 Turnfile is now producing real Tokenese A/B pilot evidence, but there is no contract for synchronizing that evidence with Tokenese's own release and roadmap state.
+The draft-time Tokenese version observation is already potentially stale, so the contract must force a current observed-state refresh before implementation or adoption decisions.
 
 This creates three risks:
 
@@ -55,7 +57,7 @@ There is also an upstream documentation conflict in Tokenese itself around Guide
 
 ## R1. Tokenese version observation artifact
 
-Turnfile must maintain a small observed-state artifact, tentatively `working-session/docs/tokenese-version-observation.md`, with:
+Turnfile must maintain a small observed-state artifact, tentatively `working-session/docs/tokenese-version-observation.md`, with a fresh observation of the current Tokenese state rather than inherited draft-time values:
 
 1. Tokenese repo path inspected.
 2. Git branch and dirty summary.
@@ -66,6 +68,8 @@ Turnfile must maintain a small observed-state artifact, tentatively `working-ses
 7. Frameset status and whether it is report-only.
 8. GuideCheck status as observed, including conflicts between Tokenese docs.
 9. Date and actor of observation.
+10. Previous Turnfile draft baseline when it differs from the current Tokenese state.
+11. Whether the Maintainer reported a newer Tokenese increment before the observation.
 
 The artifact is observational and non-authoritative. Tokenese repo docs remain the authority for Tokenese.
 
@@ -127,7 +131,7 @@ When Tokenese upstream docs conflict, Turnfile must:
 
 ## Acceptance Criteria
 
-1. `working-session/docs/tokenese-version-observation.md` exists and records Tokenese v0.3.2 / grammar v0.3 / TKAB 1.1 / report-only framesets.
+1. `working-session/docs/tokenese-version-observation.md` exists and records the currently observed Tokenese version, grammar version, TKAB schema, frameset status, git revision, and whether it supersedes the draft-time v0.3.2 observation.
 2. A TKAB validator checks active pair/result JSON artifacts and fails a fixture with mismatched pair/result IDs.
 3. The validator fails a fixture that lacks `frameset_validation` while claiming v0.3.2 scoring.
 4. The validator fails a fixture where result `source_text` or `clone_text` differs from the pair.
@@ -149,7 +153,8 @@ When Tokenese upstream docs conflict, Turnfile must:
 1. PRD-027 Tokenese cloned-communication A/B.
 2. PRD-028 Tokenese dual-artifact sync and Maintainer legibility.
 3. PRD-024 human-legibility invariant.
-4. Tokenese repo v0.3.2 observed locally on 2026-06-17.
+4. Tokenese repo v0.3.2 observed locally on 2026-06-17 as the draft-time baseline.
+5. Maintainer reported after eval authoring that Tokenese has incremented since Codex last touched it; exact current version requires a fresh Tokenese observation.
 
 ## Interaction with existing protocol
 

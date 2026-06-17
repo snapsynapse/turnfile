@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2026-06-17 (post-session audit: PRD-034/035/036 drafts registered)",
+  "updated_at": "2026-06-17 (session 18 boot: Codex authored PRD-034/035/036 evals)",
   "policy": {
     "required_reviewers": [
       "codex",
@@ -1143,12 +1143,12 @@
       ],
       "eligible_for_docs_prds": false,
       "implementation": {
-        "state": "pending",
-        "evals": null,
-        "eval_author": null,
-        "implementer": null,
-        "reviewer": null,
-        "notes": "Draft only. No implementation action taken in the audit turn per Maintainer instruction."
+        "state": "evals-authored",
+        "evals": "evals/prd-034.evals.mjs",
+        "eval_author": "codex",
+        "implementer": "claude",
+        "reviewer": "codex",
+        "notes": "Codex authored RED evals on 2026-06-17 by Maintainer request for next-session scope. Evals pin public-surface inventory/source-of-truth requirements, stale-count detection, archive exclusion, PRD-032/033 status freshness, skill bundle version freshness, assistant-guide hash parity, baseline snapshot labeling, release-gate wiring, and registry ownership. Implementation remains blocked on Claude review and Maintainer acceptance."
       }
     },
     {
@@ -1179,12 +1179,12 @@
       ],
       "eligible_for_docs_prds": false,
       "implementation": {
-        "state": "pending",
-        "evals": null,
-        "eval_author": null,
-        "implementer": null,
-        "reviewer": null,
-        "notes": "Draft only. No Tokenese repo edits or Turnfile implementation action taken in the audit turn per Maintainer instruction."
+        "state": "evals-authored",
+        "evals": "evals/prd-035.evals.mjs",
+        "eval_author": "codex",
+        "implementer": "claude",
+        "reviewer": "codex",
+        "notes": "Codex authored RED evals on 2026-06-17 by Maintainer request for next-session scope. Evals pin fresh Tokenese observed-state recording, TKAB pair/result validation failure modes, current TKAB artifact coverage, pilot result publication package, tk-calibration-audit gating before Tier-B, public GuideCheck Level 4 caution, and registry ownership. After eval authoring, the Maintainer reported Tokenese has incremented since Codex last touched it; PRD-035 now treats v0.3.2 as a draft-time baseline only and requires a fresh observation before implementation. No Tokenese repo edits were made. Implementation remains blocked on Claude review and Maintainer acceptance."
       }
     },
     {
@@ -1215,12 +1215,12 @@
       ],
       "eligible_for_docs_prds": false,
       "implementation": {
-        "state": "pending",
-        "evals": null,
-        "eval_author": null,
-        "implementer": null,
-        "reviewer": null,
-        "notes": "Draft only. The broken package script was not repaired in this audit turn per Maintainer instruction."
+        "state": "evals-authored",
+        "evals": "evals/prd-036.evals.mjs",
+        "eval_author": "codex",
+        "implementer": "claude",
+        "reviewer": "codex",
+        "notes": "Codex authored RED evals on 2026-06-17 by Maintainer request for next-session scope. Evals pin a portable aggregate PRD eval runner with dry-run/list mode, no empty-suite success, validation taxonomy docs, PRD-006 command alignment, explicit CI policy, focused PRD-032/033 eval preservation, and registry ownership. The broken package script was not repaired. Implementation remains blocked on Claude review and Maintainer acceptance."
       }
     }
   ]

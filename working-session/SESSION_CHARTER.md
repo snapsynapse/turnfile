@@ -88,3 +88,20 @@ Date: 2026-06-16 (ratified); reconciled 2026-06-17
 **Handshake status:** ratified; live clone traffic authorized within the narrowed dense-lane scope.
 **Acknowledgment:** ratified the charter + narrowed dense-lane scope. Broader adoption beyond the pilot (more real traffic, enabling the chat-scratchpad dense lane, widening PRD-024 bands) remains a separate Maintainer decision gated on full A/B results + `tk-calibration-audit` (PRD-027 R6.4/R5.5).
 **Timestamp:** 2026-06-16
+
+## Amendment A1 — Bounded Tier-B Authorization (session 18 close, 2026-06-17)
+
+The two gates named in the Maintainer acknowledgment above are now satisfied: Tier-A is fully scored (all 8 pairs; `working-session/docs/tk-ab-run-results.md`) and `tk-calibration-audit` is complete and peer-confirmed (`working-session/docs/tk-calibration-audit.md`; Codex applied the verdict, MSG-20260617-034, no counter).
+
+**Maintainer decision (2026-06-17):** AUTHORIZE a bounded Tier-B Tokenese operational/handoff twin lane.
+
+Scope of the authorization:
+1. Permitted: operational status reports and handoff notes as Tokenese twins paired to a legible English source (the W2/W5 status-snapshot shape).
+2. English source-wins on every conflict (R1); every twin has a paired legible source (R4.5). No standalone Tokenese.
+3. Governance state stays English-only: lifecycle status, locks, task claims, acceptance, normative PRD text, reasoning/proofs, and exact diffs are NEVER carried in a Tokenese twin (R1.4 unchanged).
+4. Self-reported channels stay untrusted per the calibration result: no Turnfile decision weights `^N` or treats `ev:obs` as standalone authority; `ev:obs` is readable only with in-context verifiable backing.
+5. `chat-<agent>.md` dense scratchpad lane remains OFF (separate Maintainer decision; not part of this authorization).
+6. Cross-repo boundary intact (R7): no Tokenese semantics edited from Turnfile.
+
+This lifts the measurement-only constraint for bounded operational/handoff twins only. Any wider adoption (chat dense lane, widening PRD-024 bands, weighting self-reports) remains a separate Maintainer decision. Implementation of the bounded twin lane is a session-19 lane.
+**Timestamp:** 2026-06-17 (session 18 close)

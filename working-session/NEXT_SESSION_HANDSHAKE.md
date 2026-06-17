@@ -9,6 +9,26 @@ loaded skills, scope, and the live outstanding list — so no agent acts on stal
 unilateral assumptions. Executed at boot, after the PRD-017 `docs/BOOT_SEQUENCE.md` read
 order and before the first shared-file write.
 
+## Session 19 closeout-prep addendum (2026-06-17)
+
+Session 18 closed from the Codex side at rev 217. File-backed close state:
+
+- Turnfile protocol remains v0.1.
+- Mailbox is clear for Codex, Claude, and Maintainer at Codex closeout prep.
+- Codex and Claude are idle; locks are empty; no Codex heartbeat is carried forward.
+- PRD-034, PRD-035, and PRD-036 have Codex-authored RED evals. Claude reviewed all three APPLY-with-counters. Codex has acknowledged the reviews, but the counters still need substantive reconciliation before implementation unless the Maintainer narrows the scope.
+- Tokenese was observed by Claude at v0.3.7. Grammar remains v0.3; TKAB schema remains `tkab-check-1.1`; `working-session/docs/tk-calibration-audit.md` is the single calibration source for PRD-035 R4.
+- Calibration verdict: `ev:obs` is conditional only with verifiable backing; `^N` remains untrusted; `plain` abstention passed. This supports only a bounded Tier-B operational/handoff twin lane, and only if the Maintainer authorizes it.
+- Gemini is the better third-participant candidate than Perplexity if the goal is active Turnfile participation. Claude should lead provisional onboarding under PRD-015, with Codex cross-review. Suggested evidence order: OT-008, then OT-002, then OT-004.
+- Perplexity should remain a scorer/evaluator/tool contributor until there is a separate onboarding need.
+
+Recommended session-19 scope, subject to Maintainer confirmation:
+
+1. Claude leads Gemini provisional onboarding under PRD-015; Codex cross-reviews the evidence.
+2. Reconcile Claude counters on PRD-034/035/036, then advance the PRDs eval-first. If broad PRD eval repair blocks progress, start with PRD-036; otherwise PRD-035 is the next Tokenese-critical lane.
+3. Adopt Tokenese only as far as prudence supports: bounded operational/handoff twins with English source-wins, no governance lifecycle in Tokenese, and no decision weight for unverified self-report channels.
+4. Keep the session small enough to close cleanly. Stop after Gemini provisional evidence plus one PRD implementation lane if the worktree or review surface gets crowded.
+
 ## Session 18 closeout-prep addendum (2026-06-17)
 
 Session 17 closed from the Codex side at rev 208. File-backed close state:
@@ -129,3 +149,19 @@ Suggested session-18 completion criteria:
 | Claude | yes — Turnfile v0.1; baseline PRDs incl. 032/033 now Maintainer-accepted | yes — grammar v0.3 unchanged; checker now 0.3.2 (frameset registry report-only) | partial — boot gates green (lint/mailbox/promotion/boot-sequence PASS); `validate:skills` flagged a Codex-side global hash drift (Codex-owned, see below) | yes — 4 lanes: Tokenese Tier-A, PRD-032+033 accept, guard/commit reconcile, deferred closeout | NOT enforcing Claude — `core.hooksPath` → `working-session/agents/codex/hooks` (Codex-owned), `TURNFILE_AGENT` unset = commits fail closed; to be replaced by the PRD-033 shared guard this session | Claude (Opus 4.8) — 2026-06-17 |
 | Codex | yes — Turnfile v0.1; PRD_STATUS has PRD-032/033 Maintainer-accepted, implementation-done, and promoted to `docs/prds/` | yes — grammar v0.3 unchanged; checker/toolchain v0.3.2 verified read-only as report-only frameset telemetry; R7 boundary intact | yes — repo canonical `skills/codex` v9 loaded; global Codex Turnfile skill synced from repo canonical; boot gates re-run with `validate:skills` PASS | yes — session 17 scope complete; next planned lane is Tokenese calibration first, then Maintainer decision on any Tier-B operational/handoff twins | shared guard active — `core.hooksPath` points to `tools/hooks`; `.turnfile-agent=codex`; locked guard files commit as maintainer | Codex (5.5, desktop) — 2026-06-17 |
 | Maintainer (ratifies) | accepted PRD-032/033; chose full 4-lane scope + "install PRD-033 shared guard" (session 17 boot) | | | yes | | 2026-06-17 |
+
+## Sign-off (session 18)
+
+| Agent | Protocol baseline match | Tokenese v0.3 confirmed | Skills self-validated | Scope agreed | Identity enforcing | Signed |
+|-------|---|---|---|---|---|---|
+| Claude | yes — Turnfile v0.1; baseline incl. PRD-032/033 promoted+impl-done (PRD_STATUS) | yes — grammar v0.3 unchanged; checker 0.3.2 (frameset registry report-only); Tier-A scored | partial — boot gates green (session-orient, ownership-guard, lint/mailbox PASS); `validate:skills` re-confirm Codex global hash at your boot | yes — review PRD-034/035/036 (apply-or-counter, done), then Tokenese expansion: tk-calibration-audit, then Maintainer Tier-B twin-lane decision; communicate increasingly via Tokenese twins (English source-wins), gated behind calibration | enforcing codex (this clone `.turnfile-agent=codex`); Claude-owned commits export `TURNFILE_AGENT=claude`; guard LIVE `core.hooksPath=tools/hooks` | Claude (Opus 4.8) — 2026-06-17 |
+| Codex | yes - Turnfile v0.1; rev 217 closeout prep; PRD-034/035/036 still draft pending counter reconciliation and Maintainer acceptance | yes - grammar v0.3; Tokenese observed at v0.3.7 by Claude; TKAB schema unchanged; calibration audit peer-confirmed | yes - closeout used `session-orient`; final validators recorded in Codex closeout response | yes - next recommendation is Gemini provisional onboarding, bounded Tier-B Tokenese only by Maintainer authorization, and PRD-036/035/034 advancement | shared guard active; `.turnfile-agent=codex`; `core.hooksPath=tools/hooks`; no locks | Codex (5.5, desktop) - 2026-06-17 |
+| Maintainer (ratifies) | session-18 direction: review 3 drafts first; expand Tokenese; communicate increasingly through Token Ease | | | yes | | 2026-06-17 |
+
+## Sign-off (session 19)
+
+| Agent | Protocol baseline match | Tokenese confirmed | Skills self-validated | Scope agreed | Identity enforcing | Signed |
+|-------|---|---|---|---|---|---|
+| Claude | _pending next boot_ | | | | | |
+| Codex | closeout-prep only; re-confirm at next boot | grammar v0.3 / toolchain v0.3.7 observed by Claude; Tier-B pending Maintainer decision | closeout validators passed at rev 217; re-run at boot | proposed: Gemini provisional onboarding led by Claude, PRD counters reconciled, bounded Tokenese adoption only | shared guard active at closeout; re-confirm with `validate-ownership-guard` | Codex closeout-prep - 2026-06-17 |
+| Maintainer (ratifies) | _pending_ | | | | | |

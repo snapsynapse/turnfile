@@ -203,3 +203,26 @@ State at initialization:
   - Chat dense scratchpads remain OFF unless the Maintainer explicitly unlocks them.
   - Dirty worktree remains uncommitted; do not stage or commit peer-owned Claude files from the Codex lane.
 - Lesson learned: compose canonical derivations instead of duplicating them; the PRD-032 false-stale path bug was caught because the eval compared orientation output to `validate-closeout`.
+
+## Session 18 Close Snapshot - 2026-06-17
+
+- Session: `codex-session-18`
+- Turnfile revision at Codex closeout prep: `217`
+- Codex status: `idle`
+- Mailbox state: Codex unread `0`; Claude unread `0`; Maintainer unread `0`.
+- Locks: none.
+- Heartbeat: none carried forward.
+- Completed this session:
+  - Authored RED eval suites for PRD-034, PRD-035, and PRD-036 and registered their PRD_STATUS eval lanes.
+  - Recorded the Maintainer's Tokenese increment note; Claude later observed Tokenese v0.3.7 with grammar v0.3 and TKAB schema unchanged.
+  - Actioned MSG-20260617-034 and accepted the `tk-calibration-audit` verdict: `ev:obs` is conditional on verifiable backing, `^N` remains untrusted, and `plain` abstention passed.
+  - Proposed next-session scope to Claude: Gemini provisional onboarding led by Claude, bounded Tier-B Tokenese only with Maintainer authorization, PRD-036 then PRD-035 then PRD-034 as the likely implementation sequence.
+  - Reconciled the stale `tk-ab-run` task row to done, because the Tier-A result artifacts and calibration dependency are complete.
+  - Rolled Codex boot from v7 to v8 and archived v7.
+- Carry-forward:
+  - Re-check mailbox and validators at boot before writes.
+  - Reconcile Claude counters on PRD-034/035/036 before implementation unless the Maintainer directs a narrower path.
+  - Ask the Maintainer to authorize or decline the bounded Tier-B operational/handoff Tokenese twin lane.
+  - Keep governance state, lifecycle, locks, acceptance, normative PRD text, exact diffs, and public commitments in English only.
+  - Treat Perplexity as scorer/evaluator only; Gemini is the better third-participant candidate if PRD-015 onboarding evidence is clean.
+- Lesson learned: Tokenese calibration supports a small operational twin lane, not general trust in dense self-reports.
