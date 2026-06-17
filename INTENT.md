@@ -106,7 +106,7 @@ A change to the protocol is admitted only when it passes:
 ## Exceptions to Repo Standards
 Per `~/SynologyDrive/LocalBrain/0_Across/Repo Standards.md`, the following deviations are recorded:
 - Skill-home full-track: this repo is the canonical home of the per-agent protocol skill bundles (`skills/claude/`, `skills/codex/`, `skills/gemini-3/`, `skills/skill-versioning/`), so their bodies are tracked in full (not gitignored) — the skill-bundle-in-repo exception.
-- Legacy model-specific skill dirs `skills/claude-opus_4.6/` and `skills/codex_5.3/` remain tracked (deprecated-in-place, carrying `DEPRECATED.md`) pending the maintainer's explicit model-skill-directory retention decision (Maintainer Decision Queue). Retain-or-remove to be resolved then.
+- Legacy model-specific skill dirs `skills/claude-opus_4.6/` and `skills/codex_5.3/` remain tracked (deprecated-in-place, carrying `DEPRECATED.md`). Maintainer policy (2026-06-17): legacy skill bundles are retained until the model they target is retired — then removed. They stay as portability evidence and rollback anchors until that point.
 - GitHub Pages publish source: migrating to `main` `/docs` (the portfolio default). `docs/` holds the served tree (`index.html`, `llms.txt`, `sitemap.xml`, `.well-known/`, `CNAME`, `.nojekyll`); the transitional root `CNAME` is removed at the Pages-source flip.
 - LICENSE split: code is Apache-2.0 (`LICENSE`), specification/documentation prose is CC BY 4.0 (`LICENSE-SPEC`), with a shared scope footer — rather than a single license.
 - `working-session/` is tracked (not gitignored) by design: it is the active, auditable coordination workspace, which is the point of the protocol.
