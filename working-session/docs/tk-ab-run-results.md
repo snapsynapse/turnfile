@@ -30,9 +30,16 @@ and change no Turnfile governance state (no lifecycle, ownership, locks, or acce
 | TKAB-L1 | L1 | Codex→Claude | v0.2 | deadlock-debug | l1-plain-success | L3 | 192→183, 0.95 | 115→98, 0.85 | 0 | NEGATIVE CONTROL PASS — correct `plain` refusal, `dense_statement_count: 0` (R1 dense inadmissible) |
 | TKAB-W2-v03 | W2 | Codex→Claude | v0.3 | multi-service-health | win-conformant | L3 | 118→168, 1.42 | 83→135, 1.63 | 0 | LOSS on tokens — valid structure, poor compression |
 | TKAB-W5-v03 | W5 | Codex→Claude | v0.3 | session-status-handoff | win-conformant | L3 | 147→170, 1.16 | 112→146, 1.30 | 0 | LOSS on tokens — valid structure, poor compression |
+| TKAB-W3-v03 | W3 | Claude→Codex | v0.3 | task-handoff-typed-holes | indeterminate (token-pending) | L3 | pending verified env | pending verified env | 0 | CONFORMANT (L3, 0 misparse); token verdict pending Codex verified-env score (local o200k/tiktoken gap, same as W1 locally) |
+| TKAB-L2-v03 | L2 | Claude→Codex | v0.3 | open-ended-design | indeterminate (token-pending); `plain_mode_present: true` | L3 | pending verified env | pending verified env | 0 | NEGATIVE CONTROL — correctly stayed `plain` (reasoning-heavy, Tokenese non-goal 5 / R1); predicted LOSS, token verdict pending verified env |
 
-All four pairs: conformance L3, zero misparse across all families, no unparseable lines, no
-source-authority conflict.
+W1/L1/W2/W5 fully scored. W3/L2 (Claude→Codex, authored 2026-06-17) are conformant (L3, zero
+misparse) but show `indeterminate` locally because the o200k/tiktoken tokenizer is unavailable in
+the Claude env — the same gap W1 had locally before Codex scored it in the verified TKAB env. W3
+required one `??`-style repair during authoring (initial `deploy!` op tripped a `sense/unknown_op`
+misparse; reworked to `run! @svc task:deploy` with deploy as a slot value → 0 misparse). W3's
+pre-repair score showed clone > source on anthropic tokens (verbose), so a LOSS/tie is likely.
+Routed to Codex for verified-env token scoring (parallel to the W1 flow).
 
 ## Findings
 
@@ -63,10 +70,14 @@ decision (R6.4), tracked in the WORKLOG Maintainer Decision Queue.
 
 ## Coverage / remaining
 
-- Done: W1, L1 (v0.2 mini-pilot); W2, W5 (v0.3).
-- Pending: W3 (task handoff with typed holes), W4 (structured code-review finding), L2 (open-ended
-  design), L3 (verbatim code review). `tk-calibration-audit` (R5.5) still gates trust in `^N`/`ev:`
-  channels and remains pending.
+- Fully scored: W1, L1 (v0.2 mini-pilot); W2, W5 (v0.3).
+- Authored + conformant, token-score pending Codex verified env: W3, L2 (Claude→Codex, v0.3).
+- Not yet authored: W4 (structured code-review finding, Codex→Claude), L3 (verbatim code review,
+  Codex→Claude) — Codex's direction to author.
+- `tk-calibration-audit` (R5.5) still gates trust in `^N`/`ev:` channels and remains pending; W4
+  (with `ev:obs` discipline) feeds it.
+- After the full suite is scored, this artifact is the published-results basis for any Maintainer
+  decision on broader Tokenese adoption (R6.4).
 
 ## Provenance
 

@@ -102,6 +102,20 @@ On acceptance:
 5. Worked examples: one `audit-mirror` (existing MSG-007 pattern), one `delivery-mirror` with full ack cycle, one SLA-lapse closure with boot-time reconciliation.
 6. Validator checks (R5.4) implemented or registered as a follow-on tooling task at promotion.
 
+## Worked examples
+
+### Audit mirror: MSG-20260211-007
+
+MSG-20260211-007 is the standing `audit-mirror` pattern. It recorded the PRD-015/016 approval snapshot for audit purposes and was closed on posting because no additional delivery lifecycle was required from peers.
+
+### Delivery mirror: MSG-20260613-030 / MSG-20260613-031
+
+MSG-20260613-030 and MSG-20260613-031 are session-14 `delivery-mirror` examples: they relayed decisions and promotions that affected peer follow-through. Under this contract, equivalent mirrors are addressed unread to the affected participants, each receiver acknowledges on its next session turn, and the closure owner closes after all acknowledgments are recorded.
+
+### SLA lapse closure
+
+If a `delivery-mirror` receiver does not acknowledge within its next session turn, the closure owner may close only with the lapse recorded by receiver name and with a boot-time reconciliation note. The lapsed receiver must reconcile the decision before relying on prior state in later work.
+
 ## Risks
 
 1. Over-classification toward delivery-mirror could re-create notification noise.

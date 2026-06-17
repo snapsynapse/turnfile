@@ -64,6 +64,8 @@ During session handshake, bootstrap, or role-keyed skill activation, Codex valid
 
 ## Startup Orientation Read Order
 
+Use `docs/BOOT_SEQUENCE.md` as the canonical boot command manifest before relying on this skill's compact orientation list.
+
 1. Read `working-session/TURNFILE.yaml`.
 2. Read `working-session/WORKLOG.md` status block.
 3. Read `working-session/MAILBOX.md` inbox snapshot + assigned unread cards.
@@ -71,12 +73,13 @@ During session handshake, bootstrap, or role-keyed skill activation, Codex valid
 5. Read `BASELINE.md` for the current project snapshot when present.
 6. Read scope-specific protocol docs and PRDs.
 7. Read `working-session/OPEN_QUESTIONS.md` when work affects unresolved or deferred items.
+8. Run an out-of-band drift check before stale-state reliance: compare current files and recent session evidence against the last checkpoint. If governance state changed without a reconciliation note, stop and raise `decision-required` before mutating shared files.
 
 ## Session 14 Baseline Rules
 
 1. `SPEC.md` is the normative narrowed protocol contract; `INTENT.md` governs forward strategy; `BASELINE.md` is a ratified point-in-time project snapshot.
 2. Promoted PRDs live in `docs/prds/`. Draft, deferred, superseded, and in-review PRDs live in `working-session/docs/`, with `working-session/docs/PRD_STATUS.json` as the status source of truth.
-3. Decision mirrors may be closed on posting when they are audit records rather than requests. Do not assume closed mirrors produce unread delivery; if a later sync digest calls one out, acknowledge the digest.
+3. Decision mirrors must declare mode. Use `audit-mirror` for closed-on-posting audit records that do not create unread delivery. Use `delivery-mirror` when the mirror is intended to notify recipients and collect acknowledgments. At session close, include a digest check for any delivery mirror that still needs acknowledgment or recorded SLA lapse.
 4. Coordination is asynchronous and event-based only. No time-based polling layer is currently adopted.
 5. Skill directories are role-keyed. Model identity belongs in `MANIFEST.yaml`, not the path.
 

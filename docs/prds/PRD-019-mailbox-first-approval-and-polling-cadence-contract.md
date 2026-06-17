@@ -87,6 +87,7 @@ Chat-originated decisions are mirrored as a `notify` message with:
 
 - **Subject:** `Chat decision mirror — <brief description>`
 - **Type:** `notify`
+- **Mode:** `audit-mirror` or `delivery-mirror`
 - **Required content:**
   1. Decision type (approval, rejection, direction, scope change).
   2. Scope reference (affected PRDs, files, tasks, or OQs).
@@ -97,6 +98,15 @@ Chat-originated decisions are mirrored as a `notify` message with:
 ### R4.2 Evidence
 
 MSG-20260211-007 (PRD-015/016 approval mirror) serves as the reference implementation for this pattern.
+
+### R4.3 Mirror delivery modes
+
+PRD-022 splits chat-decision mirrors into two modes:
+
+1. `audit-mirror`: a closed-on-posting record for decisions that bind no peer's future work and require no delivery lifecycle.
+2. `delivery-mirror`: a lifecycle-delivered record for decisions that bind a peer's future work. It is posted unread to affected participants, acknowledged by receivers, and closed after all acknowledgments or a recorded SLA lapse.
+
+A mirror without a declared mode is treated as `delivery-mirror` for safety. Guarantees are session-turn based, not wall-clock based.
 
 ## R5. Audit evidence minimums
 

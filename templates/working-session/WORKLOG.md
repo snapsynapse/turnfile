@@ -11,6 +11,7 @@ Now Working (Agent-1): <current task or "idle">
 Now Working (Agent-2): <current task or "idle">
 Maintainer Focus: <what needs maintainer attention>
 Next Review Checkpoint: <what triggers the next review>
+Last checkpoint (PRD-023): <date of last close/checkpoint; note any out-of-band activity reconciled since — Maintainer edits or peer commits made outside the turn loop, with governance-state-changing drift escalated as decision-required>
 
 ## Decision Index
 

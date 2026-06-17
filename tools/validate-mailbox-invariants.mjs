@@ -185,6 +185,7 @@ function parseActiveMessages(lines) {
     let priority = "";
     let status = "";
     let subject = "";
+    let mode = "";
     for (let j = i + 1; j < msgEnd; j += 1) {
       const candidate = lines[j].trim();
       const fromMatch = /^\*\*From:\*\*\s*(.+?)\s*->\s*(.+?)\s*$/.exec(candidate);
@@ -204,6 +205,10 @@ function parseActiveMessages(lines) {
       if (priorityMatch) {
         priority = priorityMatch[1].trim();
       }
+      const modeMatch = /^\*\*Mode:\*\*\s*(.+?)\s*$/.exec(candidate);
+      if (modeMatch) {
+        mode = modeMatch[1].trim().toLowerCase();
+      }
       const statusMatch = /^\*\*Status:\*\*\s*(.+?)\s*$/.exec(candidate);
       if (statusMatch) {
         status = statusMatch[1].trim().toLowerCase();
@@ -214,7 +219,7 @@ function parseActiveMessages(lines) {
       }
     }
 
-    messages.push({ id, from, to, date, type, priority, status, subject, index: messages.length });
+    messages.push({ id, from, to, date, type, mode, priority, status, subject, index: messages.length });
   }
   return messages;
 }
@@ -338,6 +343,18 @@ function main() {
         `Closed/terminal message ${msg.id} remains in Active Messages (move body to MAILBOX_ARCHIVE.md and keep a Closed Summary row).`,
       );
     }
+    if (/mirror/i.test(msg.type) || /mirror/i.test(msg.subject)) {
+      if (!msg.mode) {
+        warnings.push(
+          `Mirror message ${msg.id} has no Mode field; default is delivery-mirror but card should declare audit-mirror or delivery-mirror.`,
+        );
+      }
+      if (msg.mode === "delivery-mirror" && TERMINAL_STATUSES.has(msg.status)) {
+        errors.push(
+          `Closed delivery-mirror ${msg.id} requires recorded receiver acknowledgments or an explicit SLA lapse before closure.`,
+        );
+      }
+    }
   }
 
   for (const row of closedSummary) {
@@ -357,6 +374,11 @@ function main() {
     if (!row.outcome) missing.push("Outcome");
     if (missing.length > 0) {
       errors.push(`Closed Summary row ${row.id} missing required field(s): ${missing.join(", ")}`);
+    }
+    if (/mirror/i.test(row.outcome)) {
+      warnings.push(
+        `Closed Summary mirror row ${row.id} has no Mode field in the summary; ensure the archived card declares audit-mirror or delivery-mirror.`,
+      );
     }
   }
 

@@ -1,0 +1,116 @@
+{
+  "schema_version": "tkab-check-1.1",
+  "source_id": "TKAB-L2-v03",
+  "clone_id": "TKAB-L2-v03.claude.codex.live1",
+  "pair_id": "TKAB-L2-v03.claude-opus.live1",
+  "direction": "claude->codex",
+  "author": "claude-opus",
+  "artifact_type": "open-ended-design",
+  "scorer": "perplexity-deterministic-checker",
+  "arm": "L2",
+  "predicted_outcome": "lose",
+  "conformance_level": "L3",
+  "conformance_detail": {
+    "L1_lexicon": true,
+    "L2_grammar": true,
+    "L3_repair": true,
+    "session_issues": []
+  },
+  "token_counts": {
+    "source": {
+      "o200k": null,
+      "o200k_method": "unavailable",
+      "anthropic": 111,
+      "anthropic_method": "cached_costs+heuristic",
+      "chars": 298
+    },
+    "clone": {
+      "o200k": null,
+      "o200k_method": "unavailable",
+      "anthropic": 292,
+      "anthropic_method": "cached_costs+heuristic",
+      "chars": 812
+    },
+    "savings": {
+      "anthropic_delta": -181,
+      "anthropic_ratio": 2.6306,
+      "o200k_delta": null,
+      "o200k_ratio": null
+    }
+  },
+  "readback_diff": null,
+  "repair_events": [],
+  "repair_kinds": {
+    "repair-token": 0,
+    "repair-statement": 0,
+    "repair-handle": 0,
+    "repair-explained": 0
+  },
+  "misparse_family": {
+    "by_family": {
+      "binding": 0,
+      "scope": 0,
+      "sense": 0,
+      "triangulation": 0
+    },
+    "hits": []
+  },
+  "source_authority_conflict": [],
+  "unparseable_lines": [],
+  "plain_mode_present": true,
+  "plain_blocks": [
+    {
+      "start_line": 3,
+      "end_line": 5,
+      "byte_count": 692
+    }
+  ],
+  "dense_statement_count": 0,
+  "declared_level": null,
+  "grammar_version": "v0.3",
+  "causal_events": [],
+  "unsupported_causation": [],
+  "comment_lines": [
+    2
+  ],
+  "outcome": "indeterminate",
+  "notes": [
+    "Conformance L3; outcome did not match a typed rule."
+  ],
+  "decoded_clone_english": [
+    "[grammar version: v0.3]",
+    "(comment) L2 open-ended design; reasoning-heavy exploration -> plain (R1 / Tokenese non-goal 5)",
+    "Open design exploration — staying in prose because this is deliberation, not operational status. Enabling chat-<agent>.md dense scratchpads now would trade human legibility and calibration maturity for compression we have not yet demonstrated on reasoning-heavy content; the A/B data so far is operational-status only (W1/W2/W5). Recommend ephemeral-only for one more suite (finish W3/W4, L2/L3) plus tk-calibration-audit before unlocking, because the decision is cheap to reverse now and expensive to claw back once dense scratchpads carry decision rationale. Compressing this reasoning into dense framing is exactly what R1 forbids, so the correct Tokenese behavior here is to stay plain."
+  ],
+  "provenance": {
+    "checker_version": "tkab-check-1.1",
+    "tkab_schema_version": "tkab-check-1.1",
+    "grammar_version_supported": "v0.3",
+    "grammar_version_detected": "v0.3",
+    "scorer": "perplexity-deterministic-checker",
+    "spec_sha": "68cb84e2dbb2aa36f9965c823afab770de64df0bd9df0bc1c878eb3aac5f761e",
+    "design_sha": "5dc9338e7b6386d01ae46b47a6a7ba70478929460ecdea74b67e20afe204d520",
+    "conformance_sha": "0250b71342c49603f40fe667700422d03a95855cd45c0825841a6a8f35e987c6",
+    "intent_sha": "5f783b8367feef6d9ab69a685ea5964419ba7222095b8b29a07aee1a9334ade0",
+    "handoff_sha": "16f948709345ee2d32ff363e90ec8782129be08d9aa3ddb7c4030afeab45c1b3",
+    "anthropic_costs_sha": "12e5fe083ecf44949ec1d55fb43c1f6f547979256f2f832fef4788afbd7c91d2",
+    "prd_027_sha": "unpinned",
+    "ab_suite_sha": "unpinned",
+    "score_pair": {
+      "translator_version": "0.1.0",
+      "schema_version": "1.0",
+      "spec_sha256": "68cb84e2dbb2aa36f9965c823afab770de64df0bd9df0bc1c878eb3aac5f761e",
+      "design_sha256": "5dc9338e7b6386d01ae46b47a6a7ba70478929460ecdea74b67e20afe204d520",
+      "intent_sha256": "5f783b8367feef6d9ab69a685ea5964419ba7222095b8b29a07aee1a9334ade0",
+      "conformance_sha256": "0250b71342c49603f40fe667700422d03a95855cd45c0825841a6a8f35e987c6",
+      "lexicon_sha256": "12e5fe083ecf44949ec1d55fb43c1f6f547979256f2f832fef4788afbd7c91d2",
+      "grammar_target": "v0.3 (GRAMMAR-v0.3.md) over v0.2 (DESIGN.md §7) over v0.1 (spec.md)",
+      "grammar_version_supported": "v0.3",
+      "grammar_version_detected": "v0.3",
+      "prd_027_sha": "unpinned",
+      "ab_suite_sha": "unpinned"
+    }
+  },
+  "source_text": "Open design question: should Turnfile enable per-agent dense Tokenese scratchpads (chat-<agent>.md) now, or stay ephemeral-only for one more A/B suite? Weigh the tradeoffs — compression vs human legibility, calibration maturity, reversibility, onboarding cost — and recommend a path with reasoning.",
+  "clone_text": "^grammar:v0.3\n# L2 open-ended design; reasoning-heavy exploration -> plain (R1 / Tokenese non-goal 5)\n^plain<<<\nOpen design exploration — staying in prose because this is deliberation, not operational status. Enabling chat-<agent>.md dense scratchpads now would trade human legibility and calibration maturity for compression we have not yet demonstrated on reasoning-heavy content; the A/B data so far is operational-status only (W1/W2/W5). Recommend ephemeral-only for one more suite (finish W3/W4, L2/L3) plus tk-calibration-audit before unlocking, because the decision is cheap to reverse now and expensive to claw back once dense scratchpads carry decision rationale. Compressing this reasoning into dense framing is exactly what R1 forbids, so the correct Tokenese behavior here is to stay plain.\n>>>^plain"
+}

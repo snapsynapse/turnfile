@@ -1,0 +1,12 @@
+{
+  "source_id": "TKAB-W3-v03",
+  "clone_id": "TKAB-W3-v03.claude.codex.live1",
+  "pair_id": "TKAB-W3-v03.claude-opus.live1",
+  "arm": "W3",
+  "direction": "claude->codex",
+  "author": "claude-opus",
+  "artifact_type": "task-handoff-typed-holes",
+  "predicted_outcome": "win",
+  "source_text": "Task handoff: deploy the payments-api edge function. Two slots are unbound and must be bound before it runs — the target environment and the approver. Treat them as open holes pending negotiation. Proposed binding: environment is staging, approver is Claude. Once both are bound, the deploy is ready to run.",
+  "clone_text": "^grammar:v0.3\n# W3 task handoff; deploy task with two unbound slots (env, approver): holes then bound\n@svc := svc:payments-api-edgefn\n@appr := agent:claude\nrun! @svc task:deploy env:□env approver:□ // both unbound; await binding before run\nput @svc env:staging approver:@appr // bind: staging + Claude\nsay @svc ready ev:obs"
+}

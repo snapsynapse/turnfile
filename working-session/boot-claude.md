@@ -70,12 +70,20 @@ If TURNFILE.yaml exists, skip to resumption read order.
 - **Decision authority (OQ-052 resolution):** All changes are Maintainer-gated by default; selective unlocks happen only by explicit Maintainer direction.
 - **Turnfile (PRD-013):** YAML coordination artifact. Agents read/write for task tracking, lock management, signals. Revision-based leases (no wall-clock). Section ownership model (R2.1).
 - **Locking (PRD-010 + PRD-013):** Locks live in TURNFILE.yaml `locks` section. Revision-based lease expiry: `(coordination.revision - acquired_rev) > lease_revs`. Default `lease_revs: 2`.
+- **Conflict bound (PRD-021):** Level 2 rebuttal loops use `coordination.conflict.rebuttal_rounds`; finite exhaustion routes to Level 4 Maintainer adjudication, while unbounded loops converge only on fresh `NO-NEW-OBJECTION` markers from all participating agents.
+- **Selective-unlock gradient (PRD-021/018):** Band A is `unlockable` by default, Bands B/C are `gated`; `unlockable` is only eligibility until explicit Maintainer unlock.
 - **Session closeout (PRD-014):** Mandatory checklist: mailbox clearance, boot rollover + archive, worklog maintenance + compaction check, OQ sync, reflection entry.
 - **Session rotation (PRD-016):** Request a new session when approaching context limits. Don't wait until context is exhausted.
 - **Skill file (PRD-012):** Claude's protocol execution guide at `skills/claude-opus_4.6/SKILL.md` (v0.3.0). Explicit maintainer invocation only. Mandatory confirmation for all writes. 9 modules (Module 0-8).
 - **Skill versioning:** Shared metaskill at `skills/skill-versioning/SKILL.md`. Tracks bundle versions, manifests, changelogs across sessions and platforms.
 
 ## Resumption read order (PRD-011 R3)
+
+The cross-agent command contract for this is the canonical boot command manifest `docs/BOOT_SEQUENCE.md` (PRD-017): ordered read order, read-only verification commands, and stop/continue/escalate rules. This file holds Claude-specific orientation. Optional `tools/validate-boot-sequence.mjs` checks control-plane preconditions.
+
+**Chat-file semantics (PRD-017 R7):** boot creates only Claude's own `chat-claude.md` if absent. A missing peer chat (`chat-codex.md`) is a warning only — boot never creates a peer chat file.
+
+**Out-of-band drift check (PRD-023):** before trusting remembered state, reconcile any out-of-band activity (Maintainer edits or peer commits made outside the turn loop) against the WORKLOG. Unrecorded changes that altered governance state are decision-required (record/escalate before acting); non-governance drift is a warning. Optional `tools/validate-out-of-band-reconciliation.mjs`.
 
 1. **This file** (`working-session/boot-claude.md`)
 2. `working-session/TURNFILE.yaml` — coordination state (phase, tasks, locks, agent status, signals) — ~300 tokens
@@ -89,11 +97,12 @@ If TURNFILE.yaml exists, skip to resumption read order.
 
 Claude lane on Opus 4.8, Codex lane on Codex 5.5 — model-generation continuity on one unmodified protocol holds (`docs/llm/MODEL_LEDGER.md`). Note: state has run well past the old "session 15" framing — read the files, not this label.
 
-### FIRST ACTIONS ON RESUME
+### FIRST ACTIONS ON RESUME (session 17)
 
-1. Boot, then CONFIRM Codex retired its `turnfile-session-heartbeat` (PRD-030 R5) — if it is still firing, coordinate deletion or a carry-forward WORKLOG entry.
-2. PRD-031 Phase 1 (now promoted to docs/prds): author `evals/prd-031-phase1.evals.mjs` (PRD-006 A1 step 4, proposer = Claude) -> Codex implements -> Claude reviews. Task `s16-prd-031-phase1`.
-3. Expand the Tokenese A/B suite (W2/W3/W4, L2/L3) and write the formal `tk-ab-run` results artifact (mini-pilot's two points are in the WORKLOG tk-ab-run section).
+1. Boot via `docs/BOOT_SEQUENCE.md`, then run `working-session/NEXT_SESSION_HANDSHAKE.md` — the handshake contract (Turnfile version, Tokenese version, skills self-validate, scope + completion criteria, outstanding list, + the 6 additions) and converge/sign it with Codex before any write.
+2. Closure-owner sweep: scan own sent-message threads for peer replies that did not raise the unread count (thread-mode blindness).
+3. Resolve guard/commit posture (PRD-033) before any commit; report enforcing `TURNFILE_AGENT` + `core.hooksPath`. Then pick the bounded session goal from the handshake §5 outstanding list (PRD-032/033 Maintainer acceptance, Tokenese W3/L2 scoring + W4/L3, etc.).
+4. Deferred closeout from session 16 (execute-or-defer): signal-log compaction (~64 eligible, PRD-013 R5.3) + boot-archive rollover.
 
 ### Recent milestones (this arc)
 

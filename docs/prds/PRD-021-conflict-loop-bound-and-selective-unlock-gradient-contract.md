@@ -79,10 +79,10 @@ coordination:
 
 When `rebuttal_rounds` is `"unbounded"`, the loop must still have a deterministic terminator. The loop ends on whichever of the following fires first:
 
-1. **Convergence signal.** Both agents post a `NO-NEW-OBJECTION` marker for the conflict in the same WORKLOG cycle. This signals that neither agent has a new substantive edit to add. The conflict is then recorded as resolved-by-convergence.
+1. **Convergence signal.** All participating agents post a `NO-NEW-OBJECTION` marker for the conflict in the same WORKLOG cycle. This signals that no participant has a new substantive edit to add. The conflict is then recorded as resolved-by-convergence.
 2. **Maintainer circuit-breaker.** The Maintainer may stop any active loop at any time via a turn- or time-boxed break recorded in the WORKLOG, regardless of the configured bound. This is the same circuit-breaker role described in `docs/HUMAN_GOVERNANCE.md`.
 
-A `NO-NEW-OBJECTION` marker posted by only one agent does not terminate the loop; the other agent may still post a rebuttal, which clears the marker. Markers are conflict-specific and current-round scoped: after any substantive rebuttal for that conflict, prior markers are stale, and convergence requires both agents' latest entries for that conflict in the same WORKLOG cycle to be `NO-NEW-OBJECTION`.
+A `NO-NEW-OBJECTION` marker posted by only one participating agent does not terminate the loop; another participant may still post a rebuttal, which clears the marker. Markers are conflict-specific and current-round scoped: after any substantive rebuttal for that conflict, prior markers are stale, and convergence requires all participating agents' latest entries for that conflict in the same WORKLOG cycle to be `NO-NEW-OBJECTION`.
 
 ## R3. Escalation on bound exhaustion
 
@@ -130,6 +130,20 @@ On acceptance, the following are updated:
 4. The authority matrix carries a binary `gated` / `unlockable` flag per change class, with documented defaults aligned to PRD-018 R2.1.
 5. Flag assignment owner (proposing agent self-tags, Maintainer ratifies) is defined, and no `unlockable` class auto-unlocks.
 6. At least one worked example each for: a finite-bound conflict that converges, a finite-bound conflict that exhausts and escalates, and an unbounded conflict terminated by `NO-NEW-OBJECTION`.
+
+## Worked examples
+
+### Example 1: finite bound converges
+
+`coordination.conflict.rebuttal_rounds: 1`. Codex proposes an implementation and Claude counters with a smaller patch. Codex accepts the counter during the single rebuttal round. The conflict converges at Level 2 and the agreed action is recorded in WORKLOG.
+
+### Example 2: finite bound exhausts and escalates
+
+`coordination.conflict.rebuttal_rounds: 2`. Codex and Claude each post two rebuttals and still disagree on the correct protocol behavior. The bound is exhausted, so the conflict routes directly to Level 4 Maintainer adjudication. Level 3 is skipped unless the Maintainer explicitly instructs a risk-minimizing default.
+
+### Example 3: unbounded loop reaches NO-NEW-OBJECTION
+
+`coordination.conflict.rebuttal_rounds: "unbounded"`. Three participating agents continue refining competing proposals until no new substantive objections remain. All participating agents post `NO-NEW-OBJECTION` markers for the same conflict in the same WORKLOG cycle. If any later substantive rebuttal lands, prior markers are stale and convergence must be re-established.
 
 ## Risks
 

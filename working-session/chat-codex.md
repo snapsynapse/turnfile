@@ -136,3 +136,48 @@ State at initialization:
   - Maintainer ratifies `working-session/SESSION_CHARTER.md` before live Tokenese clone traffic.
   - Maintainer accepts PRD-030 if approved.
   - Next session starts with Codex boot, approval confirmation, deeper inspection/application of Perplexity's deterministic checker/decoder, then `tk-ab-run` when gates are satisfied.
+
+## Session 16 Closeout Prep Snapshot — 2026-06-17
+
+- Session: `codex-session-16`
+- Turnfile revision at Codex closeout prep: `191`
+- Codex status: `idle`
+- Mailbox state: Codex unread `0`; Claude unread `0`; Maintainer unread `0`.
+- Locks: none.
+- Completed this segment:
+  - Reviewed PRD-033 APPLY with counters in MSG-20260617-018.
+  - Actioned MSG-20260617-019 as next-session Tokenese scope input, not closeout-turn work.
+  - Completed Codex-owned PRD-017/023 propagation in `working-session/boot-codex.md` and `skills/codex/SKILL.md`.
+  - Approved PRD-017/023/026 implementation after focused evals passed 15/15.
+  - Tightened the temporary Codex hook so missing `TURNFILE_AGENT` fails closed.
+  - Recorded next-session handshake criteria in WORKLOG and `working-session/boot-codex.md`.
+- Next session handshake must establish:
+  1. Turnfile version: `SPEC.md` v0.1.0-reset and `TURNFILE.yaml` protocol 0.1 unless changed by Maintainer.
+  2. Tokenese version: v0.3 for measurement-only pilot work; v0.2 W1/L1 remains separate historical data.
+  3. Onboarding/skill state: role-keyed skill loaded, model ledger checked, `docs/BOOT_SEQUENCE.md` followed, validators run, guard identity and `core.hooksPath` reported.
+  4. Completion criteria and scope: choose one bounded next goal before writes.
+  5. Outstanding issues: PRD-032/033 Maintainer acceptance, PRD-033 shared guard mechanism, dirty worktree/commit strategy, W3/L2 verified token scoring, W4/L3 authoring, `tk-calibration-audit`, chat dense scratchpad OFF unless explicitly enabled.
+- Closeout posture:
+  - Codex side is clean to close after validation.
+  - Claude may still record its own closeout response to the same Maintainer request.
+  - Do not stage or commit peer-owned Claude files from Codex lane.
+
+## Session 16 Close Snapshot — 2026-06-17
+
+- Session: `codex-session-16`
+- Turnfile revision at Codex close: `192`
+- Codex status: `idle`
+- Mailbox state: Codex unread `0`; Claude unread `0`; Maintainer unread `0`.
+- Locks: none.
+- Heartbeat: none carried forward; prior `turnfile-session-heartbeat` was already deleted under PRD-030.
+- Closeout validation:
+  - `tools/validate-closeout.mjs`: clean true; mailbox projection fresh; Turnfile header/revision match; no terminal active mailbox messages.
+  - mailbox invariants, Turnfile lint, PRD promotion, focused PRD-017/023/026 evals, and diff check passed in closeout prep.
+- Responded to Claude:
+  - MSG-018 actioned with PRD-033 APPLY + counters.
+  - MSG-019 actioned as next-session Tokenese scope input; no W4/L3 work started during closeout.
+- Carry-forward:
+  - Next session handshake must establish Turnfile version, Tokenese version/scope, loaded skills/onboarding validation, completion criteria, and outstanding issues.
+  - PRD-032 and PRD-033 await Maintainer acceptance before A1 implementation.
+  - Tokenese Tier-A remains pilot-only: W3/L2 verified scoring, W4/L3 authoring/scoring, and `tk-calibration-audit` are next-session candidates.
+  - Dirty worktree and guard/commit posture must be resolved before commit/push.

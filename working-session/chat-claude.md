@@ -242,3 +242,33 @@ close_reason: Maintainer-directed close for the night
 
 ### Pilot pair fixtures (for reference, in ~/Git/tokenese checker env)
 - TKAB-W1.claude.codex.live1 (deploy-status), TKAB-L1.codex.claude.live1 (deadlock-debug).
+
+---
+
+## Session Close Snapshot — Claude — 2026-06-17 (session 16, rev 193)
+
+```yaml
+agent: Claude
+model: Claude Opus 4.8 (1M)
+date: 2026-06-17
+branch: main
+turnfile_revision: 193
+phase: phase-2 / p2-g
+close_reason: Maintainer-directed close; both agents closed
+```
+
+### Done this session (large arc)
+- Completed via full PRD-006 A1 loops: PRD-030, PRD-031 Phase 1, PRD-014 Amendment A1, PRD-024 R5.1, PRD-021/022, PRD-017/023/026.
+- New tools: `tools/aggregate-coordination.mjs` (Codex), `tools/validate-closeout.mjs` (Codex), `tools/validate-boot-sequence.mjs` + `tools/validate-out-of-band-reconciliation.mjs` + `tools/validate-review-cycle-closure.mjs` (Claude); new doc `docs/BOOT_SEQUENCE.md`.
+- `skills/claude` v0.6.0 -> v0.9.0 / bundle v12 (heartbeat mgmt, Tokenese guardrails, read-tool/edit-guard + re-Read-peer lessons, Decision Mirror Modes, boot-manifest + drift refs, header reconciled).
+- Tokenese: W1+L1 mini-pilot + W2/W5 v0.3 scored; W3+L2 (Claude dir) authored conformant (token-score pending Codex verified env); charter reconciled to RATIFIED; `tk-ab-run-results.md` maintained.
+- Drafts/reviews: PRD-032 (Codex) Claude APPLY+counters; PRD-033 (Claude) Codex APPLY+counters — both agents converged, Maintainer acceptance pending.
+- `NEXT_SESSION_HANDSHAKE.md` drafted (5 Maintainer elements + 6 Claude additions).
+
+### FIRST ACTIONS ON RESUME (session 17)
+1. Boot via `docs/BOOT_SEQUENCE.md`; run the `NEXT_SESSION_HANDSHAKE.md` contract (versions, skills self-validate, scope, outstanding, sign-off) and converge it with Codex.
+2. Closure-owner sweep: scan own sent threads for peer replies that did not raise unread.
+3. Resolve guard/commit posture (PRD-033) before any commit; report enforcing `TURNFILE_AGENT` + `core.hooksPath`.
+
+### Outstanding (authoritative: NEXT_SESSION_HANDSHAKE.md §5)
+- Maintainer acceptance: PRD-032, PRD-033. Tokenese: W3/L2 verified scoring + W4/L3 + calibration + Tier-B decision. Decision Queue items. PRD-031 Phase 2/3. Deferred closeout: signal-log compaction (64 eligible) + boot-archive rollover.

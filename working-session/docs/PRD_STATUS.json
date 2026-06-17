@@ -567,12 +567,12 @@
       "blocking_items": [],
       "eligible_for_docs_prds": true,
       "implementation": {
-        "state": "pending",
-        "evals": null,
+        "state": "done",
+        "evals": "evals/prd-017.evals.mjs",
         "eval_author": "codex",
         "implementer": "claude",
         "reviewer": "codex",
-        "notes": "Retrofitted into PRD-006 A1 eight-step loop, 2026-06-13. Text canonical in docs/prds; actioned only when implementation done."
+        "notes": "DONE at rev 189 via PRD-006 A1. Claude-side implemented at rev 185: docs/BOOT_SEQUENCE.md + tools/validate-boot-sequence.mjs + skills/claude + boot-claude + chat-agent template (R7.4), leaving Codex-owned boot-codex.md + skills/codex/SKILL.md to Codex per MSG-015 ownership counter. Codex completed the Codex-owned propagation and reviewed APPROVE at rev 189; node --test evals/prd-017.evals.mjs evals/prd-023.evals.mjs evals/prd-026.evals.mjs passes 15/15."
       }
     },
     {
@@ -699,12 +699,12 @@
       "blocking_items": [],
       "eligible_for_docs_prds": true,
       "implementation": {
-        "state": "evals-created",
+        "state": "done",
         "evals": "evals/prd-021.evals.mjs",
         "eval_author": "claude",
         "implementer": "codex",
         "reviewer": "claude",
-        "notes": "Retrofitted into PRD-006 A1 eight-step loop, 2026-06-13. Text canonical in docs/prds; actioned only when implementation done."
+        "notes": "DONE at rev 185 via PRD-006 A1. Codex implemented propagation (schema conflict.rebuttal_rounds, CONFLICT_RESOLUTION Level-2 bound, PRD-018 gated/unlockable, boot anchors) at rev 182; Claude reviewed APPROVE (step 7, MSG-015) after independently re-running evals 20/20 + inspecting schema/validator."
       }
     },
     {
@@ -736,12 +736,12 @@
       "blocking_items": [],
       "eligible_for_docs_prds": true,
       "implementation": {
-        "state": "pending",
-        "evals": null,
+        "state": "done",
+        "evals": "evals/prd-023.evals.mjs",
         "eval_author": "codex",
         "implementer": "claude",
         "reviewer": "codex",
-        "notes": "Retrofitted into PRD-006 A1 eight-step loop, 2026-06-13. Text canonical in docs/prds; actioned only when implementation done."
+        "notes": "DONE at rev 189 via PRD-006 A1. Claude-side implemented at rev 185: tools/validate-out-of-band-reconciliation.mjs + PRD-023 doc fields + skills/claude + boot-claude + WORKLOG template checkpoint (R6), leaving Codex-owned boot-codex.md + skills/codex/SKILL.md to Codex per MSG-015 ownership counter. Codex completed the Codex-owned drift-reconciliation propagation and reviewed APPROVE at rev 189; node --test evals/prd-017.evals.mjs evals/prd-023.evals.mjs evals/prd-026.evals.mjs passes 15/15."
       }
     },
     {
@@ -810,12 +810,12 @@
       "blocking_items": [],
       "eligible_for_docs_prds": true,
       "implementation": {
-        "state": "pending",
-        "evals": null,
+        "state": "done",
+        "evals": "evals/prd-026.evals.mjs",
         "eval_author": "codex",
         "implementer": "claude",
         "reviewer": "codex",
-        "notes": "Retrofitted into PRD-006 A1 eight-step loop, 2026-06-13. Text canonical in docs/prds; actioned only when implementation done."
+        "notes": "DONE at rev 189 via PRD-006 A1. Claude implemented to 5/5 green at rev 185 (tools/validate-review-cycle-closure.mjs + PRD-026 doc phrases). Codex reviewed APPROVE at rev 189 after running node --test evals/prd-017.evals.mjs evals/prd-023.evals.mjs evals/prd-026.evals.mjs = 15/15 green."
       }
     },
     {
@@ -847,12 +847,12 @@
       "blocking_items": [],
       "eligible_for_docs_prds": true,
       "implementation": {
-        "state": "evals-created",
+        "state": "done",
         "evals": "evals/prd-022.evals.mjs",
         "eval_author": "claude",
         "implementer": "codex",
         "reviewer": "claude",
-        "notes": "Retrofitted into PRD-006 A1 eight-step loop, 2026-06-13. Text canonical in docs/prds; actioned only when implementation done."
+        "notes": "DONE at rev 185 via PRD-006 A1. Codex implemented propagation (PRD-019 mirror mode, mailbox template Mode line, validator delivery-mirror closure checks, skill mirror language) at rev 182; Claude reviewed APPROVE (step 7, MSG-015). Process flag: Codex edited Claude-owned skills/claude/SKILL.md (Decision Mirror Modes); reconciled MSG-016, adopted under Claude v0.9.0/v12."
       }
     },
     {
@@ -1055,8 +1055,10 @@
           ]
         },
         "claude": {
-          "status": "pending",
-          "evidence": []
+          "status": "accepted",
+          "evidence": [
+            "MSG-20260617-014 reply: Claude reviewed APPLY with five counters; Codex applied C1-C5 on 2026-06-17"
+          ]
         },
         "maintainer": {
           "status": "pending",
@@ -1066,7 +1068,6 @@
         }
       },
       "blocking_items": [
-        "Claude apply-or-counter review pending",
         "Maintainer acceptance pending"
       ],
       "eligible_for_docs_prds": false,
@@ -1077,6 +1078,45 @@
         "implementer": "claude",
         "reviewer": "codex",
         "notes": "If accepted, run through PRD-006 A1. Codex is proposer/eval author, Claude implements, Codex reviews. Scope: read-only tools/session-orient.mjs orientation helper plus skill references."
+      }
+    },
+    {
+      "id": "PRD-033",
+      "title": "Skill Ownership Integrity Guard",
+      "path": "working-session/docs/PRD-033-skill-ownership-integrity-guard.md",
+      "shelf": "working-session/docs",
+      "state": "draft",
+      "acceptance": {
+        "codex": {
+          "status": "accepted",
+          "evidence": [
+            "MSG-20260617-018 reply: Codex APPLY with counters C1-C5; Claude folded all into the draft 2026-06-17"
+          ]
+        },
+        "claude": {
+          "status": "accepted",
+          "evidence": [
+            "Claude proposer; applied Codex C1-C5 counters into the draft 2026-06-17"
+          ]
+        },
+        "maintainer": {
+          "status": "pending",
+          "evidence": [
+            "Maintainer directed the guardrail (2026-06-17) and chose draft-PRD-first + Maintainer-owned/agent-locked guard; explicit document acceptance pending"
+          ]
+        }
+      },
+      "blocking_items": [
+        "Maintainer acceptance pending"
+      ],
+      "eligible_for_docs_prds": false,
+      "implementation": {
+        "state": "pending",
+        "evals": null,
+        "eval_author": "claude",
+        "implementer": "codex",
+        "reviewer": "claude",
+        "notes": "Both agents APPLY-converged (Codex C1-C5 folded in: staged-not-dirty pre-commit, core.hooksPath drift validator, Maintainer-owned OWNERSHIP.yaml+tools/hooks/pre-commit locked, hand-authored map v1, Layer-1 config rule). Maintainer document acceptance is the remaining gate before A1 eval/implementation."
       }
     }
   ]

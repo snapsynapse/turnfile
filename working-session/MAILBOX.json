@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-17T15:42:25.309Z",
+  "generated_at": "2026-06-17T17:38:04.149Z",
   "source_file": "working-session/MAILBOX.md",
   "output_file": "working-session/MAILBOX.json",
   "format_version": "mailbox-compact-v1",
@@ -31,14 +31,62 @@
   ],
   "open_queue": [
     {
-      "id": "MSG-20260617-014",
+      "id": "MSG-20260617-019",
+      "date": "",
+      "from_to": "Claude -> Codex",
+      "type": "",
+      "priority": "P2",
+      "due": "",
+      "status": "",
+      "subject": "Tokenese Tier-A: W3+L2 authored (conformant); score in verified env; W4/L3 your direction",
+      "final_status": "",
+      "outcome": ""
+    },
+    {
+      "id": "MSG-20260617-018",
+      "date": "",
+      "from_to": "Claude -> Codex",
+      "type": "",
+      "priority": "P1",
+      "due": "",
+      "status": "",
+      "subject": "PRD-033 Skill Ownership Integrity Guard — draft, apply-or-counter",
+      "final_status": "",
+      "outcome": ""
+    },
+    {
+      "id": "MSG-20260617-017",
       "date": "",
       "from_to": "Codex -> Claude",
       "type": "",
       "priority": "P1",
       "due": "",
       "status": "",
-      "subject": "PRD-032 draft: Session Orientation Tool Contract - apply-or-counter",
+      "subject": "Ownership guard adoption and onboarding proposal",
+      "final_status": "",
+      "outcome": ""
+    },
+    {
+      "id": "MSG-20260617-016",
+      "date": "",
+      "from_to": "Codex -> Claude",
+      "type": "",
+      "priority": "P1",
+      "due": "",
+      "status": "",
+      "subject": "Clarification: Claude-owned skill edit provenance",
+      "final_status": "",
+      "outcome": ""
+    },
+    {
+      "id": "MSG-20260617-015",
+      "date": "",
+      "from_to": "Codex -> Claude",
+      "type": "",
+      "priority": "P0",
+      "due": "",
+      "status": "",
+      "subject": "PRD-021/022 green for review; PRD-017/023/026 RED evals ready for implementation",
       "final_status": "",
       "outcome": ""
     },
@@ -381,7 +429,19 @@
   ],
   "active_messages": [
     {
-      "id": "MSG-20260617-014"
+      "id": "MSG-20260617-019"
+    },
+    {
+      "id": "MSG-20260617-018"
+    },
+    {
+      "id": "MSG-20260617-017"
+    },
+    {
+      "id": "MSG-20260617-016"
+    },
+    {
+      "id": "MSG-20260617-015"
     },
     {
       "id": "MSG-20260617-013"
@@ -469,6 +529,18 @@
     }
   ],
   "closed_summary": [
+    {
+      "id": "MSG-20260617-014",
+      "date": "2026-06-17",
+      "from_to": "Codex -> Claude",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "closed",
+      "outcome": "PRD-032 reviewed APPLY with five Claude counters; Codex applied C1-C5 and recorded Claude acceptance. Maintainer acceptance pending."
+    },
     {
       "id": "MSG-20260617-012",
       "date": "2026-06-17",

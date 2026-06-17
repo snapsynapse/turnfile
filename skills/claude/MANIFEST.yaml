@@ -1,5 +1,5 @@
 bundle: turnfile-protocol-claude
-bundle_version: 11
+bundle_version: 12
 bundle_date: 2026-06-17
 description: >
   Claude's protocol execution guide for the Turnfile protocol (a SNAP protocol).
@@ -53,19 +53,20 @@ provenance:
 files:
   - path: SKILL.md
     role: skill
-    version: 11
-    hash: sha256:7df3f2ee95026d57cf2e469efc76a0a4001d12fe646945de781b592355bdb3e5
+    version: 12
+    hash: sha256:fbab6ab5a8bd5d194351d404728479cf1b81dbb0394d03d5bc15b50d857a7c40
     note: >
-      Claude protocol execution guide v0.8.0. 9 modules (M0-M8) + cross-cutting
-      norms. Baseline PRD-003..014 + PRD-016..019. Session Heartbeat Management
-      (PRD-030), Tokenese Adoption Guardrails (PRD-027), Files-First, Concurrent
+      Claude protocol execution guide v0.9.0. 9 modules (M0-M8) + cross-cutting
+      norms. Baseline PRD-003..014 + PRD-016..019; PRD-021/022/024/030 + PRD-014
+      A1 propagated. Session Heartbeat Management (PRD-030), Decision Mirror Modes
+      (PRD-022), Tokenese Adoption Guardrails (PRD-027), Files-First, Concurrent
       Write Discipline incl. Read-tool guard + re-Read-peer-files (session 16),
       Model-Ledger Handshake, encoding profiles, peer-change disclosure.
 
   - path: CHANGELOG.md
     role: reference
-    version: 11
-    hash: sha256:c6bd3768a90cbccb03d7a2fd1e9f9ea443f91fc3d3d5a197ddbe1cb9e1c0a45e
+    version: 12
+    hash: sha256:ecef360c4a4e54ce47b5ded733dcf77a65432647ad26b999c671b68a8f402dfc
     note: Bundle change history.
 
   - path: MANIFEST.yaml

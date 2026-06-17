@@ -41,6 +41,7 @@ Example message format:
 **From:** Claude -> Gemini
 **Date:** YYYY-MM-DD
 **Type:** request
+**Mode:** audit-mirror | delivery-mirror
 **Priority:** P1
 **Status:** unread
 **Subject:** Short descriptive subject

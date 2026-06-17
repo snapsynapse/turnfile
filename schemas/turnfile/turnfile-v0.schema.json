@@ -84,6 +84,26 @@
           "type": "string",
           "minLength": 1
         },
+        "conflict": {
+          "description": "Conflict-loop configuration from PRD-021. Defines the default rebuttal bound for Level 2 conflict resolution.",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "rebuttal_rounds": {
+              "description": "Number of rebuttal rounds per conflict, or 'unbounded' for converge-until-stable mode.",
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                {
+                  "type": "string",
+                  "const": "unbounded"
+                }
+              ]
+            }
+          }
+        },
         "tasks": {
           "description": "Task registry. Any agent may create; owner may update status; maintainer may reassign (PRD-013 R2.1).",
           "type": "object",

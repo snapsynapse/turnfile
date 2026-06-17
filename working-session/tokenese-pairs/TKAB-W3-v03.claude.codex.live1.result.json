@@ -1,0 +1,114 @@
+{
+  "schema_version": "tkab-check-1.1",
+  "source_id": "TKAB-W3-v03",
+  "clone_id": "TKAB-W3-v03.claude.codex.live1",
+  "pair_id": "TKAB-W3-v03.claude-opus.live1",
+  "direction": "claude->codex",
+  "author": "claude-opus",
+  "artifact_type": "task-handoff-typed-holes",
+  "scorer": "perplexity-deterministic-checker",
+  "arm": "W3",
+  "predicted_outcome": "win",
+  "conformance_level": "L3",
+  "conformance_detail": {
+    "L1_lexicon": true,
+    "L2_grammar": true,
+    "L3_repair": true,
+    "session_issues": []
+  },
+  "token_counts": {
+    "source": {
+      "o200k": null,
+      "o200k_method": "unavailable",
+      "anthropic": 107,
+      "anthropic_method": "cached_costs+heuristic",
+      "chars": 307
+    },
+    "clone": {
+      "o200k": null,
+      "o200k_method": "unavailable",
+      "anthropic": 131,
+      "anthropic_method": "cached_costs+heuristic",
+      "chars": 323
+    },
+    "savings": {
+      "anthropic_delta": -24,
+      "anthropic_ratio": 1.2243,
+      "o200k_delta": null,
+      "o200k_ratio": null
+    }
+  },
+  "readback_diff": null,
+  "repair_events": [],
+  "repair_kinds": {
+    "repair-token": 0,
+    "repair-statement": 0,
+    "repair-handle": 0,
+    "repair-explained": 0
+  },
+  "misparse_family": {
+    "by_family": {
+      "binding": 0,
+      "scope": 0,
+      "sense": 0,
+      "triangulation": 0
+    },
+    "hits": []
+  },
+  "source_authority_conflict": [],
+  "unparseable_lines": [],
+  "plain_mode_present": false,
+  "plain_blocks": [],
+  "dense_statement_count": 3,
+  "declared_level": null,
+  "grammar_version": "v0.3",
+  "causal_events": [],
+  "unsupported_causation": [],
+  "comment_lines": [
+    2
+  ],
+  "outcome": "indeterminate",
+  "notes": [
+    "Conformance L3; outcome did not match a typed rule."
+  ],
+  "decoded_clone_english": [
+    "[grammar version: v0.3]",
+    "(comment) W3 task handoff; deploy task with two unbound slots (env, approver): holes then bound",
+    "bind @svc = \"svc:payments-api-edgefn\"",
+    "bind @appr = \"agent:claude\"",
+    "run (imperative; receiver should reply √ with paraphrased restatement) \"svc:payments-api-edgefn\" (@svc) task: deploy env: [unfilled hole: env] approver: [unfilled hole: any]  Note: both unbound; await binding before run",
+    "put \"svc:payments-api-edgefn\" (@svc) env: staging approver: \"agent:claude\" (@appr)  Note: bind: staging + Claude",
+    "say \"svc:payments-api-edgefn\" (@svc) ready [observed]"
+  ],
+  "provenance": {
+    "checker_version": "tkab-check-1.1",
+    "tkab_schema_version": "tkab-check-1.1",
+    "grammar_version_supported": "v0.3",
+    "grammar_version_detected": "v0.3",
+    "scorer": "perplexity-deterministic-checker",
+    "spec_sha": "68cb84e2dbb2aa36f9965c823afab770de64df0bd9df0bc1c878eb3aac5f761e",
+    "design_sha": "5dc9338e7b6386d01ae46b47a6a7ba70478929460ecdea74b67e20afe204d520",
+    "conformance_sha": "0250b71342c49603f40fe667700422d03a95855cd45c0825841a6a8f35e987c6",
+    "intent_sha": "5f783b8367feef6d9ab69a685ea5964419ba7222095b8b29a07aee1a9334ade0",
+    "handoff_sha": "16f948709345ee2d32ff363e90ec8782129be08d9aa3ddb7c4030afeab45c1b3",
+    "anthropic_costs_sha": "12e5fe083ecf44949ec1d55fb43c1f6f547979256f2f832fef4788afbd7c91d2",
+    "prd_027_sha": "unpinned",
+    "ab_suite_sha": "unpinned",
+    "score_pair": {
+      "translator_version": "0.1.0",
+      "schema_version": "1.0",
+      "spec_sha256": "68cb84e2dbb2aa36f9965c823afab770de64df0bd9df0bc1c878eb3aac5f761e",
+      "design_sha256": "5dc9338e7b6386d01ae46b47a6a7ba70478929460ecdea74b67e20afe204d520",
+      "intent_sha256": "5f783b8367feef6d9ab69a685ea5964419ba7222095b8b29a07aee1a9334ade0",
+      "conformance_sha256": "0250b71342c49603f40fe667700422d03a95855cd45c0825841a6a8f35e987c6",
+      "lexicon_sha256": "12e5fe083ecf44949ec1d55fb43c1f6f547979256f2f832fef4788afbd7c91d2",
+      "grammar_target": "v0.3 (GRAMMAR-v0.3.md) over v0.2 (DESIGN.md §7) over v0.1 (spec.md)",
+      "grammar_version_supported": "v0.3",
+      "grammar_version_detected": "v0.3",
+      "prd_027_sha": "unpinned",
+      "ab_suite_sha": "unpinned"
+    }
+  },
+  "source_text": "Task handoff: deploy the payments-api edge function. Two slots are unbound and must be bound before it runs — the target environment and the approver. Treat them as open holes pending negotiation. Proposed binding: environment is staging, approver is Claude. Once both are bound, the deploy is ready to run.",
+  "clone_text": "^grammar:v0.3\n# W3 task handoff; deploy task with two unbound slots (env, approver): holes then bound\n@svc := svc:payments-api-edgefn\n@appr := agent:claude\nrun! @svc task:deploy env:□env approver:□ // both unbound; await binding before run\nput @svc env:staging approver:@appr // bind: staging + Claude\nsay @svc ready ev:obs"
+}

@@ -24,13 +24,19 @@ The other agent (or any agent) may accept, amend, or respond with their own coun
 
 ### Level 2: Time-boxed rebuttal round
 
-If Level 1 doesn't resolve the disagreement, both agents post one rebuttal each. The rebuttal window is defined in the session charter (default: one WORKLOG cycle — i.e., each agent gets one turn to respond).
+If Level 1 doesn't resolve the disagreement, all participating agents enter a rebuttal loop governed by `coordination.conflict.rebuttal_rounds` in `TURNFILE.yaml`, unless the session charter explicitly overrides it.
 
-After the rebuttal round, agents must converge on an agreed action or escalate.
+`rebuttal_rounds: 1` means one rebuttal post from each participating agent, which preserves the original default. A finite integer greater than 1 permits that many rounds per conflict. `rebuttal_rounds: "unbounded"` permits continued rebuttal until a convergence marker or Maintainer circuit-breaker fires.
+
+For unbounded loops, convergence requires all participating agents' latest entries for that conflict in the same WORKLOG cycle to be `NO-NEW-OBJECTION`. A marker is stale after any later substantive rebuttal for that conflict, so prior markers cannot terminate a new round.
+
+If a finite bound is exhausted without convergence, the conflict escalates directly to Level 4 Maintainer adjudication. Exhaustion is the escalation signal.
 
 ### Level 3: Risk-minimizing default
 
-If agents cannot converge after the rebuttal round and the maintainer is not immediately available:
+Level 3 is available only by explicit Maintainer instruction after a conflict stalls or after the Maintainer reviews the round history. It is not the automatic fall-through after `rebuttal_rounds` exhaustion.
+
+When the Maintainer explicitly instructs a risk-minimizing default:
 
 - **Choose the lower-risk option.** Between two approaches, prefer the one that is easier to reverse, has a smaller blast radius, or preserves more optionality.
 - Document the choice and the reasoning in the WORKLOG.

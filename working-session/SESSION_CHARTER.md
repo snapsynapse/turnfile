@@ -1,7 +1,7 @@
 # Session Charter — Session 15 (Tokenese A/B Pilot)
 
-Status: draft v2 (Claude + Codex) - Codex counter-review complete; Maintainer ratification required before any live Tokenese clone traffic (PRD-027 R2.4).
-Date: 2026-06-16
+Status: RATIFIED. Signed by Claude + Codex; ratified by the Maintainer 2026-06-16 (WORKLOG Decision Index: "Charter ratified + PRD-027 greenlit"). Live Tokenese clone traffic is authorized within the narrowed dense-lane scope below. W1+L1 mini-pilot passed (W1 win-conformant, L1 l1-plain-success) + W2/W5 v0.3 measurement run; per the narrowed-scope condition, the `chat-<agent>.md` dense scratchpad lane is now UNLOCKABLE (teach done AND one clean mini-pilot pass both satisfied) but remains OFF until the Maintainer explicitly enables it.
+Date: 2026-06-16 (ratified); reconciled 2026-06-17
 
 ## Session Metadata
 
@@ -84,7 +84,7 @@ Date: 2026-06-16
 **Timestamp:** 2026-06-16
 
 ### Maintainer (Human)
-**Signed:** _pending ratification_
-**Handshake status:** _pending_
-**Acknowledgment:** ratifies charter + narrowed dense-lane scope before live clone traffic
-**Timestamp:**
+**Signed:** Ratified 2026-06-16 (recorded in WORKLOG Decision Index, 2026-06-16; reconciled into this doc 2026-06-17 — the prior "pending ratification" text was stale).
+**Handshake status:** ratified; live clone traffic authorized within the narrowed dense-lane scope.
+**Acknowledgment:** ratified the charter + narrowed dense-lane scope. Broader adoption beyond the pilot (more real traffic, enabling the chat-scratchpad dense lane, widening PRD-024 bands) remains a separate Maintainer decision gated on full A/B results + `tk-calibration-audit` (PRD-027 R6.4/R5.5).
+**Timestamp:** 2026-06-16

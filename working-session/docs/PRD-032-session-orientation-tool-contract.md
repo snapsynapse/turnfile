@@ -3,6 +3,15 @@
 Status: Draft
 Owner: Codex proposer; Claude reviewer; Maintainer decision pending
 Date: 2026-06-17
+Last revised: 2026-06-17 (Claude APPLY counters applied by Codex)
+
+## Review Snapshot
+
+| Reviewer | Status | Evidence |
+|----------|--------|----------|
+| Codex | accepted | Author; draft routed in MSG-20260617-014 |
+| Claude | accepted with counters applied | MSG-20260617-014 reply: APPLY with five counters; Codex applied C1-C5 on 2026-06-17 |
+| Maintainer | pending | Maintainer requested the PRD draft; explicit acceptance still pending |
 
 ## Input Provenance Tags
 
@@ -55,12 +64,14 @@ node tools/session-orient.mjs \
   --worklog working-session/WORKLOG.md \
   --prd-status working-session/docs/PRD_STATUS.json \
   [--agent codex] \
-  [--task <task-id>] \
-  [--prd PRD-032] \
-  [--emit human|json]
+	  [--task <task-id>] \
+	  [--prd PRD-032] \
+	  [--emit human|json] \
+	  [--validate]
 ```
 
 Defaults match the current repo layout. `--emit human` is concise and Maintainer-readable. `--emit json` is stable for evals, heartbeats, and future tooling.
+By default, the tool does not spawn validators; it lists recommended validation commands. `--validate` opts into running cheap local validators and embedding their results.
 
 ## R2. Read-only behavior
 
@@ -81,7 +92,9 @@ The report includes:
 6. Selected PRD registry state when `--prd` is provided.
 7. Git status summary: branch, dirty paths, and a separate list of files outside the selected agent's expected ownership if detectable.
 8. Projection freshness: whether `MAILBOX.json` matches `MAILBOX.md` and whether Turnfile header revision matches `coordination.revision`.
-9. Validator quick status when cheap and local: mailbox invariants, Turnfile lint, PRD promotion registry validity. Expensive or task-specific evals are listed as recommended commands, not run by default.
+9. Validator status only when `--validate` is supplied: mailbox invariants, Turnfile lint, PRD promotion registry validity. Without `--validate`, the tool lists these as recommended commands and does not spawn them. Expensive or task-specific evals are always listed as recommended commands, not run by default.
+
+The ownership list in item 7 is best-effort before PRD-031 shard ownership is fully authoritative. At launch, it may use simple heuristics such as flagging `skills/<other-agent>/` paths for the selected agent. It must label this section as heuristic rather than authoritative.
 
 ## R4. Human output contract
 
@@ -97,7 +110,7 @@ It must distinguish facts from recommendations. It must say "unknown" rather tha
 
 ## R5. JSON output contract
 
-The JSON output includes stable top-level keys:
+The JSON output includes a stable schema with top-level keys:
 
 ```json
 {
@@ -115,7 +128,7 @@ The JSON output includes stable top-level keys:
 }
 ```
 
-Findings carry `level` values: `info`, `warning`, `blocker`. The tool must not use `blocker` for work that is merely pending review.
+Findings carry `level` values: `info`, `warning`, `blocker`. The tool must not use `blocker` for work that is merely pending review. The stable contract is the JSON schema and key names, not byte-for-byte deterministic output; fields such as hashes, git branch, dirty paths, and timestamps may vary by environment.
 
 ## R6. Relationship to PRD-031 derived views
 
@@ -124,24 +137,35 @@ Before PRD-031 Phase 2, the tool reads current aggregate files directly. After s
 1. Run the aggregate derivation tool first in read-only mode and report derived output freshness, or
 2. Report that aggregate derivation is unavailable and mark aggregate freshness as `unknown`.
 
-The tool must never silently treat stale aggregate views as authoritative.
+The tool must never silently treat stale aggregate views as authoritative. Before PRD-031 Phase 2, it should not treat per-agent shard files as the direct task/status authority unless the relevant derivation command confirms the aggregate view. If derivation cannot run, report aggregate freshness as `unknown`.
 
 ## R7. Skill and heartbeat integration
 
-1. Codex and Claude skills should prefer `tools/session-orient.mjs` before substantive current-state claims once the tool exists.
+1. Codex and Claude skills should prefer `tools/session-orient.mjs` before substantive current-state claims once the tool is implemented and green under this PRD's A1 implementation lane. Draft acceptance alone does not create a hard skill obligation.
 2. PRD-030 heartbeat no-op reports may use the tool for quiet state refresh.
 3. Session closeout may cite the tool output, but closeout validators remain required.
 
+## R8. Derivation reuse
+
+The implementation must compose existing derivation and projection logic rather than creating a fourth independent copy of the same state checks.
+
+1. Next message id, next signal id, next revision, inbox counts, freshness receipts, max signal id, and max message sequence are derived through `tools/next-state.mjs` behavior or a shared module extracted from it.
+2. `MAILBOX.json` projection freshness and Turnfile header/coordination revision checks reuse `tools/validate-closeout.mjs` behavior or a shared helper extracted from it.
+3. If shared helpers are introduced, they must stay read-only and be covered by the PRD-032 eval fixtures.
+4. The orientation tool must not independently reimplement mailbox projection, revision matching, or next-id derivation in a way that can drift from the established tools.
+
 ## Acceptance Criteria
 
-1. `tools/session-orient.mjs --emit json` returns the stable JSON shape and exits 0 on the current repo.
+1. `tools/session-orient.mjs --emit json` returns the stable JSON schema/top-level keys and exits 0 on a hermetic fixture representing the current repo shape.
 2. `tools/session-orient.mjs --emit human --agent codex` reports Codex unread count, current revision, next message id, next signal id, and next revision.
 3. The tool detects stale `MAILBOX.json` when the JSON projection differs from `MAILBOX.md`.
 4. The tool detects Turnfile header/coordination revision mismatch.
 5. The tool reports selected PRD registry state for `--prd PRD-024` and selected task state for `--task s14-prd024-validator-rule`.
 6. The tool reports git dirty paths without modifying the worktree.
 7. Missing required files produce a nonzero exit and a machine-readable error in JSON mode.
-8. Skill guidance for Codex and Claude references the tool as the preferred orientation helper once implemented.
+8. Skill guidance for Codex and Claude references the tool as the preferred orientation helper once implemented and green.
+9. The eval suite uses hermetic fixtures and does not assert against the live working tree's mutable hashes, branch state, or dirty-path list.
+10. The implementation reuses or extracts shared derivation/projection logic from `tools/next-state.mjs` and `tools/validate-closeout.mjs` rather than duplicating those checks.
 
 ## Risks
 
@@ -150,7 +174,7 @@ The tool must never silently treat stale aggregate views as authoritative.
 2. The tool may become noisy.
    Mitigation: human output is intentionally short; JSON contains the detailed fields.
 3. Validator execution could become slow.
-   Mitigation: run only cheap validators by default and list task-specific evals as recommended commands.
+   Mitigation: run validators only with `--validate`; list task-specific evals as recommended commands.
 4. PRD-031 may change the source layout.
    Mitigation: R6 requires explicit source/freshness reporting across the aggregate-to-shard transition.
 
@@ -164,6 +188,10 @@ The tool must never silently treat stale aggregate views as authoritative.
 
 ## Open Questions
 
-1. Should `session-orient` run cheap validators by default, or only report the commands unless `--validate` is provided?
-2. Should the tool read PRD-031 shard files directly in Phase 1, or wait until Phase 2 makes shards authoritative for tasks/status?
-3. Should orientation reports be archived at closeout, or treated as transient command output only?
+*No open questions at this time.*
+
+Resolved in Claude review, MSG-20260617-014:
+
+1. Validator execution is opt-in through `--validate`; default output lists recommended validator commands.
+2. PRD-031 shard handling follows R6: before Phase 2, do not treat shard files as direct authority unless aggregate derivation confirms freshness; otherwise report `unknown`.
+3. Orientation reports are transient command output and are not archived at closeout. If a finding matters, cite it in WORKLOG or mailbox prose.

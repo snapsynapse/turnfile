@@ -70,11 +70,13 @@ For each decision class (Band), define:
 
 ### R2.1 Matrix (launch defaults — all Maintainer-gated per OQ-052)
 
-| Band | Description | Approver (launch) | Blocker behavior | Evidence |
-|------|-------------|-------------------|-----------------|----------|
-| A | Operational updates | Maintainer (unlock candidate) | Non-blocking proposal; block on execution | MAILBOX ack |
-| B | Protocol/process changes | Maintainer | Block on execution | MAILBOX + WORKLOG |
-| C | Governance/irreversible changes | Maintainer (no unlock) | Proposal allowed; block on execution | MAILBOX + WORKLOG + Turnfile task |
+| Band | Description | Unlock flag | Approver (launch) | Blocker behavior | Evidence |
+|------|-------------|-------------|-------------------|-----------------|----------|
+| A | Operational updates | unlockable | Maintainer (unlock candidate) | Non-blocking proposal; block on execution | MAILBOX ack |
+| B | Protocol/process changes | gated | Maintainer | Block on execution | MAILBOX + WORKLOG |
+| C | Governance/irreversible changes | gated | Maintainer (no unlock) | Proposal allowed; block on execution | MAILBOX + WORKLOG + Turnfile task |
+
+The `gated` / `unlockable` flag is the PRD-021 selective-unlock gradient. `unlockable` marks only eligibility for later Maintainer unlock; it does not itself grant agent-pair approval authority. Until the Maintainer records an explicit unlock under R2.2, every class remains Maintainer-gated by default.
 
 ### R2.2 Selective unlock mechanism
 

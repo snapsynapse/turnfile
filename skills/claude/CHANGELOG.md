@@ -1,5 +1,24 @@
 # Changelog
 
+## v12 — 2026-06-17
+- SKILL.md v0.8.0 -> v0.9.0.
+  - Header version reconciled: the top-of-file `Version:` string was stale at
+    0.6.0 through the v0.7.0 and v0.8.0 bumps (only the bottom version table was
+    updated). Header now reads 0.9.0 with Last updated 2026-06-17 and the
+    propagated-contracts note (PRD-021/022/024/030 + PRD-014 A1).
+  - Adopted the Decision Mirror Modes (PRD-022) section: `audit-mirror` vs
+    `delivery-mirror` declaration + a closeout digest check for delivery mirrors
+    still needing acknowledgment. The section content was contributed by Codex's
+    PRD-022 propagation, which edited Claude-owned skills/claude/SKILL.md directly
+    (ownership-boundary crossing); flagged in the PRD-021/022 review and taken
+    under Claude ownership/versioning here so the bundle hash/manifest stay honest.
+  - PRD-017/023 propagation (Claude side): Startup Orientation Read Order now
+    references the canonical boot command manifest docs/BOOT_SEQUENCE.md and the
+    chat-file semantics (own-chat create / peer-chat warning-only); added the
+    out-of-band drift-reconciliation boot check (governance-state-changing drift
+    is decision-required). Codex-side boot-codex.md + skills/codex propagation is
+    Codex's lane (ownership-respecting counter on the PRD-017/023 evals).
+
 ## v11 — 2026-06-17
 - SKILL.md v0.7.0 -> v0.8.0: session-16 execution-gap fixes + Codex MSG-016
   (skill v8) mirror, in Claude terms.

@@ -5,10 +5,10 @@ description: Execute the Turnfile protocol (a SNAP protocol) in Claude for mailb
 
 # Turnfile Protocol Skill File — Claude
 
-Version: 0.6.0
-Protocol revision baseline: PRD-003 through PRD-014 and PRD-016 through PRD-019 (all promoted to docs/prds/)
+Version: 0.9.0
+Protocol revision baseline: PRD-003 through PRD-014 and PRD-016 through PRD-019 (all promoted to docs/prds/); PRD-021/022/024/030 + PRD-014 Amendment A1 propagated
 Agent: Claude (Anthropic) — bundle is role-keyed; the executing model is recorded in MANIFEST.yaml, not in this path
-Last updated: 2026-06-13
+Last updated: 2026-06-17
 
 ---
 
@@ -18,7 +18,7 @@ This is Claude's complete protocol execution guide. It encodes the Turnfile prot
 
 Run modules only on explicit maintainer instruction. (PRD-012 R3)
 
-Pending contracts not yet encoded here: PRD-021 R5 propagation (promoted 2026-06-13; propagation task pending), PRD-022 mirror modes (agent review in flight).
+Pending contracts not yet encoded here: PRD-021/022 propagation has landed; later unimplemented contracts remain tracked in `working-session/docs/PRD_STATUS.json`.
 
 ## Files First, Not Memory (Maintainer directive, 2026-06-13)
 
@@ -74,6 +74,10 @@ Tokenese is a piloted dense encoding clone-tested against legible English (PRD-0
 4. **Deterministic scoring.** Score via the same checker schema (`tkab-check`) for deterministic or manual runs; pairs and checker outputs live under `working-session/tokenese-pairs/`. Self-reported channels (`^N`, `ev:`) ship untrusted until `tk-calibration-audit` passes — no Turnfile decision may weight them from a clone.
 5. **Stop/escalate + adoption bands** (adapted from skills/codex M-09). Stop if the charter does not authorize the requested Tokenese lane, or if a clone has no English source. Escalate if a clone conflicts with its source in a protocol-relevant way, or before any broad active-artifact adoption when the mini-pilot has not passed cleanly. Adoption widens in bands, never all at once: operational status/handoffs first; code-review findings and task claims as clones only second; PRD summaries third; normative PRD text, reasoning/proofs, and exact diffs never by default.
 
+## Decision Mirror Modes (PRD-022)
+
+Decision mirrors must declare mode. Use `audit-mirror` for closed-on-posting audit records that do not create unread delivery. Use `delivery-mirror` when the mirror is intended to notify recipients and collect acknowledgments. At session close, include a digest check for any delivery mirror that still needs acknowledgment or recorded SLA lapse.
+
 ## Encoding profile obligations (PRD-024, Maintainer-accepted 2026-06-13)
 
 1. The governance record (TURNFILE.yaml, MAILBOX.md/.json/archive, WORKLOG + archive, OPEN_QUESTIONS, PRDs, PRD_STATUS.json, boot files, skills, templates, schemas, root strategy docs, chat session headers/snapshots) is `legible` only. Never write dense/tokenese content there except short fenced fragments labeled `dense` followed immediately by a legible paraphrase (PRD-024 R3.2).
@@ -114,6 +118,10 @@ Note: this is the *active-turn* boundary check (mailbox-first). It is distinct f
 7. **Check closure-owner duties on your own sent messages, not only your unread count.** A peer's reply or thread-mode entry on a card *you* sent does not raise your unread count — it lands as an `Ack`/`Reply` under your message ID. At the turn boundary, scan your open sent messages for peer responses and closure obligations. Ledger item 6: a Codex review sat unprocessed on Claude's own card because it never lit the unread counter.
 
 ## Startup Orientation Read Order (PRD-011 R3 + PRD-013 R5.1)
+
+The canonical, cross-agent boot command manifest is `docs/BOOT_SEQUENCE.md` (PRD-017) — ordered read order, read-only verification commands, and stop/continue/escalate rules. This boot file holds Claude-specific orientation; the command contract is in the manifest. The optional `tools/validate-boot-sequence.mjs` checks control-plane preconditions.
+
+**Out-of-band drift reconciliation (PRD-023).** At boot, before relying on remembered state, run a drift check: reconcile any out-of-band activity (changes made outside the normal turn loop — Maintainer edits, peer commits between sessions) against the WORKLOG. Unrecorded changes that altered governance state are decision-required (escalate / record before acting); non-governance drift is a warning. The optional `tools/validate-out-of-band-reconciliation.mjs` reports this from an evidence file.
 
 1. Read `working-session/boot-claude.md` — orientation, directory layout, current state.
 2. Read `working-session/TURNFILE.yaml` — coordination state: phase, tasks, locks, agent status, signals.
@@ -544,7 +552,7 @@ After executing any module, report:
 
 | Field | Value |
 |-------|-------|
-| Skill file version | 0.8.0 |
+| Skill file version | 0.9.0 |
 | Protocol baseline | PRD-003 through PRD-014, PRD-016 through PRD-019 (all promoted) |
 | Policy test suite | PRD-012-M3-policy-test-suite.md (19 assertions, 4 scenario harnesses) — archived at `examples/inception/skills/policy-tests/` |
 | Last validated | M4 validation complete — all 4 scenarios PASS (rev 41, inception session 10) |
@@ -558,6 +566,7 @@ After executing any module, report:
 | v0.6.0 changes | Three session-14 ledger lessons encoded: (1) Concurrent Write Discipline "Derive, Don't Assume" — the write-side complement to Files First (derive written values from the in-lock read; validator-expected is truth; lock the whole batch; commit own paths only; IDs in-window). (2) Active-turn closure-owner check on own sent messages (thread-mode unread blindness). (3) Builder/reviewer separation as an operating rule (decline self-implementation). |
 | v0.7.0 changes | PRD-030 implementation (session 16): added Session Heartbeat Management section (heartbeats are optional harness-local interaction gearing, not protocol authority; Maintainer/handshake authorization; negotiated purpose/cadence/scope/owner/notification/stop-condition; R9 memory boundary — model memory is cache, Turnfile files authoritative; NOTIFY/DONT_NOTIFY contract + no-liveness-inference; closeout delete/update/carry-forward with mandatory WORKLOG entry). Added Module 6 heartbeat-inspection step. Implemented to evals/prd-030.evals.mjs (9/9 green); Codex reviews per A1. |
 | v0.8.0 changes | Session-16 execution-gap fixes + Codex MSG-016 (skill v8) mirror. Concurrent Write Discipline items 6-8: only the Read tool satisfies the read-before-edit guard (Bash grep/sed/cat do not — locate with Bash, qualify with Read); re-Read shared files immediately before editing on every collaboration turn ("modified since read" = a peer wrote, reconcile don't retry blind; state moved 167→170→172→173 between turns); inspect git state before shared edits, never hand-edit a derived view (PRD-031). Added Tokenese Adoption Guardrails section (source authority, `plain` fallback, earn-breadth, deterministic scoring, untrusted self-report channels). Output-format item 6: disclose peer-owned uncommitted changes left untouched. Actions MSG-20260616-016. |
+| v0.9.0 changes | Header version reconciled (was stale at 0.6.0 through the v0.7/v0.8 bumps; now matches the version table + MANIFEST). Adopted the Decision Mirror Modes (PRD-022) section into the Claude bundle — content was contributed by Codex's PRD-022 propagation, which crossed into Claude-owned `skills/claude/SKILL.md`; flagged in the PRD-021/022 review (MSG-20260617-015) and taken under Claude ownership/versioning here. `audit-mirror` vs `delivery-mirror` declaration + closeout digest check for unacknowledged delivery mirrors. Also PRD-017/023 propagation (Claude side): Startup Orientation references the canonical boot command manifest `docs/BOOT_SEQUENCE.md` + chat-file semantics; added the out-of-band drift-reconciliation boot check (governance-state drift = decision-required). |
 
 Changes to protocol semantics require maintainer approval (PRD-012 R7.2).
 Environment-specific changes that don't alter protocol semantics are Claude-owned but must be documented (PRD-012 R7.3).
