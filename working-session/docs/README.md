@@ -2,9 +2,13 @@
 
 Active iteration documents for the current local session workspace.
 
+## Draft PRDs
+
+1. `PRD-032-session-orientation-tool-contract.md`
+
 ## Accepted / Not Yet Promoted PRDs
 
-1. `PRD-030-session-heartbeat-management-contract.md`
+None.
 
 ## Actioned PRDs Promoted To `docs/prds/`
 
@@ -33,6 +37,8 @@ Active iteration documents for the current local session workspace.
 23. `PRD-027-tokenese-cloned-communication-ab-contract.md`
 24. `PRD-028-tokenese-dual-artifact-sync-and-maintainer-legibility-contract.md`
 25. `PRD-029-pre-write-state-derivation-contract.md`
+26. `PRD-030-session-heartbeat-management-contract.md`
+27. `PRD-031-concurrent-multi-agent-coordination-contract.md`
 
 ## Promotion Gate Policy (Required)
 

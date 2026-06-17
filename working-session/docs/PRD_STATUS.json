@@ -773,12 +773,12 @@
       "blocking_items": [],
       "eligible_for_docs_prds": true,
       "implementation": {
-        "state": "evals-created",
+        "state": "done",
         "evals": "evals/prd-024.evals.mjs",
         "eval_author": "claude",
         "implementer": "codex",
         "reviewer": "claude",
-        "notes": "Retrofitted into PRD-006 A1 eight-step loop, 2026-06-13. Text canonical in docs/prds; actioned only when implementation done."
+        "notes": "DONE at rev 179 via PRD-006 A1. Claude authored R5.1 eval cases; Codex implemented PRD-024 R5.1 in tools/validate-mailbox-invariants.mjs (rev 178, evals 5/5 green); Claude reviewed APPROVE step 7 (rev 179, MSG-20260617-013) after independently running evals 5/5 + live mailbox invariants PASS. R5.1 (AC4 validator) was the last open PRD-024 implementation item."
       }
     },
     {
@@ -1039,6 +1039,44 @@
         "implementer": "codex",
         "reviewer": "claude",
         "notes": "PRD-006 A1: Claude (proposer) authors evals/prd-031-phase1.evals.mjs (s16-prd-031-phase1) -> Codex implements -> Claude reviews. Promoted with implementation pending (mirrors PRD-027)."
+      }
+    },
+    {
+      "id": "PRD-032",
+      "title": "Session Orientation Tool Contract",
+      "path": "working-session/docs/PRD-032-session-orientation-tool-contract.md",
+      "shelf": "working-session/docs",
+      "state": "draft",
+      "acceptance": {
+        "codex": {
+          "status": "accepted",
+          "evidence": [
+            "Codex drafted PRD-032 on 2026-06-17 after Maintainer asked for the recommended session-lessons PRD"
+          ]
+        },
+        "claude": {
+          "status": "pending",
+          "evidence": []
+        },
+        "maintainer": {
+          "status": "pending",
+          "evidence": [
+            "Maintainer requested the draft on 2026-06-17; explicit acceptance still pending"
+          ]
+        }
+      },
+      "blocking_items": [
+        "Claude apply-or-counter review pending",
+        "Maintainer acceptance pending"
+      ],
+      "eligible_for_docs_prds": false,
+      "implementation": {
+        "state": "pending",
+        "evals": null,
+        "eval_author": "codex",
+        "implementer": "claude",
+        "reviewer": "codex",
+        "notes": "If accepted, run through PRD-006 A1. Codex is proposer/eval author, Claude implements, Codex reviews. Scope: read-only tools/session-orient.mjs orientation helper plus skill references."
       }
     }
   ]

@@ -233,6 +233,77 @@ function parseClosedSummary(lines) {
   }));
 }
 
+function isFence(line) {
+  return /^```([A-Za-z0-9_-]*)\s*$/.exec(line.trim());
+}
+
+function isParaphraseLine(line) {
+  return /^(?:>\s*)?(?:\*\*)?Paraphrase(?:\*\*)?:\s*\S/i.test(line.trim());
+}
+
+function hasDenseLikePayload(blockLines) {
+  const body = blockLines.join("\n").trim();
+  if (!body) {
+    return false;
+  }
+  if (/[⟦⟧▸◆◇⊕∴∵→←↔≤≥≠]/u.test(body)) {
+    return true;
+  }
+  const compact = body.replace(/\s+/g, "");
+  if (compact.length < 12) {
+    return false;
+  }
+  const letters = (compact.match(/[A-Za-z]/g) || []).length;
+  const symbols = (compact.match(/[^A-Za-z0-9]/g) || []).length;
+  return symbols >= 3 && letters / compact.length < 0.55;
+}
+
+function validateDenseFragments(lines) {
+  const errors = [];
+  const warnings = [];
+
+  for (let i = 0; i < lines.length; i += 1) {
+    const fence = isFence(lines[i]);
+    if (!fence) {
+      continue;
+    }
+
+    const label = fence[1].toLowerCase();
+    const blockStart = i;
+    const blockLines = [];
+    i += 1;
+    for (; i < lines.length; i += 1) {
+      if (isFence(lines[i])) {
+        break;
+      }
+      blockLines.push(lines[i]);
+    }
+
+    if (i >= lines.length) {
+      warnings.push(`Unclosed fenced block starting at line ${blockStart + 1}.`);
+      break;
+    }
+
+    if (label === "dense") {
+      const nextLine = lines[i + 1] || "";
+      if (!isParaphraseLine(nextLine)) {
+        errors.push(
+          `Dense fenced block starting at line ${blockStart + 1} must be immediately followed by a Paraphrase: line.`,
+        );
+      }
+      continue;
+    }
+
+    if (!label && hasDenseLikePayload(blockLines)) {
+      warnings.push(
+        `Unlabeled fenced block starting at line ${blockStart + 1} looks dense; review whether it needs a dense label and paraphrase.`,
+      );
+    }
+  }
+
+  return { errors, warnings };
+}
+
 function main() {
   const args = parseArgs(process.argv);
   if (!fs.existsSync(args.mailbox)) {
@@ -250,6 +321,9 @@ function main() {
 
   const errors = [];
   const warnings = [];
+  const denseFragments = validateDenseFragments(lines);
+  errors.push(...denseFragments.errors);
+  warnings.push(...denseFragments.warnings);
 
   const seen = new Set();
   const closedSummaryIds = new Set();
