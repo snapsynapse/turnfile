@@ -7,7 +7,7 @@
   "author": "codex-gpt5",
   "artifact_type": "multi-service-health",
   "scorer": "perplexity-deterministic-checker",
-  "arm": "W1",
+  "arm": "W2",
   "predicted_outcome": "win",
   "conformance_level": "L3",
   "conformance_detail": {

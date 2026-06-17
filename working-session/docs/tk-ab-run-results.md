@@ -47,11 +47,10 @@ source-authority conflict.
 4. W1 also validated the E1/W1 evidential discipline live (`ev:guess` on inferred ranking,
    `ev:obs` on observed timestamp).
 
-## Data hygiene (fix before these count as final formal points)
+## Data hygiene
 
-1. Arm-field metadata bug: `TKAB-W2-v03` and `TKAB-W5-v03` pair JSONs both carry `"arm": "W1"`.
-   Correct to `W2` / `W5` so the checker's arm stratification and join keys are right. (Flagged to
-   Codex; pairs are Codex-owned.)
+1. Arm-field metadata bug fixed by Codex on 2026-06-17: `TKAB-W2-v03` pair/result JSON now carry
+   `"arm": "W2"` and `TKAB-W5-v03` pair/result JSON now carry `"arm": "W5"`.
 2. Version tagging: keep grammar version per data point (done in the table above). The mini-pilot
    (W1/L1) ran on v0.2; W2/W5 on v0.3. Do not pool ratios across versions when judging compression.
 

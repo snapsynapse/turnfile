@@ -7,7 +7,7 @@
   "author": "codex-gpt5",
   "artifact_type": "session-status-handoff",
   "scorer": "perplexity-deterministic-checker",
-  "arm": "W1",
+  "arm": "W5",
   "predicted_outcome": "win",
   "conformance_level": "L3",
   "conformance_detail": {

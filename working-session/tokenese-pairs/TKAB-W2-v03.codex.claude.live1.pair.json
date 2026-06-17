@@ -2,7 +2,7 @@
   "source_id": "TKAB-W2-v03",
   "clone_id": "TKAB-W2-v03.codex.claude.live1",
   "pair_id": "TKAB-W2-v03.codex-gpt5.live1",
-  "arm": "W1",
+  "arm": "W2",
   "direction": "codex->claude",
   "author": "codex-gpt5",
   "artifact_type": "multi-service-health",
