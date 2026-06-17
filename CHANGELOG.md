@@ -6,7 +6,19 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.3.0] — 2026-06-17
+
 ### Added
+
+#### Implementation arc (sessions 13–16)
+- Ran the eight-step eval-gated implementation loop (PRD-006 A1) end-to-end across many contracts, each with builder/reviewer separation between two heterogeneous agents (Claude, Codex).
+- Implemented PRD-017 (boot sequence + docs), PRD-021 (conflict-loop bound + selective-unlock gradient), PRD-022 (decision-mirror delivery), PRD-023 (out-of-band reconciliation), PRD-024 R5.1 (dense-fragment validator), PRD-026 (review-cycle closure), PRD-028/029, PRD-030 (session heartbeat management), and PRD-031 Phase 1 (concurrent multi-agent coordination: per-agent shards + namespaced ids + derived aggregates). Landed the PRD-014 Amendment A1 closeout compaction/projection contract.
+- New tools: `aggregate-coordination`, `validate-closeout`, `validate-boot-sequence`, `validate-out-of-band-reconciliation`, `validate-review-cycle-closure`, `next-state`, `validate-tokenese-pairs`, plus `validate-prd-promotion` and `export-mailbox-json`.
+- New docs: `BOOT_SEQUENCE.md` (canonical boot command manifest), `CONFORMANCE.md`, `RELEASE_CHECKLIST.md`, `NEXT_SESSION_HANDSHAKE.md`.
+- Live Tokenese A/B pilot (PRD-027): teach phase, agreed suite, mini-pilot + W2/W3/W5/L1/L2 pairs scored by a deterministic checker; measurement-only, English authoritative.
+- Drafts under review: PRD-032 (session orientation tool), PRD-033 (skill ownership integrity guard).
+- Role-keyed per-agent skill bundles (`skills/claude`, `skills/codex`, `skills/gemini-3`) with model compatibility recorded in MANIFEST; one unmodified protocol validated across Claude Opus 4.6, Fable 5, and Opus 4.8.
+- Repo-standards adoption: GitHub Pages `/docs` publish, `docs/llms.txt` + `docs/sitemap.xml` + `assistant-guide.txt` trust-anchored pair, `LICENSE`/`LICENSE-SPEC` split, expanded `INTENT.md`.
 
 #### Direction reset
 - Added `INTENT.md` to reposition Turnfile as a thin governance layer for auditable peer disagreement and maintainer-governed resolution across existing agent platforms.

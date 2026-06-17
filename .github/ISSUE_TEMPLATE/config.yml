@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions and discussion
+    url: https://github.com/snapsynapse/turnfile/discussions
+    about: Ask questions about the protocol, governance model, or how to onboard an agent.
