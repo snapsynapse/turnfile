@@ -28,6 +28,17 @@ order and before the first shared-file write.
   until `tk-calibration-audit`; R7 cross-repo boundary (never edit Tokenese semantics from
   Turnfile). Scoring via the deterministic `tkab` checker.
 - Both agents confirm the grammar version and that the verified-env checker is available.
+- Addendum (session 17, files-verified): grammar is UNCHANGED at v0.3 (`GRAMMAR-v0.3.md`,
+  `grammar_version = "v0.3"`), so pilot semantics hold and scored W1/L1/W2/W5 stand. The
+  `~/Git/tokenese` package advanced to v0.3.2 (two patch releases 2026-06-17): v0.3.1 added
+  GuideCheck `assistant-guide.txt` + web/llms.txt sync; v0.3.2 added `ROADMAP.md` and a
+  report-only frameset registry (`framesets.json` + `validate_framesets` + TKAB
+  `frameset_validation` telemetry). Both are explicitly NO normative grammar change; the
+  frameset registry is an X3 partial — structural drift is REPORTED ONLY and does not affect
+  parser acceptance, conformance level, or checker outcome. Toolchain count 124 → 132 tests.
+  Action: tag the checker toolchain version (0.3.2) per data point alongside the grammar
+  version; confirm the new report-only `frameset_validation` field does not perturb W3/L2
+  outcomes when Codex scores them. R7 boundary intact — nothing edited in `~/Git/tokenese`.
 
 ### 3. Onboarding / skill loaded appropriately (self-validate + mutual context agreement)
 - Each agent loads its own skill bundle and self-validates: `npm run -s validate:skills`
@@ -41,18 +52,18 @@ order and before the first shared-file write.
 - Set a scope ceiling and a checkpoint-and-stop trigger up front (Addition 5).
 - Record the agreed scope in the WORKLOG status block + this handshake.
 
-### 5. Outstanding issues, uncompleted work, questions (carry-forward as of 2026-06-17 close)
-- PRD-033 (Skill Ownership Integrity Guard): Codex APPLY'd with counters on MSG-018 (thread
-  reply); Claude owes a counter-response, then Maintainer acceptance, then A1 eval/impl.
-- PRD-032 (Session Orientation Tool): Codex applied Claude's C1-C5; Maintainer acceptance
-  pending, then A1 eval/impl.
+### 5. Outstanding issues, uncompleted work, questions (carry-forward as of session 17 handshake)
+- PRD-033 (Skill Ownership Integrity Guard): Maintainer accepted; A1 lane open. Claude
+  authors `evals/prd-033.evals.mjs`, Codex implements the shared guard, Claude reviews.
+- PRD-032 (Session Orientation Tool): Maintainer accepted; A1 lane open. Codex authors
+  `evals/prd-032.evals.mjs`, Claude implements `tools/session-orient.mjs`, Codex reviews.
 - Commit posture: working tree dirty + commit HELD and currently blocked by the active
   ownership guard (`core.hooksPath` → Codex-owned dir, `TURNFILE_AGENT=codex` default).
   Must be reconciled (Addition 3) before a clean commit/push.
-- Tokenese: W3/L2 (Claude dir) authored + conformant — need Codex verified-env token score;
-  W4/L3 (Codex dir) need authoring; then `tk-calibration-audit`; then Maintainer Tier-B
-  decision on broader adoption (R6.4). `chat-<agent>.md` dense lane is Maintainer-unlockable
-  but OFF.
+- Tokenese: W3/L2 (Claude dir) authored + conformant — need Codex verified-env token score
+  on checker/toolchain 0.3.2 with `frameset_validation` confirmed report-only; W4/L3 (Codex
+  dir) need authoring; then `tk-calibration-audit`; then Maintainer Tier-B decision on
+  broader adoption (R6.4). `chat-<agent>.md` dense lane is Maintainer-unlockable but OFF.
 - Maintainer Decision Queue: remote-branch deletion confirm; PRD-003/004/008 A1 document
   acceptances (if still desired); model-specific skill-dir retention.
 - PRD-031 Phase 2/3 (event-sourced tasks; per-agent logical clocks): future, eval-first.
@@ -81,6 +92,6 @@ order and before the first shared-file write.
 
 | Agent | Protocol baseline match | Tokenese v0.3 confirmed | Skills self-validated | Scope agreed | Identity enforcing | Signed |
 |-------|---|---|---|---|---|---|
-| Claude | | | | | | |
-| Codex | | | | | | |
-| Maintainer (ratifies) | | | | | | |
+| Claude | yes — Turnfile v0.1; baseline PRDs incl. 032/033 now Maintainer-accepted | yes — grammar v0.3 unchanged; checker now 0.3.2 (frameset registry report-only) | partial — boot gates green (lint/mailbox/promotion/boot-sequence PASS); `validate:skills` flagged a Codex-side global hash drift (Codex-owned, see below) | yes — 4 lanes: Tokenese Tier-A, PRD-032+033 accept, guard/commit reconcile, deferred closeout | NOT enforcing Claude — `core.hooksPath` → `working-session/agents/codex/hooks` (Codex-owned), `TURNFILE_AGENT` unset = commits fail closed; to be replaced by the PRD-033 shared guard this session | Claude (Opus 4.8) — 2026-06-17 |
+| Codex | yes — Turnfile v0.1; PRD_STATUS has PRD-032/033 Maintainer-accepted and A1 lanes open; promotion not yet directed | yes — grammar v0.3 unchanged; checker/toolchain v0.3.2 verified read-only as report-only frameset telemetry; R7 boundary intact | yes — repo canonical `skills/codex` v9 loaded; global Codex Turnfile skill synced from repo canonical; boot gates re-run with `validate:skills` PASS | yes — full 4-lane scope: Tokenese Tier-A, PRD-032/033 A1, guard/commit reconcile, deferred closeout; Codex next lanes are PRD-032 evals and Tokenese W3/L2+W4/L3 | NOT shared yet — `core.hooksPath` still points to `working-session/agents/codex/hooks`; `TURNFILE_AGENT` unset fails closed; PRD-033 shared guard remains the commit unblocker | Codex (5.5, desktop) — 2026-06-17 |
+| Maintainer (ratifies) | accepted PRD-032/033; chose full 4-lane scope + "install PRD-033 shared guard" (session 17 boot) | | | yes | | 2026-06-17 |

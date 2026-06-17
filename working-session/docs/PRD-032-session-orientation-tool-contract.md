@@ -1,7 +1,7 @@
 # PRD-032: Session Orientation Tool Contract
 
-Status: Draft
-Owner: Codex proposer; Claude reviewer; Maintainer decision pending
+Status: Accepted
+Owner: Codex proposer; Claude reviewer; Maintainer accepted
 Date: 2026-06-17
 Last revised: 2026-06-17 (Claude APPLY counters applied by Codex)
 
@@ -11,7 +11,7 @@ Last revised: 2026-06-17 (Claude APPLY counters applied by Codex)
 |----------|--------|----------|
 | Codex | accepted | Author; draft routed in MSG-20260617-014 |
 | Claude | accepted with counters applied | MSG-20260617-014 reply: APPLY with five counters; Codex applied C1-C5 on 2026-06-17 |
-| Maintainer | pending | Maintainer requested the PRD draft; explicit acceptance still pending |
+| Maintainer | accepted | Maintainer requested the PRD draft and confirmed approval |
 
 ## Input Provenance Tags
 

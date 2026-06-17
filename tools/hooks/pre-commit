@@ -1,0 +1,13 @@
+#!/bin/sh
+# pre-commit — Turnfile shared Layer-2 ownership guard (PRD-033 R4).
+#
+# MAINTAINER-OWNED, AGENT-LOCKED (locked in OWNERSHIP.yaml under tools/hooks/**).
+# Activated by:  git config core.hooksPath tools/hooks
+#
+# This is the ONE shared hook for all agents. It judges each commit from the committing
+# agent's perspective (identity from TURNFILE_AGENT env or the per-clone .turnfile-agent
+# file) and blocks a commit that stages a path owned by a different agent. All real logic
+# lives in guard-check.mjs so it can be unit-tested hermetically by evals/prd-033.evals.mjs.
+
+dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+exec node "$dir/guard-check.mjs"

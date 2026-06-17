@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2026-06-17",
+  "updated_at": "2026-06-17 (session 17: PRD-032 + PRD-033 Maintainer-accepted)",
   "policy": {
     "required_reviewers": [
       "codex",
@@ -1046,7 +1046,7 @@
       "title": "Session Orientation Tool Contract",
       "path": "working-session/docs/PRD-032-session-orientation-tool-contract.md",
       "shelf": "working-session/docs",
-      "state": "draft",
+      "state": "accepted",
       "acceptance": {
         "codex": {
           "status": "accepted",
@@ -1061,23 +1061,21 @@
           ]
         },
         "maintainer": {
-          "status": "pending",
+          "status": "accepted",
           "evidence": [
-            "Maintainer requested the draft on 2026-06-17; explicit acceptance still pending"
+            "Maintainer requested the draft on 2026-06-17; document acceptance recorded 2026-06-17 (session 17 boot, AskUserQuestion scope decision: 'PRD-032 + PRD-033 accept'). Opens the PRD-006 A1 lane. Promotion to docs/prds not yet directed; remains on working-session/docs shelf until explicit promotion."
           ]
         }
       },
-      "blocking_items": [
-        "Maintainer acceptance pending"
-      ],
-      "eligible_for_docs_prds": false,
+      "blocking_items": [],
+      "eligible_for_docs_prds": true,
       "implementation": {
         "state": "pending",
         "evals": null,
         "eval_author": "codex",
         "implementer": "claude",
         "reviewer": "codex",
-        "notes": "If accepted, run through PRD-006 A1. Codex is proposer/eval author, Claude implements, Codex reviews. Scope: read-only tools/session-orient.mjs orientation helper plus skill references."
+        "notes": "Accepted and open under PRD-006 A1. Codex is proposer/eval author, Claude implements, Codex reviews. Scope: read-only tools/session-orient.mjs orientation helper plus skill references."
       }
     },
     {
@@ -1085,7 +1083,7 @@
       "title": "Skill Ownership Integrity Guard",
       "path": "working-session/docs/PRD-033-skill-ownership-integrity-guard.md",
       "shelf": "working-session/docs",
-      "state": "draft",
+      "state": "accepted",
       "acceptance": {
         "codex": {
           "status": "accepted",
@@ -1100,23 +1098,21 @@
           ]
         },
         "maintainer": {
-          "status": "pending",
+          "status": "accepted",
           "evidence": [
-            "Maintainer directed the guardrail (2026-06-17) and chose draft-PRD-first + Maintainer-owned/agent-locked guard; explicit document acceptance pending"
+            "Maintainer directed the guardrail (2026-06-17) and chose draft-PRD-first + Maintainer-owned/agent-locked guard; document acceptance recorded 2026-06-17 (session 17 boot, AskUserQuestion: 'PRD-032 + PRD-033 accept' + commit posture 'Install PRD-033 shared guard'). Opens the PRD-006 A1 lane and authorizes building the shared guard + repointing core.hooksPath."
           ]
         }
       },
-      "blocking_items": [
-        "Maintainer acceptance pending"
-      ],
-      "eligible_for_docs_prds": false,
+      "blocking_items": [],
+      "eligible_for_docs_prds": true,
       "implementation": {
-        "state": "pending",
-        "evals": null,
+        "state": "done",
+        "evals": "evals/prd-033.evals.mjs",
         "eval_author": "claude",
         "implementer": "codex",
         "reviewer": "claude",
-        "notes": "Both agents APPLY-converged (Codex C1-C5 folded in: staged-not-dirty pre-commit, core.hooksPath drift validator, Maintainer-owned OWNERSHIP.yaml+tools/hooks/pre-commit locked, hand-authored map v1, Layer-1 config rule). Maintainer document acceptance is the remaining gate before A1 eval/implementation."
+        "notes": "DONE at rev ~198 via PRD-006 A1. Step 4 (Claude): evals/prd-033.evals.mjs (12/12 green) + Maintainer-owned/agent-locked infra drafted under Maintainer direction (OWNERSHIP.yaml; tools/hooks/pre-commit + guard-check.mjs shared Layer-2; tools/hooks/README.md; tools/validate-ownership-guard.mjs; .gitignore). Step 6 (Codex, MSG-20260617-023): Codex-owned Layer-1 adapter working-session/agents/codex/layer1-pretool-ownership-guard.mjs (reuses shared ownerOf), retired stopgap working-session/agents/codex/hooks/pre-commit, set .turnfile-agent=codex, repointed core.hooksPath=tools/hooks. Step 7 (Claude review APPROVE, MSG-20260617-023): independently re-ran evals 12/12; validate-ownership-guard guard_active:true/enforcing_identity:codex/clean; LIVE active-hook real commit staging a peer-owned path BLOCKED with no commit created (HEAD unchanged); Codex L1 adapter own+shared allow / peer block / maintainer block. No counter. OPEN (not implementation gaps): locked files (OWNERSHIP.yaml, tools/hooks/**) commit as TURNFILE_AGENT=maintainer; in a single shared working tree each agent must export TURNFILE_AGENT=<self> per commit (per-clone .turnfile-agent fits a true per-agent clone). Maintainer may promote PRD-033 to docs/prds when desired."
       }
     }
   ]

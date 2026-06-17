@@ -1,0 +1,65 @@
+# OWNERSHIP.yaml — Turnfile Skill Ownership Map (PRD-033)
+#
+# MAINTAINER-OWNED, AGENT-LOCKED. No agent (claude, codex, gemini, …) may edit or
+# commit this file or anything under `tools/hooks/`. Only the Maintainer may change the
+# ownership model. An agent may *propose* changes via a PRD/review routed to the
+# Maintainer (PRD-033 R2.2); the change takes effect only when the Maintainer commits it.
+#
+# This map drives the shared Layer-2 pre-commit guard (`tools/hooks/pre-commit` →
+# `tools/hooks/guard-check.mjs`) and the boot/closeout drift check
+# (`tools/validate-ownership-guard.mjs`). It is hand-authored for v1 (PRD-033 C4);
+# registry-derived ownership is a later refinement once PRD-031 shard metadata stabilizes.
+#
+# Semantics (PRD-033 R1/R2/R4):
+#   - A staged path that matches one agent's `owned` globs is that agent's; only that
+#     agent (or the Maintainer) may stage/commit it.
+#   - A staged path that matches `maintainer_owned` is the Maintainer's; NO agent may
+#     stage/commit it. This is what stops an agent widening its own permissions.
+#   - Any path matching no owner is COLLABORATIVE — any agent may edit/commit it
+#     (PRDs, mailbox, WORKLOG, TURNFILE, schemas, docs, templates, tools/* except
+#     tools/hooks/, MODEL_LEDGER, etc.).
+#   - Glob support: `**` matches any depth, `*` matches within one path segment.
+#
+# Identity for the commit layer comes from `TURNFILE_AGENT` (env) or a per-clone,
+# gitignored `.turnfile-agent` file (PRD-033 R8, Maintainer choice 2026-06-17).
+
+version: "1.0"
+owner: "maintainer: Sam Rogers"
+updated: "2026-06-17"
+prd: "PRD-033"
+
+# Registered agents and the path patterns each exclusively owns (R1 locked set).
+agents:
+  claude:
+    owned:
+      - "skills/claude/**"
+      - "working-session/boot-claude.md"
+      - "working-session/chat-claude.md"
+      - "working-session/agents/claude/**"
+  codex:
+    owned:
+      - "skills/codex/**"
+      - "working-session/boot-codex.md"
+      - "working-session/chat-codex.md"
+      - "working-session/agents/codex/**"
+  gemini:
+    # Onboarding agent (PRD-015 deferred). Locked now so the boundary exists before
+    # Gemini receives write authority; harmless while no Gemini session runs.
+    owned:
+      - "skills/gemini/**"
+      - "skills/gemini-3/**"
+      - "working-session/boot-gemini.md"
+      - "working-session/chat-gemini.md"
+      - "working-session/agents/gemini/**"
+      - "GEMINI.md"
+
+# Legacy / model-pinned skill directories map to their owning agent (R1 note).
+legacy:
+  "skills/claude-opus_4.6/**": "claude"
+  "skills/codex_5.3/**": "codex"
+
+# Maintainer-owned, agent-locked paths (PRD-033 R2.1 / C3). Blocked for every agent;
+# only a Maintainer identity (or a logged override) may stage these.
+maintainer_owned:
+  - "OWNERSHIP.yaml"
+  - "tools/hooks/**"

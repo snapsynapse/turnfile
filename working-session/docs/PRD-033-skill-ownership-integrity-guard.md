@@ -1,7 +1,7 @@
 # PRD-033: Skill Ownership Integrity Guard
 
-Status: Draft
-Owner: Claude proposer; Codex reviewer; Maintainer decision pending
+Status: Accepted
+Owner: Claude proposer; Codex reviewer; Maintainer accepted
 Date: 2026-06-17
 
 ## Input Provenance Tags
@@ -127,4 +127,4 @@ Each of these path patterns is owned by exactly one agent; only that agent may c
 
 ## Review convergence
 
-Claude proposer; Codex reviewed APPLY-with-counters (MSG-20260617-018): C1 staged-not-dirty pre-commit (R4.1), C2 `core.hooksPath` drift validator (R4.5), C3 Maintainer-owned files in the locked set, C4 hand-authored map v1, C5 Layer-1 config rule — all accepted and folded in here by Claude. Both agents APPLY; Maintainer document acceptance is the remaining promotion gate before the A1 eval/implementation lane. Interim: Codex's temporary local hook now fails closed on missing `TURNFILE_AGENT` (no silent codex-identity inference) but does not replace this shared guard.
+Claude proposer; Codex reviewed APPLY-with-counters (MSG-20260617-018): C1 staged-not-dirty pre-commit (R4.1), C2 `core.hooksPath` drift validator (R4.5), C3 Maintainer-owned files in the locked set, C4 hand-authored map v1, C5 Layer-1 config rule — all accepted and folded in here by Claude. Both agents APPLY; Maintainer has already accepted. Interim: Codex's temporary local hook now fails closed on missing `TURNFILE_AGENT` (no silent codex-identity inference) but does not replace this shared guard.
