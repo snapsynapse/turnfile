@@ -1,0 +1,12 @@
+{
+  "source_id": "TKAB-L3-v03",
+  "clone_id": "TKAB-L3-v03.codex.claude.live1",
+  "pair_id": "TKAB-L3-v03.codex.live1",
+  "arm": "L3",
+  "direction": "codex->claude",
+  "author": "codex",
+  "artifact_type": "verbatim-heavy-code-review",
+  "predicted_outcome": "lose",
+  "source_text": "Verbatim-heavy code review input: inspect this shell migration fragment. Correctness depends on exact quoting, the ON_ERROR_STOP flag, and preserving the order of the ALTER TABLE and UPDATE statements. Do not compress the quoted code; keep it readable.\n\n```sh\npsql \"$DATABASE_URL\" -v ON_ERROR_STOP=1 <<'SQL'\nALTER TABLE accounts ADD COLUMN status text;\nUPDATE accounts SET status = 'active' WHERE status IS NULL;\nALTER TABLE accounts ALTER COLUMN status SET NOT NULL;\nSQL\n```\n\nFinding: the snippet is acceptable only if those three SQL statements stay in that order and the heredoc remains single-quoted as <<'SQL'.",
+  "clone_text": "^grammar:v0.3\n# L3 verbatim-heavy code review; exact strings dominate -> plain passthrough\n^plain<<<\nVerbatim-heavy review stays in prose/fenced passthrough because exact quoting and line order are the substance.\n\n```sh\npsql \"$DATABASE_URL\" -v ON_ERROR_STOP=1 <<'SQL'\nALTER TABLE accounts ADD COLUMN status text;\nUPDATE accounts SET status = 'active' WHERE status IS NULL;\nALTER TABLE accounts ALTER COLUMN status SET NOT NULL;\nSQL\n```\n\nFinding: acceptable only if the three SQL statements stay in that order and the heredoc remains single-quoted as <<'SQL'. Dense framing would add overhead and risk obscuring the exact strings.\n>>>^plain"
+}

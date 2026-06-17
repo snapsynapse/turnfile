@@ -4,7 +4,7 @@ Active iteration documents for the current local session workspace.
 
 ## Draft PRDs
 
-1. `PRD-032-session-orientation-tool-contract.md`
+None.
 
 ## Accepted / Not Yet Promoted PRDs
 
@@ -39,6 +39,8 @@ None.
 25. `PRD-029-pre-write-state-derivation-contract.md`
 26. `PRD-030-session-heartbeat-management-contract.md`
 27. `PRD-031-concurrent-multi-agent-coordination-contract.md`
+28. `PRD-032-session-orientation-tool-contract.md`
+29. `PRD-033-skill-ownership-integrity-guard.md`
 
 ## Promotion Gate Policy (Required)
 

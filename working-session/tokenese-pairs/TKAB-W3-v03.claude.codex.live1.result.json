@@ -18,15 +18,15 @@
   },
   "token_counts": {
     "source": {
-      "o200k": null,
-      "o200k_method": "unavailable",
+      "o200k": 64,
+      "o200k_method": "tiktoken",
       "anthropic": 107,
       "anthropic_method": "cached_costs+heuristic",
       "chars": 307
     },
     "clone": {
-      "o200k": null,
-      "o200k_method": "unavailable",
+      "o200k": 101,
+      "o200k_method": "tiktoken",
       "anthropic": 131,
       "anthropic_method": "cached_costs+heuristic",
       "chars": 323
@@ -34,8 +34,8 @@
     "savings": {
       "anthropic_delta": -24,
       "anthropic_ratio": 1.2243,
-      "o200k_delta": null,
-      "o200k_ratio": null
+      "o200k_delta": -37,
+      "o200k_ratio": 1.5781
     }
   },
   "readback_diff": null,
@@ -67,6 +67,47 @@
   "comment_lines": [
     2
   ],
+  "frameset_validation": {
+    "schema_version": "tokenese-framesets-0.1",
+    "status": "experimental-report-only",
+    "checked_statement_count": 1,
+    "checked_ops": [
+      "run"
+    ],
+    "unregistered_ops": [
+      "put",
+      "say"
+    ],
+    "issues": [
+      {
+        "line_no": 5,
+        "op": "run",
+        "code": "unregistered_slot",
+        "severity": "info",
+        "message": "slot 'task' is not declared for op 'run'",
+        "signature": "run :: what arg -> status",
+        "raw": "run! @svc task:deploy env:□env approver:□ // both unbound; await binding before run"
+      },
+      {
+        "line_no": 5,
+        "op": "run",
+        "code": "unregistered_slot",
+        "severity": "info",
+        "message": "slot 'env' is not declared for op 'run'",
+        "signature": "run :: what arg -> status",
+        "raw": "run! @svc task:deploy env:□env approver:□ // both unbound; await binding before run"
+      },
+      {
+        "line_no": 5,
+        "op": "run",
+        "code": "unregistered_slot",
+        "severity": "info",
+        "message": "slot 'approver' is not declared for op 'run'",
+        "signature": "run :: what arg -> status",
+        "raw": "run! @svc task:deploy env:□env approver:□ // both unbound; await binding before run"
+      }
+    ]
+  },
   "outcome": "indeterminate",
   "notes": [
     "Conformance L3; outcome did not match a typed rule."
@@ -89,7 +130,7 @@
     "spec_sha": "68cb84e2dbb2aa36f9965c823afab770de64df0bd9df0bc1c878eb3aac5f761e",
     "design_sha": "5dc9338e7b6386d01ae46b47a6a7ba70478929460ecdea74b67e20afe204d520",
     "conformance_sha": "0250b71342c49603f40fe667700422d03a95855cd45c0825841a6a8f35e987c6",
-    "intent_sha": "5f783b8367feef6d9ab69a685ea5964419ba7222095b8b29a07aee1a9334ade0",
+    "intent_sha": "69723894dd106ac133296f62edb081f0e6a1b599f7133c03bb68e6a71d2f6c2a",
     "handoff_sha": "16f948709345ee2d32ff363e90ec8782129be08d9aa3ddb7c4030afeab45c1b3",
     "anthropic_costs_sha": "12e5fe083ecf44949ec1d55fb43c1f6f547979256f2f832fef4788afbd7c91d2",
     "prd_027_sha": "unpinned",
@@ -99,7 +140,7 @@
       "schema_version": "1.0",
       "spec_sha256": "68cb84e2dbb2aa36f9965c823afab770de64df0bd9df0bc1c878eb3aac5f761e",
       "design_sha256": "5dc9338e7b6386d01ae46b47a6a7ba70478929460ecdea74b67e20afe204d520",
-      "intent_sha256": "5f783b8367feef6d9ab69a685ea5964419ba7222095b8b29a07aee1a9334ade0",
+      "intent_sha256": "69723894dd106ac133296f62edb081f0e6a1b599f7133c03bb68e6a71d2f6c2a",
       "conformance_sha256": "0250b71342c49603f40fe667700422d03a95855cd45c0825841a6a8f35e987c6",
       "lexicon_sha256": "12e5fe083ecf44949ec1d55fb43c1f6f547979256f2f832fef4788afbd7c91d2",
       "grammar_target": "v0.3 (GRAMMAR-v0.3.md) over v0.2 (DESIGN.md §7) over v0.1 (spec.md)",

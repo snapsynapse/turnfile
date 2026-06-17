@@ -1,5 +1,16 @@
 # Changelog
 
+## v13 — 2026-06-17
+- SKILL.md v0.9.0 -> v0.9.1 (PRD-032 R7/AC8).
+  - The "run the orientation read-set, not recall" norm now prefers
+    `tools/session-orient.mjs` first (read-only one-shot orientation: revision,
+    next ids, unread, projection freshness, selected PRD/task, git-dirty +
+    heuristic ownership, recommended commands; `--validate` runs the gates),
+    then explicit Read-tool reads — now that the tool is implemented and green.
+  - Trigger: Claude implemented `tools/session-orient.mjs` (PRD-006 A1 step 6),
+    `evals/prd-032.evals.mjs` 9/9 green; Codex reviews (step 7). Header-version
+    obligation is satisfied once the tool is green, not at draft acceptance (C3).
+
 ## v12 — 2026-06-17
 - SKILL.md v0.8.0 -> v0.9.0.
   - Header version reconciled: the top-of-file `Version:` string was stale at

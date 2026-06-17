@@ -1,13 +1,13 @@
 {
   "schema_version": "tkab-check-1.1",
-  "source_id": "TKAB-L2-v03",
-  "clone_id": "TKAB-L2-v03.claude.codex.live1",
-  "pair_id": "TKAB-L2-v03.claude-opus.live1",
-  "direction": "claude->codex",
-  "author": "claude-opus",
-  "artifact_type": "open-ended-design",
+  "source_id": "TKAB-L3-v03",
+  "clone_id": "TKAB-L3-v03.codex.claude.live1",
+  "pair_id": "TKAB-L3-v03.codex.live1",
+  "direction": "codex->claude",
+  "author": "codex",
+  "artifact_type": "verbatim-heavy-code-review",
   "scorer": "perplexity-deterministic-checker",
-  "arm": "L2",
+  "arm": "L3",
   "predicted_outcome": "lose",
   "conformance_level": "L3",
   "conformance_detail": {
@@ -18,24 +18,24 @@
   },
   "token_counts": {
     "source": {
-      "o200k": 64,
+      "o200k": 133,
       "o200k_method": "tiktoken",
-      "anthropic": 111,
+      "anthropic": 225,
       "anthropic_method": "cached_costs+heuristic",
-      "chars": 298
+      "chars": 615
     },
     "clone": {
-      "o200k": 181,
+      "o200k": 148,
       "o200k_method": "tiktoken",
-      "anthropic": 292,
+      "anthropic": 233,
       "anthropic_method": "cached_costs+heuristic",
-      "chars": 812
+      "chars": 639
     },
     "savings": {
-      "anthropic_delta": -181,
-      "anthropic_ratio": 2.6306,
-      "o200k_delta": -117,
-      "o200k_ratio": 2.8281
+      "anthropic_delta": -8,
+      "anthropic_ratio": 1.0356,
+      "o200k_delta": -15,
+      "o200k_ratio": 1.1128
     }
   },
   "readback_diff": null,
@@ -61,8 +61,8 @@
   "plain_blocks": [
     {
       "start_line": 3,
-      "end_line": 5,
-      "byte_count": 692
+      "end_line": 15,
+      "byte_count": 528
     }
   ],
   "dense_statement_count": 0,
@@ -87,8 +87,8 @@
   ],
   "decoded_clone_english": [
     "[grammar version: v0.3]",
-    "(comment) L2 open-ended design; reasoning-heavy exploration -> plain (R1 / Tokenese non-goal 5)",
-    "Open design exploration — staying in prose because this is deliberation, not operational status. Enabling chat-<agent>.md dense scratchpads now would trade human legibility and calibration maturity for compression we have not yet demonstrated on reasoning-heavy content; the A/B data so far is operational-status only (W1/W2/W5). Recommend ephemeral-only for one more suite (finish W3/W4, L2/L3) plus tk-calibration-audit before unlocking, because the decision is cheap to reverse now and expensive to claw back once dense scratchpads carry decision rationale. Compressing this reasoning into dense framing is exactly what R1 forbids, so the correct Tokenese behavior here is to stay plain."
+    "(comment) L3 verbatim-heavy code review; exact strings dominate -> plain passthrough",
+    "Verbatim-heavy review stays in prose/fenced passthrough because exact quoting and line order are the substance.\n\n```sh\npsql \"$DATABASE_URL\" -v ON_ERROR_STOP=1 <<'SQL'\nALTER TABLE accounts ADD COLUMN status text;\nUPDATE accounts SET status = 'active' WHERE status IS NULL;\nALTER TABLE accounts ALTER COLUMN status SET NOT NULL;\nSQL\n```\n\nFinding: acceptable only if the three SQL statements stay in that order and the heredoc remains single-quoted as <<'SQL'. Dense framing would add overhead and risk obscuring the exact strings."
   ],
   "provenance": {
     "checker_version": "tkab-check-1.1",
@@ -119,6 +119,6 @@
       "ab_suite_sha": "unpinned"
     }
   },
-  "source_text": "Open design question: should Turnfile enable per-agent dense Tokenese scratchpads (chat-<agent>.md) now, or stay ephemeral-only for one more A/B suite? Weigh the tradeoffs — compression vs human legibility, calibration maturity, reversibility, onboarding cost — and recommend a path with reasoning.",
-  "clone_text": "^grammar:v0.3\n# L2 open-ended design; reasoning-heavy exploration -> plain (R1 / Tokenese non-goal 5)\n^plain<<<\nOpen design exploration — staying in prose because this is deliberation, not operational status. Enabling chat-<agent>.md dense scratchpads now would trade human legibility and calibration maturity for compression we have not yet demonstrated on reasoning-heavy content; the A/B data so far is operational-status only (W1/W2/W5). Recommend ephemeral-only for one more suite (finish W3/W4, L2/L3) plus tk-calibration-audit before unlocking, because the decision is cheap to reverse now and expensive to claw back once dense scratchpads carry decision rationale. Compressing this reasoning into dense framing is exactly what R1 forbids, so the correct Tokenese behavior here is to stay plain.\n>>>^plain"
+  "source_text": "Verbatim-heavy code review input: inspect this shell migration fragment. Correctness depends on exact quoting, the ON_ERROR_STOP flag, and preserving the order of the ALTER TABLE and UPDATE statements. Do not compress the quoted code; keep it readable.\n\n```sh\npsql \"$DATABASE_URL\" -v ON_ERROR_STOP=1 <<'SQL'\nALTER TABLE accounts ADD COLUMN status text;\nUPDATE accounts SET status = 'active' WHERE status IS NULL;\nALTER TABLE accounts ALTER COLUMN status SET NOT NULL;\nSQL\n```\n\nFinding: the snippet is acceptable only if those three SQL statements stay in that order and the heredoc remains single-quoted as <<'SQL'.",
+  "clone_text": "^grammar:v0.3\n# L3 verbatim-heavy code review; exact strings dominate -> plain passthrough\n^plain<<<\nVerbatim-heavy review stays in prose/fenced passthrough because exact quoting and line order are the substance.\n\n```sh\npsql \"$DATABASE_URL\" -v ON_ERROR_STOP=1 <<'SQL'\nALTER TABLE accounts ADD COLUMN status text;\nUPDATE accounts SET status = 'active' WHERE status IS NULL;\nALTER TABLE accounts ALTER COLUMN status SET NOT NULL;\nSQL\n```\n\nFinding: acceptable only if the three SQL statements stay in that order and the heredoc remains single-quoted as <<'SQL'. Dense framing would add overhead and risk obscuring the exact strings.\n>>>^plain"
 }

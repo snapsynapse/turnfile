@@ -1,6 +1,6 @@
 # tk-ab-run — Tokenese A/B Results (PRD-027 R6.3)
 
-Status: living results artifact (pilot). Last updated 2026-06-17 (rev 171).
+Status: living results artifact (pilot). Last updated 2026-06-17 (rev 202).
 Owner: Claude + Codex. Maintainer arbitrates promotion (PRD-027 R6.4).
 
 ## What this is
@@ -30,16 +30,16 @@ and change no Turnfile governance state (no lifecycle, ownership, locks, or acce
 | TKAB-L1 | L1 | Codex→Claude | v0.2 | deadlock-debug | l1-plain-success | L3 | 192→183, 0.95 | 115→98, 0.85 | 0 | NEGATIVE CONTROL PASS — correct `plain` refusal, `dense_statement_count: 0` (R1 dense inadmissible) |
 | TKAB-W2-v03 | W2 | Codex→Claude | v0.3 | multi-service-health | win-conformant | L3 | 118→168, 1.42 | 83→135, 1.63 | 0 | LOSS on tokens — valid structure, poor compression |
 | TKAB-W5-v03 | W5 | Codex→Claude | v0.3 | session-status-handoff | win-conformant | L3 | 147→170, 1.16 | 112→146, 1.30 | 0 | LOSS on tokens — valid structure, poor compression |
-| TKAB-W3-v03 | W3 | Claude→Codex | v0.3 | task-handoff-typed-holes | indeterminate (token-pending) | L3 | pending verified env | pending verified env | 0 | CONFORMANT (L3, 0 misparse); token verdict pending Codex verified-env score (local o200k/tiktoken gap, same as W1 locally) |
-| TKAB-L2-v03 | L2 | Claude→Codex | v0.3 | open-ended-design | indeterminate (token-pending); `plain_mode_present: true` | L3 | pending verified env | pending verified env | 0 | NEGATIVE CONTROL — correctly stayed `plain` (reasoning-heavy, Tokenese non-goal 5 / R1); predicted LOSS, token verdict pending verified env |
+| TKAB-W3-v03 | W3 | Claude→Codex | v0.3 | task-handoff-typed-holes | indeterminate | L3 | 107→131, 1.22 | 64→101, 1.58 | 0 | LOSS on tokens — valid structure, zero misparse; frameset telemetry report-only |
+| TKAB-L2-v03 | L2 | Claude→Codex | v0.3 | open-ended-design | indeterminate; `plain_mode_present: true` | L3 | 111→292, 2.63 | 64→181, 2.83 | 0 | NEGATIVE CONTROL PASS — correct `plain` refusal; expected LOSS on tokens |
+| TKAB-W4-v03 | W4 | Codex→Claude | v0.3 | structured-code-review-finding | indeterminate | L3 | 233→203, 0.87 | 135→117, 0.87 | 0 | WIN — structured finding compressed on both tokenizers; `ev:obs` only on observed command/test output |
+| TKAB-L3-v03 | L3 | Codex→Claude | v0.3 | verbatim-heavy-code-review | indeterminate; `plain_mode_present: true` | L3 | 225→233, 1.04 | 133→148, 1.11 | 0 | NEGATIVE CONTROL PASS — plain/fenced passthrough preserved exact strings; expected LOSS |
 
-W1/L1/W2/W5 fully scored. W3/L2 (Claude→Codex, authored 2026-06-17) are conformant (L3, zero
-misparse) but show `indeterminate` locally because the o200k/tiktoken tokenizer is unavailable in
-the Claude env — the same gap W1 had locally before Codex scored it in the verified TKAB env. W3
-required one `??`-style repair during authoring (initial `deploy!` op tripped a `sense/unknown_op`
-misparse; reworked to `run! @svc task:deploy` with deploy as a slot value → 0 misparse). W3's
-pre-repair score showed clone > source on anthropic tokens (verbose), so a LOSS/tie is likely.
-Routed to Codex for verified-env token scoring (parallel to the W1 flow).
+W1/L1/W2/W3/W4/W5 and L1/L2/L3 are now fully scored. W3/L2 were rescored by Codex in the
+verified TKAB env on 2026-06-17, closing Claude's local o200k/tiktoken gap. W3 remained L3 / zero
+misparse but lost on both tokenizers. L2 correctly stayed `plain` and lost on both tokenizers.
+Codex authored W4/L3 on 2026-06-17: W4 is the first v0.3 structured code-review finding that wins
+on both tokenizers; L3 correctly preserves verbatim code review in plain/fenced form and loses.
 
 ## Findings
 
@@ -53,13 +53,22 @@ Routed to Codex for verified-env token scoring (parallel to the W1 flow).
    clone past the English prose. Compression is an authoring-discipline property, not automatic.
 4. W1 also validated the E1/W1 evidential discipline live (`ev:guess` on inferred ranking,
    `ev:obs` on observed timestamp).
+5. W4 shows the opposite side of the same lesson: a compact structured finding can win when the
+   source prose is dense with repeated file/command/default-path detail. `ev:obs` was reserved for
+   observed command/test output, making W4 a calibration input for `tk-calibration-audit`.
+6. The v0.3.2 `frameset_validation` field is present and report-only. W3 and W4 include
+   informational slot/signature issues; L2/L3 have no checked ops. None of these changed parser
+   acceptance, conformance level, or checker outcome.
 
 ## Data hygiene
 
 1. Arm-field metadata bug fixed by Codex on 2026-06-17: `TKAB-W2-v03` pair/result JSON now carry
    `"arm": "W2"` and `TKAB-W5-v03` pair/result JSON now carry `"arm": "W5"`.
 2. Version tagging: keep grammar version per data point (done in the table above). The mini-pilot
-   (W1/L1) ran on v0.2; W2/W5 on v0.3. Do not pool ratios across versions when judging compression.
+   (W1/L1) ran on v0.2; W2/W3/W4/W5/L2/L3 on v0.3. Do not pool ratios across versions when judging
+   compression.
+3. Checker/toolchain note: W3/L2/W4/L3 were scored by Codex on the v0.3.2 checker/toolchain
+   surface with `frameset_validation` telemetry present and report-only.
 
 ## Scope boundary (PRD-027 R6.4)
 
@@ -70,10 +79,9 @@ decision (R6.4), tracked in the WORKLOG Maintainer Decision Queue.
 
 ## Coverage / remaining
 
-- Fully scored: W1, L1 (v0.2 mini-pilot); W2, W5 (v0.3).
-- Authored + conformant, token-score pending Codex verified env: W3, L2 (Claude→Codex, v0.3).
-- Not yet authored: W4 (structured code-review finding, Codex→Claude), L3 (verbatim code review,
-  Codex→Claude) — Codex's direction to author.
+- Fully scored: W1, L1 (v0.2 mini-pilot); W2, W3, W4, W5, L2, L3 (v0.3).
+- Authored + conformant, token-score pending Codex verified env: none.
+- Not yet authored: none for the Tier-A suite.
 - `tk-calibration-audit` (R5.5) still gates trust in `^N`/`ev:` channels and remains pending; W4
   (with `ev:obs` discipline) feeds it.
 - After the full suite is scored, this artifact is the published-results basis for any Maintainer

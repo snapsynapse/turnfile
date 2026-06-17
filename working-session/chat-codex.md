@@ -181,3 +181,25 @@ State at initialization:
   - PRD-032 and PRD-033 await Maintainer acceptance before A1 implementation.
   - Tokenese Tier-A remains pilot-only: W3/L2 verified scoring, W4/L3 authoring/scoring, and `tk-calibration-audit` are next-session candidates.
   - Dirty worktree and guard/commit posture must be resolved before commit/push.
+
+## Session 17 Close Snapshot - 2026-06-17
+
+- Session: `codex-session-17`
+- Turnfile revision at Codex close: `208` after closeout handoff write.
+- Codex status: `idle`
+- Mailbox state: Codex unread `0`; Claude unread `0`; Maintainer unread `0`.
+- Locks: none.
+- Heartbeat: no active Codex app automations found under `/Users/snap/.codex/automations`; none carried forward.
+- Completed this session:
+  - PRD-033 implementation completed and reviewed: shared ownership guard active at `tools/hooks`; Codex Layer 1 adapter installed.
+  - PRD-032 implementation completed and reviewed: `tools/session-orient.mjs` landed; `evals/prd-032.evals.mjs` passes 11/11.
+  - PRD-032 and PRD-033 promoted to `docs/prds/` at rev 207.
+  - Tokenese Tier-A completed: W1/L1/W2/W3/W4/W5 and L2/L3 fully scored; W4 won on both tokenizers and feeds calibration.
+  - PRD-014 closeout checks passed from the Codex side: mailbox projection fresh, Turnfile revision match, no terminal active mailbox entries, no signal-log compaction eligible.
+  - Codex boot rolled from v6 to v7; previous boot archived as `docs/archive/boot-codex/boot-codex_v6.md`.
+- Carry-forward:
+  - Next planned scope: expand Tokenese as appropriate, starting with `tk-calibration-audit` before any trust in `^N` or `ev:`.
+  - Potential Tier-B after calibration and Maintainer decision: limited operational status and handoff twins only.
+  - Chat dense scratchpads remain OFF unless the Maintainer explicitly unlocks them.
+  - Dirty worktree remains uncommitted; do not stage or commit peer-owned Claude files from the Codex lane.
+- Lesson learned: compose canonical derivations instead of duplicating them; the PRD-032 false-stale path bug was caught because the eval compared orientation output to `validate-closeout`.

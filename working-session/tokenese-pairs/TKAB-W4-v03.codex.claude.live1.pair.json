@@ -1,0 +1,12 @@
+{
+  "source_id": "TKAB-W4-v03",
+  "clone_id": "TKAB-W4-v03.codex.claude.live1",
+  "pair_id": "TKAB-W4-v03.codex.live1",
+  "arm": "W4",
+  "direction": "codex->claude",
+  "author": "codex",
+  "artifact_type": "structured-code-review-finding",
+  "predicted_outcome": "win",
+  "source_text": "Code review finding: tools/session-orient.mjs currently fails when called as `node tools/session-orient.mjs --agent codex --emit json` because it requires explicit --mailbox, --turnfile, --worklog, and --prd-status arguments. Severity is P1 because PRD-032 R1 says current repo layout paths are defaults and AC2 uses the short command form. Observed evidence: the command exits with a JSON missing-required-file error for MAILBOX. Fix: default omitted paths to working-session/MAILBOX.md, working-session/TURNFILE.yaml, working-session/WORKLOG.md, and working-session/docs/PRD_STATUS.json.",
+  "clone_text": "^grammar:v0.3\n# W4 structured code-review finding; ev:obs only on observed command/test output\n@file := file:tools/session-orient.mjs\n@cmd := cmd:session-orient-defaults\nsay @file finding:missing-default-paths sev:^4 ev:obs\nsay @cmd exits:missing-required-file target:MAILBOX ev:obs\nfix @file default:working-session/MAILBOX.md default:working-session/TURNFILE.yaml default:working-session/WORKLOG.md default:working-session/docs/PRD_STATUS.json"
+}

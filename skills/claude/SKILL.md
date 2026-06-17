@@ -5,7 +5,7 @@ description: Execute the Turnfile protocol (a SNAP protocol) in Claude for mailb
 
 # Turnfile Protocol Skill File — Claude
 
-Version: 0.9.0
+Version: 0.9.1
 Protocol revision baseline: PRD-003 through PRD-014 and PRD-016 through PRD-019 (all promoted to docs/prds/); PRD-021/022/024/030 + PRD-014 Amendment A1 propagated
 Agent: Claude (Anthropic) — bundle is role-keyed; the executing model is recorded in MANIFEST.yaml, not in this path
 Last updated: 2026-06-17
@@ -28,7 +28,7 @@ Turnfile is collaborative, file-based work. Codex and the Maintainer mutate shar
 2. Default suspicion — if you are about to state a fact about current shared state from memory, that itself is the signal to open the file instead. Recall across your own earlier turns, and especially across model or session boundaries, is the most error-prone input you have.
 3. When memory and file disagree, the file wins, and the disagreement is itself signal: a peer or the Maintainer changed something; understand why before acting.
 4. A redundant read is cheap; a confident assertion from stale memory has repeatedly been wrong (ledger evidence: OQ-067 cited as blocking after the Maintainer had resolved it in-file; a file move misattributed to Codex when the Maintainer made it; mailbox snapshot and ID drift). The general "prefer memory, verify later" heuristic is correct for solo work and wrong here — collaboration inverts it.
-5. **When you need current state, run the orientation read-set, not recall** (adapted from skills/codex Files First): mailbox snapshot + your unread/own cards, `TURNFILE.yaml`, the WORKLOG status block, `PRD_STATUS.json`, the relevant PRD/task, `git status`, and the relevant validator. Model, platform, thread, and automation memory is non-authoritative cache; durable state lives in these files (after PRD-031, in the per-agent shards those files derive from). When an orientation helper exists, run it; until then do these reads explicitly with the Read tool.
+5. **When you need current state, run the orientation read-set, not recall** (adapted from skills/codex Files First): mailbox snapshot + your unread/own cards, `TURNFILE.yaml`, the WORKLOG status block, `PRD_STATUS.json`, the relevant PRD/task, `git status`, and the relevant validator. Model, platform, thread, and automation memory is non-authoritative cache; durable state lives in these files (after PRD-031, in the per-agent shards those files derive from). Prefer `tools/session-orient.mjs` (PRD-032) first for a one-shot read-only snapshot — current revision, next ids, your unread, projection freshness (stale `MAILBOX.json` / revision mismatch), selected PRD/task, git-dirty + heuristic ownership, and recommended commands (add `--validate` to also run the gates) — then do any deeper reads explicitly with the Read tool.
 
 ## Concurrent Write Discipline — Derive, Don't Assume (session 14 ledger)
 
@@ -552,7 +552,7 @@ After executing any module, report:
 
 | Field | Value |
 |-------|-------|
-| Skill file version | 0.9.0 |
+| Skill file version | 0.9.1 |
 | Protocol baseline | PRD-003 through PRD-014, PRD-016 through PRD-019 (all promoted) |
 | Policy test suite | PRD-012-M3-policy-test-suite.md (19 assertions, 4 scenario harnesses) — archived at `examples/inception/skills/policy-tests/` |
 | Last validated | M4 validation complete — all 4 scenarios PASS (rev 41, inception session 10) |
@@ -567,6 +567,7 @@ After executing any module, report:
 | v0.7.0 changes | PRD-030 implementation (session 16): added Session Heartbeat Management section (heartbeats are optional harness-local interaction gearing, not protocol authority; Maintainer/handshake authorization; negotiated purpose/cadence/scope/owner/notification/stop-condition; R9 memory boundary — model memory is cache, Turnfile files authoritative; NOTIFY/DONT_NOTIFY contract + no-liveness-inference; closeout delete/update/carry-forward with mandatory WORKLOG entry). Added Module 6 heartbeat-inspection step. Implemented to evals/prd-030.evals.mjs (9/9 green); Codex reviews per A1. |
 | v0.8.0 changes | Session-16 execution-gap fixes + Codex MSG-016 (skill v8) mirror. Concurrent Write Discipline items 6-8: only the Read tool satisfies the read-before-edit guard (Bash grep/sed/cat do not — locate with Bash, qualify with Read); re-Read shared files immediately before editing on every collaboration turn ("modified since read" = a peer wrote, reconcile don't retry blind; state moved 167→170→172→173 between turns); inspect git state before shared edits, never hand-edit a derived view (PRD-031). Added Tokenese Adoption Guardrails section (source authority, `plain` fallback, earn-breadth, deterministic scoring, untrusted self-report channels). Output-format item 6: disclose peer-owned uncommitted changes left untouched. Actions MSG-20260616-016. |
 | v0.9.0 changes | Header version reconciled (was stale at 0.6.0 through the v0.7/v0.8 bumps; now matches the version table + MANIFEST). Adopted the Decision Mirror Modes (PRD-022) section into the Claude bundle — content was contributed by Codex's PRD-022 propagation, which crossed into Claude-owned `skills/claude/SKILL.md`; flagged in the PRD-021/022 review (MSG-20260617-015) and taken under Claude ownership/versioning here. `audit-mirror` vs `delivery-mirror` declaration + closeout digest check for unacknowledged delivery mirrors. Also PRD-017/023 propagation (Claude side): Startup Orientation references the canonical boot command manifest `docs/BOOT_SEQUENCE.md` + chat-file semantics; added the out-of-band drift-reconciliation boot check (governance-state drift = decision-required). |
+| v0.9.1 changes | PRD-032 R7/AC8 (session 17): the orientation read-set norm now prefers `tools/session-orient.mjs` (the read-only one-shot orientation helper) first, then explicit Read-tool reads — now that the tool is implemented and green (evals/prd-032.evals.mjs 9/9). Claude implemented the tool (A1 step 6); Codex reviews. |
 
 Changes to protocol semantics require maintainer approval (PRD-012 R7.2).
 Environment-specific changes that don't alter protocol semantics are Claude-owned but must be documented (PRD-012 R7.3).

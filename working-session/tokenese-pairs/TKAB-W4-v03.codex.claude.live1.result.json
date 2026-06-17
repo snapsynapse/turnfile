@@ -1,0 +1,163 @@
+{
+  "schema_version": "tkab-check-1.1",
+  "source_id": "TKAB-W4-v03",
+  "clone_id": "TKAB-W4-v03.codex.claude.live1",
+  "pair_id": "TKAB-W4-v03.codex.live1",
+  "direction": "codex->claude",
+  "author": "codex",
+  "artifact_type": "structured-code-review-finding",
+  "scorer": "perplexity-deterministic-checker",
+  "arm": "W4",
+  "predicted_outcome": "win",
+  "conformance_level": "L3",
+  "conformance_detail": {
+    "L1_lexicon": true,
+    "L2_grammar": true,
+    "L3_repair": true,
+    "session_issues": []
+  },
+  "token_counts": {
+    "source": {
+      "o200k": 135,
+      "o200k_method": "tiktoken",
+      "anthropic": 233,
+      "anthropic_method": "cached_costs+heuristic",
+      "chars": 589
+    },
+    "clone": {
+      "o200k": 117,
+      "o200k_method": "tiktoken",
+      "anthropic": 203,
+      "anthropic_method": "cached_costs+heuristic",
+      "chars": 445
+    },
+    "savings": {
+      "anthropic_delta": 30,
+      "anthropic_ratio": 0.8712,
+      "o200k_delta": 18,
+      "o200k_ratio": 0.8667
+    }
+  },
+  "readback_diff": null,
+  "repair_events": [],
+  "repair_kinds": {
+    "repair-token": 0,
+    "repair-statement": 0,
+    "repair-handle": 0,
+    "repair-explained": 0
+  },
+  "misparse_family": {
+    "by_family": {
+      "binding": 0,
+      "scope": 0,
+      "sense": 0,
+      "triangulation": 0
+    },
+    "hits": []
+  },
+  "source_authority_conflict": [],
+  "unparseable_lines": [],
+  "plain_mode_present": false,
+  "plain_blocks": [],
+  "dense_statement_count": 3,
+  "declared_level": null,
+  "grammar_version": "v0.3",
+  "causal_events": [],
+  "unsupported_causation": [],
+  "comment_lines": [
+    2
+  ],
+  "frameset_validation": {
+    "schema_version": "tokenese-framesets-0.1",
+    "status": "experimental-report-only",
+    "checked_statement_count": 1,
+    "checked_ops": [
+      "fix"
+    ],
+    "unregistered_ops": [
+      "say"
+    ],
+    "issues": [
+      {
+        "line_no": 7,
+        "op": "fix",
+        "code": "unregistered_slot",
+        "severity": "info",
+        "message": "slot 'default' is not declared for op 'fix'",
+        "signature": "fix :: what change -> status",
+        "raw": "fix @file default:working-session/MAILBOX.md default:working-session/TURNFILE.yaml default:working-session/WORKLOG.md default:working-session/docs/PRD_STATUS.json"
+      },
+      {
+        "line_no": 7,
+        "op": "fix",
+        "code": "unregistered_slot",
+        "severity": "info",
+        "message": "slot 'default' is not declared for op 'fix'",
+        "signature": "fix :: what change -> status",
+        "raw": "fix @file default:working-session/MAILBOX.md default:working-session/TURNFILE.yaml default:working-session/WORKLOG.md default:working-session/docs/PRD_STATUS.json"
+      },
+      {
+        "line_no": 7,
+        "op": "fix",
+        "code": "unregistered_slot",
+        "severity": "info",
+        "message": "slot 'default' is not declared for op 'fix'",
+        "signature": "fix :: what change -> status",
+        "raw": "fix @file default:working-session/MAILBOX.md default:working-session/TURNFILE.yaml default:working-session/WORKLOG.md default:working-session/docs/PRD_STATUS.json"
+      },
+      {
+        "line_no": 7,
+        "op": "fix",
+        "code": "unregistered_slot",
+        "severity": "info",
+        "message": "slot 'default' is not declared for op 'fix'",
+        "signature": "fix :: what change -> status",
+        "raw": "fix @file default:working-session/MAILBOX.md default:working-session/TURNFILE.yaml default:working-session/WORKLOG.md default:working-session/docs/PRD_STATUS.json"
+      }
+    ]
+  },
+  "outcome": "indeterminate",
+  "notes": [
+    "Conformance L3; outcome did not match a typed rule."
+  ],
+  "decoded_clone_english": [
+    "[grammar version: v0.3]",
+    "(comment) W4 structured code-review finding; ev:obs only on observed command/test output",
+    "bind @file = \"file:tools/session-orient.mjs\"",
+    "bind @cmd = \"cmd:session-orient-defaults\"",
+    "say \"file:tools/session-orient.mjs\" (@file) finding: missing-default-paths sev:  [confidence 4/9] [observed]",
+    "say \"cmd:session-orient-defaults\" (@cmd) exits: missing-required-file target: MAILBOX [observed]",
+    "fix \"file:tools/session-orient.mjs\" (@file) default: working-session/MAILBOX.md default: working-session/TURNFILE.yaml default: working-session/WORKLOG.md default: working-session/docs/PRD_STATUS.json"
+  ],
+  "provenance": {
+    "checker_version": "tkab-check-1.1",
+    "tkab_schema_version": "tkab-check-1.1",
+    "grammar_version_supported": "v0.3",
+    "grammar_version_detected": "v0.3",
+    "scorer": "perplexity-deterministic-checker",
+    "spec_sha": "68cb84e2dbb2aa36f9965c823afab770de64df0bd9df0bc1c878eb3aac5f761e",
+    "design_sha": "5dc9338e7b6386d01ae46b47a6a7ba70478929460ecdea74b67e20afe204d520",
+    "conformance_sha": "0250b71342c49603f40fe667700422d03a95855cd45c0825841a6a8f35e987c6",
+    "intent_sha": "69723894dd106ac133296f62edb081f0e6a1b599f7133c03bb68e6a71d2f6c2a",
+    "handoff_sha": "16f948709345ee2d32ff363e90ec8782129be08d9aa3ddb7c4030afeab45c1b3",
+    "anthropic_costs_sha": "12e5fe083ecf44949ec1d55fb43c1f6f547979256f2f832fef4788afbd7c91d2",
+    "prd_027_sha": "unpinned",
+    "ab_suite_sha": "unpinned",
+    "score_pair": {
+      "translator_version": "0.1.0",
+      "schema_version": "1.0",
+      "spec_sha256": "68cb84e2dbb2aa36f9965c823afab770de64df0bd9df0bc1c878eb3aac5f761e",
+      "design_sha256": "5dc9338e7b6386d01ae46b47a6a7ba70478929460ecdea74b67e20afe204d520",
+      "intent_sha256": "69723894dd106ac133296f62edb081f0e6a1b599f7133c03bb68e6a71d2f6c2a",
+      "conformance_sha256": "0250b71342c49603f40fe667700422d03a95855cd45c0825841a6a8f35e987c6",
+      "lexicon_sha256": "12e5fe083ecf44949ec1d55fb43c1f6f547979256f2f832fef4788afbd7c91d2",
+      "grammar_target": "v0.3 (GRAMMAR-v0.3.md) over v0.2 (DESIGN.md §7) over v0.1 (spec.md)",
+      "grammar_version_supported": "v0.3",
+      "grammar_version_detected": "v0.3",
+      "prd_027_sha": "unpinned",
+      "ab_suite_sha": "unpinned"
+    }
+  },
+  "source_text": "Code review finding: tools/session-orient.mjs currently fails when called as `node tools/session-orient.mjs --agent codex --emit json` because it requires explicit --mailbox, --turnfile, --worklog, and --prd-status arguments. Severity is P1 because PRD-032 R1 says current repo layout paths are defaults and AC2 uses the short command form. Observed evidence: the command exits with a JSON missing-required-file error for MAILBOX. Fix: default omitted paths to working-session/MAILBOX.md, working-session/TURNFILE.yaml, working-session/WORKLOG.md, and working-session/docs/PRD_STATUS.json.",
+  "clone_text": "^grammar:v0.3\n# W4 structured code-review finding; ev:obs only on observed command/test output\n@file := file:tools/session-orient.mjs\n@cmd := cmd:session-orient-defaults\nsay @file finding:missing-default-paths sev:^4 ev:obs\nsay @cmd exits:missing-required-file target:MAILBOX ev:obs\nfix @file default:working-session/MAILBOX.md default:working-session/TURNFILE.yaml default:working-session/WORKLOG.md default:working-session/docs/PRD_STATUS.json"
+}

@@ -9,6 +9,39 @@ loaded skills, scope, and the live outstanding list — so no agent acts on stal
 unilateral assumptions. Executed at boot, after the PRD-017 `docs/BOOT_SEQUENCE.md` read
 order and before the first shared-file write.
 
+## Session 18 closeout-prep addendum (2026-06-17)
+
+Session 17 closed from the Codex side at rev 208. File-backed close state:
+
+- Turnfile protocol remains v0.1.
+- PRD-032 and PRD-033 are Maintainer-accepted, implementation-done, and promoted to
+  `docs/prds/`.
+- Tokenese Tier-A is complete: W1/L1/W2/W3/W4/W5 and L2/L3 are fully scored; W4 is the
+  strongest calibration input because it won on both tokenizers while using `ev:obs` only for
+  observed command/test output.
+- Mailbox is clear for Codex, Claude, and Maintainer at Codex close.
+- Shared ownership guard is active for this clone (`core.hooksPath=tools/hooks`,
+  `.turnfile-agent=codex`).
+- No Codex heartbeat automation is carried forward.
+
+Planned session-18 scope, subject to Maintainer confirmation: expand Tokenese only as far as the
+evidence supports. Start with `tk-calibration-audit`; use W4 plus earlier E1/W1 evidence to test
+whether `ev:obs` and any `^N` ranks correlate with verification. After that, ask the Maintainer
+whether to unlock a limited Tier-B twin lane for operational status and handoff clones. Keep
+`chat-<agent>.md` dense scratchpads OFF unless explicitly unlocked. Tokenese clones remain
+measurement artifacts only and may not carry lifecycle, locks, task claims, acceptance, normative
+PRD text, or exact diffs.
+
+Suggested session-18 completion criteria:
+
+1. `tk-calibration-audit` result recorded in English with source evidence and version tags.
+2. Decision recommendation written for Maintainer: no expansion, limited Tier-B operational twins,
+   or more data required.
+3. If Tier-B is approved, author only a small bounded set of paired English/Tokenese clones with
+   stable source IDs and deterministic scoring.
+4. No Tokenese language semantics edited from Turnfile; language changes route to
+   `/Users/snap/Git/tokenese`.
+
 ## Maintainer's five required handshake elements
 
 ### 1. Version of Turnfile agreed
@@ -93,5 +126,5 @@ order and before the first shared-file write.
 | Agent | Protocol baseline match | Tokenese v0.3 confirmed | Skills self-validated | Scope agreed | Identity enforcing | Signed |
 |-------|---|---|---|---|---|---|
 | Claude | yes — Turnfile v0.1; baseline PRDs incl. 032/033 now Maintainer-accepted | yes — grammar v0.3 unchanged; checker now 0.3.2 (frameset registry report-only) | partial — boot gates green (lint/mailbox/promotion/boot-sequence PASS); `validate:skills` flagged a Codex-side global hash drift (Codex-owned, see below) | yes — 4 lanes: Tokenese Tier-A, PRD-032+033 accept, guard/commit reconcile, deferred closeout | NOT enforcing Claude — `core.hooksPath` → `working-session/agents/codex/hooks` (Codex-owned), `TURNFILE_AGENT` unset = commits fail closed; to be replaced by the PRD-033 shared guard this session | Claude (Opus 4.8) — 2026-06-17 |
-| Codex | yes — Turnfile v0.1; PRD_STATUS has PRD-032/033 Maintainer-accepted and A1 lanes open; promotion not yet directed | yes — grammar v0.3 unchanged; checker/toolchain v0.3.2 verified read-only as report-only frameset telemetry; R7 boundary intact | yes — repo canonical `skills/codex` v9 loaded; global Codex Turnfile skill synced from repo canonical; boot gates re-run with `validate:skills` PASS | yes — full 4-lane scope: Tokenese Tier-A, PRD-032/033 A1, guard/commit reconcile, deferred closeout; Codex next lanes are PRD-032 evals and Tokenese W3/L2+W4/L3 | NOT shared yet — `core.hooksPath` still points to `working-session/agents/codex/hooks`; `TURNFILE_AGENT` unset fails closed; PRD-033 shared guard remains the commit unblocker | Codex (5.5, desktop) — 2026-06-17 |
+| Codex | yes — Turnfile v0.1; PRD_STATUS has PRD-032/033 Maintainer-accepted, implementation-done, and promoted to `docs/prds/` | yes — grammar v0.3 unchanged; checker/toolchain v0.3.2 verified read-only as report-only frameset telemetry; R7 boundary intact | yes — repo canonical `skills/codex` v9 loaded; global Codex Turnfile skill synced from repo canonical; boot gates re-run with `validate:skills` PASS | yes — session 17 scope complete; next planned lane is Tokenese calibration first, then Maintainer decision on any Tier-B operational/handoff twins | shared guard active — `core.hooksPath` points to `tools/hooks`; `.turnfile-agent=codex`; locked guard files commit as maintainer | Codex (5.5, desktop) — 2026-06-17 |
 | Maintainer (ratifies) | accepted PRD-032/033; chose full 4-lane scope + "install PRD-033 shared guard" (session 17 boot) | | | yes | | 2026-06-17 |
