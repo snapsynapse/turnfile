@@ -219,6 +219,6 @@ test("AC registry: PRD_STATUS records PRD-035 eval authorship and expected A1 ow
   assert.ok(entry, "PRD-035 missing from registry");
   assert.equal(entry.implementation?.evals, "evals/prd-035.evals.mjs");
   assert.equal(entry.implementation?.eval_author, "codex");
-  assert.equal(entry.implementation?.implementer, "claude");
+  assert.equal(entry.implementation?.implementer, "gemini");
   assert.equal(entry.implementation?.reviewer, "codex");
 });

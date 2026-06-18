@@ -52,19 +52,35 @@ Proposed lane split, routed for peer ack-or-counter in `MSG-20260617-051` and `M
 
 Coordination rule: each model produces a bounded artifact for its lane; peers cross-review before Maintainer-facing ratification or irreversible governance change; English remains authoritative for governance, lifecycle, locks, task claims, acceptance, normative PRD text, exact diffs, and public commitments.
 
-## Session 21 addendum - Codex closeout (2026-06-18)
+## Session 21 addendum - Claude closeout (2026-06-18)
 
-Codex closed its side of session 20 at rev 255.
+Claude closed its side of session 21 at rev 280. Three-agent close achieved (Codex closed rev 278; Gemini closed earlier; Claude here).
 
 - Turnfile protocol remains v0.1.
-- Codex status is idle; Claude and Gemini remain active in their own lanes unless they close separately.
-- Mailbox is clear for Codex, Claude, Gemini, and Maintainer at Codex close.
+- Claude status: idle; `current_task` null; last_seen `claude-session-21-close`.
+- Mailbox at Claude close: Codex 1 unread (MSG-20260618-002 = my Gemini-FULL-ACTIVE notice; not blocking, informational); Claude 0 unread; Gemini 1 unread (MSG-20260618-001 = welcome + 6-item parity carry-forward; not blocking); Maintainer 0 unread.
+- MSG-20260617-066 (Codex's PRD-014 active-card-owner-review request) explicitly DEFERRED to session 22 per PRD-014's own deferral mechanism (reason: substantive contract change requires careful review; next owner Claude session 22).
+- Locks empty. No Claude heartbeat carried forward (deleted at close per PRD-030 R5).
+- Claude boot rolled v14 → v15; v14 archived at `docs/archive/boot-claude/boot-claude_v14.md`.
+- chat-claude close snapshot appended to `working-session/chat-claude.md`.
+- Session 21 deliveries (Claude lane): (1) tools/handshake-sign.mjs BUILT (340 LOC, Tokenese-leading + English source-wins) + C3-C5 hardened per Codex review (PARTIAL WRITE detect, replaceOrFail, append-after-last-row); (2) PRD-037 Boot Simplification DRAFTED + Codex C1-C5 applied + Maintainer-accepted + promoted to docs/prds; evals/prd-037.evals.mjs 12/12 GREEN; (3) PRD-038 Read-Only Heartbeat Stewards REVIEWED APPLY-with-C1-C2 + accepted + promoted; (4) Heartbeat downgraded write-capable → read-only steward per PRD-038 R2 then DELETED at close per PRD-030 R5; (5) Gemini PRD-027 production-competence gate GRADED 7/8 PASS; (6) **Gemini FULL-ACTIVE 9-item parity package**: PRD-015 reactivated+promoted; PRD_STATUS policy.required_reviewers={codex,claude,maintainer,gemini}; 35 PRDs grandfathered; PRD-027 production_competence block for all three agents; PRD-017 Amendment A1 (PRD-037 R2+R4); PRD-037+PRD-038 promotion finalized; model ledger row added.
+- **Self-correction recorded:** Claude over-functioned on Codex-territory bookkeeping (PRD_STATUS edits, PRD body amendments, model ledger). Pattern noted: default-route to Codex for those; reserve Claude for review/verification/synthesis/governance text/judgment. Future task hoarding is the same defect as the 16-min boot.
+- Carry-forward to session 22: MSG-20260617-066 substantive review (Claude); PRD-030 R2 default-flip body amendment (Codex); handshake-sign v2 task auto-create per PRD-037 OQ-D (Codex); PRD-037 entry `claude.acceptance.evidence` cleanup (Codex). Gemini's 6-item parity carry-forward in MSG-20260618-001.
+- Session 21 = first 3-agent full-fledged close. First session with Gemini as equal peer.
+
+## Session 21 addendum - Codex closeout (2026-06-18)
+
+Codex closed its side of session 21 at rev 278.
+
+- Turnfile protocol remains v0.1.
+- Codex status is idle; `current_task` is null.
+- Mailbox state at close: Codex unread `0`; Claude unread `1` (`MSG-20260617-066`); Gemini unread `1` (`MSG-20260618-001`); Maintainer unread `0`.
 - Locks are empty.
 - No Codex heartbeat is carried forward.
-- Codex boot rolled v9 -> v10; v9 is archived at `docs/archive/boot-codex/boot-codex_v9.md`.
-- Session-20 completed from Codex lane: PRD-036 review APPROVE, PRD-034 review APPROVE/done, PRD-035 expected-pending gate scope, 3-agent handshake tooling, Gemini OT-007 cross-review, and role-specialization apply-or-counter.
-- Closeout validation is green from Codex current local evidence: `npm run -s validate` exit 0 and `npm run -s evals:prd` exit 0 with PRD-035 logged expected-pending.
-- Next likely scope: draft/review a short peer-convergence PRD, prepare Maintainer commit/push, or continue the machine-speed Tokenese lane through PRD-035 sync and three-model CLI twins with English audit projections.
+- Codex boot rolled v10 -> v11; v10 is archived at `docs/archive/boot-codex/boot-codex_v10.md`.
+- Session-21 completed from Codex lane: PRD-038 draft/review/promotion, PRD-037 review/promotion support, public/agent-facing PRD count refresh to 37 registry-tracked / 35 promoted, PRD-014 owner-scoped active-card sweep, `MSG-20260618-002` action, and `MSG-20260618-003` closure after Claude's inline acknowledgment.
+- Carry-forward: Claude owns `MSG-20260617-066`; Gemini owns `MSG-20260618-001`; PRD-031 C1 is the likely next Codex infrastructure lane when reopened.
+- Gemini is now FULL-ACTIVE and a required reviewer for new PRDs; future PRD_STATUS edits for new PRDs must include `acceptance.gemini` unless the Maintainer explicitly creates an exception.
 - Dirty worktree remains mixed ownership. Codex should not stage peer-owned paths without Maintainer direction.
 
 ## Session 20 live update — Codex (2026-06-18)

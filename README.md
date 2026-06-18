@@ -7,9 +7,9 @@ Agents work as peers. Disagreement is signal, not error. Humans arbitrate, not m
 
 This is a **Structured Negotiation of Autonomous Peers (SNAP)**. It's consent-based, peer multi-LLM collaboration with human-on-the-loop governance and public auditability.
 
-<!-- turnfile:prd-promoted=32 -->
-<!-- turnfile:registry-tracked=35 -->
-<!-- turnfile:skill-claude-bundle=13 turnfile:skill-codex-bundle=9 turnfile:skill-gemini-bundle=2 -->
+<!-- turnfile:prd-promoted=35 -->
+<!-- turnfile:registry-tracked=37 -->
+<!-- turnfile:skill-claude-bundle=13 turnfile:skill-codex-bundle=10 turnfile:skill-gemini-bundle=3 -->
 
 ## Who this is for
 
@@ -152,6 +152,8 @@ PRDs live on two shelves. Promoted, Maintainer-accepted contracts live in [docs/
 | [PRD-034](docs/prds/PRD-034-public-and-agent-surface-snapshot-reconciliation-contract.md) | Public + agent-facing surface snapshot reconciliation | Promoted; implementation pending (evals authored) |
 | [PRD-035](docs/prds/PRD-035-tokenese-integration-and-upstream-result-sync-contract.md) | Tokenese integration + upstream result sync | Promoted; implementation pending (evals authored) |
 | [PRD-036](docs/prds/PRD-036-prd-eval-runner-contract.md) | PRD eval runner contract | Promoted; implementation done (session 20) |
+| [PRD-037](docs/prds/PRD-037-boot-simplification.md) | Boot simplification | Promoted; implementation pending |
+| [PRD-038](docs/prds/PRD-038-read-only-heartbeat-stewards.md) | Read-only heartbeat stewards | Promoted; implementation pending |
 
 ### Skills (per-agent execution guides)
 
@@ -162,8 +164,8 @@ Bundles are role-keyed directories with model compatibility recorded in each MAN
 | Path | Description |
 |------|-------------|
 | [skills/claude/SKILL.md](skills/claude/SKILL.md) | Claude protocol execution guide (v0.9.1, role-keyed; bundle version 13) |
-| [skills/codex/SKILL.md](skills/codex/SKILL.md) | Codex protocol execution guide (role-keyed; bundle version 9) |
-| .agents/skills/turnfile-protocol-gemini/SKILL.md | Gemini protocol execution guide (v0.2.0, role-keyed; bundle version 2; provisional onboarding, peer-reviewed) |
+| [skills/codex/SKILL.md](skills/codex/SKILL.md) | Codex protocol execution guide (role-keyed; bundle version 10) |
+| .agents/skills/turnfile-protocol-gemini/SKILL.md | Gemini protocol execution guide (v0.2.2, role-keyed; bundle version 3; provisional onboarding, peer-reviewed) |
 | [skills/skill-versioning/SKILL.md](skills/skill-versioning/SKILL.md) | Shared metaskill for versioning skill bundles across agents. Current installs may expose the same bundle as `skill-provenance`. |
 | [templates/SKILL.md](templates/SKILL.md) | Skill template for onboarding new agents |
 
@@ -237,7 +239,7 @@ This protocol has been tested across 20 real collaboration sessions with three h
 - Codex (OpenAI GPT-5), running in the Codex desktop app.
 - Gemini (Google, model Gemini 3.5 Flash (High)), running in the Google Antigravity IDE — newly onboarded in session 19 as a bounded, peer-reviewed provisional participant (PRD-015 reactivated).
 
-As of the current registry snapshot (2026-06-17): 35 registry-tracked PRDs, 32 promoted PRDs, zero active open questions, and the eight-step eval-gated implementation loop (PRD-006 A1) run end-to-end across many lanes with builder/reviewer separation between heterogeneous agents — PRD-017/021/022/023/024/026/028/029/030/032/033/036 implemented, PRD-031 Phase 1 (per-agent shards + derived aggregates) and the PRD-014 closeout amendment landed, plus a live Tokenese A/B pilot scored by a deterministic checker. The Claude lane ran across three model generations (Opus 4.6, Fable 5, Opus 4.8) against one unmodified protocol. Forward development narrows Turnfile into a thin governance layer for auditable peer disagreement and maintainer-governed resolution across existing agent platforms.
+As of the current registry snapshot (2026-06-18): 37 registry-tracked PRDs, 35 promoted PRDs, zero active open questions, and the eight-step eval-gated implementation loop (PRD-006 A1) run end-to-end across many lanes with builder/reviewer separation between heterogeneous agents — PRD-017/021/022/023/024/026/028/029/030/032/033/036 implemented, PRD-031 Phase 1 (per-agent shards + derived aggregates) and the PRD-014 closeout amendment landed, plus a live Tokenese A/B pilot scored by a deterministic checker. The Claude lane ran across three model generations (Opus 4.6, Fable 5, Opus 4.8) against one unmodified protocol. Forward development narrows Turnfile into a thin governance layer for auditable peer disagreement and maintainer-governed resolution across existing agent platforms.
 
 For authoritative current state, read [PRD_STATUS.json](working-session/docs/PRD_STATUS.json) (PRD shelf and implementation status) and [WORKLOG.md](working-session/WORKLOG.md) (live session state). [BASELINE.md](BASELINE.md) is a point-in-time session-14 snapshot, not current state.
 

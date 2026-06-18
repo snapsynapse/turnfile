@@ -5,6 +5,8 @@
 **Previous Baseline:** Tokenese v0.3.2 (from PRD-035 draft time)  
 **Maintainer Alert:** Yes, the Maintainer reported a newer Tokenese increment between sessions.
 
+*Note: This artifact is purely observational and non-authoritative. Upstream Tokenese repository documents remain the sole authority.*
+
 ---
 
 ## 1. Environment & Git State

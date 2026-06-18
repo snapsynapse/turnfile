@@ -18,7 +18,7 @@
 // TOOL CONTRACT — tools/validate-closeout.mjs (read-only)
 //
 //   node tools/validate-closeout.mjs --turnfile <tf> --mailbox <mb>
-//        [--retention-sessions <N>] [--defer <item>]...
+//        [--agent <agent>] [--retention-sessions <N>] [--defer <item>]...
 //
 //   Exits 0 when closeout is clean (or every blocking item is deferred via --defer),
 //   nonzero when a blocking item remains undeferred. Prints a JSON report to stdout:
@@ -26,7 +26,11 @@
 //       compaction: {
 //         signal_log: { retention_sessions: <N>, eligible: [<SIG ids past the window>],
 //                       preserved_last_per_agent: [<SIG ids>], ok: <bool> },
-//         mailbox_archival: { terminal_in_active: [<MSG ids>], ok: <bool> }
+//         mailbox_archival: { terminal_in_active: [<MSG ids>], ok: <bool> },
+//         active_card_owner_review: {
+//           owner: <agent|null>, owned_active_count: <int|null>,
+//           actioned_owned_active: [<MSG ids>], ok: <bool>
+//         }
 //       },
 //       projection: {
 //         mailbox_json: { stale: <bool> },
@@ -111,11 +115,18 @@ ${lines}
 `;
 }
 
-// Minimal compact mailbox. `closedActive` = MSG ids wrongly left as active cards with closed status.
-function mailbox({ closedActive = [] } = {}) {
+// Minimal compact mailbox.
+// `closedActive` = MSG ids wrongly left as active cards with closed status.
+// `actionedOwned` = MSG ids left actioned with the given closure owner.
+function mailbox({ closedActive = [], actionedOwned = [], owner = "Codex" } = {}) {
   const cards = closedActive
     .map(
       (id) => `### ${id}\n\n**From:** Claude -> Codex\n**Status:** closed\n**Subject:** fixture\n**Closure owner:** Claude\n`,
+    )
+    .concat(
+      actionedOwned.map(
+        (id) => `### ${id}\n\n**From:** Claude -> ${owner}\n**Status:** actioned\n**Subject:** fixture\n**Closure owner:** ${owner}\n`,
+      ),
     )
     .join("\n");
   return `# Mailbox (Turnfile, Compact)
@@ -157,7 +168,7 @@ function writePair(tf, mb) {
 test("A1.R1: PRD-014 enumerates the unified compaction set with execute-or-defer semantics", () => {
   const s = read("docs/prds/PRD-014-session-closeout-boot-handoff-contract.md");
   assert.match(s, /A1\.R1 Closeout compaction set/);
-  for (const item of [/Worklog compaction/i, /Signal-log compaction/i, /Mailbox archival/i, /boot archive/i, /Heartbeat lifecycle/i]) {
+  for (const item of [/Worklog compaction/i, /Signal-log compaction/i, /Mailbox archival/i, /boot archive/i, /Heartbeat lifecycle/i, /Active card owner review/i]) {
     assert.match(s, item, `A1.R1 missing compaction item ${item}`);
   }
   assert.match(s, /executed or logged as an explicit deferral with reason and next owner/i);
@@ -239,6 +250,53 @@ test("A1.R5.3b: a clean mailbox (no terminal active cards) passes archival", () 
   const r = report(["--turnfile", tfp, "--mailbox", mbp]);
   assert.equal(r.compaction.mailbox_archival.ok, true);
   assert.deepEqual(r.compaction.mailbox_archival.terminal_in_active, []);
+});
+
+test("A1.R5.3b: an owner-scoped closeout flags actioned active cards owned by the closing agent", () => {
+  const { tfp, mbp } = writePair(
+    turnfile(7, 7, [{ id: "SIG-001", from: "claude", signal: "ready", rev: 1 }]),
+    mailbox({ actionedOwned: ["MSG-20260617-099"], owner: "Codex" }),
+  );
+  const res = runTool(["--turnfile", tfp, "--mailbox", mbp, "--agent", "codex"]);
+  const r = JSON.parse(res.stdout);
+  assert.equal(r.compaction.active_card_owner_review.owner, "codex");
+  assert.deepEqual(r.compaction.active_card_owner_review.actioned_owned_active, ["MSG-20260617-099"]);
+  assert.equal(r.compaction.active_card_owner_review.ok, false);
+  assert.ok(r.blocking.some((b) => b.item === "active_card_owner_review"));
+  assert.notEqual(res.status, 0, "owned actioned cards should block clean owner closeout");
+});
+
+test("A1.R5.3b: owner actioned-card review is owner-scoped and does not block other agents", () => {
+  const { tfp, mbp } = writePair(
+    turnfile(7, 7, [{ id: "SIG-001", from: "claude", signal: "ready", rev: 1 }]),
+    mailbox({ actionedOwned: ["MSG-20260617-099"], owner: "Claude" }),
+  );
+  const res = runTool(["--turnfile", tfp, "--mailbox", mbp, "--agent", "codex"]);
+  const r = JSON.parse(res.stdout);
+  assert.equal(r.compaction.active_card_owner_review.ok, true);
+  assert.deepEqual(r.compaction.active_card_owner_review.actioned_owned_active, []);
+  assert.equal(res.status, 0);
+});
+
+test("A1.R5.3b: explicit active-card owner review deferral allows closeout with reason recorded elsewhere", () => {
+  const { tfp, mbp } = writePair(
+    turnfile(7, 7, [{ id: "SIG-001", from: "claude", signal: "ready", rev: 1 }]),
+    mailbox({ actionedOwned: ["MSG-20260617-099"], owner: "Codex" }),
+  );
+  const res = runTool([
+    "--turnfile",
+    tfp,
+    "--mailbox",
+    mbp,
+    "--agent",
+    "codex",
+    "--defer",
+    "active_card_owner_review",
+  ]);
+  const r = JSON.parse(res.stdout);
+  assert.ok(r.deferred.includes("active_card_owner_review"));
+  assert.equal(r.clean, true);
+  assert.equal(res.status, 0);
 });
 
 // ── A1.R5.3c behavioral: failing projection blocks clean close unless deferred ──

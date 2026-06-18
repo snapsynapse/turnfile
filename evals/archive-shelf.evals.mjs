@@ -31,7 +31,7 @@ test("every archived registry path exists on disk", () => {
 });
 
 test("session-14 deferred/superseded set is archived, not in the active draft shelf", () => {
-  for (const id of ["PRD-002", "PRD-015", "PRD-020"]) {
+  for (const id of ["PRD-002", "PRD-020"]) {
     assert.equal(byId[id].shelf, ARCHIVE, `${id} should be archived`);
   }
 });

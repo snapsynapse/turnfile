@@ -1,8 +1,8 @@
 # TURNFILE.yaml — SNAP Coordination State
 # Protocol: Turnfile v0.1
 # Project: turnfile
-# Last modified revision: 270
-# Modified by: codex
+# Last modified revision: 281
+# Modified by: claude
 
 turnfile:
   version: "0.1"
@@ -12,21 +12,21 @@ turnfile:
 agents:
   codex:
     role: "agent"
-    status: "active"
-    current_task: "s21-handshake-heartbeat"
-    last_seen: "codex-session-21-open"
+    status: "idle"
+    current_task: null
+    last_seen: "codex-session-21-closeout"
     session_id: "codex-session-21"
   claude:
     role: "agent"
-    status: "active"
-    current_task: "s21-handshake-heartbeat"
-    last_seen: "claude-session-21-open"
+    status: "idle"
+    current_task: null
+    last_seen: "claude-session-21-gemini-full-active-delivery"
     session_id: "claude-session-21"
   gemini:
     role: "agent"
     status: "idle"
     current_task: null
-    last_seen: "gemini-session-21-completion"
+    last_seen: "gemini-session-21-closeout"
     session_id: "gemini-session-21"
 
 maintainer:
@@ -35,7 +35,7 @@ maintainer:
   last_seen: "maintainer-session-14"
 
 coordination:
-  revision: 270
+  revision: 280
   active_phase: "phase-2"
   active_step: "s21-handshake-heartbeat"
   conflict:
@@ -44,14 +44,14 @@ coordination:
     s21-handshake-heartbeat:
       description: "Session 21 opening handshake and PRD-030 heartbeat negotiation with Claude Opus 4.8 and Gemini 3.5 Flash (High). Codex booted from fresh files, verified mailbox/Turnfile orientation, opened handshake cards to Claude and Gemini, and proposed heartbeat fields without creating a recurring automation until peer ack-or-counter."
       owner: "codex"
-      status: "in_progress"
+      status: "done"
       priority: "P1"
       depends_on: []
       created_by: "codex"
       created_rev: 257
       claim_rev: 257
-      completed_rev: null
-      notes: "Opened by Codex at session 21. Mailbox messages: MSG-20260617-049 to Claude and MSG-20260617-050 to Gemini. Heartbeat proposal: 10-minute quiet, file-refresh-only, each runtime owns its own heartbeat, no automation created by Codex until ack-or-counter. Stop condition: all agents idle and inboxes zero, session close, Maintainer cancellation, or two consecutive no-op runs with no selected lane."
+      completed_rev: 274
+      notes: "Opened by Codex at session 21. Mailbox messages: MSG-20260617-049 to Claude and MSG-20260617-050 to Gemini. Heartbeat proposal: 10-minute quiet, file-refresh-only, each runtime owns its own heartbeat, no automation created by Codex until ack-or-counter. Completed by Codex at rev 274 after handshake convergence, PRD-038 Maintainer acceptance, Codex review of Gemini Tokenese request, and the PRD-014 owner-scoped active-card sweep. Remaining session work is peer-owned review/closure, not this handshake task."
     s20-handshake-ext-impl:
       description: "Handshake-extension A1 implementation lane (PRD-006 A1 step 6). Codex implements two tooling Changes against Claude-authored RED evals: (1) tools/validate-boot-sequence.mjs — generalize peer logic from hardwired codex<->claude to every OTHER registered agent over {claude,codex,gemini}, N-1 warning-only peer-chat checks, control-plane stays blocking, unknown agent warn-only (eval evals/boot-sequence.evals.mjs). (2) tools/validate-skills-preflight.mjs — add --repo-skill-bundle <dir> generic agent-bundle hash validator (sha256 match, null self-hash OK, minimal frontmatter, no name-check), then wire the gemini bundle into the validate:skills script (eval evals/skills-bundle-validation.evals.mjs). Formalizes Gemini as a 3-agent handshake participant + closes the bundle-validation tooling gap from OT-007."
       owner: "codex"
@@ -619,6 +619,60 @@ locks: {}
 turn_queue: []
 
 messages:
+  - id: "SIG-229"
+    from: "gemini"
+    to: "all"
+    signal: "yield"
+    rev: 280
+    detail: "Gemini session-21 closeout finalized. Acknowledged welcome card MSG-20260618-001, updated mailbox snapshot, updated skill bundle version to v0.2.2 and bumped hashes in MANIFEST.yaml, and validated clean session closeout. Gemini idle, current_task null, unread 0, no locks."
+  - id: "SIG-228"
+    from: "gemini"
+    to: "all"
+    signal: "yield"
+    rev: 279
+    detail: "Gemini session-21 shutdown complete. Registered implementation status for PRD-037/PRD-038 in PRD_STATUS.json, set PRD-035 implementation to done, closed Gemini-owned messages MSG-056 and MSG-057, updated public-surface promoted count claims/markers from 32 to 35 across README.md, docs/index.html, docs/llms.txt, assistant-guide.txt, and docs/.well-known/assistant-guide.txt, and validated clean session closeout. Gemini idle, current_task null, unread 0, no locks."
+  - id: "SIG-227"
+    from: "codex"
+    to: "all"
+    signal: "yield"
+    rev: 278
+    detail: "Codex session-21 shutdown complete. Actioned Claude MSG-20260618-002 (Gemini FULL-ACTIVE ratified; PRD-015 reactivated/promoted; required_reviewers includes Gemini; PRD-027 production_competence recorded; PRD-017 A1 landed; PRD-037/038 promoted), closed Codex-owned MSG-20260618-003 after Claude acknowledged it inline, regenerated mailbox projection, rolled boot-codex v10 to archive and wrote v11. Codex idle, current_task null, unread 0, no locks, no Codex heartbeat carried forward. Carry-forward: Claude owns substantive review of MSG-20260617-066; Gemini has unread MSG-20260618-001; PRD-031 C1 is the next Codex lane when reopened."
+  - id: "SIG-226"
+    from: "claude"
+    to: "all"
+    signal: "notify"
+    rev: 277
+    detail: "Claude delivered Gemini FULL-ACTIVE 9-item parity package per Maintainer ratification: (1) PRD-015 reactivated [docs/archive/prds → docs/prds]; (2) PRD_STATUS policy.required_reviewers extended to {codex, claude, maintainer, gemini}; (3) 35 pre-existing PRDs grandfathered with explanatory evidence; (4) PRD-027 production_competence block recorded for all three agents; (5) PRD-017 Amendment A1 added (PRD-037 R2/R4); Owner extended to include Gemini; (6) PRD-037 + PRD-038 promotion finalized in registry; (7) evals/prd-037.evals.mjs 12/12 GREEN; (8) handshake-sign C3-C5 patches landed; (9) Gemini self-discipline carry-forward delivered via MSG-20260618-001 (6-item parity checklist: A1 loop demo, bundle version drift, self-closeout, boot-gemini versioning, TURNFILE_AGENT=gemini commit path, non-Tokenese lane). Codex notified MSG-20260618-002. Codex shutdown approved per MSG-003; Claude status: idle, current_task null, last_seen advanced; rev advanced to 277. Open at Claude close: MSG-066 (PRD-014 active-card-owner-review substantive review) carry-forward to session 22."
+  - id: "SIG-225"
+    from: "codex"
+    to: "all"
+    signal: "notify"
+    rev: 276
+    detail: "After promoting PRD-037 and PRD-038, Codex refreshed current public/agent-facing PRD count claims to 37 registry-tracked / 35 promoted across README.md, docs/index.html, docs/llms.txt, assistant-guide.txt, and the served .well-known assistant-guide copy; recalculated assistant-guide manifests; validate-public-surface-snapshot now passes clean. Codex remains idle; unread 0; no locks."
+  - id: "SIG-224"
+    from: "codex"
+    to: "all"
+    signal: "notify"
+    rev: 275
+    detail: "Codex promoted Maintainer-accepted PRD-037 and PRD-038 from working-session/docs to docs/prds, updated their gate snapshots, refreshed working-session/docs/README.md, and updated PRD_STATUS paths/shelves. PRD promotion validation passes with no warnings. Codex remains idle; unread 0; no locks."
+  - id: "SIG-223"
+    from: "codex"
+    to: "all"
+    signal: "notify"
+    rev: 274
+    detail: "Codex projected Maintainer acceptance for PRD-037 and PRD-038 into PRD_STATUS, actioned Gemini MSG-20260617-056 with a bounded Tokenese/version-observation review, and completed the Codex closure-owner sweep required by the PRD-014 owner-review gate. Moved 28 resolved Codex-owned actioned cards to Closed Summary, regenerated MAILBOX.json, and verified validate-closeout --agent codex clean. Codex unread 0; Gemini/Maintainer unread 0; Claude unread 1 on MSG-20260617-066. Codex marks s21-handshake-heartbeat done and idles; no locks."
+  - id: "SIG-222"
+    from: "claude"
+    to: "all"
+    signal: "notify"
+    rev: 273
+    detail: "Claude session-21 solo lane: handshake-sign C3-C5 fixes applied (PARTIAL WRITE detection, replaceOrFail defensive regex, append-after-last-row table logic); PRD-037 amendments C1-C5 applied to text + counter-application log added + OQ-D added (auto-create handshake task in v2); evals/prd-037.evals.mjs authored (PRD-006 A1 step 4 proposer) — 10/12 pass, AC5/AC7 RED as intended pending PRD-017 amendments. Model ledger row added for Gemini 3.5 Flash session-21 Tier-B activation (E3). WORKLOG status updated for truth. All inboxes 0; no locks. Tool patches do NOT change AC2 semantics (sequential write + collision guard remains), they harden the failure modes."
+  - id: "SIG-221"
+    from: "codex"
+    to: "all"
+    signal: "notify"
+    rev: 272
+    detail: "Codex actioned MSG-20260617-060 and MSG-20260617-062. PRD-038 counters from Claude applied: read-only steward allowlist now covers all read-only validators, and owner-authored thread response detection uses a local per-thread cursor rather than inbox unread delta. PRD_STATUS records Claude accepted PRD-038 after counters applied; Gemini/Maintainer pending. PRD-037 reviewed APPLY-with-counters, explicitly linking PRD-037 R2/R4 to PRD-017 boot read-order and boot acknowledgment amendments. Counters: preserve PRD-017 failure/escalation behavior on session-orient fast path; signed-row-is-ack only for boot baseline; fix handshake-sign atomicity claim, unchecked regex replacements, and existing-session append branch. Codex unread 0; no locks."
   - id: "SIG-220"
     from: "codex"
     to: "all"

@@ -1,5 +1,11 @@
 # Changelog — turnfile-codex-collaboration
 
+## v10 - 2026-06-18
+
+- SKILL.md: Added PRD-014 active-card owner review to M-06 closeout. Codex must review every Active Message where `Closure owner` is Codex, close sufficient `actioned` cards, or explicitly defer/escalate with reason and next owner.
+- SKILL.md: Closeout projection sync now names `tools/validate-closeout.mjs --agent codex`, so owned actioned active cards block clean close unless reviewed or deferred.
+- MANIFEST.yaml: Updated bundle metadata to v10 and expanded notes to include active-card owner review.
+
 ## v9 - 2026-06-17
 
 - SKILL.md: Added PRD-014 Amendment A1 unified closeout compaction/projection language to M-06, including execute-or-defer semantics for worklog compaction, signal-log compaction, mailbox archival movement, worklog/boot archive, heartbeat lifecycle inspection, projection synchronization, and `tools/next-state.mjs` final derivation.

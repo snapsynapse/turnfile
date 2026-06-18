@@ -10,8 +10,8 @@ Run modules only on explicit maintainer instruction.
 ## Version Context
 
 Bundle version: 8
-Version date: 2026-06-16
-Change summary: Added PRD-030 heartbeat and memory-boundary discipline, PRD-031 concurrent-work transition guidance, and Tokenese twin-lane adoption guardrails.
+Version date: 2026-06-18
+Change summary: Added PRD-014 active-card owner review to closeout, including owner-scoped validation for actioned cards.
 
 ## Files First, Not Memory
 
@@ -272,7 +272,8 @@ Deterministic outputs:
 2. Clear carry-over + next-owner designation.
 3. Explicit unresolved blocker list if present.
 4. Unified closeout compaction set (PRD-014 A1.R1) executed or explicitly deferred with reason and next owner: worklog compaction, signal-log compaction, mailbox archival movement, worklog/boot archive, and heartbeat lifecycle inspection.
-5. Projection synchronization (PRD-014 A1.R2) complete before clean close: regenerate `MAILBOX.json`, validate PRD status shelves, verify `TURNFILE.yaml` revision consistency, and derive final IDs/counts through `tools/next-state.mjs` when available.
+5. Active-card owner review complete for every Active Message where `Closure owner` is Codex: close owned `actioned` cards when sufficient, or explicitly defer/escalate with reason and next owner. Clean close is blocked by unreviewed owned `actioned` cards.
+6. Projection synchronization (PRD-014 A1.R2) complete before clean close: regenerate `MAILBOX.json`, validate PRD status shelves, verify `TURNFILE.yaml` revision consistency, run `tools/validate-closeout.mjs --agent codex`, and derive final IDs/counts through `tools/next-state.mjs` when available.
 
 Stop/escalate:
 1. Stop if closeout would hide unresolved high-priority items.

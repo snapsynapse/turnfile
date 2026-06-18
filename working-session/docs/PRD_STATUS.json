@@ -1,11 +1,12 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2026-06-18 (PRD-038 draft added)",
+  "updated_at": "2026-06-18 (PRD-037/038 accepted and promoted)",
   "policy": {
     "required_reviewers": [
       "codex",
       "claude",
-      "maintainer"
+      "maintainer",
+      "gemini"
     ],
     "promotion_rule": "A PRD may move from working-session/docs to docs/prds only when Codex, Claude, and Maintainer are all accepted with evidence and blocking_items is empty.",
     "registry_is_source_of_truth": true
@@ -34,6 +35,12 @@
           "status": "accepted",
           "evidence": [
             "MAILBOX MSG-20260211-012 decision: approve-with-conditions; conditions satisfied by logged Codex/Claude review evidence"
+          ]
+        },
+        "gemini": {
+          "status": "accepted",
+          "evidence": [
+            "Grandfathered 2026-06-17: PRD predates Gemini full-active reactivation under PRD-015. Gemini joined the registered-agents set post-promotion; acceptance recorded as accepted for registry consistency. Gemini may raise a counter-card per PRD-017 if a substantive disagreement surfaces."
           ]
         }
       },
@@ -68,6 +75,12 @@
           "evidence": [
             "Maintainer decision 2026-06-12 (session 14 triage): keep as deferred draft; built-tool PRD predates thin-governance-layer scope; revisit after starter workflow stabilizes"
           ]
+        },
+        "gemini": {
+          "status": "accepted",
+          "evidence": [
+            "Grandfathered 2026-06-17: PRD predates Gemini full-active reactivation under PRD-015. Gemini joined the registered-agents set post-promotion; acceptance recorded as accepted for registry consistency. Gemini may raise a counter-card per PRD-017 if a substantive disagreement surfaces."
+          ]
         }
       },
       "blocking_items": [
@@ -98,6 +111,12 @@
           "status": "accepted",
           "evidence": [
             "WORKLOG Decision Index: Phase 1 approved (2026-02-08)"
+          ]
+        },
+        "gemini": {
+          "status": "accepted",
+          "evidence": [
+            "Grandfathered 2026-06-17: PRD predates Gemini full-active reactivation under PRD-015. Gemini joined the registered-agents set post-promotion; acceptance recorded as accepted for registry consistency. Gemini may raise a counter-card per PRD-017 if a substantive disagreement surfaces."
           ]
         }
       },
@@ -132,6 +151,12 @@
           "evidence": [
             "WORKLOG Decision Index: Phase 1 approved (2026-02-08)"
           ]
+        },
+        "gemini": {
+          "status": "accepted",
+          "evidence": [
+            "Grandfathered 2026-06-17: PRD predates Gemini full-active reactivation under PRD-015. Gemini joined the registered-agents set post-promotion; acceptance recorded as accepted for registry consistency. Gemini may raise a counter-card per PRD-017 if a substantive disagreement surfaces."
+          ]
         }
       },
       "blocking_items": [],
@@ -164,6 +189,12 @@
           "status": "accepted",
           "evidence": [
             "Maintainer-directed actioned-PRD cleanup to docs/prds (Session 11)"
+          ]
+        },
+        "gemini": {
+          "status": "accepted",
+          "evidence": [
+            "Grandfathered 2026-06-17: PRD predates Gemini full-active reactivation under PRD-015. Gemini joined the registered-agents set post-promotion; acceptance recorded as accepted for registry consistency. Gemini may raise a counter-card per PRD-017 if a substantive disagreement surfaces."
           ]
         }
       },
@@ -198,6 +229,12 @@
           "evidence": [
             "Maintainer-directed actioned-PRD cleanup to docs/prds (Session 11)"
           ]
+        },
+        "gemini": {
+          "status": "accepted",
+          "evidence": [
+            "Grandfathered 2026-06-17: PRD predates Gemini full-active reactivation under PRD-015. Gemini joined the registered-agents set post-promotion; acceptance recorded as accepted for registry consistency. Gemini may raise a counter-card per PRD-017 if a substantive disagreement surfaces."
+          ]
         }
       },
       "blocking_items": [],
@@ -230,6 +267,12 @@
           "status": "accepted",
           "evidence": [
             "WORKLOG Decision Index: OQ-026 resolved and adopted"
+          ]
+        },
+        "gemini": {
+          "status": "accepted",
+          "evidence": [
+            "Grandfathered 2026-06-17: PRD predates Gemini full-active reactivation under PRD-015. Gemini joined the registered-agents set post-promotion; acceptance recorded as accepted for registry consistency. Gemini may raise a counter-card per PRD-017 if a substantive disagreement surfaces."
           ]
         }
       },
@@ -264,6 +307,12 @@
           "evidence": [
             "WORKLOG Decision Index: Phase 1 approved (2026-02-08)"
           ]
+        },
+        "gemini": {
+          "status": "accepted",
+          "evidence": [
+            "Grandfathered 2026-06-17: PRD predates Gemini full-active reactivation under PRD-015. Gemini joined the registered-agents set post-promotion; acceptance recorded as accepted for registry consistency. Gemini may raise a counter-card per PRD-017 if a substantive disagreement surfaces."
+          ]
         }
       },
       "blocking_items": [],
@@ -296,6 +345,12 @@
           "status": "accepted",
           "evidence": [
             "WORKLOG Decision Index: Phase 1 approved (2026-02-08)"
+          ]
+        },
+        "gemini": {
+          "status": "accepted",
+          "evidence": [
+            "Grandfathered 2026-06-17: PRD predates Gemini full-active reactivation under PRD-015. Gemini joined the registered-agents set post-promotion; acceptance recorded as accepted for registry consistency. Gemini may raise a counter-card per PRD-017 if a substantive disagreement surfaces."
           ]
         }
       },
@@ -330,6 +385,12 @@
           "evidence": [
             "Maintainer-directed actioned-PRD cleanup to docs/prds (Session 11)"
           ]
+        },
+        "gemini": {
+          "status": "accepted",
+          "evidence": [
+            "Grandfathered 2026-06-17: PRD predates Gemini full-active reactivation under PRD-015. Gemini joined the registered-agents set post-promotion; acceptance recorded as accepted for registry consistency. Gemini may raise a counter-card per PRD-017 if a substantive disagreement surfaces."
+          ]
         }
       },
       "blocking_items": [],
@@ -362,6 +423,12 @@
           "status": "accepted",
           "evidence": [
             "Maintainer-directed actioned-PRD cleanup to docs/prds (Session 11)"
+          ]
+        },
+        "gemini": {
+          "status": "accepted",
+          "evidence": [
+            "Grandfathered 2026-06-17: PRD predates Gemini full-active reactivation under PRD-015. Gemini joined the registered-agents set post-promotion; acceptance recorded as accepted for registry consistency. Gemini may raise a counter-card per PRD-017 if a substantive disagreement surfaces."
           ]
         }
       },
@@ -396,6 +463,12 @@
           "evidence": [
             "Maintainer verbal acceptance, Session 12 pre-work (2026-02-08)"
           ]
+        },
+        "gemini": {
+          "status": "accepted",
+          "evidence": [
+            "Grandfathered 2026-06-17: PRD predates Gemini full-active reactivation under PRD-015. Gemini joined the registered-agents set post-promotion; acceptance recorded as accepted for registry consistency. Gemini may raise a counter-card per PRD-017 if a substantive disagreement surfaces."
+          ]
         }
       },
       "blocking_items": [],
@@ -428,6 +501,12 @@
           "status": "accepted",
           "evidence": [
             "Maintainer verbal acceptance, Session 12 pre-work (2026-02-08)"
+          ]
+        },
+        "gemini": {
+          "status": "accepted",
+          "evidence": [
+            "Grandfathered 2026-06-17: PRD predates Gemini full-active reactivation under PRD-015. Gemini joined the registered-agents set post-promotion; acceptance recorded as accepted for registry consistency. Gemini may raise a counter-card per PRD-017 if a substantive disagreement surfaces."
           ]
         }
       },
@@ -462,6 +541,12 @@
           "evidence": [
             "Maintainer verbal acceptance, Session 12 pre-work (2026-02-08)"
           ]
+        },
+        "gemini": {
+          "status": "accepted",
+          "evidence": [
+            "Grandfathered 2026-06-17: PRD predates Gemini full-active reactivation under PRD-015. Gemini joined the registered-agents set post-promotion; acceptance recorded as accepted for registry consistency. Gemini may raise a counter-card per PRD-017 if a substantive disagreement surfaces."
+          ]
         }
       },
       "blocking_items": [],
@@ -474,9 +559,9 @@
     {
       "id": "PRD-015",
       "title": "Agent Onboarding + Vetting Contract",
-      "path": "docs/archive/prds/PRD-015-agent-onboarding-vetting-contract.md",
-      "shelf": "docs/archive/prds",
-      "state": "deferred",
+      "path": "docs/prds/PRD-015-agent-onboarding-vetting-contract.md",
+      "shelf": "docs/prds",
+      "state": "actioned",
       "acceptance": {
         "codex": {
           "status": "accepted",
@@ -491,17 +576,20 @@
           ]
         },
         "maintainer": {
-          "status": "deferred",
+          "status": "accepted",
           "evidence": [
-            "MAILBOX MSG-20260211-015: acceptance rollback; generalized onboarding test evidence required before maintainer gate",
-            "Maintainer decision 2026-06-12 (session 14 triage): parked as deferred together with Gemini onboarding package; resurrect after skill layout becomes model-agnostic; OT-001..008 suite preserved"
+            "Maintainer decision 2026-06-17 (session 21): Gemini onboarding completed under PRD-015 — bundle ported to `.agents/skills/turnfile-protocol-gemini/`, OT-001/007/008/002/004 all passed (session 20 evidence in `working-session/docs/onboarding/evidence/antigravity/2026-06-17-01/`), PRD-027 production-competence gate passed 7/8 (MSG-20260617-057, ratified MSG-20260617-061). Gemini transitioned from provisional-active to full-active. PRD-015 reactivated and promoted to docs/prds/."
+          ]
+        },
+        "gemini": {
+          "status": "accepted",
+          "evidence": [
+            "Gemini onboarded via this PRD's OT-001/007/008/002/004 test suite (session 20 + session 21 evidence). Bundle: `.agents/skills/turnfile-protocol-gemini/` (manifest hashes match). Tier-B Tokenese activated 2026-06-17 (MSG-20260617-061)."
           ]
         }
       },
-      "blocking_items": [
-        "Deferred by Maintainer 2026-06-12: resumes with next agent onboarding after model-agnostic skill layout"
-      ],
-      "eligible_for_docs_prds": false
+      "blocking_items": [],
+      "eligible_for_docs_prds": true
     },
     {
       "id": "PRD-016",
@@ -526,6 +614,12 @@
           "status": "accepted",
           "evidence": [
             "MAILBOX MSG-20260211-007: Maintainer approval confirmed (2026-02-11)"
+          ]
+        },
+        "gemini": {
+          "status": "accepted",
+          "evidence": [
+            "Grandfathered 2026-06-17: PRD predates Gemini full-active reactivation under PRD-015. Gemini joined the registered-agents set post-promotion; acceptance recorded as accepted for registry consistency. Gemini may raise a counter-card per PRD-017 if a substantive disagreement surfaces."
           ]
         }
       },
@@ -561,6 +655,12 @@
           "status": "accepted",
           "evidence": [
             "Maintainer decision 2026-06-12 (session 14 triage): accept with PRD-020 folded in as R7; OQ-051 resolved (documented contract + optional helpers); OQ-056/057 resolved in R7.4"
+          ]
+        },
+        "gemini": {
+          "status": "accepted",
+          "evidence": [
+            "Grandfathered 2026-06-17: PRD predates Gemini full-active reactivation under PRD-015. Gemini joined the registered-agents set post-promotion; acceptance recorded as accepted for registry consistency. Gemini may raise a counter-card per PRD-017 if a substantive disagreement surfaces."
           ]
         }
       },
@@ -599,6 +699,12 @@
           "evidence": [
             "Maintainer decision 2026-06-12 (session 14 triage): accepted; OQ-052/053 resolved 2026-02-11; PRD-021 builds on this matrix"
           ]
+        },
+        "gemini": {
+          "status": "accepted",
+          "evidence": [
+            "Grandfathered 2026-06-17: PRD predates Gemini full-active reactivation under PRD-015. Gemini joined the registered-agents set post-promotion; acceptance recorded as accepted for registry consistency. Gemini may raise a counter-card per PRD-017 if a substantive disagreement surfaces."
+          ]
         }
       },
       "blocking_items": [],
@@ -631,6 +737,12 @@
           "status": "accepted",
           "evidence": [
             "Maintainer decision 2026-06-12 (session 14 triage): accepted; coordination stays asynchronous/event-based; OQ-054/055 resolved (no time-based polling)"
+          ]
+        },
+        "gemini": {
+          "status": "accepted",
+          "evidence": [
+            "Grandfathered 2026-06-17: PRD predates Gemini full-active reactivation under PRD-015. Gemini joined the registered-agents set post-promotion; acceptance recorded as accepted for registry consistency. Gemini may raise a counter-card per PRD-017 if a substantive disagreement surfaces."
           ]
         }
       },
@@ -665,6 +777,12 @@
           "evidence": [
             "Maintainer decision 2026-06-12 (session 14 triage): superseded — folded into PRD-017 R7; OQ-056/057 resolved at fold time"
           ]
+        },
+        "gemini": {
+          "status": "accepted",
+          "evidence": [
+            "Grandfathered 2026-06-17: PRD predates Gemini full-active reactivation under PRD-015. Gemini joined the registered-agents set post-promotion; acceptance recorded as accepted for registry consistency. Gemini may raise a counter-card per PRD-017 if a substantive disagreement surfaces."
+          ]
         }
       },
       "blocking_items": [],
@@ -693,6 +811,12 @@
           "status": "accepted",
           "evidence": [
             "Maintainer accepted PRD-021 as-is in chat on 2026-06-13 after agent cross-review"
+          ]
+        },
+        "gemini": {
+          "status": "accepted",
+          "evidence": [
+            "Grandfathered 2026-06-17: PRD predates Gemini full-active reactivation under PRD-015. Gemini joined the registered-agents set post-promotion; acceptance recorded as accepted for registry consistency. Gemini may raise a counter-card per PRD-017 if a substantive disagreement surfaces."
           ]
         }
       },
@@ -731,6 +855,12 @@
           "evidence": [
             "Maintainer approval 2026-06-13 (session 14); mirrored in MSG-20260613-031"
           ]
+        },
+        "gemini": {
+          "status": "accepted",
+          "evidence": [
+            "Grandfathered 2026-06-17: PRD predates Gemini full-active reactivation under PRD-015. Gemini joined the registered-agents set post-promotion; acceptance recorded as accepted for registry consistency. Gemini may raise a counter-card per PRD-017 if a substantive disagreement surfaces."
+          ]
         }
       },
       "blocking_items": [],
@@ -767,6 +897,12 @@
           "status": "accepted",
           "evidence": [
             "Maintainer approval 2026-06-13 (session 14); mirrored in MSG-20260613-030"
+          ]
+        },
+        "gemini": {
+          "status": "accepted",
+          "evidence": [
+            "Grandfathered 2026-06-17: PRD predates Gemini full-active reactivation under PRD-015. Gemini joined the registered-agents set post-promotion; acceptance recorded as accepted for registry consistency. Gemini may raise a counter-card per PRD-017 if a substantive disagreement surfaces."
           ]
         }
       },
@@ -805,6 +941,12 @@
           "evidence": [
             "Maintainer approval 2026-06-13 (session 14); mirrored in MSG-20260613-031"
           ]
+        },
+        "gemini": {
+          "status": "accepted",
+          "evidence": [
+            "Grandfathered 2026-06-17: PRD predates Gemini full-active reactivation under PRD-015. Gemini joined the registered-agents set post-promotion; acceptance recorded as accepted for registry consistency. Gemini may raise a counter-card per PRD-017 if a substantive disagreement surfaces."
+          ]
         }
       },
       "blocking_items": [],
@@ -841,6 +983,12 @@
           "status": "accepted",
           "evidence": [
             "Maintainer approval 2026-06-13 (session 14); mirrored in MSG-20260613-031"
+          ]
+        },
+        "gemini": {
+          "status": "accepted",
+          "evidence": [
+            "Grandfathered 2026-06-17: PRD predates Gemini full-active reactivation under PRD-015. Gemini joined the registered-agents set post-promotion; acceptance recorded as accepted for registry consistency. Gemini may raise a counter-card per PRD-017 if a substantive disagreement surfaces."
           ]
         }
       },
@@ -880,9 +1028,34 @@
             "Maintainer clarified on 2026-06-13 that PRD-027 is for cloning existing Turnfile communications into Tokenese for A/B testing, not replacing or changing existing communications",
             "Maintainer approved PRD-027 on 2026-06-15 (session 15): 'I have approved PRD-027.' This releases the completion-register hold; the open register items (PRD-021/022/024 implementation, PRD-023/026/017 evals, PRD-014 A1, PRD-024 R5.1 validator) continue as parallel lanes rather than PRD-027 blockers. Initiation begins with governance sync, session-charter opt-in, Claude teach phase, and Codex production-competence check before live Tokenese clone traffic."
           ]
+        },
+        "gemini": {
+          "status": "accepted",
+          "evidence": [
+            "Grandfathered 2026-06-17: PRD predates Gemini full-active reactivation under PRD-015. Gemini joined the registered-agents set post-promotion; acceptance recorded as accepted for registry consistency. Gemini may raise a counter-card per PRD-017 if a substantive disagreement surfaces."
+          ]
         }
       },
       "blocking_items": [],
+      "production_competence": {
+        "codex": {
+          "passed": true,
+          "score": "7/8",
+          "date": "2026-06-16",
+          "evidence_msg": "MSG-20260616-001 (E1-E8 transcript) + MSG-20260616-002 (Claude grading 7/8 PASS; E1 used ev:obs on inference — calibration data, non-blocking)"
+        },
+        "claude": {
+          "passed": true,
+          "date": "2026-06-15",
+          "evidence": "Claude is the teacher; production competence inferred from authoring teach packet MSG-20260615-004 and grading both Codex (MSG-20260616-002) and Gemini (MSG-20260617-057). Verified by producing valid v0.3 dense artifacts in PRD-037 drafting under Maintainer unlock (working-session/docs/PRD-037-boot-simplification.md)."
+        },
+        "gemini": {
+          "passed": true,
+          "score": "7/8",
+          "date": "2026-06-17",
+          "evidence_msg": "MSG-20260617-057 (E1-E8 transcript) + MSG-20260617-057 ack (Claude grading 7/8 PASS; E5 used `??` misparse-request vs `√` repair sigil — calibration data, non-blocking). Maintainer Tier-B activation ratified MSG-20260617-061."
+        }
+      },
       "eligible_for_docs_prds": true
     },
     {
@@ -910,6 +1083,12 @@
           "evidence": [
             "Maintainer requested PRD-028 on 2026-06-13 and specified it as prerequisite architecture before PRD-027 initiation",
             "Maintainer direct confirmation to Codex on 2026-06-13: acceptance has been expressed for PRD-028 and PRD-029"
+          ]
+        },
+        "gemini": {
+          "status": "accepted",
+          "evidence": [
+            "Grandfathered 2026-06-17: PRD predates Gemini full-active reactivation under PRD-015. Gemini joined the registered-agents set post-promotion; acceptance recorded as accepted for registry consistency. Gemini may raise a counter-card per PRD-017 if a substantive disagreement surfaces."
           ]
         }
       },
@@ -948,6 +1127,12 @@
           "evidence": [
             "Concept approved in session 14 chat 2026-06-13",
             "Maintainer direct confirmation to Codex on 2026-06-13: acceptance has been expressed for PRD-028 and PRD-029"
+          ]
+        },
+        "gemini": {
+          "status": "accepted",
+          "evidence": [
+            "Grandfathered 2026-06-17: PRD predates Gemini full-active reactivation under PRD-015. Gemini joined the registered-agents set post-promotion; acceptance recorded as accepted for registry consistency. Gemini may raise a counter-card per PRD-017 if a substantive disagreement surfaces."
           ]
         }
       },
@@ -989,6 +1174,12 @@
             "Maintainer accepted PRD-030 on 2026-06-16 as optional negotiation between LLMs using Turnfile protocol, not as a Turnfile requirement",
             "Maintainer directed promotion to docs/prds 2026-06-17 (session 15/16)"
           ]
+        },
+        "gemini": {
+          "status": "accepted",
+          "evidence": [
+            "Grandfathered 2026-06-17: PRD predates Gemini full-active reactivation under PRD-015. Gemini joined the registered-agents set post-promotion; acceptance recorded as accepted for registry consistency. Gemini may raise a counter-card per PRD-017 if a substantive disagreement surfaces."
+          ]
         }
       },
       "blocking_items": [],
@@ -1028,6 +1219,12 @@
             "PRD-031 draft v3 Promotion Gate Snapshot records Maintainer acceptance for the 2026-06-16 directive to enable concurrent multi-LLM work, tighten cycles as Tokenese lands, and prepare for more than two agents",
             "Maintainer directed promotion to docs/prds 2026-06-17"
           ]
+        },
+        "gemini": {
+          "status": "accepted",
+          "evidence": [
+            "Grandfathered 2026-06-17: PRD predates Gemini full-active reactivation under PRD-015. Gemini joined the registered-agents set post-promotion; acceptance recorded as accepted for registry consistency. Gemini may raise a counter-card per PRD-017 if a substantive disagreement surfaces."
+          ]
         }
       },
       "blocking_items": [],
@@ -1065,6 +1262,12 @@
           "evidence": [
             "Maintainer requested the draft on 2026-06-17; document acceptance recorded 2026-06-17 (session 17 boot, AskUserQuestion scope decision: 'PRD-032 + PRD-033 accept'). Opens the PRD-006 A1 lane. Maintainer-directed promotion to docs/prds recorded at rev 207."
           ]
+        },
+        "gemini": {
+          "status": "accepted",
+          "evidence": [
+            "Grandfathered 2026-06-17: PRD predates Gemini full-active reactivation under PRD-015. Gemini joined the registered-agents set post-promotion; acceptance recorded as accepted for registry consistency. Gemini may raise a counter-card per PRD-017 if a substantive disagreement surfaces."
+          ]
         }
       },
       "blocking_items": [],
@@ -1101,6 +1304,12 @@
           "status": "accepted",
           "evidence": [
             "Maintainer directed the guardrail (2026-06-17) and chose draft-PRD-first + Maintainer-owned/agent-locked guard; document acceptance recorded 2026-06-17 (session 17 boot, AskUserQuestion: 'PRD-032 + PRD-033 accept' + commit posture 'Install PRD-033 shared guard'). Opens the PRD-006 A1 lane and authorizes building the shared guard + repointing core.hooksPath."
+          ]
+        },
+        "gemini": {
+          "status": "accepted",
+          "evidence": [
+            "Grandfathered 2026-06-17: PRD predates Gemini full-active reactivation under PRD-015. Gemini joined the registered-agents set post-promotion; acceptance recorded as accepted for registry consistency. Gemini may raise a counter-card per PRD-017 if a substantive disagreement surfaces."
           ]
         }
       },
@@ -1140,6 +1349,12 @@
           "evidence": [
             "Maintainer decision 2026-06-17: PRD-034 accepted after Codex/Claude counter reconciliation."
           ]
+        },
+        "gemini": {
+          "status": "accepted",
+          "evidence": [
+            "Grandfathered 2026-06-17: PRD predates Gemini full-active reactivation under PRD-015. Gemini joined the registered-agents set post-promotion; acceptance recorded as accepted for registry consistency. Gemini may raise a counter-card per PRD-017 if a substantive disagreement surfaces."
+          ]
         }
       },
       "blocking_items": [],
@@ -1178,17 +1393,23 @@
           "evidence": [
             "Maintainer decision 2026-06-17: PRD-035 accepted; keep Turnfile evidence citeable by the Tokenese repo while keeping the repos distinct."
           ]
+        },
+        "gemini": {
+          "status": "accepted",
+          "evidence": [
+            "Grandfathered 2026-06-17: PRD predates Gemini full-active reactivation under PRD-015. Gemini joined the registered-agents set post-promotion; acceptance recorded as accepted for registry consistency. Gemini may raise a counter-card per PRD-017 if a substantive disagreement surfaces."
+          ]
         }
       },
       "blocking_items": [],
       "eligible_for_docs_prds": true,
       "implementation": {
-        "state": "in_progress",
+        "state": "done",
         "evals": "evals/prd-035.evals.mjs",
         "eval_author": "codex",
         "implementer": "gemini",
         "reviewer": "codex",
-        "notes": "Codex authored RED evals on 2026-06-17. On 2026-06-18 (Session 21), the Maintainer approved the three-model split, assigning the Tokenese lane to Gemini. Gemini completed the Tokenese v0.3 version observation (PRD-035 R1) and the teach-gate setup (PRD-027 / MSG-052), verifying the local virtual environment and Python-based toolchain (147/147 tests passed)."
+        "notes": "Codex authored RED evals on 2026-06-17. On 2026-06-18 (Session 21), the Maintainer approved the three-model split, assigning the Tokenese lane to Gemini. Gemini completed the Tokenese v0.3 version observation (PRD-035 R1) and the teach-gate setup (PRD-027 / MSG-052), verifying the local virtual environment and Python-based toolchain (147/147 tests passed). Gemini implementation complete (A1 step 6)."
       }
     },
     {
@@ -1216,6 +1437,12 @@
           "evidence": [
             "Maintainer decision 2026-06-17: PRD-036 accepted as ready."
           ]
+        },
+        "gemini": {
+          "status": "accepted",
+          "evidence": [
+            "Grandfathered 2026-06-17: PRD predates Gemini full-active reactivation under PRD-015. Gemini joined the registered-agents set post-promotion; acceptance recorded as accepted for registry consistency. Gemini may raise a counter-card per PRD-017 if a substantive disagreement surfaces."
+          ]
         }
       },
       "blocking_items": [],
@@ -1232,32 +1459,52 @@
     {
       "id": "PRD-037",
       "title": "Boot Simplification",
-      "path": "working-session/docs/PRD-037-boot-simplification.md",
-      "shelf": "working-session/docs",
-      "state": "draft",
+      "path": "docs/prds/PRD-037-boot-simplification.md",
+      "shelf": "docs/prds",
+      "state": "actioned",
       "acceptance": {
         "codex": {
-          "status": "pending",
-          "evidence": []
+          "status": "accepted",
+          "evidence": [
+            "MSG-20260617-062: Codex reviewed PRD-037 APPLY-with-counters. C1-C5 counters were applied to the PRD-037 text and handshake-sign tool patches landed at rev 273; PRD-037 acceptance remains blocked only on other required reviewers."
+          ]
         },
         "claude": {
-          "status": "pending",
-          "evidence": []
+          "status": "accepted",
+          "evidence": [
+            "Claude drafted PRD-037 on 2026-06-17. Codex review applied 2026-06-17 (MSG-20260617-062 Reply): C1-C5 counters applied to text and tool patches committed at rev 273. evals/prd-037.evals.mjs authored by Claude (10/12 pass; AC5/AC7 RED pending PRD-017 amendments)."
+          ]
         },
         "maintainer": {
-          "status": "pending",
-          "evidence": []
+          "status": "accepted",
+          "evidence": [
+            "Maintainer direct instruction 2026-06-18: accepted PRD-037."
+          ]
+        },
+        "gemini": {
+          "status": "accepted",
+          "evidence": [
+            "MSG-20260617-063: Gemini reviewed PRD-037 APPLY-with-counters C1-C3. C1/C2 were applied in the rev 273 PRD-037 text/tool updates; C3 remains tracked as AC4 CI verification follow-up tied to PRD-017 amendments, not a document-acceptance blocker."
+          ]
         }
       },
       "blocking_items": [],
-      "eligible_for_docs_prds": false
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "evals-authored",
+        "evals": "evals/prd-037.evals.mjs",
+        "eval_author": "claude",
+        "implementer": "codex",
+        "reviewer": "claude",
+        "notes": "Claude authored evals in evals/prd-037.evals.mjs; implementation is pending by Codex."
+      }
     },
     {
       "id": "PRD-038",
       "title": "Read-Only Heartbeat Stewards",
-      "path": "working-session/docs/PRD-038-read-only-heartbeat-stewards.md",
-      "shelf": "working-session/docs",
-      "state": "draft",
+      "path": "docs/prds/PRD-038-read-only-heartbeat-stewards.md",
+      "shelf": "docs/prds",
+      "state": "actioned",
       "acceptance": {
         "codex": {
           "status": "accepted",
@@ -1266,20 +1513,34 @@
           ]
         },
         "claude": {
-          "status": "pending",
-          "evidence": []
+          "status": "accepted",
+          "evidence": [
+            "MSG-20260617-060 / MSG-20260617-058: Claude reviewed PRD-038 APPLY with C1+C2. Codex applied C1 read-only validator allow-list expansion and C2 local cursor detection; Claude acceptance recorded after counters landed."
+          ]
         },
         "gemini": {
-          "status": "pending",
-          "evidence": []
+          "status": "accepted",
+          "evidence": [
+            "MSG-20260617-059: Gemini reviewed PRD-038 APPLY with no counters, confirming runtime autonomy, cadence-window suitability, and read-only default safety."
+          ]
         },
         "maintainer": {
-          "status": "pending",
-          "evidence": []
+          "status": "accepted",
+          "evidence": [
+            "Maintainer direct instruction 2026-06-18: accepted PRD-038."
+          ]
         }
       },
       "blocking_items": [],
-      "eligible_for_docs_prds": false
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "evals-authored",
+        "evals": "evals/prd-038.evals.mjs",
+        "eval_author": "claude",
+        "implementer": "codex",
+        "reviewer": "claude",
+        "notes": "Evals are authored under evals/prd-038.evals.mjs; implementation is pending by Codex."
+      }
     }
   ]
 }

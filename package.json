@@ -9,11 +9,12 @@
     "url": "https://github.com/snapsynapse/turnfile.git"
   },
   "scripts": {
-    "validate": "npm run lint:turnfile && npm run lint:mailbox && npm run lint:prds && npm run lint:public-surface && npm run validate:skills:ci && npm run evals",
+    "validate": "npm run lint:turnfile && npm run lint:mailbox && npm run lint:prds && npm run lint:public-surface && npm run lint:tkab && npm run validate:skills:ci && npm run evals",
     "lint:turnfile": "node tools/turnfile-lint.mjs",
     "lint:mailbox": "node tools/validate-mailbox-invariants.mjs",
     "lint:prds": "node tools/validate-prd-promotion.mjs",
     "lint:public-surface": "node tools/validate-public-surface-snapshot.mjs",
+    "lint:tkab": "node tools/validate-tkab-results.mjs",
     "export:mailbox": "node tools/export-mailbox-json.mjs",
     "validate:skills": "node tools/validate-skills-preflight.mjs --repo-skill-bundle .agents/skills/turnfile-protocol-gemini --strict-global",
     "validate:skills:ci": "node tools/validate-skills-preflight.mjs --repo-skill-bundle .agents/skills/turnfile-protocol-gemini",

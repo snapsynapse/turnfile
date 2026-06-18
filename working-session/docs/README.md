@@ -4,8 +4,7 @@ Active iteration documents for the current local session workspace.
 
 ## Draft PRDs
 
-1. `PRD-037-boot-simplification.md`
-2. `PRD-038-read-only-heartbeat-stewards.md`
+None.
 
 ## Accepted / Not Yet Promoted PRDs
 
@@ -45,6 +44,8 @@ None.
 30. `PRD-034-public-and-agent-surface-snapshot-reconciliation-contract.md`
 31. `PRD-035-tokenese-integration-and-upstream-result-sync-contract.md`
 32. `PRD-036-prd-eval-runner-contract.md`
+33. `PRD-037-boot-simplification.md`
+34. `PRD-038-read-only-heartbeat-stewards.md`
 
 ## Promotion Gate Policy (Required)
 

@@ -1,9 +1,25 @@
 # PRD-017: Boot Sequence Commands and Documentation Contract
 
-Status: Actioned (promoted to docs/prds, session 14, 2026-06-12)
-Owner: Maintainer + Codex + Claude  
+Status: Actioned (promoted to docs/prds, session 14, 2026-06-12; amended by PRD-037 session 21, 2026-06-18)
+Owner: Maintainer + Codex + Claude + Gemini
 Date: 2026-02-10
-Last revised: 2026-06-12 (session 14: PRD-020 folded in as R7; OQ-051 resolved)
+Last revised: 2026-06-18 (session 21: PRD-037 Amendment A1 — session-orient is boot fast path + signed-row-is-baseline-ack)
+
+## Amendment A1 — Boot Simplification (PRD-037 R2 + R4)
+
+PRD-037 (accepted + promoted session 21) amends this contract. Canonical text lives in PRD-037; summary here:
+
+### A1.1 session-orient JSON output is the boot read (fast path)
+
+A clean `node tools/session-orient.mjs --agent <self> --emit json` output satisfies the boot read **only when it reports no findings that require targeted reads**. If orient reports any of: unread mailbox work, stale projection, validator failure, missing artifacts, or dirty peer-owned paths, the agent MUST read the relevant underlying files before acting. PRD-017's failure/escalation behavior (R5) is preserved unchanged. Files-First remains in force — `session-orient` itself is a fresh disk read. Targeted reads (TURNFILE bodies, MAILBOX bodies, OPEN_QUESTIONS, boot-<agent>.md) become on-demand. (PRD-037 R2.1–R2.4)
+
+### A1.2 Signed sign-off row is the boot-baseline ack
+
+A signed handshake sign-off row in `working-session/NEXT_SESSION_HANDSHAKE.md` constitutes the agent's session-open baseline acknowledgment (protocol baseline match, skills self-validated, Tokenese confirmed, default scope ack, heartbeat spec, identity enforcing). No separate ack-or-counter mailbox card is required for boot baseline. The row CANNOT carry: a new lane assignment or task claim; a Maintainer decision relay; a substantive scope change; PRD acceptance; any policy normally requiring delivery-mirror or audit-mirror. Substantive work continues to use full mailbox cards with ack-or-counter lifecycle. Peer disagreement with a signed row's baseline claim is raised via a `counter` mailbox card pointing at the row. (PRD-037 R4.1–R4.6)
+
+### A1.3 Canonical boot write tool
+
+`tools/handshake-sign.mjs` is the canonical boot write surface: atomic sequential write with hash collision guard and PARTIAL WRITE detection across `TURNFILE.yaml`, `NEXT_SESSION_HANDSHAKE.md`, and `WORKLOG.md`, with auto-regeneration of `MAILBOX.json` and post-write validators. Use is opt-in per agent; manual boot remains valid. (PRD-037 R1)
 
 ## Promotion Gate Snapshot (PRD-006 R2a)
 

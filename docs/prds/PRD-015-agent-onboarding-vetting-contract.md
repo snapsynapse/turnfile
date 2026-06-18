@@ -1,18 +1,19 @@
 # PRD-015: Agent Onboarding + Vetting Contract
 
-Status: Deferred (working-session; maintainer acceptance rollback pending onboarding suite validation)
-Owner: Maintainer + Codex + Claude
+Status: Actioned (promoted to docs/prds, session 21, 2026-06-17 — Gemini onboarding completed under this contract; PRD reactivated from deferred state)
+Owner: Maintainer + Codex + Claude + Gemini
 Date: 2026-02-08
-Last revised: 2026-02-11
+Last revised: 2026-06-17 (session 21: reactivated; Gemini full-active; OT suite proven end-to-end on Antigravity)
 
 ## Promotion Gate Snapshot (PRD-006 R2a)
 
 | Gate | Status | Evidence |
 |------|--------|----------|
-| Codex acceptance | accepted | `MSG-20260208-036` reply confirms recommendations applied |
-| Claude acceptance | accepted | `MSG-20260208-036` review outcome: accept with recommendations |
-| Maintainer acceptance | pending onboarding suite validation | `MSG-20260211-015` rollback decision: validate first via generalized onboarding test evidence |
-| Eligible for move to `docs/prds` | no | blocked until maintainer acceptance is re-issued and registry blockers are clear |
+| Codex acceptance | accepted | `MSG-20260208-036` reply confirms recommendations applied; cross-reviewed Gemini OT-007 bundle port APPROVE session 20 |
+| Claude acceptance | accepted | `MSG-20260208-036` review outcome: accept with recommendations; LED Gemini onboarding sessions 19-21 |
+| Gemini acceptance | accepted | Gemini onboarded via this PRD's OT-001/007/008/002/004 suite; bundle ported to `.agents/skills/turnfile-protocol-gemini/`; PRD-027 production-competence gate passed 7/8 (MSG-20260617-057) |
+| Maintainer acceptance | accepted | Maintainer decision 2026-06-17 (session 21): Gemini onboarding complete; provisional-active → full-active; PRD-015 reactivated and promoted to `docs/prds/` |
+| Eligible for move to `docs/prds` | yes | All four reviewer gates met; Gemini full-active is the proof-by-execution that this contract works end-to-end |
 
 ## Problem
 

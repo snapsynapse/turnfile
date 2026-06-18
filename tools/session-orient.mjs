@@ -46,8 +46,9 @@ function parseArgs(argv) {
     else if (k === "--prd") a.prd = v();
     else if (k === "--task") a.task = v();
     else if (k === "--validate") a.validate = true;
+    else if (k === "--date") a.date = v();
     else if (k === "--help" || k === "-h") {
-      console.log("Usage: node tools/session-orient.mjs --mailbox <mb> --turnfile <tf> --worklog <wl> --prd-status <ps> [--agent <id>] [--emit json|human] [--prd <id>] [--task <id>] [--validate]");
+      console.log("Usage: node tools/session-orient.mjs --mailbox <mb> --turnfile <tf> --worklog <wl> --prd-status <ps> [--agent <id>] [--emit json|human] [--prd <id>] [--task <id>] [--validate] [--date YYYYMMDD]");
       process.exit(0);
     } else {
       jsonError("unknown-argument", `Unknown argument: ${k}`);
@@ -112,7 +113,9 @@ function main() {
   const prdStatus = parseJsonLoose(fs.readFileSync(resolveRoot(args.prdStatus), "utf8")) || { prds: [] };
 
   // Compose next-state.mjs for ids + unread snapshot.
-  const nsRaw = runNode("next-state.mjs", ["--mailbox", args.mailbox, "--turnfile", args.turnfile]);
+  const nsArgs = ["--mailbox", args.mailbox, "--turnfile", args.turnfile];
+  if (args.date) nsArgs.push("--date", args.date);
+  const nsRaw = runNode("next-state.mjs", nsArgs);
   const ns = parseJsonLoose(nsRaw.stdout);
   if (!ns) jsonError("derivation-failed", `next-state.mjs did not return JSON: ${nsRaw.stderr || nsRaw.stdout}`);
 
@@ -191,7 +194,7 @@ function main() {
     `node tools/validate-mailbox-invariants.mjs --mailbox ${args.mailbox}`,
     `node tools/turnfile-lint.mjs --turnfile ${args.turnfile} --schema schemas/turnfile/turnfile-v0.schema.json`,
     `node tools/validate-prd-promotion.mjs`,
-    `node tools/validate-closeout.mjs --turnfile ${args.turnfile} --mailbox ${args.mailbox}`,
+    `node tools/validate-closeout.mjs --turnfile ${args.turnfile} --mailbox ${args.mailbox}${args.agent ? ` --agent ${args.agent}` : ""}`,
     `node tools/validate-ownership-guard.mjs`,
   ];
 

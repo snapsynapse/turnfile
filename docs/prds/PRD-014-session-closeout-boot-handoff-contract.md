@@ -58,7 +58,8 @@ Before declaring session close, the closing agent must execute a closeout checkl
 2. Boot rollover (R3).
 3. Worklog maintenance and compaction check (R4).
 4. Open-question sync check (R5).
-5. Reflection entry (R7).
+5. Active-card owner review for messages where the closing agent is `Closure owner` (R2.6).
+6. Reflection entry (R7).
 
 The checklist outcome must be visible in the session's chat mirror close note.
 
@@ -74,6 +75,7 @@ Additional rules:
 3. Inbox Snapshot counts must match active-message state.
 4. Open Queue entries must match message status.
 5. `MAILBOX.json` must be regenerated in the same cycle if `MAILBOX.md` changed.
+6. The closing agent must review every Active Message where `Closure owner` equals the closing agent, regardless of unread count. Each owned active card receives one disposition: `closed`, explicitly deferred with reason and next owner, escalated/blocked with evidence, or still waiting on recipient. Owned `actioned` cards block clean close unless they are closed or explicitly deferred/escalated; receiver-side `actioned` is not terminal by itself.
 
 ## R3. Boot rollover + archive contract
 
@@ -199,6 +201,7 @@ At session close, the closing agent performs the full compaction set (this gener
 3. **Mailbox archival movement** — terminal (closed) messages move from `MAILBOX.md` to `MAILBOX_ARCHIVE.md`; the active mailbox retains only non-terminal threads and the Closed Summary index.
 4. **Worklog/boot archive** — per R3 boot rollover; archived boot file versioned monotonically.
 5. **Heartbeat lifecycle (PRD-030 R5/R6)** — inspect active session heartbeats relevant to the thread/workspace; for each, choose one outcome: deleted, updated, intentionally carried forward, or not applicable. Delete any whose stop condition is satisfied. Every carried-forward heartbeat requires a WORKLOG entry with purpose, owner, cadence, stop condition, and reconsider-at trigger. A clean close may not leave a stale heartbeat running silently. (This is PRD-030 R6 landing as one row in the unified set, not a duplicate gate.)
+6. **Active card owner review** — inspect every Active Message whose `Closure owner` is the closing agent. Close owned `actioned` cards when the reply is sufficient; otherwise leave an explicit deferral/escalation with reason and next owner. A clean close may not leave owned `actioned` cards silently active.
 
 ### A1.R2 Projection synchronization
 
@@ -223,5 +226,5 @@ Closeout executes the full gate suite (`turnfile-lint`, mailbox invariants, PRD-
 
 1. The compaction set (A1.R1) and projection-sync set (A1.R2) are each enumerated with execute-or-defer semantics.
 2. The PRD-026 scope boundary (A1.R3) is explicit and non-overlapping.
-3. Implementation evals (authored by Claude per PRD-006 A1) verify: signal-log compaction honors the retention window; terminal messages are archived and absent from the active mailbox; closeout fails clean-close when a projection validator fails and no deferral is recorded.
+3. Implementation evals (authored by Claude per PRD-006 A1) verify: signal-log compaction honors the retention window; terminal messages are archived and absent from the active mailbox; owner-scoped closeout flags owned `actioned` active cards; closeout fails clean-close when a projection validator fails and no deferral is recorded.
 4. Boot files and skill closeout modules reference the unified compaction set.

@@ -1,14 +1,14 @@
 bundle: turnfile-codex-collaboration
-bundle_version: 9
-bundle_date: 2026-06-17
+bundle_version: 10
+bundle_date: 2026-06-18
 description: >
   Codex's protocol execution guide for the Turnfile protocol (a SNAP protocol).
   Encodes mailbox lifecycle, payload-first review exchange, lock-safe shared-file
   updates, session close/resume, Turnfile task/lock coordination, Files First
   discipline, model ledger handshake validation, PRD-029 pre-write state
   derivation, PRD-030 heartbeat and memory-boundary discipline, PRD-031
-  concurrent-work transition guidance, PRD-014 A1 unified closeout compaction
-  and projection synchronization, Tokenese adoption guardrails, and peer
+  concurrent-work transition guidance, PRD-014 A1 unified closeout compaction,
+  active-card owner review, and projection synchronization, Tokenese adoption guardrails, and peer
   collaboration posture as operational instructions for Codex's environment.
 
 compatibility:
@@ -42,7 +42,7 @@ compatibility:
 files:
   - path: SKILL.md
     role: skill
-    version: 9
+    version: 10
     hash: null
     note: >
       Codex protocol execution guide. 10 modules (M-00 through M-09): session
@@ -53,13 +53,13 @@ files:
       ledger handshake validation, PRD-029 next-state.mjs pre-write derivation,
       PRD-030 heartbeat and memory-boundary discipline, PRD-031 concurrent-work
       transition guidance, PRD-014 A1 unified closeout compaction/projection
-      synchronization, Tokenese twin-lane guardrails, and collaboration posture
+      synchronization, active-card owner review, Tokenese twin-lane guardrails, and collaboration posture
       obligations for peer contribution, yes-and review, proposal-only authority,
       edge-case surfacing, and Maintainer legibility.
 
   - path: CHANGELOG.md
     role: reference
-    version: 9
+    version: 10
     hash: null
     note: Bundle change history.
 

@@ -20,6 +20,7 @@ Define a candidate-agnostic onboarding test set for PRD-015 gate decisions. The 
 2. Keep scenario definitions generic; candidate identity belongs only in evidence files.
 3. Record each run using `ONBOARDING_EVIDENCE_TEMPLATE.md`.
 4. Link evidence back to mailbox/worklog decision records.
+5. Use `PROTOCOL_GLOSSARY.md` as candidate onboarding support for lifecycle, closeout, and coordination terminology.
 
 ## Evidence Folder Convention
 

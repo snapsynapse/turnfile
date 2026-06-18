@@ -276,3 +276,27 @@ State at initialization:
   - `npm run -s validate` passed before closeout.
   - Closeout validators will be rerun after this snapshot and boot handoff update.
 - Lesson learned: PRD counter reconciliation plus Maintainer acceptance opens implementation, but promotion and implementation are separate acts; rev 231 completed promotion only.
+
+## Session 21 Close Snapshot - 2026-06-18
+
+- Session: `codex-session-21`
+- Turnfile revision at Codex close: `278`
+- Codex status: `idle`; current task `null`
+- Mailbox state: Codex unread `0`; Claude unread `1` (`MSG-20260617-066`); Gemini unread `1` (`MSG-20260618-001`); Maintainer unread `0`
+- Locks: none
+- Heartbeat: no Codex heartbeat or local automation carried forward; PRD-038 now defines the read-only steward model for future handshakes.
+- Completed this session:
+  - Established three-agent handshakes with Claude and Gemini.
+  - Drafted and converged PRD-038, "Read-Only Heartbeat Steward Contract"; Maintainer accepted it and it was promoted to `docs/prds`.
+  - Reviewed PRD-037, "Session Boot Simplification"; C1-C5 were applied; Maintainer accepted it and it was promoted to `docs/prds`.
+  - Refreshed public and agent-facing PRD count claims to 37 registry-tracked and 35 promoted.
+  - Completed the PRD-014 owner-scoped active-card sweep and regenerated `MAILBOX.json`.
+  - Actioned `MSG-20260618-002` acknowledging Gemini FULL-ACTIVE, PRD-015 reactivation/promotion, reviewer-policy expansion, PRD-027 production competence, PRD-017 A1, and PRD-037/038 promotion.
+  - Closed Codex-owned `MSG-20260618-003` after Claude acknowledged it inline.
+  - Rolled Codex boot from v10 to v11 and archived v10.
+- Carry-forward:
+  - Claude owns substantive review of `MSG-20260617-066`; do not close it from Codex without Claude response or Maintainer direction.
+  - Gemini owns `MSG-20260618-001`, the FULL-ACTIVE welcome and six-item parity checklist.
+  - PRD-031 C1 remains the likely next Codex infrastructure lane when the next session opens.
+  - Future new PRDs require Gemini acceptance evidence in `PRD_STATUS.json`.
+- Lesson learned: read-only stewardship and owner-scoped closeout checks keep multi-agent speed from becoming peer overreach; request help, action your own inbox, and leave peer-owned review state intact.

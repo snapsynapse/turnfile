@@ -8,7 +8,7 @@ const DEFAULT_RETENTION_SESSIONS = 2;
 function usage() {
   return [
     "Usage: node tools/validate-closeout.mjs --turnfile <tf> --mailbox <mb>",
-    "       [--retention-sessions <N>] [--defer <item>]...",
+    "       [--agent <agent>] [--retention-sessions <N>] [--defer <item>]...",
   ].join("\n");
 }
 
@@ -16,6 +16,7 @@ function parseArgs(argv) {
   const args = {
     turnfile: null,
     mailbox: null,
+    agent: null,
     retentionSessions: DEFAULT_RETENTION_SESSIONS,
     deferred: [],
   };
@@ -25,6 +26,8 @@ function parseArgs(argv) {
       args.turnfile = argv[++i] || null;
     } else if (arg === "--mailbox") {
       args.mailbox = argv[++i] || null;
+    } else if (arg === "--agent") {
+      args.agent = (argv[++i] || "").trim().toLowerCase() || null;
     } else if (arg === "--retention-sessions") {
       args.retentionSessions = Number.parseInt(argv[++i] || "", 10);
     } else if (arg === "--defer") {
@@ -239,6 +242,40 @@ function parseActiveMessageStatuses(mailboxText) {
   return messages;
 }
 
+function parseCompactField(lines, start, end, fieldName) {
+  const re = new RegExp(`^\\*\\*${fieldName}:\\*\\*\\s*(.+?)\\s*$`);
+  for (let i = start; i < end; i += 1) {
+    const match = re.exec(lines[i].trim());
+    if (match) return match[1].trim();
+  }
+  return "";
+}
+
+function parseActiveMessageCloseoutFields(mailboxText) {
+  const lines = mailboxText.replace(/\r\n/g, "\n").split("\n");
+  const start = lines.findIndex((line) => line.trim() === "## Active Messages (Newest First)");
+  if (start < 0) return [];
+  const end = lines.findIndex(
+    (line, idx) =>
+      idx > start && ["## Closed Summary (Newest First)", "## Closed Summary"].includes(line.trim()),
+  );
+  const rangeEnd = end >= 0 ? end : lines.length;
+  const messages = [];
+
+  for (let i = start + 1; i < rangeEnd; i += 1) {
+    const heading = lines[i].trim();
+    if (!heading.startsWith("### MSG-")) continue;
+    const id = heading.replace(/^###\s+/, "").trim();
+    const next = findLineInRange(lines, i + 1, rangeEnd, (candidate) => candidate.trim().startsWith("### MSG-"));
+    const msgEnd = next >= 0 ? next : rangeEnd;
+    const status = parseCompactField(lines, i + 1, msgEnd, "Status").toLowerCase();
+    const closureOwner = parseCompactField(lines, i + 1, msgEnd, "Closure owner").toLowerCase();
+    const subject = parseCompactField(lines, i + 1, msgEnd, "Subject");
+    messages.push({ id, status, closure_owner: closureOwner, subject });
+  }
+  return messages;
+}
+
 function parseTurnfileSignals(turnfileText) {
   const lines = turnfileText.replace(/\r\n/g, "\n").split("\n");
   const start = lines.findIndex((line) => line.trim() === "messages:");
@@ -333,6 +370,15 @@ function buildReport(args) {
   const terminalInActive = parseActiveMessageStatuses(mailboxText)
     .filter((message) => TERMINAL_STATUSES.has(message.status))
     .map((message) => message.id);
+  const activeCloseoutFields = parseActiveMessageCloseoutFields(mailboxText);
+  const ownerActionedActive = args.agent
+    ? activeCloseoutFields
+        .filter((message) => message.closure_owner === args.agent && message.status === "actioned")
+        .map((message) => message.id)
+    : [];
+  const ownerActiveTotal = args.agent
+    ? activeCloseoutFields.filter((message) => message.closure_owner === args.agent).length
+    : null;
   const staleMailboxJson = mailboxJsonStale(args.mailbox, mailboxText);
   const turnfileRevision = parseTurnfileRevisions(turnfileText);
 
@@ -342,6 +388,12 @@ function buildReport(args) {
     allBlocking.push({
       item: "mailbox_archival",
       reason: `terminal active messages remain: ${terminalInActive.join(", ")}`,
+    });
+  }
+  if (ownerActionedActive.length > 0) {
+    allBlocking.push({
+      item: "active_card_owner_review",
+      reason: `${args.agent} owns actioned active messages that need close/defer review: ${ownerActionedActive.join(", ")}`,
     });
   }
   if (staleMailboxJson) allBlocking.push({ item: "mailbox_json", reason: "MAILBOX.json is stale relative to MAILBOX.md" });
@@ -361,6 +413,12 @@ function buildReport(args) {
       mailbox_archival: {
         terminal_in_active: terminalInActive,
         ok: terminalInActive.length === 0,
+      },
+      active_card_owner_review: {
+        owner: args.agent,
+        owned_active_count: ownerActiveTotal,
+        actioned_owned_active: ownerActionedActive,
+        ok: ownerActionedActive.length === 0,
       },
     },
     projection: {

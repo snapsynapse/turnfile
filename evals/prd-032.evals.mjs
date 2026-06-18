@@ -254,7 +254,7 @@ test("AC1/R5: --emit json returns the stable orientation schema on a hermetic fi
 
 test("AC2/R4: --emit human reports current revision, next ids, unread count, findings, and recommendations", () => {
   const f = fixture();
-  const result = runOrient(f, ["--agent", "codex", "--emit", "human"]);
+  const result = runOrient(f, ["--agent", "codex", "--emit", "human", "--date", "20260617"]);
   assert.equal(result.status, 0, result.stderr || result.stdout);
   assert.match(result.stdout, /agent:\s*codex/i);
   assert.match(result.stdout, /revision:\s*41/i);

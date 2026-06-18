@@ -422,3 +422,63 @@ commit: 8bbf081 whole-tree as TURNFILE_AGENT=maintainer + pushed to origin/main
 
 ### Closeout bookkeeping
 - claude idle / current_task null; s20-gemini-onboarding done; gemini status reconciled active->idle under maintainer closeout authority (Gemini closed but left status active); boot rolled v13->v14 (v13 archived); WORKLOG status updated; SIG-212 yield.
+
+---
+
+## Session 21 Close Snapshot — Claude — 2026-06-18 (rev ~280)
+
+```yaml
+agent: Claude
+model: Claude Opus 4.7 (Fast mode; switched mid-session from 4.8 by Maintainer for speed)
+date: 2026-06-18
+branch: main
+turnfile_revision: ~280
+close_reason: 3-agent session close after Gemini FULL-ACTIVE delivery; Codex closed rev 278; Gemini closed earlier
+commit: held pending Maintainer direction
+```
+
+### Done this session
+- **`tools/handshake-sign.mjs` BUILT** (340 LOC): atomic-where-possible boot write tool. Hash collision guard + PARTIAL WRITE detection (C3); replaceOrFail defensive regex (C4); append-after-last-row table logic (C5). Tokenese-leading dense block + English source-wins row.
+- **PRD-037 Boot Simplification DRAFTED** (Tokenese-led under Maintainer unlock, English source-wins). Codex C1-C5 applied (PRD-017 boundary tightening, signed-row scope limits, atomicity claim revision, regex match checks, append-branch rewrite). Maintainer-accepted + promoted to docs/prds. evals/prd-037.evals.mjs 12/12 GREEN.
+- **PRD-038 Read-Only Heartbeat Stewards REVIEWED** APPLY+C1+C2 (helper allow-list completeness + closure-owner sweep mechanism). Codex applied both counters. Maintainer-accepted + promoted.
+- **Heartbeat downgraded** from write-capable to read-only steward mid-session per PRD-038 R2 (deny-list strict). Deleted at close per PRD-030 R5 stop-condition.
+- **Gemini PRD-027 production-competence GRADED 7/8 PASS** (E5 used `??` misparse-request vs `√` repair sigil — calibration data, non-blocking). Maintainer ratified Tier-B activation. Model ledger row added.
+- **Gemini FULL-ACTIVE 9-item parity package delivered:**
+  1. PRD-015 reactivated + promoted to docs/prds (file moved from archive)
+  2. `policy.required_reviewers` extended to `{codex, claude, maintainer, gemini}`
+  3. 35 pre-existing PRDs grandfathered with explanatory evidence
+  4. PRD-027 `production_competence` block recorded for all three agents
+  5. PRD-017 Amendment A1 added (PRD-037 R2 + R4); Owner extended to include Gemini
+  6. PRD-037 + PRD-038 promotion finalized in registry
+  7. evals/prd-037.evals.mjs 12/12 GREEN
+  8. handshake-sign C3-C5 patches applied
+  9. Gemini's 6-item self-discipline carry-forward (A1 loop demo, bundle version drift, self-closeout, boot-gemini versioning, TURNFILE_AGENT=gemini commit, optional non-Tokenese task) routed via MSG-20260618-001
+
+### Maintainer feedback internalized
+- **Don't hoard work** — when Codex-territory work appears (PRD_STATUS edits, PRD body amendments, model ledger), default-route to Codex. Reserve Claude for review/verification/synthesis/governance text/judgment. Pattern audit done; future default fixed.
+- **Boot floor is 60s, not 2-3 min** — peers prove it. Files-First over-reading is the same defect as work-hoarding.
+- **Tokenese can lead, English source-wins.** Bounded Tier-B is the right scope; the new handshake-sign tool emits dense + English projection by default.
+
+### Carry-forward (session 22)
+
+Mine (Claude):
+- MSG-20260617-066 substantive review — Codex's PRD-014 active-card-owner-review contract change. Explicitly deferred this session per PRD-014's own deferral mechanism. Apply-or-counter the contract; mirror closeout wording into skills/claude/SKILL.md after verdict.
+
+Route to Codex (do NOT do myself):
+- PRD-030 R2 default-flip body amendment (PRD-037 R3 + PRD-038 R8.4 cross-refs).
+- handshake-sign v2 task auto-create per PRD-037 OQ-D.
+- PRD-037 entry `claude.acceptance.evidence` cleanup (current text copy-pasted from PRD-038).
+
+Gemini's 6-item parity checklist (MSG-20260618-001):
+- A1 loop end-to-end (suggested: PRD-035 implementation).
+- Bundle version drift (SKILL header 0.2.0 vs CHANGELOG 0.2.1).
+- Self-closeout discipline.
+- boot-gemini.md v1→v2 with archive.
+- TURNFILE_AGENT=gemini commit path exercise.
+- Optional non-Tokenese task.
+
+### Closeout bookkeeping
+- claude idle / current_task null; last_seen claude-session-21-close; MSG-066 acknowledged-then-deferred per PRD-014 active-card-owner-review mechanism; MSG-003 closed by Codex during their close; boot rolled v14→v15 (v14 archived to docs/archive/boot-claude/); WORKLOG status updated to SESSION 21 CLOSED; chat-claude close snapshot appended (this); heartbeat scheduled task DELETED (PRD-030 R5); validate-closeout --agent claude clean; SIG yield.
+
+### Concurrency note
+3-agent live throughout session 21 (rev moved 256→280, ~24 increments in one sitting). Multiple mid-write collisions on MAILBOX/TURNFILE/HANDSHAKE; the Read-before-edit guard caught each. Re-grounded, took the next rev. First session where Gemini was equal peer in writes — no protocol violations observed.
