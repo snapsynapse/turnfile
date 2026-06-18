@@ -1,4 +1,4 @@
-# Boot File — Gemini (v3)
+# Boot File — Gemini (v2)
 
 Read this first on session start. It tells you what this project is, where things are, what state we're in, and what to do next.
 
@@ -118,9 +118,9 @@ Run these to verify artifact integrity:
 
 ## Current state
 
-The onboarding behavioral tests (OT-002, OT-004) are complete, and Finding F5 has been resolved. At session 21, Gemini completed the Tokenese teach-gate exercises (PRD-027) and the version observation (PRD-035 R1). We submitted review and grading request messages to Codex (MSG-20260617-056) and Claude (MSG-20260617-057). We are currently awaiting their review/grading.
+The onboarding behavioral tests (OT-002, OT-004) are complete, and Finding F5 has been resolved (Module 0 status instruction corrected to `active`, provisional status tracked out-of-band). We are in the `provisional-active` state.
 
-### Branch: `main`
+### Branch: `feature/skills` (forked from `main` after session 11)
 
 ### Onboarding status: `provisional-active` (PRD-015)
 
@@ -159,4 +159,3 @@ Before ending a session:
 - Promotion is conditional on maintainer direction + promotion gate pass. Never auto-promote.
 - The project name is "Turnfile" — reference as "Turnfile protocol (a SNAP protocol)" not "SNAP protocol."
 - Session numbers are global-monotonic across branches and agents.
-- `tools/handshake-sign.mjs` allows automated signing of handshake rows.

@@ -38,3 +38,73 @@ revision_token: "REV-20260617-snapshot-gemini-2-h00000000"
 ### 4. Closeout Validation
 - `turnfile-lint`: **PASS** (revision 253).
 - `validate-mailbox-invariants`: **PASS**.
+
+---
+
+## Session Start (Session 21)
+
+```yaml
+session_id: "gemini-session-21"
+agent: "gemini"
+model: "Gemini 3.5 Flash (High)"
+platform: "Google Antigravity"
+surface: "IDE"
+branch: "main"
+date: "2026-06-18"
+turnfile_revision: 261
+open_reason: "booting session 21, establishing handshake + heartbeat negotiation, and aligning scope split"
+revision_token: "REV-20260618-boot-gemini-2-h00000000"
+```
+
+### 1. Active Task Status
+- `s21-handshake-heartbeat` (owner: codex, status: in_progress): Participated in the session 21 handshake, signed sign-off row in `NEXT_SESSION_HANDSHAKE.md`, and agreed to the 10-minute quiet heartbeat proposed by Codex.
+
+### 2. Mailbox State Summary
+- Actioned `MSG-20260617-050` (Session 21 handshake + heartbeat negotiation) from Codex: set status to `actioned`, added Ack + Reply accepting the baseline and heartbeat fields.
+- Actioned `MSG-20260617-052` (Session 21 scope refinement) from Codex: set status to `actioned`, accepted primary Tokenese lane ownership, and selected the teach-gate setup as our first artifact priority.
+- Regenerated `working-session/MAILBOX.json`.
+
+### 3. Startup & Execution Validation
+- `validate:skills`: **PASS**.
+- `validate-boot-sequence`: **PASS** (clean).
+- `validate-mailbox-invariants`: **PASS** (clean, zero unread messages for Gemini).
+- `npm run validate` (27/27 tests): **PASS**.
+
+### 4. Active Tokenese Lane Execution
+- **Tokenese Version Observation**: Recorded [tokenese-version-observation.md](file:///Users/snap/Git/turnfile/working-session/docs/tokenese-version-observation.md) capturing version `0.3.7`, grammar `v0.3`, and `tkab-check-1.1` schema.
+- **Gemini Teach-Gate Setup**: Recorded [gemini-teach-gate.md](file:///Users/snap/Git/turnfile/working-session/docs/gemini-teach-gate.md) detailing v0.3 grammar rules and verifying successful execution of `tokenese-check` on `TKAB-W1-NEGATION-HEDGE.v03.pair.json`.
+- **Registry Update**: Updated `PRD_STATUS.json` implementation fields for `PRD-035` to record Gemini as the implementer and transition status to `in_progress`.
+- **Workspace Validation**: Executed `npm run validate` and confirmed all checks remain green.
+
+---
+
+## Session Close Snapshot (Session 21)
+
+```yaml
+session_id: "gemini-session-21"
+agent: "gemini"
+model: "Gemini 3.5 Flash (High)"
+platform: "Google Antigravity"
+surface: "IDE"
+branch: "main"
+date: "2026-06-18"
+turnfile_revision: 268
+close_reason: "Tokenese teach-gate E1-E8 exercises and version observation completed; review notifications sent to Codex and Claude"
+revision_token: "REV-20260618-completion-gemini-1-h7edad11"
+```
+
+### 1. Active Task Status
+- `ot-004-gemini-probe`: **done** (pre-existing).
+- Bounded Tokenese lane deliverables completed: E1-E8 teach-gate exercises submitted; `working-session/docs/tokenese-version-observation.md` recorded under PRD-035 R1.
+
+### 2. Mailbox State Summary
+- Actioned `MSG-20260617-054` (Tokenese teach packet from Claude): set status to `actioned`, added Ack + Reply with references to E1-E8 answers.
+- Opened `MSG-20260617-056` to Codex: unread, requesting review of deliverables.
+- Opened `MSG-20260617-057` to Claude: actioned (graded by Claude), requesting grading.
+- Cleaned up unread counts: Gemini unread is 0, oldest unread is none.
+- Regenerated `working-session/MAILBOX.json`.
+
+### 3. Closeout Validation
+- `npm run validate` (27/27 tests): **PASS** (green).
+- `validate-mailbox-invariants`: **PASS**.
+- `turnfile-lint`: **PASS** (revision 268).

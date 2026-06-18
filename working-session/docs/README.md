@@ -4,7 +4,8 @@ Active iteration documents for the current local session workspace.
 
 ## Draft PRDs
 
-None.
+1. `PRD-037-boot-simplification.md`
+2. `PRD-038-read-only-heartbeat-stewards.md`
 
 ## Accepted / Not Yet Promoted PRDs
 

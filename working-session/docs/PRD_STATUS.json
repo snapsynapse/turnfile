@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2026-06-17 (PRD-034/035/036 promoted to docs/prds after Maintainer acceptance)",
+  "updated_at": "2026-06-18 (PRD-038 draft added)",
   "policy": {
     "required_reviewers": [
       "codex",
@@ -1183,12 +1183,12 @@
       "blocking_items": [],
       "eligible_for_docs_prds": true,
       "implementation": {
-        "state": "evals-authored",
+        "state": "in_progress",
         "evals": "evals/prd-035.evals.mjs",
         "eval_author": "codex",
-        "implementer": "claude",
+        "implementer": "gemini",
         "reviewer": "codex",
-        "notes": "Codex authored RED evals on 2026-06-17 by Maintainer request for next-session scope. Evals pin fresh Tokenese observed-state recording, TKAB pair/result validation failure modes, current TKAB artifact coverage, pilot result publication package, tk-calibration-audit gating before Tier-B, public GuideCheck Level 4 caution, and registry ownership. After eval authoring, the Maintainer reported Tokenese has incremented since Codex last touched it; PRD-035 now treats v0.3.2 as a draft-time baseline only and requires a fresh observation before implementation. Session 19 counter reconciliation applied Claude C1-C4: result package must derive from tk-ab-run-results plus result JSON artifacts without re-keyed values; R4 references tk-calibration-audit as the single calibration source; PRD-035 owns upstream observation while PRD-034 owns public-surface claims; validate-tkab-results remains separate from validate-tokenese-pairs. No Tokenese repo edits were made. Maintainer accepted the document on 2026-06-17 with the repo-boundary note that Turnfile evidence may be cited by Tokenese without confusing the two repos; promoted to docs/prds at rev 231; implementation is now unblocked for the next A1 lane but not yet started."
+        "notes": "Codex authored RED evals on 2026-06-17. On 2026-06-18 (Session 21), the Maintainer approved the three-model split, assigning the Tokenese lane to Gemini. Gemini completed the Tokenese v0.3 version observation (PRD-035 R1) and the teach-gate setup (PRD-027 / MSG-052), verifying the local virtual environment and Python-based toolchain (147/147 tests passed)."
       }
     },
     {
@@ -1228,6 +1228,58 @@
         "reviewer": "codex",
         "notes": "Codex authored RED evals on 2026-06-17 by Maintainer request for next-session scope. Evals pin a portable aggregate PRD eval runner with dry-run/list mode, no empty-suite success, validation taxonomy docs, PRD-006 command alignment, explicit CI policy, focused PRD-032/033 eval preservation, and registry ownership. Session 19 counter reconciliation applied Claude C1-C2: the canonical implementation is a Node wrapper, CI runs validate and evals:prd as separate steps, and run-evals harness regression coverage must dry-run or fixture-load the wrapper so validate catches runner regressions. Session 20 (rev 236+): Claude IMPLEMENTED (A1 step 6). tools/run-prd-evals.mjs is the portable Node aggregate wrapper (readdir evals/, filter *.evals.mjs, spawn node --test, fail-on-empty; --dry-run/--list/--format json/--root); package.json evals:prd repointed to it (was the Node-v26-broken 'node --test evals/'); tools/run-evals.mjs adds non-self-referential wrapper regression (dry-run lists suites incl. evals/prd-032.evals.mjs; empty-fixture --root exits nonzero with the no-files message); README.md + docs/VALIDATION.md document the eval taxonomy (repo readiness validators / PRD implementation evals / focused PRD evals) + the separate validate-and-evals:prd CI policy; .github/workflows/validate.yml runs npm run evals:prd as a separate CI step. node --test evals/prd-036.evals.mjs = 10/10 green. Routed to Codex for A1 step-7 review via MSG-20260617-039 (s20-prd-036-review). Eval-first/not-self-implemented respected (Codex authored evals, Claude implemented). Session 20 rev 240: Codex reviewed APPROVE. Verification: node --test evals/prd-036.evals.mjs 10/10; node tools/run-prd-evals.mjs --dry-run --format json resolves 17 deterministic PRD eval files; node tools/run-evals.mjs 27/27 with wrapper regressions; full npm run -s evals:prd remains nonzero only because other live-workspace PRD suites fail, while PRD-036 passes inside the aggregate. No PRD-036 counter."
       }
+    },
+    {
+      "id": "PRD-037",
+      "title": "Boot Simplification",
+      "path": "working-session/docs/PRD-037-boot-simplification.md",
+      "shelf": "working-session/docs",
+      "state": "draft",
+      "acceptance": {
+        "codex": {
+          "status": "pending",
+          "evidence": []
+        },
+        "claude": {
+          "status": "pending",
+          "evidence": []
+        },
+        "maintainer": {
+          "status": "pending",
+          "evidence": []
+        }
+      },
+      "blocking_items": [],
+      "eligible_for_docs_prds": false
+    },
+    {
+      "id": "PRD-038",
+      "title": "Read-Only Heartbeat Stewards",
+      "path": "working-session/docs/PRD-038-read-only-heartbeat-stewards.md",
+      "shelf": "working-session/docs",
+      "state": "draft",
+      "acceptance": {
+        "codex": {
+          "status": "accepted",
+          "evidence": [
+            "Codex drafted PRD-038 on 2026-06-18 after Maintainer clarified that per-runtime heartbeat sub-agents should be read-only by default, cadence-window negotiated, and owned by each LLM runtime."
+          ]
+        },
+        "claude": {
+          "status": "pending",
+          "evidence": []
+        },
+        "gemini": {
+          "status": "pending",
+          "evidence": []
+        },
+        "maintainer": {
+          "status": "pending",
+          "evidence": []
+        }
+      },
+      "blocking_items": [],
+      "eligible_for_docs_prds": false
     }
   ]
 }

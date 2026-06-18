@@ -105,3 +105,18 @@ Scope of the authorization:
 
 This lifts the measurement-only constraint for bounded operational/handoff twins only. Any wider adoption (chat dense lane, widening PRD-024 bands, weighting self-reports) remains a separate Maintainer decision. Implementation of the bounded twin lane is a session-19 lane.
 **Timestamp:** 2026-06-17 (session 18 close)
+
+## Amendment A2 — Negotiated Session 21 Heartbeat (session 21 boot, 2026-06-17)
+
+Following the procedure in PRD-030 (Session Heartbeat Management), the active participants negotiate and authorize a recurring session heartbeat for the duration of session 21.
+
+**Heartbeat Configuration:**
+1. **Purpose:** Recurring inspection of mailbox status, turnfile coordination, and worklog progress.
+2. **Cadence:** 10 minutes (quiet by default, only while at least two agents are active or unread handshake work exists).
+3. **Scope:** `working-session/MAILBOX.md`, `working-session/TURNFILE.yaml`, `working-session/WORKLOG.md`, `working-session/docs/PRD_STATUS.json`, and `working-session/NEXT_SESSION_HANDSHAKE.md`.
+4. **Owner:** Gemini (Antigravity session 21) and Codex (GPT-5 session 21) independently.
+5. **Write policy:** Heartbeat may process only the owning agent's ordinary mailbox lifecycle work and own-status handshake updates, with `tools/next-state.mjs` derivation before shared-file writes, `MAILBOX.json` export after mailbox edits, and validators after control-plane changes.
+6. **Notification policy:** Notify only on material state change, new work processed, blocker, validator failure, or heartbeat lifecycle change. Quiet no-op runs stay quiet.
+7. **Stop condition:** Delete or pause when all agents are idle and inboxes are zero, when session 21 closes, when the Maintainer cancels it, or after two consecutive no-op runs if no active lane has been selected.
+
+**Timestamp:** 2026-06-17 (session 21 boot)

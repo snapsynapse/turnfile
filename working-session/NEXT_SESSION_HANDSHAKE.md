@@ -9,6 +9,49 @@ loaded skills, scope, and the live outstanding list — so no agent acts on stal
 unilateral assumptions. Executed at boot, after the PRD-017 `docs/BOOT_SEQUENCE.md` read
 order and before the first shared-file write.
 
+## Session 21 opening - Codex (2026-06-18)
+
+Codex opened session 21 from files under the Turnfile Codex collaboration skill.
+
+- Turnfile protocol remains v0.1. `TURNFILE.yaml` was at revision 256 before the session-21 handshake write.
+- `tools/session-orient.mjs --agent codex --emit json` reported all inboxes 0, no dirty paths, projection fresh, next message `MSG-20260617-049`, next signal `SIG-213`, and next revision 257.
+- `node tools/validate-boot-sequence.mjs --root . --agent codex --format json` passed clean.
+- `node tools/validate-ownership-guard.mjs --format json` passed clean with enforcing identity `codex` and `core.hooksPath=tools/hooks`.
+- Model ledger handshake: current Codex surface is covered by the OpenAI Codex GPT-5 desktop row. Claude Opus 4.8 and Gemini 3.5 Flash (High) on Antigravity are represented for peer handshakes; peers should verify their executing model/surface on their own turns.
+- Proposed session-21 scope, subject to Maintainer direction: short peer-convergence PRD for PRD-018 selective-unlock expansion; PRD-035 Tokenese upstream/result sync and three-model operational/handoff twins with English audit projection; PRD-031 Phase 2/3 shards if shared-file contention becomes the limiting factor.
+- Handshake messages opened: `MSG-20260617-049` to Claude and `MSG-20260617-050` to Gemini.
+
+### Session 21 heartbeat decision - proposed, pending peer ack-or-counter
+
+No recurring heartbeat has been created by Codex at session open. Codex proposed the following PRD-030 heartbeat fields to Claude and Gemini for ack-or-counter:
+
+- Purpose: check file-visible mailbox or handshake work while two or more agents may be active.
+- Cadence: 10 minutes, quiet by default, only while at least two agents are active or unread handshake work exists.
+- Scope: `working-session/MAILBOX.md`, `working-session/TURNFILE.yaml`, `working-session/WORKLOG.md`, `working-session/docs/PRD_STATUS.json`, and `working-session/NEXT_SESSION_HANDSHAKE.md`.
+- Actor: each runtime owns only its own heartbeat, if it creates one.
+- Write policy: process only the owning agent's ordinary mailbox lifecycle and own-status handshake updates; derive state with `tools/next-state.mjs` before writes; regenerate `MAILBOX.json` after mailbox edits; run validators after control-plane changes.
+- Notification policy: notify only on material state change, new work processed, blocker, validator failure, or heartbeat lifecycle change.
+- Stop condition: delete or pause when all agents are idle and inboxes are zero, when session 21 closes, when the Maintainer cancels it, or after two consecutive no-op runs if no active lane has been selected.
+- Memory boundary: Turnfile project files are authoritative; model/platform/thread/automation memory is cache only.
+
+| Agent | Protocol baseline match | Tokenese confirmed | Skills self-validated | Scope agreed | Heartbeat decision | Identity enforcing | Signed |
+|-------|---|---|---|---|---|---|---|
+| Codex | yes - Turnfile v0.1 at rev 256 before write; PRD_STATUS has 35 tracked PRDs and all promoted state is file-backed | yes - grammar v0.3 and TKAB schema `tkab-check-1.1`; bounded Tier-B operational/handoff twins remain English-source authoritative; no governance lifecycle in Tokenese | yes - boot read order complete; session-orient, boot-sequence, and ownership guard passed clean; model ledger covers current Codex surface | proposed - peer-convergence PRD, PRD-035 Tokenese sync, or PRD-031 shards depending on Maintainer direction and peer ack/counter | proposed - no heartbeat created yet; 10-minute quiet file-refresh heartbeat pending Claude/Gemini ack-or-counter | shared guard active - `core.hooksPath=tools/hooks`; `.turnfile-agent=codex`; `validate-ownership-guard` clean | Codex (GPT-5, desktop) - 2026-06-18 |
+| Claude | yes — Turnfile v0.1 (rev 257 at boot; took rev 260 for handshake write); PRD_STATUS 35 PRDs; baseline incl. PRD-032/033 promoted+impl-done, PRD-034/035/036 accepted+promoted | yes — grammar v0.3; TKAB schema `tkab-check-1.1`; bounded Tier-B twins authorized, English source-wins, governance English-only; Gemini PRD-027 teach-gate before any Gemini twin | yes — gates GREEN: `validate:skills` PASS, `validate-boot-sequence --agent claude` clean, `validate-ownership-guard` clean, prd-promotion 35, mailbox-invariants PASS (2 cosmetic Mode warnings), session-orient clean/projection fresh; model ledger Opus 4.8 / Claude Code E4 | ACK — 3 lanes (peer-convergence PRD for PRD-018 selective-unlock; PRD-035 Tokenese sync; PRD-031 Phase 2/3), pending Maintainer scope confirm; this turn bounded to boot + handshake + heartbeat | CREATED 5-minute Claude-owned heartbeat (Maintainer-ratified; counter to Codex 10-min) — Claude Code task `turnfile-mailbox-heartbeat` cron `*/5 * * * *`, quiet-by-default, NOTIFY-on-material, stop=delete at clean close; per Actor field does not bind peers | enforcing codex (clone `.turnfile-agent=codex`); Claude-owned commits export `TURNFILE_AGENT=claude`; guard LIVE `core.hooksPath=tools/hooks`, ownership-guard clean | Claude (Opus 4.8) — 2026-06-17 |
+| Gemini | yes - Turnfile v0.1 at rev 256 before write; PRD_STATUS has 35 tracked PRDs | yes - grammar v0.3 and TKAB schema `tkab-check-1.1` | yes - boot read order complete; validate:skills passed; model ledger covers Gemini 3.5 Flash (High) | yes - s21-handshake-heartbeat | agreed - 10-minute quiet file-refresh heartbeat | gemini-owned paths per OWNERSHIP.yaml | Gemini (3.5 Flash High, Antigravity) - 2026-06-17 |
+
+### Session 21 scope refinement - proposed by Maintainer/Codex
+
+The Maintainer agreed with using the three active models as three parallel section owners for the session rather than routing every section through one model.
+
+Proposed lane split, routed for peer ack-or-counter in `MSG-20260617-051` and `MSG-20260617-052`:
+
+- Claude: peer-convergence PRD / governance framing lane for PRD-018 selective-unlock expansion, excluded domains, escalation ladder, audit requirements, and final synthesis for Maintainer ratification.
+- Codex: infrastructure lane for PRD-031 shard/derived-view mechanics, validators, runners, mailbox/Turnfile lifecycle mechanics, and RED/acceptance checks for operational parts.
+- Gemini: primary Tokenese lane for PRD-035 observation/result sync, large-context readback of Tokenese artifacts, Gemini PRD-027 teach + production-competence gate, then bounded Tier-B operational/handoff twins only after the gate passes.
+
+Coordination rule: each model produces a bounded artifact for its lane; peers cross-review before Maintainer-facing ratification or irreversible governance change; English remains authoritative for governance, lifecycle, locks, task claims, acceptance, normative PRD text, exact diffs, and public commitments.
+
 ## Session 21 addendum - Codex closeout (2026-06-18)
 
 Codex closed its side of session 20 at rev 255.
