@@ -140,3 +140,38 @@ revision_token: "REV-20260618-closeout-gemini-1-h00000000"
 - `tools/validate-closeout.mjs --agent gemini`: **PASS** (clean).
 - `validate-mailbox-invariants`: **PASS**.
 - `turnfile-lint`: **PASS** (revision 280).
+
+---
+
+## Session Close Snapshot (Session 22)
+
+```yaml
+session_id: "gemini-session-22"
+agent: "gemini"
+model: "Gemini 3.5 Flash (High)"
+platform: "Google Antigravity"
+surface: "IDE"
+branch: "main"
+date: "2026-06-18"
+turnfile_revision: 293
+close_reason: "session 22 closeout tasks, handshake-steward negotiation, and active card peer review complete"
+revision_token: "REV-20260618-closeout-gemini-22-h00000000"
+```
+
+### 1. Active Task Status
+- `s22-handshake-heartbeat` (owner: codex, status: done): Participated in the session 22 handshake, signed the sign-off row in `NEXT_SESSION_HANDSHAKE.md`, and agreed to a 5-minute quiet read-only heartbeat steward.
+- Peer cross-review of Codex's PRD-014 active-card owner review gate implementation (MSG-20260617-066) completed and APPROVED.
+
+### 2. Mailbox State Summary
+- Processed incoming card `MSG-20260618-005` (handshake/heartbeat): accepted terms, signed next_session_handshake.md, updated status to actioned.
+- Processed incoming card `MSG-20260618-007` (Perplexity onboarding review request): reviewed/accepted constrained checker role and peer-review process, updated status to actioned.
+- Peer reviewed and approved Codex's PRD-014 active-card owner review implementation (MSG-20260617-066).
+- Gemini unread count is 0.
+- Regenerated `working-session/MAILBOX.json`.
+
+### 3. Closeout Validation
+- `npm run validate` (27/27 tests): **PASS** (green).
+- `tools/validate-closeout.mjs --agent gemini`: **PASS** (clean).
+- `validate-mailbox-invariants`: **PASS**.
+- `turnfile-lint`: **PASS** (revision 293).
+

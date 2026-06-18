@@ -1,4 +1,4 @@
-# Boot File — Gemini (v5)
+# Boot File — Gemini (v4)
 
 Read this first on session start. It tells you what this project is, where things are, what state we're in, and what to do next.
 
@@ -9,7 +9,7 @@ Turnfile (SNAP — Structured Negotiation of Autonomous Peers) is a file-based c
 ## Directory layout
 
 - `docs/` — Canonical tracked protocol documents (PROTOCOL_CORE, COMMUNICATIONS_PROTOCOL, HUMAN_GOVERNANCE, etc.)
-- `docs/prds/` — Promoted finalized PRDs (003-014, 015 promoted; 001/002/015/017-020 in progress)
+- `docs/prds/` — Promoted finalized PRDs (003-014, 016 promoted; 001/002/015/017-020 in progress)
 - `docs/archive/` — Versioned archives (boot files, vision)
 - `templates/` — Canonical templates (including `templates/working-session/` for cold-start bootstrap)
 - `examples/` — Historical reference: `ai-feature-tracker/` (first project) and `inception/` (11-session pilot archive)
@@ -36,7 +36,6 @@ Turnfile (SNAP — Structured Negotiation of Autonomous Peers) is a file-based c
   - `working-session/boot-codex.md` — Codex's boot file
   - `working-session/chat-gemini.md` — Gemini's scratchpad and session state snapshots
   - `working-session/docs/` — In-progress PRDs and PRD_STATUS.json
-  - `working-session/tokenese-pairs/` — Tokenese check data pairs and checker outputs
 
 ## Onboarding status: FULL-ACTIVE (PRD-015)
 
@@ -63,18 +62,19 @@ You are a **FULL-ACTIVE** agent (no longer provisional). This means:
 - **Open questions:** Registry in `working-session/OPEN_QUESTIONS.md`. Check at session start. Update when resolving.
 - **Decision authority (OQ-052 resolution):** All changes are Maintainer-gated by default; selective unlocks happen only by explicit Maintainer direction.
 - **Turnfile (PRD-013):** YAML coordination artifact. Agents read/write for task tracking, lock management, signals. Revision-based leases (no wall-clock). Section ownership model (R2.1).
-- **Locks (PRD-010 + PRD-013):** Locks live in TURNFILE.yaml `locks` section. Default lease: 2 revisions.
+- **Locking (PRD-010 + PRD-013):** Locks live in TURNFILE.yaml `locks` section. Default lease: 2 revisions.
 - **Session closeout (PRD-014):** Mandatory checklist: mailbox clearance, boot rollover + archive, worklog maintenance + compaction check, OQ sync, reflection entry.
 - **Skill versioning:** Shared metaskill at `skills/skill-versioning/SKILL.md`. Tracks bundle versions, manifests, changelogs across sessions and platforms.
 
 ## Current state
 
-Session 22 closed at rev 293. All agents are idle, all inboxes are zero, and no locks are held. We have finalized the Session 22 handshake and negotiated the 5-minute quiet read-only heartbeat steward.
+Session 21 closed at rev 280. Gemini has completed all onboarding, teach-gate, and version observation deliverables, and is now FULL-ACTIVE. We have processed all unread messages.
 
-### Carry Forward / Session 23 Plan:
+### Carry Forward / Session 22 Plan:
 
 1. **Drive PRD-035 (Tokenese sync) loop**: Gemini proposer authors RED evals in `evals/prd-035.evals.mjs` (step 4) -> Codex implements -> Claude reviews.
-2. **Review Perplexity onboarding progress**: When Codex finishes executing the Perplexity onboarding tasks (once PRD-039 is accepted by the Maintainer), prepare to perform peer review.
+2. **Review Codex's MSG-20260617-066**: Perform peer cross-review on PRD-014 active-card owner review gate.
+3. **Commit posture**: Perform commits using `TURNFILE_AGENT=gemini` to verify ownership boundaries.
 
 ## Session close protocol
 

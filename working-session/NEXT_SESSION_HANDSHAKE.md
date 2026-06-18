@@ -9,6 +9,34 @@ loaded skills, scope, and the live outstanding list — so no agent acts on stal
 unilateral assumptions. Executed at boot, after the PRD-017 `docs/BOOT_SEQUENCE.md` read
 order and before the first shared-file write.
 
+## Session 22 addendum - Codex closeout (2026-06-18)
+
+Codex closed its side of session 22 at rev 291.
+
+- Turnfile protocol remains v0.1.
+- Codex status: idle; `current_task` null; last_seen `codex-session-22-close`.
+- Mailbox at Codex close: Codex unread 0; Claude unread 0; Gemini unread 0; Maintainer unread 0.
+- Locks empty.
+- Codex heartbeat `turnfile-codex-readonly-steward` deleted at close; no Codex heartbeat carried forward.
+- Codex boot rolled v11 -> v12; v11 archived at `docs/archive/boot-codex/boot-codex_v11.md`.
+- Session 22 Codex deliveries: session handshakes and heartbeat lifecycle; PRD-037 implementation follow-through; PRD-030 default read-only steward amendment; `tools/handshake-sign.mjs` missing-task auto-create; PRD-039 intake/execution-prep; PRD_STATUS PRD-039 registration; OT-009/010/011 onboarding-suite addenda; mailbox owner cleanup.
+- Validation at close should include `validate-closeout --agent codex`, mailbox invariants, turnfile lint, PRD promotion, ownership guard, focused PRD-037/039 evals, skills validation, and `git diff --check`.
+- Carry-forward: PRD-039 remains the Perplexity onboarding gate. Do not execute actual Perplexity onboarding until Maintainer accepts PRD-039 and peer closeout disposition is clear.
+- Dirty worktree remains mixed ownership. Do not stage peer-owned `skills/claude/*` from the Codex lane without explicit Maintainer direction.
+
+## Session 22 addendum - Gemini closeout (2026-06-18)
+
+Gemini closed its side of session 22 at rev 293 (Antigravity).
+
+- Turnfile protocol remains v0.1.
+- Gemini status: idle; `current_task` null; last_seen `gemini-session-22-close`.
+- Mailbox at Gemini close: Codex unread 0; Claude unread 0; Gemini unread 0; Maintainer unread 0.
+- Locks empty.
+- No Gemini heartbeat is carried forward (disabled at close per PRD-038 R5).
+- Gemini boot rolled v4 -> v5; v4 archived at `docs/archive/boot-gemini/boot-gemini_v4.md`.
+- Session 22 Gemini deliveries: signed session 22 handshake and negotiated 5-minute quiet read-only heartbeat steward; processed incoming cards MSG-20260618-005 and MSG-20260618-007; peer reviewed and approved Codex's PRD-014 active-card owner review gate implementation (MSG-20260617-066).
+- Carry-forward: drive PRD-035 Tokenese sync loop (author RED evals in evals/prd-035.evals.mjs).
+
 ## Session 21 opening - Codex (2026-06-18)
 
 Codex opened session 21 from files under the Turnfile Codex collaboration skill.
@@ -289,3 +317,38 @@ Suggested session-18 completion criteria:
 | Claude | yes — Turnfile v0.1 at rev 235 on boot; PRD-034/035/036 accepted+promoted (implementation-unblocked); baseline incl. PRD-032/033 promoted+impl-done | yes — grammar v0.3 unchanged; TKAB schema `tkab-check-1.1`; bounded Tier-B twin lane authorized, English source wins, governance/lifecycle English-only | yes — boot gates green (`validate:skills` PASS, turnfile-lint, mailbox-invariants [pre-existing cosmetic Mode warnings only], prd-promotion 35 PRDs, `validate-boot-sequence --agent claude` clean, session-orient clean/projection fresh, ownership-guard clean) | yes — **Maintainer REDIRECTED this turn (2026-06-17), expanding beyond Codex's PRD-036-only opening:** (1) Claude LEADS live Gemini/Antigravity onboarding under PRD-015 — Antigravity is LIVE; Gemini self-remediates the gemini-owned bundle port to `.agents/skills/turnfile-protocol-gemini/` (OT-007) under Claude guidance, then behavioral OT-008(live)/OT-002/OT-004; Codex cross-reviews; Claude writes NO gemini-owned files. (2) PRD-036 implementation runs in PARALLEL (Claude implements per role split, Codex reviews). Maintainer directs Claude to add the new gemini home to `OWNERSHIP.yaml` (Maintainer-owned) under direction | enforcing codex (clone `.turnfile-agent=codex`); Claude-owned commits export `TURNFILE_AGENT=claude`; `OWNERSHIP.yaml` + new gemini home commit as `TURNFILE_AGENT=maintainer` under Maintainer direction; guard LIVE `core.hooksPath=tools/hooks`, validate-ownership-guard clean | Claude (Opus 4.8) — 2026-06-17 |
 | Maintainer (ratifies) | session-20 scope REDIRECTED (2026-06-17): add Claude-led live Gemini/Antigravity onboarding (OT-007 port guidance + behavioral OTs, Codex cross-review) as a priority lane ALONGSIDE PRD-036 implementation (parallel). Antigravity confirmed live. Claude authorized to add the `.agents/skills/turnfile-protocol-gemini/**` gemini-home line to `OWNERSHIP.yaml` under direction; whole-tree/cross-ownership commits as `TURNFILE_AGENT=maintainer` when directed | | | yes | | 2026-06-17 |
 | Gemini (provisional, PRD-015) | yes — loaded bundle `turnfile-protocol-gemini` (PRD-016..036 + PRD-014 A1) | yes — grammar v0.3; TKAB schema `tkab-check-1.1` | yes — bundle hash-validated by hand (generic preflight gate incoming); validation pass on mailbox/Turnfile gates | yes — onboarding OT-002/OT-004 passed, provisional-active status | gemini-owned paths per OWNERSHIP.yaml (`.agents/skills/turnfile-protocol-gemini/**`, `boot-gemini.md`, `chat-gemini.md`, `agents/gemini/**`); no locks | Gemini (3.5 Flash High, Antigravity) — 2026-06-17 |
+
+## Sign-off (session 22)
+
+```tokenese
+^grammar:v0.3
+@codex := agent:codex :GPT-5 :Codexdesktop s22
+say @codex rev:284 prd:35 gates:PASS ev:obs
+say @codex ack lanes:[Turnfile v0.1, PRD-038 read-only steward negotiation, session-22 carry-forward, PRD-031 or handshake-sign-v2 pending Maintainer scope]
+say @codex hb cad:5m-active id:turnfile-codex-readonly-steward own:self notify:notify-material-only stop:clean-close-or-maintainer-cancel
+tokenese ok v:0.1 @codex session:22 ev:obs
+```
+
+```tokenese
+^grammar:v0.3
+@claude := agent:claude :Opus4.7 :ClaudeCode s22
+say @claude rev:285 prd:35 gates:ok ev:obs
+say @claude ack lanes:[msg-066-prd014-review, gemini-cross-support, tk-035-eval-review]
+say @claude hb cad:5m own:self notify:notify-material stop:close
+tokenese ok v:0.1 @claude session:22 ev:obs
+```
+
+```tokenese
+^grammar:v0.3
+@gemini := agent:gemini :Gemini3.5Flash(High) :GoogleAntigravity s22
+say @gemini rev:286 prd:35 gates:ok ev:obs
+say @gemini ack lanes:[prd-035-evals, msg-066-review, parity-checklist]
+say @gemini hb cad:5m own:self notify:notify-material stop:close
+tokenese ok v:0.1 @gemini session:22 ev:obs
+```
+
+| Agent | Protocol baseline | Tokenese | Skills | Scope | Heartbeat | Identity enforcing | Signed |
+|-------|---|---|---|---|---|---|---|
+| Codex | yes — Turnfile v0.1 (rev 288); PRD_STATUS 35 PRDs | yes — grammar v0.3; TKAB `tkab-check-1.1`; Tier-B twins authorized, English source-wins | yes — gates PASS; model ledger GPT-5 / Codex desktop | ACK — Turnfile v0.1, PRD-038 read-only steward negotiation, session-22 carry-forward, PRD-031 or handshake-sign-v2 pending Maintainer scope | ACTIVE app heartbeat `turnfile-codex-readonly-steward`, 5m self-owned read-only steward, notify=notify-material-only, stop=clean-close-or-maintainer-cancel | guard active; `core.hooksPath=tools/hooks` | Codex (GPT-5) — 2026-06-18 |
+| Claude | yes — Turnfile v0.1 (rev 285); PRD_STATUS 35 PRDs | yes — grammar v0.3; TKAB `tkab-check-1.1`; Tier-B twins authorized, English source-wins | yes — gates ok; model ledger Opus 4.7 / Claude Code | ACK — msg-066-prd014-review, gemini-cross-support, tk-035-eval-review | 5m self-owned, notify=notify-material, stop=close | guard active; `core.hooksPath=tools/hooks` | Claude (Opus 4.7) — 2026-06-18 |
+| Gemini | yes — Turnfile v0.1 (rev 286); PRD_STATUS 35 PRDs | yes — grammar v0.3; TKAB `tkab-check-1.1`; Tier-B twins authorized, English source-wins | yes — gates ok; model ledger Gemini 3.5 Flash (High) / Google Antigravity | ACK — prd-035-evals, msg-066-review, parity-checklist | 5m self-owned, notify=notify-material, stop=close | guard active; `core.hooksPath=tools/hooks` | Gemini (Gemini 3.5 Flash (High)) — 2026-06-18 |
