@@ -16,7 +16,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - New tools: `aggregate-coordination`, `validate-closeout`, `validate-boot-sequence`, `validate-out-of-band-reconciliation`, `validate-review-cycle-closure`, `next-state`, `validate-tokenese-pairs`, plus `validate-prd-promotion` and `export-mailbox-json`.
 - New docs: `BOOT_SEQUENCE.md` (canonical boot command manifest), `CONFORMANCE.md`, `RELEASE_CHECKLIST.md`, `NEXT_SESSION_HANDSHAKE.md`.
 - Live Tokenese A/B pilot (PRD-027): teach phase, agreed suite, mini-pilot + W2/W3/W5/L1/L2 pairs scored by a deterministic checker; measurement-only, English authoritative.
-- Drafts under review: PRD-032 (session orientation tool), PRD-033 (skill ownership integrity guard).
+- Promoted session-17 contracts: PRD-032 (session orientation tool) and PRD-033 (skill ownership integrity guard), both implementation-done.
 - Role-keyed per-agent skill bundles (`skills/claude`, `skills/codex`, `skills/gemini-3`) with model compatibility recorded in MANIFEST; one unmodified protocol validated across Claude Opus 4.6, Fable 5, and Opus 4.8.
 - Repo-standards adoption: GitHub Pages `/docs` publish, `docs/llms.txt` + `docs/sitemap.xml` + `assistant-guide.txt` trust-anchored pair, `LICENSE`/`LICENSE-SPEC` split, expanded `INTENT.md`.
 
