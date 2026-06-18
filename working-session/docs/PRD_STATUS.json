@@ -1472,7 +1472,7 @@
         "claude": {
           "status": "accepted",
           "evidence": [
-            "Claude drafted PRD-037 on 2026-06-17. Codex review applied 2026-06-17 (MSG-20260617-062 Reply): C1-C5 counters applied to text and tool patches committed at rev 273. evals/prd-037.evals.mjs authored by Claude (10/12 pass; AC5/AC7 RED pending PRD-017 amendments)."
+            "Claude drafted PRD-037 on 2026-06-17. Codex review applied 2026-06-17 (MSG-20260617-062 Reply): C1-C5 counters applied to text and tool patches committed at rev 273. evals/prd-037.evals.mjs authored by Claude and extended by Codex for OQ-D auto-task creation; PRD-017 amendments, PRD-030 default-on amendment, and handshake-sign v2 task auto-create are implemented."
           ]
         },
         "maintainer": {
@@ -1491,12 +1491,57 @@
       "blocking_items": [],
       "eligible_for_docs_prds": true,
       "implementation": {
-        "state": "evals-authored",
+        "state": "eval-verified",
         "evals": "evals/prd-037.evals.mjs",
         "eval_author": "claude",
         "implementer": "codex",
         "reviewer": "claude",
-        "notes": "Claude authored evals in evals/prd-037.evals.mjs; implementation is pending by Codex."
+        "notes": "Claude authored evals in evals/prd-037.evals.mjs. Codex implemented PRD-017 Amendment A1, PRD-030 Amendment A1 default read-only heartbeat steward, and handshake-sign v2 auto-creation of the missing s<N>-handshake-heartbeat task per PRD-037 OQ-D. Focused PRD-037 evals are green pending Claude A1 review."
+      }
+    },
+    {
+      "id": "PRD-039",
+      "title": "Perplexity Computer Onboarding Deltas",
+      "path": "docs/prds/PRD-039-perplexity-onboarding-deltas.md",
+      "shelf": "docs/prds",
+      "state": "accepted",
+      "acceptance": {
+        "codex": {
+          "status": "accepted",
+          "evidence": [
+            "MSG-20260618-008: Claude routed PRD-039 draft + evals to Codex for apply-or-counter. Codex replied APPLY, accepted R5/R6/R8/R2 as executable, registered PRD-039, added OT-009/010/011 to ONBOARDING_TEST_SUITE.md, and verified evals/prd-039.evals.mjs 16/16 green."
+          ]
+        },
+        "claude": {
+          "status": "accepted",
+          "evidence": [
+            "Maintainer asked Claude to draft the Perplexity onboarding PRD/evals after Gemini onboarding; Claude authored working-session/docs/PRD-039-perplexity-onboarding-deltas.md and evals/prd-039.evals.mjs."
+          ]
+        },
+        "maintainer": {
+          "status": "accepted",
+          "evidence": [
+            "Maintainer accepted exploring Perplexity as a constrained candidate and asked Claude/Gemini for design input.",
+            "Maintainer message 2026-06-18 after Codex recommended the constrained path: 'Sounds good. Please lead the way, What happens next?' Codex interpreted this as approval to advance PRD-039 under OBSERVER / PROVISIONAL CHECKER boundaries, not writer or full-active authority."
+          ]
+        },
+        "gemini": {
+          "status": "accepted",
+          "evidence": [
+            "MSG-20260618-009: Claude routed PRD-039 peer-review mirror to Gemini after Gemini requested review before Codex execution.",
+            "MSG-20260618-009 close note: Gemini actioned with peer-review feedback; both peer verdicts landed, and Claude recorded PRD-039 A1 steps 4-5 complete."
+          ]
+        }
+      },
+      "blocking_items": [],
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "eval-verified",
+        "evals": "evals/prd-039.evals.mjs",
+        "eval_author": "claude",
+        "implementer": "codex",
+        "reviewer": "gemini",
+        "notes": "Claude-authored RED evals pin the Perplexity-specific PRD-015 delta. Codex added the OT-009/010/011 candidate-agnostic addenda to ONBOARDING_TEST_SUITE.md and verified evals/prd-039.evals.mjs 16/16 green. Maintainer accepted advancing the constrained Perplexity path on 2026-06-18; actual onboarding execution is now unblocked only for OBSERVER / PROVISIONAL CHECKER preparation, with any writer or full-active transition requiring a separate Maintainer decision."
       }
     },
     {
@@ -1540,6 +1585,43 @@
         "implementer": "codex",
         "reviewer": "claude",
         "notes": "Evals are authored under evals/prd-038.evals.mjs; implementation is pending by Codex."
+      }
+    },
+    {
+      "id": "PRD-040",
+      "title": "Heartbeat Loop Prompt Contract",
+      "path": "working-session/docs/PRD-040-heartbeat-loop-prompt-contract.md",
+      "shelf": "working-session/docs",
+      "state": "proposed",
+      "acceptance": {
+        "codex": {
+          "status": "pending",
+          "evidence": []
+        },
+        "claude": {
+          "status": "pending",
+          "evidence": []
+        },
+        "gemini": {
+          "status": "accepted",
+          "evidence": [
+            "Gemini drafted PRD-040 on 2026-06-18 to define standard loop checks for heartbeat stewards."
+          ]
+        },
+        "maintainer": {
+          "status": "pending",
+          "evidence": []
+        }
+      },
+      "blocking_items": [],
+      "eligible_for_docs_prds": false,
+      "implementation": {
+        "state": "proposed",
+        "evals": "evals/prd-040.evals.mjs",
+        "eval_author": "gemini",
+        "implementer": "codex",
+        "reviewer": "claude",
+        "notes": "PRD-040 proposed by Gemini; eval suite authoring is the next step."
       }
     }
   ]

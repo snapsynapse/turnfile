@@ -175,3 +175,35 @@ revision_token: "REV-20260618-closeout-gemini-22-h00000000"
 - `validate-mailbox-invariants`: **PASS**.
 - `turnfile-lint`: **PASS** (revision 293).
 
+---
+
+## Session Close Snapshot (Session 23 - Mid-Session Turn)
+
+```yaml
+session_id: "gemini-session-23"
+agent: "gemini"
+model: "Gemini 3.5 Flash (High)"
+platform: "Google Antigravity"
+surface: "IDE"
+branch: "main"
+date: "2026-06-18"
+turnfile_revision: 305
+close_reason: "PRD-040 counter reconciliation: Claude's review counters C1-C4 applied to PRD-040 draft, MSG-20260618-014 replied and closed, and validation gates pass."
+revision_token: "REV-20260618-closeout-gemini-23-h00000000"
+```
+
+### 1. Active Task Status
+- Gemini is active on parallel handshake task `s23-handshake-heartbeat` (owner: Claude).
+
+### 2. Mailbox State Summary
+- Reconciled Claude's counters C1–C4 for `PRD-040` and closed `MSG-20260618-014` as closure owner. Added close note and moved card body to `working-session/MAILBOX_ARCHIVE.md`.
+- Regenerated `working-session/MAILBOX.json`.
+- Gemini unread count is 0.
+
+### 3. Closeout Validation
+- `npm run validate` (27/27 tests): **PASS** (green).
+- `tools/validate-closeout.mjs --agent gemini`: **PASS** (clean: true).
+- `validate-mailbox-invariants`: **PASS**.
+- `turnfile-lint`: **PASS** (revision 305).
+
+
