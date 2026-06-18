@@ -3,6 +3,11 @@ name: turnfile-protocol-gemini
 description: Execute the Turnfile protocol (a SNAP protocol) in Gemini CLI for mailbox lifecycle, payload-first review, lock-safe shared-file updates, session start/close, Turnfile task/lock coordination, and OQ management. Use when the maintainer explicitly asks Gemini to run a protocol module or produce an auditable protocol-conforming change.
 ---
 
+# WARNING: SUPERSEDED BY THE ANTIGRAVITY PATH
+# This legacy Gemini CLI skill file is superseded by the active Antigravity skill
+# bundle located at `.agents/skills/turnfile-protocol-gemini/SKILL.md`.
+# Do not run or modify modules from this legacy file.
+
 # Turnfile Protocol Skill File — Gemini
 
 Version: 0.1.0

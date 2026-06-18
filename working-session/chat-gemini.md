@@ -104,7 +104,39 @@ revision_token: "REV-20260618-completion-gemini-1-h7edad11"
 - Cleaned up unread counts: Gemini unread is 0, oldest unread is none.
 - Regenerated `working-session/MAILBOX.json`.
 
-### 3. Closeout Validation
+### 3. Closeout Validation (Provisional)
 - `npm run validate` (27/27 tests): **PASS** (green).
 - `validate-mailbox-invariants`: **PASS**.
 - `turnfile-lint`: **PASS** (revision 268).
+
+---
+
+## Session Close Snapshot (Session 21 - Final Closeout)
+
+```yaml
+session_id: "gemini-session-21"
+agent: "gemini"
+model: "Gemini 3.5 Flash (High)"
+platform: "Google Antigravity"
+surface: "IDE"
+branch: "main"
+date: "2026-06-18"
+turnfile_revision: 280
+close_reason: "Final closeout of Session 21 lane. Welcomed to FULL-ACTIVE, updated skill bundle version to v0.2.2 and bumped manifest hashes, processed welcome card MSG-20260618-001, and validated clean session closeout."
+revision_token: "REV-20260618-closeout-gemini-1-h00000000"
+```
+
+### 1. Active Task Status
+- `ot-004-gemini-probe`: **done** (pre-existing).
+- Completed Gemini-specific closeout updates (bumped version to `v0.2.2` in `SKILL.md` and updated manifest hashes).
+
+### 2. Mailbox State Summary
+- Processed and acknowledged `MSG-20260618-001` (FULL-ACTIVE welcome and session-22 parity checklist).
+- Snapshot unread count updated to 0.
+- Regenerated `working-session/MAILBOX.json`.
+
+### 3. Closeout Validation
+- `npm run validate` (27/27 tests): **PASS** (green).
+- `tools/validate-closeout.mjs --agent gemini`: **PASS** (clean).
+- `validate-mailbox-invariants`: **PASS**.
+- `turnfile-lint`: **PASS** (revision 280).

@@ -5,7 +5,7 @@ description: Execute the Turnfile protocol (a SNAP protocol) in Google Antigravi
 
 # Turnfile Protocol Skill File — Gemini
 
-Version: 0.2.0
+Version: 0.2.2
 Protocol revision baseline: PRD-003 through PRD-014 and PRD-016 through PRD-036, and PRD-014 Amendment A1
 Agent: Gemini (Google) — bundle is role-keyed; the executing model is recorded in MANIFEST.yaml, not in this path
 Last updated: 2026-06-17
@@ -404,7 +404,7 @@ After any milestone completion, task status change, or substantive protocol acti
 
 **Procedure (PRD-014 A1 Unified Closeout Checklist):**
 
-1. **Check mailbox** — ensure Gemini unread = 0. If not, process remaining messages first.
+1. **Check mailbox** — ensure Gemini unread = 0. If not, process remaining messages first. Clean close is blocked not only by Gemini unread counts, but also by unresolved Gemini closure-owner duties on Gemini-sent cards.
 2. **Inspect active heartbeats (PRD-030 R5/R6):**
    - For each, choose deleted / updated / intentionally carried forward / not applicable.
    - Delete any whose stop condition is satisfied.
@@ -435,9 +435,28 @@ After any milestone completion, task status change, or substantive protocol acti
    - OQs touched.
 8. **Archive boot file** to `docs/archive/boot-gemini/boot-gemini_v<N>.md` (globally monotonic versioning per PRD-014).
 9. **Write new boot file** with updated current state.
-10. **Promote completed artifacts** from `working-session/` to tracked `docs/` (copy, not move) — **only when explicitly directed by maintainer** and only for PRDs that pass the promotion gate (`PRD_STATUS.json` eligible = true + `tools/validate-prd-promotion.mjs` passes + maintainer acceptance evidence per PRD-006 R2a/R3).
-11. **Commit tracked changes** — only when maintainer directs. Use granular commits, not one mega-commit. Do not auto-push. Push only when maintainer directs.
-12. **Final mailbox check** — confirm Gemini unread = 0.
+10. **Unified Closeout Compaction Set Check:**
+    - Execute or explicitly defer (with reason and next owner) each of the following closeout artifacts:
+      - Worklog compaction (defer if WORKLOG is under 500 lines).
+      - Signal-log compaction (retaining only the retention window + last-per-agent).
+      - Mailbox archival movement (moving *only* terminal closed or otherwise archivable messages to the archive, not merely `actioned` cards).
+      - Worklog archive sync.
+      - Boot archive rollover.
+      - Heartbeat lifecycle inspection.
+11. **Projection Sync & Verification:**
+    - Regenerate `MAILBOX.json` to keep the machine-readable projection fresh: `node tools/export-mailbox-json.mjs working-session/MAILBOX.md working-session/MAILBOX.json`.
+    - Validate PRD shelves and confirm `PRD_STATUS.json` eligibility.
+    - Verify Turnfile header revision matches `coordination.revision` exactly.
+    - Derive final IDs and counts through `tools/next-state.mjs` where available.
+12. **Final Validation Run:**
+    - Run the complete validation gates and ensure they all pass before closeout is complete:
+      - `node tools/validate-closeout.mjs`
+      - `node tools/validate-mailbox-invariants.mjs --mailbox working-session/MAILBOX.md`
+      - `node tools/turnfile-lint.mjs --turnfile working-session/TURNFILE.yaml --schema schemas/turnfile/turnfile-v0.schema.json`
+      - `node tools/validate-prd-promotion.mjs` (if PRDs changed)
+13. **Promote completed artifacts** from `working-session/` to tracked `docs/` (copy, not move) — **only when explicitly directed by maintainer** and only for PRDs that pass the promotion gate (`PRD_STATUS.json` eligible = true + `tools/validate-prd-promotion.mjs` passes + maintainer acceptance evidence per PRD-006 R2a/R3).
+14. **Commit tracked changes** — only when maintainer directs. Use granular commits, not one mega-commit. Do not auto-push. Push only when maintainer directs.
+15. **Final mailbox check** — confirm Gemini unread = 0.
 
 **Outputs:** Updated WORKLOG, MAILBOX, TURNFILE.yaml, chat-gemini.md snapshot, new boot file, archived boot file.
 
@@ -588,7 +607,7 @@ After executing any module, report:
 
 | Field | Value |
 |-------|-------|
-| Skill file version | 0.2.1 |
+| Skill file version | 0.2.2 |
 | Protocol baseline | PRD-003 through PRD-014, PRD-016 through PRD-036, and PRD-014 Amendment A1 |
 | Policy test suite | Not yet validated (onboarding candidate) |
 | Last validated | Pending — first validation during onboarding run |
@@ -596,6 +615,7 @@ After executing any module, report:
 | v0.1.0 changes | Initial skill bundle for Gemini CLI onboarding. Adapted from Claude v0.3.0. |
 | v0.2.0 changes | Ported bundle to Google Antigravity home (.agents/skills/turnfile-protocol-gemini/). Refreshed to current baseline (PRD-016 through PRD-036 + PRD-014 Amendment A1) matching Claude's v0.9.1 semantics. Fixed F2 baseline drift, F4 tracked working-session directory, and updated environment notes for Antigravity. |
 | v0.2.1 changes | F5: Module 0 status proposed -> active; provisional tracked out of band. |
+| v0.2.2 changes | MSG-20260617-064: Applied shutdown parity check amendments (Module 6 closeout compaction checklist, validation commands list, projection sync, and cursor-based thread checks). |
 
 Changes to protocol semantics require maintainer approval (PRD-012 R7.2).
 Environment-specific changes that don't alter protocol semantics are Gemini-owned but must be documented (PRD-012 R7.3).

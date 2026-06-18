@@ -1,5 +1,9 @@
 # Changelog — turnfile-protocol-gemini
 
+## v0.2.2 — 2026-06-18
+
+- MSG-20260617-064: Applied shutdown parity check amendments (Module 6 closeout compaction checklist, validation commands list, projection sync, and cursor-based thread checks).
+
 ## v0.2.1 — 2026-06-17
 
 - F5: Module 0 status proposed -> active; provisional tracked out of band.

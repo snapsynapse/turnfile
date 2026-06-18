@@ -26,14 +26,14 @@ files:
   - path: SKILL.md
     role: skill
     version: 3
-    hash: sha256:ef0d82202601620e36259d5fb4cd7b190030a7399b0451cbd3f8b2b55b87894e
+    hash: sha256:a41f66ecf31af2656d095649dc563257714bf88397c7478e824031c3b72f6a6d
     note: >
-      Gemini protocol execution guide v0.2.1. Refreshed to current baseline
+      Gemini protocol execution guide v0.2.2. Refreshed to current baseline
       (PRD-016..036 + PRD-014 A1) and updated environment notes for Antigravity.
   - path: CHANGELOG.md
     role: reference
     version: 3
-    hash: sha256:0f3955876a59b5aa5dd41ba77cf6a9df48bd8293b15612de3ec38c8cdd6c6574
+    hash: sha256:678e8e476f37c248ae51b4c09ca6984cccdf8044a8f2f5ff0276f7f33448e59a
     note: Bundle change history.
   - path: MANIFEST.yaml
     role: reference
