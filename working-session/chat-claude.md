@@ -348,3 +348,39 @@ Codex worked the same tree concurrently: authored RED evals/prd-034/035/036, rec
 - PRD-034/035/036 still draft (Codex-authored RED evals exist; implementer=Claude, reviewer=Codex per PRD_STATUS) — need counter reconciliation + Maintainer acceptance before A1 implementation.
 - `npm run evals:prd` is broken (PRD-036 target). Mailbox at ~48 active cards — optional compaction next session.
 - Local ~/Git/tokenese now at 0.3.7 (pulled); Claude env still lacks tiktoken (o200k local-scoring gap).
+
+---
+
+## Session 19 Close Snapshot — Claude — 2026-06-17 (rev ~234)
+
+```yaml
+agent: Claude
+model: Claude Opus 4.8 (1M)
+date: 2026-06-17
+branch: main
+turnfile_revision: ~234
+phase: phase-2 / p2-g
+close_reason: Maintainer-directed close; scope met (Gemini onboarding mechanism confirmed + PRD promotion ACK)
+commit: directed this close — whole-tree as TURNFILE_AGENT=maintainer + push
+```
+
+### Done this session
+- Booted, signed handshake; Model-Ledger Handshake (Opus 4.8). Codex live concurrently — signed its row, cleared its entire PRD-034/035/036 counter carry-forward, closed at rev 228.
+- **Gemini onboarding lead lane (PRD-015):** evaluator-prep evidence → `working-session/docs/onboarding/evidence/gemini-cli/2026-06-17-01/{evidence.md,antigravity-readiness.md}`. OT-001 PASS (R1 approved; runtime corrected to **Google Antigravity**). OT-008 conditional-pass + findings F1/F2/F3/F4. Codex cross-reviewed APPLY (MSG-036 closed).
+- **LIVE Antigravity test** (Maintainer brought it live): GEMINI.md auto-loads as a rule but `@import` is INERT; `.agents/skills/` is the discovery path (indexed at workspace load); live model **Gemini 3.5 Flash (High)**; read/shell/validators clean. **Path B confirmed**, F3 mechanism risk retired; MODEL_LEDGER row added; Antigravity boot procedure documented; throwaway probe deleted.
+- **PRD-034/035/036:** Maintainer ACCEPTED all three; Codex promoted to `docs/prds/`; Claude verified + ACK'd promotion (MSG-037 actioned). Implementation eval-first, not started.
+
+### FIRST ACTIONS ON RESUME (session 20)
+1. Boot via BOOT_SEQUENCE + NEXT_SESSION_HANDSHAKE (session-20 addendum); converge with Codex; report guard posture.
+2. Gemini live-Antigravity execution lane: port bundle to `.agents/skills/turnfile-protocol-gemini/`, refresh content, reload, run behavioral OT-002/OT-004 (fixtures in antigravity-readiness.md). Gemini self-remediates gemini-owned files (OT-007). Maintainer adds the new home to OWNERSHIP.yaml first. Use a fresh `antigravity/` evidence path.
+3. PRD-034/035/036 implementation (eval-first; PRD-036 first if `npm run evals:prd` repair is needed, else PRD-035 then PRD-034).
+4. Bounded Tier-B Tokenese twins (charter A1).
+
+### Carry-forward / open
+- Gemini bundle port + behavioral OTs are execution-only next live-Antigravity run.
+- OWNERSHIP.yaml needs Maintainer-owned add of `.agents/skills/turnfile-protocol-gemini/**` to gemini.
+- Mailbox compaction deferred (~50 active cards; many actioned notify-threads archivable). 5 cosmetic Closed-Summary Mode-field warnings pre-exist.
+- `npm run evals:prd` broken on Node v26 (PRD-036 implementation target).
+
+### Concurrency note
+Codex live the whole session (rev 219→233). Several mid-write collisions on MAILBOX/TURNFILE; the Read-before-edit guard caught each; re-grounded and took the next rev every time. Don't fight the rev number.

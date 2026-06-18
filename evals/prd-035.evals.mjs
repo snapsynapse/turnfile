@@ -106,7 +106,7 @@ function runValidator(args, cwd = root) {
 }
 
 test("R1-R6: PRD-035 pins observation, TKAB validation, result packaging, calibration, and upstream boundaries", () => {
-  const s = read("working-session/docs/PRD-035-tokenese-integration-and-upstream-result-sync-contract.md");
+  const s = read("docs/prds/PRD-035-tokenese-integration-and-upstream-result-sync-contract.md");
   for (const needle of [
     /tokenese-version-observation\.md/,
     /validate-tkab-results\.mjs/,
@@ -117,9 +117,26 @@ test("R1-R6: PRD-035 pins observation, TKAB validation, result packaging, calibr
     /tk-calibration-audit/,
     /No Tier-B Tokenese lane may be opened/,
     /not edit Tokenese files from the Turnfile repo/i,
+    /new, separate validator/i,
+    /does not extend, replace, or change `tools\/validate-tokenese-pairs\.mjs`/,
+    /derived from `working-session\/docs\/tk-ab-run-results\.md`/,
+    /must not re-key token counts|must not re-key/i,
+    /single calibration authority/i,
+    /PRD-034 owns what Turnfile public and agent-facing surfaces may assert/i,
   ]) {
     assert.match(s, needle);
   }
+});
+
+test("C1-C4: PRD-035 applies Claude counter boundaries", () => {
+  const s = read("docs/prds/PRD-035-tokenese-integration-and-upstream-result-sync-contract.md");
+  assert.match(s, /derived from `working-session\/docs\/tk-ab-run-results\.md`[\s\S]*`working-session\/tokenese-pairs\/\*\.result\.json`/);
+  assert.match(s, /must not re-key token counts, ratios, outcome values, or version tags/i);
+  assert.match(s, /working-session\/docs\/tk-calibration-audit\.md` as the single calibration authority/i);
+  assert.match(s, /PRD-035 owns only the packaging and adoption-gate use/i);
+  assert.match(s, /new, separate validator for TKAB JSON artifacts/i);
+  assert.match(s, /does not extend, replace, or change `tools\/validate-tokenese-pairs\.mjs`/);
+  assert.match(s, /PRD-035 produces the observed fact; PRD-034 enforces the public-surface claim/i);
 });
 
 test("AC1: Tokenese observed-state artifact records current version, previous baseline, grammar, TKAB schema, report-only framesets, and GuideCheck conflicts", () => {
@@ -172,6 +189,8 @@ test("AC5: result publication package summarizes the session-17 pilot without cl
   assert.match(s, /pilot evidence/i);
   assert.match(s, /does not satisfy|not satisfy|not the full.*N2/i);
   assert.doesNotMatch(s, /satisfies Tokenese N2|N2 validating experiment complete/i);
+  assert.match(s, /derived|generated/i);
+  assert.doesNotMatch(s, /manual re-key|hand-keyed/i);
 });
 
 test("AC6/R4/R5: tk-calibration-audit is complete before any Tier-B adoption recommendation", () => {
@@ -180,7 +199,13 @@ test("AC6/R4/R5: tk-calibration-audit is complete before any Tier-B adoption rec
   assert.match(task, /status:\s+"done"/, "tk-calibration-audit must be complete before Tier-B recommendation");
   const worklog = read("working-session/WORKLOG.md");
   assert.match(worklog, /tk-calibration-audit[\s\S]*(complete|done|passed)/i);
-  assert.doesNotMatch(worklog, /Tier-B[\s\S]{0,220}(authorized|recommend|open(ed)?)/i, "Tier-B must not be recommended before calibration evidence is complete");
+  if (/Tier-B[\s\S]{0,220}(AUTHORIZED|authorized|recommend|open(ed)?)/i.test(worklog)) {
+    assert.match(
+      worklog,
+      /Tier-B[\s\S]{0,260}(AUTHORIZED|authorized)[\s\S]{0,260}(tk-calibration-audit|calibration)[\s\S]{0,160}(complete|peer-confirmed|satisfied)/i,
+      "Tier-B authorization must cite completed calibration evidence",
+    );
+  }
 });
 
 test("AC7/R6: Turnfile public surfaces avoid unverified Tokenese GuideCheck Level 4 claims", () => {

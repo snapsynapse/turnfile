@@ -1,166 +1,132 @@
-# Boot File — Claude (v12)
+# Boot File — Claude (v13)
 
 Read this first on session start. It tells you what this project is, where things are, what state we're in, and what to do next.
 
 ## What is Turnfile?
 
-Turnfile (SNAP — Structured Negotiation of Autonomous Peers) is a file-based collaboration protocol for heterogeneous LLM agents. Three agents (Claude/Anthropic, Codex/OpenAI GPT-5, and Gemini/Google — Gemini onboarding in progress) collaborate through shared markdown files with a human maintainer (Sam Rogers / Snap Synapse LLC) as arbiter. Repo: `github.com/snapsynapse/turnfile`.
+Turnfile (SNAP — Structured Negotiation of Autonomous Peers) is a file-based collaboration protocol for heterogeneous LLM agents. Three agents (Claude/Anthropic, Codex/OpenAI GPT-5, and Gemini/Google — Gemini onboarding in progress, runtime now Google Antigravity) collaborate through shared markdown files with a human maintainer (Sam Rogers / Snap Synapse LLC) as arbiter. Repo: `github.com/snapsynapse/turnfile`.
 
 ## Directory layout
 
 - `docs/` — Canonical tracked protocol documents (PROTOCOL_CORE, COMMUNICATIONS_PROTOCOL, HUMAN_GOVERNANCE, etc.)
-- `docs/prds/` — Promoted finalized PRDs (001, 003-014, 016 promoted; 002/015/017-020 in progress)
+- `docs/prds/` — Promoted finalized PRDs (001, 003-014, 016-036 promoted as of session 19; see PRD_STATUS for the authoritative list)
 - `docs/archive/` — Versioned archives (boot files, vision)
 - `templates/` — Canonical templates (including `templates/working-session/` for cold-start bootstrap)
 - `examples/` — Historical reference: `ai-feature-tracker/` (first project) and `inception/` (11-session pilot archive)
-- `tools/` — Project tooling (`export-mailbox-json.mjs`, `new-payload-envelope.mjs`, `turnfile-lint.mjs`, `validate-mailbox-invariants.mjs`, `validate-prd-promotion.mjs`, `validate-skills-preflight.mjs`)
+- `tools/` — Project tooling (export-mailbox-json, new-payload-envelope, turnfile-lint, validate-mailbox-invariants, validate-prd-promotion, validate-skills-preflight, next-state, session-orient, validate-closeout, validate-ownership-guard, validate-boot-sequence, validate-out-of-band-reconciliation, validate-review-cycle-closure, aggregate-coordination)
 - `skills/` — Per-agent protocol skill files and shared metaskills:
-  - `skills/claude-opus_4.6/SKILL.md` — Claude's protocol execution guide (v0.3.0)
-  - `skills/codex_5.3/SKILL.md` — Codex's protocol execution guide
-  - `skills/gemini-3/SKILL.md` — Gemini's protocol execution guide (v0.1.0, onboarding candidate)
-  - `skills/skill-versioning/` — Shared metaskill for skill bundle version tracking (v3)
+  - `skills/claude/SKILL.md` — Claude's protocol execution guide (v0.9.1 / bundle v13)
+  - `skills/codex/SKILL.md` — Codex's protocol execution guide (v9)
+  - `skills/gemini-3/SKILL.md` — Gemini's guide (v0.1.0, STALE + Gemini-CLI-era; must be ported to `.agents/skills/` for Antigravity — see session-19 findings)
+  - `skills/skill-versioning/` — Shared metaskill (skill-provenance, v18)
   - `skills/STRUCTURE.md` — Skill layout and ownership rules
 - `schemas/` — JSON schemas for protocol artifacts (`turnfile/turnfile-v0.schema.json`)
-- `GEMINI.md` — Project root instruction file for Gemini CLI (onboarding artifact)
+- `OWNERSHIP.yaml` — Maintainer-owned skill ownership map driving the PRD-033 guard
+- `GEMINI.md` — Project root instruction file (Gemini-CLI-era; auto-loads on Antigravity as a rule but its `@import` is INERT there)
 - `working-session/` — **Tracked active workspace** (removed from .gitignore in session 13). All session state lives here:
   - `working-session/TURNFILE.yaml` — Runtime coordination artifact. Read first after boot file.
-  - `working-session/WORKLOG.md` — Session log with status block (read lines 1-11 after Turnfile)
-  - `working-session/WORKLOG_ARCHIVE.md` — Archived sessions (session 12 compacted here)
-  - `working-session/MAILBOX.md` — Agent-to-agent message queue (newest-first compact format)
-  - `working-session/MAILBOX.json` — Machine-readable mailbox projection
-  - `working-session/MAILBOX_ARCHIVE.md` — Full message history
-  - `working-session/OPEN_QUESTIONS.md` — Cross-PRD question registry
+  - `working-session/WORKLOG.md` — Session log with status block (read lines 1-13 after Turnfile)
+  - `working-session/WORKLOG_ARCHIVE.md` — Archived sessions
+  - `working-session/MAILBOX.md` + `MAILBOX.json` + `MAILBOX_ARCHIVE.md`
+  - `working-session/OPEN_QUESTIONS.md` — Cross-PRD question registry (no active OQs at session-19 close)
+  - `working-session/NEXT_SESSION_HANDSHAKE.md` — Boot handshake contract (run after read order)
   - `working-session/boot-claude.md` — This file
-  - `working-session/boot-codex.md` — Codex boot file
-  - `working-session/boot-gemini.md` — Gemini boot file (onboarding artifact)
-  - `working-session/chat-claude.md` — Claude's scratchpad and session state snapshots
+  - `working-session/boot-codex.md` / `boot-gemini.md` — peer boot files
+  - `working-session/chat-claude.md` — Claude's scratchpad + session close snapshots (read bottom)
   - `working-session/docs/` — In-progress PRDs and PRD_STATUS.json
-  - `working-session/docs/gemini-onboarding/` — Gemini-specific onboarding artifacts
-  - `working-session/docs/onboarding/` — Candidate-agnostic onboarding test suite and evidence
-
-## Fresh session bootstrap (cold start)
-
-If `working-session/TURNFILE.yaml` does not exist (fresh branch, new checkout, or first session):
-
-1. Copy all files from `templates/working-session/` into `working-session/`.
-2. Rename `boot-agent.md` to `boot-claude.md` and `chat-agent.md` to `chat-claude.md`.
-3. Fill `<PLACEHOLDER>` values in TURNFILE.yaml, WORKLOG.md, MAILBOX.md.
-4. Set `agents.claude.status: "active"` and `session_id: "claude-session-<N>"` in TURNFILE.yaml.
-5. Post first signal in TURNFILE.yaml `messages` section.
-6. Run startup validation gates before first shared-file mutation:
-   - `npm run -s validate:skills` (skills preflight — verify SKILL.md readable, frontmatter parses, manifest hashes match)
-   - `node tools/turnfile-lint.mjs --turnfile working-session/TURNFILE.yaml --schema schemas/turnfile/turnfile-v0.schema.json`
-   - `node tools/validate-mailbox-invariants.mjs --mailbox working-session/MAILBOX.md`
-7. If any gate fails, escalate in mailbox/worklog before continuing with substantive edits.
-8. Then proceed to normal resumption read order below.
-
-If TURNFILE.yaml exists, skip to resumption read order.
+  - `working-session/docs/gemini-onboarding/` + `working-session/docs/onboarding/` — Gemini onboarding artifacts + evidence
 
 ## Protocol essentials
 
 - **Mailbox check first and last:** Check mailbox at start and end of every turn. Ensure Claude unread=0 before turn is done.
-- **Whenever you have an unread mailbox item, continue until that mailbox item is read and acknowledged.** (Maintainer standing directive from session 13.)
-- **Message lifecycle (PRD-003):** 5 statuses: `unread -> acknowledged -> blocked -> actioned -> closed`. Only receiver can ack/block/action. Only sender/maintainer can close.
-- **SLA tiers:** P0 (next session turn), P1 (next session), P2 (best effort). Measured in session boundaries, not wall-clock.
-- **Mailbox format:** Newest-first compact view. Inbox Snapshot -> Open Queue -> Active Messages -> Closed Summary -> Archive pointer.
-- **Payload-first rule (PRD-008):** Review requests must include inline content with revision tokens (`REV-YYYYMMDD-<topic>-<seq>-h<8hex>`). No path-only references.
-- **Revision token integrity (PRD-009 R2):** Content-modifying responses require new superseding revision tokens with `Related` linkage.
-- **Open questions:** Registry in `working-session/OPEN_QUESTIONS.md`. Check at session start. Update when resolving.
-- **Decision contract (PRD-004):** Maintainer decisions require WORKLOG linkage. Relay messages need `> Maintainer: "<exact text>"` blockquote.
-- **Decision authority (OQ-052 resolution):** All changes are Maintainer-gated by default; selective unlocks happen only by explicit Maintainer direction.
-- **Turnfile (PRD-013):** YAML coordination artifact. Agents read/write for task tracking, lock management, signals. Revision-based leases (no wall-clock). Section ownership model (R2.1).
-- **Locking (PRD-010 + PRD-013):** Locks live in TURNFILE.yaml `locks` section. Revision-based lease expiry: `(coordination.revision - acquired_rev) > lease_revs`. Default `lease_revs: 2`.
-- **Conflict bound (PRD-021):** Level 2 rebuttal loops use `coordination.conflict.rebuttal_rounds`; finite exhaustion routes to Level 4 Maintainer adjudication, while unbounded loops converge only on fresh `NO-NEW-OBJECTION` markers from all participating agents.
-- **Selective-unlock gradient (PRD-021/018):** Band A is `unlockable` by default, Bands B/C are `gated`; `unlockable` is only eligibility until explicit Maintainer unlock.
-- **Session closeout (PRD-014):** Mandatory checklist: mailbox clearance, boot rollover + archive, worklog maintenance + compaction check, OQ sync, reflection entry.
-- **Session rotation (PRD-016):** Request a new session when approaching context limits. Don't wait until context is exhausted.
-- **Skill file (PRD-012):** Claude's protocol execution guide at `skills/claude-opus_4.6/SKILL.md` (v0.3.0). Explicit maintainer invocation only. Mandatory confirmation for all writes. 9 modules (Module 0-8).
-- **Skill versioning:** Shared metaskill at `skills/skill-versioning/SKILL.md`. Tracks bundle versions, manifests, changelogs across sessions and platforms.
+- **Whenever you have an unread mailbox item, continue until it is read and acknowledged.** (Maintainer standing directive.)
+- **Message lifecycle (PRD-003):** `unread -> acknowledged -> blocked -> actioned -> closed`. Only receiver can ack/block/action. Only sender/maintainer can close.
+- **SLA tiers:** P0 (next session turn), P1 (next session), P2 (best effort). Measured in session boundaries.
+- **Payload-first (PRD-008):** Review requests include inline content + revision tokens (`REV-YYYYMMDD-<topic>-<seq>-h<8hex>`). No path-only references.
+- **Decision authority (OQ-052):** All changes Maintainer-gated by default; selective unlocks only by explicit Maintainer direction.
+- **Turnfile (PRD-013):** YAML coordination artifact. Revision-based leases (no wall-clock). Section ownership (R2.1).
+- **Locking (PRD-010 + PRD-013):** `locks` section; lease expiry `(coordination.revision - acquired_rev) > lease_revs` (default 2).
+- **Ownership guard (PRD-033, LIVE):** `core.hooksPath=tools/hooks`; identity from `.turnfile-agent` (currently `codex` in this clone) or `TURNFILE_AGENT`. Edit only your own files. Claude commits export `TURNFILE_AGENT=claude`; whole-tree/cross-ownership commits use `TURNFILE_AGENT=maintainer` under Maintainer direction. `OWNERSHIP.yaml`: claude/codex/gemini owned sets + maintainer_owned; unmatched paths COLLABORATIVE.
+- **Orientation tool (PRD-032, LIVE):** `node tools/session-orient.mjs --agent claude --emit human` (add `--validate`).
+- **Tokenese (PRD-027 + charter incl. Tier-B Amendment A1):** every clone paired to a legible source; source wins; `^N`/`ev:` untrusted (calibration result); governance English-only; R7 cross-repo boundary (never edit Tokenese semantics from Turnfile).
 
 ## Resumption read order (PRD-011 R3)
 
-The cross-agent command contract for this is the canonical boot command manifest `docs/BOOT_SEQUENCE.md` (PRD-017): ordered read order, read-only verification commands, and stop/continue/escalate rules. This file holds Claude-specific orientation. Optional `tools/validate-boot-sequence.mjs` checks control-plane preconditions.
-
-**Chat-file semantics (PRD-017 R7):** boot creates only Claude's own `chat-claude.md` if absent. A missing peer chat (`chat-codex.md`) is a warning only — boot never creates a peer chat file.
-
-**Out-of-band drift check (PRD-023):** before trusting remembered state, reconcile any out-of-band activity (Maintainer edits or peer commits made outside the turn loop) against the WORKLOG. Unrecorded changes that altered governance state are decision-required (record/escalate before acting); non-governance drift is a warning. Optional `tools/validate-out-of-band-reconciliation.mjs`.
+Cross-agent contract: `docs/BOOT_SEQUENCE.md` (PRD-017). This file is Claude-specific orientation.
 
 1. **This file** (`working-session/boot-claude.md`)
-2. `working-session/TURNFILE.yaml` — coordination state (phase, tasks, locks, agent status, signals) — ~300 tokens
-3. `working-session/WORKLOG.md` lines 1-10 (status block) — ~200 tokens
-4. `working-session/MAILBOX.md` inbox snapshot — ~500 tokens — check for unread messages
-5. `working-session/OPEN_QUESTIONS.md` Active + Deferred sections — ~200 tokens
-6. `working-session/chat-claude.md` session close snapshot (bottom of file) — ~2K tokens
-7. Then read whatever files are relevant to the current task
+2. `working-session/TURNFILE.yaml` — coordination state (read fresh; Files-First)
+3. `working-session/WORKLOG.md` lines 1-13 (status block)
+4. `working-session/MAILBOX.md` inbox snapshot — check unread
+5. `working-session/docs/PRD_STATUS.json` — authoritative PRD state
+6. `working-session/OPEN_QUESTIONS.md` Active + Deferred
+7. `working-session/chat-claude.md` close snapshot (bottom)
+8. Then task-relevant files
 
-## Current state (as of session-18 close, 2026-06-17)
+Run `NEXT_SESSION_HANDSHAKE.md` (session-20 addendum) and converge/sign with Codex before substantive writes. **Out-of-band drift check (PRD-023):** reconcile any peer/Maintainer edits made outside the turn loop against the WORKLOG before trusting remembered state.
 
-Claude lane on Opus 4.8, Codex lane on Codex 5.5 — model-generation continuity on one unmodified protocol holds (`docs/llm/MODEL_LEDGER.md`). Read the files, not labels. TURNFILE at rev 218 at close; read it fresh (Files-First). Session 18 committed whole-tree as `TURNFILE_AGENT=maintainer` and PUSHED (Maintainer-directed at close).
+## Current state (as of session-19 close, 2026-06-17)
 
-### FIRST ACTIONS ON RESUME (session 19)
+Claude lane on Opus 4.8, Codex lane on Codex 5.5 — both idle/closed at session-19 end. TURNFILE at rev ~234 at close; read it fresh (Files-First). **Codex runs LIVE concurrently in the same tree** — this session saw rev 219→233 with constant concurrent edits and several mid-write collisions; the Read-before-edit guard caught every one. Re-ground almost every turn. Session 19 committed whole-tree as `TURNFILE_AGENT=maintainer` and PUSHED (Maintainer-directed at close).
 
-1. Boot via `docs/BOOT_SEQUENCE.md`, then run `working-session/NEXT_SESSION_HANDSHAKE.md` (it has a session-19 addendum) and converge/sign with Codex before any write. Codex's session-18 handshake row was left UNSIGNED — confirm/sign for session 19.
-2. Report guard/commit posture FIRST: the PRD-033 shared guard is LIVE — `core.hooksPath=tools/hooks`, identity from `.turnfile-agent` (currently `codex` in this clone) or `TURNFILE_AGENT`. Claude-owned commits export `TURNFILE_AGENT=claude`; whole-tree/cross-ownership commits `TURNFILE_AGENT=maintainer` under Maintainer direction. Run `node tools/validate-ownership-guard.mjs`.
-3. Use `tools/session-orient.mjs --agent claude --emit human` (PRD-032, live) for the one-shot orientation (add `--validate` for gates).
-4. Adopted session-19 scope (Maintainer, per Codex proposal): (a) Claude LEADS Gemini provisional onboarding under PRD-015 (reactivated for next-agent onboarding), Codex cross-reviews — evidence order OT-008 → OT-002 → OT-004; (b) Codex carry-forward to clear early: sign handshake row + apply-or-counter the 3 draft-review counters (MSG-031/032/033); then advance PRD-034/035/036 eval-first (PRD-036 first if broad eval repair is needed, else PRD-035); (c) implement the bounded Tier-B Tokenese twin lane (AUTHORIZED — charter Amendment A1). Keep small: stop after Gemini provisional evidence + one PRD lane.
+### FIRST ACTIONS ON RESUME (session 20)
 
-### Recent milestones (session 18)
+1. Boot via `docs/BOOT_SEQUENCE.md`; run `NEXT_SESSION_HANDSHAKE.md` (session-20 addendum) and converge/sign with Codex before any write.
+2. Report guard/commit posture FIRST: guard LIVE (`core.hooksPath=tools/hooks`, identity from `.turnfile-agent`). Run `node tools/validate-ownership-guard.mjs`. Use `node tools/session-orient.mjs --agent claude --emit human` for orientation.
+3. Adopted carry-forward lanes (confirm scope with Maintainer):
+   - **Gemini onboarding — live-Antigravity execution lane.** Mechanism is confirmed (Path B): port the bundle to `.agents/skills/turnfile-protocol-gemini/SKILL.md` (semantic discovery by description; `@import` is inert on Antigravity), refresh stale content (F2/F4), pin hashes (F1), reduce `GEMINI.md` to a thin pointer rule. Then reload Antigravity and run behavioral OT-002 / OT-004 (fixtures staged in `working-session/docs/onboarding/evidence/gemini-cli/2026-06-17-01/antigravity-readiness.md`). Gemini self-remediates the gemini-owned files (OT-007) under Claude guidance + Codex cross-review. Use a fresh `antigravity/` evidence path; keep `gemini-cli/2026-06-17-01/` as historical. **Maintainer must add `.agents/skills/turnfile-protocol-gemini/**` to gemini's set in `OWNERSHIP.yaml` (Maintainer-owned) before that home is committed.**
+   - **PRD-034/035/036 implementation** — accepted + promoted to `docs/prds/`, implementation eval-first and NOT started. Codex authored RED evals; implementer=Claude, reviewer=Codex per PRD_STATUS. Order: PRD-036 first if the aggregate eval runner blocks broad validation (`npm run evals:prd` is broken on Node v26 — PRD-036 target), else PRD-035 (Tokenese sync) before PRD-034 (public-surface reconciliation).
+   - **Bounded Tier-B Tokenese twins** (AUTHORIZED, charter A1): English source-wins, governance English-only, self-reports untrusted, chat dense lane OFF.
+4. Deferred (execute-or-defer, PRD-014 R4): **mailbox compaction** (~50 active cards; many session-17/18/19 notify-threads are `actioned` and archivable to Closed Summary). Pre-existing 5 cosmetic Closed-Summary `Mode`-field warnings.
 
-- tk-calibration-audit COMPLETE → `working-session/docs/tk-calibration-audit.md`. Verdict: `ev:obs` conditional (untrusted-by-default, verifiable backing only — E1 teach miss proved it is not self-validating); `^N` insufficient (N=3, no scale); `plain` abstention pass. Codex applied with no counter (MSG-034).
-- Bounded Tier-B Tokenese twin lane AUTHORIZED by Maintainer (SESSION_CHARTER Amendment A1): operational/handoff twins, English source-wins, governance English-only, self-reports untrusted, chat dense lane stays OFF, R7 intact.
-- Tokenese observed at v0.3.7 (read-only, R7) + Maintainer-directed pull to `origin/main@7edad11`. Grammar v0.3 + TKAB schema `tkab-check-1.1` UNCHANGED; re-scored all pairs → anthropic byte-identical; all 8 Tier-A pairs stand. New upstream: official Tokenese skill bundle v1.0.0, 7-tokenizer audit.
-- 3 Codex-queued drafts reviewed (apply-or-counter, code-verified): PRD-034 (surface reconciliation, 4 counters), PRD-035 (Tokenese integration, 4 counters), PRD-036 (eval runner — `npm run evals:prd` is broken, 2 counters). Codex authored RED evals for all three.
+### Recent milestones (session 19)
+
+- **Gemini onboarding lead lane (Claude):** evaluator-prep evidence written (`working-session/docs/onboarding/evidence/gemini-cli/2026-06-17-01/`). OT-001 PASS (Maintainer R1 approved; runtime corrected Gemini 2.5 CLI → **Google Antigravity**). OT-008 conditional-pass + findings F1 (null manifest hashes), F2 (protocol-baseline drift), F3 (delivery-mechanism mismatch), F4 (stale `gitignored` line). Codex cross-reviewed APPLY (MSG-036 closed).
+- **LIVE Antigravity test (Maintainer brought it live):** confirmed GEMINI.md auto-loads as a rule but `@import` is INERT; `.agents/skills/` is the discovery path (indexed at workspace load); live model **Gemini 3.5 Flash (High)**; read/shell/validators run clean. **Path B confirmed**; F3 mechanism risk retired; MODEL_LEDGER row added. Antigravity boot procedure documented in `antigravity-readiness.md`.
+- **PRD-034/035/036:** Codex applied all Claude counters (C1-C4/C1-C4/C1-C2); Maintainer ACCEPTED all three; Codex promoted to `docs/prds/`; Claude ACK'd promotion (MSG-037). Implementation not started.
+- Handshake converged + both agents signed session-19 rows.
 
 ### PRD landscape (authoritative: `working-session/docs/PRD_STATUS.json`)
 
-- Promoted/done through session 17: PRD-032/033 + earlier PRD-017/021/022/023/024/026/030 + PRD-031 Phase 1 + PRD-014 A1.
-- DRAFT, evals authored (Codex), awaiting Claude-counter reconciliation + Maintainer acceptance, then A1 (Claude implements, Codex reviews): PRD-034, PRD-035, PRD-036.
-- Reactivated for session 19: PRD-015 (agent onboarding/vetting) for Gemini provisional onboarding.
-- Future eval-first lanes: PRD-031 Phase 2/3.
+- Promoted/accepted through session 19: prior set + **PRD-034/035/036 (accepted + promoted, implementation eval-first/not-started)**.
+- PRD-015 reactivated for Gemini onboarding (live-Antigravity execution lane pending).
+- Future eval-first lanes: PRD-031 Phase 2/3; PRD-034/035/036 implementation.
 
 ### Operating norms (skill v0.9.1)
-- Files First, Not Memory; Concurrent Write Discipline (derive via `tools/next-state.mjs` in-lock; this arc rev 210→218 with Codex live concurrently — re-ground almost every turn; the Read-before-edit guard caught two stale edits). Only the Read tool satisfies that guard. Eight-step A1 loop; Model Ledger Handshake.
-- Prefer `tools/session-orient.mjs` for orientation (PRD-032). Ownership guard executable (PRD-033): edit only own files; commit identity matters.
-- Tokenese (PRD-027 + charter, now incl. Amendment A1 Tier-B): every clone paired to a legible source; source wins; no dense for reasoning (R1); `^N`/`ev:` untrusted (calibration result); governance state English-only; R7 cross-repo boundary (never edit tokenese semantics from Turnfile).
+
+- Files First, Not Memory; Concurrent Write Discipline (derive via `tools/next-state.mjs` in-lock; Codex live → re-ground almost every turn; only the Read tool satisfies the edit guard). Eight-step A1 loop (PRD-006); Model-Ledger Handshake at boot.
+- Prefer `tools/session-orient.mjs`. Ownership guard executable; commit identity matters.
 
 ### Mailbox & coordination
-- At Claude close: Claude idle, unread 0/0/0, no locks. Codex closed its side at rev 217 (boot v8, SIG-174). My MSG-034 actioned; MSG-031/032/033 acknowledged by Codex (substantive reconciliation is its carry-forward).
-- Guard LIVE; commit identity required (see FIRST ACTIONS 2). Session 18 committed + pushed at close.
-- Mailbox at ~48 active cards — optional compaction next session. Detailed resume snapshot: bottom of `working-session/chat-claude.md`.
+
+- At Claude close: Claude idle, unread 0/0/0, no locks. Codex closed at rev 228 (boot v9). MSG-036 closed (Gemini cross-review); MSG-037 actioned (PRD promotion ACK, Codex closure owner).
+- Mailbox at ~50 active cards — compaction deferred (next session, optional).
 
 ## Session close protocol
 
-Before ending a session:
-1. **Check mailbox** — ensure Claude unread=0
-2. Update WORKLOG status block with current state
-3. Close any open mailbox messages you own
-4. Update TURNFILE.yaml (agent status idle, tasks done, clean up locks/turn_queue)
-5. **Regenerate `MAILBOX.json`** if mailbox changed: `node tools/export-mailbox-json.mjs working-session/MAILBOX.md working-session/MAILBOX.json`
-6. **Run validation gates:**
-   - `node tools/validate-mailbox-invariants.mjs --mailbox working-session/MAILBOX.md`
-   - `node tools/turnfile-lint.mjs --turnfile working-session/TURNFILE.yaml --schema schemas/turnfile/turnfile-v0.schema.json`
-7. Write session state snapshot to bottom of `working-session/chat-claude.md`
-8. Archive current boot file to `docs/archive/boot-claude/boot-claude_v<N>.md` (globally monotonic)
-9. Write new boot file with updated state
-10. **WORKLOG compaction check** — if WORKLOG exceeds 500 lines, compact to WORKLOG_ARCHIVE.md (PRD-011 R5)
-11. Promote completed artifacts only when explicitly directed by maintainer and only for PRDs that pass the promotion gate
-12. Commit and push tracked changes only when maintainer directs
-13. **Final mailbox check** — confirm Claude unread=0
+1. **Check mailbox** — Claude unread=0.
+2. Update WORKLOG status block.
+3. Close any open mailbox messages you own (or defer compaction explicitly).
+4. Update TURNFILE.yaml (agent idle, tasks done/carry-forward, clean locks/turn_queue).
+5. **Regenerate `MAILBOX.json`:** `node tools/export-mailbox-json.mjs working-session/MAILBOX.md working-session/MAILBOX.json`
+6. **Run gates:** `validate-mailbox-invariants`, `turnfile-lint`, `validate-closeout`.
+7. Write session snapshot to bottom of `working-session/chat-claude.md`.
+8. Archive boot file to `docs/archive/boot-claude/boot-claude_v<N>.md` (globally monotonic).
+9. Write new boot file with updated state.
+10. WORKLOG compaction check — compact if >500 lines (PRD-011 R5).
+11. Promote artifacts only when Maintainer-directed + promotion gate passes.
+12. Commit/push only when Maintainer directs.
+13. **Final mailbox check** — Claude unread=0.
 
 ## Key lessons learned
 
-- `working-session/` is now tracked in git (changed in session 13). All active work lives there. Completed work gets copied to `docs/` for tracking.
-- Agents are stateless. SLA is measured in session boundaries, not wall-clock time.
-- TURNFILE.yaml is the first coordination read after the boot file — most compact and actionable state.
-- The WORKLOG gets long fast. Compact per PRD-011 R5 when it exceeds 500 lines.
-- Codex can't see your filesystem. Use payload-first messages with inline content for cross-agent reviews.
-- **Transaction discipline for shared-file edits:** read -> edit -> validate -> signal. Re-read immediately before editing — files may have been modified between reads. If concurrent edits are detected, re-read and merge deliberately before writing.
-- Locking is revision-based (PRD-013 R1.3), not time-based. Use `lease_revs` in TURNFILE.yaml, not wall-clock expiry.
-- Check mailbox first and last on every turn. Your messages should be unread=0 before you're done.
-- After any milestone/task completion, refresh WORKLOG status block + Turnfile metadata + mailbox lifecycle in the same turn (State Freshness Hooks).
-- After mailbox edits, verify inbox snapshot counts match actual unread states. Run `tools/validate-mailbox-invariants.mjs`.
-- `working-session/MAILBOX.json` is a machine-readable projection. Use it for quick state checks instead of parsing full MAILBOX.md.
-- Promotion is conditional on maintainer direction + promotion gate pass (PRD_STATUS.json + validate-prd-promotion.mjs). Never auto-promote.
-- The project name is "Turnfile" — reference as "Turnfile protocol (a SNAP protocol)" not "SNAP protocol."
-- Session numbers are global-monotonic across branches. When a branch forks, note the fork point in WORKLOG.
-- Request a new session proactively when approaching context limits (PRD-016). Don't wait until context is exhausted.
+- `working-session/` is tracked in git (since session 13). Completed work copied to `docs/`.
+- TURNFILE.yaml is the first coordination read after the boot file. Read it fresh — Codex edits concurrently.
+- **Concurrent-edit discipline:** read → edit → validate → signal. Re-read immediately before editing; the guard blocks stale edits. Session 19 had several mid-write collisions on MAILBOX/TURNFILE while Codex was live — each re-grounded cleanly. Don't fight the revision number; re-ground and take the next one.
+- Locking is revision-based (PRD-013 R1.3), not time-based.
+- Codex can't see your filesystem for cross-agent review — use payload-first inline content.
+- **Antigravity (Gemini runtime) loads skills from `.agents/skills/`, not via `GEMINI.md` @import.** New skills need a workspace reload to be indexed.
+- Promotion is conditional on Maintainer direction + promotion gate (PRD_STATUS + validate-prd-promotion). Never auto-promote.
+- The project name is "Turnfile" — reference as "Turnfile protocol (a SNAP protocol)".
+- Session numbers are global-monotonic across branches.
+- Request a new session proactively near context limits (PRD-016).

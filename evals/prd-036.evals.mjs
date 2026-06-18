@@ -45,7 +45,7 @@ function assertRunnerExists() {
 }
 
 test("R1-R5: PRD-036 defines aggregate runner, taxonomy, CI policy, PRD-006 alignment, and regression coverage", () => {
-  const s = read("working-session/docs/PRD-036-prd-eval-runner-contract.md");
+  const s = read("docs/prds/PRD-036-prd-eval-runner-contract.md");
   for (const needle of [
     /npm run evals:prd/,
     /every file matching `evals\/\*\.evals\.mjs`/,
@@ -83,6 +83,12 @@ test("AC1/R5: aggregate runner dry-run resolves all current PRD eval files witho
   ]) {
     assert.ok(parsed.files.includes(file), `dry-run missing ${file}`);
   }
+});
+
+test("R5: normal tool harness contains non-self-referential PRD runner regression coverage", () => {
+  const harness = read("tools/run-evals.mjs");
+  assert.match(harness, /run-prd-evals\.mjs/, "tools/run-evals.mjs must exercise the PRD eval wrapper");
+  assert.match(harness, /--dry-run|fixture/i, "tool harness coverage must use dry-run or fixture loading");
 });
 
 test("AC2/R1: aggregate runner fails clearly when no eval files exist", () => {

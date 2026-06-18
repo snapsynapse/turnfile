@@ -9,6 +9,40 @@ loaded skills, scope, and the live outstanding list — so no agent acts on stal
 unilateral assumptions. Executed at boot, after the PRD-017 `docs/BOOT_SEQUENCE.md` read
 order and before the first shared-file write.
 
+## Session 20 closeout-prep addendum — Claude (2026-06-17)
+
+Claude closed its side of session 19 at rev ~234. Session-19 outcomes for session-20 grounding:
+
+- **Gemini onboarding (PRD-015) — mechanism confirmed, execution pending.** OT-001 PASS (Maintainer R1 approved; runtime corrected to **Google Antigravity**, live model **Gemini 3.5 Flash (High)**). OT-008 conditional-pass + findings F1 (null manifest hashes), F2 (protocol-baseline drift), F3 (delivery mismatch), F4 (stale `gitignored` line). Evidence: `working-session/docs/onboarding/evidence/gemini-cli/2026-06-17-01/{evidence.md, antigravity-readiness.md}` (Codex cross-reviewed APPLY, MSG-036 closed).
+- **LIVE-confirmed Antigravity mechanism (Path B):** GEMINI.md auto-loads as a rule but `@import` is INERT; Antigravity discovers skills from `.agents/skills/` (indexed at workspace load; mid-session adds need reload). The Gemini bundle must be ported to `.agents/skills/turnfile-protocol-gemini/SKILL.md`; GEMINI.md reduces to a thin pointer rule; no new boot-doc file. Antigravity boot procedure is documented in `antigravity-readiness.md`.
+- **Session-20 Gemini lane (execution-only):** Gemini self-remediates F1/F2/F3/F4 in OT-007 (port + refresh + reload, gemini-owned, under Claude guidance + Codex cross-review); then behavioral OT-002/OT-004 (fixtures staged in `antigravity-readiness.md`). Use a fresh `antigravity/` evidence path; keep `gemini-cli/2026-06-17-01/` historical. **Maintainer must add `.agents/skills/turnfile-protocol-gemini/**` to gemini's set in `OWNERSHIP.yaml` (Maintainer-owned) before that home is committed.**
+- **PRD-034/035/036:** accepted + promoted to `docs/prds/`; Claude ACK'd promotion (MSG-037). Implementation eval-first, NOT started; order PRD-036 (if `npm run evals:prd` repair needed) → PRD-035 → PRD-034. Claude implements, Codex reviews (per PRD_STATUS).
+- **Bounded Tier-B Tokenese twins** remain authorized (charter A1).
+- Deferred: mailbox compaction (~50 active cards).
+- Concurrency reality: Codex runs live in the same tree; re-ground every turn, expect mid-write collisions (the guard catches them), don't fight the rev number.
+
+## Session 20 closeout-prep addendum (2026-06-17)
+
+Codex closed its side of session 19 at rev 228, recorded the Maintainer PRD acceptance sync at rev 229, promoted PRD-034/035/036 at rev 231, and projection-synced the mailbox/Turnfile at rev 232. File-backed close state:
+
+- Turnfile protocol remains v0.1.
+- Mailbox is clear for Codex and Maintainer. Claude has one unread promotion-specific confirmation request, MSG-20260617-037.
+- Codex is idle; locks are empty; no Codex heartbeat is carried forward.
+- Claude is still marked active on `s19-gemini-onboarding`, but Claude's latest signal says the session-19 evaluator-prep portion is complete and Claude is holding for Maintainer close direction.
+- PRD-034, PRD-035, and PRD-036 counter reconciliation is complete. Codex, Claude, and Maintainer acceptance evidence is recorded; all three are accepted, zero-blocker, and promoted to `docs/prds`. Implementation remains `evals-authored` and not started.
+- PRD-036 now requires a portable Node wrapper for aggregate PRD evals, separate CI steps for `validate` and `evals:prd`, and `tools/run-evals.mjs` wrapper regression coverage.
+- PRD-035 now requires a derived Tokenese result package, `tk-calibration-audit.md` as the single calibration source, a PRD-034 public-claim boundary, and a separate TKAB JSON validator.
+- PRD-034 now requires PRD_STATUS-only promoted-list derivation, machine-readable freshness markers, generated-surface source/template discovery plus rebuild discipline, and PRD-035 as the Tokenese/GuideCheck observation authority.
+- Gemini/Antigravity evaluator-prep advanced at rev 230 after Maintainer brought Antigravity live: `GEMINI.md` auto-loads as a rule, but `@import` is inert; `.agents/skills/` is the skill discovery path at workspace load; live model observed as Gemini 3.5 Flash (High). Path B is confirmed: port the Gemini bundle to `.agents/skills/turnfile-protocol-gemini/` and reduce `GEMINI.md` to a thin pointer rule. Gemini self-remediation remains for OT-007 plus behavioral OT-002/OT-004.
+- Bounded Tier-B Tokenese operational/handoff twins are authorized, but English source text remains authoritative and governance state remains English-only.
+
+Recommended session-20 scope, subject to Maintainer confirmation:
+
+1. Have Claude acknowledge MSG-20260617-037 or counter any promotion-specific registry/shelf issue before implementation begins.
+2. Keep implementation to one PRD lane: PRD-036 first if aggregate PRD evals block broad validation; otherwise PRD-035 before PRD-034.
+3. If the next focus is onboarding, run Antigravity OT-007 self-remediation first, then repeat live-load and behavioral onboarding tests from an `antigravity/` evidence path.
+4. Keep commit strategy explicit. The tree contains mixed Codex and Claude/Gemini evaluator-prep changes; Codex should not stage peer-owned files without Maintainer direction.
+
 ## Session 19 closeout-prep addendum (2026-06-17)
 
 Session 18 closed from the Codex side at rev 217. File-backed close state:
@@ -162,6 +196,6 @@ Suggested session-18 completion criteria:
 
 | Agent | Protocol baseline match | Tokenese confirmed | Skills self-validated | Scope agreed | Identity enforcing | Signed |
 |-------|---|---|---|---|---|---|
-| Claude | _pending next boot_ | | | | | |
-| Codex | closeout-prep only; re-confirm at next boot | grammar v0.3 / toolchain v0.3.7 observed by Claude; Tier-B pending Maintainer decision | closeout validators passed at rev 217; re-run at boot | proposed: Gemini provisional onboarding led by Claude, PRD counters reconciled, bounded Tokenese adoption only | shared guard active at closeout; re-confirm with `validate-ownership-guard` | Codex closeout-prep - 2026-06-17 |
-| Maintainer (ratifies) | _pending_ | | | | | |
+| Claude | yes — Turnfile v0.1; baseline incl. PRD-032/033 promoted+impl-done; PRD-034/035/036 still draft (Codex RED evals; counters acknowledged-not-applied) | yes — grammar v0.3 unchanged; toolchain 0.3.7 observed last session; TKAB schema `tkab-check-1.1`; bounded Tier-B twin lane AUTHORIZED (charter A1) | yes — boot gates green (lint/mailbox/promotion/`validate:skills`/`validate-boot-sequence --agent claude`); session-orient clean, projection fresh | yes — (1) Claude LEADS Gemini provisional onboarding under PRD-015 (OT-008→OT-002→OT-004), Codex cross-review; (2) Codex carry-forward: sign s18 row + apply-or-counter MSG-031/032/033, then PRD-036/035/034 eval-first; (3) bounded Tier-B twins. Ceiling: stop after Gemini provisional evidence + one PRD lane | enforcing codex (clone `.turnfile-agent=codex`); Claude-owned commits export `TURNFILE_AGENT=claude`; guard LIVE `core.hooksPath=tools/hooks`, validate-ownership-guard clean | Claude (Opus 4.8) — 2026-06-17 |
+| Codex | yes - Turnfile v0.1 at rev 218 on boot; PRD_STATUS has 35 tracked PRDs; PRD-034/035/036 remain drafts pending Maintainer acceptance after counter reconciliation | yes - grammar v0.3; toolchain v0.3.7 observed by Claude; TKAB schema `tkab-check-1.1`; bounded Tier-B twin lane AUTHORIZED, with English source-wins | yes - session-orient, boot-sequence, mailbox, Turnfile lint, PRD promotion, closeout, ownership guard, and `validate:skills` all pass; model ledger covers OpenAI Codex (GPT-5) desktop and Claude Opus 4.8 | yes - session-19 adopted scope: Claude leads Gemini provisional onboarding with Codex cross-review; reconcile PRD-034/035/036 counters and advance eval-first; implement bounded Tier-B twins; ceiling remains Gemini evidence plus one PRD lane if crowded | shared guard active - `core.hooksPath=tools/hooks`; `.turnfile-agent=codex`; `validate-ownership-guard` clean with enforcing identity codex | Codex (GPT-5, desktop) - 2026-06-17 |
+| Maintainer (ratifies) | session-19 scope ADOPTED per Codex proposal at s18 close (Gemini onboarding led by Claude + PRD-034/035/036 eval-first + bounded Tier-B twins) | | | yes | | 2026-06-17 |

@@ -59,6 +59,7 @@ function surfaceFixture({ staleCurrent = false, staleArchive = false } = {}) {
   const archiveCount = staleArchive ? 27 : promoted;
   const guide = `# Assistant Guide
 
+turnfile:prd-promoted=${currentCount}
 Turnfile current public snapshot: ${currentCount} promoted PRDs.
 Claude bundle 13. Codex bundle 9.
 `;
@@ -80,9 +81,9 @@ bytes: ${Buffer.byteLength(guide, "utf8")}
   );
   write(path.join(dir, "skills/claude/MANIFEST.yaml"), "bundle_version: 13\n");
   write(path.join(dir, "skills/codex/MANIFEST.yaml"), "bundle_version: 9\n");
-  write(path.join(dir, "README.md"), `Turnfile has ${currentCount} promoted PRDs.\n`);
-  write(path.join(dir, "docs/index.html"), `<meta name="description" content="${currentCount} promoted PRDs"><p>${currentCount} promoted PRDs</p>\n`);
-  write(path.join(dir, "docs/llms.txt"), `Turnfile: ${currentCount} promoted PRDs.\n`);
+  write(path.join(dir, "README.md"), `turnfile:prd-promoted=${currentCount}\nTurnfile has ${currentCount} promoted PRDs.\n`);
+  write(path.join(dir, "docs/index.html"), `<!-- turnfile:prd-promoted=${currentCount} -->\n<meta name="description" content="${currentCount} promoted PRDs"><p>${currentCount} promoted PRDs</p>\n`);
+  write(path.join(dir, "docs/llms.txt"), `turnfile:prd-promoted=${currentCount}\nTurnfile: ${currentCount} promoted PRDs.\n`);
   write(path.join(dir, "assistant-guide.txt"), guide);
   write(path.join(dir, "docs/.well-known/assistant-guide.txt"), guide);
   write(path.join(dir, "assistant-guide-manifest.txt"), manifest);
@@ -92,18 +93,31 @@ bytes: ${Buffer.byteLength(guide, "utf8")}
 }
 
 test("R1/R2/R6: PRD-034 defines inventory, sources of truth, and validator scope", () => {
-  const s = read("working-session/docs/PRD-034-public-and-agent-surface-snapshot-reconciliation-contract.md");
+  const s = read("docs/prds/PRD-034-public-and-agent-surface-snapshot-reconciliation-contract.md");
   for (const needle of [
     /README\.md/,
     /docs\/index\.html/,
     /docs\/llms\.txt/,
     /assistant-guide\.txt/,
     /PRD total, shelf, and promoted counts derive from `working-session\/docs\/PRD_STATUS\.json`/,
+    /PRD promoted list derives only from `working-session\/docs\/PRD_STATUS\.json`/,
     /Skill bundle versions derive from `skills\/<agent>\/MANIFEST\.yaml`/,
     /validate-public-surface-snapshot\.mjs/,
+    /machine-readable freshness markers/i,
+    /turnfile:prd-promoted=29/,
+    /Generated surfaces must be repaired at the generator or template source/i,
+    /PRD-035 owns recording the upstream Tokenese observation/i,
     /distinguishes historical archive hits from current public-surface failures/,
   ]) {
     assert.match(s, needle);
+  }
+});
+
+test("AC8: current public and agent-facing PRD count markers match PRD_STATUS", () => {
+  const expected = promotedCount();
+  const marker = new RegExp(`turnfile:prd-promoted=${expected}\\b`, "i");
+  for (const file of ["README.md", "docs/index.html", "docs/llms.txt", "assistant-guide.txt"]) {
+    assert.match(read(file), marker, `${file} must expose a registry-derived promoted-count marker`);
   }
 });
 

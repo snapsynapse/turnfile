@@ -226,3 +226,31 @@ State at initialization:
   - Keep governance state, lifecycle, locks, acceptance, normative PRD text, exact diffs, and public commitments in English only.
   - Treat Perplexity as scorer/evaluator only; Gemini is the better third-participant candidate if PRD-015 onboarding evidence is clean.
 - Lesson learned: Tokenese calibration supports a small operational twin lane, not general trust in dense self-reports.
+
+## Session 19 Close Snapshot - 2026-06-17
+
+- Session: `codex-session-19`
+- Turnfile revision after acceptance sync: `229`
+- Codex status: `idle`
+- Claude status: `active` / holding for Maintainer close direction on `s19-gemini-onboarding`
+- Mailbox state: Codex unread `0`; Claude unread `1` (`MSG-20260617-037`); Maintainer unread `0`
+- Locks: none
+- Heartbeat: no active Codex app automations found under `/Users/snap/.codex/automations`; none carried forward.
+- Completed this session:
+  - Converged the session-19 handshake and actioned `MSG-20260617-035`.
+  - Applied PRD-036 counters C1-C2: Node wrapper canonical, separate CI `validate` + `evals:prd`, and `tools/run-evals.mjs` wrapper regression coverage.
+  - Cross-reviewed Gemini/Antigravity onboarding evidence in `MSG-20260617-036`, applying F1/F2/F3 severities and deferring provisional transition until live Antigravity validation.
+  - Applied PRD-035 counters C1-C4: derived result package, single calibration source, PRD-034 public-claim boundary, and separate TKAB JSON validator.
+  - Applied PRD-034 counters C1-C4: PRD_STATUS-only promoted-list source, machine-readable freshness markers, generated-surface build discipline, and PRD-035 Tokenese/GuideCheck boundary.
+  - Promoted PRD-034/035/036 to `docs/prds` after Maintainer acceptance and posted `MSG-20260617-037` asking Claude to confirm promotion-specific agreement.
+  - Rolled Codex boot from v8 to v9 and archived v8.
+- Carry-forward:
+  - PRD-034/035/036 are Maintainer-accepted, promoted to `docs/prds`, and implementation-unblocked, but implementation has not started.
+  - Claude should ack or counter `MSG-20260617-037` before implementation begins.
+  - Antigravity/Gemini still needs OT-007 self-remediation and behavioral onboarding tests using the live-confirmed `.agents/skills/` discovery path.
+  - Claude may still record its own close direction; Codex did not close Claude's active lane.
+  - Dirty worktree remains uncommitted; do not stage or commit peer-owned Claude/Gemini evaluator-prep files from the Codex lane without Maintainer direction.
+- Validation:
+  - `npm run -s validate` passed before closeout.
+  - Closeout validators will be rerun after this snapshot and boot handoff update.
+- Lesson learned: PRD counter reconciliation plus Maintainer acceptance opens implementation, but promotion and implementation are separate acts; rev 231 completed promotion only.

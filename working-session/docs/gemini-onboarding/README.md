@@ -1,8 +1,16 @@
-# Gemini CLI Onboarding — Working Session
+# Gemini Onboarding — Working Session
 
 Status: Artifacts staged (awaiting Maintainer go-ahead + Codex cross-review)
 Owner: Claude (mentoring lead) + Codex (cross-review) + Maintainer (governance gate)
 Date: 2026-02-11
+
+> Runtime update (Maintainer, 2026-06-17, session 19): the candidate runtime is now
+> **Google Antigravity** (https://antigravity.google/ — agent-first IDE, Gemini 3-class),
+> NOT Gemini CLI. The artifacts below (skill bundle MANIFEST `designed_for`, `GEMINI.md`
+> `@import` loading, and this plan's CLI sandboxed-write assumptions) were authored for
+> Gemini CLI and must be re-validated/re-fit for Antigravity during Gemini's own OT-007
+> self-remediation once the live runtime is available (evidence:
+> `working-session/docs/onboarding/evidence/gemini-cli/2026-06-17-01/evidence.md`, finding F3).
 
 ## Purpose
 

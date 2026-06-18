@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2026-06-17 (session 18 boot: Codex authored PRD-034/035/036 evals)",
+  "updated_at": "2026-06-17 (PRD-034/035/036 promoted to docs/prds after Maintainer acceptance)",
   "policy": {
     "required_reviewers": [
       "codex",
@@ -1118,109 +1118,115 @@
     {
       "id": "PRD-034",
       "title": "Public and Agent-Facing Surface Snapshot Reconciliation Contract",
-      "path": "working-session/docs/PRD-034-public-and-agent-surface-snapshot-reconciliation-contract.md",
-      "shelf": "working-session/docs",
-      "state": "draft",
+      "path": "docs/prds/PRD-034-public-and-agent-surface-snapshot-reconciliation-contract.md",
+      "shelf": "docs/prds",
+      "state": "accepted",
       "acceptance": {
         "codex": {
-          "status": "pending",
+          "status": "accepted",
           "evidence": [
-            "Codex drafted PRD-034 on 2026-06-17 after Maintainer requested a detection-only audit of documentation, canonical webpage, and agent-facing surfaces."
+            "Codex drafted PRD-034 on 2026-06-17 after Maintainer requested a detection-only audit of documentation, canonical webpage, and agent-facing surfaces.",
+            "Codex applied Claude counters C1-C4 in session 19: registry-only promoted-list source, machine-readable claim markers, generated-surface build discipline, and PRD-035 Tokenese/GuideCheck boundary."
           ]
         },
         "claude": {
-          "status": "pending",
-          "evidence": []
+          "status": "accepted",
+          "evidence": [
+            "MSG-20260617-031: Claude reviewed PRD-034 APPLY with counters C1-C4; no semantic objection after registry-only source, marker-based validation, generated-surface discipline, and PRD-035 boundary split."
+          ]
         },
         "maintainer": {
-          "status": "pending",
-          "evidence": []
+          "status": "accepted",
+          "evidence": [
+            "Maintainer decision 2026-06-17: PRD-034 accepted after Codex/Claude counter reconciliation."
+          ]
         }
       },
-      "blocking_items": [
-        "Requires Claude review in the next mutual collaboration session.",
-        "Requires Maintainer acceptance before implementation."
-      ],
-      "eligible_for_docs_prds": false,
+      "blocking_items": [],
+      "eligible_for_docs_prds": true,
       "implementation": {
         "state": "evals-authored",
         "evals": "evals/prd-034.evals.mjs",
         "eval_author": "codex",
         "implementer": "claude",
         "reviewer": "codex",
-        "notes": "Codex authored RED evals on 2026-06-17 by Maintainer request for next-session scope. Evals pin public-surface inventory/source-of-truth requirements, stale-count detection, archive exclusion, PRD-032/033 status freshness, skill bundle version freshness, assistant-guide hash parity, baseline snapshot labeling, release-gate wiring, and registry ownership. Implementation remains blocked on Claude review and Maintainer acceptance."
+        "notes": "Codex authored RED evals on 2026-06-17 by Maintainer request for next-session scope. Evals pin public-surface inventory/source-of-truth requirements, stale-count detection, archive exclusion, PRD-032/033 status freshness, skill bundle version freshness, assistant-guide hash parity, baseline snapshot labeling, release-gate wiring, and registry ownership. Session 19 counter reconciliation applied Claude C1-C4: promoted-list source derives only from PRD_STATUS.json, current surfaces must expose machine-readable freshness markers, generated surfaces require template/source discovery plus rebuild, and PRD-034 enforces public/agent-facing Tokenese and GuideCheck claims while PRD-035 owns upstream observation facts. Maintainer accepted the document on 2026-06-17; promoted to docs/prds at rev 231; implementation is now unblocked for the next A1 lane but not yet started."
       }
     },
     {
       "id": "PRD-035",
       "title": "Tokenese Integration and Upstream Result Sync Contract",
-      "path": "working-session/docs/PRD-035-tokenese-integration-and-upstream-result-sync-contract.md",
-      "shelf": "working-session/docs",
-      "state": "draft",
+      "path": "docs/prds/PRD-035-tokenese-integration-and-upstream-result-sync-contract.md",
+      "shelf": "docs/prds",
+      "state": "accepted",
       "acceptance": {
         "codex": {
-          "status": "pending",
+          "status": "accepted",
           "evidence": [
-            "Codex drafted PRD-035 on 2026-06-17 after comparing Turnfile's Tokenese pilot state to the local Tokenese v0.3.2 repo."
+            "Codex drafted PRD-035 on 2026-06-17 after comparing Turnfile's Tokenese pilot state to the local Tokenese v0.3.2 repo.",
+            "Codex applied Claude counters C1-C4 in session 19: derived result package, single calibration source, PRD-034 public-claim boundary, and separate TKAB JSON validator boundary."
           ]
         },
         "claude": {
-          "status": "pending",
-          "evidence": []
+          "status": "accepted",
+          "evidence": [
+            "MSG-20260617-032: Claude reviewed PRD-035 APPLY with counters C1-C4; no semantic objection after derived packaging, single calibration source, PRD-034 boundary split, and separate validator wording."
+          ]
         },
         "maintainer": {
-          "status": "pending",
-          "evidence": []
+          "status": "accepted",
+          "evidence": [
+            "Maintainer decision 2026-06-17: PRD-035 accepted; keep Turnfile evidence citeable by the Tokenese repo while keeping the repos distinct."
+          ]
         }
       },
-      "blocking_items": [
-        "Requires Claude review in the next mutual collaboration session.",
-        "Requires Maintainer acceptance before implementation."
-      ],
-      "eligible_for_docs_prds": false,
+      "blocking_items": [],
+      "eligible_for_docs_prds": true,
       "implementation": {
         "state": "evals-authored",
         "evals": "evals/prd-035.evals.mjs",
         "eval_author": "codex",
         "implementer": "claude",
         "reviewer": "codex",
-        "notes": "Codex authored RED evals on 2026-06-17 by Maintainer request for next-session scope. Evals pin fresh Tokenese observed-state recording, TKAB pair/result validation failure modes, current TKAB artifact coverage, pilot result publication package, tk-calibration-audit gating before Tier-B, public GuideCheck Level 4 caution, and registry ownership. After eval authoring, the Maintainer reported Tokenese has incremented since Codex last touched it; PRD-035 now treats v0.3.2 as a draft-time baseline only and requires a fresh observation before implementation. No Tokenese repo edits were made. Implementation remains blocked on Claude review and Maintainer acceptance."
+        "notes": "Codex authored RED evals on 2026-06-17 by Maintainer request for next-session scope. Evals pin fresh Tokenese observed-state recording, TKAB pair/result validation failure modes, current TKAB artifact coverage, pilot result publication package, tk-calibration-audit gating before Tier-B, public GuideCheck Level 4 caution, and registry ownership. After eval authoring, the Maintainer reported Tokenese has incremented since Codex last touched it; PRD-035 now treats v0.3.2 as a draft-time baseline only and requires a fresh observation before implementation. Session 19 counter reconciliation applied Claude C1-C4: result package must derive from tk-ab-run-results plus result JSON artifacts without re-keyed values; R4 references tk-calibration-audit as the single calibration source; PRD-035 owns upstream observation while PRD-034 owns public-surface claims; validate-tkab-results remains separate from validate-tokenese-pairs. No Tokenese repo edits were made. Maintainer accepted the document on 2026-06-17 with the repo-boundary note that Turnfile evidence may be cited by Tokenese without confusing the two repos; promoted to docs/prds at rev 231; implementation is now unblocked for the next A1 lane but not yet started."
       }
     },
     {
       "id": "PRD-036",
       "title": "PRD Eval Runner Contract",
-      "path": "working-session/docs/PRD-036-prd-eval-runner-contract.md",
-      "shelf": "working-session/docs",
-      "state": "draft",
+      "path": "docs/prds/PRD-036-prd-eval-runner-contract.md",
+      "shelf": "docs/prds",
+      "state": "accepted",
       "acceptance": {
         "codex": {
-          "status": "pending",
+          "status": "accepted",
           "evidence": [
-            "Codex drafted PRD-036 on 2026-06-17 after `npm run evals:prd` failed while focused PRD evals passed."
+            "Codex drafted PRD-036 on 2026-06-17 after `npm run evals:prd` failed while focused PRD evals passed.",
+            "Codex applied Claude counters C1-C2 in session 19: canonical Node wrapper, explicit separate CI step, and non-self-referential tool-harness regression coverage."
           ]
         },
         "claude": {
-          "status": "pending",
-          "evidence": []
+          "status": "accepted",
+          "evidence": [
+            "MSG-20260617-033: Claude reviewed PRD-036 APPLY with counters C1-C2; no semantic objection after canonical Node wrapper, separate CI step, and tool-harness regression placement."
+          ]
         },
         "maintainer": {
-          "status": "pending",
-          "evidence": []
+          "status": "accepted",
+          "evidence": [
+            "Maintainer decision 2026-06-17: PRD-036 accepted as ready."
+          ]
         }
       },
-      "blocking_items": [
-        "Requires Claude review in the next mutual collaboration session.",
-        "Requires Maintainer acceptance before implementation."
-      ],
-      "eligible_for_docs_prds": false,
+      "blocking_items": [],
+      "eligible_for_docs_prds": true,
       "implementation": {
         "state": "evals-authored",
         "evals": "evals/prd-036.evals.mjs",
         "eval_author": "codex",
         "implementer": "claude",
         "reviewer": "codex",
-        "notes": "Codex authored RED evals on 2026-06-17 by Maintainer request for next-session scope. Evals pin a portable aggregate PRD eval runner with dry-run/list mode, no empty-suite success, validation taxonomy docs, PRD-006 command alignment, explicit CI policy, focused PRD-032/033 eval preservation, and registry ownership. The broken package script was not repaired. Implementation remains blocked on Claude review and Maintainer acceptance."
+        "notes": "Codex authored RED evals on 2026-06-17 by Maintainer request for next-session scope. Evals pin a portable aggregate PRD eval runner with dry-run/list mode, no empty-suite success, validation taxonomy docs, PRD-006 command alignment, explicit CI policy, focused PRD-032/033 eval preservation, and registry ownership. Session 19 counter reconciliation applied Claude C1-C2: the canonical implementation is a Node wrapper, CI runs validate and evals:prd as separate steps, and run-evals harness regression coverage must dry-run or fixture-load the wrapper so validate catches runner regressions. The broken package script was not repaired. Maintainer accepted the document on 2026-06-17; promoted to docs/prds at rev 231; implementation is now unblocked for the next A1 lane but not yet started."
       }
     }
   ]

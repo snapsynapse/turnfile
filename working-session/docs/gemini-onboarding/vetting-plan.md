@@ -1,8 +1,15 @@
-# Gemini CLI Vetting Plan (PRD-015)
+# Gemini Vetting Plan (PRD-015)
 
-Status: Draft
+Status: Draft — runtime re-fit pending (see banner)
 Owner: Claude (mentoring lead) + Codex (cross-review) + Maintainer (governance gate)
 Date: 2026-02-11
+
+> Runtime update (Maintainer, 2026-06-17, session 19): candidate runtime corrected to
+> **Google Antigravity** (https://antigravity.google/), not Gemini CLI. The Gemini-CLI
+> specifics below — `GEMINI.md` `@import` loading, sandboxed-write per-action approval,
+> `.gemini/` config — are NOT confirmed for Antigravity and must be re-fit before the
+> behavioral OTs run live. Tracked as finding F3 in the 2026-06-17-01 evidence run;
+> resolved during Gemini's OT-007 self-remediation.
 
 ## Purpose
 

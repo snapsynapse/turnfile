@@ -1,7 +1,7 @@
 # PRD-036: PRD Eval Runner Contract
 
-Status: Draft
-Owner: Codex proposer; Claude review pending; Maintainer acceptance pending
+Status: Accepted; implementation pending
+Owner: Codex proposer; Claude reviewed APPLY with counters; Maintainer accepted
 Date: 2026-06-17
 Last revised: 2026-06-17
 
@@ -9,10 +9,10 @@ Last revised: 2026-06-17
 
 | Gate | Status | Evidence |
 |------|--------|----------|
-| Codex acceptance | pending | Drafted by Codex after detection-only audit found `npm run evals:prd` failure |
-| Claude acceptance | pending | Next mutual collaboration session |
-| Maintainer acceptance | pending | Next mutual collaboration session |
-| Eligible for move to `docs/prds` | no | blocked until all acceptances + zero blockers in PRD_STATUS.json |
+| Codex acceptance | accepted | Drafted by Codex after detection-only audit found `npm run evals:prd` failure; applied Claude counters C1-C2 in session 19 |
+| Claude acceptance | accepted-with-amendment | MSG-20260617-033: APPLY with counters C1-C2 |
+| Maintainer acceptance | accepted | ready |
+| Eligible for move to `docs/prds` | yes | all acceptances complete; promotion move still pending |
 
 ## Input Provenance Tags
 
@@ -51,10 +51,12 @@ This is a protocol-contract problem, not just a package-script typo. PRD-006 A1 
 
 `npm run evals:prd` must run every file matching `evals/*.evals.mjs` under the Node test runner on supported Node versions.
 
-The implementation may use:
+The canonical implementation is a portable Node wrapper script that:
 
-1. A portable Node wrapper script, or
-2. A package-script glob known to work on supported shells and CI.
+1. Reads the `evals/` directory directly.
+2. Filters files matching `*.evals.mjs`.
+3. Spawns `node --test` with the resolved file list.
+4. Does not depend on shell glob expansion or directory test discovery.
 
 The command must fail if no PRD eval files are found.
 
@@ -68,15 +70,9 @@ Documentation must distinguish:
 
 ## R3. CI policy
 
-The repo must make an explicit decision, recorded in docs, about whether CI runs PRD evals by default.
+The repo policy is that CI runs `npm run validate` and `npm run evals:prd` as separate required steps.
 
-Allowed outcomes:
-
-1. `npm run validate` includes `npm run evals:prd`.
-2. CI runs `npm run validate` and `npm run evals:prd` as separate steps.
-3. CI intentionally excludes PRD evals, but docs and release checklist state when humans/agents must run them.
-
-The decision must not be implicit.
+`npm run validate` remains the cheap repo readiness gate and must not silently fold in the full PRD eval suite. CI and release validation run the PRD eval lane explicitly so a broken aggregate PRD runner cannot stay hidden behind green readiness checks.
 
 ## R4. PRD-006 alignment
 
@@ -84,23 +80,26 @@ PRD-006 A1 documentation must match the actual runner. If `npm run evals:prd` re
 
 ## R5. Regression coverage
 
-Add a lightweight regression test that verifies the aggregate PRD eval command resolves and loads at least one known eval file in a fixture or dry-run mode.
+Add lightweight regression coverage in the normal tool regression harness (`tools/run-evals.mjs`, reached by `npm run validate`) that verifies the aggregate PRD eval wrapper resolves and loads at least one known eval file in a fixture or dry-run mode.
+
+The aggregate PRD eval suite may also verify the runner contract, but the non-self-referential harness coverage is required so `npm run validate` catches a broken `evals:prd` wrapper.
 
 ## Acceptance Criteria
 
-1. `npm run evals:prd` exits 0 and runs all current `evals/*.evals.mjs` files.
+1. `npm run evals:prd` exits 0 through the portable Node wrapper and runs all current `evals/*.evals.mjs` files.
 2. The command fails when no matching eval files exist in a fixture.
 3. README or `docs/VALIDATION.md` explains the distinction between repo readiness evals and PRD implementation evals.
 4. PRD-006 references the actual canonical command.
-5. CI policy for PRD evals is explicit.
+5. CI policy for PRD evals is explicit: CI runs `npm run validate` and `npm run evals:prd` as separate steps.
 6. Focused commands for PRD-032 and PRD-033 still pass.
+7. `tools/run-evals.mjs` includes a regression that dry-runs or fixture-loads the PRD eval wrapper, so repo readiness catches wrapper regressions without executing the full PRD suite locally.
 
 ## Risks
 
 1. Running all PRD evals may be slower than quick validation.
    Mitigation: R3 allows a separate CI step or documented release gate.
 2. Shell glob behavior may vary.
-   Mitigation: prefer a Node wrapper if portability is uncertain.
+   Mitigation: use a Node wrapper as the canonical runner.
 3. Some historical PRD evals may assume live workspace state.
    Mitigation: failures should become evidence for fixture isolation or docs that define focused-only evals.
 
@@ -110,6 +109,7 @@ Add a lightweight regression test that verifies the aggregate PRD eval command r
 2. `package.json` scripts.
 3. `docs/VALIDATION.md`.
 4. GitHub Actions validate workflow.
+5. `tools/run-evals.mjs` regression harness.
 
 ## Interaction with existing protocol
 

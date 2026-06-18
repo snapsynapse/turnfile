@@ -4,9 +4,7 @@ Active iteration documents for the current local session workspace.
 
 ## Draft PRDs
 
-1. `PRD-034-public-and-agent-surface-snapshot-reconciliation-contract.md`
-2. `PRD-035-tokenese-integration-and-upstream-result-sync-contract.md`
-3. `PRD-036-prd-eval-runner-contract.md`
+None.
 
 ## Accepted / Not Yet Promoted PRDs
 
@@ -43,6 +41,9 @@ None.
 27. `PRD-031-concurrent-multi-agent-coordination-contract.md`
 28. `PRD-032-session-orientation-tool-contract.md`
 29. `PRD-033-skill-ownership-integrity-guard.md`
+30. `PRD-034-public-and-agent-surface-snapshot-reconciliation-contract.md`
+31. `PRD-035-tokenese-integration-and-upstream-result-sync-contract.md`
+32. `PRD-036-prd-eval-runner-contract.md`
 
 ## Promotion Gate Policy (Required)
 

@@ -1,6 +1,6 @@
-# Boot File - Codex (v9)
+# Boot File - Codex (v8)
 
-Read this first on Codex session start. It is the Codex handoff from session 19 closeout.
+Read this first on Codex session start. It is the Codex handoff from session 18 closeout.
 
 ## Project
 
@@ -37,16 +37,16 @@ node tools/session-orient.mjs --agent codex --emit json
 4. Run an out-of-band drift check before relying on stale session state. If the boot read finds an unrecorded governance state change, record a reconciliation note or raise a `decision-required` escalation before mutating shared files.
 5. Confirm ownership guard state with `node tools/validate-ownership-guard.mjs --format json`; expected shared hook path is `tools/hooks`.
 
-## Session 19 Close State
+## Session 18 Close State
 
-Session 19 closed from the Codex side on 2026-06-17 on `main`.
+Session 18 closed from the Codex side on 2026-06-17 on `main`.
 
-- Turnfile revision after Maintainer acceptance sync: `229`.
-- Codex status: `idle`; Claude status: `active` / holding for Maintainer close direction on `s19-gemini-onboarding`.
+- Turnfile revision at Codex closeout prep: `217`.
+- Codex status: `idle`; Claude status: `idle`.
 - Mailbox state at closeout prep: Codex unread `0`; Claude unread `0`; Maintainer unread `0`.
 - Locks at close: none.
 - Heartbeat state: no Codex heartbeat carried forward.
-- Boot rollover: v8 archived to `docs/archive/boot-codex/boot-codex_v8.md`; active boot is v9.
+- Boot rollover: v7 archived to `docs/archive/boot-codex/boot-codex_v7.md`; active boot is v8.
 
 Immediate rule: re-read live files before asserting shared state. Claude, Codex, and the Maintainer may have changed coordination files between sessions.
 
@@ -63,25 +63,24 @@ Immediate rule: re-read live files before asserting shared state. Claude, Codex,
 9. Conflict rebuttal depth is configurable through `coordination.conflict.rebuttal_rounds`; finite exhaustion routes to Maintainer adjudication, and unbounded convergence uses fresh `NO-NEW-OBJECTION` markers.
 10. PRD-018 carries the selective-unlock gradient: Band A is `unlockable` by default, Bands B/C are `gated`; `unlockable` is only eligibility until explicit Maintainer unlock.
 
-## Completed In Session 19
+## Completed In Session 18
 
-1. Codex converged the session-19 handshake, signed the session-19 row, and actioned MSG-20260617-035.
-2. Codex applied Claude's PRD-036 counters C1-C2 into the draft, eval contract, and PRD_STATUS: Node wrapper canonical, CI runs `validate` and `evals:prd` separately, and `tools/run-evals.mjs` must carry non-self-referential wrapper regression coverage.
-3. Codex cross-reviewed Gemini/Antigravity onboarding evidence in MSG-20260617-036. Codex applied F1/F2/F3 severities, agreed to defer provisional transition until live Antigravity validation, and routed detailed Antigravity refit to Gemini OT-007 once live.
-4. Codex applied Claude's PRD-035 counters C1-C4 into the draft, eval contract, and PRD_STATUS: derived result package, single calibration source, PRD-034 public-claim boundary, and separate TKAB JSON validator.
-5. Codex applied Claude's PRD-034 counters C1-C4 into the draft, eval contract, and PRD_STATUS: PRD_STATUS-only promoted-list source, machine-readable freshness markers, generated-surface build discipline, and PRD-035 Tokenese/GuideCheck boundary.
-6. Claude completed the session-19 evaluator-prep and live-mechanism portion for Gemini/Antigravity. Rev 230 live findings: `GEMINI.md` auto-loads as a rule, `@import` is inert, `.agents/skills/` is the skill discovery path, and the live model observed was Gemini 3.5 Flash (High).
-7. Codex promoted PRD-034, PRD-035, and PRD-036 to `docs/prds` at rev 231 after Maintainer acceptance and notified Claude via MSG-20260617-037 for promotion-specific agreement.
+1. Codex authored RED eval suites for PRD-034, PRD-035, and PRD-036, with PRD_STATUS registering Codex as eval author, Claude as expected implementer, and Codex as reviewer.
+2. Claude reviewed PRD-034, PRD-035, and PRD-036 as APPLY-with-counters. Codex has acknowledged the reviews, but full counter reconciliation remains next-session work unless the Maintainer redirects.
+3. Claude observed the Tokenese increment read-only: package moved from the Codex draft-time baseline v0.3.2 to v0.3.7; grammar remained v0.3 and TKAB schema remained `tkab-check-1.1`.
+4. Claude completed `working-session/docs/tk-calibration-audit.md`; Codex actioned MSG-20260617-034 and confirmed the verdict. `ev:obs` is conditional only with verifiable backing; `^N` remains untrusted; `plain` abstention passed.
+5. Codex proposed the next-session scope to Claude: Gemini provisional onboarding led by Claude, bounded Tier-B Tokenese only if the Maintainer authorizes it, and PRD-036 then PRD-035 then PRD-034 as the likely implementation order.
+6. The stale `tk-ab-run` task row was reconciled to done because the Tier-A result artifacts and calibration dependency were already complete.
 
 ## Carry Forward
 
 1. At next boot, confirm mailbox state, run `tools/session-orient.mjs`, run ownership/closeout validators, and sign or update the next-session handshake before writes.
-2. PRD-034, PRD-035, and PRD-036 are Maintainer-accepted after Codex/Claude counter reconciliation and promoted to `docs/prds`. Implementation lanes are open but not started.
-3. Likely implementation order remains PRD-036 first if the aggregate PRD eval runner blocks broad validation, then PRD-035, then PRD-034.
-4. Antigravity/Gemini onboarding remains execution work: Gemini self-remediates in OT-007 by porting the bundle to `.agents/skills/turnfile-protocol-gemini/`, reducing `GEMINI.md` to a thin pointer rule, then running live-load and behavioral OT-002/OT-004 from an `antigravity/` evidence path. Preserve `gemini-cli/2026-06-17-01/` as historical evaluator-prep evidence.
-5. Bounded Tier-B Tokenese operational/handoff twins are authorized by Maintainer, but English source text remains authoritative; governance state remains English-only.
+2. Maintainer decision needed: authorize or decline a bounded Tier-B operational/handoff Tokenese twin lane. English source text must remain authoritative either way.
+3. Maintainer decision needed: accept, defer, or amend PRD-034, PRD-035, and PRD-036 after Claude counters are reconciled.
+4. Recommended PRD order if broad eval advancement is desired: PRD-036 first, then PRD-035, then PRD-034 or PRD-034 in parallel only after result-counter semantics are settled.
+5. Gemini onboarding is plausible under PRD-015 as a provisional third participant, with Claude primary and Codex cross-review. Suggested evidence order: OT-008 first, then OT-002, then OT-004. Keep Gemini in docs/review/evidence lanes until its onboarding evidence is clean.
 6. Perplexity should remain a scorer/evaluator/tool contributor for now, not an active Turnfile participant.
-7. Dirty worktree remains uncommitted and includes Claude-owned/evaluator-prep changes. Do not stage or commit peer-owned files from the Codex lane without Maintainer direction.
+7. Dirty worktree remains uncommitted. Do not stage or commit peer-owned files from the Codex lane without Maintainer direction.
 
 ## Tokenese Guardrails
 
@@ -99,8 +98,8 @@ Before substantive work, establish:
 1. Turnfile version: `SPEC.md` v0.1.0-reset and `TURNFILE.yaml` protocol version 0.1 unless the Maintainer changes the target.
 2. Tokenese version: grammar v0.3, toolchain observed at v0.3.7 during session 18, and TKAB schema `tkab-check-1.1`; tag checker/toolchain per data point.
 3. Onboarding and skill state: load the role-keyed Codex skill, verify model ledger coverage, follow `docs/BOOT_SEQUENCE.md`, self-validate with mailbox/Turnfile/PRD checks, and mutually confirm Claude/Codex context before write work.
-4. Session completion criteria and scope: pick one bounded primary lane before implementation. Current recommendation is one accepted PRD implementation lane or live Antigravity remediation, not both unless the Maintainer explicitly broadens scope.
-5. Outstanding issues/questions: Claude ack/counter on MSG-20260617-037, Gemini OT-007 self-remediation, PRD-034/035/036 implementation ordering, dirty-worktree commit strategy, and any Claude closeout additions after this file was written.
+4. Session completion criteria and scope: pick one bounded primary lane before implementation. Current recommendation is Gemini provisional onboarding plus PRD-036/035/034 advancement, with Tokenese adoption limited to the prudent Tier-B decision.
+5. Outstanding issues/questions: PRD-034/035/036 counters, Tier-B Tokenese authorization, Gemini onboarding evidence, dirty-worktree commit strategy, and any Claude closeout additions after this file was written.
 
 ## Validation Commands
 
@@ -125,4 +124,4 @@ node --test evals/prd-034.evals.mjs evals/prd-035.evals.mjs evals/prd-036.evals.
 
 ## Closeout Lesson
 
-Counter reconciliation is not implementation. PRD-034/035/036 are now aligned between Codex and Claude, but the validators, public-surface repairs, TKAB package, and eval-runner code stay blocked until Maintainer acceptance.
+The calibration audit did not make self-report authoritative. It only bounded where Tokenese can expand safely: source-paired operational and handoff twins, with English source text winning every conflict.

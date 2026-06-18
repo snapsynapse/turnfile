@@ -1,7 +1,7 @@
 # PRD-035: Tokenese Integration and Upstream Result Sync Contract
 
-Status: Draft
-Owner: Codex proposer; Claude review pending; Maintainer acceptance pending
+Status: Accepted; implementation pending
+Owner: Codex proposer; Claude reviewed APPLY with counters; Maintainer acceptance confirmed
 Date: 2026-06-17
 Last revised: 2026-06-17
 
@@ -9,10 +9,10 @@ Last revised: 2026-06-17
 
 | Gate | Status | Evidence |
 |------|--------|----------|
-| Codex acceptance | pending | Drafted by Codex after Maintainer requested Turnfile audit and comparison to newest Tokenese |
-| Claude acceptance | pending | Next mutual collaboration session |
-| Maintainer acceptance | pending | Next mutual collaboration session |
-| Eligible for move to `docs/prds` | no | blocked until all acceptances + zero blockers in PRD_STATUS.json |
+| Codex acceptance | accepted | Drafted by Codex after Maintainer requested Turnfile audit and comparison to newest Tokenese; applied Claude counters C1-C4 in session 19 |
+| Claude acceptance | accepted | MSG-20260617-032: APPLY with counters C1-C4; counters applied by Codex |
+| Maintainer acceptance | accepted | keep this repo as evidence for the Tokenese repo (which it can cite) but do not confuse the two |
+| Eligible for move to `docs/prds` | yes | all acceptances complete; promotion move still pending |
 
 ## Input Provenance Tags
 
@@ -77,6 +77,8 @@ The artifact is observational and non-authoritative. Tokenese repo docs remain t
 
 Add a Turnfile-side validator, tentatively `tools/validate-tkab-results.mjs`, for `working-session/tokenese-pairs/*.pair.json` and `*.result.json`.
 
+This is a new, separate validator for TKAB JSON artifacts. It does not extend, replace, or change `tools/validate-tokenese-pairs.mjs`, which remains the PRD-028 validator for `*.tk.md` English/Tokenese twin artifacts. The two validators cover different artifact classes and must not overlap silently.
+
 Minimum checks:
 
 1. Every pair JSON has a matching result JSON when result evidence is claimed.
@@ -90,7 +92,11 @@ Minimum checks:
 
 ## R3. Result publication package
 
-Before any broader Tokenese adoption decision, Turnfile must produce a result package for Tokenese upstream review:
+Before any broader Tokenese adoption decision, Turnfile must produce a result package for Tokenese upstream review.
+
+The package must be derived from `working-session/docs/tk-ab-run-results.md` and the active `working-session/tokenese-pairs/*.result.json` artifacts. A generator may add structure and summary prose, but it must read the existing artifacts and must not re-key token counts, ratios, outcome values, or version tags by hand.
+
+The package includes:
 
 1. English summary of W1/L1/W2/W3/W4/W5 and L2/L3 outcomes.
 2. Version tags per data point: grammar version, checker version, schema version, tokenizer set.
@@ -101,14 +107,14 @@ Before any broader Tokenese adoption decision, Turnfile must produce a result pa
 
 ## R4. Calibration gate
 
-Turnfile must complete `tk-calibration-audit` before any decision weights `^N` or `ev:` from a clone.
+Turnfile must reference `working-session/docs/tk-calibration-audit.md` as the single calibration authority before any decision weights `^N` or `ev:` from a clone.
 
-The calibration audit must distinguish:
+PRD-035 owns only the packaging and adoption-gate use of that audit result. It must not redefine the audit criteria in parallel. The current authority says:
 
-1. Harness-observed claims (`ev:obs`) from inferred rankings.
-2. Correct abstention via `plain`.
-3. Whether frameset diagnostics predict real misparse or retry risk.
-4. Whether confidence ranks correlate with task success.
+1. `ev:obs` is conditional only when backed by in-context, independently verifiable observation.
+2. `^N` remains untrusted and must not be weighted in Turnfile decisions.
+3. `plain` abstention passed.
+4. The audit does not make any self-reported channel standalone authority.
 
 ## R5. Adoption boundary
 
@@ -129,15 +135,22 @@ When Tokenese upstream docs conflict, Turnfile must:
 3. Route proposed upstream fixes through Tokenese's repo process.
 4. Not edit Tokenese files from the Turnfile repo.
 
+Ownership split with PRD-034:
+
+1. PRD-035 owns recording the current upstream observation and any Tokenese documentation conflict, including GuideCheck status conflicts, in the observation artifact.
+2. PRD-034 owns what Turnfile public and agent-facing surfaces may assert from that observation.
+3. PRD-035 produces the observed fact; PRD-034 enforces the public-surface claim.
+
 ## Acceptance Criteria
 
 1. `working-session/docs/tokenese-version-observation.md` exists and records the currently observed Tokenese version, grammar version, TKAB schema, frameset status, git revision, and whether it supersedes the draft-time v0.3.2 observation.
 2. A TKAB validator checks active pair/result JSON artifacts and fails a fixture with mismatched pair/result IDs.
 3. The validator fails a fixture that lacks `frameset_validation` while claiming v0.3.2 scoring.
 4. The validator fails a fixture where result `source_text` or `clone_text` differs from the pair.
-5. A result publication package summarizes the session-17 Turnfile pilot without claiming it satisfies Tokenese N2.
+5. A derived result publication package summarizes the session-17 Turnfile pilot without claiming it satisfies Tokenese N2 and without re-keying numbers from source artifacts.
 6. `tk-calibration-audit` is completed before any Tier-B adoption recommendation.
 7. Public Turnfile surfaces do not claim Tokenese GuideCheck Level 4 unless the upstream conflict is resolved and independently verified.
+8. `validate-tkab-results.mjs` and `validate-tokenese-pairs.mjs` remain separate validators for separate artifact classes.
 
 ## Risks
 
@@ -164,6 +177,7 @@ When Tokenese upstream docs conflict, Turnfile must:
 | `working-session/tokenese-pairs/` | TKAB JSON artifacts become validator-covered |
 | `docs/prds/PRD-027-...` | Adoption gate clarified against newest Tokenese state |
 | `docs/prds/PRD-028-...` | Existing `*.tk.md` twin validator remains separate from TKAB result validation |
+| `docs/prds/PRD-034-public-and-agent-surface-snapshot-reconciliation-contract.md` | Owns public and agent-facing claims derived from the Tokenese observation |
 | Public surfaces | Must avoid unverified Tokenese Level 4 or broad-adoption claims |
 
 ## Milestones
