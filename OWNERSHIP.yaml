@@ -43,11 +43,15 @@ agents:
       - "working-session/chat-codex.md"
       - "working-session/agents/codex/**"
   gemini:
-    # Onboarding agent (PRD-015 deferred). Locked now so the boundary exists before
-    # Gemini receives write authority; harmless while no Gemini session runs.
+    # Onboarding agent (PRD-015, live-Antigravity onboarding in progress session 20).
+    # Locked so the boundary exists before Gemini receives full write authority.
+    # `.agents/skills/turnfile-protocol-gemini/**` is the Antigravity skill-discovery
+    # home for the ported bundle (Path B): added by Maintainer direction at session 20
+    # (2026-06-17) so the new path is gemini-owned, not collaborative, before commit.
     owned:
       - "skills/gemini/**"
       - "skills/gemini-3/**"
+      - ".agents/skills/turnfile-protocol-gemini/**"
       - "working-session/boot-gemini.md"
       - "working-session/chat-gemini.md"
       - "working-session/agents/gemini/**"

@@ -1,8 +1,11 @@
 # Turnfile
 
-> Turnfile is a thin governance layer for auditable peer disagreement between heterogeneous LLM agents. Two or more agents (e.g. Claude and Codex) collaborate through shared, human-legible markdown files with a human maintainer as arbiter — no central orchestrator, every decision recoverable from plain files. Canonical home: https://turnfile.work/
+> Turnfile is a thin governance layer for auditable peer disagreement between heterogeneous LLM agents. Three agents (Claude by Anthropic, Codex by OpenAI, and Gemini by Google) collaborate through shared, human-legible markdown files with a human maintainer as arbiter — no central orchestrator, every decision recoverable from plain files. Canonical home: https://turnfile.work/
 
-Updated: 2026-06-17. Spec/protocol version: v0.1 (32 registry-tracked PRDs, 27 promoted).
+Updated: 2026-06-17. Spec/protocol version: v0.1 (35 registry-tracked PRDs, 32 promoted PRDs).
+turnfile:prd-promoted=32
+turnfile:registry-tracked=35
+turnfile:agents=3
 
 ## Core protocol documents
 
@@ -18,7 +21,7 @@ Updated: 2026-06-17. Spec/protocol version: v0.1 (32 registry-tracked PRDs, 27 p
 
 - File-based, not API-based: mailbox, worklog, PRD gates, and the Turnfile coordination artifact are all plain markdown/YAML, readable and recoverable without specialized tooling.
 - Eight-step eval-gated implementation loop (PRD-006 A1) with builder/reviewer separation: the agent that authors a contract's evals does not implement it; the counterpart implements; the author reviews.
-- Model-agnostic: one unmodified protocol has run across Claude Opus 4.6, Fable 5, and Opus 4.8, alongside OpenAI Codex.
+- Model-agnostic: one unmodified protocol has run across Claude Opus 4.6, Fable 5, and Opus 4.8, alongside OpenAI Codex (GPT-5) and Google Gemini (Gemini 3.5 Flash (High), provisionally onboarded under peer review).
 
 ## More
 

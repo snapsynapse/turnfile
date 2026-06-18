@@ -38,7 +38,33 @@ Acceptance criteria:
 - The CLI is optional.
 - Hand-edited files remain valid protocol artifacts.
 - The validation suite covers the CLI-generated artifacts.
-### 4. Platform integration notes
+### 4. Machine-speed Tokenese coordination lane
+Status: urgent planned.
+Target: stretch by 2026-06-18; latest by 2026-06-19.
+Goal:
+- Make Turnfile useful for fast, multi-model solution construction, including iterating the next version of Tokenese itself.
+- Use Tokenese at the CLI level across at least three model surfaces.
+- Replicate all protocol-relevant Tokenese traffic into English mailbox, worklog, and documentation artifacts for audit.
+- Preserve maintainer ownership while removing routine maintainer moderation from normal agent-to-agent loops.
+Work:
+- Finish PRD-036 first so aggregate PRD evals run reliably and broad validation is not blocked.
+- Reconcile PRD-031 registry and implementation state, then make per-agent shards and derived aggregate views the default coordination write path for fast loops.
+- Implement PRD-035 so Tokenese observed state, TKAB result artifacts, calibration references, and result packages are generated and validated from source artifacts.
+- Complete Antigravity/Gemini OT-007 self-remediation, then run behavioral OT-002 and OT-004 so Gemini becomes the third live Turnfile participant.
+- Define and validate a Tokenese CLI twin lane: Tokenese is allowed in fast operational/handoff traffic, English is generated or projected into audit artifacts, and validators block source/clone drift.
+- Add a maintainer-owned automation policy that lets agents proceed on routine bounded work and escalates only for policy changes, unresolved counters, validator failures, ownership conflicts, or scope expansion.
+Acceptance criteria:
+- Claude, Codex, and Gemini/Antigravity each complete a file-backed Turnfile handshake with model-ledger evidence.
+- At least one bounded Tokenese CLI exchange occurs across all three model surfaces with paired English projections.
+- The English projection is present in mailbox or worklog artifacts and validates without manual re-keying.
+- PRD-036 and PRD-035 evals pass in aggregate validation.
+- PRD-031-derived coordination avoids hand-edited aggregate collision for the fast lane.
+- Maintainer intervention is needed only for explicit escalation cases, not ordinary message routing, task claim, handoff, or review acknowledgment.
+Non-goals:
+- Do not make Turnfile an agent runtime, scheduler, or hidden policy engine.
+- Do not let Tokenese carry authoritative lifecycle status, lock claims, acceptance, normative PRD text, exact diffs, or decisions without an English source.
+- Do not broaden beyond bounded CLI and operational/handoff traffic until validators prove source/clone sync and the maintainer explicitly authorizes the next band.
+### 5. Platform integration notes
 Status: planned.
 Work:
 - Add non-normative integration notes for Codex, Claude Code, OpenAI Agents SDK, Google ADK, Microsoft Agent Framework, LangGraph, CrewAI, MCP, A2A, and GitHub pull requests.
@@ -47,7 +73,7 @@ Work:
 Acceptance criteria:
 - Each note names the platform as an execution substrate, not a replacement for Turnfile's governance role.
 - Integration notes are examples, not conformance requirements.
-### 5. PRD shelf cleanup
+### 6. PRD shelf cleanup
 Status: planned.
 Work:
 - Review existing PRDs against the narrowed intent.
@@ -74,6 +100,24 @@ Work:
 - Preserve dissent and unresolved objections rather than flattening into a single summary.
 Decision trigger:
 - Build when sessions produce enough open records that maintainer attention becomes the bottleneck.
+### Tokenese-first coordination
+Eventual goal, not urgent.
+Goal:
+- Move beyond Tokenese twins of English-first artifacts toward Tokenese-first operational exchanges.
+- Generate English audit projections from Tokenese source traffic into mailbox, worklog, and documentation artifacts.
+- Keep the generated English projection mandatory for audit, review, search, and maintainer governance.
+Work:
+- Define which Tokenese constructs are allowed to be source traffic and which remain English-only.
+- Add deterministic Tokenese-to-English projection tooling with source IDs, hashes, and drift checks.
+- Require every generated English projection to link back to its Tokenese source and validation result.
+- Preserve English authority for lifecycle state, lock claims, acceptance, normative PRD text, exact diffs, and decisions until a future Maintainer decision explicitly changes that boundary.
+- Add review workflows for projection quality, including human spot checks and model-independent validator checks.
+Acceptance criteria:
+- A bounded operational/handoff exchange can start in Tokenese, generate English mailbox or worklog projections, and pass source/projection drift validation.
+- Maintainer can audit the English projection without needing to read Tokenese.
+- Agents can reconstruct the Tokenese source, generated English projection, and validation evidence from stable IDs.
+Decision trigger:
+- Start only after the Tokenese CLI twin lane is validated across at least three model surfaces and PRD-035-style result/projection validators exist.
 ### Governance profile levels
 Possible, not committed.
 Candidate levels:

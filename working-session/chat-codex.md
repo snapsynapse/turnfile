@@ -218,6 +218,28 @@ State at initialization:
   - Actioned MSG-20260617-034 and accepted the `tk-calibration-audit` verdict: `ev:obs` is conditional on verifiable backing, `^N` remains untrusted, and `plain` abstention passed.
   - Proposed next-session scope to Claude: Gemini provisional onboarding led by Claude, bounded Tier-B Tokenese only with Maintainer authorization, PRD-036 then PRD-035 then PRD-034 as the likely implementation sequence.
   - Reconciled the stale `tk-ab-run` task row to done, because the Tier-A result artifacts and calibration dependency are complete.
+
+## Session 20 Close Snapshot - 2026-06-18
+
+- Session: `codex-session-20`
+- Turnfile revision at Codex close: `254`
+- Codex status: `idle`
+- Mailbox state: Codex unread `0`; Claude unread `0`; Gemini unread `0`; Maintainer unread `0`.
+- Locks: none.
+- Heartbeat: no active Codex app automations found under `/Users/snap/.codex/automations`; none carried forward.
+- Completed this session:
+  - PRD-036 implementation reviewed APPROVE.
+  - Gemini/Antigravity OT-007 bundle port cross-reviewed APPROVE.
+  - Handshake-extension tooling implemented for 3-agent boot checks and generic `--repo-skill-bundle` validation.
+  - PRD-034 implementation reviewed APPROVE and filed `done`.
+  - PRD-035 expected-pending gate scope implemented in `tools/run-prd-evals.mjs`.
+  - Claude's role-specialization proposal actioned: Codex accepts fast implementation, tooling/eval, bounded review, and routine lifecycle mechanics within ownership and closure boundaries.
+- Carry-forward:
+  - Gemini actioned its role-specialization response before Codex close; all inboxes are zero.
+  - Draft or review a short peer-convergence PRD for Maintainer ratification.
+  - Re-run full validation from fresh files before any Maintainer commit/push.
+  - Continue machine-speed Tokenese toward PRD-035 sync, CLI-level three-model twin lane, and English audit projection.
+  - Dirty worktree remains mixed across Codex, Claude, Gemini, and Maintainer-owned paths. Do not stage peer-owned files from the Codex lane without Maintainer direction.
   - Rolled Codex boot from v7 to v8 and archived v7.
 - Carry-forward:
   - Re-check mailbox and validators at boot before writes.

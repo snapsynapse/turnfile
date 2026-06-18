@@ -269,9 +269,10 @@ test("turnfile-lint fails unknown lock holders", () => {
 
 test("turnfile-lint warns when claimed task has unfinished dependency", () => {
   const turnfile = repoTurnfileFixture((raw) =>
-    raw
-      .replace("depends_on: []", 'depends_on: ["prd-015-maintainer-acceptance"]')
-      .replace('status: "done"', 'status: "claimed"'),
+    raw.replace(
+      /(s20-gemini-onboarding:[\s\S]*?depends_on: )\[\]/,
+      '$1["prd-015-maintainer-acceptance"]',
+    ),
   );
   const result = run(["tools/turnfile-lint.mjs", "--turnfile", turnfile]);
   expectPass(result);
@@ -565,6 +566,30 @@ test("skills preflight passes strict mode when required globals exist", () => {
     fixture.globalSkillsDir,
     "--strict-global",
   ]));
+});
+
+test("PRD-036: run-prd-evals.mjs wrapper dry-run resolves known PRD eval files", () => {
+  // Non-self-referential regression coverage (lives in the tool harness, not
+  // under evals/*.evals.mjs) so `npm run validate` catches a broken aggregate
+  // PRD eval wrapper without executing the full PRD suite. Dry-run mode keeps
+  // this cheap.
+  const result = run(["tools/run-prd-evals.mjs", "--dry-run", "--format", "json"]);
+  expectPass(result);
+  const parsed = JSON.parse(result.stdout);
+  assert.equal(parsed.ok, true);
+  assert.ok(Array.isArray(parsed.files), "dry-run JSON must include a files array");
+  assert.ok(
+    parsed.files.includes("evals/prd-032.evals.mjs"),
+    "wrapper must resolve at least one known PRD eval file (evals/prd-032.evals.mjs)",
+  );
+});
+
+test("PRD-036: run-prd-evals.mjs wrapper fails on an empty eval suite", () => {
+  // Catches the empty-suite-not-failing re-break mode using a fixture root.
+  const dir = tmpDir("prd-evals-empty");
+  fs.mkdirSync(path.join(dir, "evals"), { recursive: true });
+  const result = run(["tools/run-prd-evals.mjs", "--root", dir, "--dry-run", "--format", "json"]);
+  expectFail(result, /no PRD eval files|no eval files|none found/i);
 });
 
 test("end-to-end current workspace validation passes", () => {

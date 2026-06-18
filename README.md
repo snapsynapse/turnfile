@@ -7,6 +7,10 @@ Agents work as peers. Disagreement is signal, not error. Humans arbitrate, not m
 
 This is a **Structured Negotiation of Autonomous Peers (SNAP)**. It's consent-based, peer multi-LLM collaboration with human-on-the-loop governance and public auditability.
 
+<!-- turnfile:prd-promoted=32 -->
+<!-- turnfile:registry-tracked=35 -->
+<!-- turnfile:skill-claude-bundle=13 turnfile:skill-codex-bundle=9 turnfile:skill-gemini-bundle=2 -->
+
 ## Who this is for
 
 Teams building multi-agent systems where LLM agents must coordinate as peers — disagreeing, negotiating, and reaching consensus without a central orchestrator.
@@ -52,7 +56,7 @@ Want a single example? [MSG-20260208-027](examples/inception/MAILBOX.md#msg-2026
 
 ## Quick start
 
-1. **Read the baseline:** [BASELINE.md](BASELINE.md): what Turnfile is and how the project works right now
+1. **Read the baseline:** [BASELINE.md](BASELINE.md): what Turnfile is and how the project works (a point-in-time session-14 snapshot; for live current state see [PRD_STATUS.json](working-session/docs/PRD_STATUS.json) and [WORKLOG.md](working-session/WORKLOG.md))
 2. **Read the stance:** [INTENT.md](INTENT.md): where this protocol is going
 3. **See it work:** [examples/inception/WORKLOG.md](examples/inception/WORKLOG.md): real session record
 4. **Run your own:** Copy [templates/working-session/](templates/working-session/) and follow [LLM Onboarding](docs/LLM_ONBOARDING.md)
@@ -143,20 +147,24 @@ PRDs live on two shelves. Promoted, Maintainer-accepted contracts live in [docs/
 | [PRD-029](docs/prds/PRD-029-pre-write-state-derivation-contract.md) | Pre-write state derivation contract | Promoted; implementation done (session 14) |
 | [PRD-030](docs/prds/PRD-030-session-heartbeat-management-contract.md) | Session heartbeat management contract | Promoted; implementation done (session 16) |
 | [PRD-031](docs/prds/PRD-031-concurrent-multi-agent-coordination-contract.md) | Concurrent multi-agent coordination | Promoted; Phase 1 implemented (per-agent shards + derived aggregates) |
-| PRD-032 | Session orientation tool contract | Draft (working-session); both agents reviewed, Maintainer acceptance pending |
-| PRD-033 | Skill ownership integrity guard | Draft (working-session); both agents reviewed, Maintainer acceptance pending |
+| [PRD-032](docs/prds/PRD-032-session-orientation-tool-contract.md) | Session orientation tool contract | Promoted; implementation done (session 17) |
+| [PRD-033](docs/prds/PRD-033-skill-ownership-integrity-guard.md) | Skill ownership integrity guard | Promoted; implementation done (session 17) |
+| [PRD-034](docs/prds/PRD-034-public-and-agent-surface-snapshot-reconciliation-contract.md) | Public + agent-facing surface snapshot reconciliation | Promoted; implementation pending (evals authored) |
+| [PRD-035](docs/prds/PRD-035-tokenese-integration-and-upstream-result-sync-contract.md) | Tokenese integration + upstream result sync | Promoted; implementation pending (evals authored) |
+| [PRD-036](docs/prds/PRD-036-prd-eval-runner-contract.md) | PRD eval runner contract | Promoted; implementation done (session 20) |
 
 ### Skills (per-agent execution guides)
 
 Each agent maintains a self-contained skill file encoding the full protocol workflow (PRD-012). Skill files are reconciled by shared policy tests, not by sharing code.
 
-Bundles are migrating to role-keyed directories with model compatibility recorded in each MANIFEST.yaml rather than the path. The Claude and Codex bundles migrated in session 14; Gemini remains deferred with PRD-015. The protocol itself is model-agnostic: session 14 ran the Claude lane on a new model generation (Fable 5) against the unmodified v3 bundle before upgrading it.
+Bundles are role-keyed directories with model compatibility recorded in each MANIFEST.yaml rather than the path. The Claude and Codex bundles migrated in session 14; Gemini onboarded provisionally in session 19 (PRD-015 reactivated) on its own role-keyed bundle. The protocol itself is model-agnostic: session 14 ran the Claude lane on a new model generation (Fable 5) against the unmodified v3 bundle before upgrading it.
 
 | Path | Description |
 |------|-------------|
-| [skills/claude/SKILL.md](skills/claude/SKILL.md) | Claude protocol execution guide (v0.6.0, role-keyed; bundle version 9) |
-| [skills/codex/SKILL.md](skills/codex/SKILL.md) | Codex protocol execution guide (v2, role-keyed) |
-| [skills/skill-versioning/SKILL.md](skills/skill-versioning/SKILL.md) | Shared metaskill for versioning skill bundles across Codex + Claude. Current installs may expose the same bundle as `skill-provenance`. |
+| [skills/claude/SKILL.md](skills/claude/SKILL.md) | Claude protocol execution guide (v0.9.1, role-keyed; bundle version 13) |
+| [skills/codex/SKILL.md](skills/codex/SKILL.md) | Codex protocol execution guide (role-keyed; bundle version 9) |
+| .agents/skills/turnfile-protocol-gemini/SKILL.md | Gemini protocol execution guide (v0.2.0, role-keyed; bundle version 2; provisional onboarding, peer-reviewed) |
+| [skills/skill-versioning/SKILL.md](skills/skill-versioning/SKILL.md) | Shared metaskill for versioning skill bundles across agents. Current installs may expose the same bundle as `skill-provenance`. |
 | [templates/SKILL.md](templates/SKILL.md) | Skill template for onboarding new agents |
 
 ### Coordination artifacts
@@ -216,11 +224,22 @@ Package scripts:
 npm run validate             # run the full repo readiness suite
 npm run validate:skills      # strict preflight (requires global skill install)
 npm run validate:skills:ci   # repo-only checks (CI-safe)
+npm run evals:prd            # run the aggregate PRD implementation evals
 ```
+
+Turnfile evals fall into three categories: repo readiness validators (`npm run validate`), PRD implementation evals (the aggregate `npm run evals:prd` over `evals/*.evals.mjs`), and focused PRD evals run directly, for example `node --test evals/prd-032.evals.mjs`. CI runs `validate` and `evals:prd` as separate steps so the readiness gate and the PRD evals are attributed independently; PRD suites whose registry implementation state is still pending run as logged `expected-pending` suites rather than failing the gate. See [Validation](docs/VALIDATION.md) for the full taxonomy and CI policy.
 
 ## Status
 
-This protocol has been tested across 16 real collaboration sessions with two LLM agents (Claude by Anthropic, Codex by OpenAI) and a human maintainer. As of the session-16 baseline (2026-06-17): 32 registry-tracked PRDs (27 promoted), zero active open questions, and the eight-step eval-gated implementation loop (PRD-006 A1) run end-to-end across many lanes with builder/reviewer separation between the two heterogeneous agents — PRD-017/021/022/023/024/026/028/029/030 implemented, PRD-031 Phase 1 (per-agent shards + derived aggregates) and the PRD-014 closeout amendment landed, plus a live Tokenese A/B pilot scored by a deterministic checker. The Claude lane ran across three model generations (Opus 4.6, Fable 5, Opus 4.8) against one unmodified protocol. Forward development narrows Turnfile into a thin governance layer for auditable peer disagreement and maintainer-governed resolution across existing agent platforms.
+This protocol has been tested across 20 real collaboration sessions with three heterogeneous LLM agents and a human maintainer:
+
+- Claude (Anthropic), running in Claude Code.
+- Codex (OpenAI GPT-5), running in the Codex desktop app.
+- Gemini (Google, model Gemini 3.5 Flash (High)), running in the Google Antigravity IDE — newly onboarded in session 19 as a bounded, peer-reviewed provisional participant (PRD-015 reactivated).
+
+As of the current registry snapshot (2026-06-17): 35 registry-tracked PRDs, 32 promoted PRDs, zero active open questions, and the eight-step eval-gated implementation loop (PRD-006 A1) run end-to-end across many lanes with builder/reviewer separation between heterogeneous agents — PRD-017/021/022/023/024/026/028/029/030/032/033/036 implemented, PRD-031 Phase 1 (per-agent shards + derived aggregates) and the PRD-014 closeout amendment landed, plus a live Tokenese A/B pilot scored by a deterministic checker. The Claude lane ran across three model generations (Opus 4.6, Fable 5, Opus 4.8) against one unmodified protocol. Forward development narrows Turnfile into a thin governance layer for auditable peer disagreement and maintainer-governed resolution across existing agent platforms.
+
+For authoritative current state, read [PRD_STATUS.json](working-session/docs/PRD_STATUS.json) (PRD shelf and implementation status) and [WORKLOG.md](working-session/WORKLOG.md) (live session state). [BASELINE.md](BASELINE.md) is a point-in-time session-14 snapshot, not current state.
 
 ## Next
 

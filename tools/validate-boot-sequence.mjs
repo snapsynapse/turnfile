@@ -12,6 +12,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 const CONTROL_PLANE = ["TURNFILE.yaml", "MAILBOX.md", "WORKLOG.md"];
+const REGISTERED_AGENTS = ["claude", "codex", "gemini"];
 
 function parseArgs(argv) {
   const args = { root: ".", agent: null, format: "human" };
@@ -27,10 +28,9 @@ function parseArgs(argv) {
   return args;
 }
 
-function peerOf(agent) {
-  if (agent === "codex") return "claude";
-  if (agent === "claude") return "codex";
-  return null;
+function peersOf(agent) {
+  if (!REGISTERED_AGENTS.includes(agent)) return [];
+  return REGISTERED_AGENTS.filter((peer) => peer !== agent);
 }
 
 function main() {
@@ -49,8 +49,11 @@ function main() {
     findings.push({ level: "warning", kind: "own-chat", detail: `own chat file missing: working-session/${ownChat} (boot may create it)` });
   }
 
-  const peer = peerOf(args.agent);
-  if (peer) {
+  if (!REGISTERED_AGENTS.includes(args.agent)) {
+    findings.push({ level: "warning", kind: "agent-registry", detail: `unknown agent '${args.agent}' is not in the registered boot peer set` });
+  }
+
+  for (const peer of peersOf(args.agent)) {
     const peerChat = `chat-${peer}.md`;
     if (!fs.existsSync(path.join(ws, peerChat))) {
       findings.push({ level: "warning", kind: "peer-chat", detail: `peer chat file missing: working-session/${peerChat} — warning only; boot never creates peer chats` });

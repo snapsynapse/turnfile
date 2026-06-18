@@ -9,6 +9,10 @@ This is a documented command contract with optional helper scripts (OQ-051), not
 mandatory script. The optional helper `tools/validate-boot-sequence.mjs` checks the
 control-plane preconditions below.
 
+## Registered agents
+
+Three agents are registered in the PRD-033 ownership map: `claude` (Anthropic, Claude Code), `codex` (OpenAI GPT-5, Codex desktop), and `gemini` (Google, runtime Google Antigravity; live model Gemini 3.5 Flash (High)). Gemini is PRD-015 provisional (bounded scope, peer-reviewed until promoted); its skill bundle lives at `.agents/skills/turnfile-protocol-gemini/` (Antigravity skill-discovery home, Path B) rather than `skills/gemini/`, and `boot-gemini.md` follows the same read order below. `--agent <agent>` accepts any registered agent; with three agents, "peer" means every other registered agent (see Chat-file semantics).
+
 ## Phase 1 — Orientation read order (PRD-011 R3 + PRD-013 R5.1)
 
 Read in this order; reason from the files, not memory (Files First, PRD-030 R9):
@@ -51,7 +55,7 @@ Before any shared-file write, derive IDs/counts/revision from files, never memor
 ## Chat-file semantics (PRD-017 R7)
 
 - Boot creates only your OWN chat file (`chat-<agent>.md`) if absent.
-- A missing PEER chat file is a warning only; boot never creates a peer chat file.
+- Missing PEER chat files (any other registered agent's `chat-<peer>.md`) are warnings only; boot never creates a peer chat file. With three registered agents, each agent has two peers.
 
 ## Cold start
 

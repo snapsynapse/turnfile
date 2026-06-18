@@ -10,6 +10,7 @@ node tools/turnfile-lint.mjs --turnfile working-session/TURNFILE.yaml \
   --schema schemas/turnfile/turnfile-v0.schema.json   # schema + lint PASS
 node tools/validate-mailbox-invariants.mjs --mailbox working-session/MAILBOX.md  # PASS
 node tools/validate-prd-promotion.mjs                 # exit 0
+node tools/validate-public-surface-snapshot.mjs       # public-surface snapshot gate (exit 0)
 node tools/validate-closeout.mjs --turnfile working-session/TURNFILE.yaml \
   --mailbox working-session/MAILBOX.md                # clean or recorded deferral
 npm run -s validate:skills                            # PREFLIGHT PASS

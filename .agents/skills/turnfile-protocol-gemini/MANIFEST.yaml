@@ -1,0 +1,42 @@
+bundle: turnfile-protocol-gemini
+bundle_version: 3
+bundle_date: 2026-06-17
+description: >
+  Gemini's protocol execution guide for the Turnfile protocol (a SNAP protocol).
+  Encodes mailbox lifecycle, payload-first review, lock-safe shared-file updates,
+  session bootstrap/start/close, Turnfile task/lock coordination, and OQ management
+  as operational instructions for Google Antigravity runtime environment.
+
+compatibility:
+  designed_for:
+    platform: Google Antigravity
+    model: Gemini 3.5 Flash (High)
+    surface: IDE
+  tested_on: []
+  spec_version: agentskills.io/1.0
+  frontmatter_mode: minimal
+    # minimal = name + description only (max portability)
+    # Version info tracked here in manifest, not in SKILL.md frontmatter
+
+provenance:
+  superseded_path: skills/gemini-3/
+  superseded_bundle_version: 1
+
+files:
+  - path: SKILL.md
+    role: skill
+    version: 3
+    hash: sha256:ef0d82202601620e36259d5fb4cd7b190030a7399b0451cbd3f8b2b55b87894e
+    note: >
+      Gemini protocol execution guide v0.2.1. Refreshed to current baseline
+      (PRD-016..036 + PRD-014 A1) and updated environment notes for Antigravity.
+  - path: CHANGELOG.md
+    role: reference
+    version: 3
+    hash: sha256:0f3955876a59b5aa5dd41ba77cf6a9df48bd8293b15612de3ec38c8cdd6c6574
+    note: Bundle change history.
+  - path: MANIFEST.yaml
+    role: reference
+    version: 3
+    hash: null
+    note: Self-referential file; hash tracked externally when needed.

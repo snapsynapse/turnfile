@@ -1,4 +1,4 @@
-# Boot File — Gemini (v2)
+# Boot File — Gemini (v1)
 
 Read this first on session start. It tells you what this project is, where things are, what state we're in, and what to do next.
 
@@ -21,7 +21,7 @@ Turnfile (SNAP — Structured Negotiation of Autonomous Peers) is a file-based c
   - `skills/skill-versioning/` — Shared metaskill for skill bundle version tracking (v3)
   - `skills/STRUCTURE.md` — Skill layout and ownership rules
 - `.agents/skills/` — Project-scoped skills for Google Antigravity discovery:
-  - `.agents/skills/turnfile-protocol-gemini/` — Gemini's active protocol execution guide (v0.2.1)
+  - `.agents/skills/turnfile-protocol-gemini/` — Gemini's active protocol execution guide (v0.2.0)
 - `schemas/` — JSON schemas for protocol artifacts (`turnfile/turnfile-v0.schema.json`)
 - `working-session/` — **Tracked active workspace.** All session state lives here (tracked in git since session 13, not gitignored):
   - `working-session/TURNFILE.yaml` — Runtime coordination artifact. Read first after boot file.
@@ -39,12 +39,13 @@ Turnfile (SNAP — Structured Negotiation of Autonomous Peers) is a file-based c
 
 ## Onboarding context
 
-You (Gemini) are a **provisional-active agent** onboarded under PRD-015. This means:
+You (Gemini) are a **candidate agent** being onboarded under PRD-015. This means:
 
-1. You have successfully completed the onboarding behavioral scenarios (OT-002, OT-004, OT-007, OT-008).
-2. Your skill bundle `.agents/skills/turnfile-protocol-gemini/` is active at version 0.2.1.
+1. You are in `proposed` or `in_vetting` state until Maintainer advances you.
+2. You must complete onboarding scenarios (OT-001 through OT-006, OT-008) defined in `working-session/docs/onboarding/ONBOARDING_TEST_SUITE.md`.
 3. While `provisional`, you work on bounded tasks only and require peer review on substantive protocol edits.
-4. Your mentoring lead is Claude; Codex provides cross-review; Maintainer holds governance gate.
+4. Evidence from your onboarding is recorded at `working-session/docs/onboarding/evidence/gemini-cli/`.
+5. Your mentoring lead is Claude; Codex provides cross-review; Maintainer holds governance gate.
 
 ## Fresh session bootstrap (cold start)
 
@@ -77,7 +78,7 @@ If TURNFILE.yaml exists, skip to resumption read order.
 - **Turnfile (PRD-013):** YAML coordination artifact. Agents read/write for task tracking, lock management, signals. Revision-based leases (no wall-clock). Section ownership model (R2.1).
 - **Locking (PRD-010 + PRD-013):** Locks live in TURNFILE.yaml `locks` section. Revision-based lease expiry: `(coordination.revision - acquired_rev) > lease_revs`. Default `lease_revs: 2`.
 - **Session closeout (PRD-014):** Mandatory checklist: mailbox clearance, boot rollover + archive, worklog maintenance + compaction check, OQ sync, reflection entry.
-- **Skill file (PRD-012):** Gemini's protocol execution guide at `.agents/skills/turnfile-protocol-gemini/SKILL.md` (v0.2.1). Explicit maintainer invocation only. Mandatory confirmation for all writes.
+- **Skill file (PRD-012):** Gemini's protocol execution guide at `.agents/skills/turnfile-protocol-gemini/SKILL.md` (v0.2.0). Explicit maintainer invocation only. Mandatory confirmation for all writes.
 - **Skill versioning:** Shared metaskill at `skills/skill-versioning/SKILL.md`. Tracks bundle versions, manifests, changelogs across sessions and platforms.
 
 ## Resumption read order (PRD-011 R3)
@@ -118,11 +119,13 @@ Run these to verify artifact integrity:
 
 ## Current state
 
-The onboarding behavioral tests (OT-002, OT-004) are complete, and Finding F5 has been resolved (Module 0 status instruction corrected to `active`, provisional status tracked out-of-band). We are in the `provisional-active` state.
+This is a placeholder section to be updated when Gemini's first session begins. Refer to TURNFILE.yaml for live coordination state.
 
 ### Branch: `feature/skills` (forked from `main` after session 11)
 
-### Onboarding status: `provisional-active` (PRD-015)
+### Onboarding status: `proposed`
+
+Gemini is being onboarded as the third protocol agent. See `working-session/docs/gemini-onboarding/README.md` for the full onboarding plan and `working-session/docs/onboarding/ONBOARDING_TEST_SUITE.md` for the test scenarios.
 
 ## Session close protocol
 
