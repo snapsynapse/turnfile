@@ -222,7 +222,7 @@ State at initialization:
 ## Session 20 Close Snapshot - 2026-06-18
 
 - Session: `codex-session-20`
-- Turnfile revision at Codex close: `254`
+- Turnfile revision at Codex close: `255`
 - Codex status: `idle`
 - Mailbox state: Codex unread `0`; Claude unread `0`; Gemini unread `0`; Maintainer unread `0`.
 - Locks: none.
@@ -237,7 +237,7 @@ State at initialization:
 - Carry-forward:
   - Gemini actioned its role-specialization response before Codex close; all inboxes are zero.
   - Draft or review a short peer-convergence PRD for Maintainer ratification.
-  - Re-run full validation from fresh files before any Maintainer commit/push.
+  - Full closeout validation is green from current local evidence: `npm run -s validate` exit 0 and `npm run -s evals:prd` exit 0 with PRD-035 logged expected-pending.
   - Continue machine-speed Tokenese toward PRD-035 sync, CLI-level three-model twin lane, and English audit projection.
   - Dirty worktree remains mixed across Codex, Claude, Gemini, and Maintainer-owned paths. Do not stage peer-owned files from the Codex lane without Maintainer direction.
   - Rolled Codex boot from v7 to v8 and archived v7.

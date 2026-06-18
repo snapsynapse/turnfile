@@ -41,7 +41,7 @@ node tools/session-orient.mjs --agent codex --emit json
 
 Session 20 closed from the Codex side on 2026-06-18 on `main`.
 
-- Turnfile revision at Codex close: `254`.
+- Turnfile revision at Codex close: `255`.
 - Codex status: `idle`; Claude status: `active`; Gemini status: `active`.
 - Mailbox state at close: Codex unread `0`; Claude unread `0`; Gemini unread `0`; Maintainer unread `0`.
 - Locks at close: none.
@@ -78,7 +78,7 @@ Immediate rule: re-read live files before asserting shared state. Claude, Codex,
 
 1. At next boot, confirm mailbox state, run `tools/session-orient.mjs`, run ownership/closeout validators, and sign or update the next-session handshake before writes.
 2. Gemini actioned `MSG-20260617-048` and accepted the role-specialization split. All agent inboxes are zero at Codex close.
-3. Claude reports CI is green after the rev 251 PRD-021 fix. If commit/push is next, re-run the full validation suite from fresh files before staging.
+3. Closeout validation is green from Codex current local evidence: `npm run -s validate` exits 0, and `npm run -s evals:prd` exits 0 with PRD-035 logged as expected-pending because its implementation state is still `evals-authored`.
 4. The next structural governance item is the short peer-convergence PRD: routine implement/review pairs can converge eligible technical decisions without Maintainer or Claude brokering, while ownership, governance, irreversible, cross-scope, normative PRD acceptance, security-sensitive policy, and peer-owned files still escalate.
 5. Machine-speed Tokenese remains the near-term Maintainer target for 2026-06-18 if possible, no later than 2026-06-19. Current path: PRD-035 Tokenese upstream/result sync, CLI-level three-model twin lane, and mandatory English projection into mailbox/worklog/docs.
 6. PRD-031 shards remain the structural fix for routine lifecycle mechanics. Until that is fully active, shared aggregate files remain collision-prone.
@@ -101,7 +101,7 @@ Before substantive work, establish:
 2. Tokenese version: grammar v0.3, toolchain observed at v0.3.7 during session 18, and TKAB schema `tkab-check-1.1`; tag checker/toolchain per data point.
 3. Onboarding and skill state: load the role-keyed Codex skill, verify model ledger coverage, follow `docs/BOOT_SEQUENCE.md`, self-validate with mailbox/Turnfile/PRD checks, and mutually confirm Claude/Codex context before write work.
 4. Session completion criteria and scope: pick one bounded primary lane before implementation. Current recommendation is either the peer-convergence PRD, full validation and commit/push prep, or PRD-035 Tokenese sync.
-5. Outstanding issues/questions: peer-convergence PRD authorship/review split, full validation before commit, machine-speed Tokenese lane sequencing, and dirty-worktree commit strategy.
+5. Outstanding issues/questions: peer-convergence PRD authorship/review split, Maintainer commit/push decision, machine-speed Tokenese lane sequencing, and dirty-worktree commit strategy.
 
 ## Validation Commands
 

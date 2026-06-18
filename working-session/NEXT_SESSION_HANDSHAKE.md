@@ -11,7 +11,7 @@ order and before the first shared-file write.
 
 ## Session 21 addendum - Codex closeout (2026-06-18)
 
-Codex closed its side of session 20 at rev 254.
+Codex closed its side of session 20 at rev 255.
 
 - Turnfile protocol remains v0.1.
 - Codex status is idle; Claude and Gemini remain active in their own lanes unless they close separately.
@@ -20,7 +20,8 @@ Codex closed its side of session 20 at rev 254.
 - No Codex heartbeat is carried forward.
 - Codex boot rolled v9 -> v10; v9 is archived at `docs/archive/boot-codex/boot-codex_v9.md`.
 - Session-20 completed from Codex lane: PRD-036 review APPROVE, PRD-034 review APPROVE/done, PRD-035 expected-pending gate scope, 3-agent handshake tooling, Gemini OT-007 cross-review, and role-specialization apply-or-counter.
-- Next likely scope: draft/review a short peer-convergence PRD, rerun full validation before any Maintainer commit/push, or continue the machine-speed Tokenese lane through PRD-035 sync and three-model CLI twins with English audit projections.
+- Closeout validation is green from Codex current local evidence: `npm run -s validate` exit 0 and `npm run -s evals:prd` exit 0 with PRD-035 logged expected-pending.
+- Next likely scope: draft/review a short peer-convergence PRD, prepare Maintainer commit/push, or continue the machine-speed Tokenese lane through PRD-035 sync and three-model CLI twins with English audit projections.
 - Dirty worktree remains mixed ownership. Codex should not stage peer-owned paths without Maintainer direction.
 
 ## Session 20 live update — Codex (2026-06-18)

@@ -268,15 +268,37 @@ test("turnfile-lint fails unknown lock holders", () => {
 });
 
 test("turnfile-lint warns when claimed task has unfinished dependency", () => {
+  // Hermetic: inject a synthetic claimed task depending on a synthetic in_progress
+  // task, so the check does not couple to live session task state (which changes
+  // status across a session and previously broke this test at closeout).
   const turnfile = repoTurnfileFixture((raw) =>
     raw.replace(
-      /(s20-gemini-onboarding:[\s\S]*?depends_on: )\[\]/,
-      '$1["prd-015-maintainer-acceptance"]',
+      /(\n  tasks:\n)/,
+      '$1    fixture-dep-target:\n' +
+        '      description: "hermetic fixture dependency"\n' +
+        '      owner: "claude"\n' +
+        '      status: "in_progress"\n' +
+        '      priority: "P2"\n' +
+        '      depends_on: []\n' +
+        '      created_by: "claude"\n' +
+        '      created_rev: 1\n' +
+        '      claim_rev: 1\n' +
+        '      completed_rev: null\n' +
+        '    fixture-claimed-task:\n' +
+        '      description: "hermetic fixture claimed task"\n' +
+        '      owner: "claude"\n' +
+        '      status: "claimed"\n' +
+        '      priority: "P2"\n' +
+        '      depends_on: ["fixture-dep-target"]\n' +
+        '      created_by: "claude"\n' +
+        '      created_rev: 1\n' +
+        '      claim_rev: 1\n' +
+        '      completed_rev: null\n',
     ),
   );
   const result = run(["tools/turnfile-lint.mjs", "--turnfile", turnfile]);
   expectPass(result);
-  assert.match(result.output, /dependency 'prd-015-maintainer-acceptance' is 'in_progress'/);
+  assert.match(result.output, /dependency 'fixture-dep-target' is 'in_progress'/);
 });
 
 test("mailbox validator fails closed messages left active", () => {

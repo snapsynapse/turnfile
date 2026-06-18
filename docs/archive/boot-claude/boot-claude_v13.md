@@ -1,4 +1,4 @@
-# Boot File — Claude (v14)
+# Boot File — Claude (v13)
 
 Read this first on session start. It tells you what this project is, where things are, what state we're in, and what to do next.
 
@@ -66,36 +66,32 @@ Cross-agent contract: `docs/BOOT_SEQUENCE.md` (PRD-017). This file is Claude-spe
 
 Run `NEXT_SESSION_HANDSHAKE.md` (session-20 addendum) and converge/sign with Codex before substantive writes. **Out-of-band drift check (PRD-023):** reconcile any peer/Maintainer edits made outside the turn loop against the WORKLOG before trusting remembered state; unrecorded changes that altered **governance state** are **decision-required** (record/escalate before acting), while non-governance drift is a warning. **Chat-file semantics (PRD-017 R7):** create only your OWN `chat-claude.md` if absent; a missing peer chat file (`chat-codex.md` / `chat-gemini.md`) is a **warning only** — boot never creates a peer chat file.
 
-## Current state (as of session-20 close, 2026-06-17)
+## Current state (as of session-19 close, 2026-06-17)
 
-THREE agents now: Claude (Opus 4.8), Codex (5.5), Gemini (Google Antigravity / Gemini 3.5 Flash (High)) — Gemini ONBOARDED provisional-active this session (PRD-015). All three idle/closed at session-20 end. TURNFILE at rev ~256 at close; read it fresh. **Files-First is a STANDING correction from Sam: read the project's live files before trusting memory/context** (see memory `read-project-before-memory`; this boot file drifts too — verify against the repo). **Codex AND Gemini run LIVE concurrently in the same tree** — session 20 ran rev 219→256 with constant 2-3-agent concurrent edits; the Read-before-edit guard caught every collision. Re-ground every turn, don't fight the rev number, and expect peers to open/close simultaneously (that's normal, not a problem). Session 20 committed whole-tree as `TURNFILE_AGENT=maintainer` (`8bbf081`) and PUSHED to origin/main.
+Claude lane on Opus 4.8, Codex lane on Codex 5.5 — both idle/closed at session-19 end. TURNFILE at rev ~234 at close; read it fresh (Files-First). **Codex runs LIVE concurrently in the same tree** — this session saw rev 219→233 with constant concurrent edits and several mid-write collisions; the Read-before-edit guard caught every one. Re-ground almost every turn. Session 19 committed whole-tree as `TURNFILE_AGENT=maintainer` and PUSHED (Maintainer-directed at close).
 
-### FIRST ACTIONS ON RESUME (session 21)
+### FIRST ACTIONS ON RESUME (session 20)
 
-1. Boot via `docs/BOOT_SEQUENCE.md` (now registers 3 agents incl gemini); run `NEXT_SESSION_HANDSHAKE.md` (session-21 addendum) and converge with peers before any write. Gemini has a sign-off row now.
-2. Report guard/commit posture FIRST: guard LIVE (`core.hooksPath=tools/hooks`, identity from `.turnfile-agent`). `node tools/validate-ownership-guard.mjs`; `node tools/session-orient.mjs --agent claude --emit human`. CI was GREEN at session-20 close: `npm run -s validate` + `npm run -s evals:prd` exit 0 (prd-035 logged expected-pending; bundle gate `--repo-skill-bundle`).
-3. Carry-forward lanes (confirm with Maintainer):
-   - **Peer-convergence PRD (highest-value next).** Draft a short PRD expanding PRD-018 selective-unlock: implement/review PAIRS converge routine technical decisions between themselves (apply-or-counter, eval sign-off, lifecycle) WITHOUT routing through Claude or Maintainer; escalate to Claude for judgment, Maintainer for ownership/governance only. Codex + Gemini ACCEPTED the role-specialization proposal (MSG-20260617-047/048). Adopted split: Claude = reviewer/verifier/synthesizer/orchestrator (off routine implementation + bookkeeping); Codex + Gemini = fast implementers who own routine coordination mechanics + peer-review each other.
-   - **PRD-035 (Tokenese sync)** — accepted+promoted, NOT implemented (only expected-pending eval suite). Gateway for the Maintainer's machine-speed-Tokenese roadmap (targets 2026-06-18/19).
-   - **Gemini Tokenese on-ramp:** Gemini must pass a PRD-027 teach phase + production-competence gate BEFORE any Tier-B twin (as Codex did E1-E8). Non-negotiable.
-   - **Bounded Tier-B Tokenese twins** (AUTHORIZED, charter A1): English source-wins, governance English-only.
-   - **PRD-031 Phase 2/3** (per-agent shard logs + regenerated aggregates) — directly targets the re-grounding tax that slows Claude with 2-3 live agents.
-4. Deferred (execute-or-defer, PRD-014 R4): **mailbox compaction** (large — 50+ actioned cards archivable to Closed Summary). Minor: gemini bundle SKILL header says 0.2.0 vs CHANGELOG v0.2.1 (gemini-owned cosmetic). Pre-existing 5 cosmetic Closed-Summary `Mode`-field warnings.
+1. Boot via `docs/BOOT_SEQUENCE.md`; run `NEXT_SESSION_HANDSHAKE.md` (session-20 addendum) and converge/sign with Codex before any write.
+2. Report guard/commit posture FIRST: guard LIVE (`core.hooksPath=tools/hooks`, identity from `.turnfile-agent`). Run `node tools/validate-ownership-guard.mjs`. Use `node tools/session-orient.mjs --agent claude --emit human` for orientation.
+3. Adopted carry-forward lanes (confirm scope with Maintainer):
+   - **Gemini onboarding — live-Antigravity execution lane.** Mechanism is confirmed (Path B): port the bundle to `.agents/skills/turnfile-protocol-gemini/SKILL.md` (semantic discovery by description; `@import` is inert on Antigravity), refresh stale content (F2/F4), pin hashes (F1), reduce `GEMINI.md` to a thin pointer rule. Then reload Antigravity and run behavioral OT-002 / OT-004 (fixtures staged in `working-session/docs/onboarding/evidence/gemini-cli/2026-06-17-01/antigravity-readiness.md`). Gemini self-remediates the gemini-owned files (OT-007) under Claude guidance + Codex cross-review. Use a fresh `antigravity/` evidence path; keep `gemini-cli/2026-06-17-01/` as historical. **Maintainer must add `.agents/skills/turnfile-protocol-gemini/**` to gemini's set in `OWNERSHIP.yaml` (Maintainer-owned) before that home is committed.**
+   - **PRD-034/035/036 implementation** — accepted + promoted to `docs/prds/`, implementation eval-first and NOT started. Codex authored RED evals; implementer=Claude, reviewer=Codex per PRD_STATUS. Order: PRD-036 first if the aggregate eval runner blocks broad validation (`npm run evals:prd` is broken on Node v26 — PRD-036 target), else PRD-035 (Tokenese sync) before PRD-034 (public-surface reconciliation).
+   - **Bounded Tier-B Tokenese twins** (AUTHORIZED, charter A1): English source-wins, governance English-only, self-reports untrusted, chat dense lane OFF.
+4. Deferred (execute-or-defer, PRD-014 R4): **mailbox compaction** (~50 active cards; many session-17/18/19 notify-threads are `actioned` and archivable to Closed Summary). Pre-existing 5 cosmetic Closed-Summary `Mode`-field warnings.
 
-### Recent milestones (session 20)
+### Recent milestones (session 19)
 
-- **Gemini/Antigravity ONBOARDED provisional-active (PRD-015):** bundle ported to `.agents/skills/turnfile-protocol-gemini/` (Antigravity Path B); OT-001/007/008/002/004 all PASSED; F1-F5 resolved; Claude verified + Codex cross-review APPROVE; OWNERSHIP gemini-home added (maintainer). Gemini drove its own OT-007 port + behavioral OTs; Claude guided + verified.
-- **PRD-034 IMPLEMENTED + APPROVE:** `tools/validate-public-surface-snapshot.mjs` + surfaces reconciled to registry truth (32 promoted / 35 tracked / 3-agent roster / freshness markers): README, docs/index.html, docs/llms.txt, assistant-guide(+.well-known byte-identical).
-- **PRD-036 IMPLEMENTED + APPROVE:** `tools/run-prd-evals.mjs` portable aggregate runner; `evals:prd` repointed off the Node-v26-broken `node --test evals/`; PRD_STATUS-driven expected-pending gate-scope (unbuilt-PRD suites log loudly but don't fail the gate).
-- **Handshake extended to 3 agents:** `validate-boot-sequence` N-agent peer logic + generic `--repo-skill-bundle` validation gate (both eval-first, Codex implemented against Claude RED evals); BOOT_SEQUENCE registered-agents note; Gemini sign-off row.
-- **Role-specialization proposal** (MSG-047/048) ACCEPTED by Codex + Gemini — peer-convergence to reduce Claude + Maintainer bottlenecks. Committed `8bbf081` + pushed; all three agents closed.
+- **Gemini onboarding lead lane (Claude):** evaluator-prep evidence written (`working-session/docs/onboarding/evidence/gemini-cli/2026-06-17-01/`). OT-001 PASS (Maintainer R1 approved; runtime corrected Gemini 2.5 CLI → **Google Antigravity**). OT-008 conditional-pass + findings F1 (null manifest hashes), F2 (protocol-baseline drift), F3 (delivery-mechanism mismatch), F4 (stale `gitignored` line). Codex cross-reviewed APPLY (MSG-036 closed).
+- **LIVE Antigravity test (Maintainer brought it live):** confirmed GEMINI.md auto-loads as a rule but `@import` is INERT; `.agents/skills/` is the discovery path (indexed at workspace load); live model **Gemini 3.5 Flash (High)**; read/shell/validators run clean. **Path B confirmed**; F3 mechanism risk retired; MODEL_LEDGER row added. Antigravity boot procedure documented in `antigravity-readiness.md`.
+- **PRD-034/035/036:** Codex applied all Claude counters (C1-C4/C1-C4/C1-C2); Maintainer ACCEPTED all three; Codex promoted to `docs/prds/`; Claude ACK'd promotion (MSG-037). Implementation not started.
+- Handshake converged + both agents signed session-19 rows.
 
 ### PRD landscape (authoritative: `working-session/docs/PRD_STATUS.json`)
 
-- Implemented + done this session: **PRD-034, PRD-036** (both Codex-APPROVE, filed done).
-- Accepted+promoted but NOT implemented: **PRD-035** (Tokenese sync; only expected-pending eval suite — runs, logged, excluded from the CI gate).
-- Handshake-extension tooling (validate-boot-sequence N-agent, `--repo-skill-bundle`) landed via eval-first A1.
-- Future eval-first lanes: peer-convergence PRD; PRD-035 implementation; PRD-031 Phase 2/3.
+- Promoted/accepted through session 19: prior set + **PRD-034/035/036 (accepted + promoted, implementation eval-first/not-started)**.
+- PRD-015 reactivated for Gemini onboarding (live-Antigravity execution lane pending).
+- Future eval-first lanes: PRD-031 Phase 2/3; PRD-034/035/036 implementation.
 
 ### Operating norms (skill v0.9.1)
 

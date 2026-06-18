@@ -384,3 +384,41 @@ commit: directed this close — whole-tree as TURNFILE_AGENT=maintainer + push
 
 ### Concurrency note
 Codex live the whole session (rev 219→233). Several mid-write collisions on MAILBOX/TURNFILE; the Read-before-edit guard caught each; re-grounded and took the next rev every time. Don't fight the rev number.
+
+---
+
+## Session 20 Close Snapshot — Claude — 2026-06-17 (rev 256)
+
+```yaml
+agent: Claude
+model: Claude Opus 4.8 (Fast mode)
+date: 2026-06-17
+branch: main
+turnfile_revision: 256
+close_reason: Maintainer-directed close; session-20 milestone committed (8bbf081) + pushed; peers (Codex, Gemini) closed concurrently
+commit: 8bbf081 whole-tree as TURNFILE_AGENT=maintainer + pushed to origin/main
+```
+
+### Done this session
+- Opened session 20, converged the handshake with live Codex (it had opened on PRD-036); recorded the Maintainer redirect to two parallel lanes. THREE agents live concurrently for the first time.
+- **Gemini/Antigravity onboarded provisional-active (PRD-015):** guided + verified Gemini's OT-007 bundle port to `.agents/skills/turnfile-protocol-gemini/`; OT-001/007/008/002/004 all passed; F1-F5 resolved; Codex cross-review APPROVE; OWNERSHIP gemini-home added.
+- **PRD-034 implemented + APPROVE:** built `tools/validate-public-surface-snapshot.mjs`; reconciled README + docs/index.html + llms.txt + assistant-guide(+.well-known) to registry truth (32 promoted / 3-agent roster / freshness markers).
+- **PRD-036 implemented + APPROVE:** `tools/run-prd-evals.mjs` portable runner; Codex took the PRD_STATUS-driven expected-pending gate-scope.
+- **Handshake extended to 3 agents:** authored RED evals for validate-boot-sequence N-agent + `--repo-skill-bundle` gate (Codex implemented); BOOT_SEQUENCE registered-agents note; fixed boot-claude prd-017/021/023 content.
+- **Role-specialization proposal** (MSG-047/048): Claude = reviewer/verifier/synthesizer/orchestrator; Codex + Gemini = fast implementers + routine coordination; peer-convergence to cut Claude + Maintainer bottlenecks. Both ACCEPTED.
+- CI GREEN (validate + evals:prd exit 0); committed 8bbf081 + pushed.
+
+### Maintainer feedback internalized
+- **Files-First, hard:** read the project's LIVE files before trusting memory/context — saved as memory `read-project-before-memory`; fixed stale MEMORY.md. This is the main thing that was slowing me (re-deriving from memory then re-grounding).
+- **Concurrency is normal:** 2-3 agents opening/closing simultaneously is expected; re-ground, take the next rev, don't be thrown.
+- **Specialize + delegate:** route fast implementation to Codex/Gemini, keep Claude on review/synthesis/judgment; reduce Maintainer as decision-broker via the peer-convergence model.
+
+### Carry-forward (session 21)
+- Draft the short peer-convergence PRD (PRD-018 selective-unlock expansion).
+- PRD-035 (Tokenese sync) implementation — machine-speed-Tokenese roadmap gateway.
+- Gemini PRD-027 teach + production-competence gate before any Tier-B twin.
+- PRD-031 Phase 2/3 (per-agent shards) to kill the re-grounding tax with 3 live agents.
+- Deferred: mailbox compaction (large); gemini bundle SKILL-header 0.2.0 vs CHANGELOG 0.2.1 (gemini-owned cosmetic).
+
+### Closeout bookkeeping
+- claude idle / current_task null; s20-gemini-onboarding done; gemini status reconciled active->idle under maintainer closeout authority (Gemini closed but left status active); boot rolled v13->v14 (v13 archived); WORKLOG status updated; SIG-212 yield.
