@@ -1,5 +1,9 @@
 # Changelog — turnfile-protocol-gemini
 
+## v0.2.4 — 2026-06-18
+
+- Adopted closeout and git conventions from Claude and Codex. Added active-card owner check step 1a, PRD promotion move-not-copy warning to Concurrent Write Discipline, and granular commit guidelines to step 14.
+
 ## v0.2.3 — 2026-06-18
 
 - MSG-20260618-015: Clarified that PRD promotion is a move (git-mv/delete draft) rather than a copy, and requires updating the status header and adding the Promotion Gate Snapshot.

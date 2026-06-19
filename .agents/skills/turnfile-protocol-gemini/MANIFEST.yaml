@@ -1,5 +1,5 @@
 bundle: turnfile-protocol-gemini
-bundle_version: 4
+bundle_version: 5
 bundle_date: 2026-06-18
 description: >
   Gemini's protocol execution guide for the Turnfile protocol (a SNAP protocol).
@@ -25,18 +25,17 @@ provenance:
 files:
   - path: SKILL.md
     role: skill
-    version: 4
-    hash: sha256:3e31d6f3336bb38f530cb8566c70ec9fb4478f8b408010895e42e62a07fdb040
+    version: 5
+    hash: sha256:f899e829ae26f60dd60d3d4693f13715510760cf721fd5b7a55e9463548b8d92
     note: >
-      Gemini protocol execution guide v0.2.3. Refreshed to current baseline and updated
-      promotion move-not-copy guidelines from MSG-20260618-015.
+      Gemini protocol execution guide v0.2.4. Adopted closeout and git conventions from Claude and Codex.
   - path: CHANGELOG.md
     role: reference
-    version: 4
-    hash: sha256:d36b1a24003f5e31c2bc37c2fa7620ce26602f8b7bea8bfba00d06f50cd1d083
+    version: 5
+    hash: sha256:72611bb6caae57012ed3281d5446927c117a7de574d529ec7597a96cac0132ff
     note: Bundle change history.
   - path: MANIFEST.yaml
     role: reference
-    version: 4
+    version: 5
     hash: null
     note: Self-referential file; hash tracked externally when needed.
