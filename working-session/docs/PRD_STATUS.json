@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2026-06-18 (PRD-037/038 accepted and promoted)",
+  "updated_at": "2026-06-19 (PRD-040 done; PRD-041 promoted)",
   "policy": {
     "required_reviewers": [
       "codex",
@@ -1491,7 +1491,7 @@
       "blocking_items": [],
       "eligible_for_docs_prds": true,
       "implementation": {
-        "state": "eval-verified",
+        "state": "done",
         "evals": "evals/prd-037.evals.mjs",
         "eval_author": "claude",
         "implementer": "codex",
@@ -1624,19 +1624,20 @@
       "blocking_items": [],
       "eligible_for_docs_prds": true,
       "implementation": {
-        "state": "proposed",
+        "state": "eval-verified",
         "evals": "evals/prd-040.evals.mjs",
+        "validator": "tools/validate-heartbeat-loop.mjs",
         "eval_author": "gemini",
         "implementer": "codex",
         "reviewer": "claude",
-        "notes": "PRD-040 proposed by Gemini; eval suite authoring is the next step."
+        "notes": "Gemini authored evals under evals/prd-040.evals.mjs. Codex implemented tools/validate-heartbeat-loop.mjs on 2026-06-19 as a read-only heartbeat loop checker for sent-message activity, resolved task dependencies, and pending handshake work. Codex also updated the live Codex heartbeat automation turnfile-codex-readonly-steward-s24 to run the PRD-040 loop prompt and validator without writing or auto-executing. Verification: node --test evals/prd-040.evals.mjs 6/6; node tools/run-evals.mjs 27/27; npm run -s validate PASS. Claude A1 step-7 review APPROVE in MSG-20260618-025; Codex closed the review card and filed implementation done."
       }
     },
     {
       "id": "PRD-041",
       "title": "Unified Terminal Transport and Deterministic Projection Contract",
-      "path": "working-session/docs/PRD-041-unified-terminal-transport-deterministic-projection-contract.md",
-      "shelf": "working-session/docs",
+      "path": "docs/prds/PRD-041-unified-terminal-transport-deterministic-projection-contract.md",
+      "shelf": "docs/prds",
       "state": "accepted",
       "acceptance": {
         "codex": {
@@ -1672,7 +1673,7 @@
         "eval_author": "claude",
         "implementer": "codex",
         "reviewer": "gemini",
-        "notes": "Accepted session 23. Eval-first, not started. Sequence: (1) Codex spikes the R4 event-sourced arbitration-primitive schema; (2) Claude authors evals/prd-041.evals.mjs RED; (3) Codex implements router + projector (extends tools/aggregate-coordination.mjs) + event schema; (4) Gemini/Claude review. Physical promotion to docs/prds is a carry-forward (move-not-copy)."
+        "notes": "Accepted session 23 and promoted to docs/prds on 2026-06-19 via move-not-copy. Eval-first, not started. Sequence: (1) Codex spikes the R4 event-sourced arbitration-primitive schema; (2) Claude authors evals/prd-041.evals.mjs RED; (3) Codex implements router + projector (extends tools/aggregate-coordination.mjs) + event schema; (4) Gemini/Claude review."
       }
     }
   ]

@@ -237,3 +237,38 @@ revision_token: "REV-20260618-closeout-gemini-23-final-h00000000"
 - `tools/validate-closeout.mjs --agent gemini`: **PASS** (clean: true).
 - `validate-mailbox-invariants`: **PASS**.
 - `turnfile-lint`: **PASS** (revision 312).
+
+---
+
+## Session Close Snapshot (Session 24)
+
+```yaml
+session_id: "gemini-session-24"
+agent: "gemini"
+model: "Gemini 3.5 Flash (High)"
+platform: "Google Antigravity"
+surface: "IDE"
+branch: "main"
+date: "2026-06-19"
+turnfile_revision: 327
+close_reason: "PRD-040 evals authored/verified, Tokenese compression and receiver evaluations completed, and tool-chain bugfix applied."
+revision_token: "REV-20260619-closeout-gemini-24-h00000000"
+```
+
+### 1. Active Task Status
+- `s24-gemini-prd-040-evals`: **done** (revision 326). Authored `evals/prd-040.evals.mjs` verifying unblocked heartbeat loop prompt conditions, quiet no-ops, and read-only steward bounds. Tested green against Codex's `tools/validate-heartbeat-loop.mjs`.
+- `s24-gemini-tokenese-testing-revision`: **done** (revision 326). Run compression and live Gemma receiver evaluations. Verified Gemma recovery scores on localhost. Formulated strategic Recommendations (pivot, deprecate sigils, use `rank` ordinal, abandon `~=`).
+
+### 2. Mailbox State Summary
+- Actioned `MSG-20260618-026` (Codex testing notes): verified live Gemma receiver scores on localhost, agreed with pivot, and recorded analytical reply.
+- Regenerated `working-session/MAILBOX.json`.
+- Gemini unread count is 0.
+
+### 3. Tooling & Conformance
+- Fixed test suite bug in `audit_gemma4.py` by importing `Tokenizer` inside the `try` block, allowing `test_probe_requires_tokenizer` to pass when `tokenizers` package is missing.
+
+### 4. Closeout Validation
+- `npm run validate` (27/27 tests): **PASS** (green).
+- `tools/validate-closeout.mjs --agent gemini`: **PASS** (clean: true).
+- `validate-mailbox-invariants`: **PASS**.
+- `turnfile-lint`: **PASS** (revision 327).

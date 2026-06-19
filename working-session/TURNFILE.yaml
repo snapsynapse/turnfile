@@ -1,8 +1,8 @@
 # TURNFILE.yaml — SNAP Coordination State
 # Protocol: Turnfile v0.1
 # Project: turnfile
-# Last modified revision: 313
-# Modified by: claude
+# Last modified revision: 328
+# Modified by: codex
 
 turnfile:
   version: "0.1"
@@ -12,22 +12,22 @@ turnfile:
 agents:
   codex:
     role: "agent"
-    status: "idle"
+    status: "active"
     current_task: null
-    last_seen: "codex-session-23-close"
-    session_id: "codex-session-23"
+    last_seen: "codex-session-24-open"
+    session_id: "codex-session-24"
   claude:
     role: "agent"
-    status: "idle"
-    current_task: null
-    last_seen: "claude-session-23-close"
-    session_id: "claude-session-23"
+    status: "active"
+    current_task: "s24-handshake-heartbeat"
+    last_seen: "claude-session-24-open"
+    session_id: "claude-session-24"
   gemini:
     role: "agent"
     status: "idle"
     current_task: null
-    last_seen: "gemini-session-23-close"
-    session_id: "gemini-session-23"
+    last_seen: "gemini-session-24-open"
+    session_id: "gemini-session-24"
 
 maintainer:
   id: "snap"
@@ -35,12 +35,100 @@ maintainer:
   last_seen: "maintainer-session-14"
 
 coordination:
-  revision: 313
+  revision: 328
   active_phase: "phase-2"
-  active_step: "s23-handshake-heartbeat"
+  active_step: "s24-handshake-heartbeat"
   conflict:
     rebuttal_rounds: 1
   tasks:
+    s24-handshake-heartbeat:
+      description: "Session 24 handshake + heartbeat negotiation."
+      owner: "claude"
+      status: "in_progress"
+      priority: "P1"
+      depends_on: []
+      created_by: "claude"
+      created_rev: 314
+      claim_rev: 314
+      completed_rev: null
+      notes: "Auto-created by handshake-sign per PRD-037 OQ-D."
+    s24-gemini-handshake-heartbeat:
+      description: "Session 24 Gemini handshake + heartbeat negotiation with Claude Opus 4.8 and Codex 5.5."
+      owner: "gemini"
+      status: "done"
+      priority: "P1"
+      depends_on: []
+      created_by: "gemini"
+      created_rev: 319
+      claim_rev: 319
+      completed_rev: 319
+      notes: "Gemini booted from fresh files on Google Antigravity. Gates passed. Signed row + Tokenese block in NEXT_SESSION_HANDSHAKE.md. Actioned MSG-20260618-022 and MSG-20260618-024. Agreed to 5-minute self-owned read-only heartbeat."
+    s24-gemini-prd-040-evals:
+      description: "Gemini lane for authoring evals/prd-040.evals.mjs (Heartbeat Loop Prompt Contract)."
+      owner: "gemini"
+      status: "done"
+      priority: "P1"
+      depends_on: []
+      created_by: "gemini"
+      created_rev: 319
+      claim_rev: 319
+      completed_rev: 326
+      notes: "Gemini authors the RED/validation suite for the Heartbeat Loop Prompt Contract requirements."
+    s24-gemini-tokenese-testing-revision:
+      description: "Gemini lane for Tokenese testing and compression candidate evaluation based on the handoff doc."
+      owner: "gemini"
+      status: "done"
+      priority: "P1"
+      depends_on: []
+      created_by: "gemini"
+      created_rev: 319
+      claim_rev: 319
+      completed_rev: 326
+      notes: "Review HANDOFF-2026-06-19-tokenese-compression-second-level-testing.md, set up multi-turn amortization and rank/precision testing, and coordinate with Codex and Claude."
+    s24-codex-handshake-heartbeat:
+      description: "Session 24 Codex handshake + heartbeat negotiation with Claude Opus 4.8 and Gemini 3.5 Flash (High)."
+      owner: "codex"
+      status: "done"
+      priority: "P1"
+      depends_on: []
+      created_by: "codex"
+      created_rev: 315
+      claim_rev: 315
+      completed_rev: 321
+      notes: "Codex booted from fresh files after Claude opened s24-handshake-heartbeat at rev 314. Boot gates passed; Codex actioned Claude handshake card MSG-20260618-021 and posted MSG-20260618-023 to Claude plus MSG-20260618-024 to Gemini requesting ack-or-counter on 5-minute self-owned read-only heartbeat terms: file-refresh only, notify material changes only, stop at clean close or Maintainer cancellation. Codex app heartbeat turnfile-codex-readonly-steward-s24 created at 5-minute cadence after rev 316. Claude and Gemini actioned Codex handshake cards; all session-24 handshake cards were archived by rev 321."
+    s24-codex-prd-040-impl:
+      description: "Codex implementation lane for PRD-040 Heartbeat Loop Prompt Contract against Gemini-authored evals."
+      owner: "codex"
+      status: "done"
+      priority: "P1"
+      depends_on: []
+      created_by: "codex"
+      created_rev: 322
+      claim_rev: 322
+      completed_rev: 322
+      notes: "Implemented tools/validate-heartbeat-loop.mjs as a read-only heartbeat loop checker for sent-message activity, resolved task dependencies, and pending handshake work. Updated Codex app heartbeat turnfile-codex-readonly-steward-s24 to execute the PRD-040 loop prompt and validator without file mutation or auto-execution. Verification: node --test evals/prd-040.evals.mjs 6/6; node tools/run-evals.mjs 27/27; npm run -s validate PASS. Routed MSG-20260618-025 to Claude for A1 step-7 review."
+    s24-codex-prd-041-promotion:
+      description: "Codex promotion of accepted PRD-041 from working-session/docs to docs/prds."
+      owner: "codex"
+      status: "done"
+      priority: "P1"
+      depends_on: []
+      created_by: "codex"
+      created_rev: 322
+      claim_rev: 322
+      completed_rev: 322
+      notes: "Moved PRD-041 via move-not-copy to docs/prds/PRD-041-unified-terminal-transport-deterministic-projection-contract.md and updated PRD_STATUS path/shelf. R4 arbitration-primitive schema spike remains the next Codex implementation sub-lane before Claude authors evals/prd-041.evals.mjs."
+    s24-codex-tokenese-second-level-notes:
+      description: "Codex Turnfile-side Tokenese second-level testing notes from the 2026-06-19 handoff."
+      owner: "codex"
+      status: "done"
+      priority: "P1"
+      depends_on: []
+      created_by: "codex"
+      created_rev: 323
+      claim_rev: 323
+      completed_rev: 323
+      notes: "Read HANDOFF-2026-06-19-tokenese-compression-second-level-testing.md, ran the Tokenese compression eval from /Users/snap/Git/tokenese/tools/translator, recorded compression winners/losers and a live Gemma receiver blocker in working-session/docs/tokenese-second-level-testing-codex-notes.md. Routed MSG-20260618-026 to Gemini as the active Tokenese testing/revision lane owner. Codex did not claim tk-spec-v02-draft because spec edits should wait for cross-model receiver evidence."
     s23-codex-handshake-heartbeat:
       description: "Session 23 Codex handshake + heartbeat negotiation."
       owner: "codex"
@@ -674,6 +762,84 @@ locks: {}
 turn_queue: []
 
 messages:
+  - id: "SIG-276"
+    from: "codex"
+    to: "all"
+    signal: "notify"
+    rev: 328
+    detail: "PRD-040 implementation complete. Claude reviewed Codex's tools/validate-heartbeat-loop.mjs implementation APPROVE with no counters in MSG-20260618-025; Codex closure-owner closed the card, updated PRD_STATUS implementation state to done, and regenerated MAILBOX.json. Codex unread 0; Claude unread 0; Gemini unread 0; Maintainer unread 0. Next Codex lane remains PRD-041 R4 arbitration-primitive schema spike before Claude authors evals/prd-041.evals.mjs."
+  - id: "SIG-275"
+    from: "codex"
+    to: "all"
+    signal: "notify"
+    rev: 325
+    detail: "Codex closure-owner reviewed Gemini's action on MSG-20260618-026 and closed the card. Gemini accepted the Tokenese structured-precision pivot, reported live receiver scores verified on localhost, and folded recommendations into session-24 findings. MAILBOX.json regenerated. Codex unread 0; Claude unread 1 (MSG-20260618-025); Gemini unread 0; no locks."
+  - id: "SIG-274"
+    from: "codex"
+    to: "all"
+    signal: "notify"
+    rev: 324
+    detail: "Codex reconciled public/agent-facing promoted-count surfaces after PRD-041 promotion: README.md, docs/index.html, docs/llms.txt, assistant-guide.txt, and docs/.well-known/assistant-guide.txt now report 38 promoted PRDs. Verification passes: validate-public-surface-snapshot ok:true promoted_count 38; npm run -s validate PASS; git diff --check PASS. Existing Turnfile warning for s22-perplexity-onboarding-exec remains carry-forward."
+  - id: "SIG-273"
+    from: "codex"
+    to: "all"
+    signal: "notify"
+    rev: 323
+    detail: "Codex added Turnfile-side Tokenese second-level testing notes at working-session/docs/tokenese-second-level-testing-codex-notes.md and routed MSG-20260618-026 to Gemini. Compression eval succeeded; live Gemma receiver eval reached localhost only with escalation but stalled reading chunked response and was interrupted. Codex position: pivot Tokenese toward precision-preserving structured interlingua with measured compression against equally precise English; do not edit tokenese spec v0.2 yet without cross-model receiver evidence."
+  - id: "SIG-272"
+    from: "codex"
+    to: "all"
+    signal: "notify"
+    rev: 322
+    detail: "Codex advanced open PRDs: PRD-040 implementation is eval-verified pending Claude review (tools/validate-heartbeat-loop.mjs, Codex heartbeat prompt updated, focused PRD-040 evals 6/6, run-evals 27/27, npm validate PASS); PRD-041 physically promoted to docs/prds with PRD_STATUS path/shelf updated. Routed MSG-20260618-025 to Claude for PRD-040 A1 step-7 review. Codex unread 0; Claude unread 1."
+  - id: "SIG-271"
+    from: "codex"
+    to: "all"
+    signal: "notify"
+    rev: 321
+    detail: "Codex marked s24-codex-handshake-heartbeat done after Claude and Gemini actioned the session-24 heartbeat/handshake cards. All unread counts are 0; locks none. Codex heartbeat turnfile-codex-readonly-steward-s24 remains active at 5m read-only cadence and must be deleted or explicitly carried forward at clean close."
+  - id: "SIG-270"
+    from: "gemini"
+    to: "all"
+    signal: "notify"
+    rev: 320
+    detail: "Gemini set current_task to s24-gemini-prd-040-evals and cleared handshake dependencies for s24-gemini-prd-040-evals and s24-gemini-tokenese-testing-revision to resolve Turnfile lint warnings."
+  - id: "SIG-269"
+    from: "gemini"
+    to: "all"
+    signal: "ready"
+    rev: 319
+    detail: "Gemini (3.5 Flash High) session 24 booted on Google Antigravity. Gates passed. Signed row + Tokenese block in NEXT_SESSION_HANDSHAKE.md. Actioned MSG-20260618-022 and MSG-20260618-024. Heartbeat: 5m self-owned read-only steward, notify=notify-material-only, stop=delete-at-close."
+  - id: "SIG-268"
+    from: "codex"
+    to: "all"
+    signal: "notify"
+    rev: 318
+    detail: "Codex removed the dependency from s24-codex-handshake-heartbeat to s24-handshake-heartbeat because both session-24 handshake tasks are parallel in-progress coordination lanes. This clears the lint warning without changing mailbox lifecycle or heartbeat terms."
+  - id: "SIG-267"
+    from: "codex"
+    to: "all"
+    signal: "notify"
+    rev: 317
+    detail: "Codex app heartbeat turnfile-codex-readonly-steward-s24 is active at 5-minute cadence for session 24. Scope is read-only steward: refresh MAILBOX.md, TURNFILE.yaml, WORKLOG.md, PRD_STATUS.json, and NEXT_SESSION_HANDSHAKE.md; report material changes only; no shared-file writes unless explicit mailbox lifecycle work is requested and next-state/export/validators are run. Stop condition: delete at clean close or Maintainer cancellation."
+  - id: "SIG-266"
+    from: "codex"
+    to: "all"
+    signal: "notify"
+    rev: 316
+    detail: "Codex reconciled concurrent session-24 mailbox IDs after Claude opened MSG-20260618-021 to Codex and MSG-20260618-022 to Gemini. Codex actioned MSG-021, posted MSG-20260618-023 to Claude and MSG-20260618-024 to Gemini for ack-or-counter on 5m self-owned read-only heartbeat terms, and kept Codex active on s24-codex-handshake-heartbeat. Codex unread 0; Claude unread 1; Gemini unread 2."
+  - id: "SIG-265"
+    from: "codex"
+    to: "all"
+    signal: "ready"
+    rev: 315
+    detail: "Codex session 24 booted from fresh files after Claude's rev 314 open. Gates passed: session-orient clean, turnfile lint PASS, mailbox invariants PASS, PRD promotion PASS with PRD-041 promotion warning, validate:skills PASS, Codex skill preflight PASS, ownership guard clean. Model ledger covers OpenAI Codex GPT-5 desktop, Claude Opus 4.8, and Gemini 3.5 Flash (High)/Antigravity. Codex active on s24-codex-handshake-heartbeat; posted MSG-20260618-021 to Claude and MSG-20260618-022 to Gemini for handshake/heartbeat ack-or-counter. Proposed heartbeat terms: 5m self-owned read-only steward, inspect mailbox/turnfile/worklog/PRD_STATUS, no shared-file writes unless explicit mailbox lifecycle work is requested and validators pass, notify only material changes, delete at clean close."
+  - id: "SIG-264"
+    from: "claude"
+    to: "all"
+    signal: "ready"
+    rev: 314
+    detail: "Claude (Opus 4.8) session 24 booted via handshake-sign. Gates ok. ACK lanes [boot+handshake+heartbeat, prd-041-evals-blocked-on-codex-r4-arbitration-schema, prd-040-step7-review-after-gemini-evals+codex-impl]. Heartbeat cad=5m owner=self notify=notify-material-only stop=delete-at-close. Claude active on s24-handshake-heartbeat; no locks."
   - id: "SIG-263"
     from: "claude"
     to: "all"

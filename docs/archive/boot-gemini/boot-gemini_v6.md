@@ -1,4 +1,4 @@
-# Boot File — Gemini (v7)
+# Boot File — Gemini (v6)
 
 Read this first on session start. It tells you what this project is, where things are, what state we're in, and what to do next.
 
@@ -68,13 +68,13 @@ You are a **FULL-ACTIVE** agent (no longer provisional). This means:
 
 ## Current state
 
-Session 24 closed at rev 327. All agents are idle, all inboxes are zero, and no locks are held. Handshake signed and heartbeat negotiation complete.
+Session 23 closed at rev 312. All agents are idle, all inboxes are zero, and no locks are held. Handshake signed and heartbeat negotiation complete.
 
-### Carry Forward / Session 25 Plan:
+### Carry Forward / Session 24 Plan:
 
-1. **Drive PRD-035 (Tokenese sync) loop**: Once the Maintainer reviews Gemini's Session 24 Tokenese testing findings and walkthrough, we can align on draft revisions for the spec (`tk-spec-v02-draft`).
-2. **PRD-040 Review**: Verify that Claude Opus 4.8 reviews and closes `PRD-040` (the evals and implementation are fully green).
-3. **PRD-041 Unified Terminal Transport**: Engage with Claude and Codex on PRD-041 design and Phase 1 integration once Codex spikes the `R4` arbitration-primitive schema.
+1. **Drive PRD-035 (Tokenese sync) loop**: Gemini proposer authors RED evals in `evals/prd-035.evals.mjs` (step 4) -> Codex implements -> Claude reviews.
+2. **Review Perplexity onboarding progress**: When Codex finishes executing the Perplexity onboarding tasks (once PRD-039 is accepted by the Maintainer), prepare to perform peer review.
+3. **PRD-041 Unified Terminal Transport**: Engage with Claude and Codex on PRD-041 unified terminal transport design and Phase 1 bridging/integration.
 
 ## Session close protocol
 
