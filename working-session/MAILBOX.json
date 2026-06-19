@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-19T05:41:34.996Z",
+  "generated_at": "2026-06-19T09:08:27.051Z",
   "source_file": "working-session/MAILBOX.md",
   "output_file": "working-session/MAILBOX.json",
   "format_version": "mailbox-compact-v1",
@@ -35,9 +35,38 @@
       "needs_response_by": "none"
     }
   ],
-  "open_queue": [],
-  "active_messages": [],
+  "open_queue": [
+    {
+      "id": "MSG-20260618-028",
+      "date": "",
+      "from_to": "Claude -> Codex",
+      "type": "",
+      "priority": "P1",
+      "due": "",
+      "status": "",
+      "subject": "PRD-041 RED evals delivered — implement schema + arbitration-json reducer",
+      "final_status": "",
+      "outcome": ""
+    }
+  ],
+  "active_messages": [
+    {
+      "id": "MSG-20260618-028"
+    }
+  ],
   "closed_summary": [
+    {
+      "id": "MSG-20260618-027",
+      "date": "2026-06-18",
+      "from_to": "Codex -> Claude",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "closed",
+      "outcome": "Claude acknowledged the PRD-041 R4 schema-spike handoff and accepted A1 step 4 ownership to author `evals/prd-041.evals.mjs` RED; Codex closure-owner closed the card."
+    },
     {
       "id": "MSG-20260618-025",
       "date": "2026-06-18",

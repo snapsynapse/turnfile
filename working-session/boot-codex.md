@@ -1,6 +1,6 @@
-# Boot File - Codex (v13)
+# Boot File - Codex (v14)
 
-Read this first on Codex session start. It is the Codex handoff from session 23 closeout.
+Read this first on Codex session start. It is the Codex handoff from session 24 closeout.
 
 ## Project
 
@@ -39,66 +39,53 @@ node tools/session-orient.mjs --agent codex --emit json
 6. Run `node tools/validate-closeout.mjs --turnfile working-session/TURNFILE.yaml --mailbox working-session/MAILBOX.md --agent codex` before assuming Codex can close cleanly.
 7. If a heartbeat is negotiated, create the actual app automation before claiming it is operational, and delete it at clean close.
 
-## Protocol Essentials
+## Session 24 Close State
 
-- **Conflict loop bound (PRD-021):** `coordination.conflict.rebuttal_rounds` bounds the apply-or-counter rebuttal loop (min 1, max `unbounded`); on bound exhaustion escalate directly to Maintainer adjudication. The selective-unlock gradient is a binary `gated`/`unlockable` flag (agent self-tags, Maintainer ratifies).
-- **Out-of-band drift check (PRD-023):** before trusting remembered state, reconcile any peer/Maintainer edits made outside the turn loop against the WORKLOG; unrecorded changes that altered **governance state** are **decision-required** (record/escalate before acting), while non-governance drift is a warning.
-- **Human-legibility (PRD-024):** governance artifacts stay English-legible; any Tokenese/dense encoding pairs to a legible English source (source wins), and encoding-profile obligations never override the legible record.
-- **Chat-file semantics (PRD-017 R7):** create only your own `chat-codex.md`; a missing peer chat file is a warning only — boot never authors a peer's chat file.
+Session 24 closed from the Codex side on 2026-06-19 on `main`.
 
-## Session 23 Close State
-
-Session 23 closed from the Codex side on 2026-06-19 on `main`.
-
-- Turnfile revision at Codex close: `312`.
-- Codex status: `idle`; current task: `null`.
+- Turnfile revision at Codex close: `336`.
+- Codex status: `idle`; current task: `null`; last_seen: `codex-session-24-close`.
 - Mailbox state at close: Codex unread `0`; Claude unread `0`; Gemini unread `0`; Maintainer unread `0`.
 - Locks at close: none.
-- Heartbeat state: Codex app heartbeat `turnfile-codex-readonly-steward-s23` deleted at close; no Codex heartbeat carried forward.
-- Boot rollover: v12 archived to `docs/archive/boot-codex/boot-codex_v12.md`; active boot is v13.
+- Heartbeat state: Codex app heartbeat `turnfile-codex-readonly-steward-s24` deleted before close; no Codex heartbeat carried forward.
+- Boot rollover: v13 archived to `docs/archive/boot-codex/boot-codex_v13.md`; active boot is v14.
+- Active mailbox carry-forward: `MSG-20260618-028` remains open and acknowledged. Closure owner is Claude. Codex owns the next implementation action.
+- Closeout compaction: signal-log compaction is eligible but explicitly deferred because the worktree contains active peer-owned closeout files. Next closeout or Maintainer-directed compaction can handle it.
 
 Immediate rule: re-read live files before asserting shared state. Claude, Gemini, Codex, and the Maintainer may have changed coordination files between sessions.
 
-## Completed In Session 23
+## Completed In Session 24
 
-1. Opened session 23 with Claude and Gemini and ran a 5-minute read-only Codex heartbeat steward until close.
-2. Promoted and executed the constrained Perplexity onboarding path under PRD-039 without granting Perplexity write authority or reviewer/approval authority.
-3. Recorded Perplexity evidence under `working-session/docs/onboarding/evidence/perplexity-computer/2026-06-18-01/`.
-4. Captured Perplexity PROVISIONAL CHECKER evidence: OT-009/OT-010/OT-011 pass, OT-008 conditional-pass, and explicit no-write/no-authority boundaries.
-5. Added `tools/validate-onboarding-evidence.mjs`, registered it in PRD-039 implementation metadata, and verified `evals/onboarding-execution.evals.mjs` 14/14 plus `evals/prd-039.evals.mjs` 16/16.
-6. Processed Perplexity Tokenese checker outputs for W4 drift, calibration rules, and eight proposed fixture pairs. These remain evidence-only and non-authoritative.
-7. Actioned Claude's PRD-041 pre-A1 infrastructure request with a feasibility read: use per-agent shards plus deterministic merge, adapter-graded transport, expanded live-turn event schema, and router-grade queue/lease semantics beyond today's manual `turn_queue`/`locks`.
-8. Actioned Gemini's skills-preflight recommendation. The live boot file now includes the Codex skills preflight command; a future scoped skill-bundle update should mirror it into `skills/codex/SKILL.md` with changelog/manifest alignment.
-9. Deleted the Codex app heartbeat at close.
+1. Established session-24 handshakes with Claude Opus 4.8 and Gemini 3.5 Flash High.
+2. Created and ran the Codex app heartbeat `turnfile-codex-readonly-steward-s24` at a 5-minute read-only cadence, updated it to use the PRD-040 loop prompt validator, and deleted it before close.
+3. Implemented PRD-040 Heartbeat Loop Prompt Contract in `tools/validate-heartbeat-loop.mjs`.
+4. Verified PRD-040 with focused evals 6/6, `node tools/run-evals.mjs` 27/27, `npm run -s validate` PASS, and Claude A1 step-7 APPROVE in `MSG-20260618-025`.
+5. Promoted PRD-041 to `docs/prds` and reconciled public/agent promoted-count surfaces to 38.
+6. Completed the PRD-041 R4 arbitration-primitive schema spike in `working-session/docs/r4-arbitration-primitive-schema-spike-prd-041.md`.
+7. Routed the PRD-041 R4 spike to Claude; Claude authored `evals/prd-041.evals.mjs` as 9/9 intentionally RED and routed `MSG-20260618-028` back to Codex.
+8. Acknowledged `MSG-20260618-028` as the PRD-041 step-6 implementation handoff. Implementation was not started during closeout.
+9. Read the Tokenese second-level testing handoff, ran the compression eval, recorded Codex notes, and routed Tokenese testing/revision to Gemini.
+10. Completed `tk-spec-v02-draft` in `/Users/snap/Git/tokenese/spec.md` under the cross-repo boundary after Maintainer approval.
+11. Added `working-session/docs/HANDOFF-2026-06-19-tokenese-precision-pivot-perplexity-build.md` as a Tokenese repo build handoff for Perplexity Computer, preserving Perplexity's external checker/tool-contributor boundary.
 
 ## Carry Forward
 
-1. PRD-041 remains proposed and incomplete. Wait for Gemini's runtime/OQ#1 answer before formal A1 routing or implementation.
-2. If PRD-041 proceeds, start with schema and fixtures, deterministic projection from fixture logs, a fake-adapter router demo, then real CLI adapters behind receipt/dedup contracts.
-3. Perplexity remains PROVISIONAL CHECKER / no-write. Any writer or full-active transition requires a later explicit Maintainer decision.
-4. Claude remains closure owner for MSG-20260618-016 and PRD-039 step-7 review. Do not close that thread from Codex without Claude or Maintainer direction.
-5. `s22-perplexity-onboarding-exec` is left as carry-forward infrastructure/evidence lane, not active Codex current_task.
-6. The dirty worktree remains mixed ownership. Do not stage peer-owned `skills/claude/*`, `boot-claude.md`, or `chat-claude.md` from the Codex lane without explicit Maintainer direction.
-7. New PRDs require Gemini acceptance evidence in `PRD_STATUS.json` unless the Maintainer explicitly creates an exception.
-
-## Tokenese Guardrails
-
-1. English is authoritative for governance, lifecycle, locks, task claims, acceptance, normative PRD text, exact diffs, and public commitments.
-2. Tokenese twins are bounded to approved operational/handoff contexts with English projection.
-3. `ev:obs` requires verifiable backing in the same source context. It is not standalone authority.
-4. `^N` remains untrusted unless a later calibration decision changes that.
-5. Chat dense scratchpads remain OFF unless the Maintainer explicitly unlocks them.
-6. Language-level changes stay in `/Users/snap/Git/tokenese` under that repo's process.
+1. PRD-041 implementation is the primary Codex-ready lane: add `schemas/prd-041/arbitration-event-v0.schema.json` and implement `node tools/aggregate-coordination.mjs --emit arbitration-json --rev <N>` over per-agent `arbitration.jsonl` shards until `evals/prd-041.evals.mjs` goes green.
+2. After PRD-041 is green, route back to Claude or Gemini for A1 step-7 review. Claude remains closure owner for `MSG-20260618-028`.
+3. Optional Tokenese receiver round 2 remains open: Codex and Gemini receiver decodes could help satisfy the PRD-041/Tokenese two-family bar before any broader Tokenese adoption claim.
+4. Perplexity remains external checker/tool contributor only. No Turnfile write, reviewer, PRD approval, or Maintainer authority exists for Perplexity.
+5. The dirty worktree remains mixed ownership. Do not stage peer-owned `working-session/boot-claude.md`, `working-session/chat-claude.md`, or Claude-owned closeout artifacts from the Codex lane without explicit Maintainer direction.
+6. Re-check `/Users/snap/Git/tokenese` state before asserting Tokenese spec status; the Tokenese repo has its own dirty state and process.
 
 ## Next Session Handshake
 
 Before substantive work, establish:
 
 1. Turnfile version: `SPEC.md` v0.1.0-reset and `TURNFILE.yaml` protocol version 0.1 unless the Maintainer changes the target.
-2. Tokenese state: observe fresh Tokenese repo state before asserting current version.
+2. Tokenese state: observe fresh Tokenese repo state before asserting current version or spec status.
 3. Onboarding and skill state: load the role-keyed Codex skill, verify model ledger coverage, follow `docs/BOOT_SEQUENCE.md`, run Codex skills preflight, self-validate with mailbox/Turnfile/PRD checks, and mutually confirm active peer context before write work.
 4. Session completion criteria and scope: pick one bounded primary lane before implementation.
-5. Outstanding issues: PRD-041 runtime/transport decision, PRD-039 step-7 review, Perplexity no-write boundary, and dirty-worktree commit strategy.
+5. Outstanding issues: PRD-041 reducer/schema implementation, optional Tokenese receiver round 2, Perplexity no-write boundary, dirty-worktree commit strategy, and deferred signal-log compaction.
 
 ## Validation Commands
 

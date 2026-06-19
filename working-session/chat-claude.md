@@ -552,3 +552,16 @@ Deliveries:
 Lessons: (1) thread-mode blindness is real — peers closing my sent cards never raised my unread; the closure-owner sweep + heartbeat caught them. PRD-040 exists to fix exactly this. (2) Held the MSG-008/009 archival + compaction repeatedly while the mailbox was hot (Codex live-writing); "rev stable across 2 ticks" gave a false-positive safe window once — Codex idle status, not rev-stability, is the reliable trigger. Did it cleanly at close when both peers idle. (3) Don't over-function but don't under-deliver: registered Maintainer acceptances + drafted PRDs (my lane); routed implementation (validator, arbitration primitive, eval authoring) to Codex/Gemini.
 
 Carry-forward (session 24): PRD-041 promotion to docs/prds (move-not-copy) + Codex arbitration-primitive schema spike + Claude-authored evals/prd-041.evals.mjs; PRD-040 eval authoring (Gemini eval_author -> Codex impl -> Claude review); onboarding-execution eval registered + green; formal MAILBOX_ARCHIVE.md move of the ~124 trimmed Closed Summary rows (tooling-assisted).
+
+## Session 24 close snapshot (Opus 4.8, 2026-06-19, rev 333)
+
+Booted via handshake-sign (rev 314). 3-way handshake (Claude+Codex+Gemini) converged; survived a concurrent MSG-ID collision (021/022) that self-healed. Ran a 5m self-owned read-only heartbeat steward all session (cron ef7b6743), deleted at close.
+
+Deliverables:
+- PRD-040 A1 step-7: APPROVE (independently verified read-only tool + 6/6 + 27/27 + validate). Codex closed MSG-025.
+- Tokenese second-level testing: compression_eval N-curves (single-referent: pronoun-English beats Tokenese; multi-referent: Tokenese crosses +26%→+59% once each referent reused ~2×), 3 blind Claude-Opus receivers, live Gemma. Synthesized → DECISION-2026-06-18-tokenese-precision-pivot.md. Maintainer RATIFIED the interim precision-preserving position; compression RETAINED as north-star goal (memory: tokenese-compression-goal-retained). All three agents independently converged on the same pivot + spec fixes.
+- PRD-041 RED evals: authored evals/prd-041.evals.mjs (9/9 RED vs Codex R4 arbitration-primitive spike) + routed to Codex (MSG-028, payload-first green contract).
+
+Process note: held too long before closing (kept the heartbeat ticking idle after the work drained); should treat "we're done" as close direction. Closed on Maintainer prompt.
+
+Carry-forward: MSG-028 open (Codex implements schema + --emit arbitration-json reducer → green → Claude/Gemini step-7); optional round-2 receiver decodes (Codex+Gemini) for OQ#6 ≥2-family bar; Codex already drafted tk-spec-v02 in ~/Git/tokenese per the ratified direction. Commit HELD (mixed-ownership tree; awaiting explicit Maintainer direction).

@@ -346,3 +346,25 @@ State at initialization:
   - Claude remains closure owner for MSG-20260618-016 and PRD-039 step-7 review.
   - Dirty worktree remains mixed ownership. Do not stage peer-owned files from the Codex lane without Maintainer direction.
 - Lesson learned: PRD-041 is the right next structural step, but the router needs adapter receipts, dedup, crash replay, and governance gates before it can replace human relay safely.
+
+## Session 24 Close Snapshot - 2026-06-19
+
+- Session: `codex-session-24`
+- Turnfile revision at Codex close: `336`
+- Codex status: `idle`; current task `null`; last_seen `codex-session-24-close`
+- Mailbox state: Codex unread `0`; Claude unread `0`; Gemini unread `0`; Maintainer unread `0`
+- Locks: none
+- Heartbeat: Codex app heartbeat `turnfile-codex-readonly-steward-s24` deleted before close; no Codex heartbeat carried forward.
+- Completed this session:
+  - Established session-24 handshakes with Claude and Gemini and operated the Codex 5-minute read-only heartbeat steward.
+  - Implemented PRD-040 heartbeat loop prompt validator and received Claude step-7 APPROVE.
+  - Promoted PRD-041, reconciled promoted-count surfaces to 38, and completed the PRD-041 R4 arbitration-primitive schema spike.
+  - Routed the PRD-041 spike to Claude; Claude delivered `evals/prd-041.evals.mjs` RED and Codex acknowledged `MSG-20260618-028`.
+  - Ran Tokenese second-level compression testing, recorded Codex notes, routed the Tokenese review lane to Gemini, updated `/Users/snap/Git/tokenese/spec.md` under Maintainer-approved cross-repo scope, and wrote the Perplexity build handoff for the Tokenese repo.
+  - Rolled Codex boot from v13 to v14 and archived v13.
+- Carry-forward:
+  - Implement PRD-041 schema plus arbitration-json reducer until `evals/prd-041.evals.mjs` is green, then route for Claude or Gemini review.
+  - Keep `MSG-20260618-028` open and acknowledged until implementation/review completes; Claude remains closure owner.
+  - Optional Tokenese receiver round 2 remains useful for the two-family receiver bar.
+  - Dirty worktree remains mixed ownership; do not stage peer-owned Claude closeout files from the Codex lane without Maintainer direction.
+- Lesson learned: read-only heartbeat turns cannot be allowed to blur ordinary mailbox lifecycle. Reading a card and marking it acknowledged are separate steps; Codex must clear its own mailbox state as soon as ordinary lifecycle authority resumes.

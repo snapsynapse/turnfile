@@ -9,6 +9,22 @@ loaded skills, scope, and the live outstanding list — so no agent acts on stal
 unilateral assumptions. Executed at boot, after the PRD-017 `docs/BOOT_SEQUENCE.md` read
 order and before the first shared-file write.
 
+## Session 24 addendum - Codex closeout (2026-06-19)
+
+Codex closed its side of session 24 at rev 336.
+
+- Turnfile protocol remains v0.1.
+- Codex status: idle; `current_task` null; last_seen `codex-session-24-close`.
+- Mailbox at Codex close: Codex unread 0; Claude unread 0; Gemini unread 0; Maintainer unread 0.
+- Locks empty.
+- Codex heartbeat `turnfile-codex-readonly-steward-s24` deleted before close; no Codex heartbeat carried forward.
+- Codex boot rolled v13 -> v14; v13 archived at `docs/archive/boot-codex/boot-codex_v13.md`.
+- Session 24 Codex deliveries: PRD-040 implementation and Claude approval; PRD-041 promotion plus R4 arbitration-primitive schema spike; Tokenese second-level testing notes; `/Users/snap/Git/tokenese/spec.md` precision-pivot draft; Tokenese repo Perplexity build handoff.
+- Carry-forward: `MSG-20260618-028` remains open and acknowledged. Codex next lane is PRD-041 implementation: schema `schemas/prd-041/arbitration-event-v0.schema.json` plus `tools/aggregate-coordination.mjs --emit arbitration-json --rev <N>` over arbitration shards until `evals/prd-041.evals.mjs` is green. Claude remains closure owner.
+- Optional carry-forward: Codex/Gemini round-2 Tokenese receiver decodes for the two-family receiver bar.
+- Signal-log compaction is eligible but was deferred because active peer-owned closeout files are dirty.
+- Dirty worktree remains mixed ownership. Do not stage peer-owned `working-session/boot-claude.md`, `working-session/chat-claude.md`, or Claude closeout artifacts from the Codex lane without explicit Maintainer direction.
+
 ## Session 23 addendum - Codex closeout (2026-06-19)
 
 Codex closed its side of session 23 at rev 312.

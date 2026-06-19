@@ -10,15 +10,32 @@ receiver tests (Claude Opus 4.8 blind subagents + live Gemma 4 via oMLX), and th
 
 ## The decision requested
 
-Ratify (or reject) the pivot of Tokenese's claim and design center:
+Ratify the INTERIM repositioning of Tokenese's claim and design center — without relinquishing the
+long-term compression goal.
 
-- FROM: "Tokenese is a compression language — generally more compressed than English."
-- TO: "Tokenese is a precision-preserving structured interlingua with MEASURED compression against
-  equally precise English, concentrated in structure English normally drops or explains verbosely:
-  evidence class, confidence, ranked alternatives, repair/fallback state, and repeated referents."
+- RETAINED GOAL (north-star, NOT abandoned): "Tokenese is a compression language." The Maintainer
+  has not given this up. The evidence says we are not there *today* for general content, not that it
+  is unreachable.
+- INTERIM POSITION (what is defensible and what we ship now): "Tokenese is a precision-preserving
+  structured interlingua with MEASURED compression against equally precise English, concentrated in
+  structure English normally drops or explains verbosely: evidence class, confidence, ranked
+  alternatives, repair/fallback state, and multi-referent amortization with reuse."
 
-Recommendation: RATIFY the pivot. The blanket compression claim is empirically dead; the narrower
-claim is strongly supported and is the more useful and defensible position.
+The relationship between the two: the interim position is a STEP toward the goal, not a replacement
+for it. Compression is already achieved (30–59%) wherever Tokenese carries exploitable structure
+(Evidence 1, 1b); the gap is flat/simple content where terse English is already near-minimal. So the
+roadmap to the retained goal is to widen the set of regimes that carry exploitable structure and to
+push tokenizer-native redesign (I6/S3 show the new operators already beat old v0.3 but not yet terse
+English — headroom exists). The interim spec changes below must not foreclose that; each is chosen to
+*increase* receiver-safe density, which is the same direction the compression goal needs.
+
+Recommendation: RATIFY the interim position; KEEP compression as the retained north-star with the
+trajectory above. The blanket "generally more compressed than English" CLAIM is empirically dead and
+should not be made today; the goal behind it is not.
+
+Maintainer ratification (session 24, 2026-06-18): AGREED to the direction. Compression intent
+explicitly retained as the long-term goal; precision-preserving interim accepted; language changes
+authorized for the interim. (Sam, direct.)
 
 ## Evidence 1 — compression is regime-dependent (deterministic token counts)
 
@@ -79,6 +96,18 @@ interleaved long referents (the S2 multi-referent session, +45%). For a single s
 pronoun-English wins. The I1 one-shot 48% was measured against a repeat-style baseline and oversells
 the single-referent case; the defensible amortization claim is "multiple distinct referents that
 defeat pronominalization," not "any repeated referent." This tightens, not weakens, the pivot.
+
+Confirmed with a 3-referent interleaved session (English must qualify each referent; Tokenese binds
+`@a`/`@b`/`@c`):
+
+| Multi-referent (o200k savings) | N=3 | N=6 | N=12 | N=21 |
+|---|---:|---:|---:|---:|
+| Tokenese vs disambiguating-English | −21% | +26% | +49% | +59% |
+
+Crossover lands between N=3 and N=6 — once each of the three referents is reused ~2×; below that the
+binding overhead dominates. This is the operative amortization regime and generalizes S2's single
++45% point into a curve: bind-and-reference pays off in multi-referent sessions with reuse, and only
+there.
 
 ## Evidence 2 — receiver fidelity holds in the same regimes (cross-model)
 
@@ -161,21 +190,30 @@ repair @a.timestamp -> plain               # explicit repair/fallback
 
 ## Recommendation
 
-1. RATIFY the pivot (claim + design center) as above.
-2. Authorize round-2 cross-model receiver testing (Codex + Gemini decode the top-3 blind; Perplexity
-   optional external critic) to satisfy OQ#6's ≥2-family rule with two more families.
-3. On ratification, route the grammar-direction proposal + the six OQ answers to `~/Git/tokenese` as
-   the spec-change work item (R7). Turnfile governance stays English-only; Tokenese remains a bounded
-   Tier-B operational/handoff twin lane with English source-wins.
-4. Feed this evidence into PRD-035 (Tokenese observation/result sync; Gemini lead) as the calibration
-   input — without coupling the pivot decision to PRD-035's lifecycle.
+1. RATIFIED (session 24): adopt the interim precision-preserving position; KEEP compression as the
+   retained north-star goal with the trajectory in "The decision requested." Stop making the blanket
+   "generally more compressed" claim today; do not drop the goal.
+2. Route the grammar-direction proposal + the six OQ answers to `~/Git/tokenese` as the interim
+   spec-change work item (R7). The retained compression goal + this trajectory also belong in the
+   tokenese repo's `INTENT.md` so the north-star survives the interim. Turnfile governance stays
+   English-only; Tokenese remains a bounded Tier-B operational/handoff twin lane, English source-wins.
+3. Each interim spec change is chosen to INCREASE receiver-safe density (the compression direction),
+   never to lock in verbosity — so the interim does not foreclose the goal.
+4. Authorize (optional, separate) round-2 cross-model receiver testing (Codex + Gemini decode the
+   top-3 blind; Perplexity optional external critic) to satisfy OQ#6's ≥2-family rule before the spec
+   change lands.
+5. Feed this evidence into PRD-035 (Tokenese observation/result sync; Gemini lead) as calibration
+   input — without coupling the decision to PRD-035's lifecycle.
+6. Roadmap toward the retained goal (open research lane): widen the regimes that carry exploitable
+   structure; push tokenizer-native redesign (I6/S3 headroom: new operators beat old v0.3 but not yet
+   terse English); periodically re-measure against the equal-precision baseline to track progress.
 
 ## Carry-forward
 
 - Round-2 receiver decodes: route blind top-3 to Codex + Gemini; capture per-dimension scores.
 - DONE this session: multi-turn I1 referent-amortization N-curve (Evidence 1b) — corrected the
   single-referent overclaim; amortization is conditional on multi-referent pronoun-defeat.
-- Open follow-up: run the N-curve for a MULTI-referent session (`@a`/`@b`/`@c` interleaved) to put a
-  number on the pronoun-defeat regime beyond S2's single data point.
+- DONE this session: multi-referent N-curve (`@a`/`@b`/`@c` interleaved) — crossover N≈4–6, scaling
+  to +59% at N=21 (Evidence 1b). The pronoun-defeat amortization regime is now a curve, not a point.
 - Tokenese repo dirty-state caveat (handoff): `INTENT.md` / `README.md` / `spec.md` carry unrelated
   pre-existing edits; review before staging any spec change.

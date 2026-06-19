@@ -1668,12 +1668,12 @@
       "blocking_items": [],
       "eligible_for_docs_prds": true,
       "implementation": {
-        "state": "proposed",
+        "state": "design-spike-complete",
         "evals": "evals/prd-041.evals.mjs",
         "eval_author": "claude",
         "implementer": "codex",
         "reviewer": "gemini",
-        "notes": "Accepted session 23 and promoted to docs/prds on 2026-06-19 via move-not-copy. Eval-first, not started. Sequence: (1) Codex spikes the R4 event-sourced arbitration-primitive schema; (2) Claude authors evals/prd-041.evals.mjs RED; (3) Codex implements router + projector (extends tools/aggregate-coordination.mjs) + event schema; (4) Gemini/Claude review."
+        "notes": "Accepted session 23 and promoted to docs/prds on 2026-06-19 via move-not-copy. Codex completed the R4 event-sourced arbitration-primitive schema spike at working-session/docs/r4-arbitration-primitive-schema-spike-prd-041.md and routed MSG-20260618-027 to Claude for evals/prd-041.evals.mjs RED. Remaining sequence: (1) Claude authors evals/prd-041.evals.mjs RED; (2) Codex implements router + projector (extends tools/aggregate-coordination.mjs) + event schema; (3) Gemini/Claude review."
       }
     }
   ]
