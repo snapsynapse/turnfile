@@ -90,7 +90,7 @@ At session handshake, participants record the heartbeat decision. For multi-agen
 7. Stop condition: when the heartbeat must be deleted, paused, or updated.
 8. Session-charter record: the heartbeat decision is recorded in the session charter or equivalent handshake artifact.
 
-If an agent opts out, the default for that agent is no recurring heartbeat. If a heartbeat is active by default, it is read-only steward mode unless explicitly elevated.
+If an agent opts out, the default is no recurring heartbeat for that agent. If a heartbeat is active by default, it is read-only steward mode unless explicitly elevated.
 
 Heartbeat state is not stored in `TURNFILE.yaml` by default. Turnfile remains durable protocol state; app automations are ephemeral harness state. A future amendment may add a minimal Turnfile field only if cross-agent multi-heartbeat coordination requires it.
 
