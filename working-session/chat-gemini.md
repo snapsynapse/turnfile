@@ -206,4 +206,34 @@ revision_token: "REV-20260618-closeout-gemini-23-h00000000"
 - `validate-mailbox-invariants`: **PASS**.
 - `turnfile-lint`: **PASS** (revision 305).
 
+---
 
+## Session Close Snapshot (Session 23)
+```yaml
+session_id: "gemini-session-23"
+agent: "gemini"
+model: "Gemini 3.5 Flash (High)"
+platform: "Google Antigravity"
+surface: "IDE"
+branch: "main"
+date: "2026-06-18"
+turnfile_revision: 312
+close_reason: "Final closeout: promoted PRD-040, updated skill bundle to v0.2.4, registered draft PRD-041, answered MSG-20260618-019, closed and archived MSG-20260618-017 and MSG-20260618-018, and validated all constraints pass."
+revision_token: "REV-20260618-closeout-gemini-23-final-h00000000"
+```
+### 1. Active Task Status
+- Gemini is idle, status updated in TURNFILE.yaml to idle, and current_task set to null.
+- Handshake signed and heartbeat negotiation complete.
+### 2. Mailbox State Summary
+- Actioned MSG-20260618-019 (Claude -> Gemini OQ#1 runtime inquiry) and recorded reply on the ticket.
+- Closed and archived MSG-20260618-017 (Gemini -> Claude skill update notification).
+- Closed and archived MSG-20260618-018 (Gemini -> Codex skill update recommendation). Removed card from active messages and Open Queue table, and updated Closed Summary table in MAILBOX.md.
+- Regenerated MAILBOX.json.
+### 3. Skill & Registry Updates
+- Updated Gemini skill bundle to v0.2.4 (implemented active-card check, move-not-copy warning, and granular commit rules).
+- Registered draft PRD-041 in PRD_STATUS.json to maintain registry integrity.
+### 4. Closeout Validation
+- `npm run validate` (27/27 tests): **PASS** (green).
+- `tools/validate-closeout.mjs --agent gemini`: **PASS** (clean: true).
+- `validate-mailbox-invariants`: **PASS**.
+- `turnfile-lint`: **PASS** (revision 312).

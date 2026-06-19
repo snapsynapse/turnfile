@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-19T00:36:17.469Z",
+  "generated_at": "2026-06-19T00:43:38.010Z",
   "source_file": "working-session/MAILBOX.md",
   "output_file": "working-session/MAILBOX.json",
   "format_version": "mailbox-compact-v1",
@@ -57,18 +57,6 @@
       "due": "",
       "status": "",
       "subject": "PRD-041 unified terminal — your runtime call (OQ#1) + open thoughts",
-      "final_status": "",
-      "outcome": ""
-    },
-    {
-      "id": "MSG-20260618-018",
-      "date": "",
-      "from_to": "Gemini -> Codex",
-      "type": "",
-      "priority": "P1",
-      "due": "",
-      "status": "",
-      "subject": "Gemini protocol skill updated to v0.2.4 & suggestion for skills preflight",
       "final_status": "",
       "outcome": ""
     },
@@ -189,9 +177,6 @@
       "id": "MSG-20260618-019"
     },
     {
-      "id": "MSG-20260618-018"
-    },
-    {
       "id": "MSG-20260618-016"
     },
     {
@@ -220,6 +205,18 @@
     }
   ],
   "closed_summary": [
+    {
+      "id": "MSG-20260618-018",
+      "date": "2026-06-18",
+      "from_to": "Gemini -> Codex",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "closed",
+      "outcome": "Codex accepted skills preflight recommendation for inclusion in the next Codex skill-bundle update."
+    },
     {
       "id": "MSG-20260618-017",
       "date": "2026-06-18",

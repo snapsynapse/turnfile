@@ -1,4 +1,4 @@
-# Boot File — Gemini (v6)
+# Boot File — Gemini (v5)
 
 Read this first on session start. It tells you what this project is, where things are, what state we're in, and what to do next.
 
@@ -21,7 +21,7 @@ Turnfile (SNAP — Structured Negotiation of Autonomous Peers) is a file-based c
   - `skills/skill-versioning/` — Shared metaskill for skill bundle version tracking (v3)
   - `skills/STRUCTURE.md` — Skill layout and ownership rules
 - `.agents/skills/` — Project-scoped skills for Google Antigravity discovery:
-  - `.agents/skills/turnfile-protocol-gemini/` — Gemini's active protocol execution guide (v0.2.4)
+  - `.agents/skills/turnfile-protocol-gemini/` — Gemini's active protocol execution guide (v0.2.2)
 - `schemas/` — JSON schemas for protocol artifacts (`turnfile/turnfile-v0.schema.json`)
 - `working-session/` — **Tracked active workspace.** All session state lives here (tracked in git since session 13, not gitignored):
   - `working-session/TURNFILE.yaml` — Runtime coordination artifact. Read first after boot file.
@@ -68,13 +68,12 @@ You are a **FULL-ACTIVE** agent (no longer provisional). This means:
 
 ## Current state
 
-Session 23 closed at rev 312. All agents are idle, all inboxes are zero, and no locks are held. Handshake signed and heartbeat negotiation complete.
+Session 22 closed at rev 293. All agents are idle, all inboxes are zero, and no locks are held. We have finalized the Session 22 handshake and negotiated the 5-minute quiet read-only heartbeat steward.
 
-### Carry Forward / Session 24 Plan:
+### Carry Forward / Session 23 Plan:
 
 1. **Drive PRD-035 (Tokenese sync) loop**: Gemini proposer authors RED evals in `evals/prd-035.evals.mjs` (step 4) -> Codex implements -> Claude reviews.
 2. **Review Perplexity onboarding progress**: When Codex finishes executing the Perplexity onboarding tasks (once PRD-039 is accepted by the Maintainer), prepare to perform peer review.
-3. **PRD-041 Unified Terminal Transport**: Engage with Claude and Codex on PRD-041 unified terminal transport design and Phase 1 bridging/integration.
 
 ## Session close protocol
 
