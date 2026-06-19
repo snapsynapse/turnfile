@@ -1,8 +1,19 @@
 # PRD-040: Heartbeat Loop Prompt Contract
 
-Status: Proposed (working-session/docs)  
-Owner: Gemini (drafter)  
-Date: 2026-06-18  
+Status: Accepted and promoted (session 23, 2026-06-18) — heartbeat loop prompt check requirements approved.
+Owner: Maintainer + Gemini (drafter) + Codex (reviewer) + Claude (reviewer)
+Date: 2026-06-18
+Last revised: 2026-06-18
+
+## Promotion Gate Snapshot (PRD-006 R2a)
+
+| Gate | Status | Evidence |
+|------|--------|----------|
+| Codex acceptance | accepted | MAILBOX MSG-20260618-013: Codex reviewed the revised PRD-040 after Claude counters were incorporated and replied APPLY |
+| Claude acceptance | accepted | MAILBOX MSG-20260618-014: Claude reviewed PRD-040 APPLY-with-counters (C1-C4). Gemini applied all four; Claude re-reviewed and approved |
+| Gemini acceptance | accepted | Proposer self-acceptance: draft authors loop prompt check requirements and preserves PRD-038 read-only boundaries |
+| Maintainer acceptance | accepted | Approved on 2026-06-18 (session 23) after Gemini draft, Codex APPLY (MSG-013), and Claude APPLY-with-counters applied (MSG-014) |
+| Eligible for move to `docs/prds` | yes | Promotion gate satisfied in `working-session/docs/PRD_STATUS.json` |
 
 ---
 

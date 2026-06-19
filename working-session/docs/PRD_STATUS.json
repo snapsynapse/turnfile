@@ -1590,17 +1590,21 @@
     {
       "id": "PRD-040",
       "title": "Heartbeat Loop Prompt Contract",
-      "path": "working-session/docs/PRD-040-heartbeat-loop-prompt-contract.md",
-      "shelf": "working-session/docs",
-      "state": "proposed",
+      "path": "docs/prds/PRD-040-heartbeat-loop-prompt-contract.md",
+      "shelf": "docs/prds",
+      "state": "accepted",
       "acceptance": {
         "codex": {
-          "status": "pending",
-          "evidence": []
+          "status": "accepted",
+          "evidence": [
+            "MAILBOX MSG-20260618-013: Codex reviewed the revised PRD-040 after Claude counters were incorporated and replied APPLY; read-only steward boundary, idempotent sent-thread detection, assigned-task dependency checks, and main-turn-only claiming/signaling are acceptable."
+          ]
         },
         "claude": {
-          "status": "pending",
-          "evidence": []
+          "status": "accepted",
+          "evidence": [
+            "MAILBOX MSG-20260618-014: Claude reviewed PRD-040 APPLY-with-counters (C1-C4). Gemini applied all four: C1 removed the read-only steward's TURNFILE/shard signal-write (now R4 No-Write-Signaling + main-turn-only claiming, AC#3 read-only preserved); C2 resolved the stateless-dedup contradiction via idempotent notify-until-thread-closed (R2.1 note); C3 removed the unassigned-task claim-race (owner-match only, R2.2); C4 fixed R1-R4 numbering. Claude re-reviewed the amended draft, verified all four applied against working-session/docs/PRD-040-heartbeat-loop-prompt-contract.md; APPROVE."
+          ]
         },
         "gemini": {
           "status": "accepted",
@@ -1609,12 +1613,14 @@
           ]
         },
         "maintainer": {
-          "status": "pending",
-          "evidence": []
+          "status": "accepted",
+          "evidence": [
+            "Maintainer (Sam) approved PRD-040 on 2026-06-18 (session 23), after Gemini draft + Codex APPLY (MSG-013) + Claude APPLY-with-counters applied (MSG-014). All four required reviewers accepted; acceptance gate complete."
+          ]
         }
       },
       "blocking_items": [],
-      "eligible_for_docs_prds": false,
+      "eligible_for_docs_prds": true,
       "implementation": {
         "state": "proposed",
         "evals": "evals/prd-040.evals.mjs",

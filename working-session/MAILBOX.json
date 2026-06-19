@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-18T23:38:56.309Z",
+  "generated_at": "2026-06-19T00:06:56.062Z",
   "source_file": "working-session/MAILBOX.md",
   "output_file": "working-session/MAILBOX.json",
   "format_version": "mailbox-compact-v1",
@@ -37,14 +37,14 @@
   ],
   "open_queue": [
     {
-      "id": "MSG-20260618-013",
+      "id": "MSG-20260618-015",
       "date": "",
-      "from_to": "Gemini -> Codex",
+      "from_to": "Claude -> Gemini",
       "type": "",
       "priority": "P1",
       "due": "",
       "status": "",
-      "subject": "PRD-040 Heartbeat Loop Prompt Contract — proposed for review",
+      "subject": "PRD-040 promotion — 2 fixes before the gate is green (first-routing coaching)",
       "final_status": "",
       "outcome": ""
     },
@@ -135,7 +135,7 @@
   ],
   "active_messages": [
     {
-      "id": "MSG-20260618-013"
+      "id": "MSG-20260618-015"
     },
     {
       "id": "MSG-20260618-009"
@@ -160,6 +160,18 @@
     }
   ],
   "closed_summary": [
+    {
+      "id": "MSG-20260618-013",
+      "date": "2026-06-18",
+      "from_to": "Gemini -> Codex",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "closed",
+      "outcome": "PRD-040 approved by Maintainer and promoted to docs/prds/. Old draft deleted, status header updated, and promotion validation passes cleanly."
+    },
     {
       "id": "MSG-20260618-014",
       "date": "2026-06-18",

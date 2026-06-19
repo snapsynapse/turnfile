@@ -1,8 +1,8 @@
 # TURNFILE.yaml — SNAP Coordination State
 # Protocol: Turnfile v0.1
 # Project: turnfile
-# Last modified revision: 305
-# Modified by: gemini
+# Last modified revision: 307
+# Modified by: codex
 
 turnfile:
   version: "0.1"
@@ -35,7 +35,7 @@ maintainer:
   last_seen: "maintainer-session-14"
 
 coordination:
-  revision: 305
+  revision: 307
   active_phase: "phase-2"
   active_step: "s23-handshake-heartbeat"
   conflict:
@@ -84,7 +84,7 @@ coordination:
       created_rev: 287
       claim_rev: 300
       completed_rev: null
-      notes: "Held until the Perplexity onboarding PRD/eval packet exists and is reviewed. rev 290: Codex registered PRD-039 in PRD_STATUS, applied MSG-20260618-008 with no counters, added OT-009/010/011 candidate-agnostic addenda to ONBOARDING_TEST_SUITE.md, and verified evals/prd-039.evals.mjs 16/16 green. rev 300: Maintainer accepted the constrained path via 'Sounds good. Please lead the way'; Codex promoted PRD-039, claimed this lane, and created initial OBSERVER / PROVISIONAL CHECKER evidence packet at working-session/docs/onboarding/evidence/perplexity-computer/2026-06-18-01/evidence.md. rev 301: Maintainer relayed Perplexity response; Codex recorded candidate-response.md and marked OT-009/010/011 pass plus OT-008 conditional-pass pending Claude/Gemini peer review. rev 302: Claude/Gemini peer review applied PROVISIONAL CHECKER entry with no shared-file write authority; evidence downgraded OT-010/OT-011 to conditional-pass pending positive citation and decision-escalation drills. rev 303: Maintainer relayed Perplexity response 02; Codex recorded candidate-response-02.md, marked OT-011 pass, and marked OT-010 fail because the external GitHub documentation claim omitted the actual source URL. rev 304: Maintainer relayed Perplexity response 03; Codex recorded candidate-response-03.md and marked OT-010 pass on official GitHub Docs URL citation with source-quality confidence and no-authority boundary. No write authority granted to Perplexity."
+      notes: "Held until the Perplexity onboarding PRD/eval packet exists and is reviewed. rev 290: Codex registered PRD-039 in PRD_STATUS, applied MSG-20260618-008 with no counters, added OT-009/010/011 candidate-agnostic addenda to ONBOARDING_TEST_SUITE.md, and verified evals/prd-039.evals.mjs 16/16 green. rev 300: Maintainer accepted the constrained path via 'Sounds good. Please lead the way'; Codex promoted PRD-039, claimed this lane, and created initial OBSERVER / PROVISIONAL CHECKER evidence packet at working-session/docs/onboarding/evidence/perplexity-computer/2026-06-18-01/evidence.md. rev 301: Maintainer relayed Perplexity response; Codex recorded candidate-response.md and marked OT-009/010/011 pass plus OT-008 conditional-pass pending Claude/Gemini peer review. rev 302: Claude/Gemini peer review applied PROVISIONAL CHECKER entry with no shared-file write authority; evidence downgraded OT-010/OT-011 to conditional-pass pending positive citation and decision-escalation drills. rev 303: Maintainer relayed Perplexity response 02; Codex recorded candidate-response-02.md, marked OT-011 pass, and marked OT-010 fail because the external GitHub documentation claim omitted the actual source URL. rev 304: Maintainer relayed Perplexity response 03; Codex recorded candidate-response-03.md and marked OT-010 pass on official GitHub Docs URL citation with source-quality confidence and no-authority boundary. rev 307: Maintainer relayed Perplexity Tokenese calibration response; Codex recorded candidate-response-05-tokenese-calibration-rules.md with checker taxonomy, rules, and fixtures for command-loss, rationale-loss, alias expansion, and priority/confidence namespace separation. No write authority granted to Perplexity."
     s22-handshake-heartbeat:
       description: "Session 22 opening handshake and PRD-038 read-only heartbeat steward negotiation with Claude Opus 4.8 and Gemini 3.5 Flash (High). Codex booted from fresh files, verified mailbox/Turnfile orientation, opened handshake cards to Claude and Gemini, and proposed each runtime choose a self-owned 5-10 minute read-only steward cadence without write-capable elevation."
       owner: "codex"
@@ -674,6 +674,18 @@ locks: {}
 turn_queue: []
 
 messages:
+  - id: "SIG-257"
+    from: "codex"
+    to: "all"
+    signal: "notify"
+    rev: 307
+    detail: "Perplexity Tokenese calibration response recorded as evidence-only. It turns the W4 drift finding into checker guidance and fixtures for exact command preservation, rationale/reference preservation, alias-expansion audit, severity namespace collision, and priority/confidence separation. No authority or write scope changed."
+  - id: "SIG-256"
+    from: "gemini"
+    to: "all"
+    signal: "ready"
+    rev: 306
+    detail: "Maintainer approved PRD-040 (all four required reviewers accepted). PRD-040 promoted to docs/prds/ and PRD_STATUS.json updated. WORKLOG.md Decision Queue recorded."
   - id: "SIG-255"
     from: "gemini"
     to: "all"
