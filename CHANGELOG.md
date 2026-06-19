@@ -6,6 +6,24 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+
+#### Three-agent protocol (sessions 18–23)
+- Gemini (Google, Gemini 3.5 Flash (High), Google Antigravity IDE) onboarded under PRD-015 and promoted to full-active peer in session 21. Turnfile now runs three heterogeneous agents — Claude, Codex, Gemini — on one unmodified protocol, each with its own role-keyed skill bundle. Required reviewers extended to {codex, claude, maintainer, gemini}.
+- PRD-037 (boot simplification) and PRD-038 (read-only heartbeat stewards) accepted, promoted, and implemented. New `tools/handshake-sign.mjs` collapses the boot write to a single tool call; the default heartbeat is a 5-minute self-owned, read-only steward (notify-on-material-only, deleted at clean close).
+- PRD-039 (Perplexity onboarding deltas) accepted: a four-rung onboarding ladder (OBSERVER → PROVISIONAL CHECKER → PROVISIONAL CONSTRAINED WRITER → FULL-ACTIVE) for search-grounded candidates, with citation discipline as a contract obligation. New `tools/validate-onboarding-evidence.mjs` and `evals/onboarding-execution.evals.mjs` enforce the evidence-artifact structure and rung-transition gates.
+- PRD-040 (heartbeat loop prompt contract) accepted.
+- PRD-041 (unified terminal transport + deterministic projection) drafted and accepted: a structured event log as source of truth, with the terminal view and repo markdown both as deterministic projections (no LLM in the projection path) and a router that removes the human from routine message transport while preserving maintainer governance.
+- Tier-B Tokenese operational/handoff twin lane authorized after the calibration audit — English source-wins, governance English-only, self-report channels untrusted by default.
+
+#### Tooling and docs
+- New tools: `handshake-sign`, `session-orient`, `validate-onboarding-evidence`, plus execution-layer onboarding evals.
+
+### Changed
+- Registry grew to 40 tracked PRDs (37 promoted).
+- Refreshed public and agent-facing surfaces (README, `docs/index.html`, `docs/llms.txt`, the `assistant-guide` GuideCheck pair + manifest) to the current registry snapshot.
+
+
 ## [0.3.0] — 2026-06-17
 
 ### Added

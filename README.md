@@ -8,8 +8,8 @@ Agents work as peers. Disagreement is signal, not error. Humans arbitrate, not m
 This is a **Structured Negotiation of Autonomous Peers (SNAP)**. It's consent-based, peer multi-LLM collaboration with human-on-the-loop governance and public auditability.
 
 <!-- turnfile:prd-promoted=37 -->
-<!-- turnfile:registry-tracked=38 -->
-<!-- turnfile:skill-claude-bundle=14 turnfile:skill-codex-bundle=10 turnfile:skill-gemini-bundle=3 -->
+<!-- turnfile:registry-tracked=40 -->
+<!-- turnfile:skill-claude-bundle=14 turnfile:skill-codex-bundle=10 turnfile:skill-gemini-bundle=5 -->
 
 ## Who this is for
 
@@ -234,13 +234,13 @@ Turnfile evals fall into three categories: repo readiness validators (`npm run v
 
 ## Status
 
-This protocol has been tested across 22 real collaboration sessions with three heterogeneous LLM agents and a human maintainer:
+This protocol has been tested across 23 real collaboration sessions with three heterogeneous LLM agents and a human maintainer:
 
 - Claude (Anthropic), running in Claude Code.
 - Codex (OpenAI GPT-5), running in the Codex desktop app.
 - Gemini (Google, model Gemini 3.5 Flash (High)), running in the Google Antigravity IDE — onboarded under PRD-015 and full-active since session 21.
 
-As of the current registry snapshot (2026-06-18): 38 registry-tracked PRDs, 37 promoted PRDs, zero active open questions, and the eight-step eval-gated implementation loop (PRD-006 A1) run end-to-end across many lanes with builder/reviewer separation between heterogeneous agents — PRD-017/021/022/023/024/026/028/029/030/032/033/036 implemented, PRD-031 Phase 1 (per-agent shards + derived aggregates) and the PRD-014 closeout amendment landed, plus a live Tokenese A/B pilot scored by a deterministic checker. The Claude lane ran across three model generations (Opus 4.6, Fable 5, Opus 4.8) against one unmodified protocol. Forward development narrows Turnfile into a thin governance layer for auditable peer disagreement and maintainer-governed resolution across existing agent platforms.
+As of the current registry snapshot (2026-06-18): 40 registry-tracked PRDs, 37 promoted PRDs, zero active open questions, and the eight-step eval-gated implementation loop (PRD-006 A1) run end-to-end across many lanes with builder/reviewer separation between heterogeneous agents — PRD-017/021/022/023/024/026/028/029/030/032/033/036 implemented, PRD-031 Phase 1 (per-agent shards + derived aggregates) and the PRD-014 closeout amendment landed, plus a live Tokenese A/B pilot scored by a deterministic checker. The Claude lane ran across three model generations (Opus 4.6, Fable 5, Opus 4.8) against one unmodified protocol. Forward development narrows Turnfile into a thin governance layer for auditable peer disagreement and maintainer-governed resolution across existing agent platforms.
 
 For authoritative current state, read [PRD_STATUS.json](working-session/docs/PRD_STATUS.json) (PRD shelf and implementation status) and [WORKLOG.md](working-session/WORKLOG.md) (live session state). [BASELINE.md](BASELINE.md) is a point-in-time session-14 snapshot, not current state.
 
@@ -260,6 +260,10 @@ Turnfile is free and open. If you're building multi-agent systems, consider [spo
 ## About
 
 Turnfile is a [PAICE.work](https://paice.work/) project. PAICE.work PBC is a public benefit corporation building infrastructure for productive collaboration between humans and autonomous agents. A peer-based, consent-driven protocol for multi-agent collaboration is a natural expression of that mission.
+
+## Contributing
+
+Contributions are welcome — see [CONTRIBUTING.md](CONTRIBUTING.md) for how to build, test, and submit changes. Report security issues through the process in [SECURITY.md](SECURITY.md).
 
 ## License
 
