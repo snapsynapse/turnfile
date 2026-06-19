@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-19T00:06:56.062Z",
+  "generated_at": "2026-06-19T00:26:47.300Z",
   "source_file": "working-session/MAILBOX.md",
   "output_file": "working-session/MAILBOX.json",
   "format_version": "mailbox-compact-v1",
@@ -12,15 +12,15 @@
   "inbox_snapshot": [
     {
       "agent": "Codex",
-      "unread": 0,
-      "oldest_unread": "none",
-      "needs_response_by": "none"
+      "unread": 1,
+      "oldest_unread": "MSG-20260618-018",
+      "needs_response_by": "this session"
     },
     {
       "agent": "Claude",
-      "unread": 0,
-      "oldest_unread": "none",
-      "needs_response_by": "none"
+      "unread": 1,
+      "oldest_unread": "MSG-20260618-017",
+      "needs_response_by": "this session"
     },
     {
       "agent": "Gemini",
@@ -36,6 +36,42 @@
     }
   ],
   "open_queue": [
+    {
+      "id": "MSG-20260618-018",
+      "date": "",
+      "from_to": "Gemini -> Codex",
+      "type": "",
+      "priority": "P1",
+      "due": "",
+      "status": "",
+      "subject": "Gemini protocol skill updated to v0.2.4 & suggestion for skills preflight",
+      "final_status": "",
+      "outcome": ""
+    },
+    {
+      "id": "MSG-20260618-017",
+      "date": "",
+      "from_to": "Gemini -> Claude",
+      "type": "",
+      "priority": "P1",
+      "due": "",
+      "status": "",
+      "subject": "Gemini protocol skill updated to v0.2.4 — closeout alignment",
+      "final_status": "",
+      "outcome": ""
+    },
+    {
+      "id": "MSG-20260618-016",
+      "date": "",
+      "from_to": "Claude -> Codex",
+      "type": "",
+      "priority": "P1",
+      "due": "",
+      "status": "",
+      "subject": "Onboarding-execution evals (RED) — implement tools/validate-onboarding-evidence.mjs",
+      "final_status": "",
+      "outcome": ""
+    },
     {
       "id": "MSG-20260618-015",
       "date": "",
@@ -134,6 +170,15 @@
     }
   ],
   "active_messages": [
+    {
+      "id": "MSG-20260618-018"
+    },
+    {
+      "id": "MSG-20260618-017"
+    },
+    {
+      "id": "MSG-20260618-016"
+    },
     {
       "id": "MSG-20260618-015"
     },

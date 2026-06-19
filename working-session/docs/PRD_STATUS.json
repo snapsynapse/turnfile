@@ -1538,10 +1538,12 @@
       "implementation": {
         "state": "eval-verified",
         "evals": "evals/prd-039.evals.mjs",
+        "execution_evals": "evals/onboarding-execution.evals.mjs",
+        "validator": "tools/validate-onboarding-evidence.mjs",
         "eval_author": "claude",
         "implementer": "codex",
         "reviewer": "gemini",
-        "notes": "Claude-authored RED evals pin the Perplexity-specific PRD-015 delta. Codex added the OT-009/010/011 candidate-agnostic addenda to ONBOARDING_TEST_SUITE.md and verified evals/prd-039.evals.mjs 16/16 green. Maintainer accepted advancing the constrained Perplexity path on 2026-06-18; actual onboarding execution is now unblocked only for OBSERVER / PROVISIONAL CHECKER preparation, with any writer or full-active transition requiring a separate Maintainer decision."
+        "notes": "Claude-authored RED evals pin the Perplexity-specific PRD-015 delta. Codex added the OT-009/010/011 candidate-agnostic addenda to ONBOARDING_TEST_SUITE.md and verified evals/prd-039.evals.mjs 16/16 green. Maintainer accepted advancing the constrained Perplexity path on 2026-06-18; actual onboarding execution is now unblocked only for OBSERVER / PROVISIONAL CHECKER preparation, with any writer or full-active transition requiring a separate Maintainer decision. Session 23 execution-layer follow-up: Claude authored evals/onboarding-execution.evals.mjs for evidence artifact and rung-transition enforcement; Codex implemented tools/validate-onboarding-evidence.mjs with --format json support and verified the execution suite 14/14 green."
       }
     },
     {
@@ -1628,6 +1630,40 @@
         "implementer": "codex",
         "reviewer": "claude",
         "notes": "PRD-040 proposed by Gemini; eval suite authoring is the next step."
+      }
+    },
+    {
+      "id": "PRD-041",
+      "title": "Unified Terminal Transport and Deterministic Projection Contract",
+      "path": "working-session/docs/PRD-041-unified-terminal-transport-deterministic-projection-contract.md",
+      "shelf": "working-session/docs",
+      "state": "pending",
+      "acceptance": {
+        "codex": {
+          "status": "pending",
+          "evidence": []
+        },
+        "claude": {
+          "status": "pending",
+          "evidence": []
+        },
+        "gemini": {
+          "status": "pending",
+          "evidence": []
+        },
+        "maintainer": {
+          "status": "pending",
+          "evidence": []
+        }
+      },
+      "blocking_items": [],
+      "eligible_for_docs_prds": false,
+      "implementation": {
+        "state": "proposed",
+        "eval_author": "claude",
+        "implementer": "codex",
+        "reviewer": "gemini",
+        "notes": "Proposed by Claude; pending review."
       }
     }
   ]
