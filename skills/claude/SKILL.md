@@ -5,10 +5,10 @@ description: Execute the Turnfile protocol (a SNAP protocol) in Claude for mailb
 
 # Turnfile Protocol Skill File — Claude
 
-Version: 0.9.1
-Protocol revision baseline: PRD-003 through PRD-014 and PRD-016 through PRD-019 (all promoted to docs/prds/); PRD-021/022/024/030 + PRD-014 Amendment A1 propagated
+Version: 0.9.2
+Protocol revision baseline: PRD-003 through PRD-014 and PRD-016 through PRD-019 (all promoted to docs/prds/); PRD-021/022/024/030/037/038 + PRD-014 Amendment A1 + PRD-014 active-card owner review amendment propagated
 Agent: Claude (Anthropic) — bundle is role-keyed; the executing model is recorded in MANIFEST.yaml, not in this path
-Last updated: 2026-06-17
+Last updated: 2026-06-18
 
 ---
 
@@ -394,6 +394,7 @@ After any milestone completion, task status change, or substantive protocol acti
    - Add session entry with handoff block.
 3. **Close open mailbox messages** that Claude owns as closure owner.
 3a. **Inspect active heartbeats (PRD-030 R5/R6):** for each, choose deleted / updated / intentionally carried forward / not applicable. Delete any whose stop condition is satisfied; every carried-forward heartbeat requires a WORKLOG entry (purpose, owner, cadence, stop condition, reconsider-at). A clean close may not leave a stale heartbeat running silently.
+3b. **Active-card owner review (PRD-014 R2.6 + A1.R1 #6, amendment 2026-06-18):** inspect every Active Message where `Closure owner` equals Claude, regardless of unread count. Each owned active card gets one disposition: `closed`, explicitly deferred with reason + next owner, escalated/blocked with evidence, or still waiting on recipient. Owned `actioned` cards are NOT terminal — they block clean close unless closed or explicitly deferred/escalated. Receiver-side `actioned` (Claude actioned a message someone else owns closure on) is not Claude's gate. Run `node tools/validate-closeout.mjs --turnfile working-session/TURNFILE.yaml --mailbox working-session/MAILBOX.md --agent claude` to check; the report's `compaction.active_card_owner_review.actioned_owned_active` enumerates blockers; `--defer active_card_owner_review` records an explicit Maintainer-recorded deferral.
 4. **Update TURNFILE.yaml:**
    - Remove any locks Claude holds.
    - Update completed tasks to `status: done`.
@@ -568,6 +569,7 @@ After executing any module, report:
 | v0.8.0 changes | Session-16 execution-gap fixes + Codex MSG-016 (skill v8) mirror. Concurrent Write Discipline items 6-8: only the Read tool satisfies the read-before-edit guard (Bash grep/sed/cat do not — locate with Bash, qualify with Read); re-Read shared files immediately before editing on every collaboration turn ("modified since read" = a peer wrote, reconcile don't retry blind; state moved 167→170→172→173 between turns); inspect git state before shared edits, never hand-edit a derived view (PRD-031). Added Tokenese Adoption Guardrails section (source authority, `plain` fallback, earn-breadth, deterministic scoring, untrusted self-report channels). Output-format item 6: disclose peer-owned uncommitted changes left untouched. Actions MSG-20260616-016. |
 | v0.9.0 changes | Header version reconciled (was stale at 0.6.0 through the v0.7/v0.8 bumps; now matches the version table + MANIFEST). Adopted the Decision Mirror Modes (PRD-022) section into the Claude bundle — content was contributed by Codex's PRD-022 propagation, which crossed into Claude-owned `skills/claude/SKILL.md`; flagged in the PRD-021/022 review (MSG-20260617-015) and taken under Claude ownership/versioning here. `audit-mirror` vs `delivery-mirror` declaration + closeout digest check for unacknowledged delivery mirrors. Also PRD-017/023 propagation (Claude side): Startup Orientation references the canonical boot command manifest `docs/BOOT_SEQUENCE.md` + chat-file semantics; added the out-of-band drift-reconciliation boot check (governance-state drift = decision-required). |
 | v0.9.1 changes | PRD-032 R7/AC8 (session 17): the orientation read-set norm now prefers `tools/session-orient.mjs` (the read-only one-shot orientation helper) first, then explicit Read-tool reads — now that the tool is implemented and green (evals/prd-032.evals.mjs 9/9). Claude implemented the tool (A1 step 6); Codex reviews. |
+| v0.9.2 changes | PRD-014 active-card owner review amendment mirror (session 22, MSG-20260617-066 review verdict APPROVE). Module 6 step 3b added: at close, inspect every Active Message where Closure owner = Claude (any unread state); owned `actioned` cards block clean close unless closed or explicitly deferred/escalated with reason+next owner. Use `validate-closeout --agent claude`; `--defer active_card_owner_review` records explicit Maintainer-recorded deferral. Receiver-side `actioned` is not Claude's gate. Codex implemented PRD/tool/eval side (evals/prd-014-amendment.evals.mjs 15/15 GREEN, independently verified). |
 
 Changes to protocol semantics require maintainer approval (PRD-012 R7.2).
 Environment-specific changes that don't alter protocol semantics are Claude-owned but must be documented (PRD-012 R7.3).

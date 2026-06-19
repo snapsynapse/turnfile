@@ -1,6 +1,6 @@
-# Boot File - Codex (v11)
+# Boot File - Codex (v13)
 
-Read this first on Codex session start. It is the Codex handoff from session 21 closeout.
+Read this first on Codex session start. It is the Codex handoff from session 23 closeout.
 
 ## Project
 
@@ -32,44 +32,47 @@ node tools/session-orient.mjs --agent codex --emit json
 ## Boot Checks
 
 1. Check `working-session/MAILBOX.md` first and action any Codex unread message before asserting readiness.
-2. Create or update only the own chat file `working-session/chat-codex.md` when the current session needs a chat snapshot.
-3. A missing peer chat file is warning only. Do not create `working-session/chat-claude.md`, `working-session/chat-gemini.md`, or any other peer chat file from the Codex lane.
-4. Confirm ownership guard state with `node tools/validate-ownership-guard.mjs --format json`.
-5. Run `node tools/validate-closeout.mjs --turnfile working-session/TURNFILE.yaml --mailbox working-session/MAILBOX.md --agent codex` before assuming Codex can close cleanly.
+2. Run the Codex skills preflight early: `node tools/validate-skills-preflight.mjs --repo-turnfile-skill skills/codex/SKILL.md`.
+3. Create or update only the own chat file `working-session/chat-codex.md` when the current session needs a chat snapshot.
+4. A missing peer chat file is warning only. Do not create peer chat files from the Codex lane.
+5. Confirm ownership guard state with `node tools/validate-ownership-guard.mjs --format json`.
+6. Run `node tools/validate-closeout.mjs --turnfile working-session/TURNFILE.yaml --mailbox working-session/MAILBOX.md --agent codex` before assuming Codex can close cleanly.
+7. If a heartbeat is negotiated, create the actual app automation before claiming it is operational, and delete it at clean close.
 
-## Session 21 Close State
+## Session 23 Close State
 
-Session 21 closed from the Codex side on 2026-06-18 on `main`.
+Session 23 closed from the Codex side on 2026-06-19 on `main`.
 
-- Turnfile revision at Codex close: `278`.
+- Turnfile revision at Codex close: `312`.
 - Codex status: `idle`; current task: `null`.
-- Mailbox state at close: Codex unread `0`; Claude unread `1` (`MSG-20260617-066`); Gemini unread `1` (`MSG-20260618-001`); Maintainer unread `0`.
+- Mailbox state at close: Codex unread `0`; Claude unread `0`; Gemini unread `0`; Maintainer unread `0`.
 - Locks at close: none.
-- Heartbeat state: no Codex heartbeat carried forward.
-- Boot rollover: v10 archived to `docs/archive/boot-codex/boot-codex_v10.md`; active boot is v11.
+- Heartbeat state: Codex app heartbeat `turnfile-codex-readonly-steward-s23` deleted at close; no Codex heartbeat carried forward.
+- Boot rollover: v12 archived to `docs/archive/boot-codex/boot-codex_v12.md`; active boot is v13.
 
 Immediate rule: re-read live files before asserting shared state. Claude, Gemini, Codex, and the Maintainer may have changed coordination files between sessions.
 
-## Completed In Session 21
+## Completed In Session 23
 
-1. Booted the three-agent session, established handshakes with Claude and Gemini, and negotiated the heartbeat concept into a read-only steward design.
-2. Drafted PRD-038, "Read-Only Heartbeat Steward Contract"; applied Claude C1/C2; recorded Claude and Gemini acceptance; Maintainer accepted; promoted to `docs/prds`.
-3. Reviewed PRD-037, "Session Boot Simplification"; applied C1-C5 through Claude; Maintainer accepted; promoted to `docs/prds`.
-4. Refreshed current public and agent-facing PRD count claims to 37 registry-tracked and 35 promoted, including README, docs index, `llms.txt`, assistant guide, and manifests.
-5. Completed the PRD-014 active-card owner sweep: moved 28 resolved Codex-owned actioned cards to Closed Summary and regenerated `MAILBOX.json`.
-6. Added onboarding glossary material and suggested Gemini shutdown parity changes without editing Gemini-owned files.
-7. Actioned Claude `MSG-20260618-002`, acknowledging Gemini FULL-ACTIVE ratification, PRD-015 reactivation/promotion, PRD-027 production competence, PRD-017 A1, and the reviewer-policy change that adds Gemini as a required reviewer for new PRDs.
-8. Closed Codex-owned `MSG-20260618-003` after Claude acknowledged the shutdown-readiness handoff inline.
+1. Opened session 23 with Claude and Gemini and ran a 5-minute read-only Codex heartbeat steward until close.
+2. Promoted and executed the constrained Perplexity onboarding path under PRD-039 without granting Perplexity write authority or reviewer/approval authority.
+3. Recorded Perplexity evidence under `working-session/docs/onboarding/evidence/perplexity-computer/2026-06-18-01/`.
+4. Captured Perplexity PROVISIONAL CHECKER evidence: OT-009/OT-010/OT-011 pass, OT-008 conditional-pass, and explicit no-write/no-authority boundaries.
+5. Added `tools/validate-onboarding-evidence.mjs`, registered it in PRD-039 implementation metadata, and verified `evals/onboarding-execution.evals.mjs` 14/14 plus `evals/prd-039.evals.mjs` 16/16.
+6. Processed Perplexity Tokenese checker outputs for W4 drift, calibration rules, and eight proposed fixture pairs. These remain evidence-only and non-authoritative.
+7. Actioned Claude's PRD-041 pre-A1 infrastructure request with a feasibility read: use per-agent shards plus deterministic merge, adapter-graded transport, expanded live-turn event schema, and router-grade queue/lease semantics beyond today's manual `turn_queue`/`locks`.
+8. Actioned Gemini's skills-preflight recommendation. The live boot file now includes the Codex skills preflight command; a future scoped skill-bundle update should mirror it into `skills/codex/SKILL.md` with changelog/manifest alignment.
+9. Deleted the Codex app heartbeat at close.
 
 ## Carry Forward
 
-1. Codex has no unread mailbox messages at close.
-2. Claude owns `MSG-20260617-066`, the substantive review request for the PRD-014 active-card owner review gate. Do not close that card from Codex unless Claude responds or the Maintainer directs.
-3. Gemini has unread `MSG-20260618-001`, its FULL-ACTIVE welcome and six-item parity checklist.
-4. PRD-031 C1 remains the next Codex infrastructure lane when the next session reopens it.
-5. Gemini is now a full required PRD reviewer for new PRDs. Future `PRD_STATUS.json` edits must include `acceptance.gemini` for new PRDs unless the Maintainer explicitly creates an exception.
-6. PRD-015 is active again and promoted to `docs/prds/`; do not treat the old archived PRD-015 state as current.
-7. Dirty worktree remains mixed across Codex, Claude, Gemini, and Maintainer-owned paths. Do not stage or commit peer-owned files from the Codex lane without Maintainer direction.
+1. PRD-041 remains proposed and incomplete. Wait for Gemini's runtime/OQ#1 answer before formal A1 routing or implementation.
+2. If PRD-041 proceeds, start with schema and fixtures, deterministic projection from fixture logs, a fake-adapter router demo, then real CLI adapters behind receipt/dedup contracts.
+3. Perplexity remains PROVISIONAL CHECKER / no-write. Any writer or full-active transition requires a later explicit Maintainer decision.
+4. Claude remains closure owner for MSG-20260618-016 and PRD-039 step-7 review. Do not close that thread from Codex without Claude or Maintainer direction.
+5. `s22-perplexity-onboarding-exec` is left as carry-forward infrastructure/evidence lane, not active Codex current_task.
+6. The dirty worktree remains mixed ownership. Do not stage peer-owned `skills/claude/*`, `boot-claude.md`, or `chat-claude.md` from the Codex lane without explicit Maintainer direction.
+7. New PRDs require Gemini acceptance evidence in `PRD_STATUS.json` unless the Maintainer explicitly creates an exception.
 
 ## Tokenese Guardrails
 
@@ -85,10 +88,10 @@ Immediate rule: re-read live files before asserting shared state. Claude, Gemini
 Before substantive work, establish:
 
 1. Turnfile version: `SPEC.md` v0.1.0-reset and `TURNFILE.yaml` protocol version 0.1 unless the Maintainer changes the target.
-2. Tokenese state: observe fresh Tokenese repo state before asserting current version; do not rely on v0.3.7 as current without observation.
-3. Onboarding and skill state: load the role-keyed Codex skill, verify model ledger coverage, follow `docs/BOOT_SEQUENCE.md`, self-validate with mailbox/Turnfile/PRD checks, and mutually confirm active peer context before write work.
-4. Session completion criteria and scope: pick one bounded primary lane before implementation. Current recommendation is PRD-031 C1 unless the Maintainer redirects.
-5. Outstanding issues: Claude review of `MSG-20260617-066`, Gemini's session-22 parity checklist, PRD-031 C1 implementation sequencing, and dirty-worktree commit strategy.
+2. Tokenese state: observe fresh Tokenese repo state before asserting current version.
+3. Onboarding and skill state: load the role-keyed Codex skill, verify model ledger coverage, follow `docs/BOOT_SEQUENCE.md`, run Codex skills preflight, self-validate with mailbox/Turnfile/PRD checks, and mutually confirm active peer context before write work.
+4. Session completion criteria and scope: pick one bounded primary lane before implementation.
+5. Outstanding issues: PRD-041 runtime/transport decision, PRD-039 step-7 review, Perplexity no-write boundary, and dirty-worktree commit strategy.
 
 ## Validation Commands
 
@@ -101,7 +104,7 @@ node tools/turnfile-lint.mjs --turnfile working-session/TURNFILE.yaml --schema s
 node tools/validate-prd-promotion.mjs --registry working-session/docs/PRD_STATUS.json
 node tools/validate-closeout.mjs --turnfile working-session/TURNFILE.yaml --mailbox working-session/MAILBOX.md --agent codex
 node tools/validate-ownership-guard.mjs
-npm run -s validate:skills
+node tools/validate-skills-preflight.mjs --repo-turnfile-skill skills/codex/SKILL.md
 git diff --check
 ```
 

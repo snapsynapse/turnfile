@@ -1,4 +1,4 @@
-# Boot File — Claude (v17)
+# Boot File — Claude (v16)
 
 Read this first on session start. It tells you what this project is, where things are, what state we're in, and what to do next.
 
@@ -72,38 +72,41 @@ Cross-agent contract: `docs/BOOT_SEQUENCE.md` (PRD-017). This file is Claude-spe
 
 Run `NEXT_SESSION_HANDSHAKE.md` (session-22 addendum) and converge/sign with peers before substantive writes. **Out-of-band drift check (PRD-023):** reconcile any peer/Maintainer edits made outside the turn loop against the WORKLOG before trusting remembered state; unrecorded changes that altered **governance state** are **decision-required** (record/escalate before acting), while non-governance drift is a warning. **Chat-file semantics (PRD-017 R7):** create only your OWN `chat-claude.md` if absent; a missing peer chat file (`chat-codex.md` / `chat-gemini.md`) is a **warning only** — boot never creates a peer chat file.
 
-## Current state (as of session-23 close, 2026-06-18)
+## Current state (as of session-22 close, 2026-06-18)
 
-THREE EQUAL agents: Claude (Opus 4.8), Codex (GPT-5), Gemini (Antigravity / Gemini 3.5 Flash High). All three idle/closed at session-23 end. TURNFILE at rev 313 at close; read it fresh. Session 23 = heavy governance/design session: PRD-039 Perplexity onboarding advanced to live OBSERVER→PROVISIONAL CHECKER execution; PRD-040 (Gemini's first PRD) accepted; **PRD-041 (Unified Terminal Transport + Deterministic Projection) drafted + Maintainer-accepted**; new tool `tools/validate-onboarding-evidence.mjs` (Codex) + new eval `evals/onboarding-execution.evals.mjs` (Claude) landed; mailbox compacted 574→64 lines. Perplexity is at PROVISIONAL CHECKER (no shared-write, not a required reviewer).
+THREE EQUAL agents: Claude (Opus 4.7/4.8), Codex (GPT-5), Gemini (Antigravity / Gemini 3.5 Flash High). All three idle/closed at session-22 end. TURNFILE at rev ~292 at close; read it fresh. Session 22 = first three-agent session opened entirely via `tools/handshake-sign.mjs` (one tool call per agent); 3-way handshake converged on 5m self-owned read-only steward heartbeats across all agents (PRD-038 R2). **PRD-039 (Perplexity Computer onboarding deltas) DRAFTED + RED evals 16/16 GREEN**; Codex executed step 6 Codex-side (PRD_STATUS registered + OT-009/010/011 added to ONBOARDING_TEST_SUITE.md); awaiting Maintainer PRD acceptance + Claude step-7 review.
 
-### FIRST ACTIONS ON RESUME (session 24)
+### FIRST ACTIONS ON RESUME (session 23)
 
 1. **Use the fast path.** `node tools/session-orient.mjs --agent claude --emit human`. If clean, boot is done.
-2. **Use `tools/handshake-sign.mjs`** for the boot write (auto-creates `s<N>-handshake-heartbeat`; PRD-037 OQ-D closed). Run `NEXT_SESSION_HANDSHAKE.md` and converge with peers.
-3. Carry-forward (mine / Claude lane):
-   - **PRD-041**: author `evals/prd-041.evals.mjs` RED (I'm eval_author) AFTER Codex spikes the R4 event-sourced arbitration-primitive schema (sequence: Codex schema → Claude evals → Codex implements router/projector → review). Also: PRD-041 promotion to `docs/prds` is eligible (all four accepted) — a move-not-copy when Maintainer directs.
-   - **PRD-040 step-7**: Gemini is eval_author for `evals/prd-040.evals.mjs`; when it routes the RED suite + Codex implements, I review.
-4. Carry-forward (route to Codex): R4 arbitration-primitive schema spike (PRD-041); PRD-041 router/projector/event-schema implementation (extends `tools/aggregate-coordination.mjs`); PRD-037 `claude.acceptance.evidence` cleanup (MSG-20260617-067 lineage, if still open).
-5. Carry-forward (route to Gemini): `evals/prd-040.evals.mjs` authoring (its first eval-first A1 loop as eval_author).
-6. Carry-forward (housekeeping): formal move of the ~124 trimmed Closed Summary rows from the session-23 compaction into `MAILBOX_ARCHIVE.md` (tooling-assisted; currently preserved in git history only).
+2. **Use `tools/handshake-sign.mjs`** for the boot write. **PRD-037 OQ-D is now CLOSED** (Codex session-22 follow-through): handshake-sign v2 auto-creates the `s<N>-handshake-heartbeat` task if missing. No manual task-create needed by the first booting agent.
+3. Run `NEXT_SESSION_HANDSHAKE.md` and converge with peers.
+4. Carry-forward (mine):
+   - **PRD-039 step-7 review** when Codex declares implementation complete. Codex did much of step 6 in-session 22 (PRD_STATUS registration + suite addenda + evals 16/16 GREEN); next session check Codex's exec-lane outputs and apply-or-counter against the PRD-039 contract (R1-R8). Also: if PRD-039 still draft, raise to Maintainer for acceptance gate.
+   - **MSG-20260618-008 + MSG-20260618-009 archival** — both Claude-owned, currently `actioned` + explicitly deferred for next-cycle terminal-archival. At session 23 close (or sooner): mark `closed`, move to `MAILBOX_ARCHIVE.md`, add Closed Summary rows.
+5. Carry-forward (route to Codex, NOT Claude):
+   - PRD-037 `claude.acceptance.evidence` cleanup (current text copy-pasted from PRD-038 — MSG-20260617-067 still open).
+   - PRD-031 C1 infrastructure lane (Codex's next likely lane if reopened).
+   - `s22-perplexity-onboarding-exec` continuation after Maintainer PRD-039 acceptance: actual Perplexity bundle port + runtime port spec + OWNERSHIP map changes at the appropriate ladder transition.
+6. Carry-forward (Gemini's 6-item parity checklist remains): see session-21 boot-claude (v15) for full list; Gemini self-closeout discipline + boot-gemini versioning + PRD-035 A1 loop end-to-end + bundle version drift fix.
 
-### Recent milestones (session 23)
+### Recent milestones (session 22)
 
-- **PRD-041 Unified Terminal Transport + Deterministic Projection DRAFTED + Maintainer-accepted.** Reframe: structured event log = source; terminal view + repo markdown are both deterministic projections (resolves English-vs-Tokenese source tension; completes PRD-031). Role-targeted peer input folded: Gemini OQ#1 → bridge Antigravity (not gemini-CLI); Codex "feasible with scoping" → capability-graded adapters (R3), per-agent shards (R1), event-sourced arbitration primitive replacing turn_queue (R4). All four reviewers accepted.
-- **PRD-040 (Gemini's first PRD) accepted.** Claude reviewed APPLY w/ C1-C4 (two read-only-integrity contradictions); Gemini applied all; Maintainer accepted. Heartbeat-loop-prompt contract — addresses thread-mode blindness.
-- **Coached Gemini's first PRD routing** (MSG-015): caught the move-not-copy promotion error + stale header; Gemini self-corrected and folded the rule into skill v0.2.4. Oversight loop worked end-to-end.
-- **Onboarding execution-layer evals**: Claude authored `evals/onboarding-execution.evals.mjs` (evidence-artifact structure + R5 rung gates, candidate-agnostic); Codex built `tools/validate-onboarding-evidence.mjs`; 14/14, Claude step-7 APPROVE.
-- **PRD-039 Perplexity** advanced to live OBSERVER evidence + Codex OBSERVER→PROVISIONAL CHECKER recommendation; Claude cross-review APPLY w/ counters (OT-010/011 conditional, work-authorization gate before citation-bearing checker work).
-- **Heartbeat proven**: Claude ran a live 5-min read-only steward cron all session; it surfaced two real inbound work items (MSG-011, MSG-014) within a tick each. Deleted at close.
+- **3-way handshake convergence (first session with full handshake-sign three-agent open).** All three agents booted via `tools/handshake-sign.mjs` in one tool call each. 5m self-owned read-only steward heartbeats aligned across Claude/Codex/Gemini per PRD-038 R2.
+- **MSG-20260617-066 PRD-014 active-card-owner-review APPROVED no counters** (Claude carry-forward from session 21). Independently re-verified `evals/prd-014-amendment.evals.mjs` 15/15 GREEN; PRD R2.6 + A1.R1#6 + `validate-closeout --agent` flag + `--defer` escape all sound; owner-vs-actioned gate intentionally narrower than spec-level review obligation (correct). skills/claude propagated: SKILL.md 0.9.1→0.9.2 (Module 6 step 3b added); MANIFEST bundle 13→14; CHANGELOG v14; hashes regenerated.
+- **PRD-039 Perplexity Computer onboarding deltas DRAFTED + RED evals**. Specialization (not replacement) of PRD-015 substrate. Four-rung ladder named: OBSERVER → PROVISIONAL CHECKER → PROVISIONAL CONSTRAINED WRITER → FULL-ACTIVE. R2 citation discipline as contract obligation. OT-009/010/011 candidate-agnostic. Routed Codex apply-or-counter MSG-008 + Gemini peer review MSG-009. Codex verdict APPLY + executed PRD_STATUS registration + suite addenda + evals 16/16 GREEN; Gemini actioned with peer-review feedback. A1 step-7 Claude review opens session 23 when Codex declares impl complete.
+- **PRD-037 OQ-D closed by Codex this session**: handshake-sign v2 auto-creates the missing session-task. No more manual `s<N>-handshake-heartbeat` task-create needed by the first booting agent. Boot floor reduced further.
+- **Codex side: PRD-037 implementation follow-through complete** (`evals/prd-037.evals.mjs` 13/13) including PRD-030 default-flip read-only steward amendment + handshake-sign v2 task auto-create.
+- **Discipline note:** Claude over-flagged hold-points at PRD-039 drafting kickoff (proposed C1-C3 as pending Maintainer confirmation; Maintainer correctly noted the Codex-relay approval already covered them). Lesson: when a Maintainer-routed assignment hands over a design with stated scope, refinements within that scope are mine to make, not separate decisions to escalate. Don't over-flag.
 
 ### PRD landscape (authoritative: `working-session/docs/PRD_STATUS.json`)
 
-- 40 PRDs tracked (PRD-039 session 22; PRD-040 + PRD-041 session 23). PRD-040 + PRD-041 accepted session 23 (PRD-041 eligible for promotion, still in working-session/docs). PRD-015/039 onboarding substrate live.
-- Required reviewers `{codex, claude, maintainer, gemini}`. Perplexity NOT a required reviewer (PRD-039 R6 #3); at PROVISIONAL CHECKER rung, no shared-write.
+- 38 PRDs tracked (PRD-039 added session 22), 35 promoted. PRD-039 awaiting Maintainer acceptance gate.
+- All three agents are required reviewers going forward (`policy.required_reviewers={codex,claude,maintainer,gemini}`). Perplexity NOT in required_reviewers until separate later Maintainer decision (PRD-039 R6 #3).
 - Open eval-first lanes:
-  - PRD-041 (Claude eval_author): blocked on Codex R4 arbitration-primitive schema spike first.
-  - PRD-040 (Gemini eval_author → Codex impl → Claude review).
-  - PRD-035 Tokenese sync (Gemini lead).
+  - PRD-039 Perplexity onboarding deltas: Claude proposer+evals authored, Codex executed step-6 Codex-side, Claude step-7 review opens session 23 if Codex declares complete.
+  - PRD-035 Tokenese sync implementation (Gemini lead, eval-first A1 loop demo per parity checklist).
+  - PRD-031 C1 infrastructure (Codex's likely next infrastructure lane if reopened).
 
 ### Operating norms (skill v0.9.1 + PRD-037 + PRD-038)
 

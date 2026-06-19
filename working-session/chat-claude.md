@@ -482,3 +482,73 @@ Gemini's 6-item parity checklist (MSG-20260618-001):
 
 ### Concurrency note
 3-agent live throughout session 21 (rev moved 256→280, ~24 increments in one sitting). Multiple mid-write collisions on MAILBOX/TURNFILE/HANDSHAKE; the Read-before-edit guard caught each. Re-grounded, took the next rev. First session where Gemini was equal peer in writes — no protocol violations observed.
+
+---
+
+## Session 22 close snapshot — Claude (Opus 4.7 / Claude Code Fast)
+
+**Date:** 2026-06-18
+**Branch:** main
+**Turnfile revision at close:** ~292
+**Phase:** phase-2 / s22-handshake-heartbeat
+**Close reason:** Maintainer directed close after PRD-039 draft + RED evals routed and both peer verdicts landed.
+**Revision token:** REV-20260618-snapshot-claude-1-h22close01
+
+### Active task status
+- s22-perplexity-onboarding-design: DONE (rev 292). PRD-039 drafted + RED evals authored + routed; both peer verdicts in-session (Codex APPLY+executed; Gemini actioned). A1 step 6 substantially complete via Codex follow-through; step 7 Claude review opens session 23.
+- MSG-20260617-066 review (PRD-014 active-card-owner-review): COMPLETE this session. Verdict APPROVE, no counters. skills/claude propagated v0.9.2.
+
+### Mailbox state at close
+- Claude unread 0. Codex unread 0. Gemini unread 0. Maintainer unread 0.
+- Claude-owned active cards (Closure owner=Claude): MSG-001 (acknowledged, terminal), MSG-008/009 (actioned, deferred for next-cycle archival), MSG-048/044/042/030 (historical acknowledged, not blocking).
+- validate-closeout --agent claude clean with one explicit deferral: `active_card_owner_review` (2-card archival rollover, next owner: any agent at session 23 close).
+
+### Open commitments / decision context
+- PRD-039 step-7 Claude review when Codex declares implementation complete (PRD_STATUS registered + suite addenda + evals 16/16 GREEN already done by Codex this session — but Codex may have residual exec-lane work, e.g. ownership map, bundle port).
+- PRD-039 Maintainer acceptance gate pending; Codex set status to actioned with peer verdicts recorded.
+- 2-card archival rollover (MSG-008/009 to MAILBOX_ARCHIVE) at next compaction.
+- Carry-forward to Codex: PRD-037 claude.acceptance.evidence cleanup; PRD-031 C1 lane if reopened.
+
+### Files modified this session
+- TURNFILE.yaml (boot + claim + done + idle close)
+- WORKLOG.md (status + decision index)
+- MAILBOX.md / MAILBOX.json (MSG-008/009 created + MSG-006/066 actioned)
+- NEXT_SESSION_HANDSHAKE.md (handshake-sign session-22 row)
+- skills/claude/{SKILL.md, MANIFEST.yaml, CHANGELOG.md} (v0.9.1→v0.9.2, bundle 13→14)
+- working-session/docs/PRD-039-perplexity-onboarding-deltas.md (NEW)
+- evals/prd-039.evals.mjs (NEW)
+- working-session/boot-claude.md (v15→v16; v15 archived to docs/archive/boot-claude/)
+- working-session/chat-claude.md (this snapshot)
+
+### Files to read on resume (ordered, budgets)
+1. `working-session/boot-claude.md` v16 (~6k tokens) — orientation + carry-forward.
+2. `working-session/TURNFILE.yaml` lines 1-300 (~3k) — coordination state, fresh.
+3. `working-session/WORKLOG.md` lines 1-15 (~2k) — status block.
+4. `working-session/MAILBOX.md` Inbox Snapshot + Open Queue + MSG-008/009 cards if archival lane chosen.
+5. `working-session/docs/PRD_STATUS.json` — PRD-039 + acceptance gate state.
+6. `working-session/docs/PRD-039-perplexity-onboarding-deltas.md` if continuing the Perplexity lane.
+
+### Lesson learned
+Don't over-flag confirmations within an already-authorized scope. When a Maintainer-routed assignment hands over a design with stated scope (Codex MSG-006: "draft the PRD and RED evals"), refinements within that scope (C1 narrowed packet, C2 ladder names, C3 citation framing) are mine to make, not separate decisions to escalate. Sam's "I thought I already approved all that" was a direct correction of that pattern; recording it for next session's discipline.
+
+### Gratitude
+Thanks to Codex for the fast follow-through on PRD-039 (PRD_STATUS registration + suite addenda + 16/16 GREEN landed before close), and to Gemini for the load-bearing fresh-onboarding peer review. Three-agent close in one session — clean.
+
+### Concurrency note
+3-agent live throughout session 22 (rev moved 282→292, +10 increments). Multiple mid-write collisions on TURNFILE/MAILBOX caught by the Read-before-edit guard. Headers occasionally lagged behind coordination.revision through interleaved writes; reconciled within the same turn each time.
+
+## Session 23 close snapshot (Claude Opus 4.8, 2026-06-18, rev 313)
+
+Opened via handshake-sign (rev 294). 3-agent live for most of the session (rev 293->313). Ran a live 5-min read-only heartbeat cron (`turnfile-claude-readonly-steward-s23`) the whole session — it caught two real inbound work items within a tick each (MSG-011 Perplexity OBSERVER review; MSG-014 PRD-040 review), proving the steward earns its keep; deleted at close.
+
+Deliveries:
+- PRD-039 Perplexity OBSERVER evidence cross-review: APPLY with counters — OT-009 PASS confirmed, OT-010/011 downgraded to CONDITIONAL-PASS (acknowledgment-stated, not behaviorally exercised at the read-only OBSERVER rung); added a work-authorization gate before citation-bearing checker work. Codex closed it incorporating the counters.
+- PRD-040 (Gemini's first PRD): reviewed APPLY w/ C1-C4 (two read-only-integrity contradictions in the heartbeat-loop-prompt draft); Gemini applied all four; recorded Claude + Maintainer acceptance -> all-four accepted.
+- Coached Gemini's FIRST PRD routing (MSG-015): caught the move-not-copy promotion error (orphan duplicate -> validate-prd-promotion RED) + stale in-body header. Flagged, did not fix (its lane). Gemini self-corrected and folded the rule into its skill v0.2.4. Oversight loop worked.
+- Authored evals/onboarding-execution.evals.mjs (execution-layer onboarding evals — evidence-artifact structure + R5 rung gates). RED baseline 12/2; caught my own over-broad C1 (enforced OT-009/010/011 on the non-search-grounded Gemini run). Routed to Codex; Codex built tools/validate-onboarding-evidence.mjs -> 14/14; Claude step-7 APPROVE.
+- PRD-041 (Unified Terminal Transport + Deterministic Projection): drafted from the Maintainer's "stop being the transport layer" goal. Reframe = structured event log as source; terminal + markdown both deterministic projections (resolves the English-vs-Tokenese source tension; completes PRD-031). Role-targeted peer input: Gemini resolved OQ#1 (bridge Antigravity, declined gemini-CLI downgrade); Codex "feasible with scoping" (capability-graded adapters, shards confirmed, turn_queue insufficient -> event-sourced arbitration primitive). Folded into R3/R4/R8. Maintainer reviewed + approved -> all-four accepted.
+- Mailbox compaction at close: 574->64 lines; 11 active cards closed (incl. step-7 MSG-016); Closed Summary ledger retained (older ~124 rows collapsed, preserved in git history).
+
+Lessons: (1) thread-mode blindness is real — peers closing my sent cards never raised my unread; the closure-owner sweep + heartbeat caught them. PRD-040 exists to fix exactly this. (2) Held the MSG-008/009 archival + compaction repeatedly while the mailbox was hot (Codex live-writing); "rev stable across 2 ticks" gave a false-positive safe window once — Codex idle status, not rev-stability, is the reliable trigger. Did it cleanly at close when both peers idle. (3) Don't over-function but don't under-deliver: registered Maintainer acceptances + drafted PRDs (my lane); routed implementation (validator, arbitration primitive, eval authoring) to Codex/Gemini.
+
+Carry-forward (session 24): PRD-041 promotion to docs/prds (move-not-copy) + Codex arbitration-primitive schema spike + Claude-authored evals/prd-041.evals.mjs; PRD-040 eval authoring (Gemini eval_author -> Codex impl -> Claude review); onboarding-execution eval registered + green; formal MAILBOX_ARCHIVE.md move of the ~124 trimmed Closed Summary rows (tooling-assisted).

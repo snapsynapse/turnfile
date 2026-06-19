@@ -1,6 +1,6 @@
 bundle: turnfile-protocol-claude
-bundle_version: 13
-bundle_date: 2026-06-17
+bundle_version: 14
+bundle_date: 2026-06-18
 description: >
   Claude's protocol execution guide for the Turnfile protocol (a SNAP protocol).
   Encodes mailbox lifecycle, payload-first review, lock-safe shared-file updates,
@@ -53,21 +53,23 @@ provenance:
 files:
   - path: SKILL.md
     role: skill
-    version: 13
-    hash: sha256:80e2943c85470931b9d9f1d9ff3a4389749d4d7d8b03f18880149915b87c8325
+    version: 14
+    hash: sha256:a3d220f5f055ff99caeb127c321ce7e11623de828820b8ffd54da5b5ae4b4e44
     note: >
-      Claude protocol execution guide v0.9.1. 9 modules (M0-M8) + cross-cutting
-      norms. Baseline PRD-003..014 + PRD-016..019; PRD-021/022/024/030 + PRD-014
-      A1 propagated. Orientation read-set prefers tools/session-orient.mjs
-      (PRD-032, green) first. Session Heartbeat Management (PRD-030), Decision
-      Mirror Modes (PRD-022), Tokenese Adoption Guardrails (PRD-027), Files-First,
-      Concurrent Write Discipline incl. Read-tool guard + re-Read-peer-files
-      (session 16), Model-Ledger Handshake, encoding profiles, peer-change disclosure.
+      Claude protocol execution guide v0.9.2. 9 modules (M0-M8) + cross-cutting
+      norms. Baseline PRD-003..014 + PRD-016..019; PRD-021/022/024/030/037/038 +
+      PRD-014 A1 + PRD-014 active-card owner review amendment propagated.
+      Module 6 step 3b: owner-scoped active-card review at close.
+      Orientation read-set prefers tools/session-orient.mjs (PRD-032, green).
+      Session Heartbeat Management (PRD-030), Decision Mirror Modes (PRD-022),
+      Tokenese Adoption Guardrails (PRD-027), Files-First, Concurrent Write
+      Discipline incl. Read-tool guard + re-Read-peer-files, Model-Ledger
+      Handshake, encoding profiles, peer-change disclosure.
 
   - path: CHANGELOG.md
     role: reference
-    version: 13
-    hash: sha256:f574d00b1865af3745e8139e122e8dada8a0c37d6b841afefdc9e24ba5af9916
+    version: 14
+    hash: sha256:8924b08a54900d4c0ae0858716cf5749ef2cddb28b0762c78040a25bdb555e21
     note: Bundle change history.
 
   - path: MANIFEST.yaml

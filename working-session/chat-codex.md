@@ -300,3 +300,49 @@ State at initialization:
   - PRD-031 C1 remains the likely next Codex infrastructure lane when the next session opens.
   - Future new PRDs require Gemini acceptance evidence in `PRD_STATUS.json`.
 - Lesson learned: read-only stewardship and owner-scoped closeout checks keep multi-agent speed from becoming peer overreach; request help, action your own inbox, and leave peer-owned review state intact.
+
+## Session 22 Close Snapshot - 2026-06-18
+
+- Session: `codex-session-22`
+- Turnfile revision at Codex close: `291`
+- Codex status: `idle`; current task `null`
+- Mailbox state: Codex unread `0`; Claude unread `0`; Gemini unread `0`; Maintainer unread `0`
+- Locks: none
+- Heartbeat: Codex app heartbeat `turnfile-codex-readonly-steward` deleted at close; no Codex heartbeat carried forward.
+- Completed this session:
+  - Established session-22 handshakes with Claude and Gemini.
+  - Created the actual 5-minute Codex read-only heartbeat after the Maintainer caught the mismatch between negotiated heartbeat and missing automation.
+  - Completed heartbeat lifecycle by deleting the automation at close.
+  - Implemented PRD-037 follow-through: PRD-030 default read-only steward amendment and `tools/handshake-sign.mjs` missing-task auto-create.
+  - Registered PRD-039 in `PRD_STATUS.json`, added OT-009/010/011 to the onboarding suite, and verified `evals/prd-039.evals.mjs` 16/16 green.
+  - Closed Codex-owned mailbox cards and cleared active-card owner review.
+  - Rolled Codex boot from v11 to v12 and archived v11.
+- Carry-forward:
+  - Actual Perplexity onboarding execution remains held for PRD-039 Maintainer acceptance and peer closeout disposition.
+  - `s22-perplexity-onboarding-exec` remains pending and should not be claimed until that gate clears.
+  - Dirty worktree remains mixed ownership, including peer-owned `skills/claude/*`.
+- Lesson learned: heartbeat agreements need immediate runtime verification. A negotiated cadence is not operational until the app automation exists and is visible.
+## Session 23 Close Snapshot - 2026-06-19
+
+- Session: `codex-session-23`
+- Turnfile revision at Codex close: `312`
+- Codex status: `idle`; current task `null`
+- Mailbox state: Codex unread `0`; Claude unread `0`; Gemini unread `0`; Maintainer unread `0`
+- Locks: none
+- Heartbeat: Codex app heartbeat `turnfile-codex-readonly-steward-s23` deleted at close; no Codex heartbeat carried forward.
+- Completed this session:
+  - Established session-23 heartbeat/handshake posture with Claude and Gemini.
+  - Promoted and executed the constrained PRD-039 Perplexity onboarding path without granting write, reviewer, PRD approval, or Maintainer authority to Perplexity.
+  - Recorded Perplexity evidence and candidate responses under `working-session/docs/onboarding/evidence/perplexity-computer/2026-06-18-01/`.
+  - Added `tools/validate-onboarding-evidence.mjs` and registered the onboarding execution eval/validator in PRD-039 metadata.
+  - Verified `evals/onboarding-execution.evals.mjs` 14/14 and `evals/prd-039.evals.mjs` 16/16.
+  - Captured Perplexity Tokenese checker evidence for W4 drift, calibration rules, and test-fixture design as evidence-only artifacts.
+  - Actioned PRD-041 pre-A1 infrastructure feasibility feedback: per-agent shards plus deterministic merge, adapter-graded transport, expanded live-turn schema, and router-grade queue/lease semantics.
+  - Accepted Gemini's Codex skills-preflight recommendation as a next scoped Codex skill-bundle update and added the preflight command to boot-codex v13.
+  - Rolled Codex boot from v12 to v13 and archived v12.
+- Carry-forward:
+  - PRD-041 remains proposed. Wait for Gemini runtime/OQ#1 before formal A1 apply-or-counter or implementation.
+  - Perplexity remains PROVISIONAL CHECKER / no-write. Any writer or full-active transition requires explicit Maintainer decision.
+  - Claude remains closure owner for MSG-20260618-016 and PRD-039 step-7 review.
+  - Dirty worktree remains mixed ownership. Do not stage peer-owned files from the Codex lane without Maintainer direction.
+- Lesson learned: PRD-041 is the right next structural step, but the router needs adapter receipts, dedup, crash replay, and governance gates before it can replace human relay safely.

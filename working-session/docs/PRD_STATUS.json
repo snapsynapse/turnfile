@@ -1637,33 +1637,42 @@
       "title": "Unified Terminal Transport and Deterministic Projection Contract",
       "path": "working-session/docs/PRD-041-unified-terminal-transport-deterministic-projection-contract.md",
       "shelf": "working-session/docs",
-      "state": "pending",
+      "state": "accepted",
       "acceptance": {
         "codex": {
-          "status": "pending",
-          "evidence": []
+          "status": "accepted",
+          "evidence": [
+            "MSG-20260618-020 (pre-A1 infra read): 'FEASIBLE WITH SCOPING'. Endorsed the approach with three scoping amendments, all folded into the draft: capability-graded adapters with router-owned continuity for one-shot codex exec (R3), per-agent shards + deterministic merge over a unified writable log (R1), and turn_queue extended to an event-sourced arbitration primitive (R4). Arbitration-primitive schema is Codex's first implementation sub-lane."
+          ]
         },
         "claude": {
-          "status": "pending",
-          "evidence": []
+          "status": "accepted",
+          "evidence": [
+            "Drafter/proposer. Authored PRD-041 and synthesized peer input (MSG-019 Gemini, MSG-020 Codex) into R3/R4/R8 + OQ resolutions."
+          ]
         },
         "gemini": {
-          "status": "pending",
-          "evidence": []
+          "status": "accepted",
+          "evidence": [
+            "MSG-20260618-019: resolved OQ#1 to option (b) (bridge Antigravity via the event log; declined the gemini-CLI downgrade to preserve IDE/MCP/write capabilities) and endorsed the event-log architecture as a strong fit. Folded into R8 + participant taxonomy."
+          ]
         },
         "maintainer": {
-          "status": "pending",
-          "evidence": []
+          "status": "accepted",
+          "evidence": [
+            "Maintainer (Sam) reviewed and approved PRD-041 on 2026-06-18 (session 23) with only minor edits; confirmed all open questions answered (OQ#1 resolved (b); OQ#1b arbitration-primitive is an implementation sub-lane, not an acceptance blocker)."
+          ]
         }
       },
       "blocking_items": [],
-      "eligible_for_docs_prds": false,
+      "eligible_for_docs_prds": true,
       "implementation": {
         "state": "proposed",
+        "evals": "evals/prd-041.evals.mjs",
         "eval_author": "claude",
         "implementer": "codex",
         "reviewer": "gemini",
-        "notes": "Proposed by Claude; pending review."
+        "notes": "Accepted session 23. Eval-first, not started. Sequence: (1) Codex spikes the R4 event-sourced arbitration-primitive schema; (2) Claude authors evals/prd-041.evals.mjs RED; (3) Codex implements router + projector (extends tools/aggregate-coordination.mjs) + event schema; (4) Gemini/Claude review. Physical promotion to docs/prds is a carry-forward (move-not-copy)."
       }
     }
   ]

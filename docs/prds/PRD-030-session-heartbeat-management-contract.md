@@ -13,6 +13,16 @@ Date: 2026-06-16
 | Maintainer acceptance | accepted | approved as optional negotiation between LLMs using Turnfile protocol, not a Turnfile requirement, a Turnfile-based agreement |
 | Eligible for move to `docs/prds` | yes | Codex, Claude, and Maintainer accepted; no blocking items remain |
 
+## Amendment A1: Default Read-Only Heartbeat Steward
+
+Accepted PRD-037 and PRD-038 amend this contract for multi-agent session boot.
+
+1. The multi-agent session default is heartbeat on: a 5-minute, self-owned, read-only steward per active runtime, with NOTIFY-on-material-only behavior and stop condition delete at clean session close.
+2. The default heartbeat capability is read-only steward mode under PRD-038. It may refresh files, run read-only checks, and report material state, but it must not edit files, regenerate projections, change mailbox status, create signals, claim tasks, stage, commit, push, or perform destructive commands.
+3. An agent or the Maintainer may opt out at handshake. The opt-out or default-on decision is recorded in the handshake artifact.
+4. Each runtime owns only its own heartbeat automation. The default cadence does not bind peer runtimes, and no heartbeat creates peer liveness obligations.
+5. Write-capable heartbeat behavior remains an explicit elevation and must satisfy the original PRD-030 write discipline plus PRD-038 elevation rules.
+
 ## Input Provenance Tags
 
 1. `explicit`: Maintainer requested a new PRD for session heartbeat management after Codex deleted the `turnfile-mailbox-heartbeat` automation during session close.
@@ -51,7 +61,7 @@ Turnfile needs a narrow lifecycle contract for session heartbeats: how participa
 
 1. Making time-based polling part of the core Turnfile protocol.
 2. Replacing mailbox-first workflow, Turnfile signals, or active-turn boundary discipline.
-3. Requiring every session to use a heartbeat.
+3. Requiring solo sessions or explicitly opted-out sessions to use a heartbeat.
 4. Defining product-specific automation APIs beyond the behavior Turnfile needs from the active agent surface.
 5. Allowing heartbeats to create hidden state, hidden authority, or out-of-band governance.
 6. Redirecting or controlling a vendor/model's internal memory implementation. PRD-030 can only define Turnfile project state as authoritative for this workflow.
@@ -69,7 +79,7 @@ Turnfile needs a narrow lifecycle contract for session heartbeats: how participa
 
 ## R2. Handshake negotiation
 
-At session handshake, participants may negotiate whether to create a heartbeat. The negotiation records:
+At session handshake, participants record the heartbeat decision. For multi-agent sessions, the default decision is a 5-minute self-owned read-only heartbeat steward unless the agent or Maintainer opts out. The negotiation records:
 
 1. Purpose: what recurring condition the heartbeat watches.
 2. Cadence: the interval or schedule, chosen conservatively.
@@ -80,7 +90,7 @@ At session handshake, participants may negotiate whether to create a heartbeat. 
 7. Stop condition: when the heartbeat must be deleted, paused, or updated.
 8. Session-charter record: the heartbeat decision is recorded in the session charter or equivalent handshake artifact.
 
-If no heartbeat is negotiated, the default is no recurring heartbeat.
+If an agent opts out, the default for that agent is no recurring heartbeat. If a heartbeat is active by default, it is read-only steward mode unless explicitly elevated.
 
 Heartbeat state is not stored in `TURNFILE.yaml` by default. Turnfile remains durable protocol state; app automations are ephemeral harness state. A future amendment may add a minimal Turnfile field only if cross-agent multi-heartbeat coordination requires it.
 

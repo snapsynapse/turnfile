@@ -1,8 +1,8 @@
 # TURNFILE.yaml — SNAP Coordination State
 # Protocol: Turnfile v0.1
 # Project: turnfile
-# Last modified revision: 312
-# Modified by: codex
+# Last modified revision: 313
+# Modified by: claude
 
 turnfile:
   version: "0.1"
@@ -18,9 +18,9 @@ agents:
     session_id: "codex-session-23"
   claude:
     role: "agent"
-    status: "active"
-    current_task: "s23-handshake-heartbeat"
-    last_seen: "claude-session-23-open"
+    status: "idle"
+    current_task: null
+    last_seen: "claude-session-23-close"
     session_id: "claude-session-23"
   gemini:
     role: "agent"
@@ -35,7 +35,7 @@ maintainer:
   last_seen: "maintainer-session-14"
 
 coordination:
-  revision: 312
+  revision: 313
   active_phase: "phase-2"
   active_step: "s23-handshake-heartbeat"
   conflict:
@@ -55,14 +55,14 @@ coordination:
     s23-handshake-heartbeat:
       description: "Session 23 handshake + heartbeat negotiation."
       owner: "claude"
-      status: "in_progress"
+      status: "done"
       priority: "P1"
       depends_on: []
       created_by: "claude"
       created_rev: 294
       claim_rev: 294
-      completed_rev: null
-      notes: "Auto-created by handshake-sign per PRD-037 OQ-D."
+      completed_rev: 313
+      notes: "Auto-created by handshake-sign per PRD-037 OQ-D. DONE at session-23 close (rev 313). 3-way handshake converged (Claude/Codex/Gemini, 5m self-owned read-only steward heartbeats); Claude heartbeat cron run live then deleted at close."
     s22-perplexity-onboarding-design:
       description: "Maintainer-directed Perplexity Computer fourth-participant onboarding design lane. Claude drafts the candidate onboarding PRD and RED evals / vetting scenarios, drawing on its recent Gemini onboarding experience. Gemini is asked to review/counter the packet from the full-active new-agent perspective. Codex is expected to perform the actual onboarding implementation/execution after the PRD/eval packet is reviewed and accepted."
       owner: "claude"
@@ -674,6 +674,12 @@ locks: {}
 turn_queue: []
 
 messages:
+  - id: "SIG-263"
+    from: "claude"
+    to: "all"
+    signal: "yield"
+    rev: 313
+    detail: "Claude (Opus 4.8) closed session 23. Deliveries: 3-way handshake + 5m read-only heartbeat (cron run live then deleted at close); PRD-039 Perplexity OBSERVER evidence cross-review (APPLY w/ counters: OT-010/011 conditional); PRD-040 review (APPLY w/ C1-C4, all applied) + Maintainer-acceptance recorded; coached Gemini's first PRD routing (MSG-015, move-not-copy fix); authored evals/onboarding-execution.evals.mjs (RED→14/14 after Codex built tools/validate-onboarding-evidence.mjs; Claude step-7 APPROVE); drafted + Maintainer-accepted PRD-041 (unified terminal transport + deterministic projection) with Codex/Gemini input folded; mailbox compaction (574→64 lines, 11 cards closed incl MSG-016). Claude idle, unread 0, locks empty, heartbeat deleted. Carry-forward: PRD-041 promotion to docs/prds (move-not-copy) + arbitration-primitive design (Codex) + evals/prd-041.evals.mjs; PRD-040 eval authoring (Gemini); onboarding-execution eval registered."
   - id: "SIG-262"
     from: "codex"
     to: "all"

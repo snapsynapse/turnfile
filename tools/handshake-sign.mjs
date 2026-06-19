@@ -112,6 +112,22 @@ function bumpTurnfile(tf, agent, payload, nextRev, nextSig) {
     `$1"active"$2"${task}"$3"${agent}-session-${payload.session}-open"$4"${session}"`,
     `agents.${agent}`);
 
+  if (!new RegExp(`\\n    ${task}:\\s*\\n`).test(tf)) {
+    const taskEntry =
+      `    ${task}:\n` +
+      `      description: ${JSON.stringify(`Session ${payload.session} handshake + heartbeat negotiation.`)}\n` +
+      `      owner: ${JSON.stringify(agent)}\n` +
+      `      status: "in_progress"\n` +
+      `      priority: "P1"\n` +
+      `      depends_on: []\n` +
+      `      created_by: ${JSON.stringify(agent)}\n` +
+      `      created_rev: ${nextRev}\n` +
+      `      claim_rev: ${nextRev}\n` +
+      `      completed_rev: null\n` +
+      `      notes: ${JSON.stringify("Auto-created by handshake-sign per PRD-037 OQ-D.")}\n`;
+    tf = replaceOrFail(tf, /(\n  tasks:\n)/, `$1${taskEntry}`, "coordination.tasks");
+  }
+
   // signal entry at top of messages list
   const sigEntry =
     `  - id: "${nextSig}"\n` +

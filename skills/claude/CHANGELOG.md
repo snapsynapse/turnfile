@@ -1,5 +1,23 @@
 # Changelog
 
+## v14 — 2026-06-18
+- SKILL.md v0.9.1 -> v0.9.2 (PRD-014 active-card owner review amendment mirror).
+  - Module 6 step 3b added: at session close, inspect every Active Message
+    where `Closure owner` = Claude (regardless of unread count). Owned
+    `actioned` cards are NOT terminal by themselves and block clean close
+    unless closed or explicitly deferred/escalated with reason + next owner.
+    Receiver-side `actioned` is not Claude's gate.
+  - Tool integration: `node tools/validate-closeout.mjs --agent claude`
+    reports `compaction.active_card_owner_review.actioned_owned_active`;
+    `--defer active_card_owner_review` records explicit Maintainer-recorded
+    deferral (used by Claude session-21 close for MSG-20260617-066 itself).
+  - Trigger: session-22 substantive review of Codex's PRD-014 amendment
+    (MSG-20260617-066). Verdict APPROVE: PRD R1#5/R2#6/A1.R1#6 text sound;
+    `tools/validate-closeout.mjs` correct (owner+actioned gate, deferral
+    escape, owner-scoped non-blocking for peers); evals/prd-014-amendment
+    independently verified 15/15 green. Codex implemented PRD/tool/eval
+    side; this commit closes the Claude-skill propagation gap.
+
 ## v13 — 2026-06-17
 - SKILL.md v0.9.0 -> v0.9.1 (PRD-032 R7/AC8).
   - The "run the orientation read-set, not recall" norm now prefers

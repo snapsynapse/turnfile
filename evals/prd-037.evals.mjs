@@ -98,6 +98,23 @@ test("AC2: live run writes TURNFILE + HANDSHAKE + WORKLOG and bumps revision", (
   assert.match(read(path.join(dir, "working-session/NEXT_SESSION_HANDSHAKE.md")), /## Sign-off \(session 21\)/);
 });
 
+test("OQ-D: handshake-sign auto-creates a missing session handshake task", () => {
+  const dir = tmpFixture();
+  const tfPath = path.join(dir, "working-session/TURNFILE.yaml");
+  const withoutTask = read(tfPath).replace(/    s21-handshake-heartbeat:[\s\S]*?(?=\n    [a-z0-9-]+:)/, "");
+  fs.writeFileSync(tfPath, withoutTask);
+  const pf = path.join(dir, "payload.json");
+  fs.writeFileSync(pf, payload(21));
+  const out = runTool(dir, ["--agent", "claude", "--payload", pf]);
+  assert.equal(out.status, 0, out.stdout + out.stderr);
+  const tf = read(tfPath);
+  assert.match(tf, /    s21-handshake-heartbeat:\n/);
+  assert.match(tf, /      owner: "claude"/);
+  assert.match(tf, /      status: "in_progress"/);
+  assert.match(tf, /      created_by: "claude"/);
+  assert.match(tf, /Auto-created by handshake-sign per PRD-037 OQ-D/);
+});
+
 test("AC3: collision guard rejects when peer mutated a shared file mid-write", () => {
   const dir = tmpFixture();
   const pf = path.join(dir, "payload.json");
