@@ -5,10 +5,10 @@ description: Execute the Turnfile protocol (a SNAP protocol) in Google Antigravi
 
 # Turnfile Protocol Skill File — Gemini
 
-Version: 0.2.2
+Version: 0.2.3
 Protocol revision baseline: PRD-003 through PRD-014 and PRD-016 through PRD-036, and PRD-014 Amendment A1
 Agent: Gemini (Google) — bundle is role-keyed; the executing model is recorded in MANIFEST.yaml, not in this path
-Last updated: 2026-06-17
+Last updated: 2026-06-18
 
 ---
 
@@ -454,7 +454,7 @@ After any milestone completion, task status change, or substantive protocol acti
       - `node tools/validate-mailbox-invariants.mjs --mailbox working-session/MAILBOX.md`
       - `node tools/turnfile-lint.mjs --turnfile working-session/TURNFILE.yaml --schema schemas/turnfile/turnfile-v0.schema.json`
       - `node tools/validate-prd-promotion.mjs` (if PRDs changed)
-13. **Promote completed artifacts** from `working-session/` to tracked `docs/` (copy, not move) — **only when explicitly directed by maintainer** and only for PRDs that pass the promotion gate (`PRD_STATUS.json` eligible = true + `tools/validate-prd-promotion.mjs` passes + maintainer acceptance evidence per PRD-006 R2a/R3).
+13. **Promote completed artifacts** — **only when explicitly directed by maintainer** and only for PRDs that pass the promotion gate (`PRD_STATUS.json` eligible = true + `tools/validate-prd-promotion.mjs` passes + maintainer acceptance evidence per PRD-006 R2a/R3). Note that PRD promotion is a **move** (delete/git-mv the draft copy from `working-session/docs/` to `docs/prds/` to avoid duplicate validation errors) and requires updating the in-body status header (e.g., `Status: Accepted and promoted...`) and adding the **Promotion Gate Snapshot (PRD-006 R2a)** table. Other (non-PRD) artifact promotions remain copies.
 14. **Commit tracked changes** — only when maintainer directs. Use granular commits, not one mega-commit. Do not auto-push. Push only when maintainer directs.
 15. **Final mailbox check** — confirm Gemini unread = 0.
 
@@ -607,7 +607,7 @@ After executing any module, report:
 
 | Field | Value |
 |-------|-------|
-| Skill file version | 0.2.2 |
+| Skill file version | 0.2.3 |
 | Protocol baseline | PRD-003 through PRD-014, PRD-016 through PRD-036, and PRD-014 Amendment A1 |
 | Policy test suite | Not yet validated (onboarding candidate) |
 | Last validated | Pending — first validation during onboarding run |
@@ -616,6 +616,7 @@ After executing any module, report:
 | v0.2.0 changes | Ported bundle to Google Antigravity home (.agents/skills/turnfile-protocol-gemini/). Refreshed to current baseline (PRD-016 through PRD-036 + PRD-014 Amendment A1) matching Claude's v0.9.1 semantics. Fixed F2 baseline drift, F4 tracked working-session directory, and updated environment notes for Antigravity. |
 | v0.2.1 changes | F5: Module 0 status proposed -> active; provisional tracked out of band. |
 | v0.2.2 changes | MSG-20260617-064: Applied shutdown parity check amendments (Module 6 closeout compaction checklist, validation commands list, projection sync, and cursor-based thread checks). |
+| v0.2.3 changes | MSG-20260618-015: Clarified that PRD promotion is a move (git-mv/delete draft) rather than a copy, and requires updating the status header and adding the Promotion Gate Snapshot. |
 
 Changes to protocol semantics require maintainer approval (PRD-012 R7.2).
 Environment-specific changes that don't alter protocol semantics are Gemini-owned but must be documented (PRD-012 R7.3).

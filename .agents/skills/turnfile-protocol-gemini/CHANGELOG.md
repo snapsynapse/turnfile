@@ -1,5 +1,9 @@
 # Changelog — turnfile-protocol-gemini
 
+## v0.2.3 — 2026-06-18
+
+- MSG-20260618-015: Clarified that PRD promotion is a move (git-mv/delete draft) rather than a copy, and requires updating the status header and adding the Promotion Gate Snapshot.
+
 ## v0.2.2 — 2026-06-18
 
 - MSG-20260617-064: Applied shutdown parity check amendments (Module 6 closeout compaction checklist, validation commands list, projection sync, and cursor-based thread checks).

@@ -1,6 +1,6 @@
 bundle: turnfile-protocol-gemini
-bundle_version: 3
-bundle_date: 2026-06-17
+bundle_version: 4
+bundle_date: 2026-06-18
 description: >
   Gemini's protocol execution guide for the Turnfile protocol (a SNAP protocol).
   Encodes mailbox lifecycle, payload-first review, lock-safe shared-file updates,
@@ -25,18 +25,18 @@ provenance:
 files:
   - path: SKILL.md
     role: skill
-    version: 3
-    hash: sha256:a41f66ecf31af2656d095649dc563257714bf88397c7478e824031c3b72f6a6d
+    version: 4
+    hash: sha256:3e31d6f3336bb38f530cb8566c70ec9fb4478f8b408010895e42e62a07fdb040
     note: >
-      Gemini protocol execution guide v0.2.2. Refreshed to current baseline
-      (PRD-016..036 + PRD-014 A1) and updated environment notes for Antigravity.
+      Gemini protocol execution guide v0.2.3. Refreshed to current baseline and updated
+      promotion move-not-copy guidelines from MSG-20260618-015.
   - path: CHANGELOG.md
     role: reference
-    version: 3
-    hash: sha256:678e8e476f37c248ae51b4c09ca6984cccdf8044a8f2f5ff0276f7f33448e59a
+    version: 4
+    hash: sha256:d36b1a24003f5e31c2bc37c2fa7620ce26602f8b7bea8bfba00d06f50cd1d083
     note: Bundle change history.
   - path: MANIFEST.yaml
     role: reference
-    version: 3
+    version: 4
     hash: null
     note: Self-referential file; hash tracked externally when needed.
