@@ -444,3 +444,20 @@ tokenese ok v:0.1 @gemini session:24 ev:obs
 | Claude | yes — Turnfile v0.1 (rev 314); PRD_STATUS 35 PRDs | yes — grammar v0.3; TKAB `tkab-check-1.1`; Tier-B twins authorized, English source-wins | yes — gates ok; model ledger Opus 4.8 / Claude Code | ACK — boot+handshake+heartbeat, prd-041-evals-blocked-on-codex-r4-arbitration-schema, prd-040-step7-review-after-gemini-evals+codex-impl | ACTIVE session-only cron `ef7b6743`, 5m self-owned read-only steward, notify=notify-material-only, stop=delete-at-close | guard active; `core.hooksPath=tools/hooks` | Claude (Opus 4.8) — 2026-06-19 |
 | Codex | yes — Turnfile v0.1 (rev 316); PRD_STATUS 35 PRDs with PRD-041 eligible-for-promotion warning | yes — grammar v0.3; TKAB `tkab-check-1.1`; Tier-B twins authorized, English source-wins | yes — session-orient clean; turnfile lint, mailbox invariants, PRD promotion, validate:skills, Codex skills preflight, and ownership guard passed | ACK — boot+handshake+heartbeat; next Codex lane is PRD-041 R4 arbitration-schema spike unless Maintainer redirects; PRD-040 waits for Gemini evals then Codex implementation | 5m self-owned read-only steward, notify=notify-material-only, stop=delete-at-close | guard active; `core.hooksPath=tools/hooks`; `.turnfile-agent=codex` | Codex (GPT-5, desktop) — 2026-06-19 |
 | Gemini | yes — Turnfile v0.1 (rev 319); PRD_STATUS 35 PRDs | yes — grammar v0.3; TKAB `tkab-check-1.1`; Tier-B twins authorized, English source-wins | yes — gates ok; model ledger Gemini 3.5 Flash (High) / Google Antigravity | ACK — boot+handshake+heartbeat, prd-040-eval-authoring, prd-035-tokenese-sync, tokenese-testing-and-revision | 5m self-owned read-only steward, notify=notify-material-only, stop=delete-at-close | guard active; `core.hooksPath=tools/hooks` | Gemini (3.5 Flash (High)) — 2026-06-19 |
+
+## Sign-off (session 25)
+
+```tokenese
+^grammar:v0.3
+@claude := agent:claude :Opus4.8 :ClaudeCode s25
+say @claude rev:337 prd:35 gates:ok ev:obs
+say @claude ack lanes:[boot+handshake+heartbeat, prd-041-step7-review-after-codex-impl, tokenese-round2-optional-maintainer-gated]
+say @claude hb cad:5m own:self notify:notify-material-only stop:delete-at-close
+tokenese ok v:0.1 @claude session:25 ev:obs
+```
+
+| Agent | Protocol baseline | Tokenese | Skills | Scope | Heartbeat | Identity enforcing | Signed |
+|-------|---|---|---|---|---|---|---|
+| Claude | yes — Turnfile v0.1 (rev 337); PRD_STATUS 35 PRDs | yes — grammar v0.3; TKAB `tkab-check-1.1`; Tier-B twins authorized, English source-wins | yes — gates ok; model ledger Opus 4.8 / Claude Code | ACK — boot+handshake+heartbeat, prd-041-step7-review-after-codex-impl, tokenese-round2-optional-maintainer-gated | ACTIVE session-only cron `fc15ff53`, 5m self-owned read-only steward, notify=notify-material-only, stop=delete-at-close | guard active; `core.hooksPath=tools/hooks` | Claude (Opus 4.8) — 2026-06-20 |
+| Codex | yes — Turnfile v0.1 (rev 338); PRD_STATUS 35 PRDs | yes — grammar v0.3; TKAB `tkab-check-1.1`; Tier-B twins authorized, English source-wins | yes — gates ok; model ledger GPT-5 / Codex desktop | ACK — boot+handshake+heartbeat, prd-041-implementation, tokenese-round2-optional-maintainer-gated | 5m self-owned, notify=notify-material-only, stop=delete-at-close | guard active; `core.hooksPath=tools/hooks` | Codex (GPT-5) — 2026-06-21 |
+| Gemini | yes — Turnfile v0.1 (rev 341); PRD_STATUS 35 PRDs | yes — grammar v0.3; TKAB `tkab-check-1.1`; Tier-B twins authorized, English source-wins | yes — gates ok; model ledger Gemini 3.5 Flash (High) / Google Antigravity | ACK — boot+handshake+heartbeat, prd-035-tokenese-sync, prd-041-step7-review-after-codex-impl, tokenese-round2-optional-maintainer-gated | 5m self-owned, notify=notify-material-only, stop=delete-at-close | guard active; `core.hooksPath=tools/hooks` | Gemini (Gemini 3.5 Flash (High)) — 2026-06-21 |

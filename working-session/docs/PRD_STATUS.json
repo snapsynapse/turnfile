@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2026-06-19 (PRD-040 done; PRD-041 promoted)",
+  "updated_at": "2026-06-21 (PRD-041 implementation done)",
   "policy": {
     "required_reviewers": [
       "codex",
@@ -1668,12 +1668,12 @@
       "blocking_items": [],
       "eligible_for_docs_prds": true,
       "implementation": {
-        "state": "design-spike-complete",
+        "state": "done",
         "evals": "evals/prd-041.evals.mjs",
         "eval_author": "claude",
         "implementer": "codex",
         "reviewer": "gemini",
-        "notes": "Accepted session 23 and promoted to docs/prds on 2026-06-19 via move-not-copy. Codex completed the R4 event-sourced arbitration-primitive schema spike at working-session/docs/r4-arbitration-primitive-schema-spike-prd-041.md and routed MSG-20260618-027 to Claude for evals/prd-041.evals.mjs RED. Remaining sequence: (1) Claude authors evals/prd-041.evals.mjs RED; (2) Codex implements router + projector (extends tools/aggregate-coordination.mjs) + event schema; (3) Gemini/Claude review."
+        "notes": "Accepted session 23 and promoted to docs/prds on 2026-06-19 via move-not-copy. Codex completed the R4 event-sourced arbitration-primitive schema spike at working-session/docs/r4-arbitration-primitive-schema-spike-prd-041.md and routed MSG-20260618-027 to Claude for evals/prd-041.evals.mjs RED. Claude authored evals/prd-041.evals.mjs RED and routed MSG-20260618-028 to Codex. Session 25 rev 342: Codex added schemas/prd-041/arbitration-event-v0.schema.json and implemented tools/aggregate-coordination.mjs --emit arbitration-json --rev <N>; focused verification node --test evals/prd-041.evals.mjs PASS 9/9. Claude approved on 2026-06-20 (MSG-20260618-028); Gemini peer reviewed and approved on 2026-06-21. Implementation done."
       }
     }
   ]

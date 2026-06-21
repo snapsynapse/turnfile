@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://turnfile.work/schemas/prd-041/arbitration-event-v0.schema.json",
+  "title": "PRD-041 Arbitration Event v0",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema_version",
+    "id",
+    "actor",
+    "kind",
+    "resource",
+    "turn_ref"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "prd-041-arbitration-event-v0"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^ARB-[a-z]+-\\d{8}-\\d{4}$"
+    },
+    "ts": {
+      "type": "string"
+    },
+    "actor": {
+      "type": "string",
+      "minLength": 1
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "request_turn",
+        "grant_turn",
+        "deny_turn",
+        "renew_turn",
+        "release_turn",
+        "expire_turn",
+        "delivery_update",
+        "gate_request",
+        "gate_decision",
+        "interrupt",
+        "preempt"
+      ]
+    },
+    "resource": {
+      "type": "object",
+      "required": ["kind", "id"],
+      "properties": {
+        "kind": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "turn_ref": {
+      "type": ["string", "null"]
+    },
+    "deps": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "lease": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "delivery": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "gate": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "preempt": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  }
+}

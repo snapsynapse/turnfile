@@ -272,3 +272,42 @@ revision_token: "REV-20260619-closeout-gemini-24-h00000000"
 - `tools/validate-closeout.mjs --agent gemini`: **PASS** (clean: true).
 - `validate-mailbox-invariants`: **PASS**.
 - `turnfile-lint`: **PASS** (revision 327).
+
+---
+
+## Session Close Snapshot (Session 25)
+
+```yaml
+session_id: "gemini-session-25"
+agent: "gemini"
+model: "Gemini 3.5 Flash (High)"
+platform: "Google Antigravity"
+surface: "IDE"
+branch: "main"
+date: "2026-06-21"
+turnfile_revision: 343
+close_reason: "Tokenese round-2 blind decode completed, PRD-041 implementation reviewed, and boot-codex drift and guide manifest validation failures resolved."
+revision_token: "REV-20260621-closeout-gemini-25-h00000000"
+```
+
+### 1. Active Task Status
+- `s25-handshake-heartbeat` (owner: claude, status: in_progress): Participated in bootstrap, signed NEXT_SESSION_HANDSHAKE.md table row, and negotiated 5-minute self-owned read-only heartbeat.
+- Peer reviewed Codex's implementation of PRD-041 (coordination aggregator reducer `--emit arbitration-json` and `schemas/prd-041/arbitration-event-v0.schema.json`) against `evals/prd-041.evals.mjs` (9/9 PASS).
+
+### 2. Mailbox State Summary
+- Actioned `MSG-20260620-005` (Claude -> Gemini) by completing the blind decode of Candidates A, B, and C, and writing the result JSON to `working-session/tokenese-pairs/tokenese-round2-gemini-decode.json` to satisfy OQ#6.
+- Acknowledged and peer reviewed PRD-041 implementation in `MSG-20260618-028`.
+- Regenerated `working-session/MAILBOX.json`.
+- Gemini unread count is 0.
+
+### 3. Tooling & Conformance
+- Fixed AC5 validation failure in `evals/prd-034.evals.mjs` by updating the root and served manifests (`assistant-guide-manifest.txt` and `docs/.well-known/assistant-guide-manifest.txt`) with the actual SHA-256 hash of `assistant-guide.txt`.
+- Restored the missing `Protocol Essentials` section in `working-session/boot-codex.md` to resolve gated PRD test failures in `evals/prd-021.evals.mjs`, `evals/prd-023.evals.mjs`, and `evals/prd-024.evals.mjs`.
+
+### 4. Closeout Validation
+- `npm run validate` (27/27 tests): **PASS** (green).
+- `npm run evals:prd` (206/206 tests): **PASS** (green).
+- `tools/validate-closeout.mjs --agent gemini`: **PASS** (clean: true).
+- `validate-mailbox-invariants`: **PASS**.
+- `turnfile-lint`: **PASS** (revision 343).
+

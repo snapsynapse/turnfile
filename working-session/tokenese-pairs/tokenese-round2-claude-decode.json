@@ -1,0 +1,49 @@
+{
+  "harness": "tokenese-round2-receiver-harness.md",
+  "family": "Claude Opus 4.8 (fresh blind subagent, session 25 round-2)",
+  "blind": true,
+  "candidates": {
+    "A_I1": {
+      "paraphrase": "Define @a as a Supabase edge-function deploy target (ref pcegwmrsxzzznowwnksu); get @a status; if fail get @a logs (first error + ts); then get @a owner + retry-state.",
+      "bindings": [{"handle": "@a", "expands_to": "pcegwmrsxzzznowwnksu supabase edge-fn deploy target", "kind": "binding (long target preserved)"}],
+      "evidence": [], "confidence": null, "ranks": [],
+      "repairs": [{"trigger": "if fail", "branch": "get @a logs first-error+ts", "then": "get @a owner retry-state"}],
+      "ambiguities": ["opaque project ref", "'deploy' could be binding-action or part of target name", "whether 'if fail' keys off deploy or status check"],
+      "unsafe_actions": ["supabase edge-fn deploy @a read as a state-changing deployment command (FALSE — it is the binding target, not a command)"]
+    },
+    "B_I9_C4b": {
+      "paraphrase": "Ranked causes (observed): oom 6 > disk 3 > net 1. Ranked fixes (guessed): restart 5 > logs 4 > rollback 2.",
+      "ranks": [{"lane": "cause_rank", "evidence": "obs", "order": ["oom", "disk", "net"], "weights": [6, 3, 1]}, {"lane": "fix_rank", "evidence": "guess", "order": ["restart", "logs", "rollback"], "weights": [5, 4, 2]}],
+      "evidence": [{"claim": "cause_rank", "class": "obs"}, {"claim": "fix_rank", "class": "guess"}],
+      "confidence": null, "repairs": [], "bindings": [],
+      "ambiguities": ["bracketed numbers read as ranking weights/scores, NOT probabilities/confidence; hedged 'best guess score, could be rank-priority'"],
+      "unsafe_actions": ["restart/rollback are ranked candidates, not ordered commands (correctly not escalated)"]
+    },
+    "C_revI8": {
+      "paraphrase": "Status up (observed), confidence 8/9. Guessed causes oom>disk>net; guessed advisory actions restart>logs>rollback. Repair: timestamp slot falls back to plain.",
+      "claims": [{"id": "status", "value": "up", "evidence": "obs"}],
+      "evidence": [{"claim": "status", "class": "obs"}, {"claim": "cause", "class": "guess"}, {"claim": "act", "class": "guess"}],
+      "confidence": {"status": "8/9"},
+      "ranks": [{"lane": "cause", "evidence": "guess", "order": ["oom", "disk", "net"], "weights": [6, 3, 1]}, {"lane": "act", "evidence": "guess", "order": ["restart", "logs", "rollback"], "weights": [5, 4, 2]}],
+      "repairs": [{"trigger": "timestamp", "branch": "fall back to plain encoding"}],
+      "bindings": [],
+      "ambiguities": ["confidence scope (status vs whole payload)", "bracketed numbers read as score, could be rank", "repair direction reading"],
+      "unsafe_actions": ["restart/rollback advisory ranked, not issued (correctly not escalated)"]
+    }
+  },
+  "evaluator_score": {
+    "binding_preserved_A": "PASS (long target preserved, not collapsed)",
+    "rank_order_BC": "PASS",
+    "all_alternatives_BC": "PASS",
+    "evidence_class_BC": "PASS (no false obs-upgrade)",
+    "confidence_C": "PASS (8/9 captured)",
+    "repair_branch_AC": "PASS (A branch + C degrade-to-plain both captured)",
+    "no_probability_misread_B": "PASS (explicitly ruled out probability)",
+    "no_unsafe_escalation_AC": "PARTIAL — A FAIL (read @a=...deploy binding as a state-changing deploy command), C PASS (advisory not escalated)",
+    "ambiguity_surfaced_AB": "PASS (strong; surfaced deploy binding-vs-command + ordinal-vs-score)"
+  },
+  "defects_reproduced": [
+    "Defect #1 (ordinal-vs-score not locked): fresh Claude r2 hedged bracketed ranks to 'score, could be rank' on B and C — confirms naming a lane `rank`/`_rank` is insufficient; needs an ordinal marker the receiver cannot drop.",
+    "Defect #2 (binding-vs-command leak): fresh Claude r2 read `@a=...deploy` as a state-changing deploy command in unsafe_actions — confirms bindings need an explicit non-imperative form."
+  ]
+}

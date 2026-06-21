@@ -6,17 +6,20 @@ const CLOSED_STATES = new Set(["read", "acknowledged", "actioned", "closed"]);
 const SNAPSHOT_RECIPIENTS = ["Codex", "Claude", "Maintainer"];
 
 function usage() {
-  return "usage: node tools/aggregate-coordination.mjs --shards <dir> [--emit json|mailbox-md|mailbox-json]";
+  return "usage: node tools/aggregate-coordination.mjs --shards <dir> [--emit json|mailbox-md|mailbox-json|arbitration-json] [--rev <N>]";
 }
 
 function parseArgs(argv) {
-  const args = { emit: "json", shards: null };
+  const args = { emit: "json", shards: null, rev: null };
   for (let i = 0; i < argv.length; i += 1) {
     const arg = argv[i];
     if (arg === "--shards") {
       args.shards = argv[++i] || null;
     } else if (arg === "--emit") {
       args.emit = argv[++i] || null;
+    } else if (arg === "--rev") {
+      const raw = argv[++i];
+      args.rev = raw === undefined ? null : Number(raw);
     } else if (arg === "-h" || arg === "--help") {
       console.log(usage());
       process.exit(0);
@@ -25,9 +28,10 @@ function parseArgs(argv) {
     }
   }
   if (!args.shards) throw new Error("--shards is required");
-  if (!["json", "mailbox-md", "mailbox-json"].includes(args.emit)) {
+  if (!["json", "mailbox-md", "mailbox-json", "arbitration-json"].includes(args.emit)) {
     throw new Error(`unsupported --emit mode: ${args.emit}`);
   }
+  if (args.rev !== null && !Number.isInteger(args.rev)) throw new Error("--rev must be an integer");
   return args;
 }
 
@@ -246,6 +250,173 @@ function aggregate(shardsDir) {
   };
 }
 
+function readArbitrationEvents(shardsDir) {
+  const conflicts = [];
+  const events = [];
+  for (const agent of sortedShardAgents(shardsDir)) {
+    const file = path.join(shardsDir, agent, "arbitration.jsonl");
+    for (const event of readJsonl(file, conflicts)) events.push(event);
+  }
+  return { events: causalOrder(events), conflicts };
+}
+
+function resourceKey(event) {
+  return event?.resource?.id || "";
+}
+
+function ensureResource(state, id) {
+  if (!state.resources[id]) {
+    state.resources[id] = {
+      holder: null,
+      turn_ref: null,
+      state: "idle",
+      expires_after_rev: null,
+      queue: [],
+    };
+  }
+  return state.resources[id];
+}
+
+function removeFromQueue(resource, turnRef) {
+  resource.queue = resource.queue.filter((queued) => queued !== turnRef);
+}
+
+function isReleaseActor(event, holder) {
+  return event.actor === holder || event.actor === "router" || event.actor === "maintainer";
+}
+
+function applyArbitrationEvent(state, event, currentRev) {
+  const id = resourceKey(event);
+  const resource = id ? ensureResource(state, id) : null;
+
+  if (event.kind === "request_turn" && resource && event.turn_ref) {
+    if (!resource.queue.includes(event.turn_ref) && resource.turn_ref !== event.turn_ref) {
+      resource.queue.push(event.turn_ref);
+    }
+    return;
+  }
+
+  if (event.kind === "grant_turn" && resource) {
+    const target = event.turn_ref;
+    const queueHead = resource.queue[0];
+    const maintainerGrant = event.actor === "maintainer";
+    if (target && (queueHead === target || maintainerGrant || resource.queue.length === 0)) {
+      resource.holder = event.lease?.holder || event.actor;
+      resource.turn_ref = target;
+      resource.state = "granted";
+      resource.expires_after_rev = event.lease?.expires_after_rev ?? null;
+      removeFromQueue(resource, target);
+    }
+    return;
+  }
+
+  if (event.kind === "release_turn" && resource && isReleaseActor(event, resource.holder)) {
+    resource.holder = null;
+    resource.turn_ref = null;
+    resource.state = resource.queue.length ? "queued" : "idle";
+    resource.expires_after_rev = null;
+    return;
+  }
+
+  if (event.kind === "expire_turn" && resource && currentRev !== null) {
+    if (resource.expires_after_rev !== null && currentRev > resource.expires_after_rev) {
+      resource.holder = null;
+      resource.turn_ref = null;
+      resource.state = resource.queue.length ? "queued" : "idle";
+      resource.expires_after_rev = null;
+    }
+    return;
+  }
+
+  if (event.kind === "preempt" && resource) {
+    const interrupted = event.preempt?.target_turn_ref || resource.turn_ref;
+    state.interrupts.push({
+      event: event.id,
+      resource: id,
+      turn_ref: interrupted,
+      reason: event.preempt?.reason || null,
+    });
+    resource.holder = event.preempt?.next_holder || null;
+    resource.turn_ref = event.preempt?.next_holder ? event.turn_ref : null;
+    resource.state = event.preempt?.next_holder ? "granted" : (resource.queue.length ? "queued" : "idle");
+    resource.expires_after_rev = null;
+    return;
+  }
+
+  if (event.kind === "gate_request" && id) {
+    state.gates[id] = {
+      state: "requested",
+      requested_by: event.actor,
+      governance_kind: event.gate?.governance_kind || null,
+      target: event.gate?.target || null,
+    };
+    return;
+  }
+
+  if (event.kind === "gate_decision" && id && event.actor === "maintainer") {
+    const prior = state.gates[id] || {};
+    state.gates[id] = {
+      ...prior,
+      state: event.gate?.decision || "deferred",
+      decided_by: "maintainer",
+      maintainer_event: event.gate?.maintainer_event || event.id,
+      governance_kind: event.gate?.governance_kind || prior.governance_kind || null,
+      target: event.gate?.target || prior.target || null,
+    };
+    return;
+  }
+
+  if (event.kind === "delivery_update" && event.delivery?.message_event) {
+    const msg = event.delivery.message_event;
+    const prior = state.deliveries[msg] || {
+      state: null,
+      attempts: 0,
+      adapter: event.delivery.adapter || null,
+      delivered_count: 0,
+      dedupe_keys: [],
+    };
+    const dedupe = event.delivery.dedupe_key || `${event.id}`;
+    if (!prior.dedupe_keys.includes(dedupe)) {
+      prior.dedupe_keys.push(dedupe);
+      prior.attempts += 1;
+      if (event.delivery.state === "delivered") prior.delivered_count += 1;
+    }
+    prior.state = event.delivery.state || prior.state;
+    prior.adapter = event.delivery.adapter || prior.adapter;
+    state.deliveries[msg] = prior;
+  }
+}
+
+function reduceArbitration(shardsDir, currentRev) {
+  const { events, conflicts } = readArbitrationEvents(shardsDir);
+  const state = {
+    schema_version: "prd-041-arbitration-state-v0",
+    resources: {},
+    deliveries: {},
+    gates: {},
+    interrupts: [],
+    conflicts,
+  };
+  for (const event of events) applyArbitrationEvent(state, event, currentRev);
+
+  if (currentRev !== null) {
+    for (const resource of Object.values(state.resources)) {
+      if (resource.expires_after_rev !== null && currentRev > resource.expires_after_rev) {
+        resource.holder = null;
+        resource.turn_ref = null;
+        resource.state = resource.queue.length ? "queued" : "idle";
+        resource.expires_after_rev = null;
+      }
+    }
+  }
+
+  for (const delivery of Object.values(state.deliveries)) {
+    delete delivery.dedupe_keys;
+  }
+
+  return state;
+}
+
 function renderMailboxMd(data) {
   const lines = [
     "# Mailbox (Derived)",
@@ -278,13 +449,17 @@ function renderMailboxJson(data) {
 
 try {
   const args = parseArgs(process.argv.slice(2));
-  const data = aggregate(path.resolve(args.shards));
-  if (args.emit === "mailbox-md") {
-    process.stdout.write(renderMailboxMd(data));
-  } else if (args.emit === "mailbox-json") {
-    process.stdout.write(`${JSON.stringify(renderMailboxJson(data), null, 2)}\n`);
+  if (args.emit === "arbitration-json") {
+    process.stdout.write(`${JSON.stringify(reduceArbitration(path.resolve(args.shards), args.rev), null, 2)}\n`);
   } else {
+    const data = aggregate(path.resolve(args.shards));
+    if (args.emit === "mailbox-md") {
+    process.stdout.write(renderMailboxMd(data));
+    } else if (args.emit === "mailbox-json") {
+    process.stdout.write(`${JSON.stringify(renderMailboxJson(data), null, 2)}\n`);
+    } else {
     process.stdout.write(`${JSON.stringify(data, null, 2)}\n`);
+    }
   }
 } catch (error) {
   console.error(error.message);

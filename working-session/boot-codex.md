@@ -37,7 +37,13 @@ node tools/session-orient.mjs --agent codex --emit json
 4. A missing peer chat file is warning only. Do not author peer chat files from the Codex lane.
 5. Confirm ownership guard state with `node tools/validate-ownership-guard.mjs --format json`.
 6. Run `node tools/validate-closeout.mjs --turnfile working-session/TURNFILE.yaml --mailbox working-session/MAILBOX.md --agent codex` before assuming Codex can close cleanly.
-7. If a heartbeat is negotiated, create the actual app automation before claiming it is operational, and delete it at clean close.
+
+## Protocol Essentials
+
+- **Conflict loop bound (PRD-021):** `coordination.conflict.rebuttal_rounds` bounds the apply-or-counter rebuttal loop (min 1, max `unbounded`); on bound exhaustion escalate directly to Maintainer adjudication. The selective-unlock gradient is a binary `gated`/`unlockable` flag (agent self-tags, Maintainer ratifies).
+- **Out-of-band drift check (PRD-023):** before trusting remembered state, reconcile any peer/Maintainer edits made outside the turn loop against the WORKLOG; unrecorded changes that altered **governance state** are **decision-required** (record/escalate before acting), while non-governance drift is a warning.
+- **Human-legibility (PRD-024):** governance artifacts stay English-legible; any Tokenese/dense encoding pairs to a legible English source (source wins), and encoding-profile obligations never override the legible record.
+- **Chat-file semantics (PRD-017 R7):** create only your own `chat-codex.md`; a missing peer chat file is a warning only — boot never authors a peer's chat file.
 
 ## Session 24 Close State
 

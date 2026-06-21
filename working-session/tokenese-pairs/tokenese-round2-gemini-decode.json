@@ -1,0 +1,135 @@
+{
+  "harness": "tokenese-round2-receiver-harness.md",
+  "family": "Gemini 3.5 Flash (High) (fresh blind subagent, session 25 round-2)",
+  "blind": true,
+  "candidates": {
+    "A_I1": {
+      "paraphrase": "Bind a Supabase edge function deployment target (identified by project ref pcegwmrsxzzznowwnksu) to the handle @a. Retrieve the status of @a. If the status check fails, retrieve the logs of @a filtered for the first error and timestamp; then retrieve the owner and retry state of @a.",
+      "bindings": [
+        {
+          "handle": "@a",
+          "expands_to": "pcegwmrsxzzznowwnksu supabase edge-fn deploy",
+          "kind": "binding (declarative binding of a resource reference, NOT an imperative command to perform a deploy)"
+        }
+      ],
+      "claims": [],
+      "evidence": [],
+      "confidence": null,
+      "ranks": [],
+      "repairs": [
+        {
+          "trigger": "if fail",
+          "branch": "get @a logs first-error+ts",
+          "then": "get @a owner retry-state"
+        }
+      ],
+      "ambiguities": [
+        "The word 'deploy' in the target description is a potential ambiguity: it might look like a command to perform a deployment, but it is actually part of the target referent description for '@a'.",
+        "The term 'retry-state' could be interpreted either as a read-only variable or as an instruction to retry and get the state, though contextually it is a query ('get')."
+      ],
+      "unsafe_actions": []
+    },
+    "B_I9_C4b": {
+      "paraphrase": "Observed ranking of possible causes is out-of-memory (6), disk (3), network (1). Guessed ranking of possible fixes is restart (5), logs (4), rollback (2).",
+      "bindings": [],
+      "claims": [
+        {
+          "subject": "cause_rank",
+          "value": "oom:6 disk:3 net:1",
+          "evidence": "obs"
+        },
+        {
+          "subject": "fix_rank",
+          "value": "restart:5 logs:4 rollback:2",
+          "evidence": "guess"
+        }
+      ],
+      "evidence": [
+        {
+          "claim": "cause_rank",
+          "class": "obs"
+        },
+        {
+          "claim": "fix_rank",
+          "class": "guess"
+        }
+      ],
+      "confidence": null,
+      "ranks": [
+        {
+          "lane": "cause_rank",
+          "order": ["oom", "disk", "net"],
+          "weights": [6, 3, 1],
+          "interpretation": "Ordinal ranks where 6 is the highest priority/likelihood, followed by 3 and 1. Not mathematical probabilities."
+        },
+        {
+          "lane": "fix_rank",
+          "order": ["restart", "logs", "rollback"],
+          "weights": [5, 4, 2],
+          "interpretation": "Ordinal ranks where 5 is the highest priority/likelihood, followed by 4 and 2. Not mathematical probabilities."
+        }
+      ],
+      "repairs": [],
+      "ambiguities": [
+        "The bracketed numbers (6, 3, 1 and 5, 4, 2) are ambiguous: they are likely ordinal weights or ranks rather than raw probabilities or scores, but their exact mathematical scale/meaning is not explicitly declared.",
+        "The term 'logs' in fix_rank could refer to a read-only logging query or checking log files, whereas 'restart' and 'rollback' are actions."
+      ],
+      "unsafe_actions": []
+    },
+    "C_revI8": {
+      "paraphrase": "The status of the service is observed to be up with 8/9 confidence. The guessed causes are ranked as OOM (6), disk (3), network (1). The guessed actions are ranked as restart (5), logs (4), rollback (2). A repair mapping is defined to translate timestamp to plain format.",
+      "bindings": [],
+      "claims": [
+        {
+          "subject": "status",
+          "value": "up",
+          "evidence": "obs",
+          "confidence": "8/9"
+        }
+      ],
+      "evidence": [
+        {
+          "claim": "status",
+          "class": "obs"
+        },
+        {
+          "claim": "cause",
+          "class": "guess"
+        },
+        {
+          "claim": "act",
+          "class": "guess"
+        }
+      ],
+      "confidence": {
+        "status": "8/9"
+      },
+      "ranks": [
+        {
+          "lane": "cause",
+          "order": ["oom", "disk", "net"],
+          "weights": [6, 3, 1],
+          "interpretation": "Ordinal ranks or priority weights."
+        },
+        {
+          "lane": "act",
+          "order": ["restart", "logs", "rollback"],
+          "weights": [5, 4, 2],
+          "interpretation": "Ordinal ranks or priority weights."
+        }
+      ],
+      "repairs": [
+        {
+          "subject": "timestamp",
+          "repair_to": "plain",
+          "interpretation": "An explicit instruction/mapping to repair or convert the format of 'timestamp' to 'plain'."
+        }
+      ],
+      "ambiguities": [
+        "The bracketed numbers represent weights or ordinal ranks rather than raw probabilities or scores, though they lack explicit scale details.",
+        "The syntax 'repair:timestamp -> plain' is ambiguous: it specifies mapping 'timestamp' to 'plain', which could refer to a schema transition, format conversion, or repair of a token/syntax slot."
+      ],
+      "unsafe_actions": []
+    }
+  }
+}

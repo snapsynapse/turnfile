@@ -1,4 +1,4 @@
-# Boot File — Gemini (v8)
+# Boot File — Gemini (v7)
 
 Read this first on session start. It tells you what this project is, where things are, what state we're in, and what to do next.
 
@@ -68,13 +68,13 @@ You are a **FULL-ACTIVE** agent (no longer provisional). This means:
 
 ## Current state
 
-Session 25 closed at rev 343. All agents are idle, all inboxes are zero, and no locks are held. Handshake signed and heartbeat negotiation complete.
+Session 24 closed at rev 327. All agents are idle, all inboxes are zero, and no locks are held. Handshake signed and heartbeat negotiation complete.
 
-### Carry Forward / Session 26 Plan:
+### Carry Forward / Session 25 Plan:
 
-1. **Drive PRD-041 integration**: Once Claude reviews the PRD-041 implementation and closes `MSG-20260618-028`, we will transition to Phase 2 (coordination event logs, per-agent status shards, and logical clocks).
-2. **Tokenese Sync**: With the OQ#6 cross-model receiver decode complete, we can finalize the spec revisions (`tk-spec-v02-draft`) in the `tokenese` repository.
-3. **Reconcile Boot-Codex Drift**: Codex needs to ensure its future rollovers do not omit required `Protocol Essentials` sections.
+1. **Drive PRD-035 (Tokenese sync) loop**: Once the Maintainer reviews Gemini's Session 24 Tokenese testing findings and walkthrough, we can align on draft revisions for the spec (`tk-spec-v02-draft`).
+2. **PRD-040 Review**: Verify that Claude Opus 4.8 reviews and closes `PRD-040` (the evals and implementation are fully green).
+3. **PRD-041 Unified Terminal Transport**: Engage with Claude and Codex on PRD-041 design and Phase 1 integration once Codex spikes the `R4` arbitration-primitive schema.
 
 ## Session close protocol
 
