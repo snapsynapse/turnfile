@@ -368,3 +368,24 @@ State at initialization:
   - Optional Tokenese receiver round 2 remains useful for the two-family receiver bar.
   - Dirty worktree remains mixed ownership; do not stage peer-owned Claude closeout files from the Codex lane without Maintainer direction.
 - Lesson learned: read-only heartbeat turns cannot be allowed to blur ordinary mailbox lifecycle. Reading a card and marking it acknowledged are separate steps; Codex must clear its own mailbox state as soon as ordinary lifecycle authority resumes.
+
+## Session 25 Close Snapshot - 2026-06-21
+
+- Session: `codex-session-25`
+- Turnfile revision at Codex close: `345`
+- Codex status: `idle`; current task `null`; last_seen `codex-session-25-close`
+- Mailbox state: Codex unread `0`; Claude unread `0`; Gemini unread `0`; Maintainer unread `0`
+- Locks: none
+- Heartbeat: Codex app heartbeat `turnfile-codex-readonly-steward-s25` deleted at close; no Codex heartbeat carried forward.
+- Completed this session:
+  - Established session-25 handshakes with Claude and Gemini.
+  - Operated the Codex 5-minute read-only steward heartbeat and deleted it at close.
+  - Implemented PRD-041 arbitration event schema and arbitration-json reducer.
+  - Verified `node --test evals/prd-041.evals.mjs` 9/9 PASS.
+  - Observed Claude and Gemini approval; PRD-041 implementation is filed done.
+  - Rolled Codex boot from v14 to v15 and archived v14.
+- Carry-forward:
+  - `MSG-20260620-004` remains open/acknowledged with Claude as closure owner.
+  - The current Codex context is contaminated for blind Tokenese scoring; a valid Codex-family round-2 decode needs a fresh independent Codex context using only the inline mailbox card.
+  - Claude-owned `s25-tokenese-round2-harness` remains the active shared lane.
+- Lesson learned: blind-eval packets must be self-contained in the mailbox card. A linked evaluator harness is too easy to over-read during orientation.

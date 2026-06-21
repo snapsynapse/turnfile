@@ -1,4 +1,4 @@
-# Boot File — Claude (v19)
+# Boot File — Claude (v18)
 
 Read this first on session start. It tells you what this project is, where things are, what state we're in, and what to do next.
 
@@ -72,32 +72,35 @@ Cross-agent contract: `docs/BOOT_SEQUENCE.md` (PRD-017). This file is Claude-spe
 
 Run `NEXT_SESSION_HANDSHAKE.md` (session-22 addendum) and converge/sign with peers before substantive writes. **Out-of-band drift check (PRD-023):** reconcile any peer/Maintainer edits made outside the turn loop against the WORKLOG before trusting remembered state; unrecorded changes that altered **governance state** are **decision-required** (record/escalate before acting), while non-governance drift is a warning. **Chat-file semantics (PRD-017 R7):** create only your OWN `chat-claude.md` if absent; a missing peer chat file (`chat-codex.md` / `chat-gemini.md`) is a **warning only** — boot never creates a peer chat file.
 
-## Current state (as of session-25 close, 2026-06-20)
+## Current state (as of session-24 close, 2026-06-19)
 
-THREE EQUAL agents: Claude (Opus 4.8), Codex (GPT-5 — self-reports GPT-5, not "5.5"), Gemini (Antigravity / Gemini 3.5 Flash High). All closed session 25 idle: Codex rev 345, Gemini rev 343, Claude rev 346. Read TURNFILE fresh — peers run LIVE concurrently (all three booted within seconds of each other in s25). Session 25 = 3-way handshake + PRD-041 closed end-to-end + Tokenese round-2 harness. **Tokenese pivot RATIFIED (interim): precision-preserving structured interlingua with measured compression — general-compression goal RETAINED as Sam's north-star.** See `working-session/docs/DECISION-2026-06-18-tokenese-precision-pivot.md` + memory `tokenese-compression-goal-retained`.
+THREE EQUAL agents: Claude (Opus 4.8), Codex (GPT-5), Gemini (Antigravity / Gemini 3.5 Flash High). Claude closed at rev 333 (Gemini idle; Codex still showed `active` but rev-stable and effectively idle — verify fresh). Read TURNFILE fresh. Session 24 = handshake + Tokenese second-level testing + PRD-040/041 advancement. **Tokenese pivot RATIFIED (interim): precision-preserving structured interlingua with measured compression — but the general-compression goal is RETAINED as Sam's north-star (NOT abandoned).** See `working-session/docs/DECISION-2026-06-18-tokenese-precision-pivot.md` and memory `tokenese-compression-goal-retained`. Codex already drafted `tk-spec-v02` in `~/Git/tokenese/spec.md` per the ratified direction (R7).
 
-**Stability status (session-25 assessment, saved to memory `session-25-summary-and-stability-assessment`):** the protocol is ALREADY self-perpetuating — s25 proved it (3 agents boot from files, auto-converge handshake, run a full eight-step PRD loop with cross-model verification, all gates green under live concurrency, no new scaffolding). Remaining ≈2-3 sessions of FEATURE TAIL, not engine-building: PRD-018 (the only substantive design left), PRD-019 (scope-reduced), PRD-031 Phase 2/3, and status-lag cleanup. "Self-perpetuating" means WITH a human arbiter (OQ-052 by design, not a gap).
-
-### FIRST ACTIONS ON RESUME (session 26)
+### FIRST ACTIONS ON RESUME (session 25)
 
 1. **Use the fast path.** `node tools/session-orient.mjs --agent claude --emit human`. If clean, boot is done.
-2. **Use `tools/handshake-sign.mjs`** for the boot write (auto-creates `s<N>-handshake-heartbeat`). Run `NEXT_SESSION_HANDSHAKE.md` and converge with peers (expect them live).
-3. Carry-forward (mine / Claude closure owner): **MSG-20260620-004** — Codex r2 Tokenese OQ#6 blind decode. Codex's main context got contaminated last session (read evaluator Ground Truth); it needs a FRESH Codex context decoding from the inline card only (NOT the harness file). When Codex r2 lands, score it into the Results Matrix in `working-session/docs/tokenese-round2-receiver-harness.md`. **Gate note:** under the literal OQ#6 "≥2 independent families" reading, Claude+Gemini ALREADY clear every dimension; only the strict "≥2-extra (Codex+Gemini)" reading still needs Codex. Decide with Maintainer whether to wait. When gate passes → route the ratified spec-direction to `~/Git/tokenese` (R7, Codex started tk-spec-v02 there).
-4. Feature-tail lanes (with Maintainer scope direction): **PRD-018** Maintainer Approval Authority Matrix (Claude/governance lane — biggest genuine design left); **PRD-019** Mailbox-First Approval/Polling (scope-reduced — OQ-054/055 already killed time-based polling); **PRD-031 Phase 2/3** concurrency on the PRD-041 arbitration substrate (Codex infra); status-lag formal-done for PRD-038/039/040 (Codex hygiene).
-5. Carry-forward (housekeeping): signal-log compaction eligible (SIG-129..) but deferred for peer-owned dirty tree; formal move of trimmed Closed Summary rows into `MAILBOX_ARCHIVE.md` (still git-history only).
+2. **Use `tools/handshake-sign.mjs`** for the boot write (auto-creates `s<N>-handshake-heartbeat`). Run `NEXT_SESSION_HANDSHAKE.md` and converge with peers.
+3. Carry-forward (mine / Claude lane):
+   - **PRD-041 step-7**: MSG-20260618-028 routed Codex the RED `evals/prd-041.evals.mjs` (9/9 RED) + payload-first green contract (schema `schemas/prd-041/arbitration-event-v0.schema.json` + `tools/aggregate-coordination.mjs --emit arbitration-json --rev <N>`). When Codex implements + the suite goes green, I (or Gemini) review. NOTE: `evals:prd` shows prd-041 RED by design until then — not a regression.
+   - **Tokenese round-2 (optional, Maintainer-gated)**: blind top-3 receiver decodes from Codex + Gemini to satisfy OQ#6's ≥2-extra-family bar before the tokenese spec change finalizes.
+4. Carry-forward (route to Codex): implement PRD-041 schema + arbitration-json reducer (MSG-028); then PRD-041 router/projector.
+5. Carry-forward (Tokenese): the ratified interim spec-direction lives in the decision memo; spec text is authored in `~/Git/tokenese` (R7), where Codex started tk-spec-v02 — review/extend there, not from Turnfile. Keep the compression goal + trajectory in tokenese `INTENT.md`.
+6. Carry-forward (housekeeping): formal move of the ~124 trimmed Closed Summary rows into `MAILBOX_ARCHIVE.md` (still git-history only).
 
-### Recent milestones (session 25)
+### Recent milestones (session 24)
 
-- **PRD-041 DONE end-to-end** (eight-step loop complete). Codex implemented `schemas/prd-041/arbitration-event-v0.schema.json` + `tools/aggregate-coordination.mjs --emit arbitration-json --rev <N>`; Claude A1 step-7 APPROVE (independently verified — ran evals 9/9 PASS + inspected schema/reducer for genuine, not-eval-gamed correctness); Gemini peer-review APPROVE; `implementation.state=done`; MSG-028 closed.
-- **Tokenese round-2 harness built** (`working-session/docs/tokenese-round2-receiver-harness.md`): blind packet + ground truth + 9-dimension rubric + ≥2-family gate. Claude r2 + Gemini r2 blind decodes scored — Gemini CLEAN all 9 dims; Claude r2 reproduced both round-1 defects (ordinal-vs-score hedge; `@a=…deploy` binding-vs-command leak). Codex r2 carry-forward (fresh context needed). Decodes in `working-session/tokenese-pairs/tokenese-round2-{claude,gemini}-decode.json`.
-- **3-way handshake** converged LIVE via handshake-sign (337/338/339); 5m read-only heartbeats all session, deleted at close. Concurrency lesson: the Read edit-guard caught stale edits every few turns — re-ground, take the next rev, don't fight it.
+- **Tokenese second-level testing → ratified interim pivot.** Compression is regime-dependent: wins 30–59% only on structure-dense payloads (multi-referent-with-reuse amortization, evidence/confidence, ranked alternatives, repair state, neighborhoods); loses/ties to terse English on flat content. Single-referent amortization LOSES to pronoun-English; multi-referent crosses positive once each referent is reused ~2×. Evidence: deterministic `compression_eval` N-curves + 3 blind Claude-Opus receivers + live Gemma. All three agents independently converged. Decision memo: `working-session/docs/DECISION-2026-06-18-tokenese-precision-pivot.md`. **Maintainer ratified the interim; compression goal retained.**
+- **PRD-040 done.** Claude A1 step-7 APPROVE (independently verified read-only + 6/6 + 27/27 + validate); Codex implemented `tools/validate-heartbeat-loop.mjs`; Codex closed MSG-025.
+- **PRD-041 advanced.** Codex landed the R4 arbitration-primitive schema spike (`working-session/docs/r4-arbitration-primitive-schema-spike-prd-041.md`) + promoted PRD-041 to `docs/prds`; Claude authored `evals/prd-041.evals.mjs` (9/9 RED) and routed to Codex (MSG-028) for schema+reducer implementation.
+- **3-way handshake** converged via handshake-sign; survived a concurrent MSG-ID collision (021/022) that self-healed. 5m read-only heartbeat run all session, deleted at close.
 
 ### PRD landscape (authoritative: `working-session/docs/PRD_STATUS.json`)
 
-- 40 PRDs tracked. impl-state tally (s25): 16 done, 14 grandfathered (pre-eval-regime, effectively done), 6 open. PRD-041 done.
-- Genuinely open lanes: PRD-018 (pending), PRD-019 (pending, scope-reduced), PRD-031 (pending Phase 2/3), PRD-038 (evals-authored), PRD-039 (eval-verified), PRD-040 (eval-verified). The 038/039/040 trio is behavior-live but needs formal `implementation.state→done` (Codex).
+- 41 PRDs tracked. PRD-040 done; PRD-041 promoted to `docs/prds`, in implementation (RED evals routed). Promoted-count surfaces reconciled to 38 by Codex.
 - Required reviewers `{codex, claude, maintainer, gemini}`. Perplexity NOT a required reviewer; PROVISIONAL CHECKER, no shared-write.
-- OPEN_QUESTIONS: zero active in local workspace. `validate` 27/27 green; old Node-v26 `evals:prd` break RESOLVED (PRD-036).
+- Open eval-first lanes:
+  - PRD-041 (Claude eval_author, RED routed → Codex implements → Claude/Gemini step-7 review).
+  - PRD-035 Tokenese sync (Gemini lead) — fed by the session-24 decision memo.
 
 ### Operating norms (skill v0.9.1 + PRD-037 + PRD-038)
 
@@ -110,7 +113,7 @@ THREE EQUAL agents: Claude (Opus 4.8), Codex (GPT-5 — self-reports GPT-5, not 
 
 ### Mailbox & coordination
 
-- At Claude close session 25 (rev 346): all inboxes 0; no locks; turn_queue empty. One open card: MSG-20260620-004 (Claude→Codex, Tokenese round-2 OQ#6 blind decode; acknowledged with blocker — Codex needs fresh context) — legitimate carry-forward, Claude closure owner, `validate-closeout --agent claude` clean.
+- At Claude close session 24: all inboxes 0; no locks; turn_queue empty. One open card: MSG-20260618-028 (Claude→Codex, PRD-041 RED evals → implement; Codex acknowledged, not yet implemented) — legitimate carry-forward, closeout gate clean.
 - Mailbox is compact (session-23 compaction holds; active cards near zero at close).
 
 ## Session close protocol

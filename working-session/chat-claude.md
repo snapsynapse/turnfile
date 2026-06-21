@@ -565,3 +565,20 @@ Deliverables:
 Process note: held too long before closing (kept the heartbeat ticking idle after the work drained); should treat "we're done" as close direction. Closed on Maintainer prompt.
 
 Carry-forward: MSG-028 open (Codex implements schema + --emit arbitration-json reducer → green → Claude/Gemini step-7); optional round-2 receiver decodes (Codex+Gemini) for OQ#6 ≥2-family bar; Codex already drafted tk-spec-v02 in ~/Git/tokenese per the ratified direction. Commit HELD (mixed-ownership tree; awaiting explicit Maintainer direction).
+
+---
+
+## Session 25 close snapshot (Opus 4.8, 2026-06-20, rev 346)
+
+Boot via handshake-sign (fast path; orient clean). 3-way handshake converged LIVE — Codex + Gemini booted concurrently mid-boot (Claude 337 / Codex 338 / Gemini 339). All three: 5m self-owned read-only heartbeat, notify-material-only, stop=delete-at-close. My cron fc15ff53 ran all session, DELETED at close.
+
+Delivered:
+- PRD-041 closed end-to-end. Codex implemented schema + arbitration-json reducer mid-session; I did A1 step-7 review APPROVE — INDEPENDENTLY verified (ran evals 9/9 PASS myself + inspected schema against contract + read the reducer to confirm genuine, not eval-gamed: single-holder/queue, lease-by-revision, preempt+audit, maintainer-only gate_decision, dedupe, jsonl-only). Gemini peer-reviewed APPROVE. PRD-041 implementation.state=done. MSG-028 closed + archived.
+- Tokenese round-2 harness built (working-session/docs/tokenese-round2-receiver-harness.md): blind packet + ground truth + 9-dimension rubric + ≥2-family gate. Ran Claude r2 blind subagent decode (reproduced both round-1 defects — ordinal-vs-score hedge + @a=...deploy binding-vs-command leak). Gemini r2 decode landed + scored CLEAN on all 9 dims (beat Claude r2 on no-unsafe-escalation). MSG-005 closed.
+- Stability assessment for Maintainer: protocol is ALREADY self-perpetuating (this session is the proof); ~2-3 sessions of feature tail remain (PRD-018 approval matrix = only substantive design left; PRD-019 scope-reduced; PRD-031 Phase 2/3 on the PRD-041 substrate; status-lag 038/039/040). Saved to project memory.
+
+Coordination notes: heavy live concurrency all session — the Read edit-guard caught stale edits repeatedly; re-grounded each time, never fought the rev number. Codex hit a real methodology bug: its orientation read past the harness Ground Truth boundary, contaminating its context; it correctly refused an invalid "blind" decode. Lesson folded in: deliver inline packet only, never reference the evaluator file.
+
+Process: closed promptly on Maintainer direction this time (improved on s24's over-hold).
+
+Carry-forward (Claude closure owner): MSG-20260620-004 — Codex r2 OQ#6 blind decode needs a FRESH Codex context (inline card only). Literal ≥2-family gate already met (Claude+Gemini); strict ≥2-extra needs Codex. When gate passes, route ratified spec-direction to ~/Git/tokenese (R7). Commit HELD (mixed-ownership tree; awaiting explicit Maintainer direction). Signal-log compaction eligible (SIG-129..) but deferred — peer-owned dirty tree.

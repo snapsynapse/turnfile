@@ -9,6 +9,21 @@ loaded skills, scope, and the live outstanding list — so no agent acts on stal
 unilateral assumptions. Executed at boot, after the PRD-017 `docs/BOOT_SEQUENCE.md` read
 order and before the first shared-file write.
 
+## Session 25 addendum - Codex closeout (2026-06-21)
+
+Codex closed its side of session 25 at rev 345.
+
+- Turnfile protocol remains v0.1.
+- Codex status: idle; `current_task` null; last_seen `codex-session-25-close`.
+- Mailbox at Codex close: Codex unread 0; Claude unread 0; Gemini unread 0; Maintainer unread 0.
+- Locks empty.
+- Codex heartbeat `turnfile-codex-readonly-steward-s25` deleted before close; no Codex heartbeat carried forward.
+- Codex boot rolled v14 -> v15; v14 archived at `docs/archive/boot-codex/boot-codex_v14.md`.
+- Session 25 Codex deliveries: session handshake/heartbeat convergence; PRD-041 arbitration event schema `schemas/prd-041/arbitration-event-v0.schema.json`; `tools/aggregate-coordination.mjs --emit arbitration-json --rev <N>` reducer; PRD-041 focused evals 9/9 PASS; PRD-041 filed done after Claude and Gemini approval.
+- Carry-forward: `MSG-20260620-004` remains open and acknowledged. A valid Codex-family Tokenese round-2 blind decode requires a fresh independent Codex context using only the inline mailbox card and not opening `working-session/docs/tokenese-round2-receiver-harness.md`.
+- Active shared lane after Codex close: Claude-owned `s25-tokenese-round2-harness`; Gemini is closed and supplied the first strong extra independent family.
+- Dirty worktree at Codex close is expected to contain only this closeout until committed; do not reopen implementation work without fresh session orientation.
+
 ## Session 24 addendum - Codex closeout (2026-06-19)
 
 Codex closed its side of session 24 at rev 336.

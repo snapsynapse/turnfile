@@ -1,6 +1,6 @@
-# Boot File - Codex (v14)
+# Boot File - Codex (v15)
 
-Read this first on Codex session start. It is the Codex handoff from session 24 closeout.
+Read this first on Codex session start. It is the Codex handoff from session 25 closeout.
 
 ## Project
 
@@ -40,48 +40,43 @@ node tools/session-orient.mjs --agent codex --emit json
 
 ## Protocol Essentials
 
-- **Conflict loop bound (PRD-021):** `coordination.conflict.rebuttal_rounds` bounds the apply-or-counter rebuttal loop (min 1, max `unbounded`); on bound exhaustion escalate directly to Maintainer adjudication. The selective-unlock gradient is a binary `gated`/`unlockable` flag (agent self-tags, Maintainer ratifies).
-- **Out-of-band drift check (PRD-023):** before trusting remembered state, reconcile any peer/Maintainer edits made outside the turn loop against the WORKLOG; unrecorded changes that altered **governance state** are **decision-required** (record/escalate before acting), while non-governance drift is a warning.
-- **Human-legibility (PRD-024):** governance artifacts stay English-legible; any Tokenese/dense encoding pairs to a legible English source (source wins), and encoding-profile obligations never override the legible record.
-- **Chat-file semantics (PRD-017 R7):** create only your own `chat-codex.md`; a missing peer chat file is a warning only — boot never authors a peer's chat file.
+- Conflict loop bound (PRD-021): `coordination.conflict.rebuttal_rounds` bounds the apply-or-counter rebuttal loop (min 1, max `unbounded`); on bound exhaustion escalate directly to Maintainer adjudication. The selective-unlock gradient is a binary `gated`/`unlockable` flag (agent self-tags, Maintainer ratifies).
+- Out-of-band drift check (PRD-023): before trusting remembered state, reconcile any peer/Maintainer edits made outside the turn loop against the WORKLOG; unrecorded changes that altered governance state are decision-required (record/escalate before acting), while non-governance drift is a warning.
+- Human-legibility (PRD-024): governance artifacts stay English-legible; any Tokenese/dense encoding pairs to a legible English source (source wins), and encoding-profile obligations never override the legible record.
+- Chat-file semantics (PRD-017 R7): create only your own `chat-codex.md`; a missing peer chat file is warning only. Boot never authors a peer chat file.
 
-## Session 24 Close State
+## Session 25 Close State
 
-Session 24 closed from the Codex side on 2026-06-19 on `main`.
+Session 25 closed from the Codex side on 2026-06-21.
 
-- Turnfile revision at Codex close: `336`.
-- Codex status: `idle`; current task: `null`; last_seen: `codex-session-24-close`.
+- Turnfile revision at Codex close: `345`.
+- Codex status: `idle`; current task: `null`; last_seen: `codex-session-25-close`.
 - Mailbox state at close: Codex unread `0`; Claude unread `0`; Gemini unread `0`; Maintainer unread `0`.
 - Locks at close: none.
-- Heartbeat state: Codex app heartbeat `turnfile-codex-readonly-steward-s24` deleted before close; no Codex heartbeat carried forward.
-- Boot rollover: v13 archived to `docs/archive/boot-codex/boot-codex_v13.md`; active boot is v14.
-- Active mailbox carry-forward: `MSG-20260618-028` remains open and acknowledged. Closure owner is Claude. Codex owns the next implementation action.
-- Closeout compaction: signal-log compaction is eligible but explicitly deferred because the worktree contains active peer-owned closeout files. Next closeout or Maintainer-directed compaction can handle it.
+- Heartbeat state: Codex app heartbeat `turnfile-codex-readonly-steward-s25` deleted before close; no Codex heartbeat carried forward.
+- Boot rollover: v14 archived to `docs/archive/boot-codex/boot-codex_v14.md`; active boot is v15.
+- Active mailbox carry-forward: `MSG-20260620-004` remains open and acknowledged. Closure owner is Claude. Current Codex context is contaminated for blind Tokenese scoring, so a valid Codex-family decode must run in a fresh independent Codex context using only the inline mailbox card.
+- Active shared step after Codex close: Claude-owned `s25-tokenese-round2-harness`.
 
 Immediate rule: re-read live files before asserting shared state. Claude, Gemini, Codex, and the Maintainer may have changed coordination files between sessions.
 
-## Completed In Session 24
+## Completed In Session 25
 
-1. Established session-24 handshakes with Claude Opus 4.8 and Gemini 3.5 Flash High.
-2. Created and ran the Codex app heartbeat `turnfile-codex-readonly-steward-s24` at a 5-minute read-only cadence, updated it to use the PRD-040 loop prompt validator, and deleted it before close.
-3. Implemented PRD-040 Heartbeat Loop Prompt Contract in `tools/validate-heartbeat-loop.mjs`.
-4. Verified PRD-040 with focused evals 6/6, `node tools/run-evals.mjs` 27/27, `npm run -s validate` PASS, and Claude A1 step-7 APPROVE in `MSG-20260618-025`.
-5. Promoted PRD-041 to `docs/prds` and reconciled public/agent promoted-count surfaces to 38.
-6. Completed the PRD-041 R4 arbitration-primitive schema spike in `working-session/docs/r4-arbitration-primitive-schema-spike-prd-041.md`.
-7. Routed the PRD-041 R4 spike to Claude; Claude authored `evals/prd-041.evals.mjs` as 9/9 intentionally RED and routed `MSG-20260618-028` back to Codex.
-8. Acknowledged `MSG-20260618-028` as the PRD-041 step-6 implementation handoff. Implementation was not started during closeout.
-9. Read the Tokenese second-level testing handoff, ran the compression eval, recorded Codex notes, and routed Tokenese testing/revision to Gemini.
-10. Completed `tk-spec-v02-draft` in `/Users/snap/Git/tokenese/spec.md` under the cross-repo boundary after Maintainer approval.
-11. Added `working-session/docs/HANDOFF-2026-06-19-tokenese-precision-pivot-perplexity-build.md` as a Tokenese repo build handoff for Perplexity Computer, preserving Perplexity's external checker/tool-contributor boundary.
+1. Established session-25 handshakes with Claude Opus 4.8 and Gemini 3.5 Flash High.
+2. Created and operated the Codex app heartbeat `turnfile-codex-readonly-steward-s25` at a 5-minute read-only cadence, then deleted it before close.
+3. Implemented PRD-041 arbitration event schema at `schemas/prd-041/arbitration-event-v0.schema.json`.
+4. Implemented `tools/aggregate-coordination.mjs --emit arbitration-json --rev <N>` over per-agent `arbitration.jsonl` shards.
+5. Verified PRD-041 focused evals with `node --test evals/prd-041.evals.mjs` 9/9 PASS.
+6. Observed Claude A1 step-7 APPROVE and Gemini peer-review APPROVE; PRD-041 implementation state is now `done`.
+7. Acknowledged the Tokenese round-2 Codex decode blocker after accidentally reading evaluator-only harness material. The current context is non-scoring for blind decode.
 
 ## Carry Forward
 
-1. PRD-041 implementation is the primary Codex-ready lane: add `schemas/prd-041/arbitration-event-v0.schema.json` and implement `node tools/aggregate-coordination.mjs --emit arbitration-json --rev <N>` over per-agent `arbitration.jsonl` shards until `evals/prd-041.evals.mjs` goes green.
-2. After PRD-041 is green, route back to Claude or Gemini for A1 step-7 review. Claude remains closure owner for `MSG-20260618-028`.
-3. Optional Tokenese receiver round 2 remains open: Codex and Gemini receiver decodes could help satisfy the PRD-041/Tokenese two-family bar before any broader Tokenese adoption claim.
+1. If OQ#6 still requires a Codex-family receiver, run `MSG-20260620-004` in a fresh independent Codex context that has not opened `working-session/docs/tokenese-round2-receiver-harness.md`.
+2. Decode only from the inline Blind Packet in `MSG-20260620-004`; write the output to `working-session/tokenese-pairs/tokenese-round2-codex-decode.json` or return it inline, then let Claude score and close.
+3. PRD-041 is complete. Do not reopen its implementation unless a new counter appears in the mailbox or PRD_STATUS changes.
 4. Perplexity remains external checker/tool contributor only. No Turnfile write, reviewer, PRD approval, or Maintainer authority exists for Perplexity.
-5. The dirty worktree remains mixed ownership. Do not stage peer-owned `working-session/boot-claude.md`, `working-session/chat-claude.md`, or Claude-owned closeout artifacts from the Codex lane without explicit Maintainer direction.
-6. Re-check `/Users/snap/Git/tokenese` state before asserting Tokenese spec status; the Tokenese repo has its own dirty state and process.
+5. Re-check `/Users/snap/Git/tokenese` state before asserting Tokenese spec status; the Tokenese repo has its own process.
 
 ## Next Session Handshake
 
@@ -91,7 +86,7 @@ Before substantive work, establish:
 2. Tokenese state: observe fresh Tokenese repo state before asserting current version or spec status.
 3. Onboarding and skill state: load the role-keyed Codex skill, verify model ledger coverage, follow `docs/BOOT_SEQUENCE.md`, run Codex skills preflight, self-validate with mailbox/Turnfile/PRD checks, and mutually confirm active peer context before write work.
 4. Session completion criteria and scope: pick one bounded primary lane before implementation.
-5. Outstanding issues: PRD-041 reducer/schema implementation, optional Tokenese receiver round 2, Perplexity no-write boundary, dirty-worktree commit strategy, and deferred signal-log compaction.
+5. Outstanding issues: fresh-context Codex Tokenese round-2 blind decode if still needed, Claude-owned Tokenese harness closure, Perplexity no-write boundary, dirty-worktree commit strategy, and deferred signal-log compaction.
 
 ## Validation Commands
 

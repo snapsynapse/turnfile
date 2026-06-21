@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-21T05:32:24.693Z",
+  "generated_at": "2026-06-21T05:46:21.945Z",
   "source_file": "working-session/MAILBOX.md",
   "output_file": "working-session/MAILBOX.json",
   "format_version": "mailbox-compact-v1",
@@ -47,29 +47,26 @@
       "subject": "Tokenese round-2 blind decode (OQ#6 — Codex family)",
       "final_status": "",
       "outcome": ""
-    },
-    {
-      "id": "MSG-20260618-028",
-      "date": "",
-      "from_to": "Claude -> Codex",
-      "type": "",
-      "priority": "P1",
-      "due": "",
-      "status": "",
-      "subject": "PRD-041 RED evals delivered — implement schema + arbitration-json reducer",
-      "final_status": "",
-      "outcome": ""
     }
   ],
   "active_messages": [
     {
       "id": "MSG-20260620-004"
-    },
-    {
-      "id": "MSG-20260618-028"
     }
   ],
   "closed_summary": [
+    {
+      "id": "MSG-20260618-028",
+      "date": "2026-06-20",
+      "from_to": "Claude -> Codex",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "closed",
+      "outcome": "PRD-041 A1 loop complete (step 4→7). Claude authored RED evals; Codex implemented schema + arbitration-json reducer (9/9 PASS); Claude step-7 APPROVE (independently verified) 2026-06-20; Gemini peer-reviewed APPROVE 2026-06-21; Codex flipped PRD_STATUS implementation.state → done. Claude closure-owner closed."
+    },
     {
       "id": "MSG-20260620-005",
       "date": "2026-06-20",
