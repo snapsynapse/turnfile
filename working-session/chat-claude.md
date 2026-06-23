@@ -602,3 +602,21 @@ Concurrency lesson (reconfirmed): the Read edit-guard caught stale edits repeate
 State at close: all three agents idle; active_step await-maintainer-next-session-scope; locks empty; turn_queue empty; all inboxes 0. Gates green (mailbox-invariants, turnfile-lint, validate-closeout --agent claude clean, validate-prd-promotion 40). Heartbeat cron 44d30fae DELETED at close. Boot rolled v19 → v20.
 
 Carry-forward for Maintainer: (1) ratify PRD-018/019 done-flip (mechanisms shipped via done PRD-021/022); (2) PRD-039 awaits Gemini reviewer confirmation in PRD_STATUS; (3) PRD-031 Phase 2/3 needs mechanics design (Codex infra) before Claude authors RED evals. Commit HELD (Maintainer-gated; mixed-ownership tree).
+
+## Session 27 snapshot (2026-06-23)
+
+Model: Claude Opus 4.6. Session opened with Codex and Gemini also live.
+
+Deliverables:
+1. PRD-042 APPLY: reviewed Gemini's Qwen 3.6 35b MLX Onboarding Deltas draft, accepted with no counters.
+2. PRD-031 Phase 2 A1 step-7 review APPROVE (SIG-325, rev 380): Codex implemented event-sourced task/status shard reducer (`--emit task-json` in `aggregate-coordination.mjs`); Claude independently verified 11/11 Phase 2 evals green, 74/74 full suite green. Key impl: `readFlatYaml()`, `causalOrderWithCycles()`, `reduceTasks()`, `normalizeTaskEvent()`, `applyTaskEvent()`, `ensureTask()`. Conflict detection: status-owner-mismatch, duplicate-task-create, claim-conflict, dependency-cycle, task-owner-mismatch. REGISTERED_AGENTS hard-coded (Phase 3 gap).
+3. MSG-20260623-007 (Codex -> Claude, P2): Qwen relay smoke evidence acknowledged. Short exact-output prompts pass; longer JSON prompts produce corrupted output. Qwen remains relay-only.
+4. Tokenese HANDOFF.md evaluation: ~/Git/tokenese repo Phase A (S1 fixture fix) and N2 A/B kill-criterion experiment mapped to PRD-027 contract. All R2 sequencing gates satisfied (PRD-024 done, PRD-028 done, PRD-029 done). User correction: PRD-027 acceptance IS authorization, no additional Maintainer gate needed.
+5. PRD-027 execution scoping: ready for session charter opt-in + teach phase (R2.8).
+6. Codex idle-prep review: read Phase 2 self-audit (6 non-blocking gaps), Phase 3 migration prep (6-step gate sequence, 8 minimum evals, 4 open design questions), Qwen MLX execution handoff doc.
+
+Self-correction this session: incorrectly suggested PRD-027 execution needed additional Maintainer approval. User corrected — acceptance IS authorization. All R2 gates clear; just needs session charter opt-in + teach phase.
+
+State at close: all three agents idle; rev 384; locks empty; turn_queue empty; all inboxes 0. Gates green (mailbox-invariants, turnfile-lint, validate-closeout --agent claude clean, validate-prd-promotion 41). Boot rolled v20 -> v21.
+
+Carry-forward: (1) PRD-027 execution ready — propose session charter opt-in + teach phase next session; (2) PRD-031 Phase 3 — Codex prep doc + self-audit ready, Claude authors RED evals when scoped; (3) PRD-042 awaits Maintainer acceptance; (4) PRD-018/019 Maintainer-gated done-flip; (5) PRD-039 awaits Gemini reviewer confirmation; (6) signal-log compaction eligible (SIG-129 through SIG-313).

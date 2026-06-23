@@ -76,10 +76,14 @@ function listRunDirs(evidenceRoot) {
       const runDir = path.join(candidateDir, runId);
       if (!fs.statSync(runDir).isDirectory()) continue;
 
-      const candidateResponse = path.join(runDir, "candidate-response.md");
       const evidence = path.join(runDir, "evidence.md");
-      if (fs.existsSync(candidateResponse) || fs.existsSync(evidence)) {
-        runs.push({ candidate, runId, runDir, candidateResponse, evidence });
+      const candidateResponses = fs
+        .readdirSync(runDir)
+        .filter((name) => /^candidate-response(?:-\d+|-[a-z0-9-]+)?\.md$/i.test(name))
+        .sort()
+        .map((name) => path.join(runDir, name));
+      if (candidateResponses.length || fs.existsSync(evidence)) {
+        runs.push({ candidate, runId, runDir, candidateResponses, evidence });
       }
     }
   }
@@ -108,7 +112,7 @@ function sectionText(text, heading) {
 
 function parseScenarioResults(evidenceText) {
   const results = {};
-  const re = /\|\s*(OT-\d{3})[^|]*\|\s*`?([a-z][a-z0-9/-]*)`?\s*\|/gi;
+  const re = /\|\s*(OT-\d{3})[^|]*\|\s*`?(pass|fail|n\/a)`?\s*\|/gi;
   let match;
   while ((match = re.exec(evidenceText)) !== null) {
     results[match[1].toUpperCase()] = match[2].toLowerCase();
@@ -116,18 +120,22 @@ function parseScenarioResults(evidenceText) {
   return results;
 }
 
-function validateCandidateResponse(run, errors) {
-  const response = readIfExists(run.candidateResponse);
+function validateCandidateResponse(run, responsePath, errors) {
+  const response = readIfExists(responsePath);
   if (!response) return;
 
-  for (const heading of REQUIRED_RESPONSE_SECTIONS) {
-    if (!new RegExp(`^##\\s+${heading}\\s*$`, "im").test(response)) {
-      addError(errors, run, "missing_observer_section", `candidate-response.md missing ${heading}`);
+  const isPrimaryResponse = path.basename(responsePath) === "candidate-response.md";
+
+  if (isPrimaryResponse) {
+    for (const heading of REQUIRED_RESPONSE_SECTIONS) {
+      if (!new RegExp(`^##\\s+${heading}\\s*$`, "im").test(response)) {
+        addError(errors, run, "missing_observer_section", `${path.basename(responsePath)} missing ${heading}`);
+      }
     }
   }
 
   const instructionLoad = sectionText(response, "instruction_load_mechanism");
-  if (instructionLoad && !/\b(observed|inferred|unknown)\b/i.test(instructionLoad)) {
+  if (isPrimaryResponse && instructionLoad && !/\b(observed|inferred|unknown)\b/i.test(instructionLoad)) {
     addError(
       errors,
       run,
@@ -224,7 +232,9 @@ function validate(args) {
   }
 
   for (const run of runs) {
-    validateCandidateResponse(run, errors);
+    for (const responsePath of run.candidateResponses) {
+      validateCandidateResponse(run, responsePath, errors);
+    }
     validateEvidence(run, errors);
   }
 
@@ -234,7 +244,8 @@ function validate(args) {
     runs_checked: runs.map((run) => ({
       candidate: run.candidate,
       run_id: run.runId,
-      has_candidate_response: fs.existsSync(run.candidateResponse),
+      candidate_responses: run.candidateResponses.map((responsePath) => path.basename(responsePath)),
+      has_candidate_response: run.candidateResponses.length > 0,
       has_evidence: fs.existsSync(run.evidence),
     })),
     errors,

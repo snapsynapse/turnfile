@@ -1,0 +1,3 @@
+{"id":"TASK-codex-20260623-0001","kind":"task.created","task_id":"s-contested","actor":"codex","ts":"2026-06-23T00:00:01Z","payload":{"owner":"codex","status":"pending","description":"contested fixture"}}
+{"id":"TASK-codex-20260623-0002","kind":"task.claimed","task_id":"s-contested","actor":"codex","ts":"2026-06-23T00:00:02Z","payload":{}}
+{"id":"TASK-codex-20260623-0003","kind":"task.completed","task_id":"s-contested","actor":"codex","ts":"2026-06-23T00:00:03Z","deps":["TASK-codex-20260623-0002"],"payload":{}}

@@ -6,14 +6,14 @@ const CLOSED_STATES = new Set(["read", "acknowledged", "actioned", "closed"]);
 const SNAPSHOT_RECIPIENTS = ["Codex", "Claude", "Maintainer"];
 
 function usage() {
-  return "usage: node tools/aggregate-coordination.mjs --shards <dir> [--emit json|mailbox-md|mailbox-json|arbitration-json] [--rev <N>]";
+  return "usage: node tools/aggregate-coordination.mjs --shards <dir>|--input <dir> [--emit json|mailbox-md|mailbox-json|arbitration-json|task-json] [--rev <N>]";
 }
 
 function parseArgs(argv) {
   const args = { emit: "json", shards: null, rev: null };
   for (let i = 0; i < argv.length; i += 1) {
     const arg = argv[i];
-    if (arg === "--shards") {
+    if (arg === "--shards" || arg === "--input") {
       args.shards = argv[++i] || null;
     } else if (arg === "--emit") {
       args.emit = argv[++i] || null;
@@ -28,7 +28,7 @@ function parseArgs(argv) {
     }
   }
   if (!args.shards) throw new Error("--shards is required");
-  if (!["json", "mailbox-md", "mailbox-json", "arbitration-json"].includes(args.emit)) {
+  if (!["json", "mailbox-md", "mailbox-json", "arbitration-json", "task-json"].includes(args.emit)) {
     throw new Error(`unsupported --emit mode: ${args.emit}`);
   }
   if (args.rev !== null && !Number.isInteger(args.rev)) throw new Error("--rev must be an integer");
@@ -134,6 +134,72 @@ function causalOrder(events) {
 
   const remainder = nodes.filter((event) => !emitted.has(event.id)).sort(baseCompare);
   return ordered.concat(remainder);
+}
+
+function causalOrderWithCycles(events) {
+  const nodes = events.slice().sort(baseCompare);
+  const byId = new Map(nodes.map((event) => [event.id, event]));
+  const indegree = new Map(nodes.map((event) => [event.id, 0]));
+  const outgoing = new Map(nodes.map((event) => [event.id, []]));
+
+  for (const event of nodes) {
+    for (const dep of Array.isArray(event.deps) ? event.deps : []) {
+      if (!byId.has(dep) || dep === event.id) continue;
+      indegree.set(event.id, indegree.get(event.id) + 1);
+      outgoing.get(dep).push(event.id);
+    }
+  }
+
+  let ready = nodes.filter((event) => indegree.get(event.id) === 0).sort(baseCompare);
+  const ordered = [];
+  const emitted = new Set();
+
+  while (ready.length) {
+    const event = ready.shift();
+    if (emitted.has(event.id)) continue;
+    emitted.add(event.id);
+    ordered.push(event);
+
+    for (const nextId of outgoing.get(event.id) || []) {
+      indegree.set(nextId, indegree.get(nextId) - 1);
+      if (indegree.get(nextId) === 0) ready.push(byId.get(nextId));
+    }
+    ready.sort(baseCompare);
+  }
+
+  const remainder = nodes.filter((event) => !emitted.has(event.id)).sort(baseCompare);
+  return { ordered: ordered.concat(remainder), cycleIds: remainder.map((event) => event.id) };
+}
+
+function parseScalar(value) {
+  const trimmed = String(value || "").trim();
+  if (trimmed === "null") return null;
+  if (trimmed === "true") return true;
+  if (trimmed === "false") return false;
+  if (
+    (trimmed.startsWith('"') && trimmed.endsWith('"')) ||
+    (trimmed.startsWith("'") && trimmed.endsWith("'"))
+  ) {
+    return trimmed.slice(1, -1);
+  }
+  return trimmed;
+}
+
+function readFlatYaml(file, conflicts) {
+  if (!fs.existsSync(file)) return null;
+  const out = {};
+  const text = fs.readFileSync(file, "utf8");
+  for (const [index, raw] of text.split(/\r?\n/).entries()) {
+    const line = raw.replace(/\s+#.*$/, "");
+    if (!line.trim()) continue;
+    const match = /^([A-Za-z0-9_-]+):\s*(.*)$/.exec(line);
+    if (!match) {
+      conflicts.push({ kind: "parse-error", detail: `${file}:${index + 1}: unsupported YAML line` });
+      continue;
+    }
+    out[match[1]] = parseScalar(match[2]);
+  }
+  return out;
 }
 
 function latestReadStates(readStates) {
@@ -417,6 +483,162 @@ function reduceArbitration(shardsDir, currentRev) {
   return state;
 }
 
+const REGISTERED_AGENTS = new Set(["claude", "codex", "gemini"]);
+
+function ensureTask(tasks, taskId) {
+  if (!tasks.has(taskId)) {
+    tasks.set(taskId, {
+      task_id: taskId,
+      status: "pending",
+      owner: null,
+      created_by: null,
+      claims: [],
+      completions: [],
+      updates: [],
+    });
+  }
+  return tasks.get(taskId);
+}
+
+function normalizeTaskEvent(event, shardAgent, conflicts) {
+  const actor = event.actor || shardAgent;
+  if (actor !== shardAgent) {
+    conflicts.push({
+      kind: "task-owner-mismatch",
+      event_id: event.id || null,
+      detail: `${shardAgent} shard contains task event actor ${actor}`,
+    });
+  }
+  return {
+    ...event,
+    actor,
+    kind: event.kind || event.type,
+    task_id: event.task_id || event.payload?.task_id || null,
+    _source: `${shardAgent}-shard`,
+  };
+}
+
+function applyTaskEvent(tasks, createsByTask, event, conflicts) {
+  if (!event.task_id || !event.kind) return;
+  const task = ensureTask(tasks, event.task_id);
+
+  if (event.kind === "task.created") {
+    const creates = createsByTask.get(event.task_id) || [];
+    creates.push(event);
+    createsByTask.set(event.task_id, creates);
+    if (creates.length > 1) {
+      conflicts.push({
+        kind: "duplicate-task-create",
+        task_id: event.task_id,
+        event_ids: creates.map((create) => create.id).filter(Boolean),
+      });
+    }
+    if (!task.created_by) {
+      task.created_by = event.actor;
+      task.owner = event.payload?.owner || event.actor;
+      task.status = event.payload?.status || "pending";
+      if (event.payload?.description) task.description = event.payload.description;
+    }
+    return;
+  }
+
+  if (event.kind === "task.claimed") {
+    if (!task.claims.some((claim) => claim.actor === event.actor && claim.event_id === event.id)) {
+      task.claims.push({ actor: event.actor, event_id: event.id || null, ts: event.ts || null });
+    }
+    if (!task.owner) task.owner = event.actor;
+    if (task.status === "pending") task.status = "in_progress";
+    return;
+  }
+
+  if (event.kind === "task.updated") {
+    task.updates.push({ actor: event.actor, event_id: event.id || null, payload: event.payload || {} });
+    Object.assign(task, event.payload || {});
+    return;
+  }
+
+  if (event.kind === "task.completed") {
+    task.completions.push({ actor: event.actor, event_id: event.id || null, ts: event.ts || null });
+    task.status = "done";
+    return;
+  }
+
+  if (event.kind === "task.deferred" || event.kind === "task.cancelled") {
+    task.status = event.kind.replace("task.", "");
+  }
+}
+
+function reduceTasks(shardsDir) {
+  const conflicts = [];
+  const agents = [];
+  const unknownAgents = [];
+  const taskEvents = [];
+
+  for (const shardAgent of sortedShardAgents(shardsDir)) {
+    const dir = path.join(shardsDir, shardAgent);
+    const status = readFlatYaml(path.join(dir, "status.yaml"), conflicts);
+    const registered = REGISTERED_AGENTS.has(shardAgent);
+
+    if (status) {
+      const declaredAgent = status.agent || shardAgent;
+      if (declaredAgent !== shardAgent) {
+        conflicts.push({
+          kind: "status-owner-mismatch",
+          agent: declaredAgent,
+          shard: shardAgent,
+          detail: `${shardAgent} status.yaml declares agent ${declaredAgent}`,
+        });
+      } else if (registered) {
+        agents.push({ ...status, agent: shardAgent, _source: `${shardAgent}-shard` });
+      } else {
+        unknownAgents.push({ ...status, agent: shardAgent, _source: `${shardAgent}-shard` });
+      }
+    } else if (!registered) {
+      unknownAgents.push({ agent: shardAgent, _source: `${shardAgent}-shard` });
+    }
+
+    for (const event of readJsonl(path.join(dir, "task-events.jsonl"), conflicts)) {
+      taskEvents.push(normalizeTaskEvent(event, shardAgent, conflicts));
+    }
+  }
+
+  const unknownNames = new Set(unknownAgents.map((agent) => agent.agent));
+  const authorizedEvents = taskEvents.filter((event) => !unknownNames.has(event.actor));
+  const { ordered, cycleIds } = causalOrderWithCycles(authorizedEvents);
+  if (cycleIds.length) {
+    conflicts.push({ kind: "dependency-cycle", event_ids: cycleIds });
+  }
+
+  const tasks = new Map();
+  const createsByTask = new Map();
+  for (const event of ordered) applyTaskEvent(tasks, createsByTask, event, conflicts);
+
+  for (const task of tasks.values()) {
+    const actors = [...new Set(task.claims.map((claim) => claim.actor))].sort();
+    if (actors.length > 1) {
+      conflicts.push({
+        kind: "claim-conflict",
+        task_id: task.task_id,
+        actors,
+        event_ids: task.claims.map((claim) => claim.event_id).filter(Boolean).sort(),
+        resolution: "allow-parallel-then-review",
+      });
+    }
+  }
+
+  return {
+    tasks: [...tasks.values()].sort((a, b) => a.task_id.localeCompare(b.task_id)),
+    agents: agents.sort((a, b) => a.agent.localeCompare(b.agent)),
+    conflicts: conflicts.sort((a, b) => {
+      const ak = `${a.kind}\u0000${a.task_id || ""}\u0000${a.agent || ""}\u0000${a.detail || ""}`;
+      const bk = `${b.kind}\u0000${b.task_id || ""}\u0000${b.agent || ""}\u0000${b.detail || ""}`;
+      return ak < bk ? -1 : ak > bk ? 1 : 0;
+    }),
+    unknown_agents: unknownAgents.sort((a, b) => a.agent.localeCompare(b.agent)),
+    source_events: ordered,
+  };
+}
+
 function renderMailboxMd(data) {
   const lines = [
     "# Mailbox (Derived)",
@@ -451,6 +673,8 @@ try {
   const args = parseArgs(process.argv.slice(2));
   if (args.emit === "arbitration-json") {
     process.stdout.write(`${JSON.stringify(reduceArbitration(path.resolve(args.shards), args.rev), null, 2)}\n`);
+  } else if (args.emit === "task-json") {
+    process.stdout.write(`${JSON.stringify(reduceTasks(path.resolve(args.shards)), null, 2)}\n`);
   } else {
     const data = aggregate(path.resolve(args.shards));
     if (args.emit === "mailbox-md") {

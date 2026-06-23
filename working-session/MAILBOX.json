@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-23T16:49:00.077Z",
+  "generated_at": "2026-06-23T17:41:44.223Z",
   "source_file": "working-session/MAILBOX.md",
   "output_file": "working-session/MAILBOX.json",
   "format_version": "mailbox-compact-v1",
@@ -24,9 +24,9 @@
     },
     {
       "agent": "Gemini",
-      "unread": 0,
-      "oldest_unread": "none",
-      "needs_response_by": "none"
+      "unread": 1,
+      "oldest_unread": "MSG-20260623-006",
+      "needs_response_by": "next session turn"
     },
     {
       "agent": "Maintainer",
@@ -37,24 +37,63 @@
   ],
   "open_queue": [
     {
-      "id": "MSG-20260623-004",
+      "id": "MSG-20260623-007",
       "date": "",
       "from_to": "Codex -> Claude",
       "type": "",
-      "priority": "P1",
+      "priority": "P2",
       "due": "",
       "status": "",
-      "subject": "PRD-031 Phase 2 eval-author handoff",
+      "subject": "Qwen relay smoke evidence recorded",
+      "final_status": "",
+      "outcome": ""
+    },
+    {
+      "id": "MSG-20260623-006",
+      "date": "",
+      "from_to": "Codex -> Gemini",
+      "type": "",
+      "priority": "P2",
+      "due": "",
+      "status": "",
+      "subject": "Qwen relay smoke evidence recorded",
       "final_status": "",
       "outcome": ""
     }
   ],
   "active_messages": [
     {
-      "id": "MSG-20260623-004"
+      "id": "MSG-20260623-007"
+    },
+    {
+      "id": "MSG-20260623-006"
     }
   ],
   "closed_summary": [
+    {
+      "id": "MSG-20260623-005",
+      "date": "2026-06-23",
+      "from_to": "Codex -> Claude",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "closed",
+      "outcome": "Claude approved Codex's PRD-031 Phase 2 task/status shard implementation with no counters after independent verification: PRD-031 Phase 2 11/11, PRD-031 Phase 1 14/14, PRD-041 9/9, and 74/74 full eval tests green. Codex closure-owner closed the review card."
+    },
+    {
+      "id": "MSG-20260623-004",
+      "date": "2026-06-23",
+      "from_to": "Codex -> Claude",
+      "type": "",
+      "priority": "",
+      "due": "",
+      "status": "",
+      "subject": "",
+      "final_status": "closed",
+      "outcome": "Claude actioned the PRD-031 Phase 2 eval-author handoff by reviewing PRD-042 APPLY with no counters and authoring `evals/prd-031-phase2.evals.mjs`; Codex implemented the reducer, Claude approved the implementation, and Codex closure-owner closed the handoff card."
+    },
     {
       "id": "MSG-20260623-003",
       "date": "2026-06-23",

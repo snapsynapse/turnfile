@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2026-06-23 (PRD-042 Claude acceptance + PRD-031 Phase 2 evals authored)",
+  "updated_at": "2026-06-23 (Qwen relay smoke evidence recorded)",
   "policy": {
     "required_reviewers": [
       "codex",
@@ -1230,12 +1230,12 @@
       "blocking_items": [],
       "eligible_for_docs_prds": true,
       "implementation": {
-        "state": "pending",
-        "evals": null,
+        "state": "phase2-reviewed",
+        "evals": "evals/prd-031-phase1.evals.mjs (14/14), evals/prd-031-phase2.evals.mjs (11/11)",
         "eval_author": "claude",
         "implementer": "codex",
         "reviewer": "claude",
-        "notes": "PRD-006 A1: Claude (proposer) authors evals/prd-031-phase1.evals.mjs (s16-prd-031-phase1) -> Codex implements -> Claude reviews. Promoted with implementation pending (mirrors PRD-027)."
+        "notes": "Phase 1: Claude authored evals, Codex implemented, Claude reviewed APPROVE (session 16-17). Phase 2: Claude authored 11 RED evals (session 27, MSG-20260623-004), Codex implemented task/status shard reducer in aggregate-coordination.mjs with fixtures (rev 379), Claude reviewed APPROVE (rev 380, SIG-325) — 11/11 green, 74/74 full suite green. Phase 2 read-only boundary preserved: no live authority migration. Phase 3 (retire coordination.revision) not yet started."
       }
     },
     {
@@ -1686,7 +1686,7 @@
         "codex": {
           "status": "accepted",
           "evidence": [
-            "Codex validated Gemini's revised PRD-042 draft and evals on 2026-06-23; node --test evals/prd-042.evals.mjs PASS 12/12. Codex accepts the plan with no design counters. Execution evidence is recorded at working-session/docs/onboarding/evidence/qwen-mlx/2026-06-23-01/evidence.md and is blocked on Qwen runtime availability before candidate response capture."
+            "Codex validated Gemini's revised PRD-042 draft and evals on 2026-06-23; node --test evals/prd-042.evals.mjs PASS 12/12. Codex accepts the plan with no design counters. Runtime-readiness evidence is recorded at working-session/docs/onboarding/evidence/qwen-mlx/2026-06-23-01/evidence.md. Maintainer-relayed short-output smoke evidence is recorded at working-session/docs/onboarding/evidence/qwen-mlx/2026-06-23-02/evidence.md: exact text, minimal JSON, boundary JSON, and tightened OT-014 refusal pass; longer JSON-only prompts showed duplicated/corrupted output."
           ]
         },
         "claude": {
@@ -1707,7 +1707,7 @@
         }
       },
       "blocking_items": [
-        "Qwen runtime unavailable to Codex execution path: local oMLX is reachable but exposes only gemma-4-e4b-it-4bit; no Qwen model/runner is available; direct omlx CLI cannot access Metal from the Codex sandbox.",
+        "Qwen runtime unavailable to Codex execution path: local oMLX is reachable but exposes only gemma-4-e4b-it-4bit; no Qwen model/runner is available; direct omlx CLI cannot access Metal from the Codex sandbox. Maintainer-relayed short-output smoke tests passed, but direct Codex execution and longer JSON output discipline remain unverified.",
         "Maintainer acceptance remains pending before PRD-042 promotion or any Qwen state transition."
       ],
       "eligible_for_docs_prds": false,
@@ -1717,7 +1717,7 @@
         "eval_author": "gemini",
         "implementer": "codex",
         "reviewer": "claude",
-        "notes": "Gemini authored evals under evals/prd-042.evals.mjs. Codex validated the plan and evals on 2026-06-23 (12/12 PASS) and registered s27-qwen-onboarding-exec. Execution is blocked before Qwen candidate response capture because no Qwen MLX runtime path is currently available to Codex; see working-session/docs/onboarding/evidence/qwen-mlx/2026-06-23-01/evidence.md."
+        "notes": "Gemini authored evals under evals/prd-042.evals.mjs. Codex validated the plan and evals on 2026-06-23 (12/12 PASS) and registered s27-qwen-onboarding-exec. Direct Codex execution remains blocked because no Qwen MLX runtime path is currently available to Codex; see working-session/docs/onboarding/evidence/qwen-mlx/2026-06-23-01/evidence.md. Maintainer-relayed smoke testing later established short exact-output relay viability and no-write boundary behavior, including tightened OT-014 refusal; see working-session/docs/onboarding/evidence/qwen-mlx/2026-06-23-02/evidence.md. This does not grant Qwen any Turnfile authority."
       }
     }
   ]

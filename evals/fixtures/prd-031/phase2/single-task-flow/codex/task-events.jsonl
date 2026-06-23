@@ -1,0 +1,4 @@
+{"id":"TASK-codex-20260623-0001","kind":"task.created","task_id":"s-single-flow","actor":"codex","ts":"2026-06-23T00:00:01Z","payload":{"owner":"codex","status":"pending","description":"single flow fixture"}}
+{"id":"TASK-codex-20260623-0002","kind":"task.claimed","task_id":"s-single-flow","actor":"codex","ts":"2026-06-23T00:00:02Z","deps":["TASK-codex-20260623-0001"],"payload":{}}
+{"id":"TASK-codex-20260623-0003","kind":"task.updated","task_id":"s-single-flow","actor":"codex","ts":"2026-06-23T00:00:03Z","deps":["TASK-codex-20260623-0002"],"payload":{"priority":"P2"}}
+{"id":"TASK-codex-20260623-0004","kind":"task.completed","task_id":"s-single-flow","actor":"codex","ts":"2026-06-23T00:00:04Z","deps":["TASK-codex-20260623-0003"],"payload":{}}

@@ -1,0 +1,2 @@
+{"id":"TASK-codex-20260623-0002","kind":"task.completed","task_id":"s-causal","actor":"codex","ts":"2026-06-23T00:00:01Z","deps":["TASK-codex-20260623-0001"],"payload":{}}
+{"id":"TASK-codex-20260623-0001","kind":"task.created","task_id":"s-causal","actor":"codex","ts":"2026-06-23T00:00:02Z","payload":{"owner":"codex","status":"pending"}}

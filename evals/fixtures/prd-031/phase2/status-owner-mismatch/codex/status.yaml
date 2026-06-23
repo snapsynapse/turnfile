@@ -1,0 +1,8 @@
+agent: gemini
+status: active
+current_task: null
+session_id: gemini-session-fixture
+last_seen: fixture
+model: gemini
+surface: antigravity
+heartbeat: read-only

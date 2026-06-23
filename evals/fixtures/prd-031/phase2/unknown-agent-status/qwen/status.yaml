@@ -1,0 +1,8 @@
+agent: qwen
+status: active
+current_task: null
+session_id: qwen-session-fixture
+last_seen: fixture
+model: qwen3.6:35b-mlx
+surface: local-mlx
+heartbeat: none

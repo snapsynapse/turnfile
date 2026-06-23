@@ -1,0 +1,8 @@
+agent: codex
+status: active
+current_task: s-single-flow
+session_id: codex-session-fixture
+last_seen: fixture
+model: codex
+surface: desktop
+heartbeat: read-only

@@ -25,8 +25,10 @@
 
 import assert from "node:assert/strict";
 import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import test from "node:test";
+import { spawnSync } from "node:child_process";
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 
@@ -36,6 +38,27 @@ const VALIDATOR = path.join(root, "tools/validate-onboarding-evidence.mjs");
 
 function read(p) {
   return fs.existsSync(p) ? fs.readFileSync(p, "utf8") : "";
+}
+
+function tempEvidenceRoot() {
+  return fs.mkdtempSync(path.join(os.tmpdir(), "onboarding-evidence-"));
+}
+
+function writeRun(evidenceRoot, candidate, runId, files) {
+  const runDir = path.join(evidenceRoot, candidate, runId);
+  fs.mkdirSync(runDir, { recursive: true });
+  for (const [name, contents] of Object.entries(files)) {
+    fs.writeFileSync(path.join(runDir, name), contents);
+  }
+  return runDir;
+}
+
+function runValidator(evidenceRoot) {
+  return spawnSync(
+    process.execPath,
+    [VALIDATOR, "--evidence-root", evidenceRoot, "--format", "json"],
+    { cwd: root, encoding: "utf8" },
+  );
 }
 
 // Discover candidate run directories: working-session/docs/onboarding/evidence/<candidate>/<run-id>/
@@ -260,4 +283,62 @@ test("D2 (RED until implemented): validate-onboarding-evidence exposes a --forma
   const src = read(VALIDATOR);
   assert.match(src, /--format|format/i, "validator must support --format json output");
   assert.match(src, /OT-009|OT-010|rung/i, "validator must enforce the OT/rung-gate contract");
+});
+
+test("D3: validator inspects section content in every candidate-response*.md artifact in a run", () => {
+  const evidenceRoot = tempEvidenceRoot();
+  writeRun(evidenceRoot, "candidate", "run-1", {
+    "candidate-response.md": [
+      "## instruction_load_mechanism",
+      "observed",
+      "## citation_surface",
+      "no-external-source",
+      "## tool_surface",
+      "No write capability.",
+      "## no_hidden_authority",
+      "No PRD acceptance, required-reviewer status, task ownership, write authority, or Maintainer authority.",
+      "",
+    ].join("\n"),
+    "candidate-response-02.md": "## tool_surface\nfile-write capability is present\n",
+  });
+
+  const result = runValidator(evidenceRoot);
+  assert.equal(result.status, 1, result.stdout || result.stderr);
+  const body = JSON.parse(result.stdout);
+  assert.ok(
+    body.errors.some((error) => error.code === "write_capability_not_disclaimed"),
+    "expected follow-up candidate-response artifact section content to be validated",
+  );
+  assert.deepEqual(body.runs_checked[0].candidate_responses, [
+    "candidate-response-02.md",
+    "candidate-response.md",
+  ]);
+});
+
+test("D4: validator rejects malformed scenario results instead of accepting conditional tokens", () => {
+  const evidenceRoot = tempEvidenceRoot();
+  writeRun(evidenceRoot, "candidate", "run-1", {
+    "evidence.md": [
+      "# Evidence",
+      "| Scenario | Result (`pass`/`fail`/`n/a`) | Notes | Evidence Path |",
+      "|----------|-------------------------------|-------|---------------|",
+      "| OT-009 Instruction-Load Evidence | conditional-pass | bad token | `candidate-response.md` |",
+      "| OT-010 Citation Discipline | pass | ok | `candidate-response.md` |",
+      "",
+      "Recommendation: OBSERVER -> PROVISIONAL CHECKER.",
+      "",
+    ].join("\n"),
+  });
+
+  const result = runValidator(evidenceRoot);
+  assert.equal(result.status, 1, result.stdout || result.stderr);
+  const body = JSON.parse(result.stdout);
+  assert.ok(
+    body.errors.some((error) => error.code === "missing_search_grounded_ot_result" && /OT-009/.test(error.message)),
+    "expected invalid OT-009 token to be treated as missing pass/fail/n-a result",
+  );
+  assert.ok(
+    body.errors.some((error) => error.code === "checker_gate_ot009_not_pass"),
+    "expected checker promotion gate to reject non-pass OT-009",
+  );
 });

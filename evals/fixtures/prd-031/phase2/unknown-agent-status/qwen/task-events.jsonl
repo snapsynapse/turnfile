@@ -1,0 +1,1 @@
+{"id":"TASK-qwen-20260623-0001","kind":"task.created","task_id":"s-qwen-should-not-own","actor":"qwen","ts":"2026-06-23T00:00:01Z","payload":{"owner":"qwen","status":"pending","description":"unknown local model attempted task create"}}
