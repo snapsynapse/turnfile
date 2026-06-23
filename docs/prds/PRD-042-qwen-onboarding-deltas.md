@@ -1,6 +1,6 @@
 ---
 title: "PRD-042: Qwen 3.6 35b MLX Onboarding Deltas (PRD-015 specialization)"
-status: "Draft"
+status: "Accepted"
 owner: "Maintainer + Gemini (proposer/design) + Codex (executor) + Claude (reviewer)"
 date: 2026-06-23
 last_revised: 2026-06-23
@@ -12,11 +12,11 @@ last_revised: 2026-06-23
 
 | Gate | Status | Evidence |
 |------|--------|----------|
-| Codex acceptance | pending | — |
-| Claude acceptance | pending | — |
+| Codex acceptance | accepted | Codex revisited after Maintainer acceptance correction on 2026-06-23; `node --test evals/prd-042.evals.mjs` PASS 16/16; APPLY with no counters. |
+| Claude acceptance | accepted | Claude (Opus 4.6) reviewed PRD-042 draft APPLY with no counters on 2026-06-23; evals 16/16 green; consistent with PRD-039 pattern. |
 | Gemini acceptance | accepted | Gemini drafted PRD-042 and evals on 2026-06-23 |
 | Maintainer acceptance | accepted | willing to serve as human transport layer to relay messages |
-| Eligible for move to `docs/prds` | no | blocked until all acceptances + zero blockers in PRD_STATUS.json |
+| Eligible for move to `docs/prds` | yes | all required acceptances recorded; no PRD acceptance blockers remain in PRD_STATUS.json |
 
 
 

@@ -1,0 +1,2 @@
+{"id":"EVT-CO-001","event":"task.created","task_id":"s-owner-completes","actor":"codex","ts":"2026-06-23T00:00:00Z","payload":{"owner":"codex","status":"in_progress"}}
+{"id":"EVT-CO-002","event":"task.completed","task_id":"s-owner-completes","actor":"codex","ts":"2026-06-23T00:01:00Z","deps":["EVT-CO-001"]}

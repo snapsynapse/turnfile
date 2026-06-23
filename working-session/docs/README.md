@@ -47,6 +47,7 @@ None.
 33. `PRD-037-boot-simplification.md`
 34. `PRD-038-read-only-heartbeat-stewards.md`
 35. `PRD-039-perplexity-onboarding-deltas.md`
+36. `PRD-042-qwen-onboarding-deltas.md`
 
 ## Promotion Gate Policy (Required)
 

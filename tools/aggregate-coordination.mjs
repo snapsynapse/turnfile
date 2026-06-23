@@ -61,6 +61,11 @@ function sortedShardAgents(shardsDir) {
     .sort((a, b) => a.localeCompare(b));
 }
 
+function shardRoot(inputDir) {
+  const agentsDir = path.join(inputDir, "agents");
+  return fs.existsSync(agentsDir) && fs.statSync(agentsDir).isDirectory() ? agentsDir : inputDir;
+}
+
 function signalNamespace(id) {
   const match = /^SIG-([A-Za-z0-9_-]+)-(\d{4,})$/.exec(String(id || ""));
   if (!match) return null;
@@ -483,7 +488,9 @@ function reduceArbitration(shardsDir, currentRev) {
   return state;
 }
 
-const REGISTERED_AGENTS = new Set(["claude", "codex", "gemini"]);
+const REGISTERED_AGENTS = new Set(["claude", "codex", "gemini", "maintainer"]);
+const AUTHORIZED_TASK_AGENTS = new Set(["claude", "codex", "gemini", "maintainer"]);
+const RESERVED_TASK_FIELDS = new Set(["id", "task_id", "created_by", "created_rev"]);
 
 function ensureTask(tasks, taskId) {
   if (!tasks.has(taskId)) {
@@ -512,7 +519,7 @@ function normalizeTaskEvent(event, shardAgent, conflicts) {
   return {
     ...event,
     actor,
-    kind: event.kind || event.type,
+    kind: event.kind || event.event || event.type,
     task_id: event.task_id || event.payload?.task_id || null,
     _source: `${shardAgent}-shard`,
   };
@@ -534,7 +541,9 @@ function applyTaskEvent(tasks, createsByTask, event, conflicts) {
       });
     }
     if (!task.created_by) {
+      task.id = event.task_id;
       task.created_by = event.actor;
+      if (event.payload?.created_rev !== undefined) task.created_rev = event.payload.created_rev;
       task.owner = event.payload?.owner || event.actor;
       task.status = event.payload?.status || "pending";
       if (event.payload?.description) task.description = event.payload.description;
@@ -553,13 +562,38 @@ function applyTaskEvent(tasks, createsByTask, event, conflicts) {
 
   if (event.kind === "task.updated") {
     task.updates.push({ actor: event.actor, event_id: event.id || null, payload: event.payload || {} });
-    Object.assign(task, event.payload || {});
+    const reserved = Object.keys(event.payload || {}).filter((field) => RESERVED_TASK_FIELDS.has(field));
+    if (reserved.length) {
+      conflicts.push({
+        kind: "reserved-field-overwrite",
+        task_id: event.task_id,
+        event_id: event.id || null,
+        fields: reserved.sort(),
+      });
+    }
+    const mutable = {};
+    for (const [key, value] of Object.entries(event.payload || {})) {
+      if (!RESERVED_TASK_FIELDS.has(key)) mutable[key] = value;
+    }
+    Object.assign(task, mutable);
     return;
   }
 
   if (event.kind === "task.completed") {
     task.completions.push({ actor: event.actor, event_id: event.id || null, ts: event.ts || null });
+    const authorized = event.actor === task.owner || event.actor === "maintainer";
+    if (!authorized) {
+      conflicts.push({
+        kind: "completion-authority-violation",
+        task_id: event.task_id,
+        event_id: event.id || null,
+        actor: event.actor,
+        owner: task.owner || null,
+      });
+      return;
+    }
     task.status = "done";
+    task.completed_by = event.actor;
     return;
   }
 
@@ -573,11 +607,27 @@ function reduceTasks(shardsDir) {
   const agents = [];
   const unknownAgents = [];
   const taskEvents = [];
+  const participantEvents = [];
+  const seenSignals = new Map();
+  const root = shardRoot(shardsDir);
 
-  for (const shardAgent of sortedShardAgents(shardsDir)) {
-    const dir = path.join(shardsDir, shardAgent);
+  for (const shardAgent of sortedShardAgents(root)) {
+    const dir = path.join(root, shardAgent);
     const status = readFlatYaml(path.join(dir, "status.yaml"), conflicts);
     const registered = REGISTERED_AGENTS.has(shardAgent);
+    const taskAuthorized = AUTHORIZED_TASK_AGENTS.has(shardAgent);
+
+    for (const signal of readJsonl(path.join(dir, "signals.jsonl"), conflicts)) {
+      if (signal.id && seenSignals.has(signal.id)) {
+        conflicts.push({
+          kind: "duplicate-signal-id",
+          signal_id: signal.id,
+          agents: [seenSignals.get(signal.id), shardAgent].sort(),
+        });
+      } else if (signal.id) {
+        seenSignals.set(signal.id, shardAgent);
+      }
+    }
 
     if (status) {
       const declaredAgent = status.agent || shardAgent;
@@ -588,7 +638,7 @@ function reduceTasks(shardsDir) {
           shard: shardAgent,
           detail: `${shardAgent} status.yaml declares agent ${declaredAgent}`,
         });
-      } else if (registered) {
+      } else if (registered && shardAgent !== "maintainer") {
         agents.push({ ...status, agent: shardAgent, _source: `${shardAgent}-shard` });
       } else {
         unknownAgents.push({ ...status, agent: shardAgent, _source: `${shardAgent}-shard` });
@@ -600,10 +650,19 @@ function reduceTasks(shardsDir) {
     for (const event of readJsonl(path.join(dir, "task-events.jsonl"), conflicts)) {
       taskEvents.push(normalizeTaskEvent(event, shardAgent, conflicts));
     }
+
+    for (const event of readJsonl(path.join(dir, "participant-events.jsonl"), conflicts)) {
+      participantEvents.push({
+        ...event,
+        actor: event.actor || shardAgent,
+        authoritative: false,
+        _source: `${shardAgent}-shard`,
+      });
+    }
   }
 
   const unknownNames = new Set(unknownAgents.map((agent) => agent.agent));
-  const authorizedEvents = taskEvents.filter((event) => !unknownNames.has(event.actor));
+  const authorizedEvents = taskEvents.filter((event) => !unknownNames.has(event.actor) && AUTHORIZED_TASK_AGENTS.has(event.actor));
   const { ordered, cycleIds } = causalOrderWithCycles(authorizedEvents);
   if (cycleIds.length) {
     conflicts.push({ kind: "dependency-cycle", event_ids: cycleIds });
@@ -627,7 +686,9 @@ function reduceTasks(shardsDir) {
   }
 
   return {
-    tasks: [...tasks.values()].sort((a, b) => a.task_id.localeCompare(b.task_id)),
+    tasks: [...tasks.values()]
+      .map((task) => ({ id: task.id || task.task_id, ...task }))
+      .sort((a, b) => a.task_id.localeCompare(b.task_id)),
     agents: agents.sort((a, b) => a.agent.localeCompare(b.agent)),
     conflicts: conflicts.sort((a, b) => {
       const ak = `${a.kind}\u0000${a.task_id || ""}\u0000${a.agent || ""}\u0000${a.detail || ""}`;
@@ -635,7 +696,8 @@ function reduceTasks(shardsDir) {
       return ak < bk ? -1 : ak > bk ? 1 : 0;
     }),
     unknown_agents: unknownAgents.sort((a, b) => a.agent.localeCompare(b.agent)),
-    source_events: ordered,
+    participant_events: causalOrder(participantEvents),
+    source_events: ordered.map((event) => ({ event: event.kind, ...event })),
   };
 }
 

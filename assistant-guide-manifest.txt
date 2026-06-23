@@ -1,8 +1,8 @@
 # assistant-guide manifest — Turnfile
 file: assistant-guide.txt
-sha256: f38043beb87d367770d101eb584c79804f0876031e8140d0cbec86d68dc129a0
+sha256: 9dcdabda6ec349f9acdc6c048f93f14adefff0aefec7df3c3ab41ab1dfcc0989
 bytes: 2334
 served: https://turnfile.work/.well-known/assistant-guide.txt
 root_copy: assistant-guide.txt
-updated: 2026-06-18
+updated: 2026-06-23
 conformance: GuideCheck (byte-identical root + .well-known pair)

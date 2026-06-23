@@ -1,0 +1,8 @@
+coordination:
+  agents:
+    claude:
+      role: reviewer
+    codex:
+      role: implementer
+    gemini:
+      role: reviewer

@@ -1,0 +1,1 @@
+{"id":"EVT-SM-001","event":"task.created","task_id":"s-shadow","actor":"codex","ts":"2026-06-23T00:00:00Z","payload":{"owner":"codex","status":"in_progress"}}

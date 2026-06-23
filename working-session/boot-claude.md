@@ -1,4 +1,4 @@
-# Boot File — Claude (v21)
+# Boot File — Claude (v22)
 
 Read this first on session start. It tells you what this project is, where things are, what state we're in, and what to do next.
 
@@ -55,6 +55,8 @@ Turnfile (SNAP — Structured Negotiation of Autonomous Peers) is a file-based c
 - **Default heartbeat (PRD-037 R3 + PRD-038):** 5-minute self-owned read-only steward per agent, NOTIFY-on-material-only, stop=delete at clean close. **READ-ONLY STRICTLY ENFORCED per PRD-038 R2 deny-list:** no file edits, no MAILBOX.json regen, no status changes, no signal creation, no revision bumps.
 - **Tokenese (PRD-027 + charter incl. Tier-B Amendment A1):** every clone paired to a legible source; source wins; `^N`/`ev:` untrusted (calibration result); governance English-only; R7 cross-repo boundary (never edit Tokenese semantics from Turnfile). All three agents passed PRD-027 production-competence.
 - **Active-card owner review at close (PRD-014):** session closeout MUST review every active mailbox card where Closure owner equals the closing agent. `validate-closeout --agent <self>` enforces this.
+- **Chat-file semantics (PRD-017 R7):** create only your own `chat-claude.md`; a missing peer chat file is warning only. Boot never authors a peer chat file from the Claude lane.
+- **Out-of-band drift check (PRD-023 R6):** at boot, before relying on any prior-session state, run reconciliation against TURNFILE.yaml + MAILBOX.md + PRD_STATUS.json + WORKLOG.md to detect out-of-band activity (peer edits between sessions, manual Maintainer changes). Note any drift in chat-claude.md with date/actor/changed-artifacts/governance-state/follow-up-owner. If governance state changed or a decision-required item surfaced, escalate to Maintainer before substantive writes.
 
 ## Resumption read order (PRD-011 R3 + PRD-017 A1)
 
@@ -73,41 +75,41 @@ Cross-agent contract: `docs/BOOT_SEQUENCE.md` (PRD-017). This file is Claude-spe
 
 Run `NEXT_SESSION_HANDSHAKE.md` and converge/sign with peers before substantive writes.
 
-## Current state (as of session-27 close, 2026-06-23)
+## Current state (as of session-28 close, 2026-06-23)
 
-THREE EQUAL agents: Claude (Opus 4.6), Codex (GPT-5), Gemini (Antigravity / Gemini 3.5 Flash High). Session 27 all agents idle: Codex rev 383, Gemini rev 382, Claude rev 384. Read TURNFILE fresh — peers run LIVE concurrently.
+THREE EQUAL agents: Claude (Opus 4.6), Codex (Codex 5.5 — handshake self-reports "GPT-5"; Maintainer-canonical label is **Codex 5.5**), Gemini (Antigravity / Gemini 3.5 Flash High). Session 28 close: Claude idle rev 397 / Codex idle rev 394 / Gemini **incomplete close** (booted+delivered + went quiet without close protocol — see observer note in WORKLOG; TURNFILE.yaml still shows gemini.status=active and boot-gemini.md is stale at v11). Read TURNFILE fresh — peers run LIVE concurrently.
 
-**PRD-031 Phase 2 DONE.** Codex implemented task/status shard event-sourced reducer (`--emit task-json` in `aggregate-coordination.mjs`); Claude authored 11 RED evals, then reviewed implementation APPROVE (11/11 green, 74/74 full suite). Phase 2 is read-only derived output only — no live authority migration. Phase 3 prep doc ready (`working-session/docs/prd-031-phase3-migration-prep-codex.md`).
+**PRD-031 Phase 3 DONE.** Complete A1 loop session 28: Claude proposed OQ#1/#2/#3/#4 resolutions (MSG-010) → Codex APPLY + counter C1 on OQ#3 (maintainer participant-events fixture-only/non-authoritative until OWNERSHIP shard-path declared by future PRD) → Claude authored 12 RED evals → Codex implemented 2 schemas (`schemas/prd-031/task-event-v0.schema.json` + `task-aggregate-v0.schema.json`), `tools/validate-task-aggregate.mjs`, `tools/compare-turnfile-tasks.mjs`, reducer extensions (4 conflict kinds: completion-authority-violation, reserved-field-overwrite, duplicate-signal-id, participant_events with authoritative=false), and 10 fixtures → Claude step-7 APPROVE. 105/105 carry-forward eval suite green across 10 PRDs. Phase 3 read-only boundary preserved.
 
-**PRD-027 execution READY.** All R2 sequencing gates clear: PRD-024 done, PRD-028 done, PRD-029 done. Needs: session charter opt-in + teach phase (R2.8) to execute. Tokenese repo Phase A (S1 fixture fix + v0.3.9 release) may be in progress by Codex.
+**PRD-042 PROMOTED** to `docs/prds/`. PRD-018/019/039 done-flipped this session (upstream lanes already delivered the contracts). Model ledger updated: canonical Codex label = Codex 5.5.
 
-**PRD-042 (Qwen Onboarding Deltas):** Claude + Codex accepted; Maintainer acceptance pending. Qwen relay smoke evidence recorded (`working-session/docs/onboarding/evidence/qwen-mlx/2026-06-23-02/`). Qwen remains relay-only, outside registered agents.
+**PRD-027 execution READY but UNSTARTED.** All R2 sequencing gates clear (PRD-024/028/029 done). Needs: Maintainer charter opt-in + teach phase (R2.8) to execute. Tokenese repo Phase A may be in progress by Codex.
 
-### FIRST ACTIONS ON RESUME (session 28)
+### FIRST ACTIONS ON RESUME (session 29)
 
 1. **Use the fast path.** `node tools/session-orient.mjs --agent claude --emit human`. If clean, boot is done.
 2. **Use `tools/handshake-sign.mjs`** for the boot write. Run `NEXT_SESSION_HANDSHAKE.md` and converge with peers.
-3. **Check for new mailbox cards** — Codex MSG-20260623-006 (to Gemini, P2, Qwen smoke) and MSG-20260623-007 (to Claude, P2, Qwen smoke, Claude acked) are the latest. No open Claude-owned cards carried forward.
-4. **Priority lanes (with Maintainer scope direction):**
+3. **Check Gemini state.** Gemini did NOT run close protocol session 28. TURNFILE shows gemini.status=active but Gemini runtime is gone. Expect Gemini to self-reconcile via close-then-fresh-boot, OR be cold; do not write into Gemini-owned paths (boot-gemini.md, chat-gemini.md, .agents/skills/turnfile-protocol-gemini/**, working-session/agents/gemini/**, skills/gemini-3/**, GEMINI.md).
+4. **No open Claude-owned cards** carried forward from session 28.
+5. **Priority lanes (with Maintainer scope direction):**
    - **PRD-027 execution** — all gates clear; propose session charter opt-in + teach phase to start the A/B pilot
-   - **PRD-031 Phase 3** — Codex prep doc + self-audit ready; Claude authors RED evals per A1 loop when scoped
-   - **PRD-042 Maintainer acceptance** — needed before Qwen state transitions
-   - **PRD-018/019 done-flip** — Maintainer-gated status-lag
-   - **PRD-039 done-flip** — awaits Gemini reviewer confirmation in PRD_STATUS
+   - **PRD-035 Tokenese sync** — Gemini lane (RED eval authoring still owed; awaits next Gemini session)
+   - **PRD-031 OWNERSHIP shard-path** — future PRD if/when registry shards become live-authoritative (per session-28 C1)
 
-### Recent milestones (session 27)
+### Recent milestones (session 28)
 
-- **PRD-031 Phase 2 complete end-to-end.** Claude authored 11 RED evals → Codex implemented reducer + fixtures → Claude reviewed APPROVE (SIG-325, rev 380). 74/74 full eval suite green.
-- **PRD-042 APPLY.** Claude reviewed Gemini's Qwen onboarding deltas draft, accepted with no counters.
-- **Qwen relay smoke evidence.** Maintainer relayed Qwen responses; short exact-output prompts pass, longer JSON prompts produce corrupted output. Qwen remains relay-only.
-- **Codex idle-prep deliverables.** Qwen MLX execution handoff doc, PRD-031 Phase 2 self-audit (6 non-blocking gaps), Phase 3 migration prep (6-step gate sequence + 8 minimum evals).
-- **Tokenese HANDOFF.md evaluated.** PRD-027 execution scoped: all R2 gates clear, N2 A/B kill-criterion experiment is the central deliverable.
+- **PRD-031 Phase 3 complete end-to-end** via Claude/Codex A1 loop. 12/12 Phase 3 + 105/105 full carry-forward green.
+- **Maintainer-directed lowest-PRD-up batch:** PRD-018/019/039 done-flips + PRD-042 promotion to docs/prds.
+- **PRD-017 R7 + PRD-023 R6 boot-claude.md drift** fixed (Codex-surfaced + Gemini-flagged respectively); both suites 5/5 green.
+- **Model ledger:** Codex canonical label = "Codex 5.5" (extended sessions 14-28).
+- **Gemini partial-session delivery:** Gemini refreshed public-surface counts (README/docs/index.html/llms.txt/assistant-guide + manifests to 39 promoted / 41 registry-tracked PRDs) before going quiet without close protocol. Public-surface work bundled into Maintainer-directed rollup commit.
 
 ### PRD landscape (authoritative: `working-session/docs/PRD_STATUS.json`)
 
-- 41 PRDs tracked. PRD-031 implementation state `phase2-reviewed`. Genuinely-open: PRD-039 (awaits Gemini reviewer), PRD-018/019 (Maintainer-gated done-flip), PRD-031 Phase 3 (not started), PRD-042 (Maintainer acceptance pending).
+- 41 PRDs tracked, 36 promoted (PRD-042 newest). PRD-031 implementation state `done` (Phase 3).
 - Required reviewers `{codex, claude, maintainer, gemini}`.
-- 74/74 eval tests green across 6 eval files.
+- 105/105 eval tests green across 10 PRD suites at Claude session-28 close.
+- Genuinely-open: PRD-027 execution (awaits Maintainer charter opt-in); PRD-035 (Gemini lane unstarted); future PRD for PRD-031 OWNERSHIP shard-path if live-authority migration ever needed.
 
 ### Operating norms (skill v0.9.1 + PRD-037 + PRD-038)
 

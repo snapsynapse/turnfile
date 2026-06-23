@@ -9,6 +9,20 @@ loaded skills, scope, and the live outstanding list — so no agent acts on stal
 unilateral assumptions. Executed at boot, after the PRD-017 `docs/BOOT_SEQUENCE.md` read
 order and before the first shared-file write.
 
+## Session 27 addendum - Codex closeout (2026-06-23)
+
+Codex closed its side of session 27 at rev 385.
+
+- Turnfile protocol remains v0.1.
+- Codex status: idle; `current_task` null; last_seen `codex-session-27-close`.
+- Mailbox at Codex close: Codex unread 0; Claude unread 0; Gemini unread 1 (`MSG-20260623-006`); Maintainer unread 0.
+- Locks empty.
+- Codex heartbeat `turnfile-codex-readonly-steward-s27` deleted before close; no Codex heartbeat carried forward.
+- Codex boot rolled v16 -> v17; v16 archived at `docs/archive/boot-codex/boot-codex_v16.md`.
+- Session 27 Codex deliveries: handshake and heartbeat convergence; PRD-042 plan validation with Codex APPLY/no counters; Qwen runtime-readiness evidence and Maintainer-relayed relay-smoke evidence; PRD-031 Phase 2 task/status shard reducer implementation and Claude approval; 3-2-1 idle prep docs for Qwen execution handoff, PRD-031 Phase 2 self-audit, and PRD-031 Phase 3 prep.
+- Carry-forward: `MSG-20260623-006` remains unread for Gemini; PRD-042 is accepted and eligible for promotion but not yet moved to `docs/prds`; direct Qwen runtime remains unavailable to Codex; Qwen remains relay-only with no Turnfile authority and no state transition is granted by acceptance alone; PRD-031 Phase 3 is not started; PRD-027 execution awaits next-session scope.
+- Dirty worktree at Codex close contains session-27 implementation/evidence/control-plane artifacts plus Claude closeout artifacts. Do not stage peer-owned closeout artifacts without explicit Maintainer direction.
+
 ## Session 25 addendum - Codex closeout (2026-06-21)
 
 Codex closed its side of session 25 at rev 345.
@@ -535,3 +549,23 @@ tokenese ok v:0.1 @codex session:27 ev:obs
 | Codex | yes — Turnfile v0.1 (rev 366); PRD_STATUS 40 PRDs | yes — grammar v0.3; TKAB `tkab-check-1.1`; Tier-B twins authorized, English source-wins | yes — gates ok; model ledger GPT-5 / Codex desktop | ACK — session-27-boot, gemini-handshake-heartbeat, perplexity-provisional-checker-available, await-maintainer-next-session-scope | 5m self-owned read-only steward, write-capable only by explicit elevated scope, notify=notify-material-only, stop=delete-at-clean-close-or-maintainer-cancel | guard active; `core.hooksPath=tools/hooks` | Codex (GPT-5) — 2026-06-23 |
 | Gemini | yes — Turnfile v0.1 (rev 368); PRD_STATUS 40 PRDs | yes — grammar v0.3; TKAB `tkab-check-1.1`; Tier-B twins authorized, English source-wins | yes — gates ok; model ledger Gemini 3.5 Flash (High) / Google Antigravity | ACK — session-27-boot, gemini-handshake-heartbeat, perplexity-provisional-checker-available, await-maintainer-next-session-scope | 5m self-owned read-only steward, write-capable only by explicit elevated scope, notify=notify-material-only, stop=delete-at-clean-close-or-maintainer-cancel | guard active; `core.hooksPath=tools/hooks` | Gemini (Gemini 3.5 Flash (High)) — 2026-06-23 |
 | Claude | yes — Turnfile v0.1 (rev 375); PRD_STATUS 41 PRDs | yes — grammar v0.3; TKAB `tkab-check-1.1`; Tier-B twins authorized, English source-wins | yes — gates ok; model ledger Opus 4.6 / Claude Code | ACK — boot+handshake+heartbeat, prd-031-phase2-eval-review-if-codex-notes-ready, prd-042-qwen-onboarding-peer-review-if-routed, feature-tail-status-lag-pending-maintainer | 5m self-owned read-only steward, write-capable only by explicit elevated scope, notify=notify-material-only, stop=delete-at-clean-close-or-maintainer-cancel | guard active; `core.hooksPath=tools/hooks` | Claude (Opus 4.6) — 2026-06-23 |
+
+## Sign-off (session 28)
+
+```tokenese
+^grammar:v0.3
+@codex := agent:codex :GPT-5 :Codexdesktop s28
+say @codex rev:388 prd:41 gates:ok ev:obs
+say @codex ack lanes:[boot-handshake-heartbeat, await-maintainer-next-session-scope, prd-042-promotion-eligible, prd-031-phase3-not-started, prd-027-awaits-next-session-scope]
+say @codex hb mode:read-only-steward cad:5m own:self notify:notify-material-only stop:delete-at-clean-close-or-maintainer-cancel
+tokenese ok v:0.1 @codex session:28 ev:obs
+```
+
+| Agent | Protocol baseline | Tokenese | Skills | Scope | Heartbeat | Identity enforcing | Signed |
+|-------|---|---|---|---|---|---|---|
+| Codex | yes — Turnfile v0.1 (rev 388); PRD_STATUS 41 PRDs | yes — grammar v0.3; TKAB `tkab-check-1.1`; Tier-B twins authorized, English source-wins | yes — gates ok; model ledger GPT-5 / Codex desktop | ACK — boot-handshake-heartbeat, await-maintainer-next-session-scope, prd-042-promotion-eligible, prd-031-phase3-not-started, prd-027-awaits-next-session-scope | 5m self-owned read-only steward, write-capable only by explicit elevated scope, notify=notify-material-only, stop=delete-at-clean-close-or-maintainer-cancel | guard active; `core.hooksPath=tools/hooks` | Codex (GPT-5) — 2026-06-23 |
+| Gemini | yes — Turnfile v0.1 (rev 390); PRD_STATUS 41 PRDs | yes — grammar v0.3; TKAB `tkab-check-1.1`; Tier-B twins authorized, English source-wins | yes — gates ok; model ledger Gemini 3.5 Flash (High) / Google Antigravity | ACK — boot-handshake-heartbeat, await-maintainer-next-session-scope, prd-042-promotion-eligible, prd-031-phase3-not-started, prd-027-awaits-next-session-scope | 5m self-owned read-only steward, write-capable only by explicit elevated scope, notify=notify-material-only, stop=delete-at-clean-close-or-maintainer-cancel | guard active; `core.hooksPath=tools/hooks` | Gemini (Gemini 3.5 Flash (High)) — 2026-06-23 |
+| Claude | yes — Turnfile v0.1 (rev 391); PRD_STATUS 41 PRDs | yes — grammar v0.3; TKAB `tkab-check-1.1`; Tier-B twins authorized, English source-wins | yes — gates ok; model ledger Opus 4.6 / Claude Code | ACK — boot-handshake-heartbeat, await-maintainer-session-scope, model-ledger-codex-update | 5m self-owned read-only steward, write-capable only by explicit elevated scope, notify=notify-material, stop=close | guard active; `core.hooksPath=tools/hooks` | Claude (Opus 4.6) — 2026-06-23 |
+
+### Session 28 Remarks & Outstanding issues
+- **Drift warning**: `working-session/boot-claude.md` is currently missing the required PRD-017 peer-chat warning language and PRD-023 drift check reconciliation/governance-state block. This causes tests `evals/prd-017.evals.mjs` and `evals/prd-023.evals.mjs` to fail. As it is a peer-owned file owned by Claude under `OWNERSHIP.yaml`, Gemini cannot modify it, and flags it here for Claude to resolve.

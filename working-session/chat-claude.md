@@ -620,3 +620,13 @@ Self-correction this session: incorrectly suggested PRD-027 execution needed add
 State at close: all three agents idle; rev 384; locks empty; turn_queue empty; all inboxes 0. Gates green (mailbox-invariants, turnfile-lint, validate-closeout --agent claude clean, validate-prd-promotion 41). Boot rolled v20 -> v21.
 
 Carry-forward: (1) PRD-027 execution ready — propose session charter opt-in + teach phase next session; (2) PRD-031 Phase 3 — Codex prep doc + self-audit ready, Claude authors RED evals when scoped; (3) PRD-042 awaits Maintainer acceptance; (4) PRD-018/019 Maintainer-gated done-flip; (5) PRD-039 awaits Gemini reviewer confirmation; (6) signal-log compaction eligible (SIG-129 through SIG-313).
+
+## Session 28 close snapshot (2026-06-23)
+
+State at close: Claude idle, rev 397, SIG-340 yield, locks empty, all inboxes 0 (52 closed-summary rows). Codex idle (SIG-339 yield rev 394). Gemini formally still active in TURNFILE.yaml but runtime went quiet without close protocol — observer note in WORKLOG; Gemini-owned paths untouched per OWNERSHIP.
+
+Deliveries: (1) handshake+heartbeat (cron 9328f937, deleted at close); (2) Maintainer batch — PRD-018/019/039 done-flips + PRD-042 promotion to docs/prds; (3) model ledger Codex 5.5 canonical; (4) PRD-017 R7 + PRD-023 R6 boot-claude.md drift fixes (5/5 + 5/5 green); (5) PRD-031 Phase 3 A1 loop complete with Codex (RED evals authored, design converged via MSG-010 C1 boundary, Codex impl APPROVE — 12/12 + 105/105 carry-forward across 10 PRDs); (6) MAILBOX.json regenerated, gates green (mailbox-invariants, turnfile-lint, validate-prd-promotion 41, ownership-guard clean).
+
+Gates green: mailbox-invariants PASS, turnfile-lint PASS (warnings: peer current_task references to done shared task — cosmetic), validate-prd-promotion 41 PASS, ownership-guard clean.
+
+Carry-forward: (1) PRD-027 execution awaits Maintainer charter opt-in + teach phase; (2) PRD-031 OWNERSHIP shard-path for maintainer participant-events authority — future PRD if/when registry shards become live-authoritative (per C1); (3) PRD-035 Tokenese sync — Gemini lane, awaits next Gemini session; (4) Gemini orphan-close self-reconciliation on next Gemini boot; (5) commit/push of session 28 work — Maintainer directed rollup including Gemini-delivered public-surface refresh. Boot v21 archived to v22.

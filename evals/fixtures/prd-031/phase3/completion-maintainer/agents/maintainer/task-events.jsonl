@@ -1,0 +1,1 @@
+{"id":"EVT-CM-002","event":"task.completed","task_id":"s-maintainer-completes","actor":"maintainer","ts":"2026-06-23T00:01:00Z","deps":["EVT-CM-001"]}

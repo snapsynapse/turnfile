@@ -1,6 +1,6 @@
-# Boot File - Codex (v16)
+# Boot File - Codex (v17)
 
-Read this first on Codex session start. It is the Codex handoff from session 26 closeout.
+Read this first on Codex session start. It is the Codex handoff from session 27 closeout.
 
 ## Project
 
@@ -44,6 +44,43 @@ node tools/session-orient.mjs --agent codex --emit json
 - Out-of-band drift check (PRD-023): before trusting remembered state, reconcile any peer/Maintainer edits made outside the turn loop against the WORKLOG; unrecorded changes that altered governance state are decision-required (record/escalate before acting), while non-governance drift is a warning.
 - Human-legibility (PRD-024): governance artifacts stay English-legible; any Tokenese/dense encoding pairs to a legible English source (source wins), and encoding-profile obligations never override the legible record.
 - Chat-file semantics (PRD-017 R7): create only your own `chat-codex.md`; a missing peer chat file is warning only. Boot never authors a peer chat file.
+
+## Session 27 Close State
+
+Session 27 closed from the Codex side on 2026-06-23.
+
+- Turnfile revision at Codex close: `385`.
+- Codex status: `idle`; current task: `null`; last_seen: `codex-session-27-close`.
+- Mailbox state at close: Codex unread `0`; Claude unread `0`; Gemini unread `1` (`MSG-20260623-006`); Maintainer unread `0`.
+- Locks at close: none.
+- Heartbeat state: Codex app heartbeat `turnfile-codex-readonly-steward-s27` deleted before close; no Codex heartbeat carried forward.
+- Boot rollover: v16 archived to `docs/archive/boot-codex/boot-codex_v16.md`; active boot is v17.
+- Active shared step after Codex close: `await-maintainer-next-session-scope`.
+- Active mailbox carry-forward: no Codex-unread cards. `MSG-20260623-006` remains unread for Gemini with Codex as closure owner.
+- Qwen state: PRD-042 is accepted and eligible for promotion, but not promoted in this closeout update. Qwen is relay-only with no Turnfile authority. Direct Qwen execution remains unavailable to Codex; Maintainer-relayed short-output smoke evidence is recorded.
+
+Immediate rule: re-read live files before asserting shared state. Claude, Gemini, Codex, and the Maintainer may have changed coordination files between sessions.
+
+## Completed In Session 27
+
+1. Established session-27 handshakes with Gemini 3.5 Flash High and Claude Opus 4.6.
+2. Created and operated the Codex app heartbeat `turnfile-codex-readonly-steward-s27` at a 5-minute read-only cadence, then deleted it before close.
+3. Validated Gemini's PRD-042 Qwen onboarding plan and evals with Codex APPLY/no counters.
+4. Recorded direct runtime-readiness evidence at `working-session/docs/onboarding/evidence/qwen-mlx/2026-06-23-01/evidence.md`: direct Codex execution blocked because oMLX exposed only Gemma and no usable Qwen MLX runner was available.
+5. Recorded Maintainer-relayed Qwen smoke evidence at `working-session/docs/onboarding/evidence/qwen-mlx/2026-06-23-02/evidence.md`: exact text, minimal JSON, boundary JSON, and tightened OT-014 refusal passed; longer JSON-only prompts duplicated/corrupted output.
+6. Implemented PRD-031 Phase 2 task/status shard reducer in `tools/aggregate-coordination.mjs` against Claude-authored RED evals; Claude reviewed APPROVE at rev 380.
+7. Delivered 3-2-1 idle prep docs: `working-session/docs/qwen-mlx-execution-handoff-codex.md`, `working-session/docs/prd-031-phase2-codex-self-audit.md`, and `working-session/docs/prd-031-phase3-migration-prep-codex.md`.
+8. Closed acknowledged `MSG-20260623-007` after Claude confirmed no counter on the Qwen smoke evidence.
+9. Regenerated `MAILBOX.json` and left Codex unread 0.
+
+## Carry Forward
+
+1. `MSG-20260623-006` remains unread for Gemini; Codex is closure owner after Gemini ack/counter.
+2. PRD-042 is accepted and eligible for promotion; promote only under next-session scope or Maintainer direction. Acceptance does not grant any Qwen state transition.
+3. Qwen remains relay-only with no Turnfile participant, reviewer, task ownership, shared-write, OWNERSHIP, or PRD authority.
+4. Direct Qwen execution remains unavailable to Codex until a Qwen model/runner path exists in the Codex-accessible environment.
+5. PRD-031 Phase 3 is not started; `working-session/docs/prd-031-phase3-migration-prep-codex.md` is prep only.
+6. PRD-027 execution appears ready per Claude's closeout summary, but needs next-session scope and charter/teach-phase handling.
 
 ## Session 26 Close State
 

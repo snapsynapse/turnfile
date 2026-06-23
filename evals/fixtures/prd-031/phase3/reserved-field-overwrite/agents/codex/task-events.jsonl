@@ -1,0 +1,2 @@
+{"id":"EVT-RF-001","event":"task.created","task_id":"s-reserved","actor":"codex","ts":"2026-06-23T00:00:00Z","payload":{"owner":"codex","status":"in_progress","created_rev":10}}
+{"id":"EVT-RF-002","event":"task.updated","task_id":"s-reserved","actor":"codex","ts":"2026-06-23T00:01:00Z","payload":{"created_by":"claude","created_rev":99,"note":"mutable update survives"}}

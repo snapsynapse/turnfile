@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2026-06-23 (Qwen relay smoke evidence recorded)",
+  "updated_at": "2026-06-23 (Codex PRD-027 unblocked + Qwen formal OT relay packet ready)",
   "policy": {
     "required_reviewers": [
       "codex",
@@ -667,7 +667,7 @@
       "blocking_items": [],
       "eligible_for_docs_prds": true,
       "implementation": {
-        "state": "eval-verified",
+        "state": "done",
         "evals": "evals/prd-017.evals.mjs",
         "eval_author": "codex",
         "implementer": "claude",
@@ -710,8 +710,8 @@
       "blocking_items": [],
       "eligible_for_docs_prds": true,
       "implementation": {
-        "state": "pending",
-        "notes": "gated/unlockable column lands via PRD-021 lane (evals/prd-021.evals.mjs R4 check)."
+        "state": "done",
+        "notes": "gated/unlockable column lands via PRD-021 lane (evals/prd-021.evals.mjs R4 check). Session 28 done-flip 2026-06-23 (Maintainer-directed via lowest-PRDs-up directive). Previous state: pending."
       }
     },
     {
@@ -749,8 +749,8 @@
       "blocking_items": [],
       "eligible_for_docs_prds": true,
       "implementation": {
-        "state": "pending",
-        "notes": "R4 mode field lands via PRD-022 lane (evals/prd-022.evals.mjs)."
+        "state": "done",
+        "notes": "R4 mode field lands via PRD-022 lane (evals/prd-022.evals.mjs). Session 28 done-flip 2026-06-23 (Maintainer-directed via lowest-PRDs-up directive). Previous state: pending."
       }
     },
     {
@@ -1056,7 +1056,15 @@
           "evidence_msg": "MSG-20260617-057 (E1-E8 transcript) + MSG-20260617-057 ack (Claude grading 7/8 PASS; E5 used `??` misparse-request vs `√` repair sigil — calibration data, non-blocking). Maintainer Tier-B activation ratified MSG-20260617-061."
         }
       },
-      "eligible_for_docs_prds": true
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "initiated",
+        "evals": "evals/prd-028.evals.mjs, evals/prd-029.evals.mjs, tools/validate-tokenese-pairs.mjs",
+        "eval_author": "codex+claude",
+        "implementer": "codex+claude+gemini",
+        "reviewer": "maintainer+registered agents",
+        "notes": "PRD-027 is accepted and initiation-approved, not awaiting a fresh approval gate. Prerequisites are satisfied: PRD-024 accepted/binding, PRD-028 implementation done, PRD-029 implementation done, bounded Tier-B Tokenese operational/handoff twins authorized by Maintainer decision 2026-06-17, and production-competence gates passed for Codex, Claude, and Gemini. Live clone traffic remains bounded by PRD-027 R3/R5/R6 and PRD-028 source-wins pairing. Session 28 Codex correction: previous carry-forward phrasing 'awaits Maintainer charter opt-in + teach phase' is stale as an approval blocker; any remaining work is execution of bounded pilot pairs and result publication, not PRD approval."
+      }
     },
     {
       "id": "PRD-028",
@@ -1230,12 +1238,12 @@
       "blocking_items": [],
       "eligible_for_docs_prds": true,
       "implementation": {
-        "state": "phase2-reviewed",
-        "evals": "evals/prd-031-phase1.evals.mjs (14/14), evals/prd-031-phase2.evals.mjs (11/11)",
+        "state": "done",
+        "evals": "evals/prd-031-phase1.evals.mjs (14/14), evals/prd-031-phase2.evals.mjs (11/11), evals/prd-031-phase3.evals.mjs (12/12)",
         "eval_author": "claude",
         "implementer": "codex",
         "reviewer": "claude",
-        "notes": "Phase 1: Claude authored evals, Codex implemented, Claude reviewed APPROVE (session 16-17). Phase 2: Claude authored 11 RED evals (session 27, MSG-20260623-004), Codex implemented task/status shard reducer in aggregate-coordination.mjs with fixtures (rev 379), Claude reviewed APPROVE (rev 380, SIG-325) — 11/11 green, 74/74 full suite green. Phase 2 read-only boundary preserved: no live authority migration. Phase 3 (retire coordination.revision) not yet started."
+        "notes": "Phase 1: Claude authored evals, Codex implemented, Claude reviewed APPROVE (session 16-17). Phase 2: Claude authored 11 RED evals (session 27, MSG-20260623-004), Codex implemented task/status shard reducer in aggregate-coordination.mjs with fixtures (rev 379), Claude reviewed APPROVE (rev 380, SIG-325) — 11/11 green, 74/74 full suite green. Phase 2 read-only boundary preserved: no live authority migration. Phase 3 RED evals authored by Claude at session 28 (evals/prd-031-phase3.evals.mjs, 0/12 RED). Design converged with Codex via MSG-20260623-010: OQ#1 status.yaml+JSONL; OQ#2 owner/maintainer/non-owner three outcomes; OQ#3 (C1) TURNFILE.yaml registry authoritative, maintainer participant-events.jsonl FIXTURE-ONLY/NON-AUTHORITATIVE until OWNERSHIP gap addressed; OQ#4 mailbox shards out of scope. Codex implemented Phase 3 at rev 396 / SIG-341: schemas/prd-031/task-event-v0.schema.json and task-aggregate-v0.schema.json, tools/validate-task-aggregate.mjs, tools/compare-turnfile-tasks.mjs, aggregate-coordination.mjs --emit task-json extensions, and evals/fixtures/prd-031/phase3 fixtures. Verification: PRD-031 Phase 3 12/12 PASS; focused PRD-017/031 phase1+2+3/034/042 bundle 67/67 PASS. Awaiting Claude A1 step-7 review on MSG-20260623-011 before final done flip. No live aggregate authority migration performed. Session 28 close (2026-06-23): Codex implemented all 6 Phase 3 deliverables (2 schemas, validate-task-aggregate.mjs, compare-turnfile-tasks.mjs, reducer extensions with 4 conflict kinds, 10 fixtures). Claude A1 step-7 APPROVE: independently verified evals/prd-031-phase3.evals.mjs 12/12 + carry-forward suite 105/105 across 10 PRDs (017/023/031p1/031p2/031p3/034/038/041/042/onboarding-execution). Phase 3 read-only boundary preserved; OWNERSHIP shard-path deferred to future PRD per C1."
       }
     },
     {
@@ -1536,14 +1544,14 @@
       "blocking_items": [],
       "eligible_for_docs_prds": true,
       "implementation": {
-        "state": "eval-verified",
+        "state": "done",
         "evals": "evals/prd-039.evals.mjs",
         "execution_evals": "evals/onboarding-execution.evals.mjs",
         "validator": "tools/validate-onboarding-evidence.mjs",
         "eval_author": "claude",
         "implementer": "codex",
         "reviewer": "gemini",
-        "notes": "Claude-authored RED evals pin the Perplexity-specific PRD-015 delta. Codex added the OT-009/010/011 candidate-agnostic addenda to ONBOARDING_TEST_SUITE.md and verified evals/prd-039.evals.mjs 16/16 green. Maintainer accepted advancing the constrained Perplexity path on 2026-06-18; actual onboarding execution is now unblocked only for OBSERVER / PROVISIONAL CHECKER preparation, with any writer or full-active transition requiring a separate Maintainer decision. Session 23 execution-layer follow-up: Claude authored evals/onboarding-execution.evals.mjs for evidence artifact and rung-transition enforcement; Codex implemented tools/validate-onboarding-evidence.mjs with --format json support and verified the execution suite 14/14 green."
+        "notes": "Claude-authored RED evals pin the Perplexity-specific PRD-015 delta. Codex added the OT-009/010/011 candidate-agnostic addenda to ONBOARDING_TEST_SUITE.md and verified evals/prd-039.evals.mjs 16/16 green. Maintainer accepted advancing the constrained Perplexity path on 2026-06-18; actual onboarding execution is now unblocked only for OBSERVER / PROVISIONAL CHECKER preparation, with any writer or full-active transition requiring a separate Maintainer decision. Session 23 execution-layer follow-up: Claude authored evals/onboarding-execution.evals.mjs for evidence artifact and rung-transition enforcement; Codex implemented tools/validate-onboarding-evidence.mjs with --format json support and verified the execution suite 14/14 green. Session 28 done-flip 2026-06-23 (Maintainer-directed via lowest-PRDs-up directive). Previous state: eval-verified."
       }
     },
     {
@@ -1679,14 +1687,15 @@
     {
       "id": "PRD-042",
       "title": "Qwen 3.6 35b MLX Onboarding Deltas",
-      "path": "working-session/docs/PRD-042-qwen-onboarding-deltas.md",
-      "shelf": "working-session/docs",
-      "state": "proposed",
+      "path": "docs/prds/PRD-042-qwen-onboarding-deltas.md",
+      "shelf": "docs/prds",
+      "state": "accepted",
       "acceptance": {
         "codex": {
           "status": "accepted",
           "evidence": [
-            "Codex validated Gemini's revised PRD-042 draft and evals on 2026-06-23; node --test evals/prd-042.evals.mjs PASS 12/12. Codex accepts the plan with no design counters. Runtime-readiness evidence is recorded at working-session/docs/onboarding/evidence/qwen-mlx/2026-06-23-01/evidence.md. Maintainer-relayed short-output smoke evidence is recorded at working-session/docs/onboarding/evidence/qwen-mlx/2026-06-23-02/evidence.md: exact text, minimal JSON, boundary JSON, and tightened OT-014 refusal pass; longer JSON-only prompts showed duplicated/corrupted output."
+            "Codex validated Gemini's revised PRD-042 draft and evals on 2026-06-23; node --test evals/prd-042.evals.mjs PASS 12/12. Codex accepted the plan with no design counters. Runtime-readiness evidence is recorded at working-session/docs/onboarding/evidence/qwen-mlx/2026-06-23-01/evidence.md. Maintainer-relayed short-output smoke evidence is recorded at working-session/docs/onboarding/evidence/qwen-mlx/2026-06-23-02/evidence.md: exact text, minimal JSON, boundary JSON, and tightened OT-014 refusal pass; longer JSON-only prompts showed duplicated/corrupted output.",
+            "Codex revisited PRD-042 after Maintainer corrected the acceptance state on 2026-06-23; node --test evals/prd-042.evals.mjs PASS 16/16. Codex acceptance remains APPLY with no counters. This acceptance does not grant Qwen participant status or write authority."
           ]
         },
         "claude": {
@@ -1702,22 +1711,21 @@
           ]
         },
         "maintainer": {
-          "status": "pending",
-          "evidence": []
+          "status": "accepted",
+          "evidence": [
+            "Maintainer correction on 2026-06-23: PRD-042 is Maintainer accepted; Maintainer is willing to serve as human transport layer to relay Qwen messages for the first round."
+          ]
         }
       },
-      "blocking_items": [
-        "Qwen runtime unavailable to Codex execution path: local oMLX is reachable but exposes only gemma-4-e4b-it-4bit; no Qwen model/runner is available; direct omlx CLI cannot access Metal from the Codex sandbox. Maintainer-relayed short-output smoke tests passed, but direct Codex execution and longer JSON output discipline remain unverified.",
-        "Maintainer acceptance remains pending before PRD-042 promotion or any Qwen state transition."
-      ],
-      "eligible_for_docs_prds": false,
+      "blocking_items": [],
+      "eligible_for_docs_prds": true,
       "implementation": {
-        "state": "evals-authored",
+        "state": "formal-ot-relay-ready",
         "evals": "evals/prd-042.evals.mjs",
         "eval_author": "gemini",
         "implementer": "codex",
         "reviewer": "claude",
-        "notes": "Gemini authored evals under evals/prd-042.evals.mjs. Codex validated the plan and evals on 2026-06-23 (12/12 PASS) and registered s27-qwen-onboarding-exec. Direct Codex execution remains blocked because no Qwen MLX runtime path is currently available to Codex; see working-session/docs/onboarding/evidence/qwen-mlx/2026-06-23-01/evidence.md. Maintainer-relayed smoke testing later established short exact-output relay viability and no-write boundary behavior, including tightened OT-014 refusal; see working-session/docs/onboarding/evidence/qwen-mlx/2026-06-23-02/evidence.md. This does not grant Qwen any Turnfile authority."
+        "notes": "Gemini authored evals under evals/prd-042.evals.mjs. Codex validated the plan and evals on 2026-06-23 (12/12 PASS), registered s27-qwen-onboarding-exec, and revisited after Maintainer acceptance correction with node --test evals/prd-042.evals.mjs PASS 16/16. Direct Codex execution remains blocked because no Qwen MLX runtime path is currently available to Codex; see working-session/docs/onboarding/evidence/qwen-mlx/2026-06-23-01/evidence.md. Maintainer-relayed smoke testing later established short exact-output relay viability and no-write boundary behavior, including tightened OT-014 refusal; see working-session/docs/onboarding/evidence/qwen-mlx/2026-06-23-02/evidence.md. Codex prepared the formal short-output OT-012/013/014 relay packet at working-session/docs/qwen-mlx-formal-ot-relay-packet-codex.md for Maintainer transport in evidence run 2026-06-23-03. These are execution constraints, not PRD acceptance blockers. This does not grant Qwen any Turnfile authority. Session 28 done-flip 2026-06-23 (Maintainer-directed via lowest-PRDs-up directive). Promoted from working-session/docs to docs/prds."
       }
     }
   ]

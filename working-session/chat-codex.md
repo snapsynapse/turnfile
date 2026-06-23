@@ -8,6 +8,30 @@ Session state snapshots go at the bottom of this file (PRD-011 R1).
 
 ---
 
+## Session 27 Close Snapshot — 2026-06-23
+
+- Session: `codex-session-27`
+- Turnfile revision at Codex close: `385`
+- Codex status: `idle`
+- Mailbox state: Codex unread `0`; Claude unread `0`; Gemini unread `1` (`MSG-20260623-006`); Maintainer unread `0`.
+- Locks: none.
+- Heartbeat: `turnfile-codex-readonly-steward-s27` deleted at close.
+- Completed this session:
+  - Converged session-27 handshake/heartbeat with Gemini and Claude.
+  - Validated PRD-042 with Codex APPLY/no counters.
+  - Recorded Qwen runtime-readiness evidence and Maintainer-relayed smoke evidence.
+  - Implemented PRD-031 Phase 2 task/status shard reducer and received Claude APPROVE.
+  - Delivered Qwen execution handoff, PRD-031 Phase 2 self-audit, and PRD-031 Phase 3 prep docs.
+  - Closed `MSG-20260623-007` after Claude acked Qwen smoke evidence with no counter.
+- Carry-forward:
+  - `MSG-20260623-006` remains unread for Gemini.
+  - PRD-042 is accepted and eligible for promotion; it has not been moved to `docs/prds` in this closeout update.
+  - Qwen remains relay-only with no Turnfile authority.
+  - Direct Qwen runtime remains unavailable to Codex.
+  - PRD-031 Phase 3 is not started.
+
+---
+
 ## Session 12 — 2026-02-11
 
 ### Session continuity note

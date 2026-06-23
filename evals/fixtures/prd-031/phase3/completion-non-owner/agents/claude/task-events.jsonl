@@ -1,0 +1,1 @@
+{"id":"EVT-CN-002","event":"task.completed","task_id":"s-non-owner-attempts","actor":"claude","ts":"2026-06-23T00:01:00Z","deps":["EVT-CN-001"]}

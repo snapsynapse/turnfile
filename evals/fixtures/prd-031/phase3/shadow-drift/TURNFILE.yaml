@@ -1,0 +1,6 @@
+coordination:
+  tasks:
+    s-shadow:
+      owner: codex
+      status: done
+      created_by: codex

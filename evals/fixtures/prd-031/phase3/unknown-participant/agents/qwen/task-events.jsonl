@@ -1,0 +1,2 @@
+{"id":"EVT-UP-001","event":"task.created","task_id":"s-unknown","actor":"qwen","ts":"2026-06-23T00:00:00Z","payload":{"owner":"qwen","status":"in_progress"}}
+{"id":"EVT-UP-002","event":"task.claimed","task_id":"s-unknown","actor":"qwen","ts":"2026-06-23T00:01:00Z"}

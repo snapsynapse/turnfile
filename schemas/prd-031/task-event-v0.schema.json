@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://turnfile.work/schemas/prd-031/task-event-v0.schema.json",
+  "title": "PRD-031 Task Event v0",
+  "type": "object",
+  "required": ["id", "event", "task_id", "ts"],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "event": {
+      "type": "string",
+      "enum": ["task.created", "task.claimed", "task.updated", "task.completed", "task.deferred", "task.cancelled"]
+    },
+    "kind": { "type": "string" },
+    "task_id": { "type": "string", "minLength": 1 },
+    "actor": { "type": "string" },
+    "ts": { "type": "string", "minLength": 1 },
+    "deps": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "payload": { "type": "object" }
+  },
+  "additionalProperties": true
+}

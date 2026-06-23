@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://turnfile.work/schemas/prd-031/task-aggregate-v0.schema.json",
+  "title": "PRD-031 Task Aggregate v0",
+  "type": "object",
+  "required": ["tasks", "agents", "conflicts", "unknown_agents", "source_events"],
+  "properties": {
+    "tasks": { "type": "array", "items": { "type": "object" } },
+    "agents": { "type": "array", "items": { "type": "object" } },
+    "conflicts": { "type": "array", "items": { "type": "object" } },
+    "unknown_agents": { "type": "array", "items": { "type": "object" } },
+    "participant_events": { "type": "array", "items": { "type": "object" } },
+    "source_events": { "type": "array", "items": { "type": "object" } }
+  },
+  "additionalProperties": true
+}

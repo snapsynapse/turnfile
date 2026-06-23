@@ -8,7 +8,7 @@ const DEFAULT_RETENTION_SESSIONS = 2;
 function usage() {
   return [
     "Usage: node tools/validate-closeout.mjs --turnfile <tf> --mailbox <mb>",
-    "       [--agent <agent>] [--retention-sessions <N>] [--defer <item>]...",
+    "       [--agent <agent>] [--retention-sessions <N>] [--defer <item>]... [--format json]",
   ].join("\n");
 }
 
@@ -19,6 +19,7 @@ function parseArgs(argv) {
     agent: null,
     retentionSessions: DEFAULT_RETENTION_SESSIONS,
     deferred: [],
+    format: "json",
   };
   for (let i = 0; i < argv.length; i += 1) {
     const arg = argv[i];
@@ -32,6 +33,8 @@ function parseArgs(argv) {
       args.retentionSessions = Number.parseInt(argv[++i] || "", 10);
     } else if (arg === "--defer") {
       args.deferred.push(argv[++i] || "");
+    } else if (arg === "--format") {
+      args.format = argv[++i] || "";
     } else if (arg === "-h" || arg === "--help") {
       console.log(usage());
       process.exit(0);
@@ -43,6 +46,7 @@ function parseArgs(argv) {
   if (!Number.isInteger(args.retentionSessions) || args.retentionSessions < 1) {
     throw new Error("--retention-sessions must be a positive integer");
   }
+  if (args.format !== "json") throw new Error("--format must be json when provided");
   return args;
 }
 
@@ -211,7 +215,6 @@ function comparableMailboxJson(data) {
     open_queue: data?.open_queue ?? [],
     active_messages: data?.active_messages ?? [],
     closed_summary: data?.closed_summary ?? [],
-    source_file: data?.source_file ?? "",
   };
 }
 

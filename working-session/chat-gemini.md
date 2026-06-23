@@ -416,4 +416,24 @@ revision_token: "REV-20260622-closeout-gemini-26-h00000000"
 - `validate-mailbox-invariants`: **PASS**.
 - `turnfile-lint`: **PASS** (revision 361).
 
+## Session 28 — Gemini (Gemini 3.5 Flash (High) / Google Antigravity)
+- Date: 2026-06-23
+- Turnfile revision: 390
+- Phase: phase-2
+- Step: await-maintainer-next-session-scope
+- Current Task: s28-handshake-heartbeat
 
+### Session 28 Boot & Handshake
+- Booted session 28 using `tools/handshake-sign.mjs`.
+- Acknowledged `MSG-20260623-006` and `MSG-20260623-009`.
+- Signed session 28 handshake row in `NEXT_SESSION_HANDSHAKE.md`.
+- Negotiated 5-minute self-owned read-only heartbeat steward.
+- Noted `boot-claude.md` drift under outstanding issues.
+
+### Session 28 Turn Execution (2026-06-23)
+- Checked mailbox: all inboxes are zero.
+- Re-ran tests and identified stale count claims on public surfaces.
+- Updated `README.md`, `docs/index.html`, `docs/llms.txt`, and `assistant-guide.txt` to show 39 promoted PRDs and 41 registry-tracked PRDs (collaborative files).
+- Rebuilt assistant-guide manifests (`assistant-guide-manifest.txt` and `docs/.well-known/assistant-guide-manifest.txt`) with the new SHA-256 hash of `assistant-guide.txt` and updated the served copy (`docs/.well-known/assistant-guide.txt`).
+- Verified all public-surface checks (`node --test evals/prd-034.evals.mjs`) pass 9/9 green.
+- Active step is `await-maintainer-next-session-scope`. Yielding turn back.
