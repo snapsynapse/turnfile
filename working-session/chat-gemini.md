@@ -311,3 +311,109 @@ revision_token: "REV-20260621-closeout-gemini-25-h00000000"
 - `validate-mailbox-invariants`: **PASS**.
 - `turnfile-lint`: **PASS** (revision 343).
 
+---
+
+## Session Close Snapshot (Session 26 Handshake)
+
+```yaml
+session_id: "gemini-session-26"
+agent: "gemini"
+model: "Gemini 3.5 Flash (High)"
+platform: "Google Antigravity"
+surface: "IDE"
+branch: "main"
+date: "2026-06-22"
+turnfile_revision: 355
+close_reason: "Session 26 handshake converged and heartbeat negotiated; mailbox cleared and validators passed."
+revision_token: "REV-20260622-handshake-gemini-26-h00000000"
+```
+
+### 1. Active Task Status
+- `s26-gemini-handshake-heartbeat`: **done** (revision 354). Gemini booted session 26, acknowledged Codex handshake card MSG-20260622-002 and Claude handshake card MSG-20260622-003, accepted baseline and heartbeat terms, signed NEXT_SESSION_HANDSHAKE.md, and established a 5-minute self-owned read-only heartbeat steward.
+- Gemini status is now active/idle (current_task null) in `TURNFILE.yaml`.
+
+### 2. Mailbox State Summary
+- Acknowledged Claude's session 26 handshake card `MSG-20260622-003` (no counter).
+- Regenerated `working-session/MAILBOX.json`.
+- Gemini unread count is 0.
+
+### 3. Closeout Validation
+- `npm run validate` (27/27 tests): **PASS** (green).
+- `npm run evals:prd` (215/215 tests): **PASS** (green).
+- `tools/validate-closeout.mjs --agent gemini`: **PASS** (clean: true).
+- `validate-mailbox-invariants`: **PASS**.
+- `turnfile-lint`: **PASS** (revision 355).
+
+---
+
+## Session Close Snapshot (Session 26 OQ#6 Scoring)
+
+```yaml
+session_id: "gemini-session-26"
+agent: "gemini"
+model: "Gemini 3.5 Flash (High)"
+platform: "Google Antigravity"
+surface: "IDE"
+branch: "main"
+date: "2026-06-22"
+turnfile_revision: 359
+close_reason: "Codex round-2 blind decode scored; Results Matrix updated and OQ#6 gate fully satisfied."
+revision_token: "REV-20260622-oq6-gemini-26-h00000000"
+```
+
+### 1. Active Task Status
+- Gemini is active/idle, status updated in `TURNFILE.yaml`.
+- Transitioned `coordination.active_step` to `"s25-tokenese-round2-harness"` per Claude's handoff.
+
+### 2. Mailbox State Summary
+- Processed and actioned Codex's message `MSG-20260622-007` delivering the fresh-context round-2 decode.
+- Scored Codex's decode against the rubric in `working-session/docs/tokenese-round2-receiver-harness.md`. All 9 dimensions scored PASS.
+- Updated the Results Matrix in `tokenese-round2-receiver-harness.md`.
+- Regenerated `working-session/MAILBOX.json`.
+- Gemini unread count is 0.
+
+### 3. Closeout Validation
+- `npm run validate` (27/27 tests): **PASS** (green).
+- `npm run evals:prd` (223/223 tests): **PASS** (green).
+- `tools/validate-closeout.mjs --agent gemini`: **PASS** (clean: true).
+- `validate-mailbox-invariants`: **PASS**.
+- `turnfile-lint`: **PASS** (revision 359).
+
+---
+
+## Session Close Snapshot (Session 26 Closeout)
+
+```yaml
+session_id: "gemini-session-26"
+agent: "gemini"
+model: "Gemini 3.5 Flash (High)"
+platform: "Google Antigravity"
+surface: "IDE"
+branch: "main"
+date: "2026-06-22"
+turnfile_revision: 361
+close_reason: "Tokenese spec-direction and precision-pivot trajectory synced to tokenese repo, handshake completed, heartbeat steward deleted, and session closed."
+revision_token: "REV-20260622-closeout-gemini-26-h00000000"
+```
+
+### 1. Active Task Status
+- Gemini session 26 is closed. Agent status in `TURNFILE.yaml` is updated to `idle` and `last_seen` to `"gemini-session-26-closed"`.
+- Appended signal `SIG-307` to the coordination messages.
+
+### 2. Spec-Direction Synchronization
+- Synced precision-pivot spec changes and resolved open questions from Turnfile to `~/Git/tokenese` repo:
+  - Updated [INTENT.md](file:///Users/snap/Git/tokenese/INTENT.md) to preserve the long-term compression goal as the North-Star and describe the interim precision-preserving interlingua trajectory.
+  - Updated [DESIGN.md](file:///Users/snap/Git/tokenese/DESIGN.md) to add Section 10 documenting the six resolved open questions and the recommended grammar direction (interim spec draft).
+  - Updated [CHANGELOG.md](file:///Users/snap/Git/tokenese/CHANGELOG.md) to log the precision-pivot sync under `[Unreleased]`.
+- Verified changes in the `tokenese` repository:
+  - Run `pytest`: `159 passed`.
+  - Run `audit_check_intersection.py`: `OK`.
+
+### 3. Closeout Validation
+- `npm run validate` (27/27 tests): **PASS** (green).
+- `npm run evals:prd` (223/223 tests): **PASS** (green).
+- `tools/validate-closeout.mjs --agent gemini`: **PASS** (clean: true).
+- `validate-mailbox-invariants`: **PASS**.
+- `turnfile-lint`: **PASS** (revision 361).
+
+

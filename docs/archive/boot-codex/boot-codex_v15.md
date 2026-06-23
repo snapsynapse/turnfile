@@ -1,6 +1,6 @@
-# Boot File - Codex (v16)
+# Boot File - Codex (v15)
 
-Read this first on Codex session start. It is the Codex handoff from session 26 closeout.
+Read this first on Codex session start. It is the Codex handoff from session 25 closeout.
 
 ## Project
 
@@ -45,52 +45,48 @@ node tools/session-orient.mjs --agent codex --emit json
 - Human-legibility (PRD-024): governance artifacts stay English-legible; any Tokenese/dense encoding pairs to a legible English source (source wins), and encoding-profile obligations never override the legible record.
 - Chat-file semantics (PRD-017 R7): create only your own `chat-codex.md`; a missing peer chat file is warning only. Boot never authors a peer chat file.
 
-## Session 26 Close State
+## Session 25 Close State
 
-Session 26 closed from the Codex side on 2026-06-22.
+Session 25 closed from the Codex side on 2026-06-21.
 
-- Turnfile revision at Codex close: `364`.
-- Codex status: `idle`; current task: `null`; last_seen: `codex-session-26-close`.
+- Turnfile revision at Codex close: `345`.
+- Codex status: `idle`; current task: `null`; last_seen: `codex-session-25-close`.
 - Mailbox state at close: Codex unread `0`; Claude unread `0`; Gemini unread `0`; Maintainer unread `0`.
 - Locks at close: none.
-- Heartbeat state: Codex app heartbeat `turnfile-codex-readonly-steward-s26` deleted before close; no Codex heartbeat carried forward.
-- Boot rollover: v15 archived to `docs/archive/boot-codex/boot-codex_v15.md`; active boot is v16.
-- Active shared step after Codex close: `await-maintainer-next-session-scope`.
-- Active mailbox carry-forward: no Codex-unread cards. `MSG-20260622-006` remains open/actioned with Claude as closure owner; Codex has actioned its side. Claude marked `s25-tokenese-round2-harness` done and closed `MSG-20260620-004` in TURNFILE at rev 363.
+- Heartbeat state: Codex app heartbeat `turnfile-codex-readonly-steward-s25` deleted before close; no Codex heartbeat carried forward.
+- Boot rollover: v14 archived to `docs/archive/boot-codex/boot-codex_v14.md`; active boot is v15.
+- Active mailbox carry-forward: `MSG-20260620-004` remains open and acknowledged. Closure owner is Claude. Current Codex context is contaminated for blind Tokenese scoring, so a valid Codex-family decode must run in a fresh independent Codex context using only the inline mailbox card.
+- Active shared step after Codex close: Claude-owned `s25-tokenese-round2-harness`.
 
 Immediate rule: re-read live files before asserting shared state. Claude, Gemini, Codex, and the Maintainer may have changed coordination files between sessions.
 
-## Completed In Session 26
+## Completed In Session 25
 
-1. Established session-26 handshakes with Claude Opus 4.8 and Gemini 3.5 Flash High.
-2. Created and operated the Codex app heartbeat `turnfile-codex-readonly-steward-s26` at a 5-minute read-only cadence, then deleted it before close.
-3. Implemented PRD-038 follow-through after registry drift showed the expected eval file was missing.
-4. Added `evals/prd-038.evals.mjs` and verified it with `node --test evals/prd-038.evals.mjs` 8/8 PASS.
-5. Updated `tools/handshake-sign.mjs` so generated heartbeat rows distinguish read-only steward mode from explicit write-capable heartbeat scope, and later derived PRD count from `PRD_STATUS.json`.
-6. Received Claude A1 step-7 APPROVE on PRD-038 and filed PRD-038 implementation `done`.
-7. Recorded Maintainer-relayed fresh-thread Codex round-2 Tokenese decode at `working-session/tokenese-pairs/tokenese-round2-codex-decode.json` with provenance caveat.
-8. Routed the Codex-family round-2 decode to Gemini; Gemini scored it PASS on all 9 dimensions and later closed its session after syncing the ratified Tokenese precision-pivot spec direction to `/Users/snap/Git/tokenese`.
-9. Actioned Claude's status-lag reconciliation card by flipping PRD-040 implementation state to `done` while holding PRD-039, PRD-018, PRD-019, and PRD-031.
-10. Regenerated `MAILBOX.json` and left Codex unread 0.
+1. Established session-25 handshakes with Claude Opus 4.8 and Gemini 3.5 Flash High.
+2. Created and operated the Codex app heartbeat `turnfile-codex-readonly-steward-s25` at a 5-minute read-only cadence, then deleted it before close.
+3. Implemented PRD-041 arbitration event schema at `schemas/prd-041/arbitration-event-v0.schema.json`.
+4. Implemented `tools/aggregate-coordination.mjs --emit arbitration-json --rev <N>` over per-agent `arbitration.jsonl` shards.
+5. Verified PRD-041 focused evals with `node --test evals/prd-041.evals.mjs` 9/9 PASS.
+6. Observed Claude A1 step-7 APPROVE and Gemini peer-review APPROVE; PRD-041 implementation state is now `done`.
+7. Acknowledged the Tokenese round-2 Codex decode blocker after accidentally reading evaluator-only harness material. The current context is non-scoring for blind decode.
 
 ## Carry Forward
 
-1. Claude marked `s25-tokenese-round2-harness` done at rev 363; re-check mailbox/TURNFILE on boot because `MAILBOX.md` may lag that closure.
-2. `MSG-20260622-006` remains actioned with Claude as closure owner.
-3. PRD-039 remains `eval-verified` pending Gemini reviewer confirmation or Maintainer direction. Do not flip it from Codex without that evidence.
-4. PRD-018 and PRD-019 remain pending and Maintainer-gated for any done/grandfathered-done flip.
-5. PRD-031 remains pending for Phase 2/3 mechanics; it is real future infrastructure work, not a status-lag cleanup.
-6. Perplexity remains external PROVISIONAL CHECKER / no-write. Any writer or full-active transition requires explicit Maintainer decision.
-7. Re-check `/Users/snap/Git/tokenese` before asserting current Tokenese repo status; Gemini changed it during session 26.
-8. Dirty worktree remains mixed ownership. Do not stage or commit peer-owned Gemini files from the Codex lane without Maintainer direction.
+1. If OQ#6 still requires a Codex-family receiver, run `MSG-20260620-004` in a fresh independent Codex context that has not opened `working-session/docs/tokenese-round2-receiver-harness.md`.
+2. Decode only from the inline Blind Packet in `MSG-20260620-004`; write the output to `working-session/tokenese-pairs/tokenese-round2-codex-decode.json` or return it inline, then let Claude score and close.
+3. PRD-041 is complete. Do not reopen its implementation unless a new counter appears in the mailbox or PRD_STATUS changes.
+4. Perplexity remains external checker/tool contributor only. No Turnfile write, reviewer, PRD approval, or Maintainer authority exists for Perplexity.
+5. Re-check `/Users/snap/Git/tokenese` state before asserting Tokenese spec status; the Tokenese repo has its own process.
 
-## Next Session Plan
+## Next Session Handshake
 
-1. Boot from fresh files with `docs/BOOT_SEQUENCE.md` and `tools/session-orient.mjs --agent codex --emit json`.
-2. If Codex has unread cards, clear those first.
-3. Confirm whether Claude has closed the Tokenese harness and whether PRD-039 reviewer evidence has landed.
-4. If no mailbox work is waiting, ask the Maintainer to choose between PRD-031 Phase 2/3 design, PRD-034/035 follow-through, or any new Tokenese/Turnfile integration lane.
-5. Keep closeout validation strict: mailbox projection fresh, PRD promotion passing, Turnfile lint passing, and owner-scoped active-card review clean.
+Before substantive work, establish:
+
+1. Turnfile version: `SPEC.md` v0.1.0-reset and `TURNFILE.yaml` protocol version 0.1 unless the Maintainer changes the target.
+2. Tokenese state: observe fresh Tokenese repo state before asserting current version or spec status.
+3. Onboarding and skill state: load the role-keyed Codex skill, verify model ledger coverage, follow `docs/BOOT_SEQUENCE.md`, run Codex skills preflight, self-validate with mailbox/Turnfile/PRD checks, and mutually confirm active peer context before write work.
+4. Session completion criteria and scope: pick one bounded primary lane before implementation.
+5. Outstanding issues: fresh-context Codex Tokenese round-2 blind decode if still needed, Claude-owned Tokenese harness closure, Perplexity no-write boundary, dirty-worktree commit strategy, and deferred signal-log compaction.
 
 ## Validation Commands
 

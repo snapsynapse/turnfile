@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2026-06-21 (PRD-041 implementation done)",
+  "updated_at": "2026-06-22 (PRD-038 implementation done)",
   "policy": {
     "required_reviewers": [
       "codex",
@@ -667,7 +667,7 @@
       "blocking_items": [],
       "eligible_for_docs_prds": true,
       "implementation": {
-        "state": "done",
+        "state": "eval-verified",
         "evals": "evals/prd-017.evals.mjs",
         "eval_author": "codex",
         "implementer": "claude",
@@ -1581,12 +1581,12 @@
       "blocking_items": [],
       "eligible_for_docs_prds": true,
       "implementation": {
-        "state": "evals-authored",
+        "state": "done",
         "evals": "evals/prd-038.evals.mjs",
-        "eval_author": "claude",
+        "eval_author": "codex",
         "implementer": "codex",
         "reviewer": "claude",
-        "notes": "Evals are authored under evals/prd-038.evals.mjs; implementation is pending by Codex."
+        "notes": "DONE at rev 356 via PRD-006 A1. Codex authored the missing evals/prd-038.evals.mjs suite and implemented the concrete handshake-sign behavior for PRD-038: default heartbeat rows now record read-only steward mode and explicit write-capable heartbeat rows must carry a named scope. Focused verification: node --test evals/prd-038.evals.mjs 8/8 PASS. Claude A1 step-7 review APPROVE in MSG-20260622-004 after independently verifying node --test evals/prd-038.evals.mjs 8/8 and node tools/run-evals.mjs 27/27, plus inspecting the implementation for genuine correctness. Codex closed MSG-20260622-004 and MSG-20260622-005."
       }
     },
     {
@@ -1624,7 +1624,7 @@
       "blocking_items": [],
       "eligible_for_docs_prds": true,
       "implementation": {
-        "state": "eval-verified",
+        "state": "done",
         "evals": "evals/prd-040.evals.mjs",
         "validator": "tools/validate-heartbeat-loop.mjs",
         "eval_author": "gemini",

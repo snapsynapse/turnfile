@@ -1,0 +1,116 @@
+{
+  "harness": "tokenese-round2-receiver-harness.md",
+  "family": "Codex fresh independent thread (Maintainer-relayed to Codex session 26)",
+  "blind": true,
+  "recording_context": "This file was recorded by the active Turnfile Codex session from Maintainer-relayed output produced in a separate fresh Codex context. The active recording context did not perform the blind decode and must not be treated as the scoring context.",
+  "candidates": {
+    "A_I1": {
+      "paraphrase": "For Supabase project pcegwmrsxzzznowwnksu, deploy an edge function, check its status, and if it fails, retrieve the first error log with timestamp before checking owner retry state.",
+      "bindings": {
+        "@a": "pcegwmrsxzzznowwnksu",
+        "service": "supabase",
+        "target": "edge-fn deploy"
+      },
+      "claims": [
+        "Deploy target is Supabase Edge Function infrastructure for project pcegwmrsxzzznowwnksu.",
+        "Status should be checked after deploy.",
+        "On failure, logs should be inspected before owner retry-state."
+      ],
+      "evidence": [
+        "Literal binding: @a=pcegwmrsxzzznowwnksu",
+        "Literal sequence: deploy -> get status -> if fail -> get logs first-error+ts -> get owner retry-state"
+      ],
+      "confidence": 0.86,
+      "ranks": {},
+      "repairs": [],
+      "ambiguities": [
+        "'edge-fn deploy' could mean deploy one function, deploy all functions, or refer to a deployment substrate.",
+        "'owner retry-state' could mean the human/project owner's retry state, an owning service's retry state, or retry metadata for ownership transfer.",
+        "'first-error+ts' implies first error plus timestamp, but timestamp format is unspecified."
+      ],
+      "unsafe_actions": [
+        "Do not deploy, query Supabase status, fetch logs, or inspect owner state without explicit authorization and credentials."
+      ]
+    },
+    "B_I9_C4b": {
+      "paraphrase": "Observed evidence ranks likely causes as OOM highest, disk second, network third; guessed fix ranking favors restart first, logs second, rollback third.",
+      "bindings": {},
+      "claims": [
+        "Cause ranking is supported by observed evidence.",
+        "Fix ranking is explicitly a guess.",
+        "OOM is ranked above disk and network as the likely cause.",
+        "Restart is ranked above logs and rollback as the proposed fix."
+      ],
+      "evidence": [
+        "cause_rank[oom:6 disk:3 net:1] ev:obs",
+        "fix_rank[restart:5 logs:4 rollback:2] ev:guess"
+      ],
+      "confidence": 0.74,
+      "ranks": {
+        "cause_rank": {
+          "oom": 6,
+          "disk": 3,
+          "net": 1
+        },
+        "fix_rank": {
+          "restart": 5,
+          "logs": 4,
+          "rollback": 2
+        }
+      },
+      "repairs": [],
+      "ambiguities": [
+        "Bracketed numbers read primarily as ranks or rank weights because the labels say cause_rank and fix_rank. They could also be scores; they do not look like probabilities because they do not sum to 1 or 100. They are not explicit confidences.",
+        "'ev:obs' means observed evidence, but the observation itself is not included.",
+        "'restart' as a fix before 'logs' may be operationally risky if logs are needed for diagnosis."
+      ],
+      "unsafe_actions": [
+        "Do not restart or rollback systems from this packet alone.",
+        "Do not treat guessed fixes as approved actions."
+      ]
+    },
+    "C_revI8": {
+      "paraphrase": "Observed status is up with confidence 8/9. Guessed cause ranking is OOM, disk, network. Guessed action ranking is restart, logs, rollback. A repair says timestamps should be rendered plainly.",
+      "bindings": {},
+      "claims": [
+        "Service status is up, based on observation.",
+        "Status confidence is 8 out of 9.",
+        "Cause ranking is guessed, with OOM highest.",
+        "Action ranking is guessed, with restart highest.",
+        "Timestamp formatting should be repaired to plain form."
+      ],
+      "evidence": [
+        "status:up ev:obs confidence:8/9",
+        "cause[oom:6 disk:3 net:1] ev:guess",
+        "act[restart:5 logs:4 rollback:2] ev:guess",
+        "repair:timestamp -> plain"
+      ],
+      "confidence": 0.82,
+      "ranks": {
+        "cause": {
+          "oom": 6,
+          "disk": 3,
+          "net": 1
+        },
+        "act": {
+          "restart": 5,
+          "logs": 4,
+          "rollback": 2
+        }
+      },
+      "repairs": [
+        "timestamp -> plain"
+      ],
+      "ambiguities": [
+        "confidence:8/9 read as confidence, approximately 0.89, because it is explicitly labeled confidence.",
+        "Bracketed cause/action numbers read as rank weights or scores. They could be ranks, but higher-is-better is inferred from ordering; they are not probabilities unless normalized externally.",
+        "'status:up' may conflict with guessed restart action; packet does not explain why restart is considered if status is up.",
+        "'plain' timestamp format is unspecified, for example ISO 8601 versus human-readable local time."
+      ],
+      "unsafe_actions": [
+        "Do not restart, fetch logs, or rollback based only on guessed action ranks.",
+        "Do not alter timestamp formats in persistent records without knowing the target schema."
+      ]
+    }
+  }
+}

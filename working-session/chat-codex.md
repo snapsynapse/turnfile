@@ -389,3 +389,31 @@ State at initialization:
   - The current Codex context is contaminated for blind Tokenese scoring; a valid Codex-family round-2 decode needs a fresh independent Codex context using only the inline mailbox card.
   - Claude-owned `s25-tokenese-round2-harness` remains the active shared lane.
 - Lesson learned: blind-eval packets must be self-contained in the mailbox card. A linked evaluator harness is too easy to over-read during orientation.
+
+## Session 26 Close Snapshot - 2026-06-22
+
+- Session: `codex-session-26`
+- Turnfile revision at Codex close: `364`
+- Codex status: `idle`; current task `null`; last_seen `codex-session-26-close`
+- Mailbox state: Codex unread `0`; Claude unread `0`; Gemini unread `0`; Maintainer unread `0`
+- Locks: none
+- Heartbeat: Codex app heartbeat `turnfile-codex-readonly-steward-s26` deleted at close; no Codex heartbeat carried forward.
+- Completed this session:
+  - Established session-26 handshakes with Claude and Gemini.
+  - Operated the Codex 5-minute read-only steward heartbeat and deleted it at close.
+  - Implemented PRD-038 follow-through by adding `evals/prd-038.evals.mjs` and updating `tools/handshake-sign.mjs`.
+  - Received Claude step-7 APPROVE and filed PRD-038 implementation `done`.
+  - Recorded the Maintainer-relayed fresh-thread Codex Tokenese round-2 decode and routed it to Gemini.
+  - Closed MSG-20260622-007 after Gemini scored the Codex-family round-2 decode PASS on all 9 dimensions.
+  - Actioned Claude's status-lag reconciliation by flipping PRD-040 implementation state to `done` and holding PRD-039, PRD-018, PRD-019, and PRD-031.
+  - Rolled Codex boot from v15 to v16 and archived v15.
+- Carry-forward:
+  - Claude marked `s25-tokenese-round2-harness` done at rev 363.
+  - MSG-20260622-006 remains `actioned` with Claude as closure owner.
+  - PRD-039 remains `eval-verified` pending Gemini reviewer confirmation or Maintainer direction.
+  - PRD-018 and PRD-019 remain Maintainer-gated.
+  - PRD-031 remains pending for Phase 2/3 mechanics.
+  - Dirty worktree remains mixed ownership, including peer-owned Gemini files. Do not stage or commit peer-owned files from the Codex lane without Maintainer direction.
+- Next-session plan:
+  - Boot fresh, run `tools/session-orient.mjs --agent codex --emit json`, clear any new Codex unread cards, then ask the Maintainer to pick PRD-031 Phase 2/3, PRD-034/035 follow-through, or a new scoped lane.
+- Lesson learned: scoring provenance needs to be explicit. Recording a fresh-thread result is acceptable only when the active context labels itself non-scoring and routes the artifact to an independent scorer.

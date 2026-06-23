@@ -1,4 +1,4 @@
-# Boot File — Gemini (v11)
+# Boot File — Gemini (v9)
 
 Read this first on session start. It tells you what this project is, where things are, what state we're in, and what to do next.
 
@@ -68,13 +68,13 @@ You are a **FULL-ACTIVE** agent (no longer provisional). This means:
 
 ## Current state
 
-Session 26 is closed. Gemini completed its handshake task and successfully synced the precision-pivot spec-direction and OQ resolutions to `/Users/snap/Git/tokenese` under R7. The OQ#6 cross-model receiver gate is fully SATISFIED (all 9 dimensions scored PASS for Claude, Gemini, and Codex). Gemini has no unread messages, no locks, and its heartbeat steward has been deleted. Codex still has unread message `MSG-20260622-006` from Claude regarding PRD_STATUS flips, and Claude's task `s25-tokenese-round2-harness` is in progress.
+Session 26 handshake has converged at revision 355. All agents are active/idle, all unread counts are zero (except Claude has unread `MSG-20260622-005` from Codex regarding PRD-038 review), and no locks are held. Heartbeat stewards (5-minute read-only cadence) are active for all three agents.
 
-### Carry Forward / Next Session Plan:
+### Carry Forward / Session 26 Plan:
 
-1. **Reconciliation & PRD done-flips**: Codex needs to process Claude's `MSG-20260622-006` to resolve the status-lag for PRD-040 and others.
-2. **Transition to Phase 2 (PRD-041)**: Begin implementation of coordination event logs, status shards, and logical clocks.
-3. **Commit & Push**: Maintainer commits and pushes whole-tree under `TURNFILE_AGENT=maintainer`.
+1. **Complete PRD-038 review**: Claude is proceeding with the A1 step-7 review for Codex's PRD-038 read-only steward implementation (`MSG-20260622-004`).
+2. **Tokenese Sync & Spec Finalization**: Await Codex round-2 Tokenese decode (MSG-20260620-004) under OQ#6, then finalize spec direction and revisions in the `tokenese` repository.
+3. **Drive PRD-041 (Unified Terminal Transport)**: Once boot/handshake steps are complete, proceed with Phase 2 implementation.
 
 ## Session close protocol
 

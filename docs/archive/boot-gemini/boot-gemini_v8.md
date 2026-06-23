@@ -1,4 +1,4 @@
-# Boot File — Gemini (v11)
+# Boot File — Gemini (v8)
 
 Read this first on session start. It tells you what this project is, where things are, what state we're in, and what to do next.
 
@@ -68,13 +68,13 @@ You are a **FULL-ACTIVE** agent (no longer provisional). This means:
 
 ## Current state
 
-Session 26 is closed. Gemini completed its handshake task and successfully synced the precision-pivot spec-direction and OQ resolutions to `/Users/snap/Git/tokenese` under R7. The OQ#6 cross-model receiver gate is fully SATISFIED (all 9 dimensions scored PASS for Claude, Gemini, and Codex). Gemini has no unread messages, no locks, and its heartbeat steward has been deleted. Codex still has unread message `MSG-20260622-006` from Claude regarding PRD_STATUS flips, and Claude's task `s25-tokenese-round2-harness` is in progress.
+Session 25 closed at rev 343. All agents are idle, all inboxes are zero, and no locks are held. Handshake signed and heartbeat negotiation complete.
 
-### Carry Forward / Next Session Plan:
+### Carry Forward / Session 26 Plan:
 
-1. **Reconciliation & PRD done-flips**: Codex needs to process Claude's `MSG-20260622-006` to resolve the status-lag for PRD-040 and others.
-2. **Transition to Phase 2 (PRD-041)**: Begin implementation of coordination event logs, status shards, and logical clocks.
-3. **Commit & Push**: Maintainer commits and pushes whole-tree under `TURNFILE_AGENT=maintainer`.
+1. **Drive PRD-041 integration**: Once Claude reviews the PRD-041 implementation and closes `MSG-20260618-028`, we will transition to Phase 2 (coordination event logs, per-agent status shards, and logical clocks).
+2. **Tokenese Sync**: With the OQ#6 cross-model receiver decode complete, we can finalize the spec revisions (`tk-spec-v02-draft`) in the `tokenese` repository.
+3. **Reconcile Boot-Codex Drift**: Codex needs to ensure its future rollovers do not omit required `Protocol Essentials` sections.
 
 ## Session close protocol
 

@@ -24,6 +24,31 @@ Codex closed its side of session 25 at rev 345.
 - Active shared lane after Codex close: Claude-owned `s25-tokenese-round2-harness`; Gemini is closed and supplied the first strong extra independent family.
 - Dirty worktree at Codex close is expected to contain only this closeout until committed; do not reopen implementation work without fresh session orientation.
 
+## Session 25 addendum - Claude closeout (2026-06-20)
+
+Claude closed its side of session 25 at rev 346.
+
+- Turnfile protocol remains v0.1.
+- Claude status: idle; `current_task` null; last_seen `claude-session-25-close`.
+- Mailbox at Claude close: Claude unread 0; locks empty.
+- Claude heartbeat cron `fc15ff53` deleted; no Claude heartbeat carried forward.
+- Claude boot rolled v18 -> v19; v18 archived.
+- Session 25 Claude deliveries: 3-way handshake converged, PRD-041 step-7 APPROVE (done, MSG-20260618-028 closed), Tokenese round-2 receiver harness built, Claude r2 blind decode scored.
+- Carry-forward: MSG-20260620-004 open/acknowledged (Claude closure owner) — Codex r2 blind decode needs a fresh independent Codex context; then score Codex r2; if gate passes, route ratified spec-direction to ~/Git/tokenese (R7).
+
+## Session 25 addendum - Gemini closeout (2026-06-21)
+
+Gemini closed its side of session 25 at rev 343.
+
+- Turnfile protocol remains v0.1.
+- Gemini status: idle; `current_task` null; last_seen `gemini-session-25-close`.
+- Mailbox: Gemini unread 0; locks empty.
+- Gemini heartbeat deleted; no Gemini heartbeat carried forward.
+- Gemini boot rolled v6 -> v7; v6 archived.
+- Session 25 Gemini deliveries: Tokenese round-2 blind decode for OQ#6 (Candidate A/B/C decodes written to working-session/tokenese-pairs/tokenese-round2-gemini-decode.json) and actioned MSG-20260620-005. Peer reviewed Codex's implementation of PRD-041 (9/9 PASS). Updated assistant-guide-manifest.txt. Restored Protocol Essentials in boot-codex.md.
+- Carry-forward: drive PRD-035 Tokenese sync loop (spec revisions).
+
+
 ## Session 24 addendum - Codex closeout (2026-06-19)
 
 Codex closed its side of session 24 at rev 336.
@@ -476,3 +501,36 @@ tokenese ok v:0.1 @claude session:25 ev:obs
 | Claude | yes — Turnfile v0.1 (rev 337); PRD_STATUS 35 PRDs | yes — grammar v0.3; TKAB `tkab-check-1.1`; Tier-B twins authorized, English source-wins | yes — gates ok; model ledger Opus 4.8 / Claude Code | ACK — boot+handshake+heartbeat, prd-041-step7-review-after-codex-impl, tokenese-round2-optional-maintainer-gated | ACTIVE session-only cron `fc15ff53`, 5m self-owned read-only steward, notify=notify-material-only, stop=delete-at-close | guard active; `core.hooksPath=tools/hooks` | Claude (Opus 4.8) — 2026-06-20 |
 | Codex | yes — Turnfile v0.1 (rev 338); PRD_STATUS 35 PRDs | yes — grammar v0.3; TKAB `tkab-check-1.1`; Tier-B twins authorized, English source-wins | yes — gates ok; model ledger GPT-5 / Codex desktop | ACK — boot+handshake+heartbeat, prd-041-implementation, tokenese-round2-optional-maintainer-gated | 5m self-owned, notify=notify-material-only, stop=delete-at-close | guard active; `core.hooksPath=tools/hooks` | Codex (GPT-5) — 2026-06-21 |
 | Gemini | yes — Turnfile v0.1 (rev 341); PRD_STATUS 35 PRDs | yes — grammar v0.3; TKAB `tkab-check-1.1`; Tier-B twins authorized, English source-wins | yes — gates ok; model ledger Gemini 3.5 Flash (High) / Google Antigravity | ACK — boot+handshake+heartbeat, prd-035-tokenese-sync, prd-041-step7-review-after-codex-impl, tokenese-round2-optional-maintainer-gated | 5m self-owned, notify=notify-material-only, stop=delete-at-close | guard active; `core.hooksPath=tools/hooks` | Gemini (Gemini 3.5 Flash (High)) — 2026-06-21 |
+
+## Sign-off (session 26)
+
+```tokenese
+^grammar:v0.3
+@gemini := agent:gemini :Gemini3.5Flash(High) :GoogleAntigravity s26
+say @gemini rev:347 prd:41 gates:ok ev:obs
+say @gemini ack lanes:[boot+handshake+heartbeat, tokenese-round2-codex-decode-pending]
+say @gemini hb cad:5m own:self notify:notify-material-only stop:delete-at-close
+tokenese ok v:0.1 @gemini session:26 ev:obs
+```
+
+| Agent | Protocol baseline | Tokenese | Skills | Scope | Heartbeat | Identity enforcing | Signed |
+|-------|---|---|---|---|---|---|---|
+| Codex | yes — Turnfile v0.1 (rev 350); PRD_STATUS 40 PRDs | yes — grammar v0.3; TKAB `tkab-check-1.1`; Tier-B twins authorized, English source-wins | yes — gates ok; model ledger GPT-5 / Codex desktop | ACK — boot+handshake+heartbeat, msg-004-codex-r2-tokenese-decode-maintainer-gated | 5m self-owned read-only steward `turnfile-codex-readonly-steward-s26`, notify=notify-material-only, stop=delete-at-close or Maintainer cancel | guard active; `core.hooksPath=tools/hooks`; `.turnfile-agent=codex` | Codex (GPT-5 / Codex desktop) — 2026-06-22 |
+| Gemini | yes — Turnfile v0.1 (rev 347); PRD_STATUS 40 PRDs | yes — grammar v0.3; TKAB `tkab-check-1.1`; Tier-B twins authorized, English source-wins | yes — gates ok; model ledger Gemini 3.5 Flash (High) / Google Antigravity | ACK — boot+handshake+heartbeat, tokenese-round2-codex-decode-pending | 5m self-owned read-only steward, notify=notify-material-only, stop=delete-at-close | guard active; `core.hooksPath=tools/hooks` | Gemini (Gemini 3.5 Flash (High)) — 2026-06-22 |
+| Claude | yes — Turnfile v0.1 (rev 349); PRD_STATUS 40 PRDs | yes — grammar v0.3; TKAB `tkab-check-1.1`; Tier-B twins authorized, English source-wins | yes — gates ok; model ledger Opus 4.8 / Claude Code | ACK — boot+handshake+heartbeat, msg-004-codex-r2-tokenese-decode-maintainer-gated, feature-tail-prd-018-019-031-status-lag-pending-maintainer-scope | 5m self-owned, notify=notify-material-only, stop=delete-at-close | guard active; `core.hooksPath=tools/hooks` | Claude (Opus 4.8) — 2026-06-22 |
+
+## Sign-off (session 27)
+
+```tokenese
+^grammar:v0.3
+@codex := agent:codex :GPT-5 :Codexdesktop s27
+say @codex rev:366 prd:40 gates:ok ev:obs
+say @codex ack lanes:[session-27-boot, gemini-handshake-heartbeat, perplexity-provisional-checker-available, await-maintainer-next-session-scope]
+say @codex hb mode:read-only-steward cad:5m own:self notify:notify-material-only stop:delete-at-clean-close-or-maintainer-cancel
+tokenese ok v:0.1 @codex session:27 ev:obs
+```
+
+| Agent | Protocol baseline | Tokenese | Skills | Scope | Heartbeat | Identity enforcing | Signed |
+|-------|---|---|---|---|---|---|---|
+| Codex | yes — Turnfile v0.1 (rev 366); PRD_STATUS 40 PRDs | yes — grammar v0.3; TKAB `tkab-check-1.1`; Tier-B twins authorized, English source-wins | yes — gates ok; model ledger GPT-5 / Codex desktop | ACK — session-27-boot, gemini-handshake-heartbeat, perplexity-provisional-checker-available, await-maintainer-next-session-scope | 5m self-owned read-only steward, write-capable only by explicit elevated scope, notify=notify-material-only, stop=delete-at-clean-close-or-maintainer-cancel | guard active; `core.hooksPath=tools/hooks` | Codex (GPT-5) — 2026-06-23 |
+| Gemini | yes — Turnfile v0.1 (rev 368); PRD_STATUS 40 PRDs | yes — grammar v0.3; TKAB `tkab-check-1.1`; Tier-B twins authorized, English source-wins | yes — gates ok; model ledger Gemini 3.5 Flash (High) / Google Antigravity | ACK — session-27-boot, gemini-handshake-heartbeat, perplexity-provisional-checker-available, await-maintainer-next-session-scope | 5m self-owned read-only steward, write-capable only by explicit elevated scope, notify=notify-material-only, stop=delete-at-clean-close-or-maintainer-cancel | guard active; `core.hooksPath=tools/hooks` | Gemini (Gemini 3.5 Flash (High)) — 2026-06-23 |

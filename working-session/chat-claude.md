@@ -582,3 +582,23 @@ Coordination notes: heavy live concurrency all session — the Read edit-guard c
 Process: closed promptly on Maintainer direction this time (improved on s24's over-hold).
 
 Carry-forward (Claude closure owner): MSG-20260620-004 — Codex r2 OQ#6 blind decode needs a FRESH Codex context (inline card only). Literal ≥2-family gate already met (Claude+Gemini); strict ≥2-extra needs Codex. When gate passes, route ratified spec-direction to ~/Git/tokenese (R7). Commit HELD (mixed-ownership tree; awaiting explicit Maintainer direction). Signal-log compaction eligible (SIG-129..) but deferred — peer-owned dirty tree.
+
+---
+
+## Session 26 close snapshot (2026-06-22, rev 365)
+
+Boot: fast-path orient clean → handshake-sign (rev 349, boot signal SIG-297). All three agents booted concurrently (Codex first at 347, Gemini at 349). 3-way handshake converged: Claude 349 / Codex 350 / Gemini 349, all-5m self-owned read-only heartbeats. Cleaned an orphan duplicate Claude sign-off row left by a failed first handshake-sign attempt (it wrote the row then failed the mailbox-invariants precondition on a transient Codex mid-write).
+
+Deliverables:
+1. PRD-038 A1 step-7 review APPROVE — Codex had found PRD_STATUS claimed evals/prd-038.evals.mjs existed while absent, authored it + extended handshake-sign (read-only-steward default vs explicit write-capable mode). Independently verified 8/8 + run-evals 27/27; inspected for genuineness (R4 tests execute the tool against a fixture; R6 statically proves the loop validator has no write calls). Codex filed PRD-038 done.
+2. Status-lag reconciliation (Maintainer-directed via relayed "take your next action"): routed MSG-006 to Codex → Codex flipped PRD-040 to done; PRD-039 held for Gemini reviewer, PRD-018/019 held for Maintainer ratify, PRD-031 left genuinely open (Phase 2/3 needs design).
+3. OQ#6 cross-verification: Codex r2 decode arrived via Maintainer-relayed fresh thread. Gemini scored it 9/9. As harness author, I cross-checked the contested Candidate A dimension — Codex's unsafe_actions is a caution ("do not deploy without authorization"), NOT an escalation, and it surfaced the edge-fn deploy ambiguity. Genuine pass. Gate SATISFIED (Codex+Gemini). Gemini routed the ratified spec-direction to ~/Git/tokenese (R7). Marked s25-tokenese-round2-harness done.
+4. Completed s26-handshake-heartbeat (rev 358); Gemini transitioned active_step off handshake. Closed all three Claude-owned cards (MSG-006/003/004) into Closed Summary.
+
+Self-correction this session: my first MSG-003 draft (Claude→Gemini) wrongly called Gemini's sign-off row a pre-boot placeholder — a stale-read error (I first read the tree at rev 346 when Gemini still showed idle; Gemini had since booted and signed via SIG-298). Retracted in-card.
+
+Concurrency lesson (reconfirmed): the Read edit-guard caught stale edits repeatedly; MAILBOX.md churned constantly under Codex's live aggregation. Re-ground, take the next rev, don't fight it. A transient mailbox-invariants FAIL during a peer mid-write cleared on its own seconds later.
+
+State at close: all three agents idle; active_step await-maintainer-next-session-scope; locks empty; turn_queue empty; all inboxes 0. Gates green (mailbox-invariants, turnfile-lint, validate-closeout --agent claude clean, validate-prd-promotion 40). Heartbeat cron 44d30fae DELETED at close. Boot rolled v19 → v20.
+
+Carry-forward for Maintainer: (1) ratify PRD-018/019 done-flip (mechanisms shipped via done PRD-021/022); (2) PRD-039 awaits Gemini reviewer confirmation in PRD_STATUS; (3) PRD-031 Phase 2/3 needs mechanics design (Codex infra) before Claude authors RED evals. Commit HELD (Maintainer-gated; mixed-ownership tree).

@@ -22,6 +22,7 @@ const TURNFILE = "working-session/TURNFILE.yaml";
 const WORKLOG = "working-session/WORKLOG.md";
 const HANDSHAKE = "working-session/NEXT_SESSION_HANDSHAKE.md";
 const MAILBOX = "working-session/MAILBOX.md";
+const PRD_STATUS = "working-session/docs/PRD_STATUS.json";
 
 function usage(code = 0) {
   const out = code === 0 ? console.log : console.error;
@@ -59,6 +60,16 @@ function parseArgs(argv) {
 
 function read(p) { return fs.readFileSync(p, "utf8"); }
 function sha(s) { return crypto.createHash("sha256").update(s, "utf8").digest("hex"); }
+
+function prdCount() {
+  if (!fs.existsSync(PRD_STATUS)) {
+    const existing = fs.existsSync(HANDSHAKE) ? read(HANDSHAKE) : "";
+    const match = existing.match(/PRD_STATUS\s+(\d+)\s+PRDs/);
+    return match ? Number(match[1]) : 0;
+  }
+  const registry = JSON.parse(read(PRD_STATUS));
+  return Array.isArray(registry.prds) ? registry.prds.length : 0;
+}
 
 function loadPayload(spec) {
   const text = spec === "-" ? fs.readFileSync(0, "utf8") : fs.readFileSync(spec, "utf8");
@@ -141,33 +152,39 @@ function bumpTurnfile(tf, agent, payload, nextRev, nextSig) {
   return tf;
 }
 
-function denseRow(agent, payload, nextRev) {
+function denseRow(agent, payload, nextRev, count) {
   const lanes = payload.scope_ack.join(", ");
   const hb = payload.heartbeat;
+  const hbMode = hb.mode === "write-capable" ? "write-capable" : "read-only-steward";
+  const hbScope = hb.mode === "write-capable" && hb.write_scope ? ` scope:${String(hb.write_scope).replace(/\s+/g, "_")}` : "";
   return (
     `\`\`\`tokenese\n` +
     `^grammar:v0.3\n` +
     `@${agent} := agent:${agent} :${payload.model.replace(/\s+/g, "")} :${payload.surface.replace(/\s+/g, "")} s${payload.session}\n` +
-    `say @${agent} rev:${nextRev} prd:35 gates:${payload.gates} ev:obs\n` +
+    `say @${agent} rev:${nextRev} prd:${count} gates:${payload.gates} ev:obs\n` +
     `say @${agent} ack lanes:[${lanes}]\n` +
-    `say @${agent} hb cad:${hb.cadence} own:${hb.owner} notify:${hb.policy} stop:${hb.stop}\n` +
+    `say @${agent} hb mode:${hbMode} cad:${hb.cadence} own:${hb.owner} notify:${hb.policy} stop:${hb.stop}${hbScope}\n` +
     `tokenese ok v:0.1 @${agent} session:${payload.session} ev:obs\n` +
     `\`\`\`\n`
   );
 }
 
-function englishRow(agent, payload, nextRev) {
+function englishRow(agent, payload, nextRev, count) {
   const cap = agent[0].toUpperCase() + agent.slice(1);
   const lanes = payload.scope_ack.join(", ");
   const hb = payload.heartbeat;
-  return `| ${cap} | yes — Turnfile v0.1 (rev ${nextRev}); PRD_STATUS 35 PRDs | yes — grammar v0.3; TKAB \`tkab-check-1.1\`; Tier-B twins authorized, English source-wins | yes — gates ${payload.gates}; model ledger ${payload.model} / ${payload.surface} | ACK — ${lanes} | ${hb.cadence} ${hb.owner}-owned, notify=${hb.policy}, stop=${hb.stop} | guard active; \`core.hooksPath=tools/hooks\` | ${cap} (${payload.model}) — ${new Date().toISOString().slice(0, 10)} |`;
+  const heartbeatMode = hb.mode === "write-capable"
+    ? `write-capable heartbeat, scope=${hb.write_scope || "UNSPECIFIED-SCOPE"}`
+    : "read-only steward, write-capable only by explicit elevated scope";
+  return `| ${cap} | yes — Turnfile v0.1 (rev ${nextRev}); PRD_STATUS ${count} PRDs | yes — grammar v0.3; TKAB \`tkab-check-1.1\`; Tier-B twins authorized, English source-wins | yes — gates ${payload.gates}; model ledger ${payload.model} / ${payload.surface} | ACK — ${lanes} | ${hb.cadence} ${hb.owner}-owned ${heartbeatMode}, notify=${hb.policy}, stop=${hb.stop} | guard active; \`core.hooksPath=tools/hooks\` | ${cap} (${payload.model}) — ${new Date().toISOString().slice(0, 10)} |`;
 }
 
 function signHandshake(hs, agent, payload, nextRev) {
   const cap = agent[0].toUpperCase() + agent.slice(1);
   const sessionHeader = `## Sign-off (session ${payload.session})`;
-  const dense = denseRow(agent, payload, nextRev);
-  const english = englishRow(agent, payload, nextRev);
+  const count = prdCount();
+  const dense = denseRow(agent, payload, nextRev, count);
+  const english = englishRow(agent, payload, nextRev, count);
 
   // Try to replace a "pending" placeholder row
   const placeholderRe = new RegExp(`\\| ${cap} \\| pending[^\\n]*\\|`, "m");
