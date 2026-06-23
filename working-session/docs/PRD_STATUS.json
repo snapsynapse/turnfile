@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2026-06-22 (PRD-038 implementation done)",
+  "updated_at": "2026-06-23 (PRD-042 Claude acceptance + PRD-031 Phase 2 evals authored)",
   "policy": {
     "required_reviewers": [
       "codex",
@@ -1674,6 +1674,50 @@
         "implementer": "codex",
         "reviewer": "gemini",
         "notes": "Accepted session 23 and promoted to docs/prds on 2026-06-19 via move-not-copy. Codex completed the R4 event-sourced arbitration-primitive schema spike at working-session/docs/r4-arbitration-primitive-schema-spike-prd-041.md and routed MSG-20260618-027 to Claude for evals/prd-041.evals.mjs RED. Claude authored evals/prd-041.evals.mjs RED and routed MSG-20260618-028 to Codex. Session 25 rev 342: Codex added schemas/prd-041/arbitration-event-v0.schema.json and implemented tools/aggregate-coordination.mjs --emit arbitration-json --rev <N>; focused verification node --test evals/prd-041.evals.mjs PASS 9/9. Claude approved on 2026-06-20 (MSG-20260618-028); Gemini peer reviewed and approved on 2026-06-21. Implementation done."
+      }
+    },
+    {
+      "id": "PRD-042",
+      "title": "Qwen 3.6 35b MLX Onboarding Deltas",
+      "path": "working-session/docs/PRD-042-qwen-onboarding-deltas.md",
+      "shelf": "working-session/docs",
+      "state": "proposed",
+      "acceptance": {
+        "codex": {
+          "status": "accepted",
+          "evidence": [
+            "Codex validated Gemini's revised PRD-042 draft and evals on 2026-06-23; node --test evals/prd-042.evals.mjs PASS 12/12. Codex accepts the plan with no design counters. Execution evidence is recorded at working-session/docs/onboarding/evidence/qwen-mlx/2026-06-23-01/evidence.md and is blocked on Qwen runtime availability before candidate response capture."
+          ]
+        },
+        "claude": {
+          "status": "accepted",
+          "evidence": [
+            "Claude (Opus 4.6) reviewed PRD-042 draft APPLY with no counters on 2026-06-23. Verified: PRD-015 substrate correctly referenced as specialization; R1 Phase 0 preflight covers local-runtime dimensions; R2 secret redaction + VaultPrime/LocalBrain boundary addresses local-host leakage; R3 OT-012/013/014 candidate-agnostic in test suite; R5 four-rung ladder cleanly extends PRD-015; R6 required_reviewers correctly excludes Qwen; evals 16/16 green; consistent with PRD-039 pattern."
+          ]
+        },
+        "gemini": {
+          "status": "accepted",
+          "evidence": [
+            "Gemini drafted PRD-042 and evals on 2026-06-23 to propose Qwen 3.6 35b MLX onboarding."
+          ]
+        },
+        "maintainer": {
+          "status": "pending",
+          "evidence": []
+        }
+      },
+      "blocking_items": [
+        "Qwen runtime unavailable to Codex execution path: local oMLX is reachable but exposes only gemma-4-e4b-it-4bit; no Qwen model/runner is available; direct omlx CLI cannot access Metal from the Codex sandbox.",
+        "Maintainer acceptance remains pending before PRD-042 promotion or any Qwen state transition."
+      ],
+      "eligible_for_docs_prds": false,
+      "implementation": {
+        "state": "evals-authored",
+        "evals": "evals/prd-042.evals.mjs",
+        "eval_author": "gemini",
+        "implementer": "codex",
+        "reviewer": "claude",
+        "notes": "Gemini authored evals under evals/prd-042.evals.mjs. Codex validated the plan and evals on 2026-06-23 (12/12 PASS) and registered s27-qwen-onboarding-exec. Execution is blocked before Qwen candidate response capture because no Qwen MLX runtime path is currently available to Codex; see working-session/docs/onboarding/evidence/qwen-mlx/2026-06-23-01/evidence.md."
       }
     }
   ]
