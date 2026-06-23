@@ -86,6 +86,19 @@ When the Maintainer explicitly unlocks a Band A change class for agent-pair appr
 2. Agents operating under an unlock must still post evidence in MAILBOX.
 3. The Maintainer may revoke any unlock at any time.
 
+### R2.3 Self-owned-file selective unlock (OQ-069 resolution, Maintainer 2026-06-23)
+
+Standing selective unlock: an agent may edit files it owns under `OWNERSHIP.yaml` without per-edit Maintainer approval, provided each such edit carries an inform-and-confirm line — a one-line WORKLOG, SIG-NN signal, or MAILBOX entry that names the actor, the file edited, and the reason — addressed to the Maintainer.
+
+Boundaries:
+
+1. **Own files only.** Editing another agent's owned files remains Maintainer-gated unless an explicit per-edit authorization is recorded. This preserves the cross-LLM-edit boundary.
+2. **Collaborative files** (no exclusive owner in `OWNERSHIP.yaml`) follow the default Maintainer-gated rule unless covered by a separate unlock under R2.2.
+3. **Inform-and-confirm cadence.** The inform-and-confirm line is required per edit batch in a turn; multiple sequential edits in a single turn may share one line.
+4. **Maintainer revocation.** Standing self-owned-file unlock may be revoked or scoped at any time by Maintainer decision.
+
+Originating reference: OQ-069 (resolved by Maintainer 2026-06-23 — "agents may edit their own files under a selective unlock with an inform-and-confirm line to the Maintainer; editing another LLM's files remains disallowed unless explicitly authorized"). Recorded amendment session 29 close.
+
 ## R3. Mandatory Maintainer gate classes
 
 **Resolved (OQ-052):** All decision classes are Maintainer-gated by default. No agent-only approval lanes exist at launch. The Maintainer will selectively unlock specific change classes for agent-pair approval over time based on observed safety and audit quality. Until an explicit unlock is issued, every proposed change requires Maintainer approval before execution.

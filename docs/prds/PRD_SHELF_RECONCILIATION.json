@@ -1,0 +1,407 @@
+{
+  "schema_version": "1.0.0",
+  "generated_for": "PRD-043 R3",
+  "generated_at_rev": 417,
+  "notes": "Authoritative classification of every PRD through PRD-048 for v1.0.0 release. classification: one of core-v1 | optional-profile | historical | deferred | superseded | draft. required_for_minimal_profile: boolean; true only for core-v1 entries that a fresh v1 adopter MUST read. profile: named optional profile (or null). v1_surface: short human-readable reason. PRD-025 is recorded as superseded because it was never registered in PRD_STATUS.json. Maintainer 2026-06-23 OQ-043-1 ruling: skills are a core requirement of FULL Turnfile participation; agents without skill bundles may participate at a LESSER (v1-minimal) tier. Tiered conformance encoded via required_for_full_participation field per entry: true for the skill-bundle profile (PRD-012, PRD-033) plus all core-v1 entries; false for everything else. v1-minimal conformance requires only required_for_minimal_profile=true entries. PRD-045 is the multi-agent-resilience optional profile and is required for full multi-agent participation, not for v1-minimal starter adoption. PRD-046 records the archive boundary as historical/provenance support, PRD-047 remains draft release-evidence work until PAICE2 dogfood evidence and ratification land, and PRD-048 is the portable CLI entry point for the v1 operational surface.",
+  "profiles": [
+    "tokenese",
+    "heartbeat",
+    "concurrent-shards",
+    "onboarding",
+    "boot-simplification",
+    "skill-bundle-integrity",
+    "public-surface-snapshot",
+    "unified-terminal-transport",
+    "multi-agent-resilience"
+  ],
+  "prds": [
+    {
+      "id": "PRD-001",
+      "classification": "core-v1",
+      "required_for_minimal_profile": true,
+      "v1_surface": "Maintainer interaction model is the authority spine encoded in SPEC §3.",
+      "profile": null,
+      "required_for_full_participation": true
+    },
+    {
+      "id": "PRD-002",
+      "classification": "deferred",
+      "required_for_minimal_profile": false,
+      "v1_surface": "Rust notification viewer MVP archived; not a protocol contract.",
+      "profile": null,
+      "required_for_full_participation": false
+    },
+    {
+      "id": "PRD-003",
+      "classification": "core-v1",
+      "required_for_minimal_profile": true,
+      "v1_surface": "Message lifecycle and SLA contract — the five-state mailbox model encoded in MINIMUM_VIABLE_TURNFILE.md.",
+      "profile": null,
+      "required_for_full_participation": true
+    },
+    {
+      "id": "PRD-004",
+      "classification": "core-v1",
+      "required_for_minimal_profile": true,
+      "v1_surface": "Maintainer decision contract — the decision-record fields encoded in SPEC §8.",
+      "profile": null,
+      "required_for_full_participation": true
+    },
+    {
+      "id": "PRD-005",
+      "classification": "core-v1",
+      "required_for_minimal_profile": true,
+      "v1_surface": "Protocol data schema and compatibility — frozen as schemas/v1/turnfile-v1.schema.json.",
+      "profile": null,
+      "required_for_full_participation": true
+    },
+    {
+      "id": "PRD-006",
+      "classification": "core-v1",
+      "required_for_minimal_profile": true,
+      "v1_surface": "Apply-or-counter review envelope encoded in SPEC §7; the A1 loop is the v1 default review path.",
+      "profile": null,
+      "required_for_full_participation": true
+    },
+    {
+      "id": "PRD-007",
+      "classification": "optional-profile",
+      "required_for_minimal_profile": false,
+      "v1_surface": "Trust and provenance layer is an evidence-quality enhancement above the core mailbox/worklog evidence model.",
+      "profile": null,
+      "required_for_full_participation": false
+    },
+    {
+      "id": "PRD-008",
+      "classification": "optional-profile",
+      "required_for_minimal_profile": false,
+      "v1_surface": "Cross-sandbox payload-first handoff is needed only when agents run in separate filesystems; single-host v1 sessions do not require it.",
+      "profile": null,
+      "required_for_full_participation": false
+    },
+    {
+      "id": "PRD-009",
+      "classification": "core-v1",
+      "required_for_minimal_profile": true,
+      "v1_surface": "Cross-document reconciliation — the OQ triage and consistency rules that keep TURNFILE/MAILBOX/WORKLOG in agreement.",
+      "profile": null,
+      "required_for_full_participation": true
+    },
+    {
+      "id": "PRD-010",
+      "classification": "core-v1",
+      "required_for_minimal_profile": true,
+      "v1_surface": "Shared-file transaction locking — revision-based lease behavior encoded in SPEC §5.",
+      "profile": null,
+      "required_for_full_participation": true
+    },
+    {
+      "id": "PRD-011",
+      "classification": "optional-profile",
+      "required_for_minimal_profile": false,
+      "v1_surface": "Session resumption read order is a boot-time aid; v1 minimal sessions can resume from the three core files directly.",
+      "profile": "boot-simplification",
+      "required_for_full_participation": false
+    },
+    {
+      "id": "PRD-012",
+      "classification": "optional-profile",
+      "required_for_minimal_profile": false,
+      "v1_surface": "Per-agent skill bundles are out of scope for v1 minimal; bundle integrity is the skill-bundle-integrity profile.",
+      "profile": "skill-bundle-integrity",
+      "required_for_full_participation": true
+    },
+    {
+      "id": "PRD-013",
+      "classification": "core-v1",
+      "required_for_minimal_profile": true,
+      "v1_surface": "Turnfile coordination format — TURNFILE.yaml shape encoded in SPEC §5 and schemas/v1.",
+      "profile": null,
+      "required_for_full_participation": true
+    },
+    {
+      "id": "PRD-014",
+      "classification": "core-v1",
+      "required_for_minimal_profile": true,
+      "v1_surface": "Session closeout + boot handoff contract — encoded as the close protocol in MINIMUM_VIABLE_TURNFILE.md.",
+      "profile": null,
+      "required_for_full_participation": true
+    },
+    {
+      "id": "PRD-015",
+      "classification": "optional-profile",
+      "required_for_minimal_profile": false,
+      "v1_surface": "Agent onboarding and vetting — needed only when adding new agents to an existing session; v1 minimal sessions name agents at open.",
+      "profile": "onboarding",
+      "required_for_full_participation": false
+    },
+    {
+      "id": "PRD-016",
+      "classification": "optional-profile",
+      "required_for_minimal_profile": false,
+      "v1_surface": "Session rotation trigger contract addresses long-running sessions; v1 minimal sessions can close and re-open without it.",
+      "profile": null,
+      "required_for_full_participation": false
+    },
+    {
+      "id": "PRD-017",
+      "classification": "optional-profile",
+      "required_for_minimal_profile": false,
+      "v1_surface": "Boot sequence commands and documentation contract is a boot-simplification enhancement.",
+      "profile": "boot-simplification",
+      "required_for_full_participation": false
+    },
+    {
+      "id": "PRD-018",
+      "classification": "optional-profile",
+      "required_for_minimal_profile": false,
+      "v1_surface": "Approval authority matrix is a delegation-band enhancement above the core authority order.",
+      "profile": null,
+      "required_for_full_participation": false
+    },
+    {
+      "id": "PRD-019",
+      "classification": "optional-profile",
+      "required_for_minimal_profile": false,
+      "v1_surface": "Mailbox-first polling cadence is a coordination-style enhancement; v1 minimal sessions can use any polling cadence.",
+      "profile": null,
+      "required_for_full_participation": false
+    },
+    {
+      "id": "PRD-020",
+      "classification": "optional-profile",
+      "required_for_minimal_profile": false,
+      "v1_surface": "Boot artifact completeness and chat log contract is a boot-simplification enhancement.",
+      "profile": "boot-simplification",
+      "required_for_full_participation": false
+    },
+    {
+      "id": "PRD-021",
+      "classification": "optional-profile",
+      "required_for_minimal_profile": false,
+      "v1_surface": "Conflict loop bound and selective-unlock gradient is a refinement over the core authority order; v1 minimal sessions can use single-round apply-or-counter.",
+      "profile": null,
+      "required_for_full_participation": false
+    },
+    {
+      "id": "PRD-022",
+      "classification": "optional-profile",
+      "required_for_minimal_profile": false,
+      "v1_surface": "Decision-mirror delivery is a notification enhancement over the core mailbox.",
+      "profile": null,
+      "required_for_full_participation": false
+    },
+    {
+      "id": "PRD-023",
+      "classification": "optional-profile",
+      "required_for_minimal_profile": false,
+      "v1_surface": "Out-of-band activity reconciliation is a multi-runtime aid; single-runtime v1 sessions do not require it.",
+      "profile": null,
+      "required_for_full_participation": false
+    },
+    {
+      "id": "PRD-024",
+      "classification": "optional-profile",
+      "required_for_minimal_profile": false,
+      "v1_surface": "Human-legibility invariant and encoding profiles is a Tokenese-adjacent contract.",
+      "profile": "tokenese",
+      "required_for_full_participation": false
+    },
+    {
+      "id": "PRD-025",
+      "classification": "superseded",
+      "required_for_minimal_profile": false,
+      "v1_surface": "Never registered; gap in PRD numbering preserved for audit.",
+      "profile": null,
+      "required_for_full_participation": false
+    },
+    {
+      "id": "PRD-026",
+      "classification": "optional-profile",
+      "required_for_minimal_profile": false,
+      "v1_surface": "Review cycle closure and task-state consistency is an automation enhancement above the core close protocol.",
+      "profile": null,
+      "required_for_full_participation": false
+    },
+    {
+      "id": "PRD-027",
+      "classification": "optional-profile",
+      "required_for_minimal_profile": false,
+      "v1_surface": "Tokenese cloned-communication A/B contract is the Tokenese-profile entry point.",
+      "profile": "tokenese",
+      "required_for_full_participation": false
+    },
+    {
+      "id": "PRD-028",
+      "classification": "optional-profile",
+      "required_for_minimal_profile": false,
+      "v1_surface": "Tokenese dual-artifact sync and maintainer legibility is part of the Tokenese profile.",
+      "profile": "tokenese",
+      "required_for_full_participation": false
+    },
+    {
+      "id": "PRD-029",
+      "classification": "optional-profile",
+      "required_for_minimal_profile": false,
+      "v1_surface": "Pre-write state derivation is a concurrent-shards-adjacent contract.",
+      "profile": "concurrent-shards",
+      "required_for_full_participation": false
+    },
+    {
+      "id": "PRD-030",
+      "classification": "optional-profile",
+      "required_for_minimal_profile": false,
+      "v1_surface": "Session heartbeat management is the heartbeat-profile entry point.",
+      "profile": "heartbeat",
+      "required_for_full_participation": false
+    },
+    {
+      "id": "PRD-031",
+      "classification": "optional-profile",
+      "required_for_minimal_profile": false,
+      "v1_surface": "Concurrent multi-agent coordination is the concurrent-shards profile.",
+      "profile": "concurrent-shards",
+      "required_for_full_participation": false
+    },
+    {
+      "id": "PRD-032",
+      "classification": "optional-profile",
+      "required_for_minimal_profile": false,
+      "v1_surface": "Session orientation tool is part of the boot-simplification profile.",
+      "profile": "boot-simplification",
+      "required_for_full_participation": false
+    },
+    {
+      "id": "PRD-033",
+      "classification": "optional-profile",
+      "required_for_minimal_profile": false,
+      "v1_surface": "Skill ownership integrity guard is part of the skill-bundle-integrity profile.",
+      "profile": "skill-bundle-integrity",
+      "required_for_full_participation": true
+    },
+    {
+      "id": "PRD-034",
+      "classification": "optional-profile",
+      "required_for_minimal_profile": false,
+      "v1_surface": "Public and agent-facing surface snapshot reconciliation is the public-surface-snapshot profile.",
+      "profile": "public-surface-snapshot",
+      "required_for_full_participation": false
+    },
+    {
+      "id": "PRD-035",
+      "classification": "optional-profile",
+      "required_for_minimal_profile": false,
+      "v1_surface": "Tokenese integration and upstream result sync is part of the Tokenese profile.",
+      "profile": "tokenese",
+      "required_for_full_participation": false
+    },
+    {
+      "id": "PRD-036",
+      "classification": "optional-profile",
+      "required_for_minimal_profile": false,
+      "v1_surface": "PRD eval runner is a CI enhancement; v1 minimal sessions can run focused node --test invocations directly.",
+      "profile": null,
+      "required_for_full_participation": false
+    },
+    {
+      "id": "PRD-037",
+      "classification": "optional-profile",
+      "required_for_minimal_profile": false,
+      "v1_surface": "Boot simplification is the boot-simplification-profile entry point.",
+      "profile": "boot-simplification",
+      "required_for_full_participation": false
+    },
+    {
+      "id": "PRD-038",
+      "classification": "optional-profile",
+      "required_for_minimal_profile": false,
+      "v1_surface": "Read-only heartbeat stewards are part of the heartbeat profile.",
+      "profile": "heartbeat",
+      "required_for_full_participation": false
+    },
+    {
+      "id": "PRD-039",
+      "classification": "optional-profile",
+      "required_for_minimal_profile": false,
+      "v1_surface": "Perplexity Computer onboarding deltas is part of the onboarding profile.",
+      "profile": "onboarding",
+      "required_for_full_participation": false
+    },
+    {
+      "id": "PRD-040",
+      "classification": "optional-profile",
+      "required_for_minimal_profile": false,
+      "v1_surface": "Heartbeat loop prompt is part of the heartbeat profile.",
+      "profile": "heartbeat",
+      "required_for_full_participation": false
+    },
+    {
+      "id": "PRD-041",
+      "classification": "optional-profile",
+      "required_for_minimal_profile": false,
+      "v1_surface": "Unified terminal transport and deterministic projection is the unified-terminal-transport profile.",
+      "profile": "unified-terminal-transport",
+      "required_for_full_participation": false
+    },
+    {
+      "id": "PRD-042",
+      "classification": "optional-profile",
+      "required_for_minimal_profile": false,
+      "v1_surface": "Qwen 3.6 35b MLX onboarding deltas is part of the onboarding profile.",
+      "profile": "onboarding",
+      "required_for_full_participation": false
+    },
+    {
+      "id": "PRD-043",
+      "classification": "core-v1",
+      "required_for_minimal_profile": true,
+      "v1_surface": "This PRD defines the Minimum Governance Profile itself; required reading is its outputs (SPEC.md + MINIMUM_VIABLE_TURNFILE.md + CONFORMANCE.md + DEFINITIONS.md), not the PRD body.",
+      "profile": null,
+      "required_for_full_participation": true
+    },
+    {
+      "id": "PRD-044",
+      "classification": "optional-profile",
+      "required_for_minimal_profile": false,
+      "v1_surface": "Handshake-sign CLI argument ergonomics is a v1 polish item; the JSON payload mode satisfies core conformance.",
+      "profile": "boot-simplification",
+      "required_for_full_participation": false
+    },
+    {
+      "id": "PRD-045",
+      "classification": "optional-profile",
+      "required_for_minimal_profile": false,
+      "v1_surface": "Stale-agent reconciliation is required for robust multi-agent operations but not for single-agent v1-minimal starter adoption.",
+      "profile": "multi-agent-resilience",
+      "required_for_full_participation": true
+    },
+    {
+      "id": "PRD-046",
+      "classification": "historical",
+      "required_for_minimal_profile": false,
+      "v1_surface": "Repo minimization archive preserves development history and archive boundaries; fresh adopters use the current stable surface instead.",
+      "profile": null,
+      "required_for_full_participation": false
+    },
+    {
+      "id": "PRD-047",
+      "classification": "draft",
+      "required_for_minimal_profile": false,
+      "v1_surface": "Cross-repo validation tests are release evidence for v1.0.0, not required reading for a fresh v1 adopter.",
+      "profile": null,
+      "required_for_full_participation": false
+    },
+    {
+      "id": "PRD-048",
+      "classification": "core-v1",
+      "required_for_minimal_profile": true,
+      "v1_surface": "Portable CLI is the v1 operational entry point for init/open/status/heartbeat/close; fresh adopters can use the CLI without reading historical PRDs.",
+      "profile": null,
+      "required_for_full_participation": true
+    }
+  ],
+  "tiers": {
+    "v1-minimal": "Lesser-level participation. Requires only entries with required_for_minimal_profile=true. No skill bundles needed. Suitable for agents whose runtime does not load skill bundles.",
+    "v1-full": "Full Turnfile participation. Requires v1-minimal plus all entries with required_for_full_participation=true (notably the skill-bundle profile via PRD-012/PRD-033). Required for agents that contribute to PRD authorship, eval authoring, or required-reviewer roles."
+  }
+}

@@ -158,6 +158,36 @@ Quiet no-op behavior should avoid governance churn. A no-op report may state ref
 3. PRD-037 may propose default heartbeat-on for boot simplification, but default-on is safe only when default mode is read-only steward mode.
 4. If PRD-037 and PRD-038 conflict, the narrower heartbeat safety rule in PRD-038 should govern heartbeat capability, while PRD-037 may govern boot simplification mechanics.
 
+### R9. Self-drive on material change (Maintainer 2026-06-23)
+
+A read-only steward must act on material change in the main loop, not merely surface findings for the user to route. On detecting material change (own unread mailbox card, projection drift, validator finding, peer response appended to an owned thread, missing artifact, or dirty peer-owned path), the steward continues the next unblocked step in its lane — closure-owner sweep, A1 step continuation, ack of new unread, or projection re-export — within the read-only deny-list.
+
+1. The read-only deny-list (R2 #2) applies to the heartbeat script itself, not to the main-loop response the script triggers.
+2. The main-loop response may take any write action the agent is normally authorized to take, including writes outside the read-only steward's permitted action set.
+3. "No material change" remains silent (R6 quiet default).
+4. Recorded precedent: session-28 Maintainer correction; encoded in `tools/turnfile.mjs heartbeat write` per PRD-048 R5.
+
+### R10. Runtime-agnostic sentinel artifact
+
+The portable contract for read-only stewards is `working-session/HEARTBEAT.md` written by `node tools/turnfile.mjs heartbeat write --agent <id> --session <N>` (PRD-048 R5).
+
+1. The sentinel file contains the steward prompt contract: agent identity, cadence, policy (notify-material), stop condition (close), and the R2 deny-list.
+2. The runtime owns its own cron mechanism (Claude Code `mcp__scheduled-tasks`, Codex automations, Antigravity native, or shell loop). Each tick reads `HEARTBEAT.md` and follows the contract.
+3. When `HEARTBEAT.md` is removed (by `node tools/turnfile.mjs heartbeat stop` or by the close orchestrator), the steward stops.
+4. No central cross-runtime scheduler. The sentinel file IS the synchronization point.
+5. This sentinel-driven model is the v1 portable heartbeat contract; runtime-specific automation registries remain valid but are no longer the source of truth for steward identity or lifecycle.
+
+### R11. v1 heartbeat-profile conformance check
+
+A session running the read-only-heartbeat optional profile conforms when:
+
+1. At session open, each active agent either creates a `HEARTBEAT.md` per R10 OR records "no heartbeat this session" in the handshake row.
+2. At each loop tick that flips a material-change signal, the agent records the resulting main-loop action in WORKLOG or MAILBOX (R9 evidence).
+3. At session close, `HEARTBEAT.md` is removed (clean stop) or carry-forward is recorded per R7.
+4. No write occurs FROM the heartbeat script itself; the R2 deny-list passes inspection of the script's output.
+
+Adopters can verify conformance by reading the WORKLOG closeout block and confirming no orphan `HEARTBEAT.md` files persist.
+
 ## Acceptance Criteria
 
 1. Session handshake format can record a heartbeat cadence window and a runtime-selected exact cadence.

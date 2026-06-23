@@ -8,6 +8,29 @@ Session state snapshots go at the bottom of this file (PRD-011 R1).
 
 ---
 
+## Session 28 Close Snapshot - 2026-06-23
+
+- Session: `codex-session-28`
+- Turnfile revision at Codex close: `403`
+- Codex status: `idle`; current task `null`; last_seen `codex-session-28-close`
+- Mailbox state: Codex unread `0`; Claude unread `0`; Gemini unread `0`; Maintainer unread `0`
+- Locks: none
+- Heartbeat: Codex app heartbeat `turnfile-codex-readonly-steward-s28` deleted at close; no Codex heartbeat carried forward.
+- Completed this session:
+  - Converged session-28 handshakes with Gemini and Claude.
+  - Updated the Codex heartbeat after Maintainer feedback so it proactively executed unblocked Codex-authorized work.
+  - Completed PRD-031 Phase 3 implementation and received Claude A1 step-7 approval.
+  - Completed PRD-042 formal Qwen OT-012/013/014 relay evidence through Maintainer transport.
+  - Recorded Qwen as PRD-042 PROVISIONAL CHECKER (`agents.qwen` role observer/status idle) without write, reviewer, task, OWNERSHIP, constrained-writer, or full-active authority.
+  - Recorded session-28 closeout in Turnfile, Worklog, boot-codex, chat-codex, and NEXT_SESSION_HANDSHAKE.
+- Carry-forward:
+  - Gemini session 28 remains stale/orphaned in Gemini-owned closeout state; next Gemini boot should self-reconcile.
+  - Qwen any further elevation requires separate Maintainer decision and likely own-path/OWNERSHIP design.
+  - PRD-027 execution, PRD-035 Tokenese sync, and PRD-031 ownership-shard/live migration remain possible next-session lanes.
+  - Dirty worktree remains uncommitted; do not stage peer-owned paths from the Codex lane without Maintainer direction.
+
+---
+
 ## Session 27 Close Snapshot — 2026-06-23
 
 - Session: `codex-session-27`
@@ -441,3 +464,30 @@ State at initialization:
 - Next-session plan:
   - Boot fresh, run `tools/session-orient.mjs --agent codex --emit json`, clear any new Codex unread cards, then ask the Maintainer to pick PRD-031 Phase 2/3, PRD-034/035 follow-through, or a new scoped lane.
 - Lesson learned: scoring provenance needs to be explicit. Recording a fresh-thread result is acceptable only when the active context labels itself non-scoring and routes the artifact to an independent scorer.
+
+## Session 29 Close Snapshot - 2026-06-23
+
+- Session: `codex-session-29`
+- Turnfile revision at Codex close: `455`
+- Codex status: `idle`; current task `null`; last_seen `codex-session-29-close`
+- Mailbox state: Codex unread `0`; Claude unread `0`; Gemini unread `0`; Maintainer unread `0`
+- Locks: none
+- Heartbeat: Codex app heartbeat `turnfile-codex-readonly-steward-s29` deleted at close; no Codex heartbeat carried forward.
+- Completed this session:
+  - Authored PRD-043 v1 Minimal Governance Profile and RED evals, then reviewed Claude's implementation through request-changes and approve cycles.
+  - Authored PRD-044 handshake-sign CLI ergonomics and PRD-045 stale-agent reconciliation policy/evals; reviewed both implementations through A1 step 7.
+  - Added mailbox session gate and v1 release wrapper tooling.
+  - Implemented PRD-048 portable Turnfile CLI.
+  - Authored PRD-046 minimization/archive contract and reviewed implementation.
+  - Authored PRD-047 cross-repo evidence contract and reviewed Tokenese partial evidence.
+  - Applied Maintainer-directed INTENT, ROADMAP, PRD shelf, public surface, repo map, examples, and tool-index cleanup.
+  - Supported v0.5.0 release promotion: PRD-043/044/045/046/048 promoted; public surfaces synced to 47 registry-tracked / 44 promoted.
+  - Updated boot-codex to lookup-based v20 handoff.
+- Carry-forward:
+  - `MSG-20260623-028` remains open/actioned with Codex as closure owner for PRD-047.
+  - v1.0.0 remains gated on PRD-047 PAICE2 dogfood evidence, Codex evidence review, and Maintainer evidence ratification.
+  - Gemini remains offline; Gemini-owned stale closeout artifacts must be self-reconciled by Gemini or explicitly authorized by Maintainer.
+  - Dirty worktree remains mixed ownership. Do not stage peer-owned files from Codex lane without explicit Maintainer direction.
+- Next-session plan:
+  - Boot fresh, run `node tools/session-orient.mjs --agent codex --emit human`, inspect `node tools/prd-status-summary.mjs --gates v1`, clear any Codex unread cards, then follow Maintainer scope. Known v1 lane is PRD-047 PAICE2 evidence review after evidence exists.
+- Lesson learned: when Maintainer acceptance is recorded, carry it forward. Do not re-ask for approval unless the accepted artifact changes materially.

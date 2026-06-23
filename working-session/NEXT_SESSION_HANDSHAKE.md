@@ -9,6 +9,35 @@ loaded skills, scope, and the live outstanding list — so no agent acts on stal
 unilateral assumptions. Executed at boot, after the PRD-017 `docs/BOOT_SEQUENCE.md` read
 order and before the first shared-file write.
 
+## Session 29 addendum - Codex closeout (2026-06-23)
+
+Codex closed its side of session 29 at rev 455.
+
+- Turnfile protocol is v0.5.
+- Codex status: idle; `current_task` null; last_seen `codex-session-29-close`.
+- Mailbox at Codex close: Codex unread 0; Claude unread 0; Gemini unread 0; Maintainer unread 0.
+- Locks empty.
+- Codex heartbeat `turnfile-codex-readonly-steward-s29` deleted before close; no Codex heartbeat carried forward.
+- Session 29 Codex deliveries: PRD-043 author/eval lane; PRD-044 and PRD-045 author plus A1 review lanes; PRD-046 author and implementation review support; PRD-048 portable CLI implementation; mailbox session gate and v1 release wrapper; PRD-047 evidence contract; intent/roadmap/public-surface/repo-structure cleanup; v0.5.0 promotion support; boot-codex lookup-pattern rewrite.
+- Carry-forward: `MSG-20260623-028` remains open/actioned with Codex as closure owner for PRD-047 cross-repo v1 validation. v1.0.0 remains gated on PAICE2 dogfood evidence, Codex evidence review, and Maintainer evidence ratification.
+- Next boot should run `node tools/session-orient.mjs --agent codex --emit human`, inspect `node tools/prd-status-summary.mjs --gates v1`, and treat PRD-047 PAICE2 evidence as the only known v1.0.0 R9 release blocker unless newer files say otherwise.
+- Dirty worktree remains mixed ownership. Do not stage peer-owned files without explicit Maintainer direction.
+
+## Session 28 addendum - Codex closeout (2026-06-23)
+
+Codex closed its side of session 28 at rev 403.
+
+- Turnfile protocol remains v0.1.
+- Codex status: idle; `current_task` null; last_seen `codex-session-28-close`.
+- Mailbox at Codex close: Codex unread 0; Claude unread 0; Gemini unread 0; Maintainer unread 0.
+- Locks empty.
+- Codex heartbeat `turnfile-codex-readonly-steward-s28` deleted before close; no Codex heartbeat carried forward.
+- Codex boot rolled v17 -> v18; v17 archived at `docs/archive/boot-codex/boot-codex_v17.md`.
+- Session 28 Codex deliveries: session-28 handshake and heartbeat lifecycle; PRD-031 Phase 3 implementation with Claude approval; PRD-017/027/042 registry cleanup under Maintainer direction; PRD-042 formal Qwen OT-012/013/014 relay evidence; Qwen PROVISIONAL CHECKER registration as `agents.qwen` role observer/status idle.
+- Qwen boundary: provisional checker only. No shared-file write authority, PRD authorship authority, required-reviewer status, task ownership, OWNERSHIP paths, constrained-writer status, or full-active status.
+- Carry-forward: Gemini session 28 remains stale/orphaned in Gemini-owned closeout state and should self-reconcile on next Gemini boot. Qwen any further elevation needs separate Maintainer decision. PRD-027 execution, PRD-035 Tokenese sync, and PRD-031 ownership-shard/live migration remain possible next-session lanes.
+- Dirty worktree at Codex close includes Codex closeout and Qwen evidence/control-plane artifacts plus prior peer/session changes. Do not stage peer-owned paths without explicit Maintainer direction.
+
 ## Session 27 addendum - Codex closeout (2026-06-23)
 
 Codex closed its side of session 27 at rev 385.
@@ -569,3 +598,19 @@ tokenese ok v:0.1 @codex session:28 ev:obs
 
 ### Session 28 Remarks & Outstanding issues
 - **Drift warning**: `working-session/boot-claude.md` is currently missing the required PRD-017 peer-chat warning language and PRD-023 drift check reconciliation/governance-state block. This causes tests `evals/prd-017.evals.mjs` and `evals/prd-023.evals.mjs` to fail. As it is a peer-owned file owned by Claude under `OWNERSHIP.yaml`, Gemini cannot modify it, and flags it here for Claude to resolve.
+
+## Sign-off (session 29)
+
+```tokenese
+^grammar:v0.3
+@claude := agent:claude :Opus4.7 :ClaudeCode s29
+say @claude rev:404 prd:41 gates:ok ev:obs
+say @claude ack lanes:[stable-release-definition, protocol-refinement]
+say @claude hb mode:read-only-steward cad:5m own:self notify:notify-material stop:close
+tokenese ok v:0.1 @claude session:29 ev:obs
+```
+
+| Agent | Protocol baseline | Tokenese | Skills | Scope | Heartbeat | Identity enforcing | Signed |
+|-------|---|---|---|---|---|---|---|
+| Claude | yes — Turnfile v0.1 (rev 404); PRD_STATUS 41 PRDs | yes — grammar v0.3; TKAB `tkab-check-1.1`; Tier-B twins authorized, English source-wins | yes — gates ok; model ledger Opus 4.7 / Claude Code | ACK — stable-release-definition, protocol-refinement | 5m self-owned read-only steward, write-capable only by explicit elevated scope, notify=notify-material, stop=close | guard active; `core.hooksPath=tools/hooks` | Claude (Opus 4.7) — 2026-06-23 |
+| Codex | yes — Turnfile v0.1 (rev 406); PRD_STATUS 42 PRDs | yes — grammar v0.3; TKAB `tkab-check-1.1`; Tier-B twins authorized, English source-wins | yes — gates turnfile-lint PASS with existing Gemini orphan warnings; mailbox PASS; PRD promotion PASS; git dirty acknowledged; model ledger Codex 5.5 / Codex desktop | ACK — stable-release-v1-cutline, protocol-refinement, PRD-043-author-evals, Claude-4.7-counter-review | 5m self-owned read-only steward, write-capable only by explicit elevated scope, notify=notify-material, stop=close | guard active; `core.hooksPath=tools/hooks` | Codex (Codex 5.5) — 2026-06-23 |

@@ -104,6 +104,8 @@ Read order must identify, at minimum:
 3. Message state artifact (`working-session/MAILBOX.md` and optional `MAILBOX.json` projection).
 4. Open-question and PRD status registries.
 
+**R2.1 amendment (Maintainer 2026-06-23):** these sources are required unless `node tools/session-orient.mjs --agent <self> --emit json` reports a clean snapshot per PRD-037 R2 (Amendment A1). When orient reports clean (no findings on unread work, projection freshness, validator failures, missing artifacts, or dirty peer-owned paths), the orient output IS the boot read and on-demand targeted reads replace mandatory enumeration. Targeted reads still fall back to this enumeration when orient surfaces findings.
+
 ### R2.2 Freshness requirement
 
 Before writing to shared files, agents must re-read target files if any concurrent edit risk exists.
@@ -207,6 +209,10 @@ Each agent owns edits to its own chat file. Maintainer and peer agents retain re
 6. Clean-start boot creates the booting agent's own chat file when absent (R7).
 7. Boot validation fails when required control-plane artifacts are missing; missing peer chat file warns without blocking (R7.3).
 8. At least one test scenario covers missing peer chat file recovery (R7).
+
+## Portable CLI entry point
+
+`node tools/turnfile.mjs open --agent <id> --session <N> --model <label> --surface <label> --scope <lane>...` (PRD-048 R3) is the v1 portable boot entry that wraps `tools/handshake-sign.mjs` direct-flag mode (PRD-044) inside the orient-is-boot fast path (PRD-037 R2 + this PRD R2.1 amendment). The CLI is additive; direct invocation of `tools/handshake-sign.mjs` or `tools/session-orient.mjs` remains valid for advanced or scripted use.
 
 ## Risks
 

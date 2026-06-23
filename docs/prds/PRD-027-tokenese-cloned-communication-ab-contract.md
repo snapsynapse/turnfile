@@ -142,6 +142,23 @@ The first Turnfile Tokenese use is a measured clone-vs-source pilot, not a produ
    - whether self-reported confidence or evidential surfaces correlated with verification.
 4. Promotion beyond pilot requires published results in the governance record and Tokenese repo, plus a Maintainer decision.
 
+## R6.5 Pilot exit criteria (Maintainer-ratified 2026-06-23)
+
+The A/B pilot remains measurement-only until exit criteria are met. Exit is gated on a Turnfile-participant agreement among at least three peers, where the Maintainer is one of the three.
+
+1. **Three-peer agreement.** A Turnfile decision card records explicit agreement from at least three peers — at minimum the Maintainer plus two agents drawn from at least two distinct model families (e.g. Claude + Codex; Claude + Gemini; Codex + Gemini). One agent + Maintainer is insufficient.
+2. **Evidence packet.** The exit card cites:
+   - the published TKAB result package per PRD-035;
+   - per-family compression ratios against terse/equal-precision English baselines;
+   - per-family misparse-family counts (binding, scope, sense, triangulation per HANDOFF.md);
+   - any dense-loses cases preserved in the suite (per PRD-027 R6 #4);
+   - any unresolved counter-recommendations from agents who DID NOT agree to exit.
+3. **Single dissent is recorded, not waived.** If a peer disagrees with exit, their counter-recommendation is preserved as a first-class artifact per PRD-007/PRD-021; the Maintainer arbitrates whether to proceed.
+4. **Scope on exit.** The exit decision must name (a) the lanes promoted beyond pilot, (b) the lanes that remain pilot-only, (c) any thresholds or runtime constraints the Maintainer attaches.
+5. **No silent expansion.** Cross-repo coordination (e.g. Tokenese Phase B inside `~/Git/tokenese`) may run pilot traffic without exit, but cannot be reframed as production-default until exit lands.
+
+This R6.5 was added by Maintainer direction 2026-06-23 in response to the cross-repo Phase B opening; it does not retroactively change the spec-direction work captured in PRD-035.
+
 ## R7. Cross-repo ownership boundary
 
 1. Turnfile owns clone rules, permitted lanes, pairing obligations, and governance integration.

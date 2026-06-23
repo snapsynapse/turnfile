@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "turnfile-v1.schema.json",
+  "title": "Turnfile v1.0 Minimal Profile Schema",
+  "description": "JSON Schema for the v1 Minimal Governance Profile per PRD-043. Validates the core fields required by SPEC.md and docs/MINIMUM_VIABLE_TURNFILE.md. Optional-profile fields (heartbeat steward state, concurrent-shard task aggregation, Tokenese pairs, etc.) are permitted via additionalProperties but not required.",
+  "type": "object",
+  "required": ["turnfile", "agents", "maintainer", "coordination"],
+  "properties": {
+    "turnfile": {
+      "type": "object",
+      "required": ["version", "project", "workspace"],
+      "properties": {
+        "version": {
+          "type": "string",
+          "pattern": "^1\\.[0-9]+(\\.[0-9]+)?$",
+          "description": "Turnfile format version. v1 conformance requires major version 1."
+        },
+        "project": {"type": "string", "minLength": 1},
+        "workspace": {"type": "string", "minLength": 1}
+      }
+    },
+    "agents": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "required": ["role", "status"],
+        "properties": {
+          "role": {"type": "string", "enum": ["agent", "observer"]},
+          "status": {"type": "string", "enum": ["idle", "active", "blocked", "offline"]},
+          "current_task": {"type": ["string", "null"]},
+          "last_seen": {"type": ["string", "null"]},
+          "session_id": {"type": ["string", "null"]}
+        }
+      }
+    },
+    "maintainer": {
+      "type": "object",
+      "required": ["id", "status"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "status": {"type": "string", "enum": ["available", "away", "observing"]},
+        "last_seen": {"type": ["string", "null"]}
+      }
+    },
+    "coordination": {
+      "type": "object",
+      "required": ["revision", "tasks"],
+      "properties": {
+        "revision": {"type": "integer", "minimum": 1},
+        "active_phase": {"type": ["string", "null"]},
+        "active_step": {"type": ["string", "null"]},
+        "conflict": {
+          "type": "object",
+          "properties": {
+            "rebuttal_rounds": {"oneOf": [{"type": "integer", "minimum": 0}, {"type": "string", "const": "unbounded"}]}
+          }
+        },
+        "tasks": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "required": ["description", "owner", "status"],
+            "properties": {
+              "description": {"type": "string"},
+              "owner": {"type": "string"},
+              "status": {"type": "string", "enum": ["pending", "claimed", "in_progress", "done", "blocked", "cancelled"]},
+              "priority": {"type": "string"},
+              "depends_on": {"type": "array", "items": {"type": "string"}},
+              "created_by": {"type": "string"},
+              "created_rev": {"type": "integer"},
+              "claim_rev": {"type": ["integer", "null"]},
+              "completed_rev": {"type": ["integer", "null"]},
+              "notes": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+    "locks": {"type": "object"},
+    "turn_queue": {"type": "array"},
+    "messages": {"type": "array"}
+  }
+}

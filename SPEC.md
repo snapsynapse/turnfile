@@ -1,10 +1,12 @@
 # Turnfile Specification
-Version: v0.1.0-reset
-Status: Draft
-Last updated: 2026-05-31
+Version: v1.0.0
+Status: v1 Minimal Governance Profile (per PRD-043)
+Last updated: 2026-06-23
 ## How to read this document
-This is the concise normative specification for Turnfile's narrowed role as a governance layer.
-Detailed historical PRDs remain in `docs/prds/` and `working-session/docs/`. Where this document conflicts with older PRDs, this document governs future development until the PRD shelf is reconciled.
+This is the concise normative specification for Turnfile as a thin governance layer for peer agent collaboration with maintainer authority and file-based source of truth.
+Core v1 conformance is defined by this document plus `DEFINITIONS.md`, `docs/MINIMUM_VIABLE_TURNFILE.md`, and `CONFORMANCE.md`. Historical PRDs remain in `docs/prds/` and `working-session/docs/` as provenance; classification is in `docs/prds/PRD_SHELF_RECONCILIATION.json`. Where this document conflicts with historical PRDs, this document governs.
+## 0. v1 lock
+Transition from v0.x to v1.0.0 is gated by the version-bump guardrail in PRD-043 R9: `tools/validate-v1-profile.mjs` green, ≥2 agent APPROVE, Maintainer ratify, with synchronized updates across `SPEC.md`, `schemas/v1/`, `turnfile.version` in `TURNFILE.yaml`, and `CHANGELOG.md`.
 ## 1. Purpose
 Turnfile defines a file-based governance protocol for agent-assisted work where peer disagreement, maintainer authority, and auditability matter.
 Turnfile records:

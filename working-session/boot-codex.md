@@ -1,6 +1,6 @@
-# Boot File - Codex (v17)
+# Boot File - Codex (v20)
 
-Read this first on Codex session start. It is the Codex handoff from session 27 closeout.
+Read this first on Codex session start. It is the Codex handoff from session 29 closeout.
 
 ## Project
 
@@ -45,89 +45,50 @@ node tools/session-orient.mjs --agent codex --emit json
 - Human-legibility (PRD-024): governance artifacts stay English-legible; any Tokenese/dense encoding pairs to a legible English source (source wins), and encoding-profile obligations never override the legible record.
 - Chat-file semantics (PRD-017 R7): create only your own `chat-codex.md`; a missing peer chat file is warning only. Boot never authors a peer chat file.
 
-## Session 27 Close State
+## Current State
 
-Session 27 closed from the Codex side on 2026-06-23.
+Always query live files at boot. Do not treat this boot file as a source for current PRD status, mailbox state, release readiness, participant state, or carry-forward work.
 
-- Turnfile revision at Codex close: `385`.
-- Codex status: `idle`; current task: `null`; last_seen: `codex-session-27-close`.
-- Mailbox state at close: Codex unread `0`; Claude unread `0`; Gemini unread `1` (`MSG-20260623-006`); Maintainer unread `0`.
-- Locks at close: none.
-- Heartbeat state: Codex app heartbeat `turnfile-codex-readonly-steward-s27` deleted before close; no Codex heartbeat carried forward.
-- Boot rollover: v16 archived to `docs/archive/boot-codex/boot-codex_v16.md`; active boot is v17.
-- Active shared step after Codex close: `await-maintainer-next-session-scope`.
-- Active mailbox carry-forward: no Codex-unread cards. `MSG-20260623-006` remains unread for Gemini with Codex as closure owner.
-- Qwen state: PRD-042 is accepted and eligible for promotion, but not promoted in this closeout update. Qwen is relay-only with no Turnfile authority. Direct Qwen execution remains unavailable to Codex; Maintainer-relayed short-output smoke evidence is recorded.
+```bash
+node tools/session-orient.mjs --agent codex --emit human
+node tools/prd-status-summary.mjs
+node tools/prd-status-summary.mjs --filter open
+node tools/prd-status-summary.mjs --filter blocked
+node tools/prd-status-summary.mjs --filter unratified
+node tools/prd-status-summary.mjs --filter draft
+node tools/prd-status-summary.mjs --filter promoted
+node tools/prd-status-summary.mjs --filter archived
+node tools/prd-status-summary.mjs --id PRD-NNN
+node tools/prd-status-summary.mjs --gates v1
+node tools/validate-v1-release.mjs --format json
+```
 
-Immediate rule: re-read live files before asserting shared state. Claude, Gemini, Codex, and the Maintainer may have changed coordination files between sessions.
+Carry-forward from prior sessions lives in the top of `working-session/WORKLOG.md` and in any active cards in `working-session/MAILBOX.md`. Read those live artifacts instead of trusting session-specific text in this file.
 
-## Completed In Session 27
+Agent live state comes from `working-session/TURNFILE.yaml`:
+- `agents.codex.{status,current_task,last_seen,session_id}` for Codex.
+- `agents.<peer>.{status,current_task,last_seen,session_id}` for peer availability.
+- `coordination.active_step`, `coordination.tasks`, `locks`, and `turn_queue` for current coordination.
 
-1. Established session-27 handshakes with Gemini 3.5 Flash High and Claude Opus 4.6.
-2. Created and operated the Codex app heartbeat `turnfile-codex-readonly-steward-s27` at a 5-minute read-only cadence, then deleted it before close.
-3. Validated Gemini's PRD-042 Qwen onboarding plan and evals with Codex APPLY/no counters.
-4. Recorded direct runtime-readiness evidence at `working-session/docs/onboarding/evidence/qwen-mlx/2026-06-23-01/evidence.md`: direct Codex execution blocked because oMLX exposed only Gemma and no usable Qwen MLX runner was available.
-5. Recorded Maintainer-relayed Qwen smoke evidence at `working-session/docs/onboarding/evidence/qwen-mlx/2026-06-23-02/evidence.md`: exact text, minimal JSON, boundary JSON, and tightened OT-014 refusal passed; longer JSON-only prompts duplicated/corrupted output.
-6. Implemented PRD-031 Phase 2 task/status shard reducer in `tools/aggregate-coordination.mjs` against Claude-authored RED evals; Claude reviewed APPROVE at rev 380.
-7. Delivered 3-2-1 idle prep docs: `working-session/docs/qwen-mlx-execution-handoff-codex.md`, `working-session/docs/prd-031-phase2-codex-self-audit.md`, and `working-session/docs/prd-031-phase3-migration-prep-codex.md`.
-8. Closed acknowledged `MSG-20260623-007` after Claude confirmed no counter on the Qwen smoke evidence.
-9. Regenerated `MAILBOX.json` and left Codex unread 0.
+PRD live state comes from `working-session/docs/PRD_STATUS.json` and the `tools/prd-status-summary.mjs` lookups above. Maintainer acceptance carries forward unless a PRD materially changes; do not turn later evidence gaps into repeat approval requests.
 
-## Carry Forward
+## First Actions On Resume
 
-1. `MSG-20260623-006` remains unread for Gemini; Codex is closure owner after Gemini ack/counter.
-2. PRD-042 is accepted and eligible for promotion; promote only under next-session scope or Maintainer direction. Acceptance does not grant any Qwen state transition.
-3. Qwen remains relay-only with no Turnfile participant, reviewer, task ownership, shared-write, OWNERSHIP, or PRD authority.
-4. Direct Qwen execution remains unavailable to Codex until a Qwen model/runner path exists in the Codex-accessible environment.
-5. PRD-031 Phase 3 is not started; `working-session/docs/prd-031-phase3-migration-prep-codex.md` is prep only.
-6. PRD-027 execution appears ready per Claude's closeout summary, but needs next-session scope and charter/teach-phase handling.
+1. Run `node tools/session-orient.mjs --agent codex --emit human`.
+2. If Codex has unread mailbox work, action it before asserting readiness.
+3. Read the top of `working-session/WORKLOG.md` for carry-forward and recent changes.
+4. Query PRD state with `node tools/prd-status-summary.mjs --filter open` and `node tools/prd-status-summary.mjs --gates v1`.
+5. Check `working-session/TURNFILE.yaml` for live peer state, locks, task ownership, and active step.
+6. Run ownership guard before edits: `node tools/validate-ownership-guard.mjs --format json`.
+7. Use `tools/next-state.mjs` before shared-file edits.
 
-## Session 26 Close State
+## Codex Boundaries
 
-Session 26 closed from the Codex side on 2026-06-22.
-
-- Turnfile revision at Codex close: `364`.
-- Codex status: `idle`; current task: `null`; last_seen: `codex-session-26-close`.
-- Mailbox state at close: Codex unread `0`; Claude unread `0`; Gemini unread `0`; Maintainer unread `0`.
-- Locks at close: none.
-- Heartbeat state: Codex app heartbeat `turnfile-codex-readonly-steward-s26` deleted before close; no Codex heartbeat carried forward.
-- Boot rollover: v15 archived to `docs/archive/boot-codex/boot-codex_v15.md`; active boot is v16.
-- Active shared step after Codex close: `await-maintainer-next-session-scope`.
-- Active mailbox carry-forward: no Codex-unread cards. `MSG-20260622-006` remains open/actioned with Claude as closure owner; Codex has actioned its side. Claude marked `s25-tokenese-round2-harness` done and closed `MSG-20260620-004` in TURNFILE at rev 363.
-
-Immediate rule: re-read live files before asserting shared state. Claude, Gemini, Codex, and the Maintainer may have changed coordination files between sessions.
-
-## Completed In Session 26
-
-1. Established session-26 handshakes with Claude Opus 4.8 and Gemini 3.5 Flash High.
-2. Created and operated the Codex app heartbeat `turnfile-codex-readonly-steward-s26` at a 5-minute read-only cadence, then deleted it before close.
-3. Implemented PRD-038 follow-through after registry drift showed the expected eval file was missing.
-4. Added `evals/prd-038.evals.mjs` and verified it with `node --test evals/prd-038.evals.mjs` 8/8 PASS.
-5. Updated `tools/handshake-sign.mjs` so generated heartbeat rows distinguish read-only steward mode from explicit write-capable heartbeat scope, and later derived PRD count from `PRD_STATUS.json`.
-6. Received Claude A1 step-7 APPROVE on PRD-038 and filed PRD-038 implementation `done`.
-7. Recorded Maintainer-relayed fresh-thread Codex round-2 Tokenese decode at `working-session/tokenese-pairs/tokenese-round2-codex-decode.json` with provenance caveat.
-8. Routed the Codex-family round-2 decode to Gemini; Gemini scored it PASS on all 9 dimensions and later closed its session after syncing the ratified Tokenese precision-pivot spec direction to `/Users/snap/Git/tokenese`.
-9. Actioned Claude's status-lag reconciliation card by flipping PRD-040 implementation state to `done` while holding PRD-039, PRD-018, PRD-019, and PRD-031.
-10. Regenerated `MAILBOX.json` and left Codex unread 0.
-
-## Carry Forward
-
-1. Claude marked `s25-tokenese-round2-harness` done at rev 363; re-check mailbox/TURNFILE on boot because `MAILBOX.md` may lag that closure.
-2. `MSG-20260622-006` remains actioned with Claude as closure owner.
-3. PRD-039 remains `eval-verified` pending Gemini reviewer confirmation or Maintainer direction. Do not flip it from Codex without that evidence.
-4. PRD-018 and PRD-019 remain pending and Maintainer-gated for any done/grandfathered-done flip.
-5. PRD-031 remains pending for Phase 2/3 mechanics; it is real future infrastructure work, not a status-lag cleanup.
-6. Perplexity remains external PROVISIONAL CHECKER / no-write. Any writer or full-active transition requires explicit Maintainer decision.
-7. Re-check `/Users/snap/Git/tokenese` before asserting current Tokenese repo status; Gemini changed it during session 26.
-8. Dirty worktree remains mixed ownership. Do not stage or commit peer-owned Gemini files from the Codex lane without Maintainer direction.
-
-## Next Session Plan
-
-1. Boot from fresh files with `docs/BOOT_SEQUENCE.md` and `tools/session-orient.mjs --agent codex --emit json`.
-2. If Codex has unread cards, clear those first.
-3. Confirm whether Claude has closed the Tokenese harness and whether PRD-039 reviewer evidence has landed.
-4. If no mailbox work is waiting, ask the Maintainer to choose between PRD-031 Phase 2/3 design, PRD-034/035 follow-through, or any new Tokenese/Turnfile integration lane.
-5. Keep closeout validation strict: mailbox projection fresh, PRD promotion passing, Turnfile lint passing, and owner-scoped active-card review clean.
+- Codex may edit Codex-owned files and shared governance artifacts when Maintainer direction or mailbox lifecycle authorizes the work.
+- Do not edit Claude-owned or Gemini-owned boot files, chat files, skill bundles, or agent shards from the Codex lane without explicit Maintainer authorization.
+- If `boot-gemini.md` shows the same stale-state pattern, route a recommendation to Gemini or surface it to the Maintainer rather than editing it.
+- Qwen remains whatever the live `TURNFILE.yaml`, `PRD_STATUS.json`, and WORKLOG say it is. Do not infer authority from old session snapshots in this file.
+- Dirty worktree state is expected in this project. Inspect the relevant diff and avoid staging or overwriting peer-owned changes.
 
 ## Validation Commands
 

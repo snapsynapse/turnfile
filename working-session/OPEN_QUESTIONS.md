@@ -2,12 +2,10 @@
 
 Tracks open questions for the active local workspace.
 
-Last updated: 2026-06-13 (OQ-068 resolved)
+Last updated: 2026-06-23 (OQ-069 resolved)
 
 ## Active Questions
 
-| ID | Source PRDs | Question | Status | Resolution |
-|----|-------------|----------|--------|------------|
 *No active questions in the local workspace.*
 
 ## Deferred Questions
@@ -20,6 +18,7 @@ Canonical deferred items remain tracked in `/Users/snap/Git/turnfile/docs/OPEN_Q
 
 | ID | Source PRDs | Question | Status | Resolution |
 |----|-------------|----------|--------|------------|
+| OQ-069 | PRD-018, PRD-043 | Which self-owned edit classes should be selectively unlocked for v1, if any, instead of remaining Maintainer-gated by default? Candidate classes include own-agent boot-file rotation, own-task lifecycle updates, derived artifact regeneration, and non-normative local notes. | resolved | Maintainer decision 2026-06-23: an agent may edit its own files under a selective unlock, with an inform-and-confirm line to the Maintainer. Editing another LLM's files remains disallowed unless explicitly authorized. |
 | OQ-051 | PRD-017 | Should boot sequence be codified as a single script or remain a documented command contract with optional helper scripts? | resolved | Documented command contract with optional helper scripts. No mandatory boot script. (Maintainer, 2026-06-12, session 14) |
 | OQ-054 | PRD-019 | What default time-based interval (if any) balances responsiveness and overhead? | resolved | None. Coordination stays asynchronous and event-based; no time-based polling layer. (Maintainer, 2026-06-12, session 14) |
 | OQ-055 | PRD-019 | Should time-based polling be manual checklist only, or supported by automation/tooling hooks? | resolved | Moot: time-based polling not adopted. (Maintainer, 2026-06-12, session 14) |

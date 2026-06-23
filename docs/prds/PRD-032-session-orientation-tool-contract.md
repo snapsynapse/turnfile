@@ -154,6 +154,10 @@ The implementation must compose existing derivation and projection logic rather 
 3. If shared helpers are introduced, they must stay read-only and be covered by the PRD-032 eval fixtures.
 4. The orientation tool must not independently reimplement mailbox projection, revision matching, or next-id derivation in a way that can drift from the established tools.
 
+## R9. Portable CLI wrapper
+
+`node tools/turnfile.mjs status [--agent <id>] [--emit json|human]` (PRD-048 R4) is a thin pass-through to `tools/session-orient.mjs` that preserves the orient output shape verbatim. It exists so portable adopters get the same orient information through the unified CLI surface. Direct invocation of `tools/session-orient.mjs` remains the canonical interface; the CLI wrapper does not redefine orient semantics.
+
 ## Acceptance Criteria
 
 1. `tools/session-orient.mjs --emit json` returns the stable JSON schema/top-level keys and exits 0 on a hermetic fixture representing the current repo shape.

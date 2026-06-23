@@ -1,6 +1,18 @@
 # Conformance — Turnfile
 
-Version: v0.1 (protocol) · 2026-06-17
+Version: v1.0.0 (protocol) · 2026-06-23
+
+## v1 Minimal Governance Profile
+
+Core v1 conformance is the smallest verifiable claim: the three required artifacts (`TURNFILE.yaml`, `MAILBOX.md`, `WORKLOG.md`) are present, schema-valid, mailbox-consistent, and free of historical-PRD required-reading dependencies. Run `node tools/validate-v1-profile.mjs --root <session-root> --format json` to verify.
+
+The Minimum Governance Profile is defined by `SPEC.md` + `DEFINITIONS.md` + `docs/MINIMUM_VIABLE_TURNFILE.md` + this file. A fresh adopter does not need to read historical PRDs.
+
+## Optional profiles
+
+The following are real Turnfile work but optional profiles, not required for v1 minimal conformance: Tokenese (optional), heartbeat stewards (optional), concurrent-shards task aggregation (optional), agent onboarding vetting (optional), unified terminal transport (optional), public-surface snapshot reconciliation (optional), and skill-bundle integrity (optional). Classification of every PRD lives in `docs/prds/PRD_SHELF_RECONCILIATION.json`. Historical and archived contracts remain in `docs/archive/` for provenance only.
+
+## Core v0.x checks (still supported)
 
 Turnfile's conformance model has no central oracle. Any party — a maintainer, an
 agent, or an outside reviewer — can verify a Turnfile project against these

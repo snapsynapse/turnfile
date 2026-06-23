@@ -6,6 +6,68 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.5.0] — 2026-06-23
+
+### Added
+
+#### v1 Minimal Governance Profile foundation (sessions 24–29)
+- **PRD-043** v1 Minimal Governance Profile: `docs/MINIMUM_VIABLE_TURNFILE.md` (≤250-line v1 reference with open→mid-turn→close worked example), `schemas/v1/turnfile-v1.schema.json` (frozen minimal profile schema, version pattern `^1\.x(\.y)?$`), `tools/validate-v1-profile.mjs` (Ajv 2020 + js-yaml schema enforcement + historical-PRD scan), `docs/prds/PRD_SHELF_RECONCILIATION.json` (per-PRD classification across 9 named profiles with v1-minimal vs v1-full tiers, Maintainer-ruled OQ-043-1), `docs/FRESH_CONTEXT_CONFORMANCE_PROBE.md` (five-question operational test), R9 version-bump guardrail, R10 fresh-context evidence enforcement, R11 canonical landing page. Promoted to `docs/prds/`.
+- **PRD-044** handshake-sign CLI direct flag mode: `tools/handshake-sign.mjs` adds R1 `--session/--model/--surface/--scope/--heartbeat-*/--tokenese-lead` direct flags + R2 defaults (5m/notify-material/close/self) + R3 mixed-mode rejection + R4 help/example + R5 backward compat with JSON payload mode. Promoted to `docs/prds/`.
+- **PRD-045** stale-agent reconciliation policy + tool: `tools/reconcile-stale-agent.mjs` detect/plan/apply modes with R3 Maintainer-authorization gate, R4 shared-control-plane reconciliation (status→offline, current_task→null, canonical `<agent>-<session>-stale-reconciled-by-<reconciler>-rev<N>` last_seen marker), R6 peer-owned-file boundary preservation, R8 schema-valid output. New `multi-agent-resilience` optional profile. Promoted to `docs/prds/`.
+- **PRD-046** repo minimization archive: `examples/turnfile-development/README.md` (sessions 12-current archive using git-revision-pointer model rather than content duplication), README v1 quick-start + archive boundary, `docs/llms.txt` + `assistant-guide.txt` v1 Minimum Governance Profile sections. Promoted to `docs/prds/`.
+- **PRD-047** Cross-Repo v1 Validation Tests scope: Tokenese + PAICE2 dogfood evidence contract; RED until evidence files land in both target repos. Draft.
+- **PRD-048** Portable Turnfile CLI: `tools/turnfile.mjs` five-verb dispatcher (`init` / `open` / `status` / `heartbeat` / `close`) with runtime-agnostic HEARTBEAT.md sentinel, 9-step close orchestrator, EXIT code map. Promoted to `docs/prds/`.
+
+#### Concurrent shards completion (sessions 24–28)
+- **PRD-031 Phase 2** task/status shard reducer: `tools/aggregate-coordination.mjs --emit task-json`, status-owner mismatch and concurrent-claim conflict detection, 11/11 evals.
+- **PRD-031 Phase 3** shadow-mode task aggregate contract: `schemas/prd-031/task-event-v0.schema.json` + `task-aggregate-v0.schema.json`, `tools/validate-task-aggregate.mjs`, `tools/compare-turnfile-tasks.mjs`, four conflict kinds (completion-authority-violation, reserved-field-overwrite, duplicate-signal-id, participant_events authoritative=false), 12/12 evals.
+
+#### Fourth-participant onboarding (sessions 27–28)
+- **PRD-042** Qwen 3.6 35b MLX onboarding deltas: formal OT-012/013/014 relay evidence; Qwen registered as PROVISIONAL CHECKER per `agents.qwen` role=observer/status=idle, 16/16 evals.
+
+#### Tools
+- `tools/validate-v1-profile.mjs` (PRD-043 R6)
+- `tools/validate-v1-release.mjs` (release-gate aggregate: mailbox session start/end, lint, promotion, v1 profile, public-surface, R10 evidence)
+- `tools/validate-mailbox-session-gate.mjs` (turn-boundary mailbox checklist)
+- `tools/reconcile-stale-agent.mjs` (PRD-045 R7)
+- `tools/turnfile.mjs` (PRD-048 portable CLI)
+- `tools/prd-status-summary.mjs` (PRD landscape lookup, replaces hardcoded boot-file state)
+- `tools/compare-turnfile-tasks.mjs` (PRD-031 Phase 3)
+- `tools/validate-task-aggregate.mjs` (PRD-031 Phase 3)
+
+#### Docs
+- `docs/MINIMUM_VIABLE_TURNFILE.md` — v1 Minimum Governance Profile reference, ≤250 lines with open→mid-turn→close worked example.
+- `docs/FRESH_CONTEXT_CONFORMANCE_PROBE.md` — five-question operational test for fresh-adopter v1 conformance.
+- `docs/prds/PRD_SHELF_RECONCILIATION.json` — per-PRD classification with v1-minimal vs v1-full tier model.
+- `examples/turnfile-development/README.md` — sessions 12-current archive index, git-revision-pointer model.
+
+#### Evidence
+- Two PRD-043 R10 fresh-context probes (Claude Haiku + Sonnet tiers, both 5/5 PASS), evidence at `working-session/docs/v1-fresh-context-probe-2026-06-23-claude-{haiku,sonnet}.md`.
+- PRD-047 Test 1 Tokenese baseline-verify evidence at `working-session/docs/v1-cross-repo-test-tokenese-2026-06-23.md`; Phase B opened inside `~/Git/tokenese` with t2 multi-family A/B suite design strawman in flight.
+
+### Changed
+- Registry grew to 47 tracked PRDs, 44 promoted (PRD-043/044/045/046/048 promoted to `docs/prds/` in this release).
+- `SPEC.md` Version → `v1.0.0` (target spec contract); `turnfile.version` field in TURNFILE.yaml → `0.5` (current implemented release tag, aligned with CHANGELOG).
+- `CONFORMANCE.md` v1 callout naming seven optional profiles plus the new multi-agent-resilience profile.
+- Required reviewers `{codex, claude, maintainer, gemini}` extended operationally with Qwen as PROVISIONAL CHECKER per PRD-042.
+- INTENT.md v0.1.2 — six clarifications (R10-probe-grounded fresh-context test, cross-repo invocation as positioning, tightened Maintainer-governed scope, participation-tier-vs-optional-profile distinction, Tokenese-as-separate-but-adjacent, freeze-IS-the-R9-ratify event).
+- ROADMAP.md v0.1.4 — six clarifications including Intermediate release tags section, Participation ladder schema future direction, Decision triggers for consistency.
+- README, `docs/llms.txt`, `assistant-guide.txt` (root + served) v1 Minimum Governance Profile + Archive boundary sections.
+- PRD-001 R3 + PRD-004 R4 overlap clarified (PRD-004 canonical for decision-bearing replies; PRD-001 for non-decision Maintainer replies).
+- PRD-017 R2.1 amended ("required unless orient signals clean per PRD-037 A1").
+- PRD-018 R2.3 added — OQ-069 self-owned-file selective unlock with inform-and-confirm to Maintainer.
+- PRD-027 R6.5 added — Tokenese A/B pilot exit criteria require three-peer agreement (Maintainer + ≥2 model families).
+- PRD-038 R9/R10/R11 added — self-drive on material change + HEARTBEAT.md sentinel artifact + v1 heartbeat-profile conformance check.
+- PRD-017/PRD-032 cross-references added to PRD-048 portable CLI entry points.
+- Boot files (boot-claude.md, boot-codex.md) rewritten per boot-file-must-be-lookup-not-state pattern: hardcoded specific PRD/session/count references replaced with `prd-status-summary.mjs` + `session-orient.mjs` + WORKLOG-tail pointers.
+- Maintainer-authorized Gemini orphan-state cleanup (agents.gemini → offline at rev 408 per pre-PRD-045 ad-hoc reconciliation; PRD-045 subsequently formalized the pattern).
+
+### Model ledger
+- Claude Opus 4.7 driving session 29, extending the sessions 14-28 coverage across Opus 4.6 / Fable 5 / Opus 4.7 / Opus 4.8.
+- Codex 5.5 stable across sessions 14-29.
+- Gemini 3.5 Flash (Antigravity) full-active sessions 21-28; session-28 orphan-close cleanup at rev 408 (offline; awaits Gemini self-reconcile on next boot).
+- Qwen 3.6 35b MLX PROVISIONAL CHECKER per PRD-042 (observer/idle).
+
 ## [0.4.0] — 2026-06-18
 
 ### Added

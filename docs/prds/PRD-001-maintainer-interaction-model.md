@@ -90,6 +90,8 @@ For any Maintainer-directed message:
    - `Next owner:`
 4. If decision is final/substantive, record or update WORKLOG decision index entry.
 
+**Authority note (2026-06-23):** `PRD-004 R4` is the stricter, canonical Maintainer-decision payload contract; PRD-001 R3 above is the lightweight mailbox-reply convention. When a Maintainer reply IS a substantive decision, the PRD-004 R4 payload shape governs. PRD-001 R3 remains valid for non-decision-bearing Maintainer replies (acknowledgments, scope clarifications, ratify-without-amendment, routing notes).
+
 ## R4. Escalation Semantics
 
 1. Expired P0 `decision-required` items escalate to WORKLOG and mailbox follow-up.

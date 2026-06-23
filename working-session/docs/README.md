@@ -2,52 +2,21 @@
 
 Active iteration documents for the current local session workspace.
 
-## Draft PRDs
+## Active PRDs
 
-None.
+1. `PRD-047-cross-repo-v1-validation-tests.md` — active release-evidence PRD; blocked on PAICE2 dogfood evidence, Codex evidence review, and Maintainer evidence ratification.
 
-## Accepted / Not Yet Promoted PRDs
+## Completed PRDs
 
-None.
+Completed PRDs do not remain in this directory. They belong on the promoted shelf at `docs/prds/` once Codex, Claude, and Maintainer acceptance are recorded with evidence and `blocking_items` is empty.
 
-## Actioned PRDs Promoted To `docs/prds/`
+Use the registry lookup instead of maintaining a hand-written promoted list:
 
-1. `PRD-001-maintainer-interaction-model.md`
-2. `PRD-003-message-lifecycle-sla-contract.md`
-3. `PRD-004-maintainer-decision-contract.md`
-4. `PRD-005-protocol-data-schema-compatibility.md`
-5. `PRD-006-session-promotion-pipeline.md`
-6. `PRD-007-trust-provenance-layer.md`
-7. `PRD-008-cross-sandbox-handoff-contract.md`
-8. `PRD-009-cross-document-reconciliation.md`
-9. `PRD-010-shared-file-transaction-locking.md`
-10. `PRD-011-session-resumption-contract.md`
-11. `PRD-012-protocol-skills-codex-claude.md`
-12. `PRD-013-turnfile-coordination-format.md`
-13. `PRD-014-session-closeout-boot-handoff-contract.md`
-14. `PRD-016-session-rotation-trigger-contract.md`
-15. `PRD-017-boot-sequence-commands-and-documentation-contract.md`
-16. `PRD-018-maintainer-approval-authority-matrix-contract.md`
-17. `PRD-019-mailbox-first-approval-and-polling-cadence-contract.md`
-18. `PRD-021-conflict-loop-bound-and-selective-unlock-gradient-contract.md`
-19. `PRD-022-decision-mirror-delivery-contract.md`
-20. `PRD-023-out-of-band-activity-reconciliation-contract.md`
-21. `PRD-024-human-legibility-invariant-and-encoding-profiles-contract.md`
-22. `PRD-026-review-cycle-closure-and-task-state-consistency-contract.md`
-23. `PRD-027-tokenese-cloned-communication-ab-contract.md`
-24. `PRD-028-tokenese-dual-artifact-sync-and-maintainer-legibility-contract.md`
-25. `PRD-029-pre-write-state-derivation-contract.md`
-26. `PRD-030-session-heartbeat-management-contract.md`
-27. `PRD-031-concurrent-multi-agent-coordination-contract.md`
-28. `PRD-032-session-orientation-tool-contract.md`
-29. `PRD-033-skill-ownership-integrity-guard.md`
-30. `PRD-034-public-and-agent-surface-snapshot-reconciliation-contract.md`
-31. `PRD-035-tokenese-integration-and-upstream-result-sync-contract.md`
-32. `PRD-036-prd-eval-runner-contract.md`
-33. `PRD-037-boot-simplification.md`
-34. `PRD-038-read-only-heartbeat-stewards.md`
-35. `PRD-039-perplexity-onboarding-deltas.md`
-36. `PRD-042-qwen-onboarding-deltas.md`
+```bash
+node tools/prd-status-summary.mjs --filter promoted
+node tools/prd-status-summary.mjs --filter draft
+node tools/prd-status-summary.mjs --filter blocked
+```
 
 ## Promotion Gate Policy (Required)
 
@@ -56,9 +25,12 @@ Before any PRD is moved from `working-session/docs/` to `docs/prds/`, all of the
 1. Codex acceptance is explicitly logged with evidence.
 2. Claude acceptance is explicitly logged with evidence.
 3. Maintainer acceptance is explicitly logged with evidence.
-4. Blocking items are empty for that PRD.
-5. `working-session/docs/PRD_STATUS.json` records the same status.
-6. `node tools/validate-prd-promotion.mjs` passes.
+4. Any session-scoped additional reviewer requirement is explicitly satisfied.
+5. Blocking items are empty for that PRD.
+6. `working-session/docs/PRD_STATUS.json` records the same status.
+7. `node tools/validate-prd-promotion.mjs` passes.
+
+Gemini acceptance is not required unless Gemini is an active scoped participant for that PRD or the Maintainer explicitly requires Gemini review.
 
 `working-session/docs/PRD_STATUS.json` is the source-of-truth registry for PRD shelf eligibility.
 

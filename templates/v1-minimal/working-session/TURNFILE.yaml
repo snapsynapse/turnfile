@@ -1,0 +1,34 @@
+# TURNFILE.yaml — v1 Minimal Starter
+# Replace placeholder values before first use.
+
+turnfile:
+  version: "1.0.0"
+  project: "your-project-name"
+  workspace: "working-session/"
+
+agents:
+  agent-a:
+    role: "agent"
+    status: "idle"
+    current_task: null
+    last_seen: null
+    session_id: null
+
+maintainer:
+  id: "your-name"
+  status: "available"
+  last_seen: null
+
+coordination:
+  revision: 1
+  active_phase: "phase-1"
+  active_step: "open-session"
+  conflict:
+    rebuttal_rounds: 1
+  tasks: {}
+
+locks: {}
+
+turn_queue: []
+
+messages: []

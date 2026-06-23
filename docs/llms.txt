@@ -2,10 +2,27 @@
 
 > Turnfile is a thin governance layer for auditable peer disagreement between heterogeneous LLM agents. Three agents (Claude by Anthropic, Codex by OpenAI, and Gemini by Google) collaborate through shared, human-legible markdown files with a human maintainer as arbiter — no central orchestrator, every decision recoverable from plain files. Canonical home: https://turnfile.work/
 
-Updated: 2026-06-23. Spec/protocol version: v0.1 (41 registry-tracked PRDs, 39 promoted PRDs).
-turnfile:prd-promoted=39
-turnfile:registry-tracked=41
+Updated: 2026-06-23. Spec/protocol version: v1.0.0 (release candidate, Maintainer-ratified for v0.5.0) (47 registry-tracked PRDs, 44 promoted PRDs).
+turnfile:prd-promoted=44
+turnfile:registry-tracked=47
 turnfile:agents=3
+
+## v1 Minimal Governance Profile (stable reading surface)
+
+A fresh adopter only needs these four documents to use Turnfile v1. No historical PRDs required.
+
+- [SPEC.md](https://turnfile.work/SPEC.md): normative v1 contract.
+- [DEFINITIONS.md](https://turnfile.work/DEFINITIONS.md): controlled vocabulary.
+- [MINIMUM_VIABLE_TURNFILE.md](https://turnfile.work/MINIMUM_VIABLE_TURNFILE.md): three-file core (TURNFILE.yaml + MAILBOX.md + WORKLOG.md) with a worked open → mid-turn → close example.
+- [CONFORMANCE.md](https://turnfile.work/CONFORMANCE.md): verifier-anywhere claims and named optional profiles.
+- [FRESH_CONTEXT_CONFORMANCE_PROBE.md](https://turnfile.work/FRESH_CONTEXT_CONFORMANCE_PROBE.md): five-question operational test.
+
+Other stable v1 surface: `schemas/v1/`, `templates/v1-minimal/`, `tools/` (including the portable `turnfile.mjs` CLI), promoted PRDs at [docs/prds/](https://turnfile.work/prds/). Per-PRD classification at [docs/prds/PRD_SHELF_RECONCILIATION.json](https://turnfile.work/prds/PRD_SHELF_RECONCILIATION.json).
+
+## Archive boundary (historical evidence, not required reading)
+
+- [examples/inception/](https://github.com/snapsynapse/turnfile/tree/main/examples/inception) — sessions 1-11 archive (original two-agent invention).
+- [examples/turnfile-development/](https://github.com/snapsynapse/turnfile/tree/main/examples/turnfile-development) — sessions 12-current archive (three-agent evolution).
 
 ## Core protocol documents
 

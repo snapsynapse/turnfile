@@ -30,11 +30,12 @@ Read in this order; reason from the files, not memory (Files First, PRD-030 R9):
 Run these to confirm the control plane is consistent before substantive work:
 
 1. `git status` — branch, dirty paths, peer-owned uncommitted changes (do not touch peer changes).
-2. `node tools/turnfile-lint.mjs --turnfile working-session/TURNFILE.yaml --schema schemas/turnfile/turnfile-v0.schema.json`
-3. `node tools/validate-mailbox-invariants.mjs --mailbox working-session/MAILBOX.md`
-4. `node tools/validate-prd-promotion.mjs`
-5. `npm run -s validate:skills` — skill bundle preflight (frontmatter + manifest hashes).
-6. Optional: `node tools/validate-boot-sequence.mjs --root . --agent <agent> --format json` — control-plane precondition check.
+2. `node tools/validate-mailbox-session-gate.mjs --phase start --agent <agent>` — mailbox start gate and failure checklist.
+3. `node tools/turnfile-lint.mjs --turnfile working-session/TURNFILE.yaml --schema schemas/turnfile/turnfile-v0.schema.json`
+4. `node tools/validate-mailbox-invariants.mjs --mailbox working-session/MAILBOX.md`
+5. `node tools/validate-prd-promotion.mjs`
+6. `npm run -s validate:skills` — skill bundle preflight (frontmatter + manifest hashes).
+7. Optional: `node tools/validate-boot-sequence.mjs --root . --agent <agent> --format json` — control-plane precondition check.
 
 ## Phase 3 — Pre-write derivation (inside the write window)
 
@@ -42,6 +43,13 @@ Before any shared-file write, derive IDs/counts/revision from files, never memor
 
 1. `node tools/next-state.mjs --mailbox working-session/MAILBOX.md --turnfile working-session/TURNFILE.yaml`
 2. After mailbox edits: `node tools/export-mailbox-json.mjs working-session/MAILBOX.md working-session/MAILBOX.json`
+
+## Phase 4 — Closeout verification
+
+Before yielding complete or closing a session, run:
+
+1. `node tools/validate-mailbox-session-gate.mjs --phase end --agent <agent>`
+2. `node tools/validate-closeout.mjs --turnfile working-session/TURNFILE.yaml --mailbox working-session/MAILBOX.md --agent <agent>`
 
 ## Stop / continue / escalate
 

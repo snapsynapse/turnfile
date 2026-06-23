@@ -26,36 +26,122 @@ const PRD_STATUS = "working-session/docs/PRD_STATUS.json";
 
 function usage(code = 0) {
   const out = code === 0 ? console.log : console.error;
-  out(`Usage: node tools/handshake-sign.mjs --agent <claude|codex|gemini> --payload <json-file|-> [--dry-run]
+  out(`Usage: node tools/handshake-sign.mjs --agent <claude|codex|gemini> [mode flags] [--dry-run]
 
-Payload schema (JSON):
-{
-  "session": 21,
-  "model": "Opus 4.8",
-  "surface": "Claude Code",
-  "scope_ack": ["gov-peer-conv", "infra-031", "tk-035"],
-  "heartbeat": {"cadence": "5m", "policy": "notify-material", "stop": "close", "owner": "self"},
-  "gates": "ok",
-  "tokenese_lead": true
-}`);
+Two input modes (PRD-044). Pick one.
+
+PAYLOAD MODE (JSON file or stdin):
+  node tools/handshake-sign.mjs --agent claude --payload payload.json
+  node tools/handshake-sign.mjs --agent claude --payload -
+
+  Payload schema (JSON):
+  {
+    "session": 21,
+    "model": "Opus 4.8",
+    "surface": "Claude Code",
+    "scope_ack": ["gov-peer-conv", "infra-031", "tk-035"],
+    "heartbeat": {"cadence": "5m", "policy": "notify-material", "stop": "close", "owner": "self"},
+    "gates": "ok",
+    "tokenese_lead": true
+  }
+
+DIRECT FLAG MODE (preferred for human-driven session opens, PRD-044 R1). Example:
+  node tools/handshake-sign.mjs --agent claude --session 29 \\
+    --model "Opus 4.7" --surface "Claude Code" \\
+    --scope stable-release --scope protocol-refinement
+
+  Flags:
+    --session <N>                   required
+    --model <label>                 required
+    --surface <label>               required
+    --scope <value>                 required (repeatable for multiple lanes)
+    --heartbeat-cadence <value>     default "5m"
+    --heartbeat-policy <value>      default "notify-material"
+    --heartbeat-stop <value>        default "close"
+    --heartbeat-owner <value>       default "self"
+    --tokenese-lead                 set tokenese_lead=true (default)
+    --no-tokenese-lead              set tokenese_lead=false
+    --gates <value>                 default "ok"
+
+  Defaults match the 5m self-owned read-only steward terms used since session 21.
+
+  --payload cannot be combined with --session/--model/--surface/--scope (R3).
+
+Common:
+  --dry-run                        emit JSON describing the planned write; no files touched
+  -h, --help                       this help`);
   process.exit(code);
 }
 
+const DIRECT_PAYLOAD_FLAGS = new Set([
+  "--session", "--model", "--surface", "--scope",
+  "--heartbeat-cadence", "--heartbeat-policy", "--heartbeat-stop", "--heartbeat-owner",
+  "--tokenese-lead", "--no-tokenese-lead", "--gates",
+]);
+
 function parseArgs(argv) {
-  const a = { dryRun: false };
+  const a = { dryRun: false, direct: {} };
+  let sawDirect = false;
   for (let i = 2; i < argv.length; i += 1) {
     const v = argv[i];
     if (v === "-h" || v === "--help") usage(0);
     else if (v === "--agent") a.agent = argv[++i];
     else if (v === "--payload") a.payload = argv[++i];
     else if (v === "--dry-run") a.dryRun = true;
+    else if (v === "--session") { a.direct.session = Number(argv[++i]); sawDirect = true; }
+    else if (v === "--model") { a.direct.model = argv[++i]; sawDirect = true; }
+    else if (v === "--surface") { a.direct.surface = argv[++i]; sawDirect = true; }
+    else if (v === "--scope") {
+      a.direct.scope_ack = a.direct.scope_ack || [];
+      a.direct.scope_ack.push(argv[++i]);
+      sawDirect = true;
+    }
+    else if (v === "--heartbeat-cadence") { a.direct.cadence = argv[++i]; sawDirect = true; }
+    else if (v === "--heartbeat-policy") { a.direct.policy = argv[++i]; sawDirect = true; }
+    else if (v === "--heartbeat-stop") { a.direct.stop = argv[++i]; sawDirect = true; }
+    else if (v === "--heartbeat-owner") { a.direct.owner = argv[++i]; sawDirect = true; }
+    else if (v === "--tokenese-lead") { a.direct.tokenese_lead = true; sawDirect = true; }
+    else if (v === "--no-tokenese-lead") { a.direct.tokenese_lead = false; sawDirect = true; }
+    else if (v === "--gates") { a.direct.gates = argv[++i]; sawDirect = true; }
     else { console.error(`unknown arg: ${v}`); usage(1); }
   }
-  if (!a.agent || !a.payload) usage(1);
+  if (!a.agent) usage(1);
   if (!["claude", "codex", "gemini"].includes(a.agent)) {
     console.error("--agent must be claude|codex|gemini"); process.exit(1);
   }
+  // R3: payload mode and direct payload flags cannot be combined.
+  if (a.payload && sawDirect) {
+    console.error("handshake-sign: cannot combine --payload with direct payload flags (--session/--model/--surface/--scope/--heartbeat-*). Pick one input mode (PRD-044 R3).");
+    process.exit(1);
+  }
+  if (!a.payload && !sawDirect) usage(1);
+  a.sawDirect = sawDirect;
   return a;
+}
+
+function payloadFromDirect(d) {
+  if (typeof d.session !== "number" || Number.isNaN(d.session)) {
+    console.error("--session <number> is required in direct flag mode"); process.exit(1);
+  }
+  if (!d.model) { console.error("--model <label> is required in direct flag mode"); process.exit(1); }
+  if (!d.surface) { console.error("--surface <label> is required in direct flag mode"); process.exit(1); }
+  if (!d.scope_ack || d.scope_ack.length === 0) {
+    console.error("--scope must be supplied at least once in direct flag mode"); process.exit(1);
+  }
+  return {
+    session: d.session,
+    model: d.model,
+    surface: d.surface,
+    scope_ack: d.scope_ack,
+    heartbeat: {
+      cadence: d.cadence || "5m",
+      policy: d.policy || "notify-material",
+      stop: d.stop || "close",
+      owner: d.owner || "self",
+    },
+    gates: d.gates || "ok",
+    tokenese_lead: d.tokenese_lead === undefined ? true : d.tokenese_lead,
+  };
 }
 
 function read(p) { return fs.readFileSync(p, "utf8"); }
@@ -259,7 +345,7 @@ function run(cmd) {
 
 function main() {
   const args = parseArgs(process.argv);
-  const payload = loadPayload(args.payload);
+  const payload = args.sawDirect ? payloadFromDirect(args.direct) : loadPayload(args.payload);
   for (const k of ["session", "model", "surface", "scope_ack", "heartbeat", "gates"]) {
     if (!(k in payload)) { console.error(`payload missing: ${k}`); process.exit(1); }
   }
@@ -279,6 +365,7 @@ function main() {
     console.log(JSON.stringify({
       ok: true, dry_run: true, agent: args.agent, prev_rev: rev, next_rev: nextRev,
       next_sig: nextSig,
+      payload,
       changed: {
         TURNFILE: tfAfter !== tfBefore,
         WORKLOG: wlAfter !== wlBefore,

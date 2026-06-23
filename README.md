@@ -7,8 +7,8 @@ Agents work as peers. Disagreement is signal, not error. Humans arbitrate, not m
 
 This is a **Structured Negotiation of Autonomous Peers (SNAP)**. It's consent-based, peer multi-LLM collaboration with human-on-the-loop governance and public auditability.
 
-<!-- turnfile:prd-promoted=39 -->
-<!-- turnfile:registry-tracked=41 -->
+<!-- turnfile:prd-promoted=44 -->
+<!-- turnfile:registry-tracked=47 -->
 <!-- turnfile:skill-claude-bundle=14 turnfile:skill-codex-bundle=10 turnfile:skill-gemini-bundle=5 -->
 
 ## Who this is for
@@ -54,7 +54,28 @@ Start here:
 
 Want a single example? [MSG-20260208-027](examples/inception/MAILBOX.md#msg-20260208-027) shows Claude proposing a PRD change, Codex pushing back, and the agents converging without maintainer intervention.
 
-## Quick start
+## Quick start (v1.0.0)
+
+The v1 Minimal Governance Profile is defined by exactly four documents. A fresh adopter does not need to read historical PRDs or the development archive.
+
+1. **Spec:** [SPEC.md](SPEC.md): normative v1 contract
+2. **Vocabulary:** [DEFINITIONS.md](DEFINITIONS.md): controlled terms
+3. **Run a session:** [docs/MINIMUM_VIABLE_TURNFILE.md](docs/MINIMUM_VIABLE_TURNFILE.md): three-file core + worked open → mid-turn → close example
+4. **Verify conformance:** [CONFORMANCE.md](CONFORMANCE.md): verifier-anywhere claims and named optional profiles
+5. **Operationalize:** `node tools/turnfile.mjs --help` — portable CLI for `init`, `open`, `status`, `heartbeat`, `close`
+
+Stable v1 reading surface lives at the repo root plus [docs/](docs/), [schemas/v1/](schemas/v1/), [templates/v1-minimal/](templates/v1-minimal/), [tools/](tools/), and promoted PRDs at [docs/prds/](docs/prds/). The fresh-context probe at [docs/FRESH_CONTEXT_CONFORMANCE_PROBE.md](docs/FRESH_CONTEXT_CONFORMANCE_PROBE.md) is the operational test for "fresh adopter can explain v1 without historical PRDs". Per-PRD classification is at [docs/prds/PRD_SHELF_RECONCILIATION.json](docs/prds/PRD_SHELF_RECONCILIATION.json).
+
+## Archive boundary
+
+Turnfile's protocol-development history is preserved as **historical evidence**, not required reading:
+
+- [examples/inception/](examples/inception/) — sessions 1-11 (original two-agent invention)
+- [examples/turnfile-development/](examples/turnfile-development/) — sessions 12-current (three-agent evolution under Claude + Codex + Gemini, plus Qwen provisional checker)
+
+Both archives are recoverable from `git log` at any point; the directories' READMEs are indexes, not duplicated content.
+
+## Legacy quick start (still works)
 
 1. **Read the baseline:** [BASELINE.md](BASELINE.md): what Turnfile is and how the project works (a point-in-time session-14 snapshot; for live current state see [PRD_STATUS.json](working-session/docs/PRD_STATUS.json) and [WORKLOG.md](working-session/WORKLOG.md))
 2. **Read the stance:** [INTENT.md](INTENT.md): where this protocol is going
@@ -240,7 +261,7 @@ This protocol has been tested across 23 real collaboration sessions with three h
 - Codex (OpenAI GPT-5), running in the Codex desktop app.
 - Gemini (Google, model Gemini 3.5 Flash (High)), running in the Google Antigravity IDE — onboarded under PRD-015 and full-active since session 21.
 
-As of the current registry snapshot (2026-06-23): 41 registry-tracked PRDs, 39 promoted PRDs, zero active open questions, and the eight-step eval-gated implementation loop (PRD-006 A1) run end-to-end across many lanes with builder/reviewer separation between heterogeneous agents — PRD-017/021/022/023/024/026/028/029/030/032/033/036 implemented, PRD-031 Phase 1 (per-agent shards + derived aggregates) and the PRD-014 closeout amendment landed, plus a live Tokenese A/B pilot scored by a deterministic checker. The Claude lane ran across three model generations (Opus 4.6, Fable 5, Opus 4.8) against one unmodified protocol. Forward development narrows Turnfile into a thin governance layer for auditable peer disagreement and maintainer-governed resolution across existing agent platforms.
+As of the current registry snapshot (2026-06-23): 47 registry-tracked PRDs, 44 promoted PRDs, zero active open questions, and the eight-step eval-gated implementation loop (PRD-006 A1) run end-to-end across many lanes with builder/reviewer separation between heterogeneous agents — PRD-017/021/022/023/024/026/028/029/030/032/033/036 implemented, PRD-031 Phase 1 (per-agent shards + derived aggregates) and the PRD-014 closeout amendment landed, plus a live Tokenese A/B pilot scored by a deterministic checker. The Claude lane ran across three model generations (Opus 4.6, Fable 5, Opus 4.8) against one unmodified protocol. Forward development narrows Turnfile into a thin governance layer for auditable peer disagreement and maintainer-governed resolution across existing agent platforms.
 
 For authoritative current state, read [PRD_STATUS.json](working-session/docs/PRD_STATUS.json) (PRD shelf and implementation status) and [WORKLOG.md](working-session/WORKLOG.md) (live session state). [BASELINE.md](BASELINE.md) is a point-in-time session-14 snapshot, not current state.
 

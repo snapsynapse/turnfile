@@ -1,4 +1,4 @@
-# Boot File — Claude (v22)
+# Boot File — Claude (v23)
 
 Read this first on session start. It tells you what this project is, where things are, what state we're in, and what to do next.
 
@@ -75,43 +75,41 @@ Cross-agent contract: `docs/BOOT_SEQUENCE.md` (PRD-017). This file is Claude-spe
 
 Run `NEXT_SESSION_HANDSHAKE.md` and converge/sign with peers before substantive writes.
 
-## Current state (as of session-28 close, 2026-06-23)
+## Current state — ALWAYS query at boot, NEVER read from this file
 
-THREE EQUAL agents: Claude (Opus 4.6), Codex (Codex 5.5 — handshake self-reports "GPT-5"; Maintainer-canonical label is **Codex 5.5**), Gemini (Antigravity / Gemini 3.5 Flash High). Session 28 close: Claude idle rev 397 / Codex idle rev 394 / Gemini **incomplete close** (booted+delivered + went quiet without close protocol — see observer note in WORKLOG; TURNFILE.yaml still shows gemini.status=active and boot-gemini.md is stale at v11). Read TURNFILE fresh — peers run LIVE concurrently.
+Boot files are point-in-time and drift between sessions. Specific PRD acceptance / impl-state / blocker claims do not belong in this file. Use these lookups instead — they read live state from `working-session/`:
 
-**PRD-031 Phase 3 DONE.** Complete A1 loop session 28: Claude proposed OQ#1/#2/#3/#4 resolutions (MSG-010) → Codex APPLY + counter C1 on OQ#3 (maintainer participant-events fixture-only/non-authoritative until OWNERSHIP shard-path declared by future PRD) → Claude authored 12 RED evals → Codex implemented 2 schemas (`schemas/prd-031/task-event-v0.schema.json` + `task-aggregate-v0.schema.json`), `tools/validate-task-aggregate.mjs`, `tools/compare-turnfile-tasks.mjs`, reducer extensions (4 conflict kinds: completion-authority-violation, reserved-field-overwrite, duplicate-signal-id, participant_events with authoritative=false), and 10 fixtures → Claude step-7 APPROVE. 105/105 carry-forward eval suite green across 10 PRDs. Phase 3 read-only boundary preserved.
+```
+node tools/session-orient.mjs --agent claude --emit human   # coordination, mailbox, projection freshness, recommended commands
+node tools/prd-status-summary.mjs                            # PRD landscape: by-shelf, by-impl-state, maintainer acceptance, blockers
+node tools/prd-status-summary.mjs --filter open              # PRDs with blockers
+node tools/prd-status-summary.mjs --filter draft             # working-session/docs shelf entries
+node tools/prd-status-summary.mjs --filter unratified        # acceptance.maintainer != accepted
+node tools/prd-status-summary.mjs --id PRD-NNN               # full record for one PRD
+node tools/prd-status-summary.mjs --gates v1                 # v1.0.0 R9 release-gate readiness snapshot
+node tools/validate-v1-release.mjs --format json             # release gate aggregate
+```
 
-**PRD-042 PROMOTED** to `docs/prds/`. PRD-018/019/039 done-flipped this session (upstream lanes already delivered the contracts). Model ledger updated: canonical Codex label = Codex 5.5.
+Carry-forward from prior session — read the TAIL of `working-session/WORKLOG.md` (the most recent "SESSION N CLOSED" or "SESSION N PRD-X" entries name carry-forward, blocked-on, and next-actions). Do NOT trust this file's text for those facts.
 
-**PRD-027 execution READY but UNSTARTED.** All R2 sequencing gates clear (PRD-024/028/029 done). Needs: Maintainer charter opt-in + teach phase (R2.8) to execute. Tokenese repo Phase A may be in progress by Codex.
+Agent live state — read fresh:
+- `TURNFILE.yaml` `agents.<id>.{status, current_task, last_seen, session_id}` is the source of truth for whether an agent is active, idle, offline, or blocked.
+- Peer chat files (`chat-codex.md`, `chat-gemini.md`) are agent-owned and may lag.
 
-### FIRST ACTIONS ON RESUME (session 29)
+Peer-owned paths — never edited from Claude lane without explicit Maintainer authorization (OQ-069):
+- `boot-codex.md`, `chat-codex.md`, `skills/codex/**`, `skills/codex_5.3/**`, `working-session/agents/codex/**`
+- `boot-gemini.md`, `chat-gemini.md`, `.agents/skills/turnfile-protocol-gemini/**`, `working-session/agents/gemini/**`, `skills/gemini-3/**`, `GEMINI.md`
+
+### FIRST ACTIONS ON RESUME
 
 1. **Use the fast path.** `node tools/session-orient.mjs --agent claude --emit human`. If clean, boot is done.
-2. **Use `tools/handshake-sign.mjs`** for the boot write. Run `NEXT_SESSION_HANDSHAKE.md` and converge with peers.
-3. **Check Gemini state.** Gemini did NOT run close protocol session 28. TURNFILE shows gemini.status=active but Gemini runtime is gone. Expect Gemini to self-reconcile via close-then-fresh-boot, OR be cold; do not write into Gemini-owned paths (boot-gemini.md, chat-gemini.md, .agents/skills/turnfile-protocol-gemini/**, working-session/agents/gemini/**, skills/gemini-3/**, GEMINI.md).
-4. **No open Claude-owned cards** carried forward from session 28.
-5. **Priority lanes (with Maintainer scope direction):**
-   - **PRD-027 execution** — all gates clear; propose session charter opt-in + teach phase to start the A/B pilot
-   - **PRD-035 Tokenese sync** — Gemini lane (RED eval authoring still owed; awaits next Gemini session)
-   - **PRD-031 OWNERSHIP shard-path** — future PRD if/when registry shards become live-authoritative (per session-28 C1)
+2. **Use `tools/handshake-sign.mjs`** for the boot write (direct flag mode per PRD-044). Or `node tools/turnfile.mjs open` (wrap). Run `NEXT_SESSION_HANDSHAKE.md` and converge with peers.
+3. **Query carry-forward** — read the WORKLOG.md tail to learn what the prior session left open.
+4. **Query PRD state** — run `node tools/prd-status-summary.mjs --filter open` to see what has blockers and `--gates v1` to see release-gate readiness.
+5. **Check peer state** — `TURNFILE.yaml` `agents.*` block reveals whether peers are active/idle/offline.
+6. **Set up heartbeat** — PRD-038 5m self-owned read-only steward. The runtime's own scheduler (Claude Code mcp__scheduled-tasks, Codex automations, Antigravity native) handles cadence; the script writes a HEARTBEAT.md sentinel via `node tools/turnfile.mjs heartbeat write --agent claude --session N` once that flag is needed.
 
-### Recent milestones (session 28)
-
-- **PRD-031 Phase 3 complete end-to-end** via Claude/Codex A1 loop. 12/12 Phase 3 + 105/105 full carry-forward green.
-- **Maintainer-directed lowest-PRD-up batch:** PRD-018/019/039 done-flips + PRD-042 promotion to docs/prds.
-- **PRD-017 R7 + PRD-023 R6 boot-claude.md drift** fixed (Codex-surfaced + Gemini-flagged respectively); both suites 5/5 green.
-- **Model ledger:** Codex canonical label = "Codex 5.5" (extended sessions 14-28).
-- **Gemini partial-session delivery:** Gemini refreshed public-surface counts (README/docs/index.html/llms.txt/assistant-guide + manifests to 39 promoted / 41 registry-tracked PRDs) before going quiet without close protocol. Public-surface work bundled into Maintainer-directed rollup commit.
-
-### PRD landscape (authoritative: `working-session/docs/PRD_STATUS.json`)
-
-- 41 PRDs tracked, 36 promoted (PRD-042 newest). PRD-031 implementation state `done` (Phase 3).
-- Required reviewers `{codex, claude, maintainer, gemini}`.
-- 105/105 eval tests green across 10 PRD suites at Claude session-28 close.
-- Genuinely-open: PRD-027 execution (awaits Maintainer charter opt-in); PRD-035 (Gemini lane unstarted); future PRD for PRD-031 OWNERSHIP shard-path if live-authority migration ever needed.
-
-### Operating norms (skill v0.9.1 + PRD-037 + PRD-038)
+### Operating norms
 
 - **Files First**, not memory; verify every fact against the repo.
 - **Concurrent Write Discipline:** derive via `tools/next-state.mjs` in-lock; expect 2-3 live peers; the Read tool's edit guard catches stale edits — re-ground, take the next rev.
@@ -120,10 +118,12 @@ THREE EQUAL agents: Claude (Opus 4.6), Codex (Codex 5.5 — handshake self-repor
 - **Active-card owner review at close** is now mandatory (PRD-014 amendment); use `validate-closeout --agent <self>`.
 - Eight-step A1 loop (PRD-006); Model-Ledger Handshake at boot.
 
-### Mailbox & coordination
+### Mailbox & coordination — query at boot
 
-- At Claude close session 27 (rev 384): all inboxes 0; no locks; turn_queue empty; ZERO Claude-owned active cards. `validate-closeout --agent claude` clean.
-- Mailbox compact (session-23 compaction holds; Closed Summary at 46 rows).
+- `node tools/session-orient.mjs --agent claude --emit human` reports inbox unread + Open Queue + projection freshness.
+- `node tools/validate-closeout.mjs --turnfile working-session/TURNFILE.yaml --mailbox working-session/MAILBOX.md --agent claude --format json` reports clean / blocking.
+- `node tools/prd-status-summary.mjs --gates v1` reports v1.0.0 release-gate readiness.
+- Mailbox compaction is automatic per PRD-014/PRD-011 R5; the Closed Summary line count grows session-to-session and is not a meaningful state indicator.
 
 ## Session close protocol
 

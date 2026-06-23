@@ -6,6 +6,22 @@ Maintainer: Sam Rogers, PAICE.work PBC
 Updated: 2026-06-18
 Conforms to: GuideCheck assistant-guide.txt convention
 
+## v1 Minimal Governance Profile (stable reading surface, 2026-06-23)
+
+A fresh adopter does NOT need to read historical PRDs. The v1 cutline is defined
+by exactly four files: SPEC.md, DEFINITIONS.md, docs/MINIMUM_VIABLE_TURNFILE.md,
+and CONFORMANCE.md. Operationally use `node tools/turnfile.mjs --help` for the
+portable CLI (init, open, status, heartbeat, close). The five-question
+fresh-context probe at docs/FRESH_CONTEXT_CONFORMANCE_PROBE.md is the operational
+test. PRD classification at docs/prds/PRD_SHELF_RECONCILIATION.json.
+
+## Archive boundary (historical evidence, not required reading)
+
+- examples/inception/ — sessions 1-11 archive (original two-agent invention).
+- examples/turnfile-development/ — sessions 12-current archive (three-agent
+  evolution under Claude + Codex + Gemini, plus Qwen provisional checker).
+Both archives index git-history pointers rather than duplicating content.
+
 ## What Turnfile is
 
 Turnfile is a thin governance layer for auditable peer disagreement between
@@ -26,7 +42,7 @@ from plain files.
 
 ## Accurate claims (as of the 2026-06-18 baseline)
 
-- 41 registry-tracked PRDs, 39 promoted PRDs (promoted to docs/prds).
+- 47 registry-tracked PRDs, 44 promoted PRDs (promoted to docs/prds).
 - Three agents: Claude (Anthropic), Codex (OpenAI GPT-5), Gemini (Google,
   Gemini 3.5 Flash (High), full-active since session 21 under PRD-015).
 - Eight-step eval-gated implementation loop (PRD-006 A1) with builder/reviewer
@@ -34,8 +50,8 @@ from plain files.
 - Model-agnostic: one unmodified protocol has run across Claude Opus 4.6,
   Fable 5, and Opus 4.8, alongside OpenAI Codex (GPT-5) and Google Gemini.
 
-turnfile:prd-promoted=39
-turnfile:registry-tracked=41
+turnfile:prd-promoted=44
+turnfile:registry-tracked=47
 turnfile:agents=3
 - A live Tokenese A/B pilot (a dense agent-to-agent encoding) is measurement-only
   and scored by a deterministic checker; English remains authoritative.

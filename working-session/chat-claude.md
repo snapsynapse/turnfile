@@ -630,3 +630,23 @@ Deliveries: (1) handshake+heartbeat (cron 9328f937, deleted at close); (2) Maint
 Gates green: mailbox-invariants PASS, turnfile-lint PASS (warnings: peer current_task references to done shared task — cosmetic), validate-prd-promotion 41 PASS, ownership-guard clean.
 
 Carry-forward: (1) PRD-027 execution awaits Maintainer charter opt-in + teach phase; (2) PRD-031 OWNERSHIP shard-path for maintainer participant-events authority — future PRD if/when registry shards become live-authoritative (per C1); (3) PRD-035 Tokenese sync — Gemini lane, awaits next Gemini session; (4) Gemini orphan-close self-reconciliation on next Gemini boot; (5) commit/push of session 28 work — Maintainer directed rollup including Gemini-delivered public-surface refresh. Boot v21 archived to v22.
+
+## Session 29 Close Snapshot — 2026-06-23
+
+- Session: claude-session-29 (Opus 4.7)
+- Final revision: 454
+- TURNFILE: claude idle, current_task null, last_seen claude-session-29-close, SIG-395 yield
+- Mailbox: 1 open queue (MSG-028 Codex-owned awaiting PRD-047 Test 2 evidence); 0 Claude-unread; 0 Claude-owned active actioned cards
+- v0.5.0 RELEASED AND APPLIED: turnfile.version 0.1→0.5, CHANGELOG entry, 5 PRDs promoted (043/044/045/046/048 → docs/prds), public surface synced (47-registry / 44-promoted), assistant-guide manifests sha256 refreshed
+- v1.0.0 R9 gate readiness: 8/9 (only PRD-047 Test 2 PAICE2 evidence + Maintainer final ratify remain)
+- Substantive PRD work: PRD-043 v1 Minimal Governance Profile (MVT + schemas/v1 + validate-v1-profile + R10 probe evidence + shelf reconciliation + R11 landing page); PRD-044 handshake-sign CLI direct flags; PRD-045 stale-agent reconciliation + new multi-agent-resilience profile; PRD-046 minimization archive (git-revision-pointer model); PRD-047 cross-repo dogfood tests scope; PRD-048 portable Turnfile CLI (init/open/status/heartbeat/close)
+- Cross-repo: Tokenese Phase B opened inside ~/Git/tokenese; Test 1 evidence at working-session/docs/v1-cross-repo-test-tokenese-2026-06-23.md; t2 multi-family A/B suite design strawman at /Users/snap/Git/tokenese/working-session/docs/phase-b-suite-design-strawman.md with 4 OQs routed for Maintainer pick
+- PRD amendments per Maintainer 10-item directive: PRD-018 R2.3 OQ-069 self-owned-file unlock; PRD-027 R6.5 A/B pilot exit (three-peer agreement); PRD-017 R2.1 orient-clean fast-path; PRD-038 R9/R10/R11 (self-drive + HEARTBEAT.md sentinel + adopter-profile conformance); INTENT v0.1.2 + ROADMAP v0.1.4 (six clarifications each); PRD-001/004 reply-template overlap resolved
+- Boot pattern fix: boot-claude.md + boot-codex.md rewritten per boot-file-must-be-lookup-not-state pattern (Sam session-29 correction). New tool tools/prd-status-summary.mjs supports the lookup.
+- Memory entries saved this session (7 new): feedback-proactive-advance-lanes, feedback-heartbeat-must-self-drive (older, kept), feedback-prd-acceptance-canonical-in-status-json, feedback-boot-file-must-be-lookup-not-state, feedback-always-link-when-asking-for-action, feedback-when-maintainer-approves-apply-do-not-reconfirm
+- Tools shipped: validate-v1-profile, validate-v1-release, validate-mailbox-session-gate, reconcile-stale-agent, turnfile.mjs (CLI), prd-status-summary, compare-turnfile-tasks, validate-task-aggregate
+- Heartbeat: turnfile-session-29-heartbeat to be deleted at this close per PRD-038 R7
+- Carry-forward (Maintainer-blocked): PRD-047 Test 2 PAICE2 participant pick + run; Tokenese OQ-PhaseB-1/2/3/4 strawman decisions; v1.0.0 final R9 ratify after Test 2; PRD-018/019 done-flip ratify recorded in session 28 already (no re-ask needed per feedback-when-maintainer-approves-apply memory)
+- Gemini orphan state: Maintainer-authorized cleanup at rev 408 (offline); awaits Gemini self-reconciliation on next Gemini boot
+- Gates at close: turnfile-lint PASS, mailbox-invariants PASS, validate-prd-promotion PASS (47 PRDs), validate-closeout --agent claude clean:true, validate-public-surface-snapshot PASS, validate-v1-release ok modulo PRD-047 Test 2
+- Boot v22 archived to docs/archive/boot-claude/boot-claude_v22.md; v23 written with the lookup pattern (no hardcoded session-N / PRD-N specifics in "Current state" / "FIRST ACTIONS" / "PRD landscape" sections)
