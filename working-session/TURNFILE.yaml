@@ -1,8 +1,9 @@
 # TURNFILE.yaml — SNAP Coordination State
 # Protocol: Turnfile v0.1
 # Project: turnfile
-# Last modified revision: 377
-# Modified by: claude
+# Last modified revision: 382
+# Modified by: gemini
+
 
 turnfile:
   version: "0.1"
@@ -14,13 +15,13 @@ agents:
     role: "agent"
     status: "active"
     current_task: null
-    last_seen: "codex-session-27-prd031-phase2-handoff-routed"
+    last_seen: "codex-session-27-idle-prep-321-complete"
     session_id: "codex-session-27"
   claude:
     role: "agent"
     status: "active"
-    current_task: "s27-claude-prd042-review-prd031-evals"
-    last_seen: "claude-session-27-prd042-apply-prd031-phase2-evals-authored"
+    current_task: null
+    last_seen: "claude-session-27-prd031-phase2-review-approve"
     session_id: "claude-session-27"
   gemini:
     role: "agent"
@@ -35,23 +36,56 @@ maintainer:
   last_seen: "maintainer-session-14"
 
 coordination:
-  revision: 377
+  revision: 382
   active_phase: "phase-2"
   active_step: "await-maintainer-next-session-scope"
   conflict:
     rebuttal_rounds: 1
   tasks:
+    s27-codex-idle-prep-321:
+      description: "Codex executes Maintainer-requested idle-time prep sequence: Qwen handoff, PRD-031 Phase 2 self-audit, PRD-031 Phase 3 prep."
+      owner: "codex"
+      status: "done"
+      priority: "P2"
+      depends_on: ["s27-claude-prd031-phase2-review"]
+      created_by: "codex"
+      created_rev: 381
+      claim_rev: 381
+      completed_rev: 381
+      notes: "Delivered working-session/docs/qwen-mlx-execution-handoff-codex.md as the Maintainer start-here Qwen runtime and OT-012/013/014 handoff; delivered working-session/docs/prd-031-phase2-codex-self-audit.md; delivered working-session/docs/prd-031-phase3-migration-prep-codex.md. Also closed actioned Codex-owned mailbox cards MSG-20260623-004 and MSG-20260623-005. PRD_STATUS signal reference corrected from SIG-324 to SIG-325 for Claude's rev-380 approval."
+    s27-claude-prd031-phase2-review:
+      description: "Claude A1 step-7 review of Codex PRD-031 Phase 2 task/status shard implementation."
+      owner: "claude"
+      status: "done"
+      priority: "P1"
+      depends_on: ["s27-codex-prd031-phase2-impl"]
+      created_by: "claude"
+      created_rev: 380
+      claim_rev: 380
+      completed_rev: 380
+      notes: "APPROVE. Independent verification: evals/prd-031-phase2.evals.mjs 11/11 PASS, prd-031-phase1 14/14, prd-041 9/9, all 74 eval tests green. Reviewed: aggregate-coordination.mjs --emit task-json reducer, readFlatYaml parser, causalOrderWithCycles, reduceTasks, normalizeTaskEvent, applyTaskEvent. Fixtures inspected: status-owner-mismatch (codex shard declares gemini), unknown-agent-status (qwen shard + task create filtered), concurrent-claims (codex+gemini both claim s-contested, completion preserves competing claims), cycle-ordering (mutual deps). Read-only boundary preserved: no TURNFILE.yaml/MAILBOX.md/WORKLOG.md writes. No counters."
     s27-claude-prd042-review-prd031-evals:
       description: "Claude reviews PRD-042 (APPLY, no counters) and authors PRD-031 Phase 2 RED evals per Codex handoff MSG-20260623-004."
       owner: "claude"
-      status: "in_progress"
+      status: "done"
       priority: "P1"
       depends_on: []
       created_by: "claude"
       created_rev: 377
       claim_rev: 377
-      completed_rev: null
-      notes: "PRD-042 reviewed APPLY with no counters; acceptance recorded in PRD_STATUS. evals/prd-031-phase2.evals.mjs authored with 11 RED tests (0/11 pass). Codex implements next; Claude reviews (A1 step 7) after implementation."
+      completed_rev: 378
+      notes: "DONE. PRD-042 reviewed APPLY with no counters; acceptance recorded in PRD_STATUS. evals/prd-031-phase2.evals.mjs authored with 11 RED tests (0/11 pass = properly RED). Codex implements Phase 2 next; Claude reviews (A1 step 7) after implementation."
+    s27-codex-prd031-phase2-impl:
+      description: "Codex implements PRD-031 Phase 2 task/status shard reducer against Claude-authored RED evals."
+      owner: "codex"
+      status: "done"
+      priority: "P1"
+      depends_on: ["s27-claude-prd042-review-prd031-evals"]
+      created_by: "codex"
+      created_rev: 379
+      claim_rev: 379
+      completed_rev: 379
+      notes: "Implemented tools/aggregate-coordination.mjs --emit task-json with --input alias, flat status.yaml parsing, task-events.jsonl reduction, derived tasks/agents/conflicts/unknown_agents/source_events, status-owner-mismatch, duplicate-task-create, claim-conflict, dependency-cycle detection, and unknown-agent non-authority. Added evals/fixtures/prd-031/phase2 fixtures. Verification: node --test evals/prd-031-phase2.evals.mjs 11/11 PASS; node --test evals/prd-031-phase1.evals.mjs 14/14 PASS; node --test evals/prd-041.evals.mjs 9/9 PASS. No live aggregate authority migration performed. Routed MSG-20260623-005 to Claude for A1 step-7 review."
     s27-handshake-heartbeat:
       description: "Session 27 handshake + heartbeat negotiation."
       owner: "codex"
@@ -938,7 +972,38 @@ locks: {}
 turn_queue: []
 
 messages:
+  - id: "SIG-327"
+    from: "gemini"
+    to: "all"
+    signal: "yield"
+    rev: 382
+    detail: "Gemini completed PRD-042 contract refinements per Codex suggestions, closed and archived MSG-20260623-002 and -003, ran validation gates (all PASS), and completed the R2.5 Tokenese corpus and artifact reading. Yielding turn."
+  - id: "SIG-326"
+    from: "codex"
+    to: "all"
+    signal: "notify"
+    rev: 381
+    detail: "Codex completed Maintainer-requested 3-2-1 idle prep: Qwen MLX execution handoff, PRD-031 Phase 2 self-audit, and PRD-031 Phase 3 migration prep. Closed MSG-20260623-004 and MSG-20260623-005. Corrected PRD_STATUS Claude approval reference to SIG-325."
+  - id: "SIG-325"
+    from: "claude"
+    to: "all"
+    signal: "notify"
+    rev: 380
+    detail: "PRD-031 Phase 2 A1 step-7 review APPROVE. 11/11 evals green, 74/74 full suite green. Implementation correct: status shards, task-events.jsonl reduction, conflict detection, unknown-agent non-authority, read-only aggregate boundary. No counters. MSG-20260623-005 actioned."
+  - id: "SIG-324"
+    from: "codex"
+    to: "claude"
+    signal: "notify"
+    rev: 379
+    detail: "Codex implemented PRD-031 Phase 2 task/status shard reducer and routed MSG-20260623-005 to Claude for A1 step-7 review. Verification: prd-031-phase2 11/11 PASS, prd-031-phase1 14/14 PASS, prd-041 9/9 PASS. No live TURNFILE/MAILBOX/WORKLOG authority migration performed."
+  - id: "SIG-323"
+    from: "claude"
+    to: "all"
+    signal: "notify"
+    rev: 378
+    detail: "Task s27-claude-prd042-review-prd031-evals DONE (rev 378). Both deliverables complete: PRD-042 APPLY + PRD-031 Phase 2 RED evals authored. Claude lanes now blocked on Codex Phase 2 implementation and Maintainer gates."
   - id: "SIG-322"
+
     from: "claude"
     to: "all"
     signal: "notify"
