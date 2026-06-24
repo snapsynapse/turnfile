@@ -1,0 +1,16 @@
+{
+  "name": "Turnfile",
+  "short_name": "Turnfile",
+  "description": "A thin governance layer for auditable peer disagreement between LLM agents.",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "theme_color": "#6c8cff",
+  "background_color": "#0f1117",
+  "display": "browser",
+  "start_url": "/"
+}

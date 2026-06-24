@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Not found &mdash; Turnfile</title>
+  <link rel="canonical" href="https://turnfile.work/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="mask-icon" href="/favicon.svg" color="#8aa4ff">
+  <link rel="apple-touch-icon" href="/favicon.svg">
+  <meta name="theme-color" content="#6c8cff">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0f1117;
+      --bg-alt: #1a1d27;
+      --text: #e1e4ed;
+      --text-muted: #8b90a0;
+      --accent: #6c8cff;
+      --accent-hover: #8aa4ff;
+      --border: #2e3345;
+      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --mono: "SF Mono", "Fira Code", Menlo, Consolas, monospace;
+    }
+    body {
+      font-family: var(--font);
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 2rem;
+      -webkit-font-smoothing: antialiased;
+    }
+    main {
+      max-width: 640px;
+      text-align: center;
+    }
+    h1 {
+      font-size: clamp(2rem, 6vw, 3rem);
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .code {
+      font-family: var(--mono);
+      color: var(--accent-hover);
+      font-size: 0.95rem;
+    }
+    p { color: var(--text-muted); margin-bottom: 1.5rem; }
+    p strong { color: var(--text); }
+    .turnfile-card {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      text-align: left;
+      margin: 2rem 0;
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--text);
+      white-space: pre-wrap;
+    }
+    .turnfile-card .tk-cm { color: var(--text-muted); }
+    .turnfile-card .tk-key { color: var(--accent-hover); }
+    .turnfile-card .tk-str { color: var(--text); }
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      font-weight: 600;
+      background: var(--accent);
+      color: var(--bg);
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .btn:hover { background: var(--accent-hover); }
+    .btn:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+    a { color: var(--accent); }
+    a:hover { color: var(--accent-hover); }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="code">// 404 / not-found</p>
+    <h1>This page is not in the working session.</h1>
+    <p>The Turnfile you were looking for might be at a different revision, in a different branch, or simply not yet registered. Every Turnfile session starts with a clean <code class="code">working-session/</code> &mdash; nothing is hidden.</p>
+    <div class="turnfile-card" role="img" aria-label="404 represented as a Turnfile coordination snippet: status not-found, revision unknown, next action return-home">
+<span class="tk-cm"># turnfile.yaml</span>
+<span class="tk-key">status</span>:    <span class="tk-str">not-found</span>
+<span class="tk-key">revision</span>:  <span class="tk-str">unknown</span>
+<span class="tk-key">next</span>:      <span class="tk-str">return-home</span></div>
+    <p><a href="/" class="btn">Return home</a></p>
+    <p style="margin-top: 2rem; font-size: 0.85rem;">
+      Or jump to:
+      <a href="https://github.com/snapsynapse/turnfile" rel="noopener">the repository</a> &middot;
+      <a href="https://github.com/snapsynapse/turnfile/blob/main/INTENT.md" rel="noopener">INTENT</a> &middot;
+      <a href="https://github.com/snapsynapse/turnfile/blob/main/SPEC.md" rel="noopener">SPEC</a> &middot;
+      <a href="https://github.com/snapsynapse/turnfile/blob/main/docs/MINIMUM_VIABLE_TURNFILE.md" rel="noopener">Minimal Profile</a>
+    </p>
+  </main>
+</body>
+</html>

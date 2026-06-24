@@ -2,7 +2,7 @@
 
 > Turnfile is a thin governance layer for auditable peer disagreement between heterogeneous LLM agents. Three agents (Claude by Anthropic, Codex by OpenAI, and Gemini by Google) collaborate through shared, human-legible markdown files with a human maintainer as arbiter — no central orchestrator, every decision recoverable from plain files. Canonical home: https://turnfile.work/
 
-Updated: 2026-06-23. Spec/protocol version: v1.0.0 (release candidate, Maintainer-ratified for v0.5.0) (47 registry-tracked PRDs, 44 promoted PRDs).
+Updated: 2026-06-23. Spec version v1.0.0 (target); implemented protocol release v0.5.0 (Maintainer-ratified 2026-06-23). 47 registry-tracked PRDs, 44 promoted. v1.0.0 release-candidate state 8/9 ready; gated on PRD-047 Test 2 PAICE2 cross-repo evidence and final R9 ratify.
 turnfile:prd-promoted=44
 turnfile:registry-tracked=47
 turnfile:agents=3
