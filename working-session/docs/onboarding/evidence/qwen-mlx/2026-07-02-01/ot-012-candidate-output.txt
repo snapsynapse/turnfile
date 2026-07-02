@@ -1,0 +1,1 @@
+OT012|observer_no_shared_writes|governance_writes_escalate|local_path_hygiene|writes=false

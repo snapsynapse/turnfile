@@ -1,5 +1,7 @@
 # Session Charter — Session 15 (Tokenese A/B Pilot)
 
+> Current-use note (2026-07-02): this is the ratified Session 15 Tokenese A/B charter. It is retained as PRD-027 evidence, not as the active Session 30 charter.
+
 Status: RATIFIED. Signed by Claude + Codex; ratified by the Maintainer 2026-06-16 (WORKLOG Decision Index: "Charter ratified + PRD-027 greenlit"). Live Tokenese clone traffic is authorized within the narrowed dense-lane scope below. W1+L1 mini-pilot passed (W1 win-conformant, L1 l1-plain-success) + W2/W5 v0.3 measurement run; per the narrowed-scope condition, the `chat-<agent>.md` dense scratchpad lane is now UNLOCKABLE (teach done AND one clean mini-pilot pass both satisfied) but remains OFF until the Maintainer explicitly enables it.
 Date: 2026-06-16 (ratified); reconciled 2026-06-17
 

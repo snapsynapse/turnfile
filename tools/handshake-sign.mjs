@@ -15,9 +15,14 @@
 
 import crypto from "node:crypto";
 import fs from "node:fs";
-import { execSync } from "node:child_process";
+import path from "node:path";
+import { spawnSync } from "node:child_process";
+import { createRequire } from "node:module";
+
+const require = createRequire(import.meta.url);
 
 const ROOT = process.cwd();
+const REPO_ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const TURNFILE = "working-session/TURNFILE.yaml";
 const WORKLOG = "working-session/WORKLOG.md";
 const HANDSHAKE = "working-session/NEXT_SESSION_HANDSHAKE.md";
@@ -55,6 +60,7 @@ DIRECT FLAG MODE (preferred for human-driven session opens, PRD-044 R1). Example
     --model <label>                 required
     --surface <label>               required
     --scope <value>                 required (repeatable for multiple lanes)
+    --instance <id>                 optional same-family instance id (PRD-049)
     --heartbeat-cadence <value>     default "5m"
     --heartbeat-policy <value>      default "notify-material"
     --heartbeat-stop <value>        default "close"
@@ -74,7 +80,7 @@ Common:
 }
 
 const DIRECT_PAYLOAD_FLAGS = new Set([
-  "--session", "--model", "--surface", "--scope",
+  "--session", "--model", "--surface", "--scope", "--instance",
   "--heartbeat-cadence", "--heartbeat-policy", "--heartbeat-stop", "--heartbeat-owner",
   "--tokenese-lead", "--no-tokenese-lead", "--gates",
 ]);
@@ -91,6 +97,7 @@ function parseArgs(argv) {
     else if (v === "--session") { a.direct.session = Number(argv[++i]); sawDirect = true; }
     else if (v === "--model") { a.direct.model = argv[++i]; sawDirect = true; }
     else if (v === "--surface") { a.direct.surface = argv[++i]; sawDirect = true; }
+    else if (v === "--instance") { a.direct.instance = argv[++i]; sawDirect = true; }
     else if (v === "--scope") {
       a.direct.scope_ack = a.direct.scope_ack || [];
       a.direct.scope_ack.push(argv[++i]);
@@ -132,6 +139,7 @@ function payloadFromDirect(d) {
     session: d.session,
     model: d.model,
     surface: d.surface,
+    instance: d.instance || null,
     scope_ack: d.scope_ack,
     heartbeat: {
       cadence: d.cadence || "5m",
@@ -160,6 +168,28 @@ function prdCount() {
 function loadPayload(spec) {
   const text = spec === "-" ? fs.readFileSync(0, "utf8") : fs.readFileSync(spec, "utf8");
   return JSON.parse(text);
+}
+
+function assertInstanceCap(agent, payload, tfRaw) {
+  if (!payload.instance) return;
+  let parsed;
+  try {
+    const yaml = require("js-yaml");
+    parsed = yaml.load(tfRaw);
+  } catch (error) {
+    console.error(`handshake-sign: cannot inspect existing instances before boot: ${error.message}`);
+    process.exit(1);
+  }
+  const instances = parsed?.agents?.[agent]?.instances || {};
+  const liveInstances = instances && typeof instances === "object" ? Object.keys(instances) : [];
+  if (!liveInstances.includes(payload.instance) && liveInstances.length >= 3) {
+    console.error(
+      `handshake-sign: refusing fourth same-family instance '${agent}/${payload.instance}'; ` +
+      `family '${agent}' already has ${liveInstances.length} live instances ` +
+      `(${liveInstances.join(", ")}); cap is 3.`,
+    );
+    process.exit(1);
+  }
 }
 
 function deriveNextState(tf, mb) {
@@ -202,8 +232,8 @@ function bumpTurnfile(tf, agent, payload, nextRev, nextSig) {
     `    role:\\s*"agent"\\s*\\n` +
     `    status:\\s*)"[^"]*"(\\s*\\n` +
     `    current_task:\\s*)(?:null|"[^"]*")(\\s*\\n` +
-    `    last_seen:\\s*)"[^"]*"(\\s*\\n` +
-    `    session_id:\\s*)"[^"]*"`
+    `    last_seen:\\s*)(?:null|"[^"]*")(\\s*\\n` +
+    `    session_id:\\s*)(?:null|"[^"]*")`
   );
   tf = replaceOrFail(tf, blockRe,
     `$1"active"$2"${task}"$3"${agent}-session-${payload.session}-open"$4"${session}"`,
@@ -222,7 +252,11 @@ function bumpTurnfile(tf, agent, payload, nextRev, nextSig) {
       `      claim_rev: ${nextRev}\n` +
       `      completed_rev: null\n` +
       `      notes: ${JSON.stringify("Auto-created by handshake-sign per PRD-037 OQ-D.")}\n`;
-    tf = replaceOrFail(tf, /(\n  tasks:\n)/, `$1${taskEntry}`, "coordination.tasks");
+    if (/\n  tasks:\s*\{\}\s*\n/.test(tf)) {
+      tf = replaceOrFail(tf, /\n  tasks:\s*\{\}\s*\n/, `\n  tasks:\n${taskEntry}`, "coordination.tasks");
+    } else {
+      tf = replaceOrFail(tf, /(\n  tasks:\n)/, `$1${taskEntry}`, "coordination.tasks");
+    }
   }
 
   // signal entry at top of messages list
@@ -233,7 +267,11 @@ function bumpTurnfile(tf, agent, payload, nextRev, nextSig) {
     `    signal: "ready"\n` +
     `    rev: ${nextRev}\n` +
     `    detail: ${JSON.stringify(detail)}\n`;
-  tf = replaceOrFail(tf, /^messages:\n/m, `messages:\n${sigEntry}`, "messages.head");
+  if (/^messages:\s*\[\]\s*$/m.test(tf)) {
+    tf = replaceOrFail(tf, /^messages:\s*\[\]\s*$/m, `messages:\n${sigEntry.trimEnd()}`, "messages.head");
+  } else {
+    tf = replaceOrFail(tf, /^messages:\n/m, `messages:\n${sigEntry}`, "messages.head");
+  }
 
   return tf;
 }
@@ -338,9 +376,16 @@ function updateWorklog(wl, agent, payload, nextRev) {
   return wl + "\n" + line + "\n";
 }
 
-function run(cmd) {
-  try { execSync(cmd, { stdio: "pipe" }); return { ok: true }; }
-  catch (e) { return { ok: false, out: (e.stdout?.toString() || "") + (e.stderr?.toString() || "") }; }
+function runTool(script, args) {
+  const result = spawnSync(process.execPath, [path.join(REPO_ROOT, script), ...args], {
+    cwd: ROOT,
+    encoding: "utf8",
+    stdio: "pipe",
+  });
+  return {
+    ok: result.status === 0,
+    out: `${result.stdout || ""}${result.stderr || ""}`,
+  };
 }
 
 function main() {
@@ -356,6 +401,7 @@ function main() {
   const tfHash = sha(tfBefore), wlHash = sha(wlBefore), hsHash = sha(hsBefore);
 
   const { rev, nextRev, nextSig } = deriveNextState(tfBefore, read(MAILBOX));
+  assertInstanceCap(args.agent, payload, tfBefore);
 
   const tfAfter = bumpTurnfile(tfBefore, args.agent, payload, nextRev, nextSig);
   const hsAfter = signHandshake(hsBefore, args.agent, payload, nextRev);
@@ -396,12 +442,15 @@ function main() {
   }
 
   // Re-export MAILBOX.json (no mailbox edits here, but keep projection fresh)
-  const exp = run(`node tools/export-mailbox-json.mjs ${MAILBOX} working-session/MAILBOX.json`);
+  const exp = runTool("tools/export-mailbox-json.mjs", [MAILBOX, "working-session/MAILBOX.json"]);
   if (!exp.ok) { console.error("export-mailbox-json failed:", exp.out); process.exit(3); }
 
-  const lint = run(`node tools/turnfile-lint.mjs --turnfile ${TURNFILE} --schema schemas/turnfile/turnfile-v0.schema.json`);
+  const lint = runTool("tools/turnfile-lint.mjs", [
+    "--turnfile", TURNFILE,
+    "--schema", path.join(REPO_ROOT, "schemas/turnfile/turnfile-v0.schema.json"),
+  ]);
   if (!lint.ok) { console.error("turnfile-lint failed:", lint.out); process.exit(4); }
-  const mbInv = run(`node tools/validate-mailbox-invariants.mjs --mailbox ${MAILBOX}`);
+  const mbInv = runTool("tools/validate-mailbox-invariants.mjs", ["--mailbox", MAILBOX]);
   if (!mbInv.ok) { console.error("mailbox-invariants failed:", mbInv.out); process.exit(5); }
 
   console.log(JSON.stringify({

@@ -30,7 +30,7 @@ function usage() {
     "",
     "Examples:",
     "  node tools/turnfile.mjs init --project demo --maintainer snap --agent claude --root /tmp/demo",
-    "  node tools/turnfile.mjs open --agent claude --session 48 --model 'Opus 4.7' --surface 'Claude Code' --scope v1",
+    "  node tools/turnfile.mjs open --agent claude --instance fable-5 --session 48 --model 'Fable 5' --surface 'Claude Code' --scope v1",
     "  node tools/turnfile.mjs status --agent claude --emit json",
     "  node tools/turnfile.mjs heartbeat write --agent claude --session 48",
     "  node tools/turnfile.mjs close --agent claude --dry-run",
@@ -54,6 +54,19 @@ function parseFlags(argv, { repeatable = new Set() } = {}) {
     } else {
       out[key] = value;
     }
+  }
+  return out;
+}
+
+function stripFlag(argv, flag) {
+  const out = [];
+  for (let i = 0; i < argv.length; i += 1) {
+    if (argv[i] !== flag) {
+      out.push(argv[i]);
+      continue;
+    }
+    const next = argv[i + 1];
+    if (next && !next.startsWith("--")) i += 1;
   }
   return out;
 }
@@ -90,7 +103,7 @@ function commandInit(argv) {
   }
 
   const templateRoot = path.join(repoRoot, "templates/v1-minimal/working-session");
-  const files = ["TURNFILE.yaml", "MAILBOX.md", "WORKLOG.md"];
+  const files = ["TURNFILE.yaml", "MAILBOX.md", "WORKLOG.md", "NEXT_SESSION_HANDSHAKE.md"];
   const substitutions = {
     "your-project-name": project,
     "your-name": maintainer,
@@ -135,22 +148,26 @@ function mirrorAndExit(result) {
 
 function commandOpen(argv) {
   const flags = parseFlags(argv, { repeatable: new Set(["scope"]) });
+  const root = path.resolve(String(flags.root || process.cwd()));
   if (flags["dry-run"] === true) {
     const scopes = Array.isArray(flags.scope) ? flags.scope.map(String) : flags.scope ? [String(flags.scope)] : [];
     emitJson({
       ok: true,
       dry_run: true,
+      root,
       agent: String(flags.agent || ""),
       payload: {
         session: Number.parseInt(String(flags.session || "0"), 10) || 0,
         model: String(flags.model || ""),
         surface: String(flags.surface || ""),
+        instance: flags.instance ? String(flags.instance) : null,
         scope_ack: scopes,
       },
     });
     return;
   }
-  const result = runNode(path.join(repoRoot, "tools/handshake-sign.mjs"), argv);
+  const delegated = stripFlag(argv, "--root");
+  const result = runNode(path.join(repoRoot, "tools/handshake-sign.mjs"), delegated, { cwd: root });
   mirrorAndExit(result);
 }
 
@@ -188,7 +205,10 @@ function commandStatus(argv) {
   mirrorAndExit(result);
 }
 
-function heartbeatPath(root = process.cwd()) {
+function heartbeatPath(root = process.cwd(), agent = "", instance = "") {
+  if (agent && instance) {
+    return path.join(root, `working-session/HEARTBEAT-${agent}.${instance}.md`);
+  }
   return path.join(root, "working-session/HEARTBEAT.md");
 }
 
@@ -196,9 +216,10 @@ function commandHeartbeat(argv) {
   const action = argv[0];
   const flags = parseFlags(argv.slice(1));
   const root = path.resolve(String(flags.root || "."));
-  const file = heartbeatPath(root);
+  const agent = String(flags.agent || "");
+  const instance = flags.instance ? String(flags.instance) : "";
+  const file = heartbeatPath(root, agent, instance);
   if (action === "write") {
-    const agent = String(flags.agent || "");
     const session = String(flags.session || "");
     if (!agent || !session) die(EXIT.usage, "heartbeat write requires --agent and --session");
     const cadence = String(flags.cadence || "5m");
@@ -208,6 +229,7 @@ function commandHeartbeat(argv) {
       "# Turnfile Heartbeat",
       "",
       `agent: ${agent}`,
+      instance ? `instance: ${instance}` : null,
       `session: ${session}`,
       `cadence: ${cadence}`,
       `policy: ${policy}`,
@@ -217,14 +239,14 @@ function commandHeartbeat(argv) {
       "Deny-list: no file edits, no MAILBOX.json regen, no status changes, no signal creation, no revision bumps from the heartbeat itself.",
       "Self-drive rule: the runtime owns the actual loop and reads this sentinel on each tick; absence of this file stops the heartbeat.",
       "",
-    ].join("\n");
+    ].filter(Boolean).join("\n");
     try {
       fs.mkdirSync(path.dirname(file), { recursive: true });
       fs.writeFileSync(file, body, "utf8");
     } catch (error) {
       die(EXIT.fs, `heartbeat write failed: ${error.message}`);
     }
-    emitJson({ ok: true, action: "write", path: "working-session/HEARTBEAT.md", agent, session });
+    emitJson({ ok: true, action: "write", path: path.relative(root, file), agent, instance: instance || null, session });
     return;
   }
   if (action === "stop") {
@@ -248,7 +270,7 @@ function commandClose(argv) {
   const agent = String(flags.agent || "");
   if (!agent) die(EXIT.usage, "close requires --agent");
   const dryRun = flags["dry-run"] === true;
-  const root = process.cwd();
+  const root = path.resolve(String(flags.root || process.cwd()));
   const validators = [];
 
   function runStep(id, script, args) {
@@ -260,11 +282,28 @@ function commandClose(argv) {
     return { ok: true, result };
   }
 
+  const targetPrdStatus = path.join(root, "working-session/docs/PRD_STATUS.json");
+  const fallbackPrdStatus = path.join(os.tmpdir(), "turnfile-empty-close-prd-status.json");
+  if (!fs.existsSync(targetPrdStatus)) {
+    fs.writeFileSync(
+      fallbackPrdStatus,
+      JSON.stringify({ policy: { required_reviewers: ["claude", "codex"] }, prds: [] }, null, 2),
+      "utf8",
+    );
+  }
+
   const steps = [
     ["mailbox-invariants", "tools/validate-mailbox-invariants.mjs", ["--mailbox", "working-session/MAILBOX.md"]],
     ["closeout", "tools/validate-closeout.mjs", ["--turnfile", "working-session/TURNFILE.yaml", "--mailbox", "working-session/MAILBOX.md", "--agent", agent]],
-    ["turnfile-lint", "tools/turnfile-lint.mjs", ["--turnfile", "working-session/TURNFILE.yaml", "--schema", "schemas/turnfile/turnfile-v0.schema.json"]],
-    ["prd-promotion", "tools/validate-prd-promotion.mjs", []],
+    ["turnfile-lint", "tools/turnfile-lint.mjs", [
+      "--turnfile", "working-session/TURNFILE.yaml",
+      "--schema", path.join(repoRoot, "schemas/turnfile/turnfile-v0.schema.json"),
+    ]],
+    ["prd-promotion", "tools/validate-prd-promotion.mjs", [
+      "--registry", fs.existsSync(targetPrdStatus)
+        ? "working-session/docs/PRD_STATUS.json"
+        : fallbackPrdStatus,
+    ]],
   ];
   for (const [id, script, args] of steps) {
     const step = runStep(id, script, args);

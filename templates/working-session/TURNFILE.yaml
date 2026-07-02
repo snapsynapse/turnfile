@@ -5,7 +5,7 @@
 # Modified by: maintainer
 
 turnfile:
-  version: "0.1"
+  version: "0.1.0"
   project: "<project-name>"
   workspace: "working-session/"
 

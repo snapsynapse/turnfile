@@ -89,9 +89,9 @@ function v1GateSnapshot(d) {
   checks.push(cond("PRD-046 done", p046?.implementation?.state === "done" || p046?.implementation?.state === "eval-verified", `state=${p046?.implementation?.state}`));
   checks.push(cond("PRD-048 done", p048?.implementation?.state === "done", `state=${p048?.implementation?.state}`));
   const tokeneseEvidence = fs.existsSync(path.join(root, "working-session/docs")) && fs.readdirSync(path.join(root, "working-session/docs")).some((f) => f.startsWith("v1-cross-repo-test-tokenese-"));
-  const paice2Evidence = fs.existsSync(path.join(root, "working-session/docs")) && fs.readdirSync(path.join(root, "working-session/docs")).some((f) => f.startsWith("v1-cross-repo-test-paice2-"));
+  const aidrEvidence = fs.existsSync(path.join(root, "working-session/docs")) && fs.readdirSync(path.join(root, "working-session/docs")).some((f) => f.startsWith("v1-cross-repo-test-aidr-"));
   checks.push(cond("PRD-047 Test 1 Tokenese evidence", tokeneseEvidence, "glob working-session/docs/v1-cross-repo-test-tokenese-*"));
-  checks.push(cond("PRD-047 Test 2 PAICE2 evidence", paice2Evidence, "glob working-session/docs/v1-cross-repo-test-paice2-*"));
+  checks.push(cond("PRD-047 Test 2 AIDR evidence", aidrEvidence, "glob working-session/docs/v1-cross-repo-test-aidr-*"));
   const p043MaintainerAccepted = p043?.acceptance?.maintainer?.status === "accepted";
   const p043StaleApprovalBlockers = (p043?.blocking_items || []).filter((b) => /maintainer (ratif|approv)|r9 version-bump guardrail/i.test(b));
   checks.push(cond("PRD-043 maintainer acceptance carries forward", p043MaintainerAccepted && p043StaleApprovalBlockers.length === 0, `maintainer=${p043?.acceptance?.maintainer?.status || "missing"} stale_approval_blockers=${JSON.stringify(p043StaleApprovalBlockers)}`));

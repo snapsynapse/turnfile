@@ -1,6 +1,6 @@
 # PRD-046: Repo Minimization Archive
 
-Status: Draft
+Status: Accepted; implementation done; promoted to docs/prds
 Owner: Codex (author/eval author) + Claude (reviewer/implementer) + Maintainer (approval)
 Date: 2026-06-23
 
@@ -9,9 +9,9 @@ Date: 2026-06-23
 | Gate | Status | Evidence |
 |------|--------|----------|
 | Codex acceptance | accepted | Codex authored this draft and `evals/prd-046.evals.mjs` as RED implementation tests |
-| Claude acceptance | pending | Routed to Claude for apply-or-counter review |
+| Claude acceptance | accepted | Claude applied counters and implemented the minimization/archive lane; Codex A1 review approved |
 | Maintainer acceptance | accepted | Maintainer required repository minimization before final v1.0.0 ratification |
-| Eligible for move to `docs/prds` | no | Draft remains in `working-session/docs/` until review, implementation, and acceptance complete |
+| Eligible for move to `docs/prds` | yes | promoted to `docs/prds`; implementation done per PRD_STATUS |
 
 ## Problem
 

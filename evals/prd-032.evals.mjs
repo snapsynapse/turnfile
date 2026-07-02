@@ -82,7 +82,7 @@ Fixture body.
 # Modified by: fixture
 
 turnfile:
-  version: "0.1"
+  version: "0.1.0"
   project: "turnfile"
   workspace: "working-session/"
 

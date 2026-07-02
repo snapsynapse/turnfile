@@ -1,5 +1,9 @@
 # TURNFILE.yaml — v1 Minimal Starter
 # Replace placeholder values before first use.
+# Protocol: Turnfile v1.0.0
+# Project: your-project-name
+# Last modified revision: 1
+# Modified by: agent
 
 turnfile:
   version: "1.0.0"
@@ -17,7 +21,7 @@ agents:
 maintainer:
   id: "your-name"
   status: "available"
-  last_seen: null
+  last_seen: "replace-on-first-use"
 
 coordination:
   revision: 1

@@ -90,7 +90,7 @@ test("R4/R5: v1 starter template and schema freeze exist and are minimal", () =>
     .sort();
   assert.deepEqual(
     templateFiles,
-    ["MAILBOX.md", "TURNFILE.yaml", "WORKLOG.md"],
+    ["MAILBOX.md", "NEXT_SESSION_HANDSHAKE.md", "TURNFILE.yaml", "WORKLOG.md"],
     "minimal starter working-session must contain only the required core files",
   );
 });
@@ -196,6 +196,21 @@ test("R9/R10: validate-v1-release wrapper exposes the final evidence gate", () =
   const check = output.checks.find((row) => row.id === "prd-043-r10-fresh-context-evidence");
   assert.ok(check, "release validator must expose the PRD-043 R10 fresh-context evidence gate");
   assert.match(check.detail || "", /v1-fresh-context-probe|found/i);
+});
+
+test("R9: validate-v1-release explains MSG-028 as Maintainer ratification blocker", () => {
+  const result = run(["tools/validate-v1-release.mjs", "--format", "json"]);
+  const output = JSON.parse(result.stdout || "{}");
+  assert.ok(Array.isArray(output.checks), "release validator JSON must include checks");
+  const mailboxEnd = output.checks.find((row) => row.id === "mailbox-session-end");
+  assert.ok(mailboxEnd, "release validator must include mailbox session end check");
+  if (!output.ok && /MSG-20260623-028/.test(mailboxEnd.detail || "")) {
+    assert.match(
+      mailboxEnd.detail,
+      /Maintainer dogfood evidence ratification/i,
+      "MSG-20260623-028 release-gate failure must identify the concrete ratification blocker",
+    );
+  }
 });
 
 test("A1 registry: PRD_STATUS records PRD-043 promoted ownership and expected implementation split", () => {

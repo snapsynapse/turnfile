@@ -14,9 +14,9 @@
       "additionalProperties": false,
       "properties": {
         "version": {
-          "description": "Turnfile format version. Must be a quoted string to avoid YAML implicit typing (PRD-013 R1.1).",
+          "description": "Turnfile format version as Semantic Versioning MAJOR.MINOR.PATCH (optional -prerelease and +build), matching the release tag so the field and the tag never diverge. Must be a quoted string to avoid YAML implicit typing (PRD-013 R1.1).",
           "type": "string",
-          "pattern": "^[0-9]+\\.[0-9]+$"
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z.-]+)?(\\+[0-9A-Za-z.-]+)?$"
         },
         "project": {
           "description": "Project identifier.",
@@ -167,6 +167,49 @@
         "session_id": {
           "description": "Current session identifier, or null if not in a session.",
           "type": ["string", "null"]
+        },
+        "instances": {
+          "description": "Optional same-family instance registry for PRD-049. Omitted for normal single-instance operation.",
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "$ref": "#/$defs/agent_instance_entry"
+          },
+          "propertyNames": {
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          }
+        }
+      }
+    },
+
+    "agent_instance_entry": {
+      "description": "Per-instance registration entry within a provider family.",
+      "type": "object",
+      "required": ["model", "session_id", "status", "current_task", "lane_role"],
+      "additionalProperties": false,
+      "properties": {
+        "model": {
+          "description": "Instance model identifier.",
+          "type": "string",
+          "minLength": 1
+        },
+        "session_id": {
+          "description": "Current instance session identifier, or null if not in a session.",
+          "type": ["string", "null"]
+        },
+        "status": {
+          "description": "Current instance status.",
+          "type": "string",
+          "enum": ["idle", "active", "blocked", "offline"]
+        },
+        "current_task": {
+          "description": "Task ID the instance is currently working on, or null.",
+          "type": ["string", "null"]
+        },
+        "lane_role": {
+          "description": "Family lane role for same-family multi-instance collaboration.",
+          "type": "string",
+          "enum": ["primary", "secondary"]
         }
       }
     },

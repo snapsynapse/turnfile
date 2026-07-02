@@ -71,7 +71,7 @@ function createFixtureWorkspace(options = {}) {
 
   const turnfile = options.turnfile || `# TURNFILE.yaml — SNAP Coordination State
 turnfile:
-  version: "0.1"
+  version: "0.1.0"
   project: "turnfile"
   workspace: "working-session/"
 
@@ -102,9 +102,12 @@ messages: []
 | Gemini | yes — Turnfile v0.1 (rev 320) | yes — grammar v0.3 | yes | ACK | 5m | yes | Gemini (3.5 Flash (High)) — 2026-06-19 |
 `;
 
+  const prdStatus = options.prdStatus || JSON.stringify({ prds: [] });
+
   write(path.join(ws, "MAILBOX.md"), mailbox);
   write(path.join(ws, "TURNFILE.yaml"), turnfile);
   write(path.join(ws, "NEXT_SESSION_HANDSHAKE.md"), handshake);
+  write(path.join(ws, "docs/PRD_STATUS.json"), prdStatus);
   return dir;
 }
 
@@ -221,4 +224,34 @@ test("R4: Heartbeat check remains read-only and does not mutate filesystem", () 
   // Verify file modification times have not changed
   assert.equal(fs.statSync(mailboxPath).mtimeMs, initialMailboxMtime, "MAILBOX.md must not be modified");
   assert.equal(fs.statSync(turnfilePath).mtimeMs, initialTurnfileMtime, "TURNFILE.yaml must not be modified");
+});
+
+test("AC2/R2.5: Pending PRD_STATUS ownership triggers NOTIFY", () => {
+  const prdStatus = JSON.stringify({
+    prds: [
+      {
+        id: "PRD-999",
+        title: "Test PRD",
+        state: "draft",
+        acceptance: {
+          gemini: {
+            status: "pending",
+            evidence: []
+          }
+        },
+        implementation: {
+          state: "initiated",
+          implementer: "codex"
+        }
+      }
+    ]
+  });
+
+  const dir = createFixtureWorkspace({ prdStatus });
+  const res = runValidator(["--root", dir, "--agent", "gemini", "--format", "json"]);
+  assert.equal(res.status, 0, res.stderr);
+  const data = JSON.parse(res.stdout);
+  assert.equal(data.outcome, "NOTIFY");
+  assert.equal(data.reason, "prd-status-activity");
+  assert.ok(data.details.prd_status_work.includes("PRD-999"));
 });

@@ -187,6 +187,33 @@ function checkSemanticInvariants(turnfile, errors, warnings, fixHints) {
 
   // 2. Agent current_task references a valid task
   for (const [agentId, agent] of Object.entries(agents)) {
+    const instances = agent.instances && typeof agent.instances === "object" ? agent.instances : null;
+    if (instances) {
+      const instanceEntries = Object.entries(instances);
+      if (instanceEntries.length > 3) {
+        errors.push(`Agent family '${agentId}' has ${instanceEntries.length} instances; cap is at most 3.`);
+      }
+      const primaries = instanceEntries.filter(([, instance]) => instance?.lane_role === "primary");
+      if (primaries.length !== 1) {
+        errors.push(`Agent family '${agentId}' instances must have exactly one primary; found ${primaries.length}.`);
+      }
+      for (const [instanceId, instance] of instanceEntries) {
+        const qualifiedId = `${agentId}/${instanceId}`;
+        if (instance.current_task && !(instance.current_task in tasks)) {
+          errors.push(`Agent instance '${qualifiedId}' references unknown task '${instance.current_task}'.`);
+        }
+        if (instance.current_task && instance.current_task in tasks) {
+          const task = tasks[instance.current_task];
+          if (task.owner !== agentId && task.owner !== qualifiedId) {
+            warnings.push(`Agent instance '${qualifiedId}' current_task '${instance.current_task}' is owned by '${task.owner}'.`);
+          }
+          if (!["in_progress", "claimed"].includes(task.status)) {
+            warnings.push(`Agent instance '${qualifiedId}' current_task '${instance.current_task}' has status '${task.status}' (expected in_progress or claimed).`);
+          }
+        }
+      }
+    }
+
     if (agent.current_task && !(agent.current_task in tasks)) {
       errors.push(`Agent '${agentId}' references unknown task '${agent.current_task}'.`);
       if (fixHints) {
@@ -197,7 +224,7 @@ function checkSemanticInvariants(turnfile, errors, warnings, fixHints) {
     // Agent current_task should match a task that's in_progress or claimed and owned by them
     if (agent.current_task && agent.current_task in tasks) {
       const task = tasks[agent.current_task];
-      if (task.owner !== agentId) {
+      if (task.owner !== agentId && !String(task.owner).startsWith(`${agentId}/`)) {
         warnings.push(`Agent '${agentId}' current_task '${agent.current_task}' is owned by '${task.owner}'.`);
       }
       if (!["in_progress", "claimed"].includes(task.status)) {

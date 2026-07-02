@@ -1,6 +1,6 @@
-# Boot File — Gemini (v13)
+# Boot File — Gemini (v12)
 
-Read this first on Gemini session start. It is the Gemini handoff from session 30 closeout.
+Read this first on Gemini session start. It is the Gemini handoff from session 29 closeout.
 
 ## Project
 

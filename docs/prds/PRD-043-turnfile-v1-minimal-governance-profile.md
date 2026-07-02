@@ -1,6 +1,6 @@
 # PRD-043: Turnfile v1 Minimal Governance Profile and PRD Shelf Reconciliation
 
-Status: Draft
+Status: Accepted; implementation done; promoted to docs/prds
 Owner: Codex (author/eval author) + Claude (counter-reviewer/implementer) + Maintainer (boundary arbitration)
 Date: 2026-06-23
 
@@ -9,9 +9,9 @@ Date: 2026-06-23
 | Gate | Status | Evidence |
 |------|--------|----------|
 | Codex acceptance | accepted | Codex authored this draft and `evals/prd-043.evals.mjs` as RED implementation tests |
-| Claude acceptance | pending | Claude must counter-review the v1 cut-list before implementation |
+| Claude acceptance | accepted | Claude counter-reviewed and implemented the v1 cut-list; Codex A1 review approved |
 | Maintainer acceptance | accepted | Maintainer arbitrates disputed boundary lines only |
-| Eligible for move to `docs/prds` | no | Draft remains in `working-session/docs/` until Claude review, Maintainer arbitration, and implementation are complete |
+| Eligible for move to `docs/prds` | yes | promoted to `docs/prds`; implementation done per PRD_STATUS |
 
 ## Problem
 

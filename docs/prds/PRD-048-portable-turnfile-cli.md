@@ -1,6 +1,6 @@
 # PRD-048: Portable Turnfile CLI
 
-Status: Draft
+Status: Accepted; implementation done; promoted to docs/prds
 Owner: Claude (author + eval author) + Codex (implementer) + Maintainer (approval)
 Reviewer: Claude (PRD-006 step 7)
 Date: 2026-06-23
@@ -11,10 +11,10 @@ Sibling: PRD-046 (Repo Minimization), PRD-047 (Cross-Repo v1 Validation Tests)
 
 | Gate | Status | Evidence |
 |------|--------|----------|
-| Codex acceptance | pending | Codex apply-or-counter requested via MSG-20260623-024 |
+| Codex acceptance | accepted | Codex implemented the CLI against Claude-authored evals |
 | Claude acceptance | accepted | Claude authored this draft + RED evals at Maintainer direction |
-| Maintainer acceptance | pending | Required before promotion |
-| Eligible for move to `docs/prds` | no | Draft remains in `working-session/docs/` until review, implementation, and acceptance complete |
+| Maintainer acceptance | accepted | Maintainer acceptance carries forward per PRD_STATUS |
+| Eligible for move to `docs/prds` | yes | promoted to `docs/prds`; implementation done per PRD_STATUS |
 
 ## A1 ownership (Maintainer-directed exception)
 

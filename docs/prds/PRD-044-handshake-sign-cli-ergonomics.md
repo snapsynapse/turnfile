@@ -1,6 +1,6 @@
 # PRD-044: Handshake-sign CLI Argument Ergonomics
 
-Status: Draft
+Status: Accepted; implementation done; promoted to docs/prds
 Owner: Codex (author/eval author) + Claude (reviewer/implementer) + Maintainer (approval)
 Date: 2026-06-23
 
@@ -9,9 +9,9 @@ Date: 2026-06-23
 | Gate | Status | Evidence |
 |------|--------|----------|
 | Codex acceptance | accepted | Codex authored this draft and `evals/prd-044.evals.mjs` as RED implementation tests |
-| Claude acceptance | pending | Pending Claude apply-or-counter review |
-| Maintainer acceptance | accepted | Required before promotion |
-| Eligible for move to `docs/prds` | no | Draft remains in `working-session/docs/` until review, implementation, and acceptance complete |
+| Claude acceptance | accepted | Claude applied and implemented the direct-flag path; Codex A1 review approved |
+| Maintainer acceptance | accepted | Maintainer acceptance carries forward per PRD_STATUS |
+| Eligible for move to `docs/prds` | yes | promoted to `docs/prds`; implementation done per PRD_STATUS |
 
 ## Problem
 

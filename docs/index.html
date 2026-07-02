@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Turnfile &mdash; Auditable peer disagreement for agents</title>
-  <!-- turnfile:prd-promoted=44 turnfile:registry-tracked=47 turnfile:agents=3 turnfile:skill-claude-bundle=14 turnfile:skill-codex-bundle=10 turnfile:skill-gemini-bundle=5 turnfile:spec=v0.5.0 turnfile:release-target=v1.0.0 -->
-  <meta name="description" content="Turnfile is a thin governance layer for auditable peer disagreement between LLM agents. Current snapshot: 44 promoted PRDs, 47 registry-tracked PRDs, three heterogeneous agents (Claude, Codex, Gemini), an eight-step eval-gated implementation loop run end-to-end with builder/reviewer separation, and no central orchestrator.">
+  <!-- turnfile:prd-promoted=46 turnfile:registry-tracked=48 turnfile:agents=3 turnfile:skill-claude-bundle=14 turnfile:skill-codex-bundle=10 turnfile:skill-gemini-bundle=5 turnfile:spec=v1.0.0 turnfile:release=v1.0.0 -->
+  <meta name="description" content="Turnfile is a thin governance layer for auditable peer disagreement between LLM agents. Current snapshot: 46 promoted PRDs, 48 registry-tracked PRDs, three heterogeneous agents (Claude, Codex, Gemini), an eight-step eval-gated implementation loop run end-to-end with builder/reviewer separation, and no central orchestrator.">
   <meta name="keywords" content="turnfile, SNAP, structured negotiation of autonomous peers, multi-agent protocol, LLM collaboration, peer agents, counter-recommendation, human-in-the-loop, agent arbitration, mailbox protocol, markdown coordination, auditable AI">
   <meta name="author" content="Sam Rogers">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
@@ -30,7 +30,7 @@
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Turnfile">
   <meta property="og:title" content="Turnfile">
-  <meta property="og:description" content="A thin governance layer for auditable peer disagreement between LLM agents. Current snapshot: 44 promoted PRDs, 47 registry-tracked PRDs, three heterogeneous agents (Claude, Codex, Gemini), eval-gated implementation with builder/reviewer separation, and no central orchestrator.">
+  <meta property="og:description" content="A thin governance layer for auditable peer disagreement between LLM agents. Current snapshot: 46 promoted PRDs, 48 registry-tracked PRDs, three heterogeneous agents (Claude, Codex, Gemini), eval-gated implementation with builder/reviewer separation, and no central orchestrator.">
   <meta property="og:image" content="https://turnfile.work/imgs/og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -38,7 +38,7 @@
   <meta property="og:url" content="https://turnfile.work/">
   <meta property="og:locale" content="en_US">
   <meta property="article:published_time" content="2026-02-08T00:00:00Z">
-  <meta property="article:modified_time" content="2026-06-23T00:00:00Z">
+  <meta property="article:modified_time" content="2026-07-02T00:00:00Z">
   <meta property="article:author" content="Sam Rogers">
   <meta property="article:publisher" content="https://paice.work/">
   <meta property="article:section" content="Open Patterns">
@@ -52,7 +52,7 @@
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Turnfile">
-  <meta name="twitter:description" content="A thin governance layer for auditable peer disagreement between LLM agents. Current snapshot: 44 promoted PRDs, 47 registry-tracked PRDs, three heterogeneous agents (Claude, Codex, Gemini), eval-gated implementation with builder/reviewer separation, and no central orchestrator.">
+  <meta name="twitter:description" content="A thin governance layer for auditable peer disagreement between LLM agents. Current snapshot: 46 promoted PRDs, 48 registry-tracked PRDs, three heterogeneous agents (Claude, Codex, Gemini), eval-gated implementation with builder/reviewer separation, and no central orchestrator.">
   <meta name="twitter:image" content="https://turnfile.work/imgs/og.png">
   <meta name="twitter:site" content="@paicework">
   <meta name="twitter:creator" content="@snapsynapse">
@@ -69,7 +69,7 @@
     "url": "https://turnfile.work/",
     "mainEntityOfPage": { "@type": "WebPage", "@id": "https://turnfile.work/" },
     "datePublished": "2026-02-08",
-    "dateModified": "2026-06-23",
+    "dateModified": "2026-07-02",
     "author": {
       "@type": "Person",
       "name": "Sam Rogers",
@@ -481,15 +481,15 @@
       <span class="sep">&middot;</span>
       Published <time datetime="2026-02-08">February 8, 2026</time>
       <span class="sep">&middot;</span>
-      Updated <time datetime="2026-06-23">June 23, 2026</time>
+      Updated <time datetime="2026-07-02">July 2, 2026</time>
       <span class="sep">&middot;</span>
-      44 promoted PRDs
+      46 promoted PRDs
       <span class="sep">&middot;</span>
-      <span class="version">v0.5.0 (current) &middot; v1.0.0 target</span>
+      <span class="version">v1.0.0 (current)</span>
       <span class="sep">&middot;</span>
       <a href="https://creativecommons.org/licenses/by/4.0/" rel="license" target="_blank">CC&nbsp;BY&nbsp;4.0</a>
     </p>
-    <p class="hook">v0.5.0 released; v1.0.0 release candidate gated on cross-repo dogfood evidence. 44 promoted PRDs, 47 registry-tracked. The eight-step eval-gated implementation loop runs end-to-end with builder/reviewer separation across three heterogeneous agents (Claude, Codex, Gemini), surviving Opus 4.6, Fable 5, Opus 4.7, and Opus 4.8 without protocol migration. The <strong>v1 Minimal Governance Profile</strong> (PRD-043) defines a fresh-adopter cutline that runs without reading historical PRDs; the new portable CLI (PRD-048, <code>node tools/turnfile.mjs</code>) initializes a session in any repo.</p>
+    <p class="hook">v1.0.0 released, the Minimal Governance Profile freeze. 46 promoted PRDs, 48 registry-tracked. The eight-step eval-gated implementation loop runs end-to-end with builder/reviewer separation across three heterogeneous agents (Claude, Codex, Gemini), surviving Opus 4.6, Fable 5, Opus 4.7, and Opus 4.8 without protocol migration. The <strong>v1 Minimal Governance Profile</strong> (PRD-043) defines a fresh-adopter cutline that runs without reading historical PRDs; the new portable CLI (PRD-048, <code>node tools/turnfile.mjs</code>) initializes a session in any repo.</p>
 
     <div class="turnfile-snippet" role="img" tabindex="0" aria-label="Example Turnfile coordination artifact showing three peer agents Claude, Codex, and Gemini with owned lanes, a human maintainer as arbiter, and the current turn being handed from Codex to Claude"><span class="tk-cm"># turnfile.yaml</span>
 <span class="tk-key">agents</span>:
@@ -646,7 +646,7 @@ docs/HUMAN_GOVERNANCE.md</pre>
       <div class="code-col">
         <div class="code-block">
           <h3>The current PRD shelf</h3>
-<pre># 44 promoted PRDs, 47 registry-tracked PRDs
+<pre># 46 promoted PRDs, 48 registry-tracked PRDs
 PRD-001  Maintainer interaction model
 PRD-002  Deferred archive
 PRD-003  Message lifecycle + SLA
@@ -700,7 +700,7 @@ PRD-042  Qwen 3.6 35b MLX onboarding deltas</pre>
     <div class="demo-block">
       <h2>See it in action</h2>
       <p>The <strong>inception archive</strong> is the unedited record of two LLM agents &mdash; Claude Opus 4.6 and OpenAI Codex 5.3 &mdash; building this protocol together across 11 sessions. No human wrote their messages. No orchestrator commanded them. Zero file collisions.</p>
-      <p>The protocol has since run across 27 real collaboration sessions and grown to three heterogeneous agents &mdash; Claude (Anthropic, Claude Code), Codex (OpenAI GPT-5, Codex desktop), and Gemini (Google, Gemini 3.5 Flash (High), Antigravity IDE; full-active since session 21 under PRD-015). The current snapshot: 47 registry-tracked PRDs (44 promoted), zero active open questions, and the eight-step eval-gated implementation loop run end-to-end across many lanes with builder/reviewer separation &mdash; PRD-017/021/022/023/024/026/028/029/030/032/033/036 implemented, PRD-031 Phase 1 (per-agent shards + derived aggregates) and the PRD-014 closeout amendment landed, plus a live Tokenese A/B pilot scored by a deterministic checker. The Claude lane ran across Opus 4.6, Fable 5, and Opus 4.8 on one unmodified protocol.</p>
+      <p>The protocol has since run across 27 real collaboration sessions and grown to three heterogeneous agents &mdash; Claude (Anthropic, Claude Code), Codex (OpenAI GPT-5, Codex desktop), and Gemini (Google, Gemini 3.5 Flash (High), Antigravity IDE; full-active since session 21 under PRD-015). The current snapshot: 48 registry-tracked PRDs (46 promoted), zero active open questions, and the eight-step eval-gated implementation loop run end-to-end across many lanes with builder/reviewer separation &mdash; PRD-017/021/022/023/024/026/028/029/030/032/033/036 implemented, PRD-031 Phase 1 (per-agent shards + derived aggregates) and the PRD-014 closeout amendment landed, plus a live Tokenese A/B pilot scored by a deterministic checker. The Claude lane ran across Opus 4.6, Fable 5, and Opus 4.8 on one unmodified protocol.</p>
       <p>Start with <a href="https://github.com/snapsynapse/turnfile/blob/main/examples/inception/WORKLOG.md" target="_blank" rel="noopener">WORKLOG.md</a> for the session-by-session narrative, or jump straight to <a href="https://github.com/snapsynapse/turnfile/blob/main/examples/inception/MAILBOX.md" target="_blank" rel="noopener">MAILBOX.md</a> to read the actual agent-to-agent messages &mdash; proposals, reviews, and counter-recommendations.</p>
       <div class="cta-row">
         <a href="https://github.com/snapsynapse/turnfile/tree/main/examples/inception" class="btn btn-primary" target="_blank" rel="noopener">Open the inception archive &rarr;</a>
@@ -732,7 +732,7 @@ PRD-042  Qwen 3.6 35b MLX onboarding deltas</pre>
       <a href="https://github.com/snapsynapse/turnfile/blob/main/INTENT.md" target="_blank" rel="noopener">INTENT.md</a>
       in the repository; any cross-posts on LinkedIn, PAICE.work, or other platforms are derived from those sources and should cite
       <a href="https://turnfile.work/">turnfile.work</a> as canonical.
-      Last substantive revision: <time datetime="2026-06-23">2026-06-23</time>.
+      Last substantive revision: <time datetime="2026-07-02">2026-07-02</time>.
       <a href="https://github.com/snapsynapse/turnfile/commits/main/INTENT.md" target="_blank" rel="noopener">Revision history &rarr;</a>
     </aside>
   </div>

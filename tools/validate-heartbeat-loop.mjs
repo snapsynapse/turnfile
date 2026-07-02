@@ -15,6 +15,15 @@ const TERMINAL_STATUSES = new Set([
   "abandoned",
 ]);
 
+const COMPLETE_IMPLEMENTATION_STATES = new Set([
+  "done",
+  "eval-verified",
+  "accepted",
+  "closed",
+  "superseded",
+  "deferred",
+]);
+
 function usage() {
   console.error(
     "Usage: node tools/validate-heartbeat-loop.mjs --agent <agent> [--root <dir>] [--format json|human]",
@@ -125,14 +134,45 @@ function hasHandshakeRow(handshakeText, agent) {
     });
 }
 
+function prdStatusWork(prdStatusText, agent) {
+  if (!prdStatusText.trim()) return [];
+  let registry;
+  try {
+    registry = JSON.parse(prdStatusText);
+  } catch {
+    return [];
+  }
+  const normalizedAgent = agent.toLowerCase();
+  const rows = Array.isArray(registry.prds) ? registry.prds : [];
+  return rows
+    .filter((prd) => prd && typeof prd === "object")
+    .filter((prd) => {
+      if (Array.isArray(prd.blocking_items) && prd.blocking_items.length > 0) return false;
+      const acceptance = prd.acceptance || {};
+      const ownAcceptance = acceptance[normalizedAgent];
+      if (ownAcceptance?.status === "pending") return true;
+
+      const implementation = prd.implementation || {};
+      const state = String(implementation.state || "").toLowerCase();
+      if (COMPLETE_IMPLEMENTATION_STATES.has(state)) return false;
+      return ["implementer", "reviewer", "eval_author"].some(
+        (key) => String(implementation[key] || "").toLowerCase() === normalizedAgent,
+      );
+    })
+    .map((prd) => prd.id)
+    .filter(Boolean);
+}
+
 function buildReport(root, agent) {
   const mailbox = readIfExists(path.join(root, "working-session", "MAILBOX.md"));
   const turnfile = readIfExists(path.join(root, "working-session", "TURNFILE.yaml"));
   const handshake = readIfExists(path.join(root, "working-session", "NEXT_SESSION_HANDSHAKE.md"));
+  const prdStatus = readIfExists(path.join(root, "working-session", "docs", "PRD_STATUS.json"));
 
   const details = {
     active_threads: sentMessageActivity(mailbox, agent),
     unblocked_tasks: unblockedTasks(turnfile, agent),
+    prd_status_work: prdStatusWork(prdStatus, agent),
     pending_handshake: !hasHandshakeRow(handshake, agent),
   };
 
@@ -141,6 +181,9 @@ function buildReport(root, agent) {
   }
   if (details.unblocked_tasks.length > 0) {
     return { outcome: "NOTIFY", reason: "task-dependency", details };
+  }
+  if (details.prd_status_work.length > 0) {
+    return { outcome: "NOTIFY", reason: "prd-status-activity", details };
   }
   if (details.pending_handshake) {
     return { outcome: "NOTIFY", reason: "pending-handshake", details };

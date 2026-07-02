@@ -75,6 +75,26 @@ function checkCommand(id, label, root, script, args) {
   };
 }
 
+function activeMessageBlock(mailboxText, id) {
+  const match = mailboxText.match(new RegExp(`### ${id}[\\s\\S]*?(?=\\n### MSG-|\\n## Closed Summary|$)`));
+  return match?.[0] || "";
+}
+
+function ratificationContext(root, detail) {
+  const ids = [...String(detail || "").matchAll(/\bMSG-\d{8}-\d+\b/g)].map((match) => match[0]);
+  if (ids.length === 0) return "";
+  const mailboxPath = rel(root, "working-session/MAILBOX.md");
+  if (!fs.existsSync(mailboxPath)) return "";
+  const mailbox = fs.readFileSync(mailboxPath, "utf8");
+  const contexts = [];
+  for (const id of ids) {
+    const block = activeMessageBlock(mailbox, id);
+    const blocker = block.match(/Remaining blocker[^:\n]*:\s*([^\n]+)/i)?.[1]?.trim();
+    if (blocker) contexts.push(`${id}: ${blocker}`);
+  }
+  return contexts.length > 0 ? `; blocker context: ${contexts.join("; ")}` : "";
+}
+
 function checkR10Evidence(root) {
   const dir = rel(root, "working-session/docs");
   let files = [];
@@ -120,6 +140,11 @@ function runGate(args) {
     ]),
     checkR10Evidence(root),
   ];
+  for (const check of checks) {
+    if (check.id === "mailbox-session-end" && !check.ok) {
+      check.detail = `${check.detail}${ratificationContext(root, check.detail)}`;
+    }
+  }
   const failures = checks.filter((check) => !check.ok);
   return {
     ok: failures.length === 0,

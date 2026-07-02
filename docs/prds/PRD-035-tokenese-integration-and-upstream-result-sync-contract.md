@@ -1,6 +1,6 @@
 # PRD-035: Tokenese Integration and Upstream Result Sync Contract
 
-Status: Accepted; implementation pending
+Status: Accepted; implementation done; promoted to docs/prds
 Owner: Codex proposer; Claude reviewed APPLY with counters; Maintainer acceptance confirmed
 Date: 2026-06-17
 Last revised: 2026-06-17
@@ -12,7 +12,7 @@ Last revised: 2026-06-17
 | Codex acceptance | accepted | Drafted by Codex after Maintainer requested Turnfile audit and comparison to newest Tokenese; applied Claude counters C1-C4 in session 19 |
 | Claude acceptance | accepted | MSG-20260617-032: APPLY with counters C1-C4; counters applied by Codex |
 | Maintainer acceptance | accepted | keep this repo as evidence for the Tokenese repo (which it can cite) but do not confuse the two |
-| Eligible for move to `docs/prds` | yes | all acceptances complete; promotion move still pending |
+| Eligible for move to `docs/prds` | yes | promoted to `docs/prds`; implementation done per PRD_STATUS |
 
 ## Input Provenance Tags
 

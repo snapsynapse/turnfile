@@ -77,13 +77,34 @@ function asArray(value) {
   return Array.isArray(value) ? value : [];
 }
 
+function reviewerFamily(reviewerId) {
+  return String(reviewerId || "").split(/[/.]/)[0];
+}
+
+function matchingAcceptanceEntries(acceptance, requiredReviewer) {
+  const family = reviewerFamily(requiredReviewer);
+  return Object.entries(acceptance).filter(([reviewerId]) => reviewerFamily(reviewerId) === family);
+}
+
+function validateOneFamilyOneVoice(entryId, acceptance, requiredReviewer, errors) {
+  const matching = matchingAcceptanceEntries(acceptance, requiredReviewer);
+  const accepted = matching.filter(([, slot]) => slot?.status === "accepted");
+  if (accepted.length > 1) {
+    errors.push(
+      `${entryId}: one-family-one-voice violation for required reviewer '${requiredReviewer}': ` +
+      `multiple same-family accepted review records (${accepted.map(([id]) => id).join(", ")})`,
+    );
+  }
+}
+
 function summarizeAcceptance(entry, requiredReviewers) {
   const acceptance = entry.acceptance || {};
   let accepted = true;
 
   for (const reviewer of requiredReviewers) {
-    const slot = acceptance[reviewer] || {};
-    if (slot.status !== "accepted") {
+    const matching = matchingAcceptanceEntries(acceptance, reviewer);
+    const acceptedSlots = matching.filter(([, slot]) => slot?.status === "accepted");
+    if (acceptedSlots.length !== 1) {
       accepted = false;
       break;
     }
@@ -164,20 +185,28 @@ function main() {
 
     const acceptance = entry.acceptance || {};
     for (const reviewer of requiredReviewers) {
-      const slot = acceptance[reviewer];
-      if (!slot || typeof slot !== "object") {
+      const matching = matchingAcceptanceEntries(acceptance, reviewer);
+      if (matching.length === 0) {
         errors.push(`${id}: missing acceptance entry for '${reviewer}'`);
         continue;
       }
+      validateOneFamilyOneVoice(id, acceptance, reviewer, errors);
 
-      const status = slot.status;
-      if (!VALID_STATUSES.has(status)) {
-        errors.push(`${id}: invalid acceptance status '${status}' for ${reviewer}`);
-      }
+      for (const [reviewerId, slot] of matching) {
+        if (!slot || typeof slot !== "object") {
+          errors.push(`${id}: acceptance entry for '${reviewerId}' must be an object`);
+          continue;
+        }
 
-      const evidence = asArray(slot.evidence);
-      if (status === "accepted" && evidence.length === 0) {
-        errors.push(`${id}: ${reviewer} is accepted but evidence is empty`);
+        const status = slot.status;
+        if (!VALID_STATUSES.has(status)) {
+          errors.push(`${id}: invalid acceptance status '${status}' for ${reviewerId}`);
+        }
+
+        const evidence = asArray(slot.evidence);
+        if (status === "accepted" && evidence.length === 0) {
+          errors.push(`${id}: ${reviewerId} is accepted but evidence is empty`);
+        }
       }
     }
 

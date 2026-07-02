@@ -45,6 +45,12 @@ These rules cannot be overridden by the session charter:
 
 6. **Counter-recommendations are encouraged.** When an agent disagrees with another agent's recommendation, they document it using the template in [section 5](#5-handoff-formats). Disagreement is signal, not friction. See [Conflict Resolution](./CONFLICT_RESOLUTION.md) for the full escalation ladder.
 
+7. **Same-family instances count as one voice.** When a provider family has multiple concurrent instances, the family still contributes one review voice. Instances count as one family voice, cannot satisfy proposer/implementer separation against a sibling instance, and must reconcile conflicting family verdicts before recording the external review.
+
+8. **Instance heartbeats use instance sentinels.** A persistent same-family instance may use `HEARTBEAT-<family>.<instance-id>.md` so one instance closing does not stop a sibling's steward. The existing `HEARTBEAT.md` name remains valid for single-instance operation.
+
+9. **Ephemeral delegates are not protocol participants.** A delegate, subagent, or fan-out worker spawned by an agent or instance is attributed to the spawner. Delegate output must be reviewed by the spawner before it enters protocol evidence; delegates never write coordination artifacts such as TURNFILE, mailbox, review, or quorum records directly and cannot contribute quorum standing.
+
 ---
 
 ## 4) Cross-review policy

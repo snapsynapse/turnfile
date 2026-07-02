@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0.0",
   "generated_for": "PRD-043 R3",
-  "generated_at_rev": 417,
-  "notes": "Authoritative classification of every PRD through PRD-048 for v1.0.0 release. classification: one of core-v1 | optional-profile | historical | deferred | superseded | draft. required_for_minimal_profile: boolean; true only for core-v1 entries that a fresh v1 adopter MUST read. profile: named optional profile (or null). v1_surface: short human-readable reason. PRD-025 is recorded as superseded because it was never registered in PRD_STATUS.json. Maintainer 2026-06-23 OQ-043-1 ruling: skills are a core requirement of FULL Turnfile participation; agents without skill bundles may participate at a LESSER (v1-minimal) tier. Tiered conformance encoded via required_for_full_participation field per entry: true for the skill-bundle profile (PRD-012, PRD-033) plus all core-v1 entries; false for everything else. v1-minimal conformance requires only required_for_minimal_profile=true entries. PRD-045 is the multi-agent-resilience optional profile and is required for full multi-agent participation, not for v1-minimal starter adoption. PRD-046 records the archive boundary as historical/provenance support, PRD-047 remains draft release-evidence work until PAICE2 dogfood evidence and ratification land, and PRD-048 is the portable CLI entry point for the v1 operational surface.",
+  "generated_at_rev": 481,
+  "notes": "Authoritative classification of every PRD through PRD-049 for v1.0.0 release. classification: one of core-v1 | optional-profile | historical | deferred | superseded | draft. required_for_minimal_profile: boolean; true only for core-v1 entries that a fresh v1 adopter MUST read. profile: named optional profile (or null). v1_surface: short human-readable reason. PRD-025 is recorded as superseded because it was never registered in PRD_STATUS.json. Maintainer 2026-06-23 OQ-043-1 ruling: skills are a core requirement of FULL Turnfile participation; agents without skill bundles may participate at a LESSER (v1-minimal) tier. Tiered conformance encoded via required_for_full_participation field per entry: true for the skill-bundle profile (PRD-012, PRD-033) plus all core-v1 entries; false for everything else. v1-minimal conformance requires only required_for_minimal_profile=true entries. PRD-045 is the multi-agent-resilience optional profile and is required for full multi-agent participation, not for v1-minimal starter adoption. PRD-046 records the archive boundary as historical/provenance support, PRD-047 remains draft release-evidence work until Maintainer dogfood evidence ratification lands, PRD-048 is the portable CLI entry point for the v1 operational surface, and PRD-049 is an optional same-family multi-instance collaboration profile.",
   "profiles": [
     "tokenese",
     "heartbeat",
@@ -12,7 +12,8 @@
     "skill-bundle-integrity",
     "public-surface-snapshot",
     "unified-terminal-transport",
-    "multi-agent-resilience"
+    "multi-agent-resilience",
+    "same-family-multi-instance"
   ],
   "prds": [
     {
@@ -398,6 +399,14 @@
       "v1_surface": "Portable CLI is the v1 operational entry point for init/open/status/heartbeat/close; fresh adopters can use the CLI without reading historical PRDs.",
       "profile": null,
       "required_for_full_participation": true
+    },
+    {
+      "id": "PRD-049",
+      "classification": "optional-profile",
+      "required_for_minimal_profile": false,
+      "v1_surface": "Same-family multi-instance collaboration is an optional profile for concurrent sibling models in one provider family; it does not change v1-minimal required reading or reviewer independence.",
+      "profile": "same-family-multi-instance",
+      "required_for_full_participation": false
     }
   ],
   "tiers": {

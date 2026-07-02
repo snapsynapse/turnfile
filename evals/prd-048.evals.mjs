@@ -66,6 +66,14 @@ function copyMinimalRepoStub(dir) {
   return dir;
 }
 
+function assertNoTargetTools(dir) {
+  assert.equal(
+    exists(path.join(dir, "tools")),
+    false,
+    "true cold-start target must not contain a copied tools/ directory",
+  );
+}
+
 test("R1: dispatcher exists and lists all five subcommands in --help", () => {
   assert.equal(exists(cli), true, `${cli} must exist`);
   const result = run(["--help"]);
@@ -106,6 +114,7 @@ test("R2/AC3: init scaffolds three working-session files with substitutions", ()
     "working-session/TURNFILE.yaml",
     "working-session/MAILBOX.md",
     "working-session/WORKLOG.md",
+    "working-session/NEXT_SESSION_HANDSHAKE.md",
   ]) {
     assert.equal(exists(path.join(dir, f)), true, `init must create ${f}`);
   }
@@ -178,6 +187,75 @@ test("R3/AC5: open --dry-run produces same payload shape as handshake-sign direc
   assert.equal(out.agent, "claude");
   assert.equal(out.payload.session, 48);
   assert.deepEqual(out.payload.scope_ack, ["v1-portable-cli"]);
+});
+
+test("R3/AC5: open --root delegates real execution inside the target repo", () => {
+  const dir = tmpRoot();
+  copyMinimalRepoStub(dir);
+  for (const f of [
+    "working-session/TURNFILE.yaml",
+    "working-session/MAILBOX.md",
+    "working-session/WORKLOG.md",
+  ]) {
+    fs.copyFileSync(path.join(root, "templates/v1-minimal", f), path.join(dir, f));
+  }
+  const turnfilePath = path.join(dir, "working-session/TURNFILE.yaml");
+  fs.writeFileSync(turnfilePath, read(turnfilePath).split("agent-a").join("claude"), "utf8");
+  fs.writeFileSync(path.join(dir, "working-session/NEXT_SESSION_HANDSHAKE.md"), "# Next Session Handshake\n");
+
+  const result = run([
+    "open",
+    "--root", dir,
+    "--agent", "claude",
+    "--session", "48",
+    "--model", "Opus 4.8",
+    "--surface", "Claude Code",
+    "--scope", "v1-portable-cli",
+    "--no-tokenese-lead",
+  ], root);
+  assert.equal(result.status, 0, `${result.stdout}${result.stderr}`);
+  assert.doesNotMatch(`${result.stdout}${result.stderr}`, /unknown arg: --root/);
+  const tf = read(path.join(dir, "working-session/TURNFILE.yaml"));
+  assert.match(tf, /claude-session-48/, "open --root must write session state in the target repo");
+});
+
+test("R3/R4/R6: fresh init -> open --root -> status -> close dry-run uses target repo", () => {
+  const dir = tmpRoot();
+  assertNoTargetTools(dir);
+  const init = run([
+    "init",
+    "--project", "cold-start-project",
+    "--maintainer", "snap",
+    "--agent", "claude",
+    "--root", dir,
+  ], root);
+  assert.equal(init.status, 0, `${init.stdout}${init.stderr}`);
+  assert.equal(exists(path.join(dir, "working-session/NEXT_SESSION_HANDSHAKE.md")), true);
+  assertNoTargetTools(dir);
+
+  const open = run([
+    "open",
+    "--root", dir,
+    "--agent", "claude",
+    "--session", "48",
+    "--model", "Opus 4.8",
+    "--surface", "Claude Code",
+    "--scope", "v1-portable-cli",
+    "--no-tokenese-lead",
+  ], root);
+  assert.equal(open.status, 0, `${open.stdout}${open.stderr}`);
+  assert.doesNotMatch(`${open.stdout}${open.stderr}`, /ENOENT|NEXT_SESSION_HANDSHAKE\.md|unknown arg: --root|Cannot find module/);
+
+  const status = run(["status", "--root", dir, "--agent", "claude", "--emit", "json"], root);
+  assert.equal(status.status, 0, `${status.stdout}${status.stderr}`);
+  const out = JSON.parse(status.stdout);
+  assert.equal(out.revision, 2, "status --root must read the opened target repo revision");
+  assert.equal(out.inbox?.selected_agent?.unread, 0, "fresh opened target should not create unread mail");
+
+  const close = run(["close", "--root", dir, "--agent", "claude", "--dry-run"], root);
+  assert.equal(close.status, 0, `${close.stdout}${close.stderr}`);
+  assert.doesNotMatch(`${close.stdout}${close.stderr}`, /ENOENT|NEXT_SESSION_HANDSHAKE\.md|unknown arg|Cannot find module/i);
+  assert.match(`${close.stdout}${close.stderr}`, /validators|MAILBOX SESSION|LINT|ok/i);
 });
 
 test("R4/AC6: status JSON matches session-orient JSON shape", () => {

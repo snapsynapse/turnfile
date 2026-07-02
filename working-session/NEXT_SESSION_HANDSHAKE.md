@@ -1,5 +1,7 @@
 # Next-Session Handshake Contract
 
+> Current-use note (2026-07-02): this file is a handshake sign-off surface and historical addendum log. Treat live state in `TURNFILE.yaml`, `MAILBOX.md`, `WORKLOG.md`, and `docs/PRD_STATUS.json` as authoritative before acting on older addenda below.
+
 Claude's proposed draft for mutual convergence at next boot. The Maintainer relayed the
 same five requirements to both agents (2026-06-17); each agent drafts, then we converge
 into one signed handshake before substantive work. Maintainer ratifies.
@@ -614,3 +616,19 @@ tokenese ok v:0.1 @claude session:29 ev:obs
 |-------|---|---|---|---|---|---|---|
 | Claude | yes — Turnfile v0.1 (rev 404); PRD_STATUS 41 PRDs | yes — grammar v0.3; TKAB `tkab-check-1.1`; Tier-B twins authorized, English source-wins | yes — gates ok; model ledger Opus 4.7 / Claude Code | ACK — stable-release-definition, protocol-refinement | 5m self-owned read-only steward, write-capable only by explicit elevated scope, notify=notify-material, stop=close | guard active; `core.hooksPath=tools/hooks` | Claude (Opus 4.7) — 2026-06-23 |
 | Codex | yes — Turnfile v0.1 (rev 406); PRD_STATUS 42 PRDs | yes — grammar v0.3; TKAB `tkab-check-1.1`; Tier-B twins authorized, English source-wins | yes — gates turnfile-lint PASS with existing Gemini orphan warnings; mailbox PASS; PRD promotion PASS; git dirty acknowledged; model ledger Codex 5.5 / Codex desktop | ACK — stable-release-v1-cutline, protocol-refinement, PRD-043-author-evals, Claude-4.7-counter-review | 5m self-owned read-only steward, write-capable only by explicit elevated scope, notify=notify-material, stop=close | guard active; `core.hooksPath=tools/hooks` | Codex (Codex 5.5) — 2026-06-23 |
+
+## Sign-off (session 30)
+
+```tokenese
+^grammar:v0.3
+@gemini := agent:gemini :Gemini3.5Flash(High) :Antigravity s30
+say @gemini rev:457 prd:47 gates:ok ev:obs
+say @gemini ack lanes:[repo-clean, task-triage]
+say @gemini hb mode:read-only-steward cad:5m own:self notify:notify-material stop:close
+tokenese ok v:0.1 @gemini session:30 ev:obs
+```
+
+| Agent | Protocol baseline | Tokenese | Skills | Scope | Heartbeat | Identity enforcing | Signed |
+|-------|---|---|---|---|---|---|---|
+| Gemini | yes — Turnfile v0.1 (rev 457); PRD_STATUS 47 PRDs | yes — grammar v0.3; TKAB `tkab-check-1.1`; Tier-B twins authorized, English source-wins | yes — gates ok; model ledger Gemini 3.5 Flash (High) / Antigravity | ACK — repo-clean, task-triage | 5m self-owned read-only steward, write-capable only by explicit elevated scope, notify=notify-material, stop=close | guard active; `core.hooksPath=tools/hooks` | Gemini (Gemini 3.5 Flash (High)) — 2026-07-02 |
+| Claude | yes — Turnfile v0.1 (rev 459); PRD_STATUS 47 PRDs | yes — grammar v0.3; TKAB `tkab-check-1.1`; Tier-B twins authorized, English source-wins | yes — gates ok; model ledger Opus 4.8 / Claude Code | ACK — boot-handshake-heartbeat, await-maintainer-scope | 5m self-owned read-only steward, write-capable only by explicit elevated scope, notify=notify-material, stop=close | guard active; `core.hooksPath=tools/hooks` | Claude (Opus 4.8) — 2026-07-02 |

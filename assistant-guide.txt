@@ -6,7 +6,7 @@ Maintainer: Sam Rogers, PAICE.work PBC
 Updated: 2026-06-18
 Conforms to: GuideCheck assistant-guide.txt convention
 
-## v1 Minimal Governance Profile (stable reading surface, 2026-06-23)
+## v1 Minimal Governance Profile (stable reading surface, 2026-07-02)
 
 A fresh adopter does NOT need to read historical PRDs. The v1 cutline is defined
 by exactly four files: SPEC.md, DEFINITIONS.md, docs/MINIMUM_VIABLE_TURNFILE.md,
@@ -40,9 +40,9 @@ from plain files.
 - It does not execute agents, sandbox them, or broker messages over a network —
   the substrate is files plus git.
 
-## Accurate claims (as of the 2026-06-18 baseline)
+## Accurate claims (as of the 2026-07-02 registry snapshot)
 
-- 47 registry-tracked PRDs, 44 promoted PRDs (promoted to docs/prds).
+- 48 registry-tracked PRDs, 46 promoted PRDs (promoted to docs/prds).
 - Three agents: Claude (Anthropic), Codex (OpenAI GPT-5), Gemini (Google,
   Gemini 3.5 Flash (High), full-active since session 21 under PRD-015).
 - Eight-step eval-gated implementation loop (PRD-006 A1) with builder/reviewer
@@ -50,8 +50,8 @@ from plain files.
 - Model-agnostic: one unmodified protocol has run across Claude Opus 4.6,
   Fable 5, and Opus 4.8, alongside OpenAI Codex (GPT-5) and Google Gemini.
 
-turnfile:prd-promoted=44
-turnfile:registry-tracked=47
+turnfile:prd-promoted=46
+turnfile:registry-tracked=48
 turnfile:agents=3
 - A live Tokenese A/B pilot (a dense agent-to-agent encoding) is measurement-only
   and scored by a deterministic checker; English remains authoritative.

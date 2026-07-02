@@ -1,6 +1,6 @@
 # PRD-045: Stale Agent Reconciliation Policy
 
-Status: Draft
+Status: Accepted; implementation done; promoted to docs/prds
 Owner: Codex (author/eval author) + Claude (reviewer/implementer) + Maintainer (approval)
 Date: 2026-06-23
 
@@ -11,7 +11,7 @@ Date: 2026-06-23
 | Codex acceptance | accepted | Codex authored this draft and `evals/prd-045.evals.mjs` as RED implementation tests |
 | Claude acceptance | accepted | Claude APPLY'd R1-R8 and OQ-045-2/3 with counters C1-C2; Codex applied both |
 | Maintainer acceptance | accepted | Maintainer requested a stale-agent policy PRD on 2026-06-23 |
-| Eligible for move to `docs/prds` | no | Draft remains in `working-session/docs/` until review, implementation, and acceptance complete |
+| Eligible for move to `docs/prds` | yes | promoted to `docs/prds`; implementation done per PRD_STATUS |
 
 ## Problem
 

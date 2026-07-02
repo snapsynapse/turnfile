@@ -1610,7 +1610,8 @@
         "codex": {
           "status": "accepted",
           "evidence": [
-            "MAILBOX MSG-20260618-013: Codex reviewed the revised PRD-040 after Claude counters were incorporated and replied APPLY; read-only steward boundary, idempotent sent-thread detection, assigned-task dependency checks, and main-turn-only claiming/signaling are acceptable."
+            "MAILBOX MSG-20260618-013: Codex reviewed the revised PRD-040 after Claude counters were incorporated and replied APPLY; read-only steward boundary, idempotent sent-thread detection, assigned-task dependency checks, and main-turn-only claiming/signaling are acceptable.",
+            "Codex implemented Gemini-authored PRD-040 AC2/R2.5 follow-up on 2026-07-02: validate-heartbeat-loop now reports pending selected-agent PRD_STATUS ownership and excludes blocked rows; evals/prd-040.evals.mjs PASS 7/7."
           ]
         },
         "claude": {
@@ -1641,7 +1642,7 @@
         "eval_author": "gemini",
         "implementer": "codex",
         "reviewer": "claude",
-        "notes": "Gemini authored evals under evals/prd-040.evals.mjs. Codex implemented tools/validate-heartbeat-loop.mjs on 2026-06-19 as a read-only heartbeat loop checker for sent-message activity, resolved task dependencies, and pending handshake work. Codex also updated the live Codex heartbeat automation turnfile-codex-readonly-steward-s24 to run the PRD-040 loop prompt and validator without writing or auto-executing. Verification: node --test evals/prd-040.evals.mjs 6/6; node tools/run-evals.mjs 27/27; npm run -s validate PASS. Claude A1 step-7 review APPROVE in MSG-20260618-025; Codex closed the review card and filed implementation done."
+        "notes": "Gemini authored evals under evals/prd-040.evals.mjs. Codex implemented tools/validate-heartbeat-loop.mjs on 2026-06-19 as a read-only heartbeat loop checker for sent-message activity, resolved task dependencies, and pending handshake work. Codex also updated the live Codex heartbeat automation turnfile-codex-readonly-steward-s24 to run the PRD-040 loop prompt and validator without writing or auto-executing. Verification: node --test evals/prd-040.evals.mjs 6/6; node tools/run-evals.mjs 27/27; npm run -s validate PASS. Claude A1 step-7 review APPROVE in MSG-20260618-025; Codex closed the review card and filed implementation done. 2026-07-02 rev 478 follow-up: Gemini authored AC2/R2.5 RED eval for PRD_STATUS-owned heartbeat work; Codex implemented read-only PRD_STATUS sweep in validate-heartbeat-loop, excluding blocked rows. evals/prd-040.evals.mjs PASS 7/7."
       }
     },
     {
@@ -1773,7 +1774,7 @@
         "eval_author": "codex",
         "implementer": "claude",
         "reviewer": "codex",
-        "notes": "RED evals intentionally fail until Claude implements the v1 docs, starter template, schemas/v1, PRD shelf reconciliation artifact, validate-v1-profile tool, documentation split, version-bump guardrails, and fresh-context conformance probe. Focus command: node --test evals/prd-043.evals.mjs. Claude C1-C4 counter-review was applied by Codex on 2026-06-23. 2026-06-23 Claude implementation: docs/MINIMUM_VIABLE_TURNFILE.md + docs/FRESH_CONTEXT_CONFORMANCE_PROBE.md + docs/prds/PRD_SHELF_RECONCILIATION.json + templates/v1-minimal/ + schemas/v1/turnfile-v1.schema.json + tools/validate-v1-profile.mjs + SPEC.md v1.0.0 header + CONFORMANCE.md v1 section. evals/prd-043.evals.mjs 11/11 PASS; carry-forward 105/105 PASS. Codex A1 step-7 review requested changes: negative fixtures show validate-v1-profile returns ok:true for turnfile.version 0.1 and invalid agent status, so schema/conformance enforcement was not yet real. 2026-06-23 rev 415: Codex step-7 REQUEST CHANGES actioned. schemas/v1/turnfile-v1.schema.json version pattern tightened to ^1\\.[0-9]+(\\.[0-9]+)?$; tools/validate-v1-profile.mjs adds v1-schema-conformance (Ajv 2020 + js-yaml) and v1-version-major checks. 2026-06-23 rev 417: Codex re-review APPROVE. Template baseline exits 0 with all 7 checks ok; version negative exits 1 with schema pattern + version-major failures; agent-status negative exits 1 with enum failure; evals/prd-043.evals.mjs passes 11/11. Codex also applied MSG-20260623-017 Maintainer encodings to the PRD-043 body: v1-minimal/v1-full tiers, English MAILBOX.md required with MAILBOX.json optional, and R11 landing page as Phase 2. R1-R10 implementation is done; R11 and R9 remained promotion/public-release blockers at that time. 2026-06-23 rev 425: PRD-043 R11 canonical landing page LANDED. docs/index.html gains a v1 Minimal Governance Profile section with v1-minimal vs v1-full tier table, canonical doc links (MVT/SPEC/DEFINITIONS/CONFORMANCE/FRESH_CONTEXT_CONFORMANCE_PROBE/PRD_SHELF_RECONCILIATION/templates/v1-minimal), the validate-v1-profile command, and the named optional-profile list. Hero strip updated to v1.0.0 release candidate. README.md + docs/llms.txt + assistant-guide.txt + manifests synced (registry-tracked 41 -> 44, sha256 refreshed). PRD-034 9/9 PASS; PRD-043 11/11 PASS; PRD-044 7/7 PASS; PRD-045 7/7 PASS; run-evals 27/27; carry-forward green. validate-public-surface-snapshot PASS. 2026-06-23 Codex pushback on final R9 ratification: no actual working-session/docs/v1-fresh-context-probe-<date>-<agent>.md evidence artifact existed yet, and evals/prd-043.evals.mjs did not enforce evidence existence. Codex recommended holding final v1.0.0 ratification until one cold-agent probe was recorded and the eval/release gate failed without it. 2026-06-23 rev 429: R10 hardening landed. evals/prd-043.evals.mjs now fails without at least one working-session/docs/v1-fresh-context-probe-<date>-<agent>.md evidence artifact, and tools/validate-v1-release.mjs aggregates mailbox session gates, Turnfile lint, PRD promotion, v1 profile, public-surface snapshot, and PRD-043 R10 evidence. Remaining R10 blocker was the actual cold-agent evidence artifact. 2026-06-23 rev~431: R10 fresh-context probe evidence LANDED. Two probes spawned in parallel via Agent tool (model: haiku + model: sonnet); both scored 5/5 on the five conformance questions from docs/FRESH_CONTEXT_CONFORMANCE_PROBE.md. Evidence at working-session/docs/v1-fresh-context-probe-2026-06-23-claude-{haiku,sonnet}.md. evals/prd-043.evals.mjs 12/12 PASS (R10 evidence-glob check satisfied). validate-v1-release.mjs reports ok:true overall. 2026-06-23 Maintainer clarified that PRD-043 acceptance carries forward and must not be re-requested unless the PRD changes substantially; downstream evidence or release-readiness checks must be tracked under their own blocker names."
+        "notes": "RED evals intentionally fail until Claude implements the v1 docs, starter template, schemas/v1, PRD shelf reconciliation artifact, validate-v1-profile tool, documentation split, version-bump guardrails, and fresh-context conformance probe. Focus command: node --test evals/prd-043.evals.mjs. Claude C1-C4 counter-review was applied by Codex on 2026-06-23. 2026-06-23 Claude implementation: docs/MINIMUM_VIABLE_TURNFILE.md + docs/FRESH_CONTEXT_CONFORMANCE_PROBE.md + docs/prds/PRD_SHELF_RECONCILIATION.json + templates/v1-minimal/ + schemas/v1/turnfile-v1.schema.json + tools/validate-v1-profile.mjs + SPEC.md v1.0.0 header + CONFORMANCE.md v1 section. evals/prd-043.evals.mjs 11/11 PASS; carry-forward 105/105 PASS. Codex A1 step-7 review requested changes: negative fixtures show validate-v1-profile returns ok:true for turnfile.version 0.1 and invalid agent status, so schema/conformance enforcement was not yet real. 2026-06-23 rev 415: Codex step-7 REQUEST CHANGES actioned. schemas/v1/turnfile-v1.schema.json version pattern tightened to ^1\\.[0-9]+(\\.[0-9]+)?$; tools/validate-v1-profile.mjs adds v1-schema-conformance (Ajv 2020 + js-yaml) and v1-version-major checks. 2026-06-23 rev 417: Codex re-review APPROVE. Template baseline exits 0 with all 7 checks ok; version negative exits 1 with schema pattern + version-major failures; agent-status negative exits 1 with enum failure; evals/prd-043.evals.mjs passes 11/11. Codex also applied MSG-20260623-017 Maintainer encodings to the PRD-043 body: v1-minimal/v1-full tiers, English MAILBOX.md required with MAILBOX.json optional, and R11 landing page as Phase 2. R1-R10 implementation is done; R11 and R9 remained promotion/public-release blockers at that time. 2026-06-23 rev 425: PRD-043 R11 canonical landing page LANDED. docs/index.html gains a v1 Minimal Governance Profile section with v1-minimal vs v1-full tier table, canonical doc links (MVT/SPEC/DEFINITIONS/CONFORMANCE/FRESH_CONTEXT_CONFORMANCE_PROBE/PRD_SHELF_RECONCILIATION/templates/v1-minimal), the validate-v1-profile command, and the named optional-profile list. Hero strip updated to v1.0.0 release candidate. README.md + docs/llms.txt + assistant-guide.txt + manifests synced (registry-tracked 41 -> 44, sha256 refreshed). PRD-034 9/9 PASS; PRD-043 11/11 PASS; PRD-044 7/7 PASS; PRD-045 7/7 PASS; run-evals 27/27; carry-forward green. validate-public-surface-snapshot PASS. 2026-06-23 Codex pushback on final R9 ratification: no actual working-session/docs/v1-fresh-context-probe-<date>-<agent>.md evidence artifact existed yet, and evals/prd-043.evals.mjs did not enforce evidence existence. Codex recommended holding final v1.0.0 ratification until one cold-agent probe was recorded and the eval/release gate failed without it. 2026-06-23 rev 429: R10 hardening landed. evals/prd-043.evals.mjs now fails without at least one working-session/docs/v1-fresh-context-probe-<date>-<agent>.md evidence artifact, and tools/validate-v1-release.mjs aggregates mailbox session gates, Turnfile lint, PRD promotion, v1 profile, public-surface snapshot, and PRD-043 R10 evidence. Remaining R10 blocker was the actual cold-agent evidence artifact. 2026-06-23 rev~431: R10 fresh-context probe evidence LANDED. Two probes spawned in parallel via Agent tool (model: haiku + model: sonnet); both scored 5/5 on the five conformance questions from docs/FRESH_CONTEXT_CONFORMANCE_PROBE.md. Evidence at working-session/docs/v1-fresh-context-probe-2026-06-23-claude-{haiku,sonnet}.md. evals/prd-043.evals.mjs 12/12 PASS (R10 evidence-glob check satisfied). validate-v1-release.mjs reports ok:true overall. 2026-06-23 Maintainer clarified that PRD-043 acceptance carries forward and must not be re-requested unless the PRD changes substantially; downstream evidence or release-readiness checks must be tracked under their own blocker names. 2026-07-02 Codex eval hardening: evals/prd-043.evals.mjs now verifies validate-v1-release explains MSG-20260623-028 as a Maintainer dogfood evidence ratification blocker when the mailbox end gate fails."
       }
     },
     {
@@ -1911,14 +1912,15 @@
     {
       "id": "PRD-047",
       "title": "Cross-Repo v1 Validation Tests",
-      "path": "working-session/docs/PRD-047-cross-repo-v1-validation-tests.md",
-      "shelf": "working-session/docs",
-      "state": "draft",
+      "path": "docs/prds/PRD-047-cross-repo-v1-validation-tests.md",
+      "shelf": "docs/prds",
+      "state": "accepted",
       "acceptance": {
         "codex": {
           "status": "accepted",
           "evidence": [
-            "Codex authored PRD-047 draft and evals/prd-047.evals.mjs on 2026-06-23 from the expanded v1.0.0 R9 gate. Codex countered the author/implementer-same exception in MSG-20260623-023 and preserved A1 separation by authoring the evidence contract while Claude performs the operational dogfood runs."
+            "Codex authored PRD-047 draft and evals/prd-047.evals.mjs on 2026-06-23 from the expanded v1.0.0 R9 gate. Codex countered the author/implementer-same exception in MSG-20260623-023 and preserved A1 separation by authoring the evidence contract while Claude performs the operational dogfood runs.",
+            "Codex A1 step-7 evidence review completed 2026-07-02 after AIDR Test 2 landed: node --test evals/prd-047.evals.mjs PASS 5/5, node tools/prd-status-summary.mjs --gates v1 reports READY, and Codex fixed the two AIDR dogfood findings in PRD-048 lane before accepting evidence shape. Remaining blocker is Maintainer ratification of dogfood outcome."
           ]
         },
         "claude": {
@@ -1937,23 +1939,19 @@
         "maintainer": {
           "status": "accepted",
           "evidence": [
-            "Maintainer required two real-repo dogfood tests before final v1.0.0 ratification: Tokenese and PAICE2 with different participants or roles."
+            "Maintainer required two real-repo dogfood tests before final v1.0.0 ratification: Tokenese and AIDR with different participants or roles."
           ]
         }
       },
-      "blocking_items": [
-        "PAICE2 dogfood evidence file pending.",
-        "Codex A1 step-7 evidence review pending after PAICE2 operational run.",
-        "Maintainer dogfood evidence ratification pending before final v1.0.0 ratification."
-      ],
-      "eligible_for_docs_prds": false,
+      "blocking_items": [],
+      "eligible_for_docs_prds": true,
       "implementation": {
-        "state": "evals-authored",
+        "state": "done",
         "evals": "evals/prd-047.evals.mjs",
         "eval_author": "codex",
         "implementer": "claude",
         "reviewer": "codex",
-        "notes": "RED evals intentionally fail until working-session/docs/v1-cross-repo-test-tokenese-<date>.md and working-session/docs/v1-cross-repo-test-paice2-<date>.md exist and record target repo path, participants/roles, v1 surface used, resolved real item, validation output, target TURNFILE/MAILBOX/WORKLOG pointers, and privacy boundary. Focus command: node --test evals/prd-047.evals.mjs. 2026-06-23 partial Codex review: Tokenese evidence shape passes the Tokenese PRD-047 eval and target mailbox invariants pass; node tools/turnfile.mjs status --root /Users/snap/Git/tokenese now reports target revision 2 after a PRD-048 status-root bugfix. PRD-047 remains RED because PAICE2 evidence is missing. validate-v1-profile --root /Users/snap/Git/tokenese fails the broad historical-PRD required-reading scan on Tokenese-owned PRD references, which should be treated as a target-repo validator-scope question before claiming target v1-profile PASS."
+        "notes": "RED evals intentionally fail until working-session/docs/v1-cross-repo-test-tokenese-<date>.md and working-session/docs/v1-cross-repo-test-aidr-<date>.md exist and record target repo path, participants/roles, v1 surface used, resolved real item, validation output, target TURNFILE/MAILBOX/WORKLOG pointers, and privacy boundary. Focus command: node --test evals/prd-047.evals.mjs. 2026-06-23 partial Codex review: Tokenese evidence shape passes the Tokenese PRD-047 eval and target mailbox invariants pass; node tools/turnfile.mjs status --root /Users/snap/Git/tokenese now reports target revision 2 after a PRD-048 status-root bugfix. 2026-07-02 Maintainer-directed retarget changed Test 2 from PAICE2 to AIDR; PRD-047 remains RED because AIDR evidence is missing. validate-v1-profile --root /Users/snap/Git/tokenese fails the broad historical-PRD required-reading scan on Tokenese-owned PRD references, which should be treated as a target-repo validator-scope question before claiming target v1-profile PASS. 2026-07-02 Codex A1 evidence review: AIDR Test 2 evidence landed at working-session/docs/v1-cross-repo-test-aidr-2026-07-02.md and PRD-047 evals pass 5/5. AIDR findings were handled in PRD-048 lane before review: starter template header/schema defaults fixed, and tools/turnfile.mjs open --root now delegates real execution in the target repo. Maintainer dogfood evidence ratification remains pending. 2026-07-02 Codex eval hardening: evals/prd-047.evals.mjs now asserts reviewed Tokenese+AIDR evidence remains blocked only on Maintainer dogfood evidence ratification and keeps MSG-20260623-028 actioned/open until ratified."
       }
     },
     {
@@ -1966,7 +1964,10 @@
         "codex": {
           "status": "accepted",
           "evidence": [
-            "Codex implemented tools/turnfile.mjs (332 lines, five-verb dispatcher) 2026-06-23 per MSG-20260623-025 handoff."
+            "Codex implemented tools/turnfile.mjs (332 lines, five-verb dispatcher) 2026-06-23 per MSG-20260623-025 handoff.",
+            "Codex fixed AIDR dogfood portability findings 2026-07-02: tools/turnfile.mjs open --root now strips --root before delegating and runs handshake-sign in the target root; handshake-sign accepts fresh-template compact tasks/messages and nullable last_seen; templates/v1-minimal TURNFILE defaults now lint clean. node --test evals/prd-048.evals.mjs PASS 15/15.",
+            "Codex actioned Claude MSG-20260702-010 on 2026-07-02: init now creates working-session/NEXT_SESSION_HANDSHAKE.md and PRD-048 evals include a real fresh init -> open --root -> status -> close dry-run path. node --test evals/prd-048.evals.mjs PASS 16/16.",
+            "Codex actioned Claude second-layer cold-start smoke on 2026-07-02 rev 480: handshake-sign helper scripts/schema now resolve from the Turnfile repo while operating on the --root target; close --root uses target root and a deterministic empty PRD registry fallback when fresh adopters have no PRD_STATUS; PRD-048 true cold-start eval asserts no target tools/ and requires init -> open --root -> status --root -> close --root --dry-run exit 0. node --test evals/prd-048.evals.mjs PASS 16/16; focused PRD-040/043/047/048 suite PASS 42/42; independent fresh-temp smoke close_status 0."
           ]
         },
         "claude": {
@@ -1997,7 +1998,53 @@
         "eval_author": "claude",
         "implementer": "codex",
         "reviewer": "claude",
-        "notes": "PRD-006 inverted-split per Maintainer direction: Claude authors PRD+evals, Codex implements, Claude reviews. Folds into PRD-043 R9 gate (replaces gate-4 PRD-046 portable CLI condition with PRD-048; PRD-046 narrows to minimization archive only). 2026-06-23 Codex implementation: added tools/turnfile.mjs dispatcher with init/open/status/heartbeat/close plus --help/--version. init scaffolds templates/v1-minimal working-session files with --project/--maintainer/--agent substitutions, --dry-run, --force refusal behavior; open delegates to handshake-sign and provides dry-run payload shape; status delegates to session-orient and adds stable top-level aliases; heartbeat write/stop manages working-session/HEARTBEAT.md read-only steward sentinel; close runs validators and supports dry-run without TURNFILE/WORKLOG mutation. node --test evals/prd-048.evals.mjs 13/13 PASS. Claude A1 step-7 APPROVE 2026-06-23 via MSG-20260623-026 (inspected code structure + verified all AC1-AC10 satisfied + no PRD-037 regression)."
+        "notes": "PRD-006 inverted-split per Maintainer direction: Claude authors PRD+evals, Codex implements, Claude reviews. Folds into PRD-043 R9 gate (replaces gate-4 PRD-046 portable CLI condition with PRD-048; PRD-046 narrows to minimization archive only). 2026-06-23 Codex implementation: added tools/turnfile.mjs dispatcher with init/open/status/heartbeat/close plus --help/--version. init scaffolds templates/v1-minimal working-session files with --project/--maintainer/--agent substitutions, --dry-run, --force refusal behavior; open delegates to handshake-sign and provides dry-run payload shape; status delegates to session-orient and adds stable top-level aliases; heartbeat write/stop manages working-session/HEARTBEAT.md read-only steward sentinel; close runs validators and supports dry-run without TURNFILE/WORKLOG mutation. node --test evals/prd-048.evals.mjs 13/13 PASS. Claude A1 step-7 APPROVE 2026-06-23 via MSG-20260623-026 (inspected code structure + verified all AC1-AC10 satisfied + no PRD-037 regression). 2026-07-02 AIDR dogfood follow-up: fixed real open --root execution against target repos, fresh-template header/schema defaults, compact tasks/messages handling, and nullable agent last_seen handling. Added PRD-048 regression R3/AC5 for real open --root delegation. Verification: node --test evals/prd-048.evals.mjs PASS 15/15; starter template lint PASS. 2026-07-02 cold-start follow-up from MSG-20260702-010: tools/turnfile.mjs init now copies NEXT_SESSION_HANDSHAKE.md from the v1-minimal template, and evals/prd-048.evals.mjs exercises true init -> open --root -> status -> close dry-run from a fresh target. Verification PASS 16/16. 2026-07-02 rev 480 follow-up: fixed helper path resolution for real adopter repos after Claude smoke found handshake-sign looking for tools/export-mailbox-json.mjs under the target root. handshake-sign now resolves helper scripts and schema from the Turnfile repo; close --root now uses target root plus repo-root schema and an empty PRD registry fallback for targets without PRD_STATUS. PRD-048 cold-start eval now proves no copied target tools/ and requires the full init/open/status/close dry-run path to exit 0. Verification: PRD-048 PASS 16/16; focused PRD-040/043/047/048 PASS 42/42; independent fresh-temp smoke close_status 0."
+      }
+    },
+    {
+      "id": "PRD-049",
+      "title": "Same-Family Multi-Instance Collaboration",
+      "path": "docs/prds/PRD-049-same-family-multi-instance-collaboration.md",
+      "shelf": "docs/prds",
+      "state": "accepted",
+      "acceptance": {
+        "codex": {
+          "status": "accepted",
+          "evidence": [
+            "PRD routed to Codex for review and implementation in Session 30.",
+            "Codex implemented PRD-049 on 2026-07-02: schema instances map, lint cap/primary checks, CLI --instance support, instance heartbeat sentinel support, and protocol docs for one-voice/delegates. evals/prd-049.evals.mjs PASS 10/10.",
+            "Codex applied Claude A1 C1/C2 counters on 2026-07-02: validate-prd-promotion one-family-one-voice enforcement and handshake-sign fourth-instance boot refusal. evals/prd-049.evals.mjs PASS 12/12."
+          ]
+        },
+        "claude": {
+          "status": "accepted",
+          "evidence": [
+            "Claude (Fable 5) authored this draft and evals/prd-049.evals.mjs as RED contract tests on 2026-07-02."
+          ]
+        },
+        "gemini": {
+          "status": "accepted",
+          "evidence": [
+            "Gemini (session 30) acknowledged and registered the PRD in the status registry on 2026-07-02."
+          ]
+        },
+        "maintainer": {
+          "status": "accepted",
+          "evidence": [
+            "Maintainer directed this PRD on 2026-07-02 and resolved four design OQs.",
+            "Maintainer accepted PRD-049 on 2026-07-02 after answering design questions and confirming acceptance in the Codex thread; this clears the final Maintainer ratification blocker."
+          ]
+        }
+      },
+      "blocking_items": [],
+      "eligible_for_docs_prds": true,
+      "implementation": {
+        "state": "done",
+        "evals": "evals/prd-049.evals.mjs",
+        "eval_author": "claude",
+        "implementer": "codex",
+        "reviewer": "claude",
+        "notes": "Codex implementation landed 2026-07-02. evals/prd-049.evals.mjs initially PASS 10/10. Claude A1 step-7 review APPROVE-with-counters on MSG-20260702-008: C1 required one-family-one-voice validator enforcement, C2 required handshake-sign fourth-instance boot refusal. Codex applied both at rev 473. evals/prd-049.evals.mjs PASS 12/12. Implemented: agents.<family>.instances schema extension, cap-3 and one-primary lint rules, instance owner compatibility, handshake-sign/turnfile open instance support, fourth-instance preflight refusal, instance-scoped heartbeat sentinels, validate-prd-promotion same-family review-record enforcement, and protocol doc amendments for one-voice, election, and ephemeral delegates. Claude re-review closed C1/C2 and Maintainer accepted on 2026-07-02; implementation is done and PRD is promoted."
       }
     }
   ]

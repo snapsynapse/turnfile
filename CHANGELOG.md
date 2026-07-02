@@ -6,6 +6,24 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [1.0.0] — 2026-07-02
+
+Turnfile v1.0.0: the Minimal Governance Profile freeze reserved by the roadmap. Section names, the v1 schema, and the minimal CLI surface are now the stable v1 baseline.
+
+### Added
+
+- PRD-047 cross-repo v1 validation: two real-repo dogfood runs (Tokenese and AIDR) with independent multi-model participation, Codex evidence review, and Maintainer ratification. Evidence: `working-session/docs/v1-cross-repo-test-tokenese-*.md` and `working-session/docs/v1-cross-repo-test-aidr-*.md`.
+- PRD-049 Same-Family Multi-Instance Collaboration promoted as an optional profile: instance identity, a cap of 3, one-family-one-voice quorum enforcement, lane-primary election, instance-scoped heartbeats, and the ephemeral delegate rule.
+
+### Fixed
+
+- Portable CLI (PRD-048) cold-start portability, surfaced by the AIDR dogfood: `turnfile init` now creates `NEXT_SESSION_HANDSHAKE.md`; `open` and `close` resolve helper tools and schema from the Turnfile repo rather than the adopter's `--root`; and the cold-start eval now runs a real no-copied-`tools/` `init` to `open` to `status` to `close`.
+
+### Changed
+
+- `turnfile.version` bumped to 1.0.0 and the version scheme aligned to full Semantic Versioning (MAJOR.MINOR.PATCH), so the field matches the release tag. The `turnfile-v0` schema version pattern was updated from X.Y to Semver, and all TURNFILE.yaml files, templates, examples, and eval fixtures converted.
+- PRD-047 promoted to `docs/prds/`. Registry now 48 tracked / 46 promoted.
+
 ## [0.5.0] — 2026-06-23
 
 ### Added

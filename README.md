@@ -7,8 +7,8 @@ Agents work as peers. Disagreement is signal, not error. Humans arbitrate, not m
 
 This is a **Structured Negotiation of Autonomous Peers (SNAP)**. It's consent-based, peer multi-LLM collaboration with human-on-the-loop governance and public auditability.
 
-<!-- turnfile:prd-promoted=44 -->
-<!-- turnfile:registry-tracked=47 -->
+<!-- turnfile:prd-promoted=46 -->
+<!-- turnfile:registry-tracked=48 -->
 <!-- turnfile:skill-claude-bundle=14 turnfile:skill-codex-bundle=10 turnfile:skill-gemini-bundle=5 -->
 
 ## Who this is for
@@ -173,9 +173,19 @@ PRDs live on two shelves. Promoted, Maintainer-accepted contracts live in [docs/
 | [PRD-034](docs/prds/PRD-034-public-and-agent-surface-snapshot-reconciliation-contract.md) | Public + agent-facing surface snapshot reconciliation | Promoted; implementation done |
 | [PRD-035](docs/prds/PRD-035-tokenese-integration-and-upstream-result-sync-contract.md) | Tokenese integration + upstream result sync | Promoted; implementation done |
 | [PRD-036](docs/prds/PRD-036-prd-eval-runner-contract.md) | PRD eval runner contract | Promoted; implementation done (session 20) |
-| [PRD-037](docs/prds/PRD-037-boot-simplification.md) | Boot simplification | Promoted; implementation eval-verified |
-| [PRD-038](docs/prds/PRD-038-read-only-heartbeat-stewards.md) | Read-only heartbeat stewards | Promoted; implementation pending |
-| [PRD-039](working-session/docs/PRD-039-perplexity-onboarding-deltas.md) | Perplexity Computer onboarding deltas | Draft; evals authored, pending Gemini peer review and Maintainer acceptance |
+| [PRD-037](docs/prds/PRD-037-boot-simplification.md) | Boot simplification | Promoted; implementation done |
+| [PRD-038](docs/prds/PRD-038-read-only-heartbeat-stewards.md) | Read-only heartbeat stewards | Promoted; implementation done |
+| [PRD-039](docs/prds/PRD-039-perplexity-onboarding-deltas.md) | Perplexity Computer onboarding deltas | Promoted; implementation done |
+| [PRD-040](docs/prds/PRD-040-heartbeat-loop-prompt-contract.md) | Heartbeat loop prompt contract | Promoted; implementation done |
+| [PRD-041](docs/prds/PRD-041-unified-terminal-transport-deterministic-projection-contract.md) | Unified terminal transport deterministic projection | Promoted; implementation done |
+| [PRD-042](docs/prds/PRD-042-qwen-onboarding-deltas.md) | Qwen onboarding deltas | Promoted; implementation done |
+| [PRD-043](docs/prds/PRD-043-turnfile-v1-minimal-governance-profile.md) | Turnfile v1 minimal governance profile | Promoted; implementation done |
+| [PRD-044](docs/prds/PRD-044-handshake-sign-cli-ergonomics.md) | Handshake-sign CLI ergonomics | Promoted; implementation done |
+| [PRD-045](docs/prds/PRD-045-stale-agent-reconciliation-policy.md) | Stale-agent reconciliation policy | Promoted; implementation done |
+| [PRD-046](docs/prds/PRD-046-repo-minimization-archive.md) | Repo minimization archive | Promoted; implementation done |
+| [PRD-047](working-session/docs/PRD-047-cross-repo-v1-validation-tests.md) | Cross-repo v1 validation tests | Draft; AIDR evidence complete; Maintainer evidence ratification pending |
+| [PRD-048](docs/prds/PRD-048-portable-turnfile-cli.md) | Portable Turnfile CLI | Promoted; implementation done |
+| [PRD-049](docs/prds/PRD-049-same-family-multi-instance-collaboration.md) | Same-family multi-instance collaboration | Promoted; implementation done |
 
 ### Skills (per-agent execution guides)
 
@@ -261,7 +271,7 @@ This protocol has been tested across 23 real collaboration sessions with three h
 - Codex (OpenAI GPT-5), running in the Codex desktop app.
 - Gemini (Google, model Gemini 3.5 Flash (High)), running in the Google Antigravity IDE — onboarded under PRD-015 and full-active since session 21.
 
-As of the current registry snapshot (2026-06-23): 47 registry-tracked PRDs, 44 promoted PRDs, zero active open questions, and the eight-step eval-gated implementation loop (PRD-006 A1) run end-to-end across many lanes with builder/reviewer separation between heterogeneous agents — PRD-017/021/022/023/024/026/028/029/030/032/033/036 implemented, PRD-031 Phase 1 (per-agent shards + derived aggregates) and the PRD-014 closeout amendment landed, plus a live Tokenese A/B pilot scored by a deterministic checker. The Claude lane ran across three model generations (Opus 4.6, Fable 5, Opus 4.8) against one unmodified protocol. Forward development narrows Turnfile into a thin governance layer for auditable peer disagreement and maintainer-governed resolution across existing agent platforms.
+As of the current registry snapshot (2026-07-02): 48 registry-tracked PRDs, 46 promoted PRDs, zero active open questions, and the eight-step eval-gated implementation loop (PRD-006 A1) run end-to-end across many lanes with builder/reviewer separation between heterogeneous agents — PRD-017/021/022/023/024/026/028/029/030/032/033/036 implemented, PRD-031 Phase 1 (per-agent shards + derived aggregates) and the PRD-014 closeout amendment landed, plus a live Tokenese A/B pilot scored by a deterministic checker. The Claude lane ran across three model generations (Opus 4.6, Fable 5, Opus 4.8) against one unmodified protocol. Forward development narrows Turnfile into a thin governance layer for auditable peer disagreement and maintainer-governed resolution across existing agent platforms.
 
 For authoritative current state, read [PRD_STATUS.json](working-session/docs/PRD_STATUS.json) (PRD shelf and implementation status) and [WORKLOG.md](working-session/WORKLOG.md) (live session state). [BASELINE.md](BASELINE.md) is a point-in-time session-14 snapshot, not current state.
 

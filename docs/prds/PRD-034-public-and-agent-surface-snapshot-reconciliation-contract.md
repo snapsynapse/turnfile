@@ -1,6 +1,6 @@
 # PRD-034: Public and Agent-Facing Surface Snapshot Reconciliation Contract
 
-Status: Accepted; implementation pending
+Status: Accepted; implementation done; promoted to docs/prds
 Owner: Codex proposer; Claude reviewed APPLY with counters; Maintainer accepted
 Date: 2026-06-17
 Last revised: 2026-06-17
@@ -12,7 +12,7 @@ Last revised: 2026-06-17
 | Codex acceptance | accepted | Drafted by Codex after Maintainer requested a detection-only repo audit; applied Claude counters C1-C4 in session 19 |
 | Claude acceptance | accepted-with-amendment | MSG-20260617-031: APPLY with counters C1-C4 |
 | Maintainer acceptance | accepted | thank you |
-| Eligible for move to `docs/prds` | yes | all acceptances complete; promotion move still pending |
+| Eligible for move to `docs/prds` | yes | promoted to `docs/prds`; implementation done per PRD_STATUS |
 
 ## Input Provenance Tags
 

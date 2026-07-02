@@ -77,7 +77,7 @@ function turnfile(revisionHeader, coordinationRevision, sigs) {
 # Modified by: claude
 
 turnfile:
-  version: "0.1"
+  version: "0.1.0"
   project: "turnfile"
   workspace: "working-session/"
 
