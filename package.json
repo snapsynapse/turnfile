@@ -1,6 +1,6 @@
 {
   "name": "turnfile",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "SNAP \u2014 Structured Negotiation of Autonomous Peers. File-based LLM collaboration protocol.",
   "license": "Apache-2.0",
   "private": true,
