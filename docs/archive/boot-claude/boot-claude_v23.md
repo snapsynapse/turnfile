@@ -1,31 +1,29 @@
-# Boot File — Claude (v24)
+# Boot File — Claude (v23)
 
 Read this first on session start. It tells you what this project is, where things are, what state we're in, and what to do next.
 
-Milestone: Turnfile v1.0.0 released 2026-07-02 (Minimal Governance Profile freeze, PRD-043; tag `v1.0.0`). This is a durable structural fact; for everything past the freeze (PRD landscape, agent roster, counts, revision) use the live lookups in "Current state" below — never read drifting state from this file.
-
 ## What is Turnfile?
 
-Turnfile (SNAP — Structured Negotiation of Autonomous Peers) is a file-based collaboration protocol for heterogeneous LLM agents that collaborate as **equal peers** through shared markdown files with a human maintainer (Sam Rogers / Snap Synapse LLC) as arbiter. Core providers are Claude/Anthropic, Codex/OpenAI, and Gemini/Google; same-family multi-instance participation (e.g. `claude/fable-5`) is governed by PRD-049 under the one-family-one-voice quorum rule. The live roster and each agent's status are authoritative in `TURNFILE.yaml` `agents.*` — read it fresh, do not trust an agent count hardcoded here. Repo: `github.com/snapsynapse/turnfile`.
+Turnfile (SNAP — Structured Negotiation of Autonomous Peers) is a file-based collaboration protocol for heterogeneous LLM agents. THREE agents (Claude/Anthropic, Codex/OpenAI GPT-5, Gemini/Google Antigravity 3.5 Flash) collaborate as **equal peers** through shared markdown files with a human maintainer (Sam Rogers / Snap Synapse LLC) as arbiter. Gemini transitioned from provisional-active to FULL-ACTIVE in session 21 (2026-06-18). Repo: `github.com/snapsynapse/turnfile`.
 
 ## Directory layout
 
 - `docs/` — Canonical tracked protocol documents (PROTOCOL_CORE, COMMUNICATIONS_PROTOCOL, HUMAN_GOVERNANCE, etc.)
-- `docs/prds/` — Promoted finalized PRDs. The promoted set and tracked count drift every session; read `working-session/docs/PRD_STATUS.json` or run `node tools/prd-status-summary.mjs` for the authoritative list — never trust a count hardcoded here.
+- `docs/prds/` — Promoted finalized PRDs (PRD-001, 003-017, 021-038 promoted as of session 21; see PRD_STATUS for the authoritative list — 41 PRDs tracked)
 - `docs/archive/` — Versioned archives (boot files, vision)
 - `templates/` — Canonical templates (including `templates/working-session/` for cold-start bootstrap)
 - `examples/` — Historical reference: `ai-feature-tracker/` (first project) and `inception/` (11-session pilot archive)
 - `tools/` — Project tooling (export-mailbox-json, new-payload-envelope, turnfile-lint, validate-mailbox-invariants, validate-prd-promotion, validate-skills-preflight, next-state, session-orient, validate-closeout (now agent-scoped per PRD-014 active-card-owner-review), validate-ownership-guard, validate-boot-sequence, validate-out-of-band-reconciliation, validate-review-cycle-closure, aggregate-coordination, validate-public-surface-snapshot, run-prd-evals, handshake-sign, validate-onboarding-evidence)
 - `skills/` — Per-agent protocol skill files and shared metaskills:
-  - `skills/claude/SKILL.md` — Claude's protocol execution guide (version in the file header; drifts — read it, don't trust a version pinned here)
-  - `skills/codex/SKILL.md` — Codex's protocol execution guide (version in the file header)
+  - `skills/claude/SKILL.md` — Claude's protocol execution guide (v0.9.1 / bundle v13 at session 21 close)
+  - `skills/codex/SKILL.md` — Codex's protocol execution guide (v11 after session 21 PRD-014 active-card-owner-review patch)
   - `.agents/skills/turnfile-protocol-gemini/SKILL.md` — Gemini's Antigravity skill bundle
   - `skills/skill-versioning/` — Shared metaskill (skill-provenance)
   - `skills/STRUCTURE.md` — Skill layout and ownership rules
 - `schemas/` — JSON schemas for protocol artifacts (`turnfile/turnfile-v0.schema.json`); agent-agnostic
 - `OWNERSHIP.yaml` — Maintainer-owned skill ownership map driving the PRD-033 guard; includes gemini-home `.agents/skills/turnfile-protocol-gemini/**`
 - `GEMINI.md` — Project root instruction file (Antigravity auto-loads as a rule; `@import` is INERT — discovery via `.agents/skills/`)
-- `evals/` — per-PRD eval suites (`prd-NNN.evals.mjs`). Suite list and pass counts drift as PRDs land; run `node --test evals/` (or a specific suite) for the current tally rather than trusting a total hardcoded here.
+- `evals/` — PRD eval suites (`prd-031-phase1.evals.mjs` 14/14, `prd-031-phase2.evals.mjs` 11/11, `prd-038.evals.mjs` 8/8, `prd-041.evals.mjs` 9/9, `prd-042.evals.mjs` 16/16, `onboarding-execution.evals.mjs` 16/16; 74/74 total)
 - `working-session/` — **Tracked active workspace** (removed from .gitignore in session 13). All session state lives here:
   - `working-session/TURNFILE.yaml` — Runtime coordination artifact. Read first after boot file.
   - `working-session/WORKLOG.md` — Session log with status block (read lines 1-13 after Turnfile)

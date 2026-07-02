@@ -650,3 +650,13 @@ Carry-forward: (1) PRD-027 execution awaits Maintainer charter opt-in + teach ph
 - Gemini orphan state: Maintainer-authorized cleanup at rev 408 (offline); awaits Gemini self-reconciliation on next Gemini boot
 - Gates at close: turnfile-lint PASS, mailbox-invariants PASS, validate-prd-promotion PASS (47 PRDs), validate-closeout --agent claude clean:true, validate-public-surface-snapshot PASS, validate-v1-release ok modulo PRD-047 Test 2
 - Boot v22 archived to docs/archive/boot-claude/boot-claude_v22.md; v23 written with the lookup pattern (no hardcoded session-N / PRD-N specifics in "Current state" / "FIRST ACTIONS" / "PRD landscape" sections)
+
+## Session 30 close snapshot (Opus 4.8, 2026-07-02)
+
+- MILESTONE: Turnfile v1.0.0 released — Minimal Governance Profile freeze (PRD-043). Commit 3bc1905 + tag v1.0.0 pushed to origin; GitHub release published at github.com/snapsynapse/turnfile/releases/tag/v1.0.0. `validate-v1-release ok:true`.
+- Session-30 Claude deliveries: PRD-047 Test 2 dogfood retargeted PAICE2 → ~/Git/aidr (Maintainer-directed), with AIDR-0002 (ratify AIDR SPEC v0.1.0) as the real-work item; ran the AIDR dogfood and wrote `working-session/docs/v1-cross-repo-test-aidr-2026-07-02.md`; the run found + drove fixes for two portable-CLI cold-start bugs (open --root init gap; masking eval) via independent fresh-temp verification. Maintainer ratified the dogfood evidence; PRD-047 promoted to docs/prds.
+- Version scheme aligned to full Semantic Versioning at Maintainer direction: `turnfile-v0` schema pattern X.Y → MAJOR.MINOR.PATCH; all TURNFILE.yaml / templates / examples / eval fixtures converted; `turnfile.version` = 1.0.0.
+- PRD-049 (same-family multi-instance, one-family-one-voice) A1 step-7 review to convergence (C1 one-voice validator + C2 boot-refusal counters resolved); accepted + promoted (Codex lane).
+- Provenance lesson recorded: one model transcribing another's work is a bad precedent; first-party authorship is now the AIDR CONTRIBUTING rule. Memory: feedback-produce-before-requesting-ratification (produce the artifact, then present for arbitration; approval-of-direction is not a per-step gate).
+- Close actions: heartbeat sentinel + cron deleted; nine Claude-owned/addressed cards swept to Closed Summary; Claude idle + SIG-424 yield; boot-claude v24 (de-hardcoded drifted counts into lookups). Gates green at rev 484.
+- Carry-forward: no open Claude-lane blockers. AIDR polished in a parallel session (leave ~/Git/aidr alone). Next session: query live state via session-orient / prd-status-summary; do not trust these bullets for live PRD/agent state.
