@@ -1,6 +1,6 @@
 # Conformance — Turnfile
 
-Version: v1.0.0 (protocol) · 2026-06-23
+Version: v1.0.0 (protocol) · 2026-07-02
 
 ## v1 Minimal Governance Profile
 
