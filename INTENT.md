@@ -1,7 +1,7 @@
 ---
 title: "Turnfile INTENT"
-version: "0.1.3"
-last_updated: 2026-06-23
+version: "0.1.4"
+last_updated: 2026-07-06
 status: v1-release-candidate-strategy
 description: "Standards-level strategy for Turnfile as a thin governance layer for auditable peer disagreement and maintainer-governed resolution across agent platforms."
 tags: [intent, strategy, turnfile, agents, governance]
@@ -33,6 +33,8 @@ Primary positioning:
 - Durable plain-text audit over proprietary trace lock-in.
 - Runtime portability over framework ownership.
 - Cross-repo invocation as a first-class operational mode: Turnfile can be summoned into another repository to coordinate that repository's own work without dragging the inception repo into the conversation.
+## Philosophical ground
+Turnfile practices the Aggregated Intelligence tenets, ratified as canon 2026-07-06: intelligence lives in the arrangement, not the node; disagreement is the engine; independence before influence; consensus is evidence, never authority; authority is human because accountability is human; the record is the relationship; the standard is a commons or it is a leash; rules are earned, not decreed. Canonical statement: https://paice.foundation/papers/aggregated-intelligence-tenets.html. The tenets predate their naming; Turnfile's VISION.md (2026-02-08) already states the aggregate-intelligence objective and rejects hierarchical control models. Lineage is by citation; the tenets impose no conformance requirement on this spec.
 ## Design invariants
 These are the core commitments future work should preserve.
 1. Turnfile does not run agents. It coordinates and records work performed by agents running elsewhere.
@@ -133,6 +135,7 @@ The following deviations are recorded:
 - `working-session/` is tracked (not gitignored) by design: it is the active, auditable coordination workspace, which is the point of the protocol.
 
 ## Changelog
+- 2026-07-06 v0.1.4 - Added Philosophical ground section: the Aggregated Intelligence tenets (ratified canon 2026-07-06) cited as the design principles Turnfile practices, canonical URL at paice.foundation/papers; lineage by citation, no conformance requirement.
 - 2026-06-23 v0.1.3 - Recorded durable maintainer-acceptance intent: accepted PRDs stay accepted unless materially changed, and later evidence or release-readiness gaps must be tracked as separate blockers rather than repeated approval requests.
 - 2026-06-23 v0.1.2 - Six clarifications per Claude review (Maintainer-directed apply 2026-06-23): grounded the fresh-context test in the PRD-043 R10 probe mechanism; added cross-repo invocation as a first-class positioning line; tightened "Maintainer-governed" in Design invariant #3 to name what Maintainer does and does not own; distinguished participation tier (v1-minimal vs v1-full) from optional profile (feature bundles) in the Profile boundary section; added Tokenese-as-separate-but-adjacent line; clarified that the v1.0.0 freeze is the Maintainer R9 ratify event, not a code-freeze window.
 - 2026-06-23 v0.1.1 - Added v1 release intent, profile boundary, stable release gate, updated admission posture, and stale participant strategy for the v1 release-candidate phase.
