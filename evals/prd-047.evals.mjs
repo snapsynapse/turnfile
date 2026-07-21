@@ -1,6 +1,6 @@
-// PRD-047 RED evals - cross-repo v1 validation evidence.
+// PRD-047 cross-repo v1 validation evidence and release-state regression checks.
 // Eval author: Codex. Expected operator/implementer: Claude. Reviewer: Codex.
-// EXPECTED TO FAIL until Tokenese and AIDR evidence artifacts land.
+// The suite became a permanent regression gate after v1.0.0 ratification.
 
 import assert from "node:assert/strict";
 import fs from "node:fs";
@@ -34,8 +34,8 @@ function assertEvidenceShape(rel, repoName, repoPathPattern) {
   assert.match(text, new RegExp(repoName, "i"), `${rel} must identify ${repoName}`);
 }
 
-test("R1/R5: Tokenese and AIDR evidence files exist", () => {
-  assert.equal(exists("working-session/docs/PRD-047-cross-repo-v1-validation-tests.md"), true);
+test("R1/R5: promoted PRD and Tokenese/AIDR evidence files exist", () => {
+  assert.equal(exists("docs/prds/PRD-047-cross-repo-v1-validation-tests.md"), true);
   assert.ok(listEvidence("tokenese").length >= 1, "missing Tokenese evidence file");
   assert.ok(listEvidence("aidr").length >= 1, "missing AIDR evidence file");
 });
@@ -69,37 +69,37 @@ test("R1/R6: evidence records different participant sets or roles across runs", 
   );
 });
 
-test("R6: reviewed evidence remains blocked until Maintainer dogfood ratification", () => {
+test("R6: reviewed evidence is Maintainer-ratified and its closure is recorded", () => {
   const registry = JSON.parse(read("working-session/docs/PRD_STATUS.json"));
   const entry = registry.prds.find((p) => p.id === "PRD-047");
   assert.ok(entry, "PRD-047 missing from PRD_STATUS registry");
-  assert.deepEqual(
-    entry.blocking_items,
-    ["Maintainer dogfood evidence ratification pending before final v1.0.0 ratification."],
-    "after Codex evidence review, PRD-047 must retain only Maintainer dogfood ratification as blocker",
-  );
+  assert.deepEqual(entry.blocking_items, [], "ratified PRD-047 must have no remaining blockers");
+  assert.equal(entry.acceptance?.maintainer?.status, "accepted");
+
+  const prd = read("docs/prds/PRD-047-cross-repo-v1-validation-tests.md");
   assert.match(
-    JSON.stringify(entry.acceptance?.codex || {}),
-    /evidence review completed|Maintainer ratification/i,
-    "Codex acceptance evidence must record completed evidence review and remaining Maintainer ratification",
+    prd,
+    /Maintainer ratification:\s*Ratified by Sam Rogers \(Maintainer\) on 2026-07-02/i,
+    "promoted PRD must preserve the Maintainer ratification record",
   );
 
   const mailbox = read("working-session/MAILBOX.md");
-  const msg = mailbox.match(/### MSG-20260623-028[\s\S]*?(?=\n## Closed Summary|\n### MSG-|\z)/)?.[0] || "";
-  assert.ok(msg, "MSG-20260623-028 must remain present as the PRD-047 dogfood closure card");
-  assert.match(msg, /\*\*Status:\*\*\s*actioned/i, "MSG-20260623-028 must not be closed before ratification");
-  assert.match(msg, /\*\*Closure owner:\*\*\s*Codex/i);
-  assert.match(msg, /Remaining blocker.*Maintainer dogfood evidence ratification/i);
-  assert.match(msg, /Closure condition:[\s\S]*Maintainer has ratified the dogfood evidence outcome/i);
+  assert.match(
+    mailbox,
+    /\| MSG-20260623-028 \| 2026-07-02 \| Codex -> Claude \| closed \|[^\n]*Maintainer ratified the dogfood evidence outcome 2026-07-02\./i,
+    "MSG-20260623-028 must remain in the closed summary with ratification evidence",
+  );
 });
 
-test("Registry: PRD_STATUS records PRD-047 ownership and RED eval package", () => {
+test("Registry: PRD_STATUS records PRD-047 ownership and promoted implementation", () => {
   const registry = JSON.parse(read("working-session/docs/PRD_STATUS.json"));
   const entry = registry.prds.find((p) => p.id === "PRD-047");
   assert.ok(entry, "PRD-047 missing from PRD_STATUS registry");
-  assert.equal(entry.path, "working-session/docs/PRD-047-cross-repo-v1-validation-tests.md");
-  assert.equal(entry.shelf, "working-session/docs");
-  assert.equal(entry.state, "draft");
+  assert.equal(entry.path, "docs/prds/PRD-047-cross-repo-v1-validation-tests.md");
+  assert.equal(entry.shelf, "docs/prds");
+  assert.equal(entry.state, "accepted");
+  assert.equal(entry.eligible_for_docs_prds, true);
+  assert.equal(entry.implementation?.state, "done");
   assert.equal(entry.implementation?.evals, "evals/prd-047.evals.mjs");
   assert.equal(entry.implementation?.eval_author, "codex");
   assert.equal(entry.implementation?.implementer, "claude");

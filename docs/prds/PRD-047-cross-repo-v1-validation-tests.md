@@ -1,6 +1,6 @@
 # PRD-047: Cross-Repo v1 Validation Tests
 
-Status: Draft
+Status: Accepted
 Owner: Codex (author/eval author) + Claude (operator/implementer) + Codex (reviewer) + Maintainer (ratifier)
 Date: 2026-06-23
 
@@ -8,16 +8,14 @@ Date: 2026-06-23
 
 | Gate | Status | Evidence |
 |------|--------|----------|
-| Codex acceptance | accepted | Codex authored this draft and `evals/prd-047.evals.mjs` as RED evidence-contract tests |
+| Codex acceptance | accepted | Codex authored the evidence contract and completed the A1 evidence review |
 | Claude acceptance | accepted | Claude applied the operational lane, landed Tokenese and AIDR evidence, and completed the peer evidence path |
-| Maintainer acceptance | accepted | Maintainer required two real-repo dogfood tests before final v1.0.0 ratification |
+| Maintainer acceptance | accepted | Maintainer ratified the Tokenese and AIDR dogfood evidence on 2026-07-02 |
 | Eligible for move to `docs/prds` | yes | Maintainer ratified the dogfood evidence outcome 2026-07-02 (see Maintainer Ratification below); all upstream gates complete |
 
 ## Maintainer Ratification
 
-Everything upstream is complete: both dogfood evidence files exist and pass `evals/prd-047.evals.mjs` (Tokenese and AIDR); Codex reviewed the evidence; and the two CLI findings the AIDR run surfaced (cold-start `open --root`, and the eval that masked it) are fixed and independently re-verified. The v1 gate reads READY. The only remaining gate is the Maintainer's ratification of the dogfood evidence outcome.
-
-Write your ratification on the line below, in your own words, dated and signed (this mirrors how AIDR-0002 was arbitrated: a human decision, authored by the human). When you save it, tell me and I run the release.
+Everything upstream is complete: both dogfood evidence files exist and pass `evals/prd-047.evals.mjs` (Tokenese and AIDR); Codex reviewed the evidence; and the two CLI findings the AIDR run surfaced (cold-start `open --root`, and the eval that masked it) are fixed and independently re-verified. The Maintainer ratified the outcome and Turnfile v1.0.0 was released.
 
 Maintainer ratification: Ratified by Sam Rogers (Maintainer) on 2026-07-02. The v1.0.0 cross-repo dogfood evidence (Tokenese and AIDR) passes; Turnfile v1.0.0 is approved for release. Recorded by Claude at the Maintainer's explicit direction this session, per the Maintainer's stated approval that ratification has been supplied everywhere required.
 
@@ -104,9 +102,9 @@ Claude performs the operational runs unless the Maintainer redirects. Codex revi
 7. Codex records A1 step-7 review.
 8. Maintainer ratifies the dogfood evidence before final v1.0.0 ratification.
 
-## RED Eval Package
+## Evaluation Package
 
-`evals/prd-047.evals.mjs` is intentionally RED until both evidence artifacts exist.
+`evals/prd-047.evals.mjs` began as a RED evidence contract. After both evidence artifacts landed and Maintainer ratification completed, it became the permanent regression gate for the promoted PRD and its release evidence.
 
 Expected implementer tasks:
 
