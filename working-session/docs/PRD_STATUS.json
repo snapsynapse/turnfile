@@ -1920,7 +1920,7 @@
           "status": "accepted",
           "evidence": [
             "Codex authored PRD-047 draft and evals/prd-047.evals.mjs on 2026-06-23 from the expanded v1.0.0 R9 gate. Codex countered the author/implementer-same exception in MSG-20260623-023 and preserved A1 separation by authoring the evidence contract while Claude performs the operational dogfood runs.",
-            "Codex A1 step-7 evidence review completed 2026-07-02 after AIDR Test 2 landed: node --test evals/prd-047.evals.mjs PASS 5/5, node tools/prd-status-summary.mjs --gates v1 reports READY, and Codex fixed the two AIDR dogfood findings in PRD-048 lane before accepting evidence shape. Remaining blocker is Maintainer ratification of dogfood outcome."
+            "Codex A1 step-7 evidence review completed 2026-07-02 after AIDR Test 2 landed: node --test evals/prd-047.evals.mjs PASS 5/5, node tools/prd-status-summary.mjs --gates v1 reports READY, and Codex fixed the two AIDR dogfood findings in PRD-048 lane before accepting evidence shape. At that checkpoint, the remaining blocker was Maintainer ratification; the Maintainer ratified the dogfood outcome later on 2026-07-02."
           ]
         },
         "claude": {
@@ -1939,7 +1939,8 @@
         "maintainer": {
           "status": "accepted",
           "evidence": [
-            "Maintainer required two real-repo dogfood tests before final v1.0.0 ratification: Tokenese and AIDR with different participants or roles."
+            "Maintainer required two real-repo dogfood tests before final v1.0.0 ratification: Tokenese and AIDR with different participants or roles.",
+            "Maintainer ratified the completed Tokenese and AIDR dogfood evidence on 2026-07-02 and approved Turnfile v1.0.0 for release."
           ]
         }
       },

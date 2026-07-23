@@ -4,7 +4,7 @@ Active iteration documents for the current local session workspace.
 
 ## Active PRDs
 
-1. `PRD-047-cross-repo-v1-validation-tests.md` - active release-evidence PRD; blocked on Maintainer dogfood evidence ratification before final v1.0.0 ratification.
+None. PRD-047 was ratified and promoted to `docs/prds/` with the v1.0.0 release.
 
 ## Completed PRDs
 
@@ -42,7 +42,7 @@ Gemini acceptance is not required unless Gemini is an active scoped participant 
 - `onboarding/ONBOARDING_TEST_SUITE.md` - candidate-agnostic onboarding scenario matrix (pilot staging)
 - `onboarding/ONBOARDING_EVIDENCE_TEMPLATE.md` - standard evidence capture template for onboarding runs
 
-## Active Release Evidence
+## v1.0.0 Release Evidence
 
 - `v1-cross-repo-test-tokenese-2026-06-23.md` - Tokenese v1 dogfood evidence.
 - `v1-cross-repo-test-aidr-2026-07-02.md` - AIDR v1 dogfood evidence.
@@ -64,7 +64,6 @@ Gemini acceptance is not required unless Gemini is an active scoped participant 
 
 ## Organization Recommendations
 
-1. Keep PRD-047 here until Maintainer dogfood evidence ratification completes.
-2. After v1.0.0 ratification, move release evidence to a durable evidence shelf such as `docs/evidence/v1/` or archive it with the release notes.
-3. Promote stable onboarding docs out of `working-session/docs/` once the onboarding protocol is no longer session-local.
-4. Archive historical PRD-031, PRD-041, Tokenese, and Qwen notes only after references in PRDs, worklog entries, and validators are updated.
+1. Retain the v1.0.0 dogfood evidence here until a durable evidence-shelf migration updates all references and validators atomically.
+2. Promote stable onboarding docs out of `working-session/docs/` once the onboarding protocol is no longer session-local.
+3. Archive historical PRD-031, PRD-041, Tokenese, and Qwen notes only after references in PRDs, worklog entries, and validators are updated.
