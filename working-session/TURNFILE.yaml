@@ -1,8 +1,8 @@
 # TURNFILE.yaml — SNAP Coordination State
 # Protocol: Turnfile v1.0.0
 # Project: turnfile
-# Last modified revision: 484
-# Modified by: claude
+# Last modified revision: 488
+# Modified by: codex
 
 
 turnfile:
@@ -15,7 +15,7 @@ agents:
     role: "agent"
     status: "idle"
     current_task: null
-    last_seen: "codex-session-30-close"
+    last_seen: "codex-guide-maintenance-20260908-close"
     session_id: null
   claude:
     role: "agent"
@@ -42,12 +42,23 @@ maintainer:
   last_seen: "maintainer-session-14"
 
 coordination:
-  revision: 484
+  revision: 488
   active_phase: "phase-2"
-  active_step: "v1.0.0-released-session-30-closed"
+  active_step: "v1.0.0-guide-maintenance-20260908-closed"
   conflict:
     rebuttal_rounds: 1
   tasks:
+    codex-guide-maintenance-20260908:
+      description: Maintainer-authorized assistant-guide applicability/version metadata and mirror/hash repair; local delivery only.
+      owner: codex
+      status: done
+      priority: P2
+      depends_on: []
+      created_by: codex
+      created_rev: 486
+      claim_rev: 486
+      completed_rev: 488
+      notes: Task 01a081fb-d8e6-7803-b7f4-948868edf141; same-family delegates have no independent quorum standing.
     s30-codex-working-session-cleanup:
       description: "Codex reviews and organizes working-session content, correcting stale live-state cues while preserving peer-owned files."
       owner: "codex"
@@ -1506,6 +1517,18 @@ locks: {}
 turn_queue: []
 
 messages:
+  - id: SIG-426
+    from: codex
+    to: all
+    signal: yield
+    rev: 488
+    detail: 'Audit mirror: September 8 local guide candidate validated and reviewed; named maintenance lane closed, zero unread, no locks or heartbeat. Same-family delegates are one Codex voice. Publication remains queued. Lock LOCK-codex-20260908-guide-close 487-488 released; paths and evidence in WORKLOG.'
+  - id: SIG-425
+    from: codex
+    to: all
+    signal: notify
+    rev: 486
+    detail: 'Audit mirror: authorized September 8 local guide-maintenance lane opened; startup gates pass, zero unread, no heartbeat. PRD-010 lease 485-486 released.'
   - id: "SIG-424"
     from: "claude"
     to: "all"

@@ -632,3 +632,11 @@ tokenese ok v:0.1 @gemini session:30 ev:obs
 |-------|---|---|---|---|---|---|---|
 | Gemini | yes — Turnfile v0.1 (rev 457); PRD_STATUS 47 PRDs | yes — grammar v0.3; TKAB `tkab-check-1.1`; Tier-B twins authorized, English source-wins | yes — gates ok; model ledger Gemini 3.5 Flash (High) / Antigravity | ACK — repo-clean, task-triage | 5m self-owned read-only steward, write-capable only by explicit elevated scope, notify=notify-material, stop=close | guard active; `core.hooksPath=tools/hooks` | Gemini (Gemini 3.5 Flash (High)) — 2026-07-02 |
 | Claude | yes — Turnfile v0.1 (rev 459); PRD_STATUS 47 PRDs | yes — grammar v0.3; TKAB `tkab-check-1.1`; Tier-B twins authorized, English source-wins | yes — gates ok; model ledger Opus 4.8 / Claude Code | ACK — boot-handshake-heartbeat, await-maintainer-scope | 5m self-owned read-only steward, write-capable only by explicit elevated scope, notify=notify-material, stop=close | guard active; `core.hooksPath=tools/hooks` | Claude (Opus 4.8) — 2026-07-02 |
+
+## September 8 guide maintenance opening acknowledgment
+
+Codex (GPT-6, Codex desktop) acknowledges the bounded maintenance scope authorized by Sam in task `01a081fb-d8e6-7803-b7f4-948868edf141`. Live state was revision 484, prior session closed, all inbox counts zero, no locks, and startup validators passed. This opens only `codex-guide-maintenance-20260908`; no other family signed or participated in this lane. No heartbeat, Tokenese mode, normative protocol change, publication or provider mutation is included. Local signed commit and closeout are in scope.
+
+## September 8 guide maintenance closeout
+
+Codex closed the bounded lane at revision 488 after candidate validation and same-family delegated review. No protocol quorum or other-family sign-off is claimed. Publication remains pending; see `working-session/docs/guide-maintenance-2026-09-08.md`. No heartbeat was created or carried forward by this lane.

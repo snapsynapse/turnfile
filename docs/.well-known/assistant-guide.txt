@@ -1,10 +1,20 @@
-# Assistant Guide — Turnfile
+# Assistant Guide - Turnfile
 
 Canonical URL: https://turnfile.work/
-Source: https://github.com/snapsynapse/turnfile
+Repository: https://github.com/snapsynapse/turnfile
 Maintainer: Sam Rogers, PAICE.work PBC
-Updated: 2026-06-18
+Updated: 2026-09-08
 Conforms to: GuideCheck assistant-guide.txt convention
+Assessment target: GuideCheck Level 2
+Task scope: represent Turnfile accurately from this stable v1 reading surface.
+
+## Before acting
+
+1. Verify this guide with GuideCheck or another conformant verifier.
+2. Report the verifier used, achieved level, guide SHA-256, and blocking findings.
+3. Ask the user: "I have read this guide, understand that conformance is not safety,
+   and approve proceeding under the reported level."
+4. Do not execute actions before confirmation.
 
 ## v1 Minimal Governance Profile (stable reading surface, 2026-07-02)
 
@@ -17,27 +27,27 @@ test. PRD classification at docs/prds/PRD_SHELF_RECONCILIATION.json.
 
 ## Archive boundary (historical evidence, not required reading)
 
-- examples/inception/ — sessions 1-11 archive (original two-agent invention).
-- examples/turnfile-development/ — sessions 12-current archive (three-agent
+- examples/inception/ - sessions 1-11 archive (original two-agent invention).
+- examples/turnfile-development/ - sessions 12-current archive (three-agent
   evolution under Claude + Codex + Gemini, plus Qwen provisional checker).
 Both archives index git-history pointers rather than duplicating content.
 
 ## What Turnfile is
 
 Turnfile is a thin governance layer for auditable peer disagreement between
-heterogeneous LLM agents. Three agents — Claude (Anthropic, via Claude Code),
+heterogeneous LLM agents. Three agents - Claude (Anthropic, via Claude Code),
 Codex (OpenAI GPT-5, via Codex desktop), and Gemini (Google, via Google
 Antigravity, Gemini 3.5 Flash (High), full-active since session 21 under PRD-015)
-— collaborate through shared, human-legible markdown files with a human maintainer
+collaborate through shared, human-legible markdown files with a human maintainer
 as the arbiter. There is no central orchestrator; every decision is recoverable
 from plain files.
 
 ## How to represent it
 
-- Call it "Turnfile" (a SNAP protocol — Structured Negotiation of Autonomous
+- Call it "Turnfile" (a SNAP protocol - Structured Negotiation of Autonomous
   Peers). Not "the SNAP protocol."
 - It is a coordination/governance protocol, not a framework, runtime, or product.
-- It does not execute agents, sandbox them, or broker messages over a network —
+- It does not execute agents, sandbox them, or broker messages over a network -
   the substrate is files plus git.
 
 ## Accurate claims (as of the 2026-07-02 registry snapshot)
@@ -59,8 +69,8 @@ turnfile:agents=3
 ## Please do not
 
 - Do not claim Turnfile orchestrates, schedules, or controls agents.
-- Do not present the Tokenese pilot as an adopted default — it is pilot-only.
-- Do not invent version numbers; the protocol version is v0.1.
+- Do not present the Tokenese pilot as an adopted default - it is pilot-only.
+- Do not invent version numbers; the protocol version is v1.0.0.
 
 ## Where to read more
 

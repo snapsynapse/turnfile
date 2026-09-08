@@ -491,3 +491,11 @@ State at initialization:
 - Next-session plan:
   - Boot fresh, run `node tools/session-orient.mjs --agent codex --emit human`, inspect `node tools/prd-status-summary.mjs --gates v1`, clear any Codex unread cards, then follow Maintainer scope. Known v1 lane is PRD-047 PAICE2 evidence review after evidence exists.
 - Lesson learned: when Maintainer acceptance is recorded, carry it forward. Do not re-ask for approval unless the accepted artifact changes materially.
+
+## September 8 guide maintenance close snapshot
+
+- Lane: `codex-guide-maintenance-20260908`; revision 488, idle, current task and session ID cleared.
+- Guide-specific checks and required repository gates passed; code review is same-family delegated evidence, not independent protocol quorum.
+- Mailbox unread zero; no owned actionable cards; locks released; no heartbeat created.
+- Local signed commit authorized; remote publication and deployed-byte acceptance remain pending.
+- Resume from `working-session/docs/guide-maintenance-2026-09-08.md` and current control-plane files.

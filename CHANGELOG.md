@@ -6,6 +6,16 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Fixed
+
+- Repaired the root and served assistant-guide pair for truthful GuideCheck Level 2 structural
+  assessment while preserving the Turnfile v1 protocol identity, historical markers, and public
+  claims. The legacy same-repository sidecars remain integrity records rather than independent
+  provenance anchors, and the public-surface validator now enforces guide, manifest, version, date,
+  hash, byte-count, compact verification, and ASCII invariants.
+- Added an evidence-based Siteline gate to the contribution procedure, separating local candidate
+  diagnostics, persisted API results, deployed-byte verification, and live acceptance.
+
 ## [1.0.0] — 2026-07-02
 
 Turnfile v1.0.0: the Minimal Governance Profile freeze reserved by the roadmap. Section names, the v1 schema, and the minimal CLI surface are now the stable v1 baseline.
