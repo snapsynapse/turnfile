@@ -439,3 +439,23 @@ Not deleted. These are tracked evidence-shelf artifacts, cited by name in `TURNF
 `qwen-mlx-execution-handoff-codex.md` was assessed and left live. PRD-042 implementation is `done` and accepted by all required reviewers, but direct runtime execution never ran because no Qwen MLX path was reachable from the Codex sandbox. Its Maintainer start-here runbook remains valid if the runtime is provisioned. Qwen holds no Turnfile authority.
 
 `working-session/docs/README.md` index updated to carry both dispositions.
+
+## Claude repo-baseline maintenance lane closed — 2026-09-22 (rev 489)
+
+Bounded maintenance lane `claude-repo-baseline-maintenance-20260922`, opened at Maintainer request for a baseline assessment of repo, issues and branches. No numbered session was opened and no protocol change was made; the lane follows the shape of Codex's bounded `codex-guide-maintenance-20260908` lane. No heartbeat was created. Qwen authority unchanged.
+
+Delivered, all Maintainer-directed and merged:
+
+1. Branch cleanup. Six branches deleted after verifying each was fully contained in `main`; the only branch-unique paths were a relocated `CNAME`, a dead `skills/skill-versioning` symlink and a PRD-017 draft since promoted. Recovery SHAs recorded in session transcript. Local `main` fast-forwarded `2bee6c9` to `7fa21ea`.
+2. PR #5 (`ebb4718`) — the Sept 8 guide-contract reconciliation and the AIDR back-link, rebased onto current `main` from the stale `codex/fix-prd047-ci` branch. This closed the delivery route that `working-session/docs/guide-maintenance-2026-09-08.md` left open. Deployed-byte acceptance verified against the live site: 3,712 bytes, hash matching the manifest.
+3. PR #6 (`c932392`) — PRD-027 withdrawn by Maintainer decision; the two stranded Tokenese handoffs closed with banners; Qwen runbook assessed and left live. Promoted count 46 to 45 propagated across every public surface and verified live.
+
+Carry-forward for the next session:
+
+- Two unprocessed handoffs remain in the untracked `handoffs/` queue by Maintainer direction: signing/Scorecard/`CITATION.cff` (now unblocked, since its preflight blocker of local `main` being behind the remote is resolved), and the join-vs-initialize entry-prompt protocol gap.
+- No `withdrawn` PRD state exists. `tools/validate-prd-promotion.mjs` accepts only `deferred` and `superseded` as `TERMINAL_STATES`. Adding a true `withdrawn` state would change the validator contract and needs its own PRD. Flagged, not opened.
+- `.turnfile-agent` in the Maintainer's clone reports `codex`; Claude commits this lane used `TURNFILE_AGENT=claude` to keep attribution honest.
+- `main` has no branch protection and all five release tags are lightweight and unsigned; both are workstreams in the parked signing handoff.
+- WORKLOG at 441 lines before this entry, under the 500-line PRD-011 R5 compaction trigger. Compaction not executed and not deferred as an open item.
+
+Registry after this lane: 48 tracked PRDs, 45 promoted, 3 archived, zero `initiated`. Gates green: `npm run validate` 27/27, `npm run evals:prd` 335/335, promotion, public-surface snapshot, ownership guard, v1.0.0 R9 release gate unaffected.
