@@ -1,6 +1,16 @@
 # HANDOFF 2026-06-19 Tokenese precision-pivot Perplexity build
 Scope: Turnfile-side build handoff for `/Users/snap/Git/tokenese`. The smallest authoritative scope for the requested work is the Tokenese repo; this file is evidence and instruction context, not a normative Tokenese spec by itself.
 Audience: Perplexity Computer as a constrained external build/checker lane. Perplexity may implement Tokenese repo tooling or draft Tokenese repo text only when the Maintainer explicitly authorizes that repo work. Perplexity has no Turnfile task ownership, PRD acceptance authority, required-reviewer status, mailbox authority, lock authority, or shared Turnfile write authority.
+## Status
+
+> **Closed — 2026-09-22.** This handoff is stranded and must not be started. The Tokenese
+> repository was archived on 2026-07-25 with a POST-MORTEM recording that the flagship
+> compression claim was falsified and that the live A/B experiment was never completed.
+> PRD-027, the Turnfile contract this work fed, was withdrawn by Maintainer decision on
+> 2026-09-22 and moved to `docs/archive/prds/`. Retained as evidence because the session
+> ledger in `../TURNFILE.yaml` and `../WORKLOG.md` cites it by name; do not treat any
+> instruction below as an open request.
+
 ## Why this handoff exists
 Session-24 Turnfile testing changed the Tokenese work from "prove broad compression" to "build a precision-first measurement and receiver-fidelity harness." Perplexity Computer built much of the last Tokenese tooling pass, so this handoff makes the next build pass explicit.
 The retained north-star is still compression. The interim shippable claim is narrower: Tokenese is a precision-preserving structured interlingua with measured compression against equally precise English, concentrated in regimes where English must repeat or verbosely explain structure: multi-referent bindings, evidence class, confidence, ranked alternatives, repair/fallback state, and semantic contrast.

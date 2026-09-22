@@ -429,3 +429,13 @@ Vocabulary limit recorded rather than worked around: `tools/validate-prd-promoti
 Acceptance history preserved unaltered. Withdrawal ends the work; it does not retract validly recorded acceptances.
 
 Changes: PRD-027 moved to `docs/archive/prds/`, withdrawal notice added to its header, registry `state`/`shelf`/`path`/`eligible_for_docs_prds`/`acceptance.maintainer.status`/`blocking_items`/`implementation.state` updated. Promoted count 46 to 45; archived 2 to 3; zero `initiated` PRDs remain.
+
+## Stranded Tokenese handoffs closed — 2026-09-22
+
+Follow-through from the PRD-027 withdrawal. The two 2026-06-19 Tokenese handoffs in `working-session/docs/` queued work that can no longer be started: `HANDOFF-2026-06-19-tokenese-compression-second-level-testing.md` (multi-model compression testing, self-labelled Open) and `HANDOFF-2026-06-19-tokenese-precision-pivot-perplexity-build.md` (Perplexity build pass on Tokenese tooling). Both carry a Closed banner naming the upstream archival and the PRD-027 withdrawal.
+
+Not deleted. These are tracked evidence-shelf artifacts, cited by name in `TURNFILE.yaml` session history, this WORKLOG, `docs/archive/boot-codex/boot-codex_v14.md` and the `working-session/docs/README.md` index. Deleting them would break the audit trail the protocol exists to keep. The temporary-handoff disposal rule governs the untracked `handoffs/` queue, which is a different surface and still holds two unprocessed items by Maintainer direction.
+
+`qwen-mlx-execution-handoff-codex.md` was assessed and left live. PRD-042 implementation is `done` and accepted by all required reviewers, but direct runtime execution never ran because no Qwen MLX path was reachable from the Codex sandbox. Its Maintainer start-here runbook remains valid if the runtime is provisioned. Qwen holds no Turnfile authority.
+
+`working-session/docs/README.md` index updated to carry both dispositions.
