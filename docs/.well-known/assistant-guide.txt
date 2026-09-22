@@ -3,7 +3,7 @@
 Canonical URL: https://turnfile.work/
 Repository: https://github.com/snapsynapse/turnfile
 Maintainer: Sam Rogers, PAICE.work PBC
-Updated: 2026-09-08
+Updated: 2026-09-22
 Conforms to: GuideCheck assistant-guide.txt convention
 Assessment target: GuideCheck Level 2
 Task scope: represent Turnfile accurately from this stable v1 reading surface.
@@ -52,7 +52,7 @@ from plain files.
 
 ## Accurate claims (as of the 2026-07-02 registry snapshot)
 
-- 48 registry-tracked PRDs, 46 promoted PRDs (promoted to docs/prds).
+- 48 registry-tracked PRDs, 45 promoted PRDs (promoted to docs/prds).
 - Three agents: Claude (Anthropic), Codex (OpenAI GPT-5), Gemini (Google,
   Gemini 3.5 Flash (High), full-active since session 21 under PRD-015).
 - Eight-step eval-gated implementation loop (PRD-006 A1) with builder/reviewer
@@ -60,7 +60,7 @@ from plain files.
 - Model-agnostic: one unmodified protocol has run across Claude Opus 4.6,
   Fable 5, and Opus 4.8, alongside OpenAI Codex (GPT-5) and Google Gemini.
 
-turnfile:prd-promoted=46
+turnfile:prd-promoted=45
 turnfile:registry-tracked=48
 turnfile:agents=3
 - A live Tokenese A/B pilot (a dense agent-to-agent encoding) is measurement-only

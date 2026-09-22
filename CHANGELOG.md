@@ -6,6 +6,18 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Removed
+
+- PRD-027 (Tokenese Cloned-Communication A/B Contract) withdrawn by Maintainer decision on
+  2026-09-22 and moved to `docs/archive/prds/`. Its subject, the Tokenese interlingua, was archived
+  upstream on 2026-07-25 with a post-mortem recording that the flagship compression claim was
+  falsified and that the live A/B experiment this PRD contracts was never completed, leaving no
+  reachable completion path. PRD-027 was the registry's only `initiated` implementation state, so it
+  read as ordinary in-flight work. Registry records `deferred`, the accurate terminal state
+  available, because `superseded` would imply a replacement that does not exist; a distinct
+  `withdrawn` state would change the promotion validator contract and needs its own PRD. Promoted
+  PRD count moves 46 to 45 across every public surface. Acceptance history is preserved unaltered.
+
 ### Added
 
 - Reciprocal cross-reference to AIDR (https://aidr.work/), the minimal single-artifact expression

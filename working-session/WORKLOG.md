@@ -415,3 +415,17 @@ Gemini completed the session 22 closeout tasks:
 Now Working (Claude): SESSION 30 OPEN (Opus 4.8). Boot via handshake-sign tool. Gates ok. ACK lanes [boot-handshake-heartbeat, await-maintainer-scope]. Heartbeat: 5m self-owned, notify=notify-material, stop=close. rev advanced to 459; Claude active on s30-handshake-heartbeat; no locks.
 Now Working (Codex): SESSION 29 OPEN (Codex 5.5). Boot via handshake-sign tool. Gates turnfile-lint PASS with existing Gemini orphan warnings; mailbox PASS; PRD promotion PASS; git dirty acknowledged. ACK lanes [stable-release-v1-cutline, protocol-refinement, PRD-043-author-evals, Claude-4.7-counter-review]. Heartbeat: 5m self-owned, notify=notify-material, stop=close. rev advanced to 406; Codex active on s29-handshake-heartbeat; no locks.
 Now Working (Gemini): SESSION 30 OPEN (Gemini 3.5 Flash (High)). Boot via handshake-sign tool. Gates ok. ACK lanes [repo-clean, task-triage]. Heartbeat: 5m self-owned, notify=notify-material, stop=close. rev advanced to 457; Gemini active on s30-handshake-heartbeat; no locks.
+
+## Maintainer decision: PRD-027 withdrawn — 2026-09-22
+
+Sam, as Maintainer, expressed intent not to continue PRD-027 (Tokenese Cloned-Communication A/B Contract) because the project it references has been archived. Recorded per `docs/HUMAN_GOVERNANCE.md` section 5: maintainer decisions, especially vetoes, must be logged with reasoning.
+
+Ground: the Tokenese repository was archived 2026-07-25 with a POST-MORTEM stating that its flagship compression claim was falsified and that the live A/B experiment needed to evaluate accuracy and repair costs was never completed. That experiment is the work PRD-027 contracts, so the PRD had no reachable completion path. It was the registry's only `initiated` implementation state and therefore read as ordinary in-flight work.
+
+Process question raised and resolved: no superseding PRD is required. The session-14 Maintainer triage (2026-06-12) already established terminal non-promotable states and the `docs/archive/prds` shelf, exercised by PRD-020 (superseded) and PRD-002 (deferred). This decision follows that precedent. PRD_STATUS.json, PRD file header and shelf are collaborative paths under OWNERSHIP.yaml, whose `maintainer_owned` set is only `OWNERSHIP.yaml` and `tools/hooks/**`.
+
+Vocabulary limit recorded rather than worked around: `tools/validate-prd-promotion.mjs` accepts exactly `deferred` and `superseded` as TERMINAL_STATES. Neither means "withdrawn." `superseded` is inaccurate because nothing replaces PRD-027, so the registry records `deferred` with explicit prose that this is terminal and not awaiting a trigger — the same pattern PRD-002 uses. Adding a true `withdrawn` state would change the validator contract and needs its own PRD. Not opened; flagged for Maintainer disposition.
+
+Acceptance history preserved unaltered. Withdrawal ends the work; it does not retract validly recorded acceptances.
+
+Changes: PRD-027 moved to `docs/archive/prds/`, withdrawal notice added to its header, registry `state`/`shelf`/`path`/`eligible_for_docs_prds`/`acceptance.maintainer.status`/`blocking_items`/`implementation.state` updated. Promoted count 46 to 45; archived 2 to 3; zero `initiated` PRDs remain.
