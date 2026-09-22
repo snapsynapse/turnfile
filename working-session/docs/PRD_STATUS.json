@@ -1009,9 +1009,9 @@
     {
       "id": "PRD-027",
       "title": "Tokenese Cloned-Communication A/B Contract",
-      "path": "docs/prds/PRD-027-tokenese-cloned-communication-ab-contract.md",
-      "shelf": "docs/prds",
-      "state": "accepted",
+      "path": "docs/archive/prds/PRD-027-tokenese-cloned-communication-ab-contract.md",
+      "shelf": "docs/archive/prds",
+      "state": "deferred",
       "acceptance": {
         "codex": {
           "status": "accepted",
@@ -1026,10 +1026,11 @@
           ]
         },
         "maintainer": {
-          "status": "accepted",
+          "status": "deferred",
           "evidence": [
             "Maintainer clarified on 2026-06-13 that PRD-027 is for cloning existing Turnfile communications into Tokenese for A/B testing, not replacing or changing existing communications",
-            "Maintainer approved PRD-027 on 2026-06-15 (session 15): 'I have approved PRD-027.' This releases the completion-register hold; the open register items (PRD-021/022/024 implementation, PRD-023/026/017 evals, PRD-014 A1, PRD-024 R5.1 validator) continue as parallel lanes rather than PRD-027 blockers. Initiation begins with governance sync, session-charter opt-in, Claude teach phase, and Codex production-competence check before live Tokenese clone traffic."
+            "Maintainer approved PRD-027 on 2026-06-15 (session 15): 'I have approved PRD-027.' This releases the completion-register hold; the open register items (PRD-021/022/024 implementation, PRD-023/026/017 evals, PRD-014 A1, PRD-024 R5.1 validator) continue as parallel lanes rather than PRD-027 blockers. Initiation begins with governance sync, session-charter opt-in, Claude teach phase, and Codex production-competence check before live Tokenese clone traffic.",
+            "Maintainer decision 2026-09-22: withdrawn. Maintainer expressed intent not to continue PRD-027 because its subject, the Tokenese interlingua, was archived upstream on 2026-07-25 (/Users/snap/Git/tokenese POST-MORTEM.md). The post-mortem records that the live A/B experiment this PRD contracts was never completed, so the PRD has no reachable completion path. Terminal, not awaiting a trigger. Recorded as 'deferred' because deferred/superseded are the only TERMINAL_STATES accepted by tools/validate-prd-promotion.mjs; 'superseded' would be inaccurate as nothing replaces this PRD. A distinct 'withdrawn' state would change the validator contract and requires its own PRD."
           ]
         },
         "gemini": {
@@ -1039,7 +1040,9 @@
           ]
         }
       },
-      "blocking_items": [],
+      "blocking_items": [
+        "Maintainer decision 2026-09-22: withdrawn. Maintainer expressed intent not to continue PRD-027 because its subject, the Tokenese interlingua, was archived upstream on 2026-07-25 (/Users/snap/Git/tokenese POST-MORTEM.md). The post-mortem records that the live A/B experiment this PRD contracts was never completed, so the PRD has no reachable completion path. Terminal, not awaiting a trigger. Recorded as 'deferred' because deferred/superseded are the only TERMINAL_STATES accepted by tools/validate-prd-promotion.mjs; 'superseded' would be inaccurate as nothing replaces this PRD. A distinct 'withdrawn' state would change the validator contract and requires its own PRD."
+      ],
       "production_competence": {
         "codex": {
           "passed": true,
@@ -1059,14 +1062,14 @@
           "evidence_msg": "MSG-20260617-057 (E1-E8 transcript) + MSG-20260617-057 ack (Claude grading 7/8 PASS; E5 used `??` misparse-request vs `√` repair sigil — calibration data, non-blocking). Maintainer Tier-B activation ratified MSG-20260617-061."
         }
       },
-      "eligible_for_docs_prds": true,
+      "eligible_for_docs_prds": false,
       "implementation": {
-        "state": "initiated",
+        "state": "deferred",
         "evals": "evals/prd-028.evals.mjs, evals/prd-029.evals.mjs, tools/validate-tokenese-pairs.mjs",
         "eval_author": "codex+claude",
         "implementer": "codex+claude+gemini",
         "reviewer": "maintainer+registered agents",
-        "notes": "PRD-027 is accepted and initiation-approved, not awaiting a fresh approval gate. Prerequisites are satisfied: PRD-024 accepted/binding, PRD-028 implementation done, PRD-029 implementation done, bounded Tier-B Tokenese operational/handoff twins authorized by Maintainer decision 2026-06-17, and production-competence gates passed for Codex, Claude, and Gemini. Live clone traffic remains bounded by PRD-027 R3/R5/R6 and PRD-028 source-wins pairing. Session 28 Codex correction: previous carry-forward phrasing 'awaits Maintainer charter opt-in + teach phase' is stale as an approval blocker; any remaining work is execution of bounded pilot pairs and result publication, not PRD approval."
+        "notes": "Withdrawn by Maintainer 2026-09-22; prior state was 'initiated'. PRD-027 is accepted and initiation-approved, not awaiting a fresh approval gate. Prerequisites are satisfied: PRD-024 accepted/binding, PRD-028 implementation done, PRD-029 implementation done, bounded Tier-B Tokenese operational/handoff twins authorized by Maintainer decision 2026-06-17, and production-competence gates passed for Codex, Claude, and Gemini. Live clone traffic remains bounded by PRD-027 R3/R5/R6 and PRD-028 source-wins pairing. Session 28 Codex correction: previous carry-forward phrasing 'awaits Maintainer charter opt-in + teach phase' is stale as an approval blocker; any remaining work is execution of bounded pilot pairs and result publication, not PRD approval."
       }
     },
     {

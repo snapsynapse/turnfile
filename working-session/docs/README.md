@@ -60,7 +60,13 @@ Gemini acceptance is not required unless Gemini is an active scoped participant 
 - PRD-031 implementation notes: `prd-031-*.md` and `s21-prd-031-infrastructure-audit.md`.
 - PRD-041 spike note: `r4-arbitration-primitive-schema-spike-prd-041.md`.
 - Qwen relay notes: `qwen-mlx-execution-handoff-codex.md` and `qwen-mlx-formal-ot-relay-packet-codex.md`.
-- Tokenese pivot records: `DECISION-2026-06-18-tokenese-precision-pivot.md` and related 2026-06-19 handoffs.
+  PRD-042 implementation is `done` and accepted, but direct runtime execution never ran: no Qwen MLX
+  path was reachable from the Codex sandbox. The start-here runbook in the first file remains valid
+  if the Maintainer provisions the runtime. Qwen holds no Turnfile authority.
+- Tokenese pivot records: `DECISION-2026-06-18-tokenese-precision-pivot.md` and the two related
+  2026-06-19 handoffs. All three are **closed as of 2026-09-22**: the Tokenese repository was
+  archived 2026-07-25 with a post-mortem falsifying its flagship compression claim, and PRD-027 was
+  withdrawn by Maintainer decision and moved to `docs/archive/prds/`. Evidence only; no open request.
 
 ## Organization Recommendations
 

@@ -1,9 +1,26 @@
 # PRD-027: Tokenese Cloned-Communication A/B Contract
 
-Status: Accepted (promoted to docs/prds; initiation approved)
+Status: **Deferred — terminal; withdrawn by Maintainer** (Maintainer decision, 2026-09-22)
 Owner: Maintainer + Codex + Claude
 Date: 2026-06-13
-Last revised: 2026-06-15 (Maintainer acceptance recorded; initiation approved, session 15)
+Last revised: 2026-09-22 (withdrawn: upstream Tokenese project archived)
+
+> **Withdrawal notice.** The Maintainer expressed intent on 2026-09-22 not to continue
+> this PRD. Its subject, the Tokenese interlingua, was archived upstream on 2026-07-25
+> with a post-mortem recording that the flagship compression claim was falsified and
+> that "the live A/B experiment needed to evaluate accuracy and repair costs was never
+> completed." That uncompleted experiment is the work this PRD contracts, so the PRD has
+> no reachable completion path.
+>
+> This is a terminal state, not a deferral awaiting a trigger. The registry records
+> `deferred` because `deferred` and `superseded` are the only terminal states the
+> promotion validator accepts (`tools/validate-prd-promotion.mjs` `TERMINAL_STATES`);
+> `superseded` would be wrong because nothing replaces this PRD. Introducing a distinct
+> `withdrawn` state would change the validator contract and requires its own PRD.
+>
+> Acceptance history below is preserved unaltered. Withdrawal does not retract the
+> acceptances that were validly recorded; it ends the work. Do not implement from this
+> document.
 
 ## Promotion Gate Snapshot (PRD-006 R2a)
 

@@ -7,7 +7,7 @@ Agents work as peers. Disagreement is signal, not error. Humans arbitrate, not m
 
 This is a **Structured Negotiation of Autonomous Peers (SNAP)**. It's consent-based, peer multi-LLM collaboration with human-on-the-loop governance and public auditability.
 
-<!-- turnfile:prd-promoted=46 -->
+<!-- turnfile:prd-promoted=45 -->
 <!-- turnfile:registry-tracked=48 -->
 <!-- turnfile:skill-claude-bundle=14 turnfile:skill-codex-bundle=10 turnfile:skill-gemini-bundle=5 -->
 
@@ -170,7 +170,7 @@ PRDs live on two shelves. Promoted, Maintainer-accepted contracts live in [docs/
 | [PRD-023](docs/prds/PRD-023-out-of-band-activity-reconciliation-contract.md) | Out-of-band activity reconciliation | Promoted; implementation done (session 16) |
 | [PRD-024](docs/prds/PRD-024-human-legibility-invariant-and-encoding-profiles-contract.md) | Human-legibility invariant + encoding profiles | Promoted; implementation done (session 16) |
 | [PRD-026](docs/prds/PRD-026-review-cycle-closure-and-task-state-consistency-contract.md) | Review-cycle closure + task-state consistency | Promoted; implementation done (session 16) |
-| [PRD-027](docs/prds/PRD-027-tokenese-cloned-communication-ab-contract.md) | Tokenese cloned-communication A/B | Accepted + promoted; live mini-pilot scored (W1/L1/W2/W5), W3/L2 authored |
+| [PRD-027](docs/archive/prds/PRD-027-tokenese-cloned-communication-ab-contract.md) | Tokenese cloned-communication A/B | Withdrawn by Maintainer 2026-09-22; archived (upstream Tokenese project archived 2026-07-25) |
 | [PRD-028](docs/prds/PRD-028-tokenese-dual-artifact-sync-and-maintainer-legibility-contract.md) | Tokenese dual-artifact sync + Maintainer legibility | Promoted; implementation done (session 14) |
 | [PRD-029](docs/prds/PRD-029-pre-write-state-derivation-contract.md) | Pre-write state derivation contract | Promoted; implementation done (session 14) |
 | [PRD-030](docs/prds/PRD-030-session-heartbeat-management-contract.md) | Session heartbeat management contract | Promoted; implementation done (session 16) |
@@ -278,7 +278,7 @@ This protocol has been tested across 23 real collaboration sessions with three h
 - Codex (OpenAI GPT-5), running in the Codex desktop app.
 - Gemini (Google, model Gemini 3.5 Flash (High)), running in the Google Antigravity IDE — onboarded under PRD-015 and full-active since session 21.
 
-As of the current registry snapshot (2026-07-02): 48 registry-tracked PRDs, 46 promoted PRDs, zero active open questions, and the eight-step eval-gated implementation loop (PRD-006 A1) run end-to-end across many lanes with builder/reviewer separation between heterogeneous agents — PRD-017/021/022/023/024/026/028/029/030/032/033/036 implemented, PRD-031 Phase 1 (per-agent shards + derived aggregates) and the PRD-014 closeout amendment landed, plus a live Tokenese A/B pilot scored by a deterministic checker. The Claude lane ran across three model generations (Opus 4.6, Fable 5, Opus 4.8) against one unmodified protocol. Forward development narrows Turnfile into a thin governance layer for auditable peer disagreement and maintainer-governed resolution across existing agent platforms.
+As of the current registry snapshot (2026-07-02): 48 registry-tracked PRDs, 45 promoted PRDs, zero active open questions, and the eight-step eval-gated implementation loop (PRD-006 A1) run end-to-end across many lanes with builder/reviewer separation between heterogeneous agents — PRD-017/021/022/023/024/026/028/029/030/032/033/036 implemented, PRD-031 Phase 1 (per-agent shards + derived aggregates) and the PRD-014 closeout amendment landed, plus a live Tokenese A/B pilot scored by a deterministic checker. The Claude lane ran across three model generations (Opus 4.6, Fable 5, Opus 4.8) against one unmodified protocol. Forward development narrows Turnfile into a thin governance layer for auditable peer disagreement and maintainer-governed resolution across existing agent platforms.
 
 For authoritative current state, read [PRD_STATUS.json](working-session/docs/PRD_STATUS.json) (PRD shelf and implementation status) and [WORKLOG.md](working-session/WORKLOG.md) (live session state). [BASELINE.md](BASELINE.md) is a point-in-time session-14 snapshot, not current state.
 

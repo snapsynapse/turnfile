@@ -4,7 +4,15 @@ Scope: Turnfile working-session handoff for the next Tokenese testing session. T
 
 ## Status
 
-Open. Start next Turnfile session from this handoff if the Maintainer wants Claude Opus 4.8, Gemini 3.5 Flash, Codex, and optionally Perplexity to run deeper behavioral tests on the current Tokenese compression candidates.
+> **Closed — 2026-09-22.** This handoff is stranded and must not be started. The Tokenese
+> repository was archived on 2026-07-25 with a POST-MORTEM recording that the flagship
+> compression claim was falsified and that the live A/B experiment was never completed.
+> PRD-027, the Turnfile contract this work fed, was withdrawn by Maintainer decision on
+> 2026-09-22 and moved to `docs/archive/prds/`. Retained as evidence because the session
+> ledger in `../TURNFILE.yaml` and `../WORKLOG.md` cites it by name; do not treat any
+> instruction below as an open request.
+
+Superseded status of the original request, retained verbatim: Open. Start next Turnfile session from this handoff if the Maintainer wants Claude Opus 4.8, Gemini 3.5 Flash, Codex, and optionally Perplexity to run deeper behavioral tests on the current Tokenese compression candidates.
 
 ## Source context
 
