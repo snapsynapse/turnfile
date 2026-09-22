@@ -104,6 +104,13 @@ This repository is intentionally scoped to maximize interoperability and auditab
 3. **Public-by-default artifacts**: decisions, handoffs, and objections are readable without specialized tooling
 4. **Human intent authority**: maintainer sets direction and resolves disputes through logged decisions
 5. **Explicit non-goal**: not an autonomous agent-command system
+
+## Relationship to AIDR
+
+If you need to record a single consequential decision rather than govern a whole session, start with [AIDR](https://aidr.work/) (AI Decision Records): one markdown file holding the question, each agent's independent position, any objections, and the human arbitration that resolved them. No runtime, no service, one template.
+
+AIDR was spun out of Turnfile in July 2026 as its minimal single-artifact expression. AIDR is the front door; Turnfile is the advanced profile, adding the session lifecycle, mailbox, ownership and closeout that a single record deliberately omits. The two share no code and no history — the lineage is by citation. See [INTENT.md](INTENT.md) for the full statement.
+
 ## Document map
 
 ### Direction (where the project is going)

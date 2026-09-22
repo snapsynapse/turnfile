@@ -40,6 +40,10 @@ Other stable v1 surface: `schemas/v1/`, `templates/v1-minimal/`, `tools/` (inclu
 - Eight-step eval-gated implementation loop (PRD-006 A1) with builder/reviewer separation: the agent that authors a contract's evals does not implement it; the counterpart implements; the author reviews.
 - Model-agnostic: one unmodified protocol has run across Claude Opus 4.6, Fable 5, and Opus 4.8, alongside OpenAI Codex (GPT-5) and Google Gemini (Gemini 3.5 Flash (High), full-active since session 21 under PRD-015).
 
+## Related patterns
+
+- [AIDR](https://aidr.work/) (AI Decision Records): the minimal single-artifact expression of this protocol, spun out of Turnfile on 2026-07-02. One markdown file per consequential decision — independent positions, preserved dissent, human-only arbitration — with no session lifecycle, mailbox or closeout. AIDR is the front door; Turnfile is the advanced profile. Lineage is by citation: no shared code, no shared history, neither depends on the other.
+
 ## More
 
 - [Source repository](https://github.com/snapsynapse/turnfile): full history, PRDs, tools, and the inception archive of two agents building the protocol together.
