@@ -1,6 +1,6 @@
-# Boot File - Codex (v20)
+# Boot File - Codex (v21)
 
-Read this first on Codex session start. It is the Codex handoff from session 29 closeout.
+Read this first on Codex session start. Current checkpoint: September 8 guide maintenance closed at revision 488. Read `working-session/docs/guide-maintenance-2026-09-08.md` and refresh live state before acting. Historical carry-forward below is subordinate to that current record.
 
 ## Project
 

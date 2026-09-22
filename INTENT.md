@@ -1,7 +1,7 @@
 ---
 title: "Turnfile INTENT"
-version: "0.1.4"
-last_updated: 2026-07-06
+version: "0.1.5"
+last_updated: 2026-09-22
 status: v1-release-candidate-strategy
 description: "Standards-level strategy for Turnfile as a thin governance layer for auditable peer disagreement and maintainer-governed resolution across agent platforms."
 tags: [intent, strategy, turnfile, agents, governance]
@@ -89,6 +89,13 @@ Turnfile should treat adjacent platforms as execution substrates.
 - A2A is an agent interoperability surface.
 - GitHub issues, pull requests, checks, and review comments are publication and review surfaces.
 Turnfile's role is to bind these surfaces to a shared governance record when peer disagreement and maintainer arbitration matter.
+## Relationship to AIDR
+AIDR (AI Decision Records, https://aidr.work/) is the minimal single-artifact expression of this protocol: one markdown file recording one consequential decision, with independent positions, preserved dissent, and human-only arbitration. It was spun out of Turnfile on 2026-07-02 and carries no session lifecycle, mailbox, ownership model or closeout.
+- AIDR is the front door; Turnfile is the advanced profile. A team that outgrows single-decision records graduates to Turnfile sessions.
+- Turnfile remains the full session protocol and is not deprecated, superseded or forked by AIDR.
+- The lineage is by citation only. Neither repository depends on the other, and they share no code and no history. Both stay small.
+- Record IDs are repository-scoped in both projects: a bare `AIDR-0002` is ambiguous across repositories, so cite as `repo#AIDR-NNNN`.
+This section records the relationship arbitrated in AIDR-0001 (2026-07-02). It states a position, not a conformance requirement: Turnfile imposes nothing on AIDR, and AIDR imposes nothing here.
 ## Development posture
 Priority order:
 1. Finalize the v1.0.0 release gate around the Minimal Governance Profile.
@@ -135,6 +142,7 @@ The following deviations are recorded:
 - `working-session/` is tracked (not gitignored) by design: it is the active, auditable coordination workspace, which is the point of the protocol.
 
 ## Changelog
+- 2026-09-22 v0.1.5 - Added Relationship to AIDR section, recording the lineage arbitrated in AIDR-0001 (2026-07-02): AIDR is the minimal single-artifact expression and the front door, Turnfile is the advanced profile and is not deprecated or superseded. Lineage by citation only; no shared code, no shared history, no conformance requirement in either direction. The reciprocal link was outstanding since the arbitration; the public surfaces (README, landing page, llms.txt) were updated in the same change.
 - 2026-07-06 v0.1.4 - Added Philosophical ground section: the Aggregated Intelligence tenets (ratified canon 2026-07-06) cited as the design principles Turnfile practices, canonical URL at paice.foundation/papers; lineage by citation, no conformance requirement.
 - 2026-06-23 v0.1.3 - Recorded durable maintainer-acceptance intent: accepted PRDs stay accepted unless materially changed, and later evidence or release-readiness gaps must be tracked as separate blockers rather than repeated approval requests.
 - 2026-06-23 v0.1.2 - Six clarifications per Claude review (Maintainer-directed apply 2026-06-23): grounded the fresh-context test in the PRD-043 R10 probe mechanism; added cross-repo invocation as a first-class positioning line; tightened "Maintainer-governed" in Design invariant #3 to name what Maintainer does and does not own; distinguished participation tier (v1-minimal vs v1-full) from optional profile (feature bundles) in the Profile boundary section; added Tokenese-as-separate-but-adjacent line; clarified that the v1.0.0 freeze is the Maintainer R9 ratify event, not a code-freeze window.

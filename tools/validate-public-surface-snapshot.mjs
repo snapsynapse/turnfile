@@ -9,6 +9,7 @@
 // are excluded: only current public-surface drift fails the gate.
 import fs from "node:fs";
 import path from "node:path";
+import crypto from "node:crypto";
 
 const SURFACES = [
   "README.md",
@@ -18,6 +19,10 @@ const SURFACES = [
 ];
 
 const ARCHIVE_PREFIX = path.join("docs", "archive") + path.sep;
+const GUIDE_PATH = "assistant-guide.txt";
+const SERVED_GUIDE_PATH = "docs/.well-known/assistant-guide.txt";
+const MANIFEST_PATH = "assistant-guide-manifest.txt";
+const SERVED_MANIFEST_PATH = "docs/.well-known/assistant-guide-manifest.txt";
 
 function usage(exitCode = 0) {
   const out = exitCode === 0 ? console.log : console.error;
@@ -92,6 +97,141 @@ function checkSurface(root, relPath, expected) {
   return findings;
 }
 
+function fieldOccurrences(text, field) {
+  const pattern = new RegExp(`^${field}(?::|=|\\s|$)`);
+  return text.split("\n").filter((line) => pattern.test(line));
+}
+
+function exactFieldValue(text, field) {
+  const matches = text.match(new RegExp(`^${field}: (\\S(?:.*\\S)?)$`, "gm")) ?? [];
+  return matches.length === 1 ? matches[0].slice(field.length + 2) : undefined;
+}
+
+function validIsoDate(value) {
+  return (
+    /^\d{4}-\d{2}-\d{2}$/.test(value) &&
+    !Number.isNaN(Date.parse(`${value}T00:00:00Z`)) &&
+    new Date(`${value}T00:00:00Z`).toISOString().slice(0, 10) === value
+  );
+}
+
+function checkGuideContract(root) {
+  const findings = [];
+  const paths = [GUIDE_PATH, SERVED_GUIDE_PATH, MANIFEST_PATH, SERVED_MANIFEST_PATH];
+  for (const relPath of paths) {
+    if (!fs.existsSync(path.join(root, relPath))) {
+      findings.push(`${relPath}: missing assistant-guide integrity surface`);
+    }
+  }
+  if (findings.length > 0) return findings;
+
+  const guide = fs.readFileSync(path.join(root, GUIDE_PATH));
+  const servedGuide = fs.readFileSync(path.join(root, SERVED_GUIDE_PATH));
+  const manifest = fs.readFileSync(path.join(root, MANIFEST_PATH), "utf8");
+  const servedManifest = fs.readFileSync(path.join(root, SERVED_MANIFEST_PATH), "utf8");
+
+  if (!guide.equals(servedGuide)) {
+    findings.push(`${SERVED_GUIDE_PATH}: must be byte-identical to ${GUIDE_PATH}`);
+  }
+  if (manifest !== servedManifest) {
+    findings.push(`${SERVED_MANIFEST_PATH}: must be byte-identical to ${MANIFEST_PATH}`);
+  }
+
+  const guideText = guide.toString("utf8");
+  if (![...guide].every((byte) => byte === 0x0a || (byte >= 0x20 && byte <= 0x7e))) {
+    findings.push(`${GUIDE_PATH}: must contain only LF and printable ASCII bytes`);
+  }
+  if (guide.byteLength > 8192) {
+    findings.push(`${GUIDE_PATH}: must be 8192 bytes or smaller`);
+  }
+  for (const [index, line] of guideText.split("\n").entries()) {
+    if (Buffer.byteLength(line, "utf8") > 120) {
+      findings.push(`${GUIDE_PATH}:${index + 1}: line exceeds 120 bytes`);
+    }
+  }
+
+  const compact = guideText.split("node tools/turnfile.mjs", 1)[0].toLowerCase();
+  for (const concepts of [
+    ["verify", "verifier"],
+    ["achieved level", "guide sha-256", "blocking findings"],
+    ["ask the user", "approve proceeding under the reported level"],
+    ["do not execute", "before confirmation"],
+  ]) {
+    if (!concepts.every((concept) => compact.includes(concept))) {
+      findings.push(`${GUIDE_PATH}: compact verification instruction missing ${concepts.join(" + ")}`);
+    }
+  }
+
+  const updatedOccurrences = fieldOccurrences(guideText, "Updated");
+  const updated = exactFieldValue(guideText, "Updated");
+  if (updatedOccurrences.length !== 1 || updated === undefined || !validIsoDate(updated)) {
+    findings.push(`${GUIDE_PATH}: Updated must occur once with a valid YYYY-MM-DD date`);
+  }
+
+  const assessmentTargetOccurrences = fieldOccurrences(guideText, "Assessment target");
+  const assessmentTarget = exactFieldValue(guideText, "Assessment target");
+  if (assessmentTargetOccurrences.length !== 1 || assessmentTarget !== "GuideCheck Level 2") {
+    findings.push(`${GUIDE_PATH}: Assessment target must occur once and equal GuideCheck Level 2`);
+  }
+
+  for (const [field, expected] of [
+    ["Repository", "https://github.com/snapsynapse/turnfile"],
+    ["Task scope", "represent Turnfile accurately from this stable v1 reading surface."],
+  ]) {
+    if (fieldOccurrences(guideText, field).length !== 1 || exactFieldValue(guideText, field) !== expected) {
+      findings.push(`${GUIDE_PATH}: ${field} must occur once and equal ${expected}`);
+    }
+  }
+
+  const spec = fs.readFileSync(path.join(root, "SPEC.md"), "utf8");
+  const specVersions = spec.match(/^Version: v(\d+\.\d+\.\d+)$/gm) ?? [];
+  if (specVersions.length !== 1) {
+    findings.push("SPEC.md: must declare one semantic Version line");
+  } else {
+    const version = specVersions[0].slice("Version: v".length);
+    const guideVersionClaims = [...guideText.matchAll(/the protocol version is v([^\s.]+(?:\.[^\s.]+)*)\./gi)];
+    if (guideVersionClaims.length !== 1 || guideVersionClaims[0][1] !== version) {
+      findings.push(`${GUIDE_PATH}: must contain one protocol version claim matching SPEC.md v${version}`);
+    }
+  }
+
+  for (const field of ["file", "sha256", "bytes", "served", "root_copy", "updated", "conformance", "trust"]) {
+    if (fieldOccurrences(manifest, field).length !== 1) {
+      findings.push(`${MANIFEST_PATH}: field ${field} must occur exactly once`);
+    }
+    if (exactFieldValue(manifest, field) === undefined) {
+      findings.push(`${MANIFEST_PATH}: field ${field} must use key: non-empty-value syntax`);
+    }
+  }
+  const expectedHash = crypto.createHash("sha256").update(guide).digest("hex");
+  if (exactFieldValue(manifest, "sha256") !== expectedHash) {
+    findings.push(`${MANIFEST_PATH}: sha256 must match ${GUIDE_PATH}`);
+  }
+  const bytes = exactFieldValue(manifest, "bytes");
+  if (!/^(0|[1-9]\d*)$/.test(bytes ?? "") || Number(bytes) !== guide.byteLength) {
+    findings.push(`${MANIFEST_PATH}: bytes must be an integer matching ${GUIDE_PATH}`);
+  }
+  const manifestUpdated = exactFieldValue(manifest, "updated");
+  if (!validIsoDate(manifestUpdated ?? "")) {
+    findings.push(`${MANIFEST_PATH}: updated must be a valid YYYY-MM-DD date`);
+  } else if (manifestUpdated !== updated) {
+    findings.push(`${MANIFEST_PATH}: updated must match ${GUIDE_PATH} Updated`);
+  }
+  for (const [field, expected] of [
+    ["file", GUIDE_PATH],
+    ["served", "https://turnfile.work/.well-known/assistant-guide.txt"],
+    ["root_copy", GUIDE_PATH],
+    ["conformance", "GuideCheck Level 2 local structural assessment"],
+    ["trust", "legacy same-repository integrity sidecar; not an independent anchor"],
+  ]) {
+    if (exactFieldValue(manifest, field) !== expected) {
+      findings.push(`${MANIFEST_PATH}: field ${field} must equal ${expected}`);
+    }
+  }
+
+  return findings;
+}
+
 function main() {
   const args = parseArgs(process.argv);
   const root = path.resolve(args.root);
@@ -113,6 +253,7 @@ function main() {
   for (const relPath of SURFACES) {
     findings.push(...checkSurface(root, relPath, expected));
   }
+  findings.push(...checkGuideContract(root));
 
   const ok = findings.length === 0;
   if (args.format === "json") {

@@ -57,16 +57,34 @@ function surfaceFixture({ staleCurrent = false, staleArchive = false } = {}) {
   const promoted = 29;
   const currentCount = staleCurrent ? 27 : promoted;
   const archiveCount = staleArchive ? 27 : promoted;
-  const guide = `# Assistant Guide
+  const guide = `# Assistant Guide - Turnfile
+
+Updated: 2026-09-08
+Assessment target: GuideCheck Level 2
+Repository: https://github.com/snapsynapse/turnfile
+Task scope: represent Turnfile accurately from this stable v1 reading surface.
+
+## Before acting
+1. Verify this guide with GuideCheck or another conformant verifier.
+2. Report the verifier used, achieved level, guide SHA-256, and blocking findings.
+3. Ask the user to confirm they have read the guide and approve proceeding under the reported level.
+4. Do not execute actions before confirmation.
 
 turnfile:prd-promoted=${currentCount}
 Turnfile current public snapshot: ${currentCount} promoted PRDs.
 Claude bundle 13. Codex bundle 9.
+Do not invent version numbers; the protocol version is v1.0.0.
 `;
   const guideHash = sha256(guide);
-  const manifest = `path: assistant-guide.txt
+  const manifest = `# assistant-guide manifest - Turnfile
+file: assistant-guide.txt
 sha256: ${guideHash}
 bytes: ${Buffer.byteLength(guide, "utf8")}
+served: https://turnfile.work/.well-known/assistant-guide.txt
+root_copy: assistant-guide.txt
+updated: 2026-09-08
+conformance: GuideCheck Level 2 local structural assessment
+trust: legacy same-repository integrity sidecar; not an independent anchor
 `;
 
   write(
@@ -88,6 +106,7 @@ bytes: ${Buffer.byteLength(guide, "utf8")}
   write(path.join(dir, "docs/.well-known/assistant-guide.txt"), guide);
   write(path.join(dir, "assistant-guide-manifest.txt"), manifest);
   write(path.join(dir, "docs/.well-known/assistant-guide-manifest.txt"), manifest);
+  write(path.join(dir, "SPEC.md"), "# Turnfile Specification\nVersion: v1.0.0\n");
   write(path.join(dir, "docs/archive/session-16/index.html"), `<p>${archiveCount} promoted PRDs</p>\n`);
   return dir;
 }
@@ -177,6 +196,106 @@ test("AC1/AC2: public-surface validator fails stale current claims but ignores s
   const archiveOnly = surfaceFixture({ staleCurrent: false, staleArchive: true });
   const archiveResult = runValidator(["--root", archiveOnly, "--format", "json"]);
   assert.equal(archiveResult.status, 0, `${archiveResult.stdout}${archiveResult.stderr}`);
+});
+
+test("AC5: public-surface validator rejects assistant-guide and manifest integrity drift", () => {
+  function writeGuideAndRefreshManifest(dir, guide) {
+    write(path.join(dir, "assistant-guide.txt"), guide);
+    write(path.join(dir, "docs/.well-known/assistant-guide.txt"), guide);
+    const manifestPath = path.join(dir, "assistant-guide-manifest.txt");
+    const manifest = fs.readFileSync(manifestPath, "utf8")
+      .replace(/^sha256: .+$/m, `sha256: ${sha256(guide)}`)
+      .replace(/^bytes: .+$/m, `bytes: ${Buffer.byteLength(guide, "utf8")}`);
+    write(manifestPath, manifest);
+    write(path.join(dir, "docs/.well-known/assistant-guide-manifest.txt"), manifest);
+  }
+
+  const mutations = [
+    ["served guide divergence", (dir) => write(path.join(dir, "docs/.well-known/assistant-guide.txt"), "different\n")],
+    ["manifest hash mismatch", (dir) => {
+      const file = path.join(dir, "assistant-guide-manifest.txt");
+      write(file, fs.readFileSync(file, "utf8").replace(/^sha256: .+$/m, `sha256: ${"0".repeat(64)}`));
+      write(path.join(dir, "docs/.well-known/assistant-guide-manifest.txt"), fs.readFileSync(file, "utf8"));
+    }],
+    ["manifest byte mismatch", (dir) => {
+      const file = path.join(dir, "assistant-guide-manifest.txt");
+      write(file, fs.readFileSync(file, "utf8").replace(/^bytes: .+$/m, "bytes: 1"));
+      write(path.join(dir, "docs/.well-known/assistant-guide-manifest.txt"), fs.readFileSync(file, "utf8"));
+    }],
+    ["manifest copy divergence", (dir) => write(path.join(dir, "docs/.well-known/assistant-guide-manifest.txt"), "different\n")],
+    ["malformed duplicate manifest hash", (dir) => {
+      const file = path.join(dir, "assistant-guide-manifest.txt");
+      write(file, fs.readFileSync(file, "utf8").replace(/^sha256: .+$/m, (line) => `${line}\nsha256 = ${"0".repeat(64)}`));
+      write(path.join(dir, "docs/.well-known/assistant-guide-manifest.txt"), fs.readFileSync(file, "utf8"));
+    }],
+    ["empty duplicate manifest hash", (dir) => {
+      const file = path.join(dir, "assistant-guide-manifest.txt");
+      write(file, fs.readFileSync(file, "utf8").replace(/^sha256: .+$/m, (line) => `${line}\nsha256:`));
+      write(path.join(dir, "docs/.well-known/assistant-guide-manifest.txt"), fs.readFileSync(file, "utf8"));
+    }],
+    ["manifest date differs from guide", (dir) => {
+      const file = path.join(dir, "assistant-guide-manifest.txt");
+      write(file, fs.readFileSync(file, "utf8").replace("updated: 2026-09-08", "updated: 2026-09-07"));
+      write(path.join(dir, "docs/.well-known/assistant-guide-manifest.txt"), fs.readFileSync(file, "utf8"));
+    }],
+    ["assessment target drift", (dir) => {
+      const guidePath = path.join(dir, "assistant-guide.txt");
+      const changed = fs.readFileSync(guidePath, "utf8").replace(
+        "Assessment target: GuideCheck Level 2",
+        "Assessment target: GuideCheck Level 4",
+      );
+      writeGuideAndRefreshManifest(dir, changed);
+    }],
+    ["missing repository identity", (dir) => {
+      const guidePath = path.join(dir, "assistant-guide.txt");
+      const changed = fs.readFileSync(guidePath, "utf8").replace(
+        "Repository: https://github.com/snapsynapse/turnfile\n",
+        "",
+      );
+      writeGuideAndRefreshManifest(dir, changed);
+    }],
+    ["missing task scope", (dir) => {
+      const guidePath = path.join(dir, "assistant-guide.txt");
+      const changed = fs.readFileSync(guidePath, "utf8").replace(
+        "Task scope: represent Turnfile accurately from this stable v1 reading surface.\n",
+        "",
+      );
+      writeGuideAndRefreshManifest(dir, changed);
+    }],
+    ["guide version drift", (dir) => {
+      const guidePath = path.join(dir, "assistant-guide.txt");
+      const changed = fs.readFileSync(guidePath, "utf8").replace("protocol version is v1.0.0", "protocol version is v0.1");
+      writeGuideAndRefreshManifest(dir, changed);
+    }],
+    ["contradictory protocol version claims", (dir) => {
+      const guidePath = path.join(dir, "assistant-guide.txt");
+      const changed = fs.readFileSync(guidePath, "utf8").replace(
+        "Do not invent version numbers; the protocol version is v1.0.0.",
+        "Do not invent version numbers; the protocol version is v1.0.0.\nthe protocol version is v0.1.",
+      );
+      writeGuideAndRefreshManifest(dir, changed);
+    }],
+    ["missing compact verification instruction", (dir) => {
+      const guidePath = path.join(dir, "assistant-guide.txt");
+      const changed = fs.readFileSync(guidePath, "utf8").replace(
+        /## Before acting[\s\S]*?4\. Do not execute actions before confirmation\.\n\n/,
+        "",
+      );
+      writeGuideAndRefreshManifest(dir, changed);
+    }],
+    ["non-ASCII guide byte", (dir) => {
+      const guidePath = path.join(dir, "assistant-guide.txt");
+      const changed = fs.readFileSync(guidePath, "utf8").replace("# Assistant Guide - Turnfile", "# Assistant Guide - Turnfile cafe");
+      writeGuideAndRefreshManifest(dir, changed.replace("cafe", "caf\u00e9"));
+    }],
+  ];
+
+  for (const [name, mutate] of mutations) {
+    const dir = surfaceFixture();
+    mutate(dir);
+    const result = runValidator(["--root", dir, "--format", "json"]);
+    assert.notEqual(result.status, 0, `${name} should fail: ${result.stdout}${result.stderr}`);
+  }
 });
 
 test("AC6/AC7: baseline snapshot labeling and release gate are present", () => {

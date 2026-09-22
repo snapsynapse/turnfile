@@ -65,6 +65,16 @@ The invariant rules in `docs/PROTOCOL_CORE.md` section 3 are intentionally hard 
 - Templates should be copy-paste ready with clear placeholder markers
 - Cross-references between docs should use relative links and resolve to existing files
 
+## Public-site delivery evidence
+
+Before delivery review, assess https://turnfile.work/ with Siteline and reconcile the result
+against the candidate source. Retain the timestamp, evaluator commit, scanner and rubric versions,
+grade, score, findings, and target commit. For a persisted API result, also retain its result ID and
+confirmed storage location. Reconcile each finding against source and intended behavior; do not add
+irrelevant surfaces merely to improve a grade. A local candidate-engine diagnostic is not a
+persisted Siteline API result or live acceptance. After an authorized deployment, verify the
+deployed bytes and scan the live canonical site before recording acceptance.
+
 ## License
 
 By contributing, you agree that your contributions will be licensed under the Apache License 2.0.

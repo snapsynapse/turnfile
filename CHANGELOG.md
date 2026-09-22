@@ -6,6 +6,26 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+
+- Reciprocal cross-reference to AIDR (https://aidr.work/), the minimal single-artifact expression
+  spun out of Turnfile on 2026-07-02. Recorded in INTENT.md as a new Relationship to AIDR section
+  and carried to the README, landing page and `docs/llms.txt` in the same change per the
+  public-surface contract. AIDR is the front door, Turnfile the advanced profile; the lineage is by
+  citation only, with no shared code, no shared history and no conformance requirement in either
+  direction. This link was outstanding since the AIDR-0001 arbitration, and aidr.work had linked
+  here without anything pointing back.
+
+### Fixed
+
+- Repaired the root and served assistant-guide pair for truthful GuideCheck Level 2 structural
+  assessment while preserving the Turnfile v1 protocol identity, historical markers, and public
+  claims. The legacy same-repository sidecars remain integrity records rather than independent
+  provenance anchors, and the public-surface validator now enforces guide, manifest, version, date,
+  hash, byte-count, compact verification, and ASCII invariants.
+- Added an evidence-based Siteline gate to the contribution procedure, separating local candidate
+  diagnostics, persisted API results, deployed-byte verification, and live acceptance.
+
 ## [1.0.0] — 2026-07-02
 
 Turnfile v1.0.0: the Minimal Governance Profile freeze reserved by the roadmap. Section names, the v1 schema, and the minimal CLI surface are now the stable v1 baseline.
