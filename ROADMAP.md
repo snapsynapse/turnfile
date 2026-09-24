@@ -1,16 +1,16 @@
 ---
 title: "Turnfile ROADMAP"
-version: "0.1.4"
-last_updated: 2026-06-23
-status: v1-release-candidate-planning
-description: "Non-normative planning roadmap for Turnfile v1 release readiness, optional profiles, and future integration work."
+version: "0.1.5"
+last_updated: 2026-09-23
+status: post-v1-planning
+description: "Non-normative planning roadmap for Turnfile after the v1.0.0 release: optional profiles, adoption evidence, and future integration work."
 tags: [roadmap, planning, turnfile, agents, governance]
 ---
 # Roadmap
 Status: planning notes for actions not yet executed and decisions not yet made.
 This roadmap is not normative. It records likely future work so unresolved items remain visible without becoming commitments.
 ## Current state
-Turnfile has a working protocol corpus, validation tooling, examples from real multi-agent sessions, skills for Codex and Claude, staged Gemini onboarding artifacts, and a passing local validation suite.
+Turnfile v1.0.0, the Minimal Governance Profile, shipped on 2026-07-02. The repo has a working protocol corpus, validation tooling, the portable CLI, examples from real multi-agent sessions, skills for Claude, Codex, and Gemini (full-active since session 21), and a passing local validation suite. Sections below that describe v1 release readiness are retained as the record of how the release gate was met.
 The project now narrows from "multi-agent collaboration protocol" to "thin governance layer for auditable peer disagreement and maintainer-governed resolution across existing agent platforms."
 ## Near-term reset
 ### 1. Scope reconciliation

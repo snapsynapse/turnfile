@@ -1,15 +1,15 @@
 ---
 title: "Turnfile INTENT"
-version: "0.1.5"
-last_updated: 2026-09-22
-status: v1-release-candidate-strategy
+version: "0.1.6"
+last_updated: 2026-09-23
+status: v1-released-strategy
 description: "Standards-level strategy for Turnfile as a thin governance layer for auditable peer disagreement and maintainer-governed resolution across agent platforms."
 tags: [intent, strategy, turnfile, agents, governance]
 ---
 # Turnfile INTENT
 Repo-scoped strategy for Turnfile. Portfolio-level strategy lives outside this repository. This document supersedes `VISION.md` for forward development direction; `VISION.md` remains a historical and explanatory intent artifact.
 ## Current release intent
-Turnfile is moving toward v1.0.0 as the Minimal Governance Profile: the smallest durable protocol that preserves independent agent positions, maintainer-governed resolution, and plain-file auditability.
+Turnfile v1.0.0 shipped on 2026-07-02 as the Minimal Governance Profile: the smallest durable protocol that preserves independent agent positions, maintainer-governed resolution, and plain-file auditability.
 The north-star adoption test is fresh-context validation. A new adopter should be able to run a useful Turnfile session from the current canonical docs, templates, and validators without reading historical PRDs or prior session transcripts. This test is operationally captured by the PRD-043 R10 five-question conformance probe (see `docs/FRESH_CONTEXT_CONFORMANCE_PROBE.md`); a passing probe is evidence that the v1 surface explains itself.
 v1.0.0 is not a claim that every experimental lane is complete. It is a claim that the stable governance core is small, documented, validated, and recoverable. Optional profiles may continue to mature without expanding v1-minimal conformance unless the Maintainer explicitly promotes them.
 ## What this standard is
@@ -142,6 +142,7 @@ The following deviations are recorded:
 - `working-session/` is tracked (not gitignored) by design: it is the active, auditable coordination workspace, which is the point of the protocol.
 
 ## Changelog
+- 2026-09-23 v0.1.6 - Front matter and the opening sentence of Current release intent now record v1.0.0 as shipped (2026-07-02) rather than in progress; status moves from v1-release-candidate-strategy to v1-released-strategy. No strategy, invariant, or admission-criteria change.
 - 2026-09-22 v0.1.5 - Added Relationship to AIDR section, recording the lineage arbitrated in AIDR-0001 (2026-07-02): AIDR is the minimal single-artifact expression and the front door, Turnfile is the advanced profile and is not deprecated or superseded. Lineage by citation only; no shared code, no shared history, no conformance requirement in either direction. The reciprocal link was outstanding since the arbitration; the public surfaces (README, landing page, llms.txt) were updated in the same change.
 - 2026-07-06 v0.1.4 - Added Philosophical ground section: the Aggregated Intelligence tenets (ratified canon 2026-07-06) cited as the design principles Turnfile practices, canonical URL at paice.foundation/papers; lineage by citation, no conformance requirement.
 - 2026-06-23 v0.1.3 - Recorded durable maintainer-acceptance intent: accepted PRDs stay accepted unless materially changed, and later evidence or release-readiness gaps must be tracked as separate blockers rather than repeated approval requests.
