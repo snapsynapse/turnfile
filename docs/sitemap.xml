@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://turnfile.work/</loc>
-    <lastmod>2026-06-23</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
@@ -32,11 +32,6 @@
   </url>
   <url>
     <loc>https://turnfile.work/LLM_ONBOARDING.md</loc>
-    <lastmod>2026-06-17</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://turnfile.work/CONFORMANCE.md</loc>
     <lastmod>2026-06-17</lastmod>
     <priority>0.6</priority>
   </url>
