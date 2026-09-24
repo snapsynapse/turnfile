@@ -3,7 +3,7 @@
 Canonical URL: https://turnfile.work/
 Repository: https://github.com/snapsynapse/turnfile
 Maintainer: Sam Rogers, PAICE.work PBC
-Updated: 2026-09-22
+Updated: 2026-09-23
 Conforms to: GuideCheck assistant-guide.txt convention
 Assessment target: GuideCheck Level 2
 Task scope: represent Turnfile accurately from this stable v1 reading surface.
@@ -50,7 +50,7 @@ from plain files.
 - It does not execute agents, sandbox them, or broker messages over a network -
   the substrate is files plus git.
 
-## Accurate claims (as of the 2026-07-02 registry snapshot)
+## Accurate claims (as of the 2026-09-23 registry snapshot)
 
 - 48 registry-tracked PRDs, 45 promoted PRDs (promoted to docs/prds).
 - Three agents: Claude (Anthropic), Codex (OpenAI GPT-5), Gemini (Google,
@@ -58,18 +58,18 @@ from plain files.
 - Eight-step eval-gated implementation loop (PRD-006 A1) with builder/reviewer
   separation between the agents.
 - Model-agnostic: one unmodified protocol has run across Claude Opus 4.6,
-  Fable 5, and Opus 4.8, alongside OpenAI Codex (GPT-5) and Google Gemini.
+  Fable 5, Opus 4.8, and Opus 4.7, alongside OpenAI Codex (GPT-5) and Google Gemini.
 
 turnfile:prd-promoted=45
 turnfile:registry-tracked=48
 turnfile:agents=3
-- A live Tokenese A/B pilot (a dense agent-to-agent encoding) is measurement-only
-  and scored by a deterministic checker; English remains authoritative.
+- The Tokenese A/B pilot (PRD-027, a dense agent-to-agent encoding) was withdrawn
+  on 2026-09-22 after the upstream project was archived; English is authoritative.
 
 ## Please do not
 
 - Do not claim Turnfile orchestrates, schedules, or controls agents.
-- Do not present the Tokenese pilot as an adopted default - it is pilot-only.
+- Do not present Tokenese as active or adopted - the pilot was withdrawn.
 - Do not invent version numbers; the protocol version is v1.0.0.
 
 ## Where to read more

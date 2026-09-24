@@ -284,12 +284,13 @@ For authoritative current state, read [PRD_STATUS.json](working-session/docs/PRD
 
 ## Next
 
-The authoritative forward task register lives in [BASELINE.md](BASELINE.md). Headlines:
+v1.0.0 shipped the items previously headlined here: role-keyed skill layout, a root `CLAUDE.md` bootstrap alongside `GEMINI.md`, and the minimal starter workflow ([templates/v1-minimal/](templates/v1-minimal/) plus the portable CLI). Forward direction is set by the development posture in [INTENT.md](INTENT.md); candidate work is tracked, without commitment, in [ROADMAP.md](ROADMAP.md). Open candidates:
 
-- Model-agnostic skill layout (role-keyed directories, model in manifest).
-- Root `AGENTS.md` / `CLAUDE.md` bootstrap files for cold-start agent interop.
-- Minimal starter workflow: adopt Turnfile by copying one folder and reading one guide.
-- Platform integration notes for current agent platforms, MCP, A2A, and GitHub review flows.
+- More cross-repo dogfood evidence beyond the Tokenese and AIDR runs (PRD-047), so adoption claims rest on repositories other than this one.
+- A root `AGENTS.md` bootstrap for agents that load neither `CLAUDE.md` nor `GEMINI.md`.
+- A cleaned public example of a compact v1 session, so the inception archive stops being the first thing a newcomer reads.
+- Platform integration notes (MCP, A2A, GitHub review flows), written only after repeated manual mappings prove they reduce friction.
+- Tool layout consolidation under `tools/`, deferred until after v1.0.0 with its own migration check.
 
 ## Sponsor
 
