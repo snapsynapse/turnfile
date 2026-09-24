@@ -8,6 +8,7 @@ Turnfile keeps tool files flat before v1.0.0 so existing PRD evals and docs do n
 - `export-mailbox-json.mjs` — regenerate `working-session/MAILBOX.json`.
 ## Validators
 - `turnfile-lint.mjs`
+- `turnfile-schema.mjs` — shared helper: picks the v1 schema for sessions whose `turnfile.version` is 1.x, v0 otherwise. Used by `turnfile.mjs`, `handshake-sign.mjs`, and `session-orient.mjs`.
 - `validate-mailbox-invariants.mjs`
 - `validate-mailbox-session-gate.mjs`
 - `validate-closeout.mjs`

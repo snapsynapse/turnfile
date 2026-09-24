@@ -5,6 +5,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import process from "node:process";
+import { schemaForTurnfile } from "./turnfile-schema.mjs";
 
 const CLI_VERSION = "0.1.0";
 const PROTOCOL_VERSION = "1.0.0";
@@ -297,7 +298,7 @@ function commandClose(argv) {
     ["closeout", "tools/validate-closeout.mjs", ["--turnfile", "working-session/TURNFILE.yaml", "--mailbox", "working-session/MAILBOX.md", "--agent", agent]],
     ["turnfile-lint", "tools/turnfile-lint.mjs", [
       "--turnfile", "working-session/TURNFILE.yaml",
-      "--schema", path.join(repoRoot, "schemas/turnfile/turnfile-v0.schema.json"),
+      "--schema", schemaForTurnfile(path.join(root, "working-session/TURNFILE.yaml")),
     ]],
     ["prd-promotion", "tools/validate-prd-promotion.mjs", [
       "--registry", fs.existsSync(targetPrdStatus)
