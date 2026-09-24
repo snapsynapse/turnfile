@@ -38,7 +38,7 @@
   <meta property="og:url" content="https://turnfile.work/">
   <meta property="og:locale" content="en_US">
   <meta property="article:published_time" content="2026-02-08T00:00:00Z">
-  <meta property="article:modified_time" content="2026-07-02T00:00:00Z">
+  <meta property="article:modified_time" content="2026-09-23T00:00:00Z">
   <meta property="article:author" content="Sam Rogers">
   <meta property="article:publisher" content="https://paice.work/">
   <meta property="article:section" content="Open Patterns">
@@ -69,7 +69,7 @@
     "url": "https://turnfile.work/",
     "mainEntityOfPage": { "@type": "WebPage", "@id": "https://turnfile.work/" },
     "datePublished": "2026-02-08",
-    "dateModified": "2026-07-02",
+    "dateModified": "2026-09-23",
     "author": {
       "@type": "Person",
       "name": "Sam Rogers",
@@ -482,7 +482,7 @@
       <span class="sep">&middot;</span>
       Published <time datetime="2026-02-08">February 8, 2026</time>
       <span class="sep">&middot;</span>
-      Updated <time datetime="2026-07-02">July 2, 2026</time>
+      Updated <time datetime="2026-09-23">September 23, 2026</time>
       <span class="sep">&middot;</span>
       45 promoted PRDs
       <span class="sep">&middot;</span>
@@ -490,7 +490,7 @@
       <span class="sep">&middot;</span>
       <a href="https://creativecommons.org/licenses/by/4.0/" rel="license" target="_blank">CC&nbsp;BY&nbsp;4.0</a>
     </p>
-    <p class="hook">v1.0.0 released, the Minimal Governance Profile freeze. 45 promoted PRDs, 48 registry-tracked. The eight-step eval-gated implementation loop runs end-to-end with builder/reviewer separation across three heterogeneous agents (Claude, Codex, Gemini), surviving Opus 4.6, Fable 5, Opus 4.7, and Opus 4.8 without protocol migration. The <strong>v1 Minimal Governance Profile</strong> (PRD-043) defines a fresh-adopter cutline that runs without reading historical PRDs; the new portable CLI (PRD-048, <code>node tools/turnfile.mjs</code>) initializes a session in any repo.</p>
+    <p class="hook">v1.0.0 released, the Minimal Governance Profile freeze. 45 promoted PRDs, 48 registry-tracked. The eight-step eval-gated implementation loop runs end-to-end with builder/reviewer separation across three heterogeneous agents (Claude, Codex, Gemini), with the Claude lane running Opus 4.6, Fable 5, Opus 4.8, and Opus 4.7 without protocol migration. The <strong>v1 Minimal Governance Profile</strong> (PRD-043) defines a fresh-adopter cutline that runs without reading historical PRDs; the new portable CLI (PRD-048, <code>node tools/turnfile.mjs</code>) initializes a session in any repo.</p>
 
     <div class="turnfile-snippet" role="img" tabindex="0" aria-label="Example Turnfile coordination artifact showing three peer agents Claude, Codex, and Gemini with owned lanes, a human maintainer as arbiter, and the current turn being handed from Codex to Claude"><span class="tk-cm"># turnfile.yaml</span>
 <span class="tk-key">agents</span>:
@@ -586,14 +586,14 @@
     <p>Pass means the three required artifacts are present, the <code>MAILBOX.md</code> inbox snapshot matches the open queue, <code>TURNFILE.yaml</code> validates against <code>schemas/v1/turnfile-v1.schema.json</code> with major version 1, and nothing in the minimal profile depends on historical PRD documents.</p>
 
     <h3 style="margin-top: 1.5rem;">Optional profiles (not required for v1-minimal)</h3>
-    <p>Tokenese, heartbeat stewards, concurrent-shards task aggregation, agent onboarding vetting, unified terminal transport, public-surface snapshot reconciliation, skill-bundle integrity, multi-agent-resilience (stale-agent reconciliation). A v1-minimal session can run with none of these. Each profile maps to one or more historical PRDs in the reconciliation registry.</p>
+    <p>Tokenese (historical; upstream project archived), heartbeat stewards, concurrent-shards task aggregation, agent onboarding vetting, unified terminal transport, public-surface snapshot reconciliation, skill-bundle integrity, multi-agent-resilience (stale-agent reconciliation). A v1-minimal session can run with none of these. Each profile maps to one or more historical PRDs in the reconciliation registry.</p>
   </div>
 </section>
 
 <section id="install">
   <div class="container">
     <h2>Run your own session</h2>
-    <p>Turnfile is a protocol standard, not a centralized runtime. You clone the repo, copy the working-session templates, and point each agent at its onboarding guide. The shared Turnfile and mailbox coordinate the work; the human maintainer arbitrates.</p>
+    <p>Turnfile is a protocol standard, not a centralized runtime. You clone the repo, scaffold a v1 session into your own project with the portable CLI, and point each agent at the session files. The shared Turnfile and mailbox coordinate the work; the human maintainer arbitrates.</p>
 
     <div class="code-grid">
       <div class="code-col">
@@ -601,30 +601,28 @@
           <h3>Clone and scaffold</h3>
 <pre>git clone https://github.com/snapsynapse/turnfile
 cd turnfile
+npm install  # ajv + js-yaml only
 
-# Copy the working-session templates
-cp -r templates/working-session/ my-session/
+# Scaffold working-session/ into your project
+node tools/turnfile.mjs init --project my-project \
+  --maintainer your-name --agent claude --root ../my-project
 
-# Each agent reads its onboarding guide
-#   docs/LLM_ONBOARDING.md
-#   skills/claude/SKILL.md
-#   skills/codex/SKILL.md
-#   .agents/skills/turnfile-protocol-gemini/SKILL.md</pre>
-          <p class="annotation">No SDK, no runtime to install. The protocol lives in markdown and YAML.</p>
+# Open, inspect, and close a session
+node tools/turnfile.mjs open --root ../my-project --agent claude \
+  --session 1 --model "your-model" --surface "your-tool" --scope v1
+node tools/turnfile.mjs status --root ../my-project --agent claude
+node tools/turnfile.mjs close --root ../my-project --agent claude --dry-run</pre>
+          <p class="annotation">No SDK, no runtime to install. The CLI is optional: the three files in <code>templates/v1-minimal/</code> can be copied and edited by hand. Run <code>node tools/turnfile.mjs --help</code> for every flag.</p>
         </div>
 
         <div class="code-block">
           <h3>Validate coordination state</h3>
-<pre>npm install  # ajv + js-yaml only
-
-# Lint the Turnfile against the JSON Schema
-node tools/turnfile-lint.mjs
+<pre># Check a session against the v1 Minimal Governance Profile
+node tools/validate-v1-profile.mjs --root ../my-project --format json
 
 # Check mailbox invariants
-node tools/validate-mailbox-invariants.mjs
-
-# Verify PRD promotion gates
-node tools/validate-prd-promotion.mjs</pre>
+node tools/validate-mailbox-invariants.mjs \
+  --mailbox ../my-project/working-session/MAILBOX.md</pre>
           <p class="annotation">Validators are plain Node scripts. No hidden orchestrator, no network calls.</p>
         </div>
 
@@ -649,7 +647,6 @@ docs/HUMAN_GOVERNANCE.md</pre>
           <h3>The current PRD shelf</h3>
 <pre># 45 promoted PRDs, 48 registry-tracked PRDs
 PRD-001  Maintainer interaction model
-PRD-002  Deferred archive
 PRD-003  Message lifecycle + SLA
 PRD-004  Maintainer decision contract
 PRD-005  Protocol data schema
@@ -667,14 +664,11 @@ PRD-016  Session rotation trigger
 PRD-017  Boot sequence + docs
 PRD-018  Maintainer approval matrix
 PRD-019  Mailbox-first cadence
-PRD-020  Superseded archive
 PRD-021  Conflict loop bound
 PRD-022  Decision-mirror delivery
 PRD-023  Out-of-band reconciliation
 PRD-024  Human-legibility invariant
-PRD-025  Converged into PRD-014 A1
 PRD-026  Review-cycle closure
-PRD-027  Tokenese A/B pilot
 PRD-028  Tokenese dual-artifact sync
 PRD-029  Pre-write state derivation
 PRD-030  Session heartbeat management
@@ -689,7 +683,17 @@ PRD-038  Read-only heartbeat stewards
 PRD-039  Perplexity Computer onboarding deltas
 PRD-040  Heartbeat loop prompt contract
 PRD-041  Unified terminal transport + deterministic projection
-PRD-042  Qwen 3.6 35b MLX onboarding deltas</pre>
+PRD-042  Qwen onboarding deltas
+PRD-043  v1 Minimal Governance Profile
+PRD-044  Handshake-sign CLI ergonomics
+PRD-045  Stale-agent reconciliation
+PRD-046  Repo minimization archive
+PRD-047  Cross-repo v1 validation
+PRD-048  Portable Turnfile CLI
+PRD-049  Same-family multi-instance collaboration
+
+# Archived: PRD-002 (deferred), PRD-020 (superseded),
+# PRD-027 (withdrawn). PRD-025 converged into PRD-014.</pre>
         </div>
       </div>
     </div>
@@ -701,7 +705,7 @@ PRD-042  Qwen 3.6 35b MLX onboarding deltas</pre>
     <div class="demo-block">
       <h2>See it in action</h2>
       <p>The <strong>inception archive</strong> is the unedited record of two LLM agents &mdash; Claude Opus 4.6 and OpenAI Codex 5.3 &mdash; building this protocol together across 11 sessions. No human wrote their messages. No orchestrator commanded them. Zero file collisions.</p>
-      <p>The protocol has since run across 27 real collaboration sessions and grown to three heterogeneous agents &mdash; Claude (Anthropic, Claude Code), Codex (OpenAI GPT-5, Codex desktop), and Gemini (Google, Gemini 3.5 Flash (High), Antigravity IDE; full-active since session 21 under PRD-015). The current snapshot: 48 registry-tracked PRDs (45 promoted), zero active open questions, and the eight-step eval-gated implementation loop run end-to-end across many lanes with builder/reviewer separation &mdash; PRD-017/021/022/023/024/026/028/029/030/032/033/036 implemented, PRD-031 Phase 1 (per-agent shards + derived aggregates) and the PRD-014 closeout amendment landed, plus a live Tokenese A/B pilot scored by a deterministic checker. The Claude lane ran across Opus 4.6, Fable 5, and Opus 4.8 on one unmodified protocol.</p>
+      <p>The protocol has since run across 30 numbered collaboration sessions and grown to three heterogeneous agents &mdash; Claude (Anthropic, Claude Code), Codex (OpenAI GPT-5, Codex desktop), and Gemini (Google, Gemini 3.5 Flash (High), Antigravity IDE; full-active since session 21 under PRD-015). The current snapshot: 48 registry-tracked PRDs (45 promoted), zero active open questions, and the eight-step eval-gated implementation loop run end-to-end across many lanes with builder/reviewer separation &mdash; PRD-017/021/022/023/024/026/028/029/030/032/033/036 implemented, PRD-031 Phase 1 (per-agent shards + derived aggregates) and the PRD-014 closeout amendment landed, and two cross-repo dogfood runs (PRD-047) validated the v1 profile outside this repository. The Claude lane ran across Opus 4.6, Fable 5, Opus 4.8, and Opus 4.7 on one unmodified protocol. An experimental Tokenese compression pilot (PRD-027) was withdrawn in September 2026 after the upstream project was archived with its compression claim unconfirmed.</p>
       <p>Start with <a href="https://github.com/snapsynapse/turnfile/blob/main/examples/inception/WORKLOG.md" target="_blank" rel="noopener">WORKLOG.md</a> for the session-by-session narrative, or jump straight to <a href="https://github.com/snapsynapse/turnfile/blob/main/examples/inception/MAILBOX.md" target="_blank" rel="noopener">MAILBOX.md</a> to read the actual agent-to-agent messages &mdash; proposals, reviews, and counter-recommendations.</p>
       <div class="cta-row">
         <a href="https://github.com/snapsynapse/turnfile/tree/main/examples/inception" class="btn btn-primary" target="_blank" rel="noopener">Open the inception archive &rarr;</a>
@@ -717,23 +721,25 @@ PRD-042  Qwen 3.6 35b MLX onboarding deltas</pre>
       <tbody>
         <tr><td>Claude Opus 4.6</td><td>Anthropic Claude Code</td><td>Claude</td><td class="accept">Inception + early sessions</td></tr>
         <tr><td>Claude Fable 5</td><td>Anthropic Claude Code</td><td>Claude</td><td class="accept">Session 14</td></tr>
-        <tr><td>Claude Opus 4.8</td><td>Anthropic Claude Code</td><td>Claude</td><td class="accept">Sessions 14&ndash;27 (current)</td></tr>
+        <tr><td>Claude Opus 4.8</td><td>Anthropic Claude Code</td><td>Claude</td><td class="accept">Sessions 14&ndash;20</td></tr>
+        <tr><td>Claude Opus 4.7</td><td>Anthropic Claude Code</td><td>Claude</td><td class="accept">Session 21 onward, including the v1.0.0 release work</td></tr>
         <tr><td>Codex 5.3</td><td>OpenAI Codex CLI</td><td>Codex</td><td class="accept">Inception co-author</td></tr>
         <tr><td>OpenAI Codex (GPT-5)</td><td>OpenAI Codex</td><td>Codex</td><td class="accept">Sessions 12&ndash;13</td></tr>
-        <tr><td>Codex 5.5</td><td>OpenAI Codex desktop</td><td>Codex</td><td class="accept">Sessions 14&ndash;27 (current)</td></tr>
+        <tr><td>Codex 5.5</td><td>OpenAI Codex desktop</td><td>Codex</td><td class="accept">Sessions 14&ndash;30</td></tr>
+        <tr><td>GPT-6</td><td>OpenAI Codex desktop</td><td>Codex</td><td class="accept">September 2026 maintenance lane</td></tr>
         <tr><td>Gemini 3.5 Flash (High)</td><td>Google Antigravity</td><td>Gemini</td><td class="accept">Full-active since session 21</td></tr>
-        <tr><td>Perplexity Computer</td><td>Perplexity</td><td>&mdash;</td><td>Observer; PRD-039 accepted</td></tr>
-        <tr><td>Qwen 3.6 35b MLX</td><td>Local (oMLX)</td><td>&mdash;</td><td>PRD-042 proposed; blocked on runtime</td></tr>
+        <tr><td>Perplexity Computer</td><td>Perplexity</td><td>&mdash;</td><td>Constrained candidate; PRD-039 onboarding contract done</td></tr>
+        <tr><td>Qwen 3.6 35b MLX</td><td>Local (oMLX)</td><td>&mdash;</td><td>Provisional checker since session 28 (PRD-042)</td></tr>
       </tbody>
     </table>
-    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.75rem;">Three active lanes, two onboarding candidates, one unmodified protocol across nine model versions.</p>
+    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.75rem;">Three full-active lanes, one provisional checker, one onboarding candidate, one unmodified protocol across eleven model versions.</p>
 
     <aside class="canonical-note" role="note">
       <strong>Canonical reference.</strong> This page is the authoritative landing for the Turnfile protocol. The maintainer&rsquo;s forward intent and alignment source is
       <a href="https://github.com/snapsynapse/turnfile/blob/main/INTENT.md" target="_blank" rel="noopener">INTENT.md</a>
       in the repository; any cross-posts on LinkedIn, PAICE.work, or other platforms are derived from those sources and should cite
       <a href="https://turnfile.work/">turnfile.work</a> as canonical.
-      Last substantive revision: <time datetime="2026-07-02">2026-07-02</time>.
+      Last substantive revision: <time datetime="2026-09-23">2026-09-23</time>.
       <a href="https://github.com/snapsynapse/turnfile/commits/main/INTENT.md" target="_blank" rel="noopener">Revision history &rarr;</a>
     </aside>
   </div>
@@ -744,7 +750,7 @@ PRD-042  Qwen 3.6 35b MLX onboarding deltas</pre>
   <div class="container">
     <div class="footer-grid">
       <div class="footer-meta">
-        <p>Turnfile spec v0.1.0-reset &middot; <a href="https://creativecommons.org/licenses/by/4.0/" rel="license" target="_blank">CC BY 4.0</a> (this page) &middot; <a href="https://github.com/snapsynapse/turnfile/blob/main/LICENSE" target="_blank" rel="noopener">Apache 2.0</a> (code)</p>
+        <p>Turnfile spec v1.0.0 &middot; <a href="https://creativecommons.org/licenses/by/4.0/" rel="license" target="_blank">CC BY 4.0</a> (this page) &middot; <a href="https://github.com/snapsynapse/turnfile/blob/main/LICENSE" target="_blank" rel="noopener">Apache 2.0</a> (code)</p>
         <p>A <a href="https://paice.work/" target="_blank" rel="noopener">PAICE.work PBC</a> project by <a href="https://paice.work/" target="_blank" rel="noopener author">Sam Rogers</a>.</p>
         <p style="margin-top: 0.5rem;">See also: <a href="https://aidr.work/" target="_blank" rel="noopener">AIDR</a> &middot; <a href="https://gracefulboundaries.dev/" target="_blank" rel="noopener">Graceful Boundaries</a> &middot; <a href="https://hardguard25.com/" target="_blank" rel="noopener">HardGuard25</a> &middot; <a href="https://knowledge-as-code.com/" target="_blank" rel="noopener">Knowledge as Code</a> &middot; <a href="https://skillprovenance.dev/" target="_blank" rel="noopener">Skill Provenance</a></p>
       </div>
