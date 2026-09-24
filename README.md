@@ -190,7 +190,7 @@ PRDs live on two shelves. Promoted, Maintainer-accepted contracts live in [docs/
 | [PRD-044](docs/prds/PRD-044-handshake-sign-cli-ergonomics.md) | Handshake-sign CLI ergonomics | Promoted; implementation done |
 | [PRD-045](docs/prds/PRD-045-stale-agent-reconciliation-policy.md) | Stale-agent reconciliation policy | Promoted; implementation done |
 | [PRD-046](docs/prds/PRD-046-repo-minimization-archive.md) | Repo minimization archive | Promoted; implementation done |
-| [PRD-047](working-session/docs/PRD-047-cross-repo-v1-validation-tests.md) | Cross-repo v1 validation tests | Draft; AIDR evidence complete; Maintainer evidence ratification pending |
+| [PRD-047](docs/prds/PRD-047-cross-repo-v1-validation-tests.md) | Cross-repo v1 validation tests | Promoted; implementation done |
 | [PRD-048](docs/prds/PRD-048-portable-turnfile-cli.md) | Portable Turnfile CLI | Promoted; implementation done |
 | [PRD-049](docs/prds/PRD-049-same-family-multi-instance-collaboration.md) | Same-family multi-instance collaboration | Promoted; implementation done |
 
@@ -272,13 +272,13 @@ Turnfile evals fall into three categories: repo readiness validators (`npm run v
 
 ## Status
 
-This protocol has been tested across 23 real collaboration sessions with three heterogeneous LLM agents and a human maintainer:
+This protocol has been tested across 30 numbered collaboration sessions with three heterogeneous LLM agents and a human maintainer:
 
 - Claude (Anthropic), running in Claude Code.
 - Codex (OpenAI GPT-5), running in the Codex desktop app.
 - Gemini (Google, model Gemini 3.5 Flash (High)), running in the Google Antigravity IDE — onboarded under PRD-015 and full-active since session 21.
 
-As of the current registry snapshot (2026-07-02): 48 registry-tracked PRDs, 45 promoted PRDs, zero active open questions, and the eight-step eval-gated implementation loop (PRD-006 A1) run end-to-end across many lanes with builder/reviewer separation between heterogeneous agents — PRD-017/021/022/023/024/026/028/029/030/032/033/036 implemented, PRD-031 Phase 1 (per-agent shards + derived aggregates) and the PRD-014 closeout amendment landed, plus a live Tokenese A/B pilot scored by a deterministic checker. The Claude lane ran across three model generations (Opus 4.6, Fable 5, Opus 4.8) against one unmodified protocol. Forward development narrows Turnfile into a thin governance layer for auditable peer disagreement and maintainer-governed resolution across existing agent platforms.
+As of the current registry snapshot (2026-09-23): 48 registry-tracked PRDs, 45 promoted PRDs, zero active open questions, and the eight-step eval-gated implementation loop (PRD-006 A1) run end-to-end across many lanes with builder/reviewer separation between heterogeneous agents — PRD-017/021/022/023/024/026/028/029/030/032/033/036 implemented, PRD-031 Phase 1 (per-agent shards + derived aggregates) and the PRD-014 closeout amendment landed, and two cross-repo dogfood runs (PRD-047) validated the v1 profile outside this repository. The Claude lane ran across Opus 4.6, Fable 5, Opus 4.8 and Opus 4.7 against one unmodified protocol. An experimental Tokenese compression pilot (PRD-027) was withdrawn in September 2026 after the upstream project was archived with its compression claim unconfirmed. Forward development narrows Turnfile into a thin governance layer for auditable peer disagreement and maintainer-governed resolution across existing agent platforms.
 
 For authoritative current state, read [PRD_STATUS.json](working-session/docs/PRD_STATUS.json) (PRD shelf and implementation status) and [WORKLOG.md](working-session/WORKLOG.md) (live session state). [BASELINE.md](BASELINE.md) is a point-in-time session-14 snapshot, not current state.
 

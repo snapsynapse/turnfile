@@ -2,7 +2,7 @@
 
 > Turnfile is a thin governance layer for auditable peer disagreement between heterogeneous LLM agents. Three agents (Claude by Anthropic, Codex by OpenAI, and Gemini by Google) collaborate through shared, human-legible markdown files with a human maintainer as arbiter — no central orchestrator, every decision recoverable from plain files. Canonical home: https://turnfile.work/
 
-Updated: 2026-07-02. Spec version v1.0.0; protocol release v1.0.0 (Maintainer-ratified 2026-07-02, the Minimal Governance Profile freeze). 48 registry-tracked PRDs, 45 promoted PRDs.
+Updated: 2026-09-23. Spec version v1.0.0; protocol release v1.0.0 (Maintainer-ratified 2026-07-02, the Minimal Governance Profile freeze). 48 registry-tracked PRDs, 45 promoted PRDs.
 turnfile:prd-promoted=45
 turnfile:registry-tracked=48
 turnfile:agents=3
@@ -11,13 +11,13 @@ turnfile:agents=3
 
 A fresh adopter only needs these four documents to use Turnfile v1. No historical PRDs required.
 
-- [SPEC.md](https://turnfile.work/SPEC.md): normative v1 contract.
-- [DEFINITIONS.md](https://turnfile.work/DEFINITIONS.md): controlled vocabulary.
+- [SPEC.md](https://github.com/snapsynapse/turnfile/blob/main/SPEC.md): normative v1 contract.
+- [DEFINITIONS.md](https://github.com/snapsynapse/turnfile/blob/main/DEFINITIONS.md): controlled vocabulary.
 - [MINIMUM_VIABLE_TURNFILE.md](https://turnfile.work/MINIMUM_VIABLE_TURNFILE.md): three-file core (TURNFILE.yaml + MAILBOX.md + WORKLOG.md) with a worked open → mid-turn → close example.
-- [CONFORMANCE.md](https://turnfile.work/CONFORMANCE.md): verifier-anywhere claims and named optional profiles.
+- [CONFORMANCE.md](https://github.com/snapsynapse/turnfile/blob/main/CONFORMANCE.md): verifier-anywhere claims and named optional profiles.
 - [FRESH_CONTEXT_CONFORMANCE_PROBE.md](https://turnfile.work/FRESH_CONTEXT_CONFORMANCE_PROBE.md): five-question operational test.
 
-Other stable v1 surface: `schemas/v1/`, `templates/v1-minimal/`, `tools/` (including the portable `turnfile.mjs` CLI), promoted PRDs at [docs/prds/](https://turnfile.work/prds/). Per-PRD classification at [docs/prds/PRD_SHELF_RECONCILIATION.json](https://turnfile.work/prds/PRD_SHELF_RECONCILIATION.json).
+Other stable v1 surface: `schemas/v1/`, `templates/v1-minimal/`, `tools/` (including the portable `turnfile.mjs` CLI), promoted PRDs at [docs/prds/](https://github.com/snapsynapse/turnfile/tree/main/docs/prds). Per-PRD classification at [docs/prds/PRD_SHELF_RECONCILIATION.json](https://turnfile.work/prds/PRD_SHELF_RECONCILIATION.json).
 
 ## Archive boundary (historical evidence, not required reading)
 
@@ -32,13 +32,13 @@ Other stable v1 surface: `schemas/v1/`, `templates/v1-minimal/`, `tools/` (inclu
 - [Conflict resolution](https://turnfile.work/CONFLICT_RESOLUTION.md): structured disagreement and the rebuttal-loop bound.
 - [Boot sequence](https://turnfile.work/BOOT_SEQUENCE.md): the canonical, cross-agent boot command manifest (read order + verification gates).
 - [LLM onboarding](https://turnfile.work/LLM_ONBOARDING.md): how a new agent joins a Turnfile project.
-- [Conformance](https://turnfile.work/CONFORMANCE.md): testable conformance claims for the protocol.
+- [Conformance](https://github.com/snapsynapse/turnfile/blob/main/CONFORMANCE.md): testable conformance claims for the protocol.
 
 ## How it works
 
 - File-based, not API-based: mailbox, worklog, PRD gates, and the Turnfile coordination artifact are all plain markdown/YAML, readable and recoverable without specialized tooling.
 - Eight-step eval-gated implementation loop (PRD-006 A1) with builder/reviewer separation: the agent that authors a contract's evals does not implement it; the counterpart implements; the author reviews.
-- Model-agnostic: one unmodified protocol has run across Claude Opus 4.6, Fable 5, and Opus 4.8, alongside OpenAI Codex (GPT-5) and Google Gemini (Gemini 3.5 Flash (High), full-active since session 21 under PRD-015).
+- Model-agnostic: one unmodified protocol has run across Claude Opus 4.6, Fable 5, Opus 4.8, and Opus 4.7, alongside OpenAI Codex (GPT-5) and Google Gemini (Gemini 3.5 Flash (High), full-active since session 21 under PRD-015).
 
 ## Related patterns
 
