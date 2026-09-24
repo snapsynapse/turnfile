@@ -10,7 +10,7 @@ The Minimum Governance Profile is defined by `SPEC.md` + `DEFINITIONS.md` + `doc
 
 ## Optional profiles
 
-The following are real Turnfile work but optional profiles, not required for v1 minimal conformance: Tokenese (optional), heartbeat stewards (optional), concurrent-shards task aggregation (optional), agent onboarding vetting (optional), unified terminal transport (optional), public-surface snapshot reconciliation (optional), and skill-bundle integrity (optional). Classification of every PRD lives in `docs/prds/PRD_SHELF_RECONCILIATION.json`. Historical and archived contracts remain in `docs/archive/` for provenance only.
+The following are real Turnfile work but optional profiles, not required for v1 minimal conformance: Tokenese (optional; historical, upstream project archived), heartbeat stewards (optional), concurrent-shards task aggregation (optional), agent onboarding vetting (optional), unified terminal transport (optional), public-surface snapshot reconciliation (optional), and skill-bundle integrity (optional). Classification of every PRD lives in `docs/prds/PRD_SHELF_RECONCILIATION.json`. Historical and archived contracts remain in `docs/archive/` for provenance only.
 
 ## Core v0.x checks (still supported)
 
@@ -55,6 +55,7 @@ running the validators above against the repository.
 
 ## Scope
 
-This file covers protocol-artifact conformance. Tokenese clone conformance is
-scored separately by the deterministic checker in the `~/Git/tokenese` repository
-(PRD-027 R7 cross-repo boundary) and is measurement-only during the pilot.
+This file covers protocol-artifact conformance. Tokenese clone conformance was
+scored outside this repository under the PRD-027 R7 cross-repo boundary. The
+upstream Tokenese project was archived on 2026-07-25 and PRD-027 was withdrawn on
+2026-09-22, so no Tokenese conformance claim is made or scored for Turnfile.
