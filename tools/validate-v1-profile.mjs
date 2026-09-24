@@ -46,10 +46,17 @@ if (fs.existsSync(mailboxPath)) {
   const text = fs.readFileSync(mailboxPath, "utf8");
   const snapshotRows = extractTableRows(text, "Inbox Snapshot");
   const queueRows = extractTableRows(text, "Open Queue");
+  // Unread means an open-queue message whose Active Messages card has Status: unread,
+  // matching validate-mailbox-invariants.mjs. Acknowledged, blocked, and actioned
+  // messages stay in the Open Queue but are not unread. A queue row with no matching
+  // card is counted as unread so a malformed mailbox is not silently accepted.
+  const cardStatus = extractMessageStatuses(text);
   const queueAgents = new Map();
   for (const r of queueRows) {
+    const id = (r.cells[0] || "").trim();
     const m = /->\s*([A-Za-z][\w-]*)/.exec(r.cells[1] || "");
-    if (m) {
+    const status = cardStatus.get(id);
+    if (m && (status === undefined || status === "unread")) {
       const key = m[1].toLowerCase();
       queueAgents.set(key, (queueAgents.get(key) || 0) + 1);
     }
@@ -69,8 +76,8 @@ if (fs.existsSync(mailboxPath)) {
     "mailbox-inbox-queue-consistency",
     inconsistent === null,
     inconsistent
-      ? `inbox snapshot says ${inconsistent.agent} unread=${inconsistent.unread} but open queue has ${inconsistent.queued} matching rows`
-      : "inbox snapshot matches open queue counts",
+      ? `inbox snapshot says ${inconsistent.agent} unread=${inconsistent.unread} but open queue has ${inconsistent.queued} unread messages to ${inconsistent.agent}`
+      : "inbox snapshot matches open queue unread counts",
   );
 }
 
@@ -195,6 +202,22 @@ function parseArgs(argv) {
     else if (a === "--format") out.format = argv[++i];
   }
   return out;
+}
+
+function extractMessageStatuses(text) {
+  const statuses = new Map();
+  let current = null;
+  for (const line of text.split(/\r?\n/)) {
+    const heading = /^###\s+(MSG-[\w-]+)\s*$/.exec(line.trim());
+    if (heading) {
+      current = heading[1];
+      continue;
+    }
+    if (/^##\s+/.test(line)) current = null;
+    const status = /^\*\*Status:\*\*\s*(.+?)\s*$/.exec(line.trim());
+    if (current && status && !statuses.has(current)) statuses.set(current, status[1].toLowerCase());
+  }
+  return statuses;
 }
 
 function extractTableRows(text, sectionHeader) {

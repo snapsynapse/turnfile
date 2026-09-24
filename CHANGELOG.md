@@ -30,6 +30,17 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Fixed
 
+- `validate-v1-profile.mjs` inbox check now counts only open-queue messages whose card has
+  `Status: unread`, matching `validate-mailbox-invariants.mjs`. Previously an `acknowledged`,
+  `blocked` or `actioned` message in the Open Queue was counted as unread, so a mailbox that
+  passed the invariants validator failed the v1 profile. A queue row with no matching card still
+  counts as unread.
+- The portable CLI linted v1 sessions against the v0 schema: `turnfile close`, `turnfile open`
+  (through `handshake-sign.mjs`) and the `session-orient.mjs` lint recommendation all hardcoded
+  `schemas/turnfile/turnfile-v0.schema.json`, so a valid v1 session using a signal name outside
+  the v0 enum failed at open and close. A new `tools/turnfile-schema.mjs` helper selects
+  `schemas/v1/turnfile-v1.schema.json` when `turnfile.version` is 1.x and v0 otherwise. The
+  repository's own `npm run lint:turnfile` keeps its explicit v0 default.
 - Repaired the root and served assistant-guide pair for truthful GuideCheck Level 2 structural
   assessment while preserving the Turnfile v1 protocol identity, historical markers, and public
   claims. The legacy same-repository sidecars remain integrity records rather than independent

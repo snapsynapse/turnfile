@@ -18,6 +18,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { createRequire } from "node:module";
+import { schemaForTurnfile } from "./turnfile-schema.mjs";
 
 const require = createRequire(import.meta.url);
 
@@ -447,7 +448,7 @@ function main() {
 
   const lint = runTool("tools/turnfile-lint.mjs", [
     "--turnfile", TURNFILE,
-    "--schema", path.join(REPO_ROOT, "schemas/turnfile/turnfile-v0.schema.json"),
+    "--schema", schemaForTurnfile(path.resolve(ROOT, TURNFILE)),
   ]);
   if (!lint.ok) { console.error("turnfile-lint failed:", lint.out); process.exit(4); }
   const mbInv = runTool("tools/validate-mailbox-invariants.mjs", ["--mailbox", MAILBOX]);

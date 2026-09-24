@@ -27,6 +27,7 @@ import { spawnSync } from "node:child_process";
 import { createRequire } from "node:module";
 
 import { ownerOf } from "./hooks/guard-check.mjs";
+import { schemaForTurnfile } from "./turnfile-schema.mjs";
 
 const require = createRequire(import.meta.url);
 const TOOLS = path.dirname(fileURLToPath(import.meta.url));
@@ -192,7 +193,7 @@ function main() {
   const recommended_commands = [
     `node tools/next-state.mjs --mailbox ${args.mailbox} --turnfile ${args.turnfile}`,
     `node tools/validate-mailbox-invariants.mjs --mailbox ${args.mailbox}`,
-    `node tools/turnfile-lint.mjs --turnfile ${args.turnfile} --schema schemas/turnfile/turnfile-v0.schema.json`,
+    `node tools/turnfile-lint.mjs --turnfile ${args.turnfile} --schema ${schemaForTurnfile(resolveRoot(args.turnfile), { absolute: false })}`,
     `node tools/validate-prd-promotion.mjs`,
     `node tools/validate-closeout.mjs --turnfile ${args.turnfile} --mailbox ${args.mailbox}${args.agent ? ` --agent ${args.agent}` : ""}`,
     `node tools/validate-ownership-guard.mjs`,
@@ -207,7 +208,7 @@ function main() {
       return { status: r.status, result: r.status === 0 ? "pass" : "fail" };
     };
     validators.mailbox = run("validate-mailbox-invariants.mjs", ["--mailbox", args.mailbox]);
-    validators.turnfile = run("turnfile-lint.mjs", ["--turnfile", args.turnfile, "--schema", path.join(ROOT, "schemas/turnfile/turnfile-v0.schema.json")]);
+    validators.turnfile = run("turnfile-lint.mjs", ["--turnfile", args.turnfile, "--schema", schemaForTurnfile(resolveRoot(args.turnfile))]);
     validators.prd_promotion = run("validate-prd-promotion.mjs", []);
   }
 
