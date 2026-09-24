@@ -1,6 +1,6 @@
 ---
 title: "Turnfile ROADMAP"
-version: "0.1.5"
+version: "0.1.6"
 last_updated: 2026-09-23
 status: post-v1-planning
 description: "Non-normative planning roadmap for Turnfile after the v1.0.0 release: optional profiles, adoption evidence, and future integration work."
@@ -60,8 +60,7 @@ Work:
 - Require stable source IDs, English projections, drift checks, and repair records.
 - Keep per-agent write paths and derived aggregate views as the preferred structure for fast loops once they are validated.
 - Document escalation triggers for policy changes, unresolved counters, validator failures, ownership conflicts, and scope expansion.
-- Treat Tokenese as the current measurement candidate for this profile, not as a core requirement.
-- See §Tokenese-first coordination for the eventual Tokenese-as-source extension of this profile.
+- Tokenese was the measurement candidate for this optional profile. The upstream project was archived on 2026-07-25 and PRD-027 was withdrawn on 2026-09-22, so no dense encoding is currently a candidate. A future candidate needs its own measured evidence before this profile advances.
 Acceptance criteria:
 - A bounded operational or handoff exchange completes with source/projection links and validator evidence.
 - English projections are present in mailbox, worklog, or documentation artifacts without manual reconstruction.
@@ -113,24 +112,9 @@ Work:
 - Preserve dissent and unresolved objections rather than flattening into a single summary.
 Decision trigger:
 - Build when sessions produce enough open records that maintainer attention becomes the bottleneck.
-### Tokenese-first coordination
-Eventual goal, not urgent.
-Goal:
-- Move beyond Tokenese twins of English-first artifacts toward Tokenese-first operational exchanges.
-- Generate English audit projections from Tokenese source traffic into mailbox, worklog, and documentation artifacts.
-- Keep the generated English projection mandatory for audit, review, search, and maintainer governance.
-Work:
-- Define which Tokenese constructs are allowed to be source traffic and which remain English-only.
-- Add deterministic Tokenese-to-English projection tooling with source IDs, hashes, and drift checks.
-- Require every generated English projection to link back to its Tokenese source and validation result.
-- Preserve English authority for lifecycle state, lock claims, acceptance, normative PRD text, exact diffs, and decisions until a future Maintainer decision explicitly changes that boundary.
-- Add review workflows for projection quality, including human spot checks and model-independent validator checks.
-Acceptance criteria:
-- A bounded operational/handoff exchange can start in Tokenese, generate English mailbox or worklog projections, and pass source/projection drift validation.
-- Maintainer can audit the English projection without needing to read Tokenese.
-- Agents can reconstruct the Tokenese source, generated English projection, and validation evidence from stable IDs.
-Decision trigger:
-- Start only after the Tokenese CLI twin lane is validated across at least three model surfaces and PRD-035-style result/projection validators exist.
+### Tokenese-first coordination (retired)
+Retired 2026-09-23. This direction proposed moving from English-first artifacts with Tokenese twins to Tokenese-first operational exchanges with generated English audit projections. Its decision trigger, a Tokenese CLI twin lane validated across at least three model surfaces, can no longer be met: the upstream Tokenese project was archived on 2026-07-25 with a post-mortem recording that its compression claim was falsified, and PRD-027 was withdrawn on 2026-09-22.
+English remains authoritative for lifecycle state, lock claims, acceptance, normative PRD text, exact diffs, and decisions. The earlier plan is recoverable from git history (ROADMAP v0.1.5).
 ### Governance profile levels
 Possible, not committed.
 Candidate levels:

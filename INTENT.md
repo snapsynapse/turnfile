@@ -1,6 +1,6 @@
 ---
 title: "Turnfile INTENT"
-version: "0.1.6"
+version: "0.1.7"
 last_updated: 2026-09-23
 status: v1-released-strategy
 description: "Standards-level strategy for Turnfile as a thin governance layer for auditable peer disagreement and maintainer-governed resolution across agent platforms."
@@ -47,8 +47,8 @@ These are the core commitments future work should preserve.
 ## Profile boundary
 Core v1 is the Minimal Governance Profile. It covers the required session artifacts, basic mailbox lifecycle, worklog evidence, maintainer arbitration, peer disagreement, closeout expectations, and the validator path needed to prove those files are internally consistent.
 Participation tier and optional profile are orthogonal concepts. *Participation tier* describes what a participant can do: v1-minimal (lesser-level participation; three core files; no skill bundles required) versus v1-full (full participation including PRD authorship and required-reviewer roles; adds skill-bundle integrity). *Optional profiles* describe feature bundles a session may layer onto either tier. A v1-minimal participant may use heartbeat or cross-repo profiles without being v1-full; a v1-full participant may run a session that uses no optional profiles. Per-PRD classification across both axes lives in `docs/prds/PRD_SHELF_RECONCILIATION.json`.
-Optional profiles are real Turnfile work but not v1-minimal requirements unless promoted by Maintainer decision. Current optional-profile candidates include Tokenese measurement, heartbeat stewarding, stale-agent reconciliation, concurrent shard aggregation, agent onboarding, public-surface generators, skill-bundle integrity, and cross-repo dogfood evidence.
-Tokenese is a special case: it is a separate repository and protocol (`~/Git/tokenese`). What's optional in Turnfile is the *interop pattern* (the PRD-027 R7 cross-repo boundary), not the Tokenese protocol itself. Tokenese semantics are not edited from Turnfile.
+Optional profiles are real Turnfile work but not v1-minimal requirements unless promoted by Maintainer decision. Current optional-profile candidates include heartbeat stewarding, stale-agent reconciliation, concurrent shard aggregation, agent onboarding, public-surface generators, skill-bundle integrity, and cross-repo dogfood evidence.
+Tokenese was a special case: a separate repository and protocol, archived upstream on 2026-07-25. The Turnfile interop pattern for it (the PRD-027 R7 cross-repo boundary) was withdrawn on 2026-09-22. PRD-028 and PRD-035 remain on the promoted shelf as historical optional-profile records. Tokenese semantics were never edited from Turnfile.
 Deferred or excluded surfaces remain outside Turnfile's core: runtime orchestration, autonomous consensus, hidden policy enforcement, general project management, model memory management, sandbox control, and task execution.
 ## Non-goals
 Turnfile should not attempt to become:
@@ -98,8 +98,8 @@ AIDR (AI Decision Records, https://aidr.work/) is the minimal single-artifact ex
 This section records the relationship arbitrated in AIDR-0001 (2026-07-02). It states a position, not a conformance requirement: Turnfile imposes nothing on AIDR, and AIDR imposes nothing here.
 ## Development posture
 Priority order:
-1. Finalize the v1.0.0 release gate around the Minimal Governance Profile.
-2. Complete dogfood evidence that proves fresh adopters and adjacent repositories can use the profile without historical PRD context.
+1. Keep the v1.0.0 Minimal Governance Profile stable. Post-freeze core-v1 changes follow the admission criteria below: Maintainer ratification, validator or eval coverage, and a compatibility note.
+2. Extend dogfood evidence beyond the two PRD-047 runs (Tokenese and AIDR) so that fresh-adopter and adjacent-repository claims rest on a wider set of repositories.
 3. Keep the starter workflow and CLI helper small enough to explain from the canonical docs.
 4. Document adapter patterns for existing platforms only after repeated manual mappings prove they reduce friction.
 5. Preserve the historical inception archive as evidence, but do not make it required reading.
@@ -142,6 +142,7 @@ The following deviations are recorded:
 - `working-session/` is tracked (not gitignored) by design: it is the active, auditable coordination workspace, which is the point of the protocol.
 
 ## Changelog
+- 2026-09-23 v0.1.7 - Maintainer-directed. Development posture reordered for the post-release phase: item 1 now keeps the v1.0.0 profile stable under the post-freeze admission criteria instead of finalizing the release gate, and item 2 extends dogfood evidence beyond the two PRD-047 runs. Profile boundary drops Tokenese measurement from the current optional-profile candidates and records the Tokenese interop pattern as withdrawn, following the upstream archive (2026-07-25) and the PRD-027 withdrawal (2026-09-22).
 - 2026-09-23 v0.1.6 - Front matter and the opening sentence of Current release intent now record v1.0.0 as shipped (2026-07-02) rather than in progress; status moves from v1-release-candidate-strategy to v1-released-strategy. No strategy, invariant, or admission-criteria change.
 - 2026-09-22 v0.1.5 - Added Relationship to AIDR section, recording the lineage arbitrated in AIDR-0001 (2026-07-02): AIDR is the minimal single-artifact expression and the front door, Turnfile is the advanced profile and is not deprecated or superseded. Lineage by citation only; no shared code, no shared history, no conformance requirement in either direction. The reciprocal link was outstanding since the arbitration; the public surfaces (README, landing page, llms.txt) were updated in the same change.
 - 2026-07-06 v0.1.4 - Added Philosophical ground section: the Aggregated Intelligence tenets (ratified canon 2026-07-06) cited as the design principles Turnfile practices, canonical URL at paice.foundation/papers; lineage by citation, no conformance requirement.
