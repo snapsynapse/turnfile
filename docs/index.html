@@ -146,6 +146,7 @@
       color: var(--text);
       background: var(--bg);
       line-height: 1.6;
+      overflow-wrap: break-word;
       -webkit-font-smoothing: antialiased;
     }
 
@@ -359,12 +360,12 @@
     /* Code blocks */
     .code-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 1.5rem;
       margin-top: 1.5rem;
       align-items: start;
     }
-    .code-col { display: flex; flex-direction: column; gap: 1.5rem; }
+    .code-col { display: flex; flex-direction: column; gap: 1.5rem; min-width: 0; }
     .code-block { text-align: left; }
     .code-block h3 { font-size: 0.95rem; margin-bottom: 0.75rem; }
     .code-block .annotation {
@@ -433,7 +434,9 @@
       .hero { padding: 3rem 0 2.5rem; }
       .turnfile-snippet { font-size: 0.72rem; padding: 1rem 1.1rem; }
       .pillars { grid-template-columns: 1fr; }
-      .code-grid { grid-template-columns: 1fr; }
+      .code-grid { grid-template-columns: minmax(0, 1fr); }
+      table { display: block; max-width: 100%; overflow-x: auto; }
+      th, td { padding: 0.5rem 0.6rem; }
       nav .links { display: none; }
       nav .links.mobile-compact { display: flex; gap: 0.75rem; }
       .footer-grid { flex-direction: column; }
