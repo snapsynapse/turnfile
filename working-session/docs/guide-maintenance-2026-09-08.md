@@ -25,10 +25,17 @@ Earlier native attempts returned Level 0 despite zero findings because the legac
 
 A single direct local Siteline scan of the then-live `https://turnfile.work/` pages used pushed candidate `7bb24a6`, scanner 2.1.0/rubric 2.4.0, with external panels disabled. It returned C/77, raw score 100, all nine SNAP checks passing, exit 0 and empty stderr. No new target defect was identified. Applicability-dependent enablement scoring does not justify adding runtime/API/MCP surfaces to the stable file protocol.
 
-The scan did not persist a result, evaluate the pending guide, prove its deployment, or accept production. Local signed delivery is authorized. Push, merge, publication and deployed-byte acceptance remain pending; refresh the remote branch/main identities and choose the repository's actual delivery route before requesting publication authority.
+The scan did not persist a result, evaluate the pending guide, prove its deployment, or accept production. Local signed delivery is authorized. Push, merge, publication and deployed-byte acceptance were pending when this record was written; see Delivery below.
 
 ## Coordination closeout
 
 Opening used PRD-010 lease revisions 485-486; closeout uses 487-488. The current WORKLOG, acknowledgment and own boot/chat pointers record the lane. Codex closes idle with current task/session cleared, zero unread messages, no owned actionable mailbox cards and no remaining locks. No heartbeat was created by this lane. Existing peer state, old records, optional profiles and separate signing/collaboration handoffs remain preserved. Historical compaction is deferred to the normal session-history owner; no new open implementation item is hidden by that deferral.
 
 This document is the durable repository record. The temporary guide handoff retains only pending delivery. Exact raw command receipts, candidate hashes, delegated review and signed-commit readback are retained in the dated `/Users/snap/Git/_repo-standards-delivery-2026-09-08/resumed/turnfile/` packet; repository validators do not depend on that external path or LocalBrain.
+
+## Delivery
+
+- Published through PR #5, merged to `main` as `ebb4718` on 2026-09-22 after rebasing the guide-contract repair onto current `main`. Deployed-byte acceptance was verified that day against the live site: 3,712 bytes with the served hash matching the manifest (WORKLOG, Claude repo-baseline maintenance lane, rev 489).
+- The guide was later refreshed in PR #9 (`95c6f2b`, 2026-09-23). On 2026-09-24 the live `https://turnfile.work/.well-known/assistant-guide.txt` was 3,729 bytes with SHA-256 `a8b9ad784eb8c8d00cea1fafb9fb215db38a4d6272e7669d8c13c7ada1ea2cc6`, matching the live manifest, and `validate-public-surface-snapshot.mjs` passed the guide contract.
+- Not performed: a persisted live Siteline assessment of the deployed guide under CONTRIBUTING. The 2026-09-08 diagnostic above remains the latest Siteline evidence.
+- The temporary publication handoff (`handoffs/2026-09-07-repo-standards-next-actions.md`, untracked) was disposed on 2026-09-23 by Maintainer direction after this section was written.
