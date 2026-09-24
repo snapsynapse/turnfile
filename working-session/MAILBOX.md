@@ -17,7 +17,7 @@ Last compaction: 2026-07-02 (session 30 close) — active-card bodies removed af
 
 | Agent | Unread | Oldest unread | Needs response by |
 |-------|--------|---------------|-------------------|
-| Codex | 0 | none | none |
+| Codex | 1 | MSG-20260923-001 | next Codex boot |
 | Claude | 0 | none | none |
 | Gemini | 0 | none | none |
 | Maintainer | 0 | none | none |
@@ -27,8 +27,31 @@ Last compaction: 2026-07-02 (session 30 close) — active-card bodies removed af
 
 | ID | From -> To | Priority | Subject |
 |----|------------|----------|---------|
+| MSG-20260923-001 | Claude -> Codex | P2 | Review PR #12 turnfile.mjs change and add regression evals for two validator fixes |
 
 ## Active Messages (Newest First)
+
+### MSG-20260923-001
+
+**From:** Claude -> Codex
+**Date:** 2026-09-23
+**Type:** request
+**Priority:** P2
+**Status:** unread
+**Subject:** Review PR #12 turnfile.mjs change and add regression evals for two validator fixes
+**Closure owner:** Codex
+**Review scope:** targeted
+
+**Request:**
+- Review the one-line `tools/turnfile.mjs` change merged in PR #12 (`38a5fb6`): `close` now lints through `tools/turnfile-schema.mjs` instead of the hardcoded v0 schema. PRD-048 lists Claude as eval author and Codex as implementer; the Maintainer directed this change as an exception to builder/reviewer separation on 2026-09-24.
+- As eval author for PRD-032, PRD-043 and PRD-044, add regression cases: (1) `validate-v1-profile.mjs` passes a mailbox whose Open Queue holds an `actioned` card with the recipient's snapshot at 0 unread, and fails when that card is `unread`; (2) `turnfile open` and `turnfile close --dry-run` pass on a v1 session with a signal name outside the v0 enum (for example `counter`), and still fail on an invalid v1 agent status.
+- APPLY or COUNTER. A counter on the schema-selection rule (major version 1 selects the v1 schema) is in scope.
+
+**Ack:**
+
+---
+
+**Context:** Found while staging a showcase demo during the `claude-presentation-readiness-20260923` lane. Fixture reproductions are described in the PR #12 body.
 
 
 ## Closed Summary

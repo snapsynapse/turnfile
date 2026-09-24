@@ -459,3 +459,28 @@ Carry-forward for the next session:
 - WORKLOG at 441 lines before this entry, under the 500-line PRD-011 R5 compaction trigger. Compaction not executed and not deferred as an open item.
 
 Registry after this lane: 48 tracked PRDs, 45 promoted, 3 archived, zero `initiated`. Gates green: `npm run validate` 27/27, `npm run evals:prd` 335/335, promotion, public-surface snapshot, ownership guard, v1.0.0 R9 release gate unaffected.
+
+## Claude presentation-readiness maintenance lane closed — 2026-09-23 (rev 490)
+
+Bounded maintenance lane `claude-presentation-readiness-20260923`, opened at Maintainer request for a presentation-readiness pass ahead of a PAICE portfolio showcase (deadline on or before 2026-09-30). No numbered session was opened and no protocol obligation changed. No heartbeat was created. Qwen authority unchanged.
+
+Delivered, all Maintainer-directed and merged:
+
+1. PR #8 (`027d69c`) — landing page, `docs/llms.txt` and README corrected: withdrawn Tokenese pilot claim removed; session count, Claude model roster (Opus 4.7 added per MODEL_LEDGER), Qwen and Perplexity status and footer spec version reconciled; PRD shelf lists all 45 promoted PRDs; install section shows the v1 CLI path; four `llms.txt` links that 404ed repointed. Deployed bytes verified against `main`.
+2. PR #9 (`95c6f2b`) — assistant guide (root and served copies, manifest hash and bytes) refreshed; README Next section rewritten; landing page horizontal overflow at 375px fixed (grid `minmax(0, 1fr)`, scrollable tables, `overflow-wrap`). Verified in a rendered browser at 375px and 1280px on the deployed page.
+3. PR #10 (`3416089`) — INTENT v0.1.6 and ROADMAP v0.1.5 front matter record v1.0.0 as shipped.
+4. PR #11 (`7733a99`) — INTENT v0.1.7 development posture reordered for the post-release phase and Tokenese profile text retired; ROADMAP v0.1.6 marks Tokenese-first coordination retired; CONFORMANCE no longer points to the archived Tokenese checker.
+5. PR #12 (`96c0cf2`) — two validator bugs fixed: `validate-v1-profile.mjs` now counts only `unread` cards, matching `validate-mailbox-invariants.mjs`; `turnfile open`, `turnfile close` and the `session-orient.mjs` lint recommendation select the schema by `turnfile.version` through new `tools/turnfile-schema.mjs`. The `tools/turnfile.mjs` line is a Maintainer-directed exception to builder/reviewer separation (PRD-048). Review and regression evals routed to Codex as MSG-20260923-001.
+6. This close: `docs/sitemap.xml` homepage `lastmod` 2026-06-23 to 2026-09-23, and the `CONFORMANCE.md` entry removed because that file is not served from `docs/` (404 on turnfile.work).
+
+Outside the repo: a showcase demo fixture at `~/turnfile-demo` (runbook `DEMO.md`, rebuild kit in `kit/`) stages an unresolved Claude/Codex disagreement awaiting Maintainer arbitration. Both positions were scripted by Claude and are labeled as such in the fixture.
+
+Carry-forward for the next session:
+
+- MSG-20260923-001 to Codex: review the PR #12 `turnfile.mjs` change and add regression evals for both validator fixes.
+- Landing page meta description is 324 characters, over the 160-character guidance; predates this lane and is a copy decision for the Maintainer.
+- Rendered mobile check covered the landing page only; GitHub README rendering not checked on device.
+- `handoffs/2026-09-07-repo-standards-next-actions.md` appears delivered (PR #5 merged, deployed guide verified); disposal is the Maintainer's call. The signing/Scorecard/`CITATION.cff` and join-vs-initialize handoffs remain unprocessed by Maintainer direction.
+- WORKLOG at 461 lines before this entry, under the 500-line PRD-011 R5 compaction trigger. Compaction not executed and not deferred as an open item.
+
+Registry unchanged: 48 tracked PRDs, 45 promoted, 3 archived.
