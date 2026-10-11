@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you cite or build on Turnfile, cite the specification repository."
+title: "Turnfile: Structured Negotiation of Autonomous Peers (SNAP)"
+version: "1.0.0"
+date-released: 2026-07-02
+type: software
+authors:
+  - family-names: Rogers
+    given-names: Sam
+url: "https://turnfile.work/"
+repository-code: "https://github.com/snapsynapse/turnfile"
+license:
+  - Apache-2.0
+  - CC-BY-4.0
+abstract: "Turnfile is a file-based governance protocol for multi-agent work: independent agent positions, preserved dissent, maintainer-governed resolution and plain-file audit, with no orchestrator. v1.0.0 (the Minimal Governance Profile) is a stable specification in maintenance-only mode. Code is Apache-2.0; specification and documentation prose is CC BY 4.0."
+keywords:
+  - multi-agent
+  - governance
+  - LLM agents
+  - decision records
+  - human arbitration

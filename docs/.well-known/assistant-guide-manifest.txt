@@ -1,9 +1,9 @@
 # assistant-guide manifest - Turnfile
 file: assistant-guide.txt
-sha256: a8b9ad784eb8c8d00cea1fafb9fb215db38a4d6272e7669d8c13c7ada1ea2cc6
-bytes: 3729
+sha256: b20de1435ebbbcf8e99be5a0f2370a9b8cd74a1e521d0241dfc1a7a04a0b92a8
+bytes: 3988
 served: https://turnfile.work/.well-known/assistant-guide.txt
 root_copy: assistant-guide.txt
-updated: 2026-09-23
+updated: 2026-10-11
 conformance: GuideCheck Level 2 local structural assessment
 trust: legacy same-repository integrity sidecar; not an independent anchor

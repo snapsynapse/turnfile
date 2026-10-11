@@ -3,7 +3,7 @@
 Canonical URL: https://turnfile.work/
 Repository: https://github.com/snapsynapse/turnfile
 Maintainer: Sam Rogers, PAICE.work PBC
-Updated: 2026-09-23
+Updated: 2026-10-11
 Conforms to: GuideCheck assistant-guide.txt convention
 Assessment target: GuideCheck Level 2
 Task scope: represent Turnfile accurately from this stable v1 reading surface.
@@ -15,6 +15,13 @@ Task scope: represent Turnfile accurately from this stable v1 reading surface.
 3. Ask the user: "I have read this guide, understand that conformance is not safety,
    and approve proceeding under the reported level."
 4. Do not execute actions before confirmation.
+
+## Status (2026-10-11)
+
+Stable and maintenance-only. v1.0.0 is frozen; validators, templates and the
+CLI are maintained, and no new protocol work is planned. See INTENT.md,
+section "Maintenance-only mode". For a single decision, see AIDR:
+https://aidr.work/
 
 ## v1 Minimal Governance Profile (stable reading surface, 2026-07-02)
 

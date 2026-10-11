@@ -6,6 +6,17 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Changed
+
+- Turnfile enters maintenance-only mode (Maintainer decision, 2026-10-11). v1.0.0 is frozen as a
+  stable specification; validators, schemas, templates, the CLI and documentation are still
+  maintained, and no new protocol work is planned. INTENT.md v0.2.0 adds a Maintenance-only mode
+  section with the evidence baseline, scope and a four-event reopen trigger. ROADMAP.md v0.2.0 is
+  frozen. README, landing page, `docs/llms.txt` and the assistant guide pair state the status.
+  Landing-page Open Graph and Twitter descriptions drop the snapshot PRD counts.
+- RELEASE_CHECKLIST.md requires annotated signed tags for any release after v1.0.0 and leaves the
+  lightweight `v1.0.0` tag untouched.
+
 ### Removed
 
 - PRD-027 (Tokenese Cloned-Communication A/B Contract) withdrawn by Maintainer decision on
@@ -19,6 +30,9 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   PRD count moves 46 to 45 across every public surface. Acceptance history is preserved unaltered.
 
 ### Added
+
+- Root `CITATION.cff` for the protocol and reference implementation (Apache-2.0 code,
+  CC BY 4.0 specification prose). No DOI.
 
 - Reciprocal cross-reference to AIDR (https://aidr.work/), the minimal single-artifact expression
   spun out of Turnfile on 2026-07-02. Recorded in INTENT.md as a new Relationship to AIDR section

@@ -484,3 +484,14 @@ Carry-forward for the next session:
 - WORKLOG at 461 lines before this entry, under the 500-line PRD-011 R5 compaction trigger. Compaction not executed and not deferred as an open item.
 
 Registry unchanged: 48 tracked PRDs, 45 promoted, 3 archived.
+
+## Claude maintenance-only freeze lane closed — 2026-10-11 (rev 491)
+
+Bounded lane `claude-maintenance-freeze-20261011`, opened at Maintainer direction after a viability teardown. No numbered session opened; no protocol obligation changed; Qwen authority unchanged.
+
+1. PR #16 (meta description) merged as `133b7e1`.
+2. Maintainer decision: v1.0.0 frozen, repository in maintenance-only mode. INTENT v0.2.0 adds the Maintenance-only mode section (evidence baseline, scope, four-event reopen trigger) and rewrites Development posture; ROADMAP v0.2.0 frozen. README, landing page, `docs/llms.txt`, sitemap and the assistant guide pair (hash and bytes refreshed) state the status.
+3. Root `CITATION.cff` added; RELEASE_CHECKLIST requires annotated signed tags after v1.0.0 and leaves `v1.0.0` untouched.
+4. Both untracked handoffs processed and deleted: join-vs-initialize declined (no multi-coordinator session planned); Scorecard declined; CITATION and signed-tag rule accepted.
+
+Carry-forward: MSG-20260923-001 to Codex (review of PR #12 and regression evals) stays open; it is in maintenance scope. WORKLOG is at the 500-line PRD-011 R5 compaction threshold; compact at the next lane.

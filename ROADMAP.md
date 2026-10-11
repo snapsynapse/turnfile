@@ -1,13 +1,14 @@
 ---
 title: "Turnfile ROADMAP"
-version: "0.1.6"
-last_updated: 2026-09-23
-status: post-v1-planning
-description: "Non-normative planning roadmap for Turnfile after the v1.0.0 release: optional profiles, adoption evidence, and future integration work."
+version: "0.2.0"
+last_updated: 2026-10-11
+status: frozen
+description: "Non-normative planning roadmap for Turnfile. Frozen 2026-10-11: Turnfile is in maintenance-only mode and every item below is parked behind the INTENT reopen trigger."
 tags: [roadmap, planning, turnfile, agents, governance]
 ---
 # Roadmap
-Status: planning notes for actions not yet executed and decisions not yet made.
+Status: frozen 2026-10-11. Turnfile v1.0.0 is a stable specification in maintenance-only mode (see the Maintenance-only mode section of `INTENT.md`). Nothing below is scheduled. Items return only if the INTENT reopen trigger fires and the Maintainer reopens active development.
+While frozen, the only planned work is maintenance: validator, schema, template and CLI correctness fixes with eval coverage, documentation and public-surface accuracy, dependency and security updates, and citation metadata (`CITATION.cff`, added 2026-10-11). OpenSSF Scorecard work was declined on 2026-10-11. Any future release uses an annotated signed tag; `v1.0.0` stays a lightweight tag and is not rewritten.
 This roadmap is not normative. It records likely future work so unresolved items remain visible without becoming commitments.
 ## Current state
 Turnfile v1.0.0, the Minimal Governance Profile, shipped on 2026-07-02. The repo has a working protocol corpus, validation tooling, the portable CLI, examples from real multi-agent sessions, skills for Claude, Codex, and Gemini (full-active since session 21), and a passing local validation suite. Sections below that describe v1 release readiness are retained as the record of how the release gate was met.
