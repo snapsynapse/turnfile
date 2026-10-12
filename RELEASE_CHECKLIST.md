@@ -54,6 +54,11 @@ gh release list --limit 5
 A commit without a tag is not a release; a tag without `gh release create` is not
 a release. Both are required.
 
+Every release after v1.0.0 uses an annotated, signed tag (`git tag -s`), verified
+locally (`git tag -v vX.Y.Z`) and on GitHub before `gh release create`. Do not
+replace or force-update the lightweight `v1.0.0` tag. Bump `version` and
+`date-released` in `CITATION.cff` in the same release commit.
+
 ## 5. Close-out grep
 
 ```bash

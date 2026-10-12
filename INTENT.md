@@ -1,8 +1,8 @@
 ---
 title: "Turnfile INTENT"
-version: "0.1.7"
-last_updated: 2026-09-23
-status: v1-released-strategy
+version: "0.2.0"
+last_updated: 2026-10-11
+status: maintenance-only
 description: "Standards-level strategy for Turnfile as a thin governance layer for auditable peer disagreement and maintainer-governed resolution across agent platforms."
 tags: [intent, strategy, turnfile, agents, governance]
 ---
@@ -12,6 +12,22 @@ Repo-scoped strategy for Turnfile. Portfolio-level strategy lives outside this r
 Turnfile v1.0.0 shipped on 2026-07-02 as the Minimal Governance Profile: the smallest durable protocol that preserves independent agent positions, maintainer-governed resolution, and plain-file auditability.
 The north-star adoption test is fresh-context validation. A new adopter should be able to run a useful Turnfile session from the current canonical docs, templates, and validators without reading historical PRDs or prior session transcripts. This test is operationally captured by the PRD-043 R10 five-question conformance probe (see `docs/FRESH_CONTEXT_CONFORMANCE_PROBE.md`); a passing probe is evidence that the v1 surface explains itself.
 v1.0.0 is not a claim that every experimental lane is complete. It is a claim that the stable governance core is small, documented, validated, and recoverable. Optional profiles may continue to mature without expanding v1-minimal conformance unless the Maintainer explicitly promotes them.
+## Maintenance-only mode
+Maintainer decision, 2026-10-11: Turnfile v1.0.0 is frozen as a stable specification and the repository is in maintenance-only mode. No new protocol work, PRDs, optional profiles, adapters or CLI commands are started. The site, spec, templates, validators and CLI stay published and supported as they are.
+Why: after v1.0.0 every change was maintenance. On 2026-10-11 the repository had 9 stars, 0 forks, 6 unique visitors in 14 days, no issues or pull requests from outside the project, and no repository outside the project carrying a `TURNFILE.yaml`. The only multi-coordinator session since July (the AIDR working session of 2026-09-05) stalled at the join step. AIDR plus the agent platforms' native review features cover the single-decision demand actually observed. The portfolio decision of 2026-09-22 keeps Turnfile as a core PAICE capability; core describes its mission role, not development priority, and further development must earn its place through demonstrated need. Freezing honors both.
+In scope while frozen:
+- Correctness fixes to validators, schemas, templates and the CLI, with eval coverage.
+- Documentation fixes and stale-claim corrections on public surfaces.
+- Dependency and security updates.
+- Answering issues and reviewing outside contributions.
+- Citation metadata.
+Out of scope while frozen: new PRDs, core-v1 changes, optional-profile work, platform integration notes, adapters, tool-layout consolidation, OpenSSF Scorecard work and new public promotion.
+Reopen trigger. The Maintainer reviews this mode at a strategy session, not on a date. Reopen active development only if at least one of these is observed and recorded:
+1. A repository outside snapsynapse commits a `TURNFILE.yaml`.
+2. Someone outside snapsynapse opens an issue or pull request that engages with the protocol.
+3. The Maintainer plans a session in which two or more model families coordinate as peers.
+4. Harnessie ships an export to Turnfile sessions.
+Archive is not the default outcome of a quiet review. Archiving would reopen the 2026-09-22 portfolio decision and break AIDR's graduation link, and needs its own Maintainer decision.
 ## What this standard is
 Turnfile is a portable governance layer for high-consequence multi-agent work where competent agents may disagree before action.
 It is not an agent runtime, workflow engine, task queue, chat system, or orchestration platform. Those layers should be supplied by tools such as Codex, Claude Code, OpenAI Agents SDK, Google ADK, Microsoft Agent Framework, LangGraph, CrewAI, A2A hosts, MCP hosts, or future equivalents.
@@ -97,12 +113,12 @@ AIDR (AI Decision Records, https://aidr.work/) is the minimal single-artifact ex
 - Record IDs are repository-scoped in both projects: a bare `AIDR-0002` is ambiguous across repositories, so cite as `repo#AIDR-NNNN`.
 This section records the relationship arbitrated in AIDR-0001 (2026-07-02). It states a position, not a conformance requirement: Turnfile imposes nothing on AIDR, and AIDR imposes nothing here.
 ## Development posture
-Priority order:
-1. Keep the v1.0.0 Minimal Governance Profile stable. Post-freeze core-v1 changes follow the admission criteria below: Maintainer ratification, validator or eval coverage, and a compatibility note.
-2. Extend dogfood evidence beyond the two PRD-047 runs (Tokenese and AIDR) so that fresh-adopter and adjacent-repository claims rest on a wider set of repositories.
-3. Keep the starter workflow and CLI helper small enough to explain from the canonical docs.
-4. Document adapter patterns for existing platforms only after repeated manual mappings prove they reduce friction.
-5. Preserve the historical inception archive as evidence, but do not make it required reading.
+Maintenance-only since 2026-10-11 (see Maintenance-only mode). Priority order while frozen:
+1. Keep the v1.0.0 Minimal Governance Profile stable and its validators green. Any core-v1 change still needs Maintainer ratification, validator or eval coverage and a compatibility note.
+2. Keep public surfaces truthful: no claim of active development, and no snapshot counts that drift.
+3. Keep the starter workflow and CLI helper explainable from the canonical docs.
+4. Preserve the historical inception archive as evidence, but do not make it required reading.
+Wider dogfood evidence and adapter patterns were the pre-freeze priorities. They return only through the reopen trigger.
 ## Versioning and authority
 `SPEC.md` is normative for protocol requirements.
 `DEFINITIONS.md` is canonical for vocabulary.
@@ -142,6 +158,7 @@ The following deviations are recorded:
 - `working-session/` is tracked (not gitignored) by design: it is the active, auditable coordination workspace, which is the point of the protocol.
 
 ## Changelog
+- 2026-10-11 v0.2.0 - Maintainer-directed. Turnfile enters maintenance-only mode: v1.0.0 frozen as a stable specification. Added the Maintenance-only mode section with the evidence baseline, in-scope and out-of-scope work, and a four-event reopen trigger reviewed at strategy sessions. Development posture rewritten for the frozen state. Handoff dispositions: declined the 2026-09-05 proposal to specify how independently launched agents join an existing review session (no multi-coordinator session is planned; the incident record stays in LocalBrain `0_Across/AI Collaboration Solution Assessment 2026-09-05.md`), From the 2026-09-01 signing handoff, declined OpenSSF Scorecard work and accepted a root `CITATION.cff` plus annotated signed tags for any future release without rewriting `v1.0.0`.
 - 2026-09-23 v0.1.7 - Maintainer-directed. Development posture reordered for the post-release phase: item 1 now keeps the v1.0.0 profile stable under the post-freeze admission criteria instead of finalizing the release gate, and item 2 extends dogfood evidence beyond the two PRD-047 runs. Profile boundary drops Tokenese measurement from the current optional-profile candidates and records the Tokenese interop pattern as withdrawn, following the upstream archive (2026-07-25) and the PRD-027 withdrawal (2026-09-22).
 - 2026-09-23 v0.1.6 - Front matter and the opening sentence of Current release intent now record v1.0.0 as shipped (2026-07-02) rather than in progress; status moves from v1-release-candidate-strategy to v1-released-strategy. No strategy, invariant, or admission-criteria change.
 - 2026-09-22 v0.1.5 - Added Relationship to AIDR section, recording the lineage arbitrated in AIDR-0001 (2026-07-02): AIDR is the minimal single-artifact expression and the front door, Turnfile is the advanced profile and is not deprecated or superseded. Lineage by citation only; no shared code, no shared history, no conformance requirement in either direction. The reciprocal link was outstanding since the arbitration; the public surfaces (README, landing page, llms.txt) were updated in the same change.

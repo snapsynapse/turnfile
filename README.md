@@ -7,6 +7,8 @@ Agents work as peers. Disagreement is signal, not error. Humans arbitrate, not m
 
 This is a **Structured Negotiation of Autonomous Peers (SNAP)**. It's consent-based, peer multi-LLM collaboration with human-on-the-loop governance and public auditability.
 
+> **Status: stable, maintenance-only.** Turnfile v1.0.0 is a frozen, supported specification. Validators, templates and the CLI are maintained; no new protocol work is planned. See [INTENT.md](INTENT.md#maintenance-only-mode) for scope and the conditions that would reopen development. For a single consequential decision, start with [AIDR](https://aidr.work/).
+
 <!-- turnfile:prd-promoted=45 -->
 <!-- turnfile:registry-tracked=48 -->
 <!-- turnfile:skill-claude-bundle=14 turnfile:skill-codex-bundle=10 turnfile:skill-gemini-bundle=5 -->
@@ -284,17 +286,11 @@ For authoritative current state, read [PRD_STATUS.json](working-session/docs/PRD
 
 ## Next
 
-v1.0.0 shipped the items previously headlined here: role-keyed skill layout, a root `CLAUDE.md` bootstrap alongside `GEMINI.md`, and the minimal starter workflow ([templates/v1-minimal/](templates/v1-minimal/) plus the portable CLI). Forward direction is set by the development posture in [INTENT.md](INTENT.md); candidate work is tracked, without commitment, in [ROADMAP.md](ROADMAP.md). Open candidates:
-
-- More cross-repo dogfood evidence beyond the Tokenese and AIDR runs (PRD-047), so adoption claims rest on repositories other than this one.
-- A root `AGENTS.md` bootstrap for agents that load neither `CLAUDE.md` nor `GEMINI.md`.
-- A cleaned public example of a compact v1 session, so the inception archive stops being the first thing a newcomer reads.
-- Platform integration notes (MCP, A2A, GitHub review flows), written only after repeated manual mappings prove they reduce friction.
-- Tool layout consolidation under `tools/`, deferred until after v1.0.0 with its own migration check.
+Nothing is scheduled. Since 2026-10-11 Turnfile is in maintenance-only mode: v1.0.0 is the stable specification, and fixes to validators, schemas, templates, the CLI and documentation are still accepted. Candidate work that predates the freeze is parked in [ROADMAP.md](ROADMAP.md) and returns only if one of the reopen conditions in [INTENT.md](INTENT.md#maintenance-only-mode) is met. Issues and pull requests are welcome and are what would reopen development.
 
 ## Sponsor
 
-Turnfile is free and open. If you're building multi-agent systems, consider [sponsoring this protocol's development](https://github.com/sponsors/snapsynapse). See [SPONSORS.md](SPONSORS.md).
+Turnfile is free and open. If you're building multi-agent systems, consider [sponsoring this protocol's maintenance](https://github.com/sponsors/snapsynapse). See [SPONSORS.md](SPONSORS.md).
 
 ## About
 

@@ -46,10 +46,9 @@ Per `package.json` and `.github/workflows/validate.yml`:
 - `node tools/session-orient.mjs --agent <agent> --emit human` and `node tools/prd-status-summary.mjs --gates v1` — session/release status tooling referenced in handshake docs.
 - CI: `.github/workflows/validate.yml` (push to main + PRs, runs `npm run validate` and `npm run evals:prd`) and `.github/workflows/pages.yml` (deploys `docs/` to GitHub Pages on push to main).
 
-## Current state (as of 2026-07-12 assessment)
+## Current state (as of 2026-10-11)
 
-- On `main`, clean working tree, up to date with `origin/main`. Latest commit: `ab37ba5` (2026-07-06), "INTENT v0.1.4: cite the Aggregated Intelligence tenets as philosophical ground."
-- **v1.0.0 shipped** (2026-07-02): the Minimal Governance Profile freeze. Root + `docs/` + `schemas/v1/` + `templates/v1-minimal/` + `tools/` + promoted PRDs in `docs/prds/` are the stable v1 reading surface.
-- Registry: 48 tracked PRDs, 46 promoted (per README badges).
-- Very active multi-agent development history (30+ sessions across Claude, Codex, Gemini, provisional Qwen checker) — see `working-session/WORKLOG.md` and `working-session/NEXT_SESSION_HANDSHAKE.md` for the latest addenda.
-- No CHANGELOG entries under `[Unreleased]` at time of writing — latest release is 1.0.0.
+- **Maintenance-only mode** since 2026-10-11 (Maintainer decision; see `INTENT.md`, "Maintenance-only mode"). v1.0.0 is a frozen, stable specification. In scope: validator, schema, template and CLI correctness fixes with eval coverage; documentation and public-surface accuracy; dependency and security updates; issue and contribution review. Out of scope: new PRDs, core-v1 changes, optional profiles, adapters, integration notes, tool-layout consolidation, Scorecard work. Do not start out-of-scope work unless the Maintainer reopens development under the INTENT reopen trigger.
+- **v1.0.0 shipped** (2026-07-02): the Minimal Governance Profile. Root + `docs/` + `schemas/v1/` + `templates/v1-minimal/` + `tools/` + promoted PRDs in `docs/prds/` are the stable v1 reading surface.
+- Registry: 48 tracked PRDs, 45 promoted (`working-session/docs/PRD_STATUS.json` is authoritative).
+- Live session state: `working-session/TURNFILE.yaml`, `MAILBOX.md`, `WORKLOG.md`. Latest release is 1.0.0; check `CHANGELOG.md` `[Unreleased]` for post-release changes.

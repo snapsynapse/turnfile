@@ -1,7 +1,7 @@
 # TURNFILE.yaml — SNAP Coordination State
 # Protocol: Turnfile v1.0.0
 # Project: turnfile
-# Last modified revision: 490
+# Last modified revision: 491
 # Modified by: claude
 
 
@@ -21,8 +21,8 @@ agents:
     role: "agent"
     status: "idle"
     current_task: null
-    last_seen: "claude-presentation-readiness-20260923-close"
-    session_id: "claude-presentation-readiness-20260923"
+    last_seen: "claude-maintenance-freeze-20261011-close"
+    session_id: "claude-maintenance-freeze-20261011"
   gemini:
     role: "agent"
     status: "idle"
@@ -42,9 +42,9 @@ maintainer:
   last_seen: "maintainer-session-14"
 
 coordination:
-  revision: 490
+  revision: 491
   active_phase: "phase-2"
-  active_step: "v1.0.0-guide-maintenance-20260908-closed"
+  active_step: "v1.0.0-maintenance-only-20261011"
   conflict:
     rebuttal_rounds: 1
   tasks:
