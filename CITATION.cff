@@ -1,8 +1,8 @@
 cff-version: 1.2.0
 message: "If you cite or build on Turnfile, cite the specification repository."
 title: "Turnfile: Structured Negotiation of Autonomous Peers (SNAP)"
-version: "1.0.0"
-date-released: 2026-07-02
+version: "1.0.1"
+date-released: 2026-11-08
 type: software
 authors:
   - family-names: Rogers

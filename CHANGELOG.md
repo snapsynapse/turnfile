@@ -6,8 +6,16 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [1.0.1] — 2026-11-08
+
+Tooling, documentation and security patch release. The specification stays v1.0.0: no change to
+`SPEC.md`, `schemas/v1/`, `templates/v1-minimal/` or the v1 conformance contract.
+
 ### Changed
 
+- Release metadata moves to v1.0.1: `package.json`, `CITATION.cff`, the landing-page release
+  marker and `docs/llms.txt`. `node tools/turnfile.mjs --version` now reports `cli` 0.1.1
+  (protocol stays 1.0.0), reflecting the v1 schema-selection fix below.
 - Turnfile enters maintenance-only mode (Maintainer decision, 2026-10-11). v1.0.0 is frozen as a
   stable specification; validators, schemas, templates, the CLI and documentation are still
   maintained, and no new protocol work is planned. INTENT.md v0.2.0 adds a Maintenance-only mode
@@ -62,6 +70,9 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   hash, byte-count, compact verification, and ASCII invariants.
 - Added an evidence-based Siteline gate to the contribution procedure, separating local candidate
   diagnostics, persisted API results, deployed-byte verification, and live acceptance.
+- RELEASE_CHECKLIST.md ran `npm test` as the PRD-eval gate, but `package.json` defines no `test`
+  script, so the gate failed before any eval ran. It now runs `npm run evals:prd`, the command CI
+  runs.
 
 ### Security
 
