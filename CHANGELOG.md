@@ -63,6 +63,14 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Added an evidence-based Siteline gate to the contribution procedure, separating local candidate
   diagnostics, persisted API results, deployed-byte verification, and live acceptance.
 
+### Security
+
+- Lockfile-only dev-dependency update clearing 17 npm advisories: ajv 8.17.1 to 8.20.0
+  (GHSA-2g4f-4pwh-qvx6), fast-uri 3.1.0 to 3.1.9 (twelve advisories, GHSA-q3j6-qgpj-74h6 and
+  others), and js-yaml 4.1.1 to 4.3.2 (four advisories, GHSA-52cp-r559-cp3m and others). All three
+  stay inside the existing `package.json` ranges, which are unchanged. Spec text, schemas,
+  templates and the v1.0.0 version are unchanged.
+
 ## [1.0.0] — 2026-07-02
 
 Turnfile v1.0.0: the Minimal Governance Profile freeze reserved by the roadmap. Section names, the v1 schema, and the minimal CLI surface are now the stable v1 baseline.
