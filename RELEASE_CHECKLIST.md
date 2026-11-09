@@ -29,6 +29,8 @@ every surface that displays a version or date:
 - `README.md` — version/status references and the PRD status index.
 - `docs/index.html` — version block, byline date, JSON-LD `dateModified`,
   `article:modified_time`, last-revision stamp.
+- `docs/sitemap.xml` — `<lastmod>` for every page whose content changed, including the
+  landing page whenever `docs/index.html` changes.
 - `docs/llms.txt` and `assistant-guide.txt` (+ `.well-known/` copy) — `Updated:`
   date; if `assistant-guide.txt` content changed, recompute SHA-256 and update
   both the manifest sidecars (verify byte-identical).

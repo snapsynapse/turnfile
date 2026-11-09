@@ -6,6 +6,12 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Fixed
+
+- `docs/sitemap.xml` listed the landing page with `<lastmod>` 2026-10-11 after the v1.0.1 release
+  changed it on 2026-11-08. The landing-page entry now reads 2026-11-08, and RELEASE_CHECKLIST.md
+  section 2 lists the sitemap among the surfaces a release must update.
+
 ## [1.0.1] — 2026-11-08
 
 Tooling, documentation and security patch release. The specification stays v1.0.0: no change to
