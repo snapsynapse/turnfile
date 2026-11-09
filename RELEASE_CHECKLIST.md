@@ -14,7 +14,7 @@ node tools/validate-public-surface-snapshot.mjs       # public-surface snapshot 
 node tools/validate-closeout.mjs --turnfile working-session/TURNFILE.yaml \
   --mailbox working-session/MAILBOX.md                # clean or recorded deferral
 npm run -s validate:skills                            # PREFLIGHT PASS
-npm test                                              # PRD eval suites green
+npm run evals:prd                                     # PRD eval suites green (same command as CI)
 ```
 
 A failing gate blocks the tag unless the Maintainer records an explicit deferral

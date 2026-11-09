@@ -35,6 +35,6 @@ Repo: https://github.com/snapsynapse/turnfile
 
 ## Current status
 
-- v1.0.0 shipped 2026-07-02 ("Minimal Governance Profile freeze"). Repo is on `main`, clean, up to date with origin as of this writing (last commit 2026-07-06).
-- Active, ongoing multi-agent development continues past v1.0.0 (30+ working sessions logged); pre-v1 history is preserved as archive, not required reading for adopters.
-- No open CHANGELOG entries — treat 1.0.0 as the current stable release line.
+- v1.0.0 shipped 2026-07-02 ("Minimal Governance Profile freeze"). v1.0.1 (2026-11-08) is a tooling, documentation and security patch; the spec stays v1.0.0.
+- Maintenance-only since 2026-10-11 (see `INTENT.md`, "Maintenance-only mode"): no new protocol work is planned; validators, templates, the CLI and documentation are maintained. Pre-v1 history is preserved as archive, not required reading for adopters.
+- Treat 1.0.1 as the current stable release line; check `CHANGELOG.md` `[Unreleased]` for changes since.

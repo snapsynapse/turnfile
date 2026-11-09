@@ -7,7 +7,7 @@ import path from "node:path";
 import process from "node:process";
 import { schemaForTurnfile } from "./turnfile-schema.mjs";
 
-const CLI_VERSION = "0.1.0";
+const CLI_VERSION = "0.1.1";
 const PROTOCOL_VERSION = "1.0.0";
 const repoRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 
